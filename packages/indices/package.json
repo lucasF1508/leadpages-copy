@@ -1,0 +1,27 @@
+{
+  "name": "indices",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Build Sanity Index data",
+  "repository": "https://github.com/gearbox-built",
+  "author": "Devin Edwards",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build:data": "run-func buildIndices.js init",
+    "build": "yarn build:data",
+    "blast:node": "rm -rf node_modules"
+  },
+  "dependencies": {
+    "client": "*",
+    "config": "*",
+    "@sanity/client": "^2.21.3",
+    "chokidar": "^3.5.3",
+    "jsonfile": "^6.1.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.173",
+    "run-func": "^1.0.5"
+  }
+}

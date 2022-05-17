@@ -1,0 +1,49 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import { image } from '@data'
+import Pinion from '@components/Pinion'
+import Avatar from '@components/Avatar'
+import { argTypesTemplate } from '@storyUtils/helpers'
+export const data = {
+  image,
+  name: 'Megan Thomas',
+  title: 'Co-founder / CEO',
+}
+
+export const Component = (args) => (
+  <Pinion>
+    <Avatar {...data} {...args} />
+  </Pinion>
+)
+
+# Avatar Component
+
+<Meta
+  title="Components/Avatar/Default"
+  component={Avatar}
+  argTypes={argTypesTemplate([
+    {
+      arg: 'large',
+      description: 'Set the avatar size to a larger version.',
+      control: {
+        options: ['true', 'false'],
+        type: 'inline-radio',
+      },
+    },
+    {
+      arg: 'layout',
+      description: 'Choose your layout.',
+      control: {
+        options: ['horizontal', 'vertical'],
+        type: 'select',
+      },
+    },
+  ])}
+/>
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

@@ -1,0 +1,27 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Quote from '@components/Quote'
+import { data as avatarData } from '../Avatar/Avatar.stories.mdx'
+const data = {
+  content:
+    'Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consec tetur neque tristique pellen tesque. Blandit amet, sed aenean.',
+  ...avatarData,
+}
+
+export const Component = (args) => (
+  <Pinion>
+    <Quote {...data} {...args} />
+  </Pinion>
+)
+
+# Quote Component
+
+<Meta title="Components/Quote/Quote" component={Quote} />
+
+<Canvas>
+  <Story name="Quote">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Quote" />
+
+This is some documentation explain features or even implementation

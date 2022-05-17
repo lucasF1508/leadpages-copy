@@ -1,0 +1,64 @@
+:root {
+  --border-style: 1px solid rgba(0, 0, 0, 0.1);
+  --background-color: #e4e8ed;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+button {
+  color: #7b8ca8;
+  background-color: transparent;
+  padding: calc(0.75rem - 1px) calc(2.75rem - 1px);
+  outline: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  border: 2px solid rgba(123, 140, 168, 0.35);
+  cursor: pointer;
+}
+
+button:hover {
+  background: #7b8ca8;
+  color: #fff;
+}
+
+.list {
+  list-style-type: none;
+  min-width: 220px;
+  max-width: 100%;
+  width: 100%;
+  overflow-y: auto;
+  margin-top: 0;
+  padding: 0;
+}
+
+.listItem:first-child {
+  border-top: var(--border-style);
+}
+
+.listItem {
+  padding: 5px;
+  border: var(--border-style);
+  border-top: 0;
+  animation: fadeIn ease 0.25s;
+}
+
+.marginTop {
+  margin-top: 3rem;
+}
+
+.noTopMargin {
+  margin-top: 0;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+}

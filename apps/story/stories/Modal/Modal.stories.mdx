@@ -1,0 +1,39 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import { ModalParent } from '@components/Modal'
+import Modal from '@components/Modal'
+import { ModalContext } from '@components/Modal'
+import { ModalLink } from '@components/Modal'
+import Heading from '@components/Heading'
+import useModal from '@hooks/useModal'
+const modalKey = 'popup'
+const modalPrompt = 'Click here to show the modal.'
+const modalMessage = 'Modals are FEEEEEUUUUNNNN-AH'
+
+export const Component = (args) => {
+  const ModalContextValue = useModal()
+  return (
+    <ModalContext.Provider value={ModalContextValue}>
+      <ModalParent />
+      <Modal modalKey={modalKey} {...args}>
+        <p>{modalMessage}</p>
+      </Modal>
+      <ModalLink modalKey={modalKey}>
+        <Heading tag="h4" css={{ '&:hover': { c: 'tomato' } }}>
+          {modalPrompt}
+        </Heading>
+      </ModalLink>
+    </ModalContext.Provider>
+  )
+}
+
+# Modal Component
+
+<Meta title="Components/Modal/Default" component={Modal} />
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

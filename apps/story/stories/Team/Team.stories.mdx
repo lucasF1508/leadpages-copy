@@ -1,0 +1,32 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Team from '@components/Team'
+import { image } from '@data'
+import { mockArray } from '@data/mockDataUtils'
+const heading = 'Our Team of Experts'
+const content =
+  'Risus velit condimentum vitae tincidunt tincidunt. Mauris ridiculus fusce amet urna nunc. Ut nisl ornare diam in.'
+const team = mockArray({
+  data: {
+    image,
+    name: 'Tom Thomas',
+    title: 'Co-founder / CEO',
+  },
+  count: 12,
+})
+
+export const Component = (args) => (
+  <Pinion component="logoGrid">
+    <Team heading={heading} content={content} team={team} {...args} />
+  </Pinion>
+)
+
+# Team Component
+
+<Meta title="Components/Team/Default" component={Team} />
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />

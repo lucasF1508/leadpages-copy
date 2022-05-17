@@ -1,0 +1,13 @@
+{
+  "paths": {
+    "source": "./src",
+    "compiled": "./build"
+  },
+  "parts": [
+    {
+      "name": "part:@gearbox-built/studio/config",
+      "description": "Studio config for rack-pinion",
+      "path": "index.js"
+    }
+  ]
+}

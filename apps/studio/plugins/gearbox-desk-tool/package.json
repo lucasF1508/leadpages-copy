@@ -1,0 +1,9 @@
+{
+  "name": "gearbox-desk-tool",
+  "private": true,
+  "version": "0.0.1",
+  "description": "",
+  "main": "build/index.js",
+  "author": "Troy McGinnis <troy@gearboxbuilt.com>",
+  "license": "UNLICENSED"
+}

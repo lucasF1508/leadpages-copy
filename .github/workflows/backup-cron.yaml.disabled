@@ -1,0 +1,24 @@
+# Relies on the following secrets:
+# - API_DOMAIN:
+#   Vercel cloud function base URL (eg. https://jawl-dev.gearboxbuilt.com)
+#
+# - S3_ACCESS_KEY
+#   Access key for the user with permissions to the S3 bucket. Used to verify the API request.
+
+name: Data Backup Cron
+on:
+  schedule:
+    - cron: '0 2 * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Daily Data Backup
+        env:
+          API_DOMAIN: ${{ secrets.API_DOMAIN }}
+          API_URL: api/backup
+        run: |
+          curl --request POST \
+          --url "${API_DOMAIN}/${API_URL}" \
+          --header 'Content-Type: application/json' \
+          --data '{"assets": false, "accessKey": "${{ secrets.S3_ACCESS_KEY }}"}'

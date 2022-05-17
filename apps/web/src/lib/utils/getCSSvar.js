@@ -1,0 +1,11 @@
+import kebabCase from 'lodash/kebabCase'
+
+export const getCSSvar = (cssVar) => {
+  if (typeof window === 'undefined') return null
+
+  return window
+    .getComputedStyle(document.documentElement)
+    .getPropertyValue(`--${kebabCase(cssVar)}`)
+}
+
+export default getCSSvar

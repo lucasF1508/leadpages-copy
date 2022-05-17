@@ -1,0 +1,23 @@
+{
+  "paths": {
+    "source": "./src",
+    "compiled": "./build"
+  },
+  "parts": [
+    {
+      "name": "part:gearbox-autocomplete-address/autocomplete-address",
+      "description": "Google places API to get geoloaction and address information",
+      "path": "components/AutocompleteAddress.js"
+    },
+    {
+      "name": "part:gearbox-autocomplete-address/autocomplete-address-schema",
+      "description": "Address schema",
+      "path": "schema/schemaAddress.js"
+    },
+    {
+      "implements": "part:@sanity/base/schema-type",
+      "description": "Adds address schema to base schema types",
+      "path": "schema/schemaAddress.js"
+    }
+  ]
+}

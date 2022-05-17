@@ -1,0 +1,83 @@
+{
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "dist/**"]
+    },
+    "analyze": {
+      "dependsOn": ["query#build"],
+      "outputs": []
+    },
+    "start": {
+      "cache": false,
+      "outputs": []
+    },
+    "story": {
+      "cache": false,
+      "dependsOn": ["indices#build", "sanity-hooks#build"],
+      "outputs": []
+    },
+    "query#start": {
+      "dependsOn": ["schema-registry#build", "client#build"],
+      "outputs": ["dist/**"]
+    },
+    "client#build": {
+      "dependsOn": [],
+      "outputs": ["dist/**"]
+    },
+    "schema-registry#build": {
+      "dependsOn": [],
+      "outputs": ["dist/**"]
+    },
+    "query#build": {
+      "dependsOn": ["schema-registry#build", "client#build"],
+      "outputs": ["dist/**"]
+    },
+    "indices#build": {
+      "cache": false,
+      "dependsOn": ["schema-registry#build", "query#build", "client#build"],
+      "outputs": []
+    },
+    "web#start": {
+      "cache": false,
+      "dependsOn": ["query#build", "sanity-hooks#build"]
+    },
+    "web#build": {
+      "cache": false,
+      "outputs": [".next/**", "dist/**"],
+      "dependsOn": ["studio#build", "query#build", "sanity-hooks#build"]
+    },
+    "studio#build": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "story#build": {
+      "dependsOn": ["indices#build", "sanity-hooks#build"],
+      "outputs": ["../web/public/story/**"]
+    },
+    "lint": {
+      "outputs": []
+    },
+    "dev": {
+      "cache": false,
+      "outputs": []
+    },
+    "serve": {
+      "cache": false,
+      "outputs": []
+    },
+    "blast:node": {
+      "cache": false,
+      "outputs": []
+    },
+    "blast:next": {
+      "cache": false,
+      "outputs": []
+    },
+    "blast:dist": {
+      "cache": false,
+      "outputs": []
+    }
+  },
+  "globalDependencies": [".env"]
+}

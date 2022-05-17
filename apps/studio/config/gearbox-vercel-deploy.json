@@ -1,0 +1,21 @@
+{
+  "toolSwitcher": true,
+  "default": {
+    "id": "vercel-deploy.Cuxfd7AtV4kb8DZ_tfW4p",
+    "name": "Development",
+    "url": "https://api.vercel.com/v1/integrations/deploy/prj_t84aEO2I7Ewvx7ISmXBkALxgrVv5/hIXXk1AcVW",
+    "vercelProject": "rack-pinion",
+    "vercelTeam": {
+      "id": "team_9W9RiFQsWcxGUltYF7q6Vk79",
+      "name": "GearboxBuilt",
+      "slug": "gearboxbuilt"
+    },
+    "vercelToken": "iNK1gY3JGJaHjhf0EdLtHDDY"
+  },
+  "envs": {
+    "production": {
+      "name": "Production",
+      "url": "https://api.vercel.com/v1/integrations/deploy/prj_t84aEO2I7Ewvx7ISmXBkALxgrVv5/qKNGWXhqxw"
+    }
+  }
+}

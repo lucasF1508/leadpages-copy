@@ -1,0 +1,28 @@
+{
+  "name": "client",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Rack & Pinion Sanity Client",
+  "main": "./dist/index.js",
+  "repository": "https://github.com/gearbox-built",
+  "author": "Devin Edwards",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "swc ./src -d dist -w",
+    "build": "yarn build:query",
+    "build:query": "swc ./src -d dist",
+    "blast:node": "rm -rf node_modules",
+    "blast:dist": "rm -rf dist"
+  },
+  "dependencies": {
+    "@sanity/client": "^2.21.3",
+    "chokidar": "^3.5.3",
+    "config": "*",
+    "dotenv": "^10.0.0",
+    "find-up": "5.0"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.173"
+  }
+}

@@ -1,0 +1,67 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Footer from '@components/Footer'
+const footerInfo = {
+  content: 'This is some footer content as an example',
+  contact: {
+    companyTitle: 'Gearbox Development Inc.',
+  },
+  navigations: [
+    {
+      title: 'Primary Navigation',
+      menu: [
+        {
+          link: {
+            label: 'Home',
+            condition: 'internal',
+            url: '/',
+          },
+        },
+        {
+          link: {
+            label: 'Components',
+            condition: 'internal',
+            url: '/',
+          },
+        },
+        {
+          link: {
+            label: 'Cool stuff',
+            condition: 'internal',
+            url: '/',
+          },
+        },
+      ],
+    },
+    {
+      title: 'Contact',
+      menu: [
+        {
+          link: {
+            label: 'web@gearboxbuilt.com',
+            condition: 'external',
+            url: '/',
+          },
+        },
+      ],
+    },
+  ],
+}
+
+export const Component = (args) => (
+  <Pinion>
+    <Footer footer={footerInfo} {...args} />
+  </Pinion>
+)
+
+# Footer Component
+
+<Meta title="Components/Footer/Default" component={Footer} />
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

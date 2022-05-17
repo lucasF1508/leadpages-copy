@@ -1,0 +1,23 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Example from './Example'
+const heading = 'This is an example'
+const content = "It's not pretty, but it does the job"
+
+export const Component = (args) => (
+  <Pinion>
+    <Example heading={heading} content={content} {...args} />
+  </Pinion>
+)
+
+# Example Component
+
+<Meta title="Components/Example/Default" component={Example} />
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

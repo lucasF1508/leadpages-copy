@@ -1,0 +1,6 @@
+export * from './schemaPage'
+export * from './schemaPageArchive'
+export * from './schemaPageHome'
+export * from './schemaPost'
+// export * from './schemaPageProducts'
+// export * from './schemaProduct'

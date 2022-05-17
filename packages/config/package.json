@@ -1,0 +1,14 @@
+{
+  "name": "config",
+  "version": "1.0.0",
+  "main": "./index.js",
+  "license": "MIT",
+  "files": [],
+  "exports": {
+    ".": "./index.js",
+    "./globalQueries": "./globalQueries.js",
+    "./favicon": "./favicon.js",
+    "./indices": "./indices.js",
+    "./parser": "./parser.js"
+  }
+}

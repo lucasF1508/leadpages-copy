@@ -1,0 +1,54 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Separator from '@components/Separator'
+import { argTypesTemplate } from '@storyUtils/helpers'
+
+export const Component = (args) => (
+  <Pinion
+    css={{
+      h: '75vh',
+      m: 0,
+      bc: '$primary',
+      pt: '$4',
+      div: {
+        d: 'grid',
+        placeItems: 'center',
+        h: '50vh',
+      },
+    }}
+  >
+    <Separator {...args} />
+  </Pinion>
+)
+
+# Separator Component
+
+A simple Separator component.
+
+Accepts an `orientation` prop that can render the component **vertically** or **horizontally**.
+
+Has a `decorative` prop that is set to `true` by default in the component (component is purely visual - no semantic meaning).
+
+<Meta
+  title="Components/Separator/Default"
+  component={Separator}
+  argTypes={argTypesTemplate([
+    {
+      arg: 'orientation',
+      description: 'Switch between vertical or horizontal orientation.',
+      options: ['horizontal', 'vertical'],
+      control: { type: 'inline-radio' },
+    },
+    { arg: 'decorative', table: { disable: true } },
+  ])}
+/>
+
+<Canvas>
+  <Story name="Default" args={{ orientation: 'horizontal' }}>
+    {Component.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

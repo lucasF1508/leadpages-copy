@@ -1,0 +1,80 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Form from '@components/Form'
+export const formInfo = {
+  confirmation: 'Thank you! Your message has been sent.',
+  submitText: 'Submit',
+  fields: [
+    {
+      _key: 'd1f2f22787c4',
+      _type: 'input.text',
+      label: 'Text Line Field',
+      required: true,
+    },
+    {
+      _key: '0dc4d322e294',
+      _type: 'input.select',
+      choices: 'One : one\nTwo : two\nThree : three',
+      label: 'Dropdown',
+      required: true,
+    },
+    {
+      _key: 'ef1616fcbed5',
+      _type: 'input.file',
+      label: 'File Upload',
+      required: true,
+    },
+    {
+      _key: '1cd198f46bc2',
+      _type: 'input.textarea',
+      label: 'Text Box',
+      required: true,
+    },
+    {
+      _key: '20b7d56f22c4',
+      _type: 'input.email',
+      label: 'Email',
+      required: true,
+    },
+    {
+      _key: 'f76e249ed12e',
+      _type: 'input.tel',
+      label: 'Phone',
+      required: true,
+    },
+    {
+      _key: '1db9eb16cb7a',
+      _type: 'input.radio',
+      choices: 'Red : red\nBlue : blue',
+      label: 'Radio Buttons',
+      required: true,
+    },
+    {
+      _key: '486bb9b5d224',
+      _type: 'input.checkbox',
+      choices: 'Yes : yes\nNo : no',
+      label: 'Checkboxes',
+      required: false,
+    },
+  ],
+}
+
+export const Component = (args) => {
+  return (
+    <Pinion>
+      <Form form={formInfo} {...args} />
+    </Pinion>
+  )
+}
+
+# Form Component
+
+<Meta title="Components/Form/Default" component={Form} />
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

@@ -1,0 +1,31 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Slider from '@components/Slider'
+import { mockArray } from '@data/mockDataUtils'
+import { mockGallery } from '@data/mockDataUtils'
+import { galleryImages } from '../Gallery/Gallery.stories.mdx'
+export const slides = mockArray({
+  data: {},
+})
+export const gallery = mockGallery({
+  data: galleryImages,
+  count: 3,
+})
+
+export const Component = (args) => (
+  <Pinion>
+    <Slider {...slides} images={gallery} {...args} />
+  </Pinion>
+)
+
+# Slider Component
+
+<Meta title="Components/Slider/Default" component={Slider} />
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

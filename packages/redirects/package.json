@@ -1,0 +1,22 @@
+{
+  "name": "redirects",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Get redirects from Sanity",
+  "main": "./index.js",
+  "repository": "https://github.com/gearbox-built",
+  "author": "Devin Edwards",
+  "license": "UNLICENSED",
+  "scripts": {
+    "blast:node": "rm -rf node_modules"
+  },
+  "dependencies": {
+    "config": "*",
+    "client": "*",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.173"
+  }
+}

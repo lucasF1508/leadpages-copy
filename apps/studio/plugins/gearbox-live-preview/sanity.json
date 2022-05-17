@@ -1,0 +1,18 @@
+{
+  "paths": {
+    "source": "./src",
+    "compiled": "./build"
+  },
+  "parts": [
+    {
+      "name": "part:gearbox-live-preview/add-preview-pane",
+      "description": "Adds Previews tab to document panes",
+      "path": "functions/addPreviewPane.js"
+    },
+    {
+      "name": "part:gearbox-live-preview/iframe-preview",
+      "description": "Iframe Preview Component",
+      "path": "components/IframePreview.js"
+    }
+  ]
+}

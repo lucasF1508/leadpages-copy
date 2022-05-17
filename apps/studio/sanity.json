@@ -1,0 +1,76 @@
+{
+  "root": true,
+  "project": {
+    "basePath": "/studio"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/components",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "@sanity/production-preview",
+    "@sanity/dashboard",
+    "media",
+    "tabs",
+    "@gearbox-built/studio/config",
+    "gearbox-vercel-deploy",
+    "gearbox-doc-order-sort",
+    "gearbox-autocomplete-address",
+    "gearbox-multi-references",
+    "gearbox-admin-message",
+    "gearbox-live-preview",
+    "gearbox-seo-pane",
+    "gearbox-desk-tool",
+    "gearbox-schema-tool",
+    "gearbox-vimeo",
+    "seo-pane",
+    "table"
+  ],
+  "env": {
+    "development": {
+      "api": {
+        "dataset": "production"
+      },
+      "plugins": ["@sanity/vision", "parts-list"]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schema"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./parts/deskStructure"
+    },
+    {
+      "implements": "part:gearbox-utils/utils",
+      "path": "./parts/utils"
+    },
+    {
+      "implements": "part:@sanity/production-preview/resolve-production-url",
+      "path": "./parts/resolveProductionUrl"
+    },
+    {
+      "implements": "part:gearbox-utils/resolveProductionUrl",
+      "path": "./parts/resolveProductionUrl"
+    },
+    {
+      "implements": "part:@sanity/base/theme/variables/override-style",
+      "path": "./styles/sanityVariables.css"
+    },
+    {
+      "implements": "part:@sanity/form-builder/input/image/asset-sources",
+      "path": "./parts/assetSources.js"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "./actions/resolveDocumentActions.js"
+    },
+    {
+      "implements": "part:@sanity/base/brand-logo",
+      "path": "./parts/brandingName.js"
+    }
+  ]
+}

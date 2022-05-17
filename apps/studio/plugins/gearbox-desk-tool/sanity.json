@@ -1,0 +1,13 @@
+{
+  "paths": {
+    "source": "./src",
+    "compiled": "./build"
+  },
+  "parts": [
+    {
+      "name": "part:gearbox-desk-tool/structure-builder",
+      "description": "Structure builder convenience methods",
+      "path": "structure-builder/index.js"
+    }
+  ]
+}

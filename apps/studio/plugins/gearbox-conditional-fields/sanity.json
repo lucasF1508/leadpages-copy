@@ -1,0 +1,13 @@
+{
+  "paths": {
+    "source": "./src",
+    "compiled": "./build"
+  },
+  "parts": [
+    {
+      "name": "part:gearbox-conditional-fields/conditional-fields",
+      "description": "Custom Input Conditional Fields",
+      "path": "components/ConditionalFields.js"
+    }
+  ]
+}

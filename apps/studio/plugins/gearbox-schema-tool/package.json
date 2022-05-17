@@ -1,0 +1,9 @@
+{
+  "name": "gearbox-schema-tool",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "author": "Troy McGinnis <troy@gearboxbuilt.com>",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,53 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import MediaWithText from '@components/MediaWithText'
+import { image } from '@data'
+import { argTypesTemplate } from '@storyUtils/helpers'
+const data = {
+  content:
+    'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.',
+  heading: 'Lightning fast websites are what we specialize in',
+  media: {
+    condition: 'image',
+    caption: 'Caption text',
+    image,
+  },
+  link: {
+    condition: 'internal',
+    url: '/',
+    label: 'Link CTA',
+    linkStyle: 'text',
+  },
+}
+
+export const Component = (args) => (
+  <Pinion maxWidth="base">
+    <MediaWithText type="static" {...data} {...args} />
+  </Pinion>
+)
+
+# Media with Text Component
+
+<Meta
+  title="Components/Media with Text/Default"
+  component={MediaWithText}
+  argTypes={argTypesTemplate([
+    { arg: 'media', table: { disable: true } },
+    {
+      arg: 'align',
+      description: 'Change which side the text is on.',
+      options: ['left', 'right'],
+      control: { type: 'inline-radio' },
+    },
+  ])}
+/>
+
+<Canvas>
+  <Story name="Default" args={{ align: 'right' }}>
+    {Component.bind({})}
+  </Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

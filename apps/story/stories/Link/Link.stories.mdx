@@ -1,0 +1,96 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Link from '@components/Link'
+import Heading from '@components/Heading'
+import Grid from '@components/Grid'
+import startCase from 'lodash/startCase'
+import capitalize from 'lodash/capitalize'
+import { FiMail, FiArrowRight } from 'react-icons/fi'
+const conditions = ['internal', 'external', 'download', 'modal']
+const styles = ['button', 'buttonGhost', 'text']
+const states = ['active', 'hasIcon', 'disabled']
+const link = {
+  condition: 'internal',
+  url: '/',
+}
+
+export const Component = (args) => (
+  <Pinion align="left" mw="base">
+    <Grid
+      css={{
+        mw: '$base',
+        gtc: '1fr',
+        justifyItems: 'left',
+        gap: '$8',
+        mw: '$content',
+        mx: 'auto',
+      }}
+    >
+      {styles.map((style) => (
+        <Grid
+          css={{
+            mw: '$base',
+            gtc: 'repeat(3, 1fr)',
+            justifyItems: 'left',
+            gap: '$2',
+            w: '100%',
+          }}
+        >
+          <Heading
+            css={{ gc: '1 / -1', mt: '$2', mb: 0 }}
+            tag="h5"
+            heading={startCase(style)}
+          />
+          {states.map((state) => (
+            <Link
+              key={state}
+              linkStyle={style}
+              disabled={state === 'disabled' ? true : false}
+              hasIcon={state === 'hasIcon' ? true : false}
+              label={startCase(state)}
+              {...link}
+              {...args}
+            />
+          ))}
+        </Grid>
+      ))}
+    </Grid>
+    <Grid
+      css={{
+        mt: '$8',
+        mw: '$base',
+        gtc: 'repeat(2, 1fr)',
+        justifyItems: 'left',
+        gap: '$4',
+        w: '100%',
+      }}
+    >
+      <Heading heading={'Icons'} css={{ gc: '1 / -1', mb: 0 }} tag="h5" />
+      {conditions.map((condition) => (
+        <Link
+          key={condition}
+          linkStyle="text"
+          label={startCase(condition)}
+          condition={condition}
+          url="/"
+          hasIcon
+          {...args}
+        />
+      ))}
+    </Grid>
+  </Pinion>
+)
+
+# Links
+
+Hover and click to see the applied styles.
+
+<Meta title="Design System/Links" component={Link} />
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

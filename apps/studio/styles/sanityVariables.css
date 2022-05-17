@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+
+:root {
+  /* --brand-primary: #1a1b1b; */
+  /* --brand-secondary: #1a1b1b; */
+  /* --font-family-base: 'Open Sans'; */
+}
+
+[data-testid='input-heroHeading'] [data-testid='pt-editor'],
+[data-testid='input-headingBlock'] [data-testid='pt-editor'],
+[data-testid='input-heading'] [data-testid='pt-editor'] {
+  height: 5.35em;
+}
+
+[data-ui='TabList'] div:nth-child(2) {
+  padding-left: 0 !important;
+  vertical-align: baseline !important;
+}
+
+[data-testid='group-tab-all-fields'] {
+  display: none !important;
+}

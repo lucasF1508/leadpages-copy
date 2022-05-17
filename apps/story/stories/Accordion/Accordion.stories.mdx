@@ -1,0 +1,33 @@
+import { ArgsTable, Meta, Story, Canvas } from '@storybook/addon-docs'
+import Pinion from '@components/Pinion'
+import Accordion from '@components/Accordion'
+import { mockArray } from '@data/mockDataUtils'
+const content =
+  'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.'
+const accordionItems = mockArray({
+  data: {
+    title: 'Boost your conversion rate',
+    content,
+  },
+  count: 3,
+})
+
+export const Component = (args) => {
+  return (
+    <Pinion>
+      <Accordion accordionItems={accordionItems} />
+    </Pinion>
+  )
+}
+
+# Accordion Component
+
+<Meta title="Primitives/Accordion/Default" component={Accordion} />
+
+<Canvas>
+  <Story name="Default">{Component.bind({})}</Story>
+</Canvas>
+
+<ArgsTable story="Default" />
+
+This is some documentation explain features or even implementation

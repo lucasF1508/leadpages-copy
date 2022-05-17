@@ -1,0 +1,74 @@
+export const textDefaultTokens = {
+  [`
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6
+  `]: {
+    mt: '$6',
+    mb: '$3',
+
+    '&:first-child': {
+      mt: 0,
+    },
+
+    '@>m': {
+      mt: '$8',
+    },
+  },
+  [`
+    & ul,
+    & ol
+  `]: {
+    mt: '$3',
+    ml: 0,
+  },
+  '& li': {
+    position: 'relative',
+    pl: '$3',
+    mt: '1.25rem',
+    lh: 1.5,
+    listStyle: 'none',
+
+    '&:first-child': {
+      mt: 0,
+    },
+  },
+  '& ul li::before': {
+    position: 'absolute',
+    top: '0.75em',
+    left: '0.25rem',
+    fontSize: 'inherit',
+    content: '',
+    d: 'block',
+    w: '0.25rem',
+    h: '0.25rem',
+    mt: '-0.125rem',
+    br: '$round',
+    bc: '$brand',
+  },
+  '& ol': {
+    'counter-reset': 'list',
+    '& > li::before': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      lh: '$m',
+      c: '$brand',
+      content: "counter(list, lower-roman) '. '",
+      fontWeight: '$bold',
+      counterIncrement: 'list',
+    },
+  },
+  '& a': {
+    c: '$brand',
+
+    '&[href^="tel"]': {
+      c: '$text',
+    },
+  },
+}
+
+export default textDefaultTokens

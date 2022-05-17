@@ -1,0 +1,35 @@
+{
+  "name": "query",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A Sanity Toolkit to parse the schema, build queries and get docs",
+  "main": "./dist/index.js",
+  "repository": "https://github.com/gearbox-built",
+  "author": "Devin Edwards",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "yarn build:query",
+    "build:query": "swc ./src -d dist",
+    "start": "swc ./src -d dist -w",
+    "blast:node": "rm -rf node_modules",
+    "blast:dist": "rm -rf dist"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./builder": "./dist/builder/index.js",
+    "./getters": "./dist/getters/index.js",
+    "./parser": "./dist/parser/index.js",
+    "./primitives": "./dist/parser/primitives/index.js"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "client": "*",
+    "config": "*",
+    "lodash": "^4.17.21",
+    "schema-registry": "*"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.173"
+  }
+}

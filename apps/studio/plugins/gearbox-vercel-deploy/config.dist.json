@@ -1,0 +1,20 @@
+{
+  "toolSwitcher": true,
+  "default": {
+    "id": "",
+    "name": "",
+    "url": "",
+    "vercelProject": "",
+    "vercelTeam": {
+      "id": "",
+      "name": "",
+      "slug": ""
+    }
+  },
+  "envs": {
+    "production": {
+      "name": "",
+      "url": ""
+    }
+  }
+}
