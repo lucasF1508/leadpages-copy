@@ -9,8 +9,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "swc ./src -d dist -w",
-    "build": "yarn build:query",
-    "build:query": "swc ./src -d dist",
+    "build": "yarn build:client",
+    "build:client": "swc ./src -d dist",
     "blast:node": "rm -rf node_modules",
     "blast:dist": "rm -rf dist"
   },

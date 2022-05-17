@@ -8,9 +8,9 @@
   "author": "Devin Edwards",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "yarn build:query",
+    "build": "yarn build:sanity-hooks",
     "start": "swc ./src -d dist -w",
-    "build:query": "swc ./src -d dist",
+    "build:sanity-hooks": "swc ./src -d dist",
     "blast:node": "rm -rf node_modules",
     "blast:dist": "rm -rf dist"
   },
