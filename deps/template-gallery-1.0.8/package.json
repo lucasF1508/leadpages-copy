@@ -1,0 +1,197 @@
+{
+  "name": "@lp/template-gallery",
+  "description": "React components for the leadpages template gallery.",
+  "version": "1.0.8",
+  "repository": "https://github.com/leadpages/template-gallery",
+  "author": "LP Developers <developers@leadpages.com>",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "scripts": {
+    "build": "rm -rf ./dist/* && yarn build:require && yarn build:esm",
+    "build:require": "NODE_ENV=production rollup -c",
+    "build:esm": "NODE_ENV=production ESM=true rollup -c",
+    "build:analyze": "rm -f bundle-analysis.html && yarn build --config-analyze",
+    "build:ci": "yarn build && yarn build:types",
+    "build:storybook": "build-storybook",
+    "build:types": "rm -rf ./dist/types && tsc --noEmit false --emitDeclarationOnly",
+    "lint": "eslint \"src/**\" --color",
+    "lint:staged": "eslint \"src/**\"  --color --fix --max-warnings=0",
+    "start": "STORYBOOK_MANDREL_BASE_URL=https://api.leadpages.io/template/v2/ yarn storybook",
+    "start:test": "STORYBOOK_MANDREL_BASE_URL=https://api-test.leadpages.io/template/v2/ NODE_ENV=test yarn storybook",
+    "start:docker": "STORYBOOK_MANDREL_BASE_URL=https://stargate.docker/template/v2/ NODE_ENV=docker yarn storybook",
+    "storybook": "start-storybook -p 6006",
+    "test": "node scripts/test.js",
+    "test:coverage": "node scripts/test.js --coverage && open ./coverage/lcov-report/index.html",
+    "test:ci": "CI=true node scripts/test.js",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "yarn type-check -- --watch"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.11.2",
+    "react-infinite-scroll-hook": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@lp/chevron": "^3.0.1",
+    "@lp/config": "^1.1.12",
+    "@lp/events-js": "^0.1.3",
+    "@lp/lib-warehouse": "^2.0.0",
+    "@lp/observations-js": "^1.3.1",
+    "@lp/ui": "^1.0.9",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "clsx": "^1.1.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.11.5",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/plugin-transform-react-constant-elements": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@lp/chevron": "^3.0.1",
+    "@lp/config": "^1.1.12",
+    "@lp/ui": "^1.0.9",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@rollup/plugin-babel": "^5.2.0",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-image": "^2.0.5",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/addon-storysource": "^6.0.21",
+    "@storybook/addons": "^6.0.21",
+    "@storybook/react": "^6.0.21",
+    "@storybook/source-loader": "^6.0.21",
+    "@testing-library/dom": "^7.24.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.0",
+    "@testing-library/react-hooks": "^3.4.2",
+    "@testing-library/user-event": "^12.1.3",
+    "@types/jest": "^26.0.13",
+    "@types/lodash.clonedeep": "^4.5.6",
+    "@types/node": "^14.6.3",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "babel-jest": "^26.3.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-optimize-clsx": "^2.6.1",
+    "babel-plugin-transform-imports": "^2.0.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "babel-plugin-typescript-to-proptypes": "^1.4.0",
+    "camelcase": "^6.0.0",
+    "clsx": "^1.1.1",
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "eslint-plugin-testing-library": "^3.8.0",
+    "husky": "^4.2.5",
+    "jest": "26.4.2",
+    "jest-canvas-mock": "^2.3.0",
+    "jest-environment-jsdom-fourteen": "^1.0.1",
+    "jest-fetch-mock": "^3.0.3",
+    "jest-watch-typeahead": "^0.6.0",
+    "lint-staged": "^10.2.13",
+    "lodash.clonedeep": "^4.5.0",
+    "prettier": "^2.1.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-app-polyfill": "^1.0.6",
+    "react-dom": "^16.10.0",
+    "react-test-renderer": "^16.13.1",
+    "regenerator-runtime": "^0.13.7",
+    "rollup": "^2.26.9",
+    "rollup-plugin-filesize": "^9.0.2",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-progress": "^1.1.2",
+    "rollup-plugin-visualizer": "^4.1.1",
+    "typescript": "~4.0.2",
+    "webpack": "^4.44.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn type-check && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "yarn lint:staged",
+    "*.{json,css,scss,md,yml,yaml}": "prettier --write"
+  },
+  "browserslist": {
+    "production": [
+      ">5%",
+      "last 2 versions"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.stories.*",
+      "!src/**/*.d.ts"
+    ],
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ],
+    "modulePaths": [],
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "setupFiles": [
+      "react-app-polyfill/jsdom"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/config/jest/setup.js"
+    ],
+    "testEnvironment": "jest-environment-jsdom-fourteen",
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$"
+    ],
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
+  }
+}

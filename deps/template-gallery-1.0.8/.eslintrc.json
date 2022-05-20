@@ -1,0 +1,111 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:jest/recommended",
+    "plugin:testing-library/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "plugins": ["jest", "react-hooks", "@typescript-eslint", "prettier"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "jest/globals": true,
+    "node": true
+  },
+  "rules": {
+    "class-methods-use-this": 0,
+    "no-underscore-dangle": [2, { "allow": ["_meta", "_items", "_status", "_fs_ready"] }],
+    "prettier/prettier": "error",
+    "react/prop-types": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".tsx"] }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": true,
+        "peerDependencies": true
+      }
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  },
+  "overrides": [
+    {
+      // Enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": ["error"],
+        "no-shadow": 0
+      }
+    },
+    {
+      "files": ["scripts/**/*.js", "config/**/*.js", "babel.config.js", "rollup.config.js"],
+      "rules": {
+        "strict": 0,
+        "no-console": 0,
+        "global-require": 0,
+        "func-names": 0,
+        "no-use-before-define": 0,
+        "import/no-dynamic-require": 0,
+        "@typescript-eslint/no-var-requires": 0
+      }
+    },
+    {
+      "files": ["src/**/*.d.ts"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": 0
+      }
+    },
+    {
+      "files": ["*.spec.tsx"],
+      "rules": {
+        "react/jsx-props-no-spreading": 0
+      }
+    },
+    {
+      "files": ["src/types/*", "src/__fixtures__/*"],
+      "rules": {
+        "no-param-reassign": 0,
+        "camelcase": 0
+      }
+    },
+    {
+      "files": ["src/**/*.stories.tsx"],
+      "rules": {
+        "@typescript-eslint/no-empty-function": 0,
+        "no-console": 0
+      }
+    }
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    },
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "globals": {
+    "EC": true,
+    "waitTimeout": true
+  },
+  "parser": "@typescript-eslint/parser"
+}

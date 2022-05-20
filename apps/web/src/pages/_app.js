@@ -7,6 +7,10 @@ import useSanityPreview from '@hooks/useSanityPreview'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
 
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { MarketingThemeProvider } from '@lp/ui'
+import GlobalStyles from '../legacy/components/GlobalStyles'
+
 const LayoutContainer = dynamic(() => import('@components/LayoutContainer'))
 const SEO = dynamic(() => import('@components/SEO'))
 const Footer = dynamic(() => import('@components/Footer'))
@@ -45,15 +49,18 @@ export default function App({
 
   return (
     <AppContext.Provider value={siteMeta}>
-      <SEO seo={pageData?.seo} siteMeta={siteMeta} />
-      <LazyMotion features={loadFeatures} strict>
-        {navigation && <Header navigation={navigation} />}
-        <LayoutContainer>
-          <Main {...pageData} {...meta} />
-        </LayoutContainer>
-        {navigation && <Footer navigation={navigation} />}
-        <ModalParent />
-      </LazyMotion>
+      <MarketingThemeProvider>
+        <GlobalStyles />
+        <SEO seo={pageData?.seo} siteMeta={siteMeta} />
+        <LazyMotion features={loadFeatures} strict>
+          {navigation && <Header navigation={navigation} />}
+          <LayoutContainer>
+            <Main {...pageData} {...meta} />
+          </LayoutContainer>
+          {navigation && <Footer navigation={navigation} />}
+          <ModalParent />
+        </LazyMotion>
+      </MarketingThemeProvider>
     </AppContext.Provider>
   )
 }

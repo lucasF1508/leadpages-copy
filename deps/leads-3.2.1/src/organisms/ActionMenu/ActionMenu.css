@@ -1,0 +1,75 @@
+@import "../../theme/theme.css";
+
+.expandActions {
+  color: var(--grey);
+}
+
+.actionMenu {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+
+  min-width: 100px;
+  max-width: 300px;
+  height: 0;
+
+  & .actionMenuList {
+    display: flex;
+    visibility: hidden;
+
+    list-style: none;
+
+    transition: opacity 0.4s ease 0.2s, visibility 0.1s ease 0.2s;
+
+    opacity: 0;
+  }
+
+  & .actionMenuList i {
+    font-size: 15px;
+
+    width: 30px;
+  }
+
+  & .actionMenuList > li {
+    transform: translateY(-0.5em);
+  }
+
+  &.isActive .actionMenuList,
+  &:hover .actionMenuList {
+    visibility: visible;
+
+    transition: opacity 0.4s ease 0.2s, visibility 0.1s ease;
+
+    opacity: 1;
+  }
+
+  &.isActive .actionMenuList > li,
+  &:hover .actionMenuList > li {
+    transform: translateY(0%);
+  }
+
+  & .expandActions {
+    position: absolute;
+    right: 10px;
+
+    visibility: visible;
+
+    transition: visibility 0.1s ease 0.6s;
+
+    color: var(--grey-dark);
+  }
+
+  &.isActive .expandActions,
+  &:hover .expandActions {
+    visibility: hidden;
+
+    transition: visibility 0.1s ease 0.1s;
+  }
+}
+
+.expandActions > i {
+  font-size: 26px;
+}

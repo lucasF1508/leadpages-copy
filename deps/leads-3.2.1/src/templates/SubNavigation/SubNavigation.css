@@ -1,0 +1,125 @@
+@import '../../theme/theme.css';
+
+/* TODO: this functionality was from the glamor migration and needs to be resolved */
+
+/* const MOBILE_WIDTH = 700; */
+
+.text {
+  @apply --headingDefault;
+
+  display: flex;
+  align-items: center;
+
+  margin: 0 0 0 12px;
+
+  transition: all 200ms ease-in;
+
+  &:hover {
+    cursor: auto;
+  }
+
+  &.noBackButton {
+    margin: 0 0 0 24px;
+  }
+}
+
+.editButton {
+  cursor: pointer;
+
+  opacity: 0;
+}
+
+/* .text:hover {
+  cursor: pointer;
+} */
+
+.text:hover + .editButton,
+.editButton:hover {
+  margin-left: 3px;
+
+  transition: all 200ms ease-in;
+
+  opacity: 1;
+}
+
+.backArrow {
+  margin: 0 12px 0 0;
+
+  transition: all 200ms ease-in;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.hidden {
+  display: none;
+}
+
+.header {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 72px;
+  padding: 0 24px;
+
+  border: 1px solid #d8dce6;
+  background: white;
+}
+
+.headerMobile {
+  min-height: 48px;
+}
+
+.headerMobileWithChildren {
+  min-height: 96px;
+}
+
+.info {
+  display: flex;
+  align-self: stretch;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  align-items: baseline;
+  flex: 1 1 0;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  min-width: 0;
+  max-width: 50%;
+}
+
+.name {
+  display: flex;
+}
+
+.tab {
+  display: flex;
+  flex: 0 1 auto;
+}
+
+.visibilityHidden {
+  visibility: hidden;
+}

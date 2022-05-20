@@ -1,0 +1,131 @@
+@import '../../theme/theme.css';
+
+.select {
+  font-family: 'Akkurat', 'Roboto', 'Helvetica', sans-serif;
+
+  position: relative;
+
+  max-width: 396px;
+
+  & .label {
+    @apply --bodyDefault;
+  }
+
+  & .singleInputField {
+    height: 100%;
+  }
+}
+
+.header .input {
+  @apply --tableHeader;
+
+  display: inline-block;
+
+  margin-top: 1px;
+
+  & .icon {
+    margin-left: 6px;
+  }
+}
+
+.open {
+  & .input,
+  & .input:hover {
+    border-color: var(--blue);
+  }
+}
+
+.open .input,
+.open .input:hover {
+  & .icon {
+    transform: rotate(180deg);
+  }
+}
+
+.disabled {
+  cursor: auto;
+  user-select: none;
+  pointer-events: none;
+
+  opacity: 0.4;
+}
+
+.input {
+  font-size: 15px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+
+  color: var(--grey-dark);
+  border: 1px solid var(--grey);
+  border-radius: 3px;
+  background: #ffffff;
+
+  &:hover {
+    border-color: var(--grey-darker);
+  }
+
+  &.selected {
+    color: var(--grey-darker);
+  }
+
+  & .icon {
+    margin-left: auto;
+
+    user-select: none;
+    transition: transform 0.2s ease;
+  }
+}
+
+.nativeElement {
+  display: none;
+}
+
+.truncateEllipsis {
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.noBackground {
+  & .input {
+    display: inline-block;
+
+    width: auto;
+    height: auto;
+    padding: 0;
+
+    border: none;
+    border-radius: 0;
+
+    background: transparent;
+
+    &:hover,
+    &:focus {
+      color: var(--blue-dark);
+    }
+  }
+}
+/* Control scrolling behavior in options container */
+.flyout {
+  padding: 0px !important;
+  overflow-y: hidden !important;
+}
+
+.options {
+  position: relative;
+  overflow: auto;
+  max-height: 324px;
+  margin: 9px 0;
+  padding: 0 9px;
+  max-height: 306px; /* Max height of Flyout 324px - 18px margin */
+}

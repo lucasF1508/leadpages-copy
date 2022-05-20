@@ -1,0 +1,19 @@
+---
+service: template-gallery
+runtime: python27
+default_expiration: "5m"
+threadsafe: true
+
+handlers:
+  - url: (.*)/
+    static_files: storybook-static/index.html
+    upload: storybook-static/index.html
+    secure: always
+    login: required
+  - url: /
+    static_dir: storybook-static
+    secure: always
+    login: required
+
+skip_files:
+  - (?!^storybook-static)

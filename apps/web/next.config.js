@@ -27,9 +27,14 @@ const {
   MC_AUDIENCE_ID,
   MC_SERVER_PREFIX,
   HCAPTCHA_SITEKEY,
+  LEADPAGES_API_HOST,
+  STARGATE_API_HOST,
 } = process.env
 
 module.exports = withPlugins([[withBundleAnalyzer]], {
+  compiler: {
+    styledComponents: true,
+  },
   env: {
     SANITY_STUDIO_API_PROJECT_ID,
     SANITY_STUDIO_API_DATASET,
@@ -48,6 +53,8 @@ module.exports = withPlugins([[withBundleAnalyzer]], {
     RECAPTCHA_SITE_KEY,
     VERCEL_ENV,
     HCAPTCHA_SITEKEY,
+    LEADPAGES_API_HOST,
+    STARGATE_API_HOST,
   },
   poweredByHeader: false,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],

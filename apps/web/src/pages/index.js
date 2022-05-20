@@ -7,9 +7,7 @@ const IndexPage = (props) => <HomePage {...props} />
 export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/'
-  const data = await getDoc('pageHome', {
-    preview,
-  })
+  const data = {}
 
   return {
     props: {

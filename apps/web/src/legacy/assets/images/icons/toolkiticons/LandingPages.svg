@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="30px" viewBox="0 0 24 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Icons/Product/Landing Pages-60</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Product/Landing-pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="/product/landing-pages" transform="translate(-577.000000, -3847.000000)">
+            <g id="Group-5" transform="translate(-46.000000, 2706.000000)">
+                <g id="All-Products" transform="translate(46.000000, 882.000000)">
+                    <g id="Active" transform="translate(547.000000, 235.000000)">
+                        <g id="Icons/Product/Landing-Page-60" transform="translate(30.000000, 24.000000)">
+                            <g>
+                                <g id="_icons/Product/landing-page">
+                                    <rect id="Rectangle" fill="#E7E6E6" x="0" y="0" width="24" height="19"></rect>
+                                    <rect id="Rectangle" fill="#F65B1C" x="5.5" y="9.5" width="13" height="4" rx="2"></rect>
+                                </g>
+                                <polygon id="_icons/Product/square" fill="#C3C2C1" points="17.5784271 24.4215729 12 30 6.42157288 24.4215729 12 18.8431458"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

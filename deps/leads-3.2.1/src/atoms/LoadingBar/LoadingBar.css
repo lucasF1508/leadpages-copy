@@ -1,0 +1,46 @@
+.uiLoadingBar {
+  position: fixed;
+  z-index: 1001;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 4px;
+
+  transform: translate3d(0, 0, 0) rotateZ(360deg);
+  text-align: center;
+
+  background: #deecfd;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+
+    display: block;
+
+    width: 85%;
+    padding: 0;
+
+    content: '';
+    transform: rotateZ(360deg);
+    animation: ui-loading 1.8s ease-out infinite;
+
+    background: linear-gradient(to right, #deecfd 0%, #4692ff 10%, #4692ff 90%, #deecfd 100%);
+    will-change: transform;
+  }
+}
+
+@keyframes ui-loading {
+  0% {
+    transform: translate3d(0, 0, 0) rotateZ(360deg);
+  }
+
+  100% {
+    transform: translate3d(236%, 0, 0) rotateZ(360deg);
+  }
+}

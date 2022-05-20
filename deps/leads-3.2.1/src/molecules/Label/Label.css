@@ -1,0 +1,37 @@
+@import "../../theme/theme.css";
+
+.labelClass {
+  @apply --bodyDefault;
+
+  display: flex;
+
+  align-items: center;
+
+  & i {
+    margin-right: 6px;
+
+    color: var(--grey);
+  }
+
+  & .indicator {
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+
+    border: 2px solid var(--green);
+    border-radius: 8px;
+    background: var(--green);
+  }
+
+  & .indicatorWithText {
+    font-size: 13px;
+    font-weight: 700;
+
+    width: 23px;
+    height: 23px;
+
+    text-align: center;
+
+    border-radius: 12px;
+  }
+}

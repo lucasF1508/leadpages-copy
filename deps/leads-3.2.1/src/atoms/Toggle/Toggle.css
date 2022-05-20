@@ -1,0 +1,55 @@
+@import "../../theme/theme.css";
+
+.toggleClass {
+  transition: all 0.25s ease;
+
+  &:hover,
+  &.toggleActive {
+    cursor: pointer;
+
+    & .toggleSwitch {
+      box-shadow: var(--shadow-l2);
+    }
+  }
+
+  & .toggleBase {
+    position: relative;
+
+    width: 35px;
+    height: 12px;
+
+    transition: all 0.25s ease;
+
+    border-radius: 6px;
+    background: #b1bacc;
+  }
+
+  & .toggleBase.toggleBaseOn {
+    background: #0069ff;
+  }
+
+  & .toggleInput {
+    display: none;
+  }
+
+  & .toggleSwitch {
+    position: absolute;
+    top: -6px;
+    left: -7px;
+
+    width: 24px;
+    height: 24px;
+
+    transition: all 0.25s ease;
+
+    border-radius: 12px;
+    background: #fafafa;
+    box-shadow: var(--shadow-l1);
+  }
+
+  & .toggleSwitch.toggleSwitchOn {
+    left: 16px;
+
+    background: #bcdfff;
+  }
+}

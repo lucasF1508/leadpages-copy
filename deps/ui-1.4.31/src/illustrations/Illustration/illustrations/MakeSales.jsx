@@ -1,0 +1,28 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+export default function MakeSales({ width, height, ...props }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="-6 -6 72 72"
+      {...props}
+    >
+      <g fill="none" fillRule="evenodd">
+        <polygon fill="#C3C2C1" points="0 0 11 0 11 10" transform="translate(0 10)" />
+        <path
+          fill="#E7E6E6"
+          d="M11,20 L60,20 L60,36 C60,42.627417 54.627417,48 48,48 L23,48 C16.372583,48 11,42.627417 11,36 L11,20 Z"
+        />
+        <polygon fill="#4D7523" points="26 10 36 0 46 10 36 20" />
+        <circle cx="47" cy="54" r="6" fill="#C3C2C1" />
+        <circle cx="24" cy="54" r="6" fill="#C3C2C1" />
+      </g>
+    </svg>
+  );
+}
+
+MakeSales.propTypes = { width: PropTypes.number, height: PropTypes.number };
+
+MakeSales.defaultProps = { width: 72, height: 72 };

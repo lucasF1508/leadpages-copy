@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Option Component should render out children if they are provided 1`] = `
+Array [
+  <div
+    aria-selected={false}
+    className="option"
+    data-value="foo"
+    disabled={false}
+    onClick={[Function]}
+    role="option"
+    selected={false}
+    tabIndex={0}
+  >
+    <div
+      className="optionInner"
+    >
+      <div
+        className="primaryText truncateEllipsis"
+        title="I shouldn't be here"
+      >
+        <span>
+          wut wut
+        </span>
+      </div>
+      
+    </div>
+  </div>,
+]
+`;

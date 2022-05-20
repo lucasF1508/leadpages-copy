@@ -1,0 +1,127 @@
+@import '../../theme/theme.css';
+
+.templateDrawer {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100%;
+
+  text-align: center;
+
+  color: #ffffff;
+  background-color: var(--blue-darker-accent);
+
+  @media (max-width: 840px) {
+    display: none;
+  }
+}
+
+.templateDrawerContent {
+  position: relative;
+
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+
+  width: 1150px;
+  height: 100%;
+  margin: auto;
+
+  @media (max-width: 1200px) {
+    width: 95%;
+  }
+}
+
+.templates {
+  display: flex;
+}
+
+.templateDrawerHeader {
+  margin-bottom: 24px;
+}
+
+.header {
+  @apply --bodyDefault;
+
+  margin: 36px 0 0;
+
+  text-transform: capitalize;
+
+  color: #ffffff;
+}
+
+.subheader {
+  @apply --headingDefault;
+
+  line-height: 20px;
+
+  margin: 24px 0 0;
+
+  color: #ffffff;
+}
+
+.templateDrawerFooter {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+
+  margin: 36px 0;
+
+  vertical-align: middle;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 5px;
+
+  @media (max-width: 992px) {
+    top: 5px;
+    right: 0;
+  }
+}
+
+.templateDrawer .templateDrawerContent .closeButton .button,
+.templateDrawer .templateDrawerContent .templates .button {
+  color: #ffffff;
+}
+
+.templateDrawer .templateDrawerContent .closeButton .button:hover,
+.templateDrawer .templateDrawerContent .templates .button:hover {
+  color: #ffffff;
+  background-color: rgba(228, 231, 237, 0.27);
+}
+
+.templateDrawer .templateDrawerContent .templates .button {
+  font-size: 4em;
+
+  display: flex;
+  align-self: stretch;
+  flex: 1 5%;
+  justify-content: center;
+
+  width: 5%;
+  height: inherit;
+  margin: 0 6px;
+
+  transition: all 0.25s ease;
+
+  border-radius: 3px;
+
+  & i {
+    font-size: 1.1em;
+  }
+}
+
+.templatesWrapper {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+
+  @media (max-width: 1200px) {
+    width: 90%;
+  }
+}

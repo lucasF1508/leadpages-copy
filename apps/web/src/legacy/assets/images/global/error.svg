@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>_Icons / 16px  / Info</title>
+    <desc>Created with Sketch.</desc>
+    <g id="_UI-Kit" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Light" transform="translate(-197.000000, -4128.000000)" fill="#575452">
+            <g id="Notes/warning" transform="translate(165.000000, 4099.000000)">
+                <g id="_Icons-/-24px--/-Error">
+                    <g transform="translate(34.000000, 31.000000)">
+                        <path d="M8,-2 C13.5118803,-2 18,2.48811969 18,8 C18,13.5118804 13.5118804,18 8,18 C2.48811969,18 -2,13.5118803 -2,8 C-2,2.48811972 2.48811972,-2 8,-2 Z M8,-0.4 C3.37177532,-0.4 -0.4,3.37177532 -0.4,8 C-0.4,12.6282247 3.37177528,16.4 8,16.4 C12.6282248,16.4 16.4,12.6282248 16.4,8 C16.4,3.37177528 12.6282247,-0.4 8,-0.4 Z M8.92592593,6.14814815 L8.92592593,12.6296296 L7.07407407,12.6296296 L7.07407407,6.14814815 L8.92592593,6.14814815 Z M8.92592593,2.44444444 L8.92592593,4.2962963 L7.07407407,4.2962963 L7.07407407,2.44444444 L8.92592593,2.44444444 Z" id="Icon" transform="translate(8.000000, 8.000000) rotate(-180.000000) translate(-8.000000, -8.000000) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

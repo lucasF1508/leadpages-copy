@@ -1,0 +1,41 @@
+@import "../../theme/theme.css";
+
+.editUrlContent {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+
+  margin: 6px 0;
+
+  & > .editSubdomain,
+  & > .editSlug {
+    flex: 1;
+  }
+
+  & > .editSlug,
+  & > .editUrlSave {
+    margin-left: 12px;
+  }
+
+  & > .editUrlSave {
+    display: flex;
+    align-items: flex-start;
+
+    min-height: 100%;
+
+    margin-left: 12px;
+    padding-top: 24px;
+  }
+
+  & .supportLabel {
+    margin: 0 0 6px;
+  }
+
+  & .errorMessage {
+    color: var(--red-dark);
+  }
+}
+
+.urlEditLink {
+  margin: 18px 0;
+}

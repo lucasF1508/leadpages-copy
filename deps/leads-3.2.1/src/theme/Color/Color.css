@@ -1,0 +1,467 @@
+@import "../theme.css";
+
+.blueLighterBackgroundColor,
+.blueLighterBackgroundColorHover:hover {
+  background-color: var(--blue-lighter) !important;
+}
+
+.blueLightBackgroundColor,
+.blueLightBackgroundColorHover:hover {
+  background-color: var(--blue-light) !important;
+}
+
+.blueBackgroundColor,
+.blueBackgroundColorHover:hover {
+  background-color: var(--blue) !important;
+}
+
+.blueDarkBackgroundColor,
+.blueDarkBackgroundColorHover:hover {
+  background-color: var(--blue-dark) !important;
+}
+
+.blueDarkerBackgroundColor,
+.blueDarkerBackgroundColorHover:hover {
+  background-color: var(--blue-darker) !important;
+}
+
+.blueDarkerAccentBackgroundColor,
+.blueDarkerAccentBackgroundColorHover:hover {
+  background-color: var(--blue-darker-accent) !important;
+}
+
+.greenLighterBackgroundColor,
+.greenLighterBackgroundColorHover:hover {
+  background-color: var(--green-lighter) !important;
+}
+
+.greenLightBackgroundColor,
+.greenLightBackgroundColorHover:hover {
+  background-color: var(--green-light) !important;
+}
+
+.greenBackgroundColor,
+.greenBackgroundColorHover:hover {
+  background-color: var(--green) !important;
+}
+
+.greenDarkBackgroundColor,
+.greenDarkBackgroundColorHover:hover {
+  background-color: var(--green-dark) !important;
+}
+
+.greenDarkerBackgroundColor,
+.greenDarkerBackgroundColorHover:hover {
+  background-color: var(--green-darker) !important;
+}
+
+.redLighterBackgroundColor,
+.redLighterBackgroundColorHover:hover {
+  background-color: var(--red-lighter) !important;
+}
+
+.redLightBackgroundColor,
+.redLightBackgroundColorHover:hover {
+  background-color: var(--red-light) !important;
+}
+
+.redBackgroundColor,
+.redBackgroundColorHover:hover {
+  background-color: var(--red) !important;
+}
+
+.redDarkBackgroundColor,
+.redDarkBackgroundColorHover:hover {
+  background-color: var(--red-dark) !important;
+}
+
+.redDarkerBackgroundColor,
+.redDarkerBackgroundColorHover:hover {
+  background-color: var(--red-darker) !important;
+}
+
+.yellowLighterBackgroundColor,
+.yellowLighterBackgroundColorHover:hover {
+  background-color: var(--yellow-lighter) !important;
+}
+
+.yellowLightBackgroundColor,
+.yellowLightBackgroundColorHover:hover {
+  background-color: var(--yellow-light) !important;
+}
+
+.yellowBackgroundColor,
+.yellowBackgroundColorHover:hover {
+  background-color: var(--yellow) !important;
+}
+
+.yellowDarkBackgroundColor,
+.yellowDarkBackgroundColorHover:hover {
+  background-color: var(--yellow-dark) !important;
+}
+
+.yellowDarkerBackgroundColor,
+.yellowDarkerBackgroundColorHover:hover {
+  background-color: var(--yellow-darker) !important;
+}
+
+.purpleLighterBackgroundColor,
+.purpleLighterBackgroundColorHover:hover {
+  background-color: var(--purple-lighter) !important;
+}
+
+.purpleLightBackgroundColor,
+.purpleLightBackgroundColorHover:hover {
+  background-color: var(--purple-light) !important;
+}
+
+.purpleBackgroundColor,
+.purpleBackgroundColorHover:hover {
+  background-color: var(--purple) !important;
+}
+
+.purpleDarkBackgroundColor,
+.purpleDarkBackgroundColorHover:hover {
+  background-color: var(--purple-dark) !important;
+}
+
+.purpleDarkerBackgroundColor,
+.purpleDarkerBackgroundColorHover:hover {
+  background-color: var(--purple-darker) !important;
+}
+
+.greyLighterBackgroundColor,
+.greyLighterBackgroundColorHover:hover {
+  background-color: var(--grey-lighter) !important;
+}
+
+.greyLightBackgroundColor,
+.greyLightBackgroundColorHover:hover {
+  background-color: var(--grey-light) !important;
+}
+
+.greyBackgroundColor,
+.greyBackgroundColorHover:hover {
+  background-color: var(--grey) !important;
+}
+
+.greyDarkBackgroundColor,
+.greyDarkBackgroundColorHover:hover {
+  background-color: var(--grey-dark) !important;
+}
+
+.greyDarkerBackgroundColor,
+.greyDarkerBackgroundColorHover:hover {
+  background-color: var(--grey-darker) !important;
+}
+
+.blueLighterColor,
+.blueLighterColorHover:hover {
+  color: var(--blue-lighter) !important;
+}
+
+.blueLightColor,
+.blueLightColorHover:hover {
+  color: var(--blue-light) !important;
+}
+
+.blueColor,
+.blueColorHover:hover {
+  color: var(--blue) !important;
+}
+
+.blueDarkColor,
+.blueDarkColorHover:hover {
+  color: var(--blue-dark) !important;
+}
+
+.blueDarkerColor,
+.blueDarkerColorHover:hover {
+  color: var(--blue-darker) !important;
+}
+
+.blueDarkerAccentColor,
+.blueDarkerAccentColorHover:hover {
+  color: var(--blue-darker-accent) !important;
+}
+
+.greenLighterColor,
+.greenLighterColorHover:hover {
+  color: var(--green-lighter) !important;
+}
+
+.greenLightColor,
+.greenLightColorHover:hover {
+  color: var(--green-light) !important;
+}
+
+.greenColor,
+.greenColorHover:hover {
+  color: var(--green) !important;
+}
+
+.greenDarkColor,
+.greenDarkColorHover:hover {
+  color: var(--green-dark) !important;
+}
+
+.greenDarkerColor,
+.greenDarkerColorHover:hover {
+  color: var(--green-darker) !important;
+}
+
+.redLighterColor,
+.redLighterColorHover:hover {
+  color: var(--red-lighter) !important;
+}
+
+.redLightColor,
+.redLightColorHover:hover {
+  color: var(--red-light) !important;
+}
+
+.redColor,
+.redColorHover:hover {
+  color: var(--red) !important;
+}
+
+.redDarkColor,
+.redDarkColorHover:hover {
+  color: var(--red-dark) !important;
+}
+
+.redDarkerColor,
+.redDarkerColorHover:hover {
+  color: var(--red-darker) !important;
+}
+
+.yellowLighterColor,
+.yellowLighterColorHover:hover {
+  color: var(--yellow-lighter) !important;
+}
+
+.yellowLightColor,
+.yellowLightColorHover:hover {
+  color: var(--yellow-light) !important;
+}
+
+.yellowColor,
+.yellowColorHover:hover {
+  color: var(--yellow) !important;
+}
+
+.yellowDarkColor,
+.yellowDarkColorHover:hover {
+  color: var(--yellow-dark) !important;
+}
+
+.yellowDarkerColor,
+.yellowDarkerColorHover:hover {
+  color: var(--yellow-darker) !important;
+}
+
+.purpleLighterColor,
+.purpleLighterColorHover:hover {
+  color: var(--purple-lighter) !important;
+}
+
+.purpleLightColor,
+.purpleLightColorHover:hover {
+  color: var(--purple-light) !important;
+}
+
+.purpleColor,
+.purpleColorHover:hover {
+  color: var(--purple) !important;
+}
+
+.purpleDarkColor,
+.purpleDarkColorHover:hover {
+  color: var(--purple-dark) !important;
+}
+
+.purpleDarkerColor,
+.purpleDarkerColorHover:hover {
+  color: var(--purple-darker) !important;
+}
+
+.greyLighterColor,
+.greyLighterColorHover:hover {
+  color: var(--grey-lighter) !important;
+}
+
+.greyLightColor,
+.greyLightColorHover:hover {
+  color: var(--grey-light) !important;
+}
+
+.greyColor,
+.greyColorHover:hover {
+  color: var(--grey) !important;
+}
+
+.greyDarkColor,
+.greyDarkColorHover:hover {
+  color: var(--grey-dark) !important;
+}
+
+.greyDarkerColor,
+.greyDarkerColorHover:hover {
+  color: var(--grey-darker) !important;
+}
+
+/* PATH */
+.blueLighterStroke,
+.blueLighterStrokeHover:hover {
+  stroke: var(--blue-lighter) !important;
+}
+
+.blueLightStroke,
+.blueLightStrokeHover:hover {
+  stroke: var(--blue-light) !important;
+}
+
+.blueStroke,
+.blueStrokeHover:hover {
+  stroke: var(--blue) !important;
+}
+
+.blueDarkStroke,
+.blueDarkStrokeHover:hover {
+  stroke: var(--blue-dark) !important;
+}
+
+.blueDarkerStroke,
+.blueDarkerStrokeHover:hover {
+  stroke: var(--blue-darker) !important;
+}
+
+.blueDarkerAccentStroke,
+.blueDarkerAccentStrokeHover:hover {
+  stroke: var(--blue-darker-accent) !important;
+}
+
+.greenLighterStroke,
+.greenLighterStrokeHover:hover {
+  stroke: var(--green-lighter) !important;
+}
+
+.greenLightStroke,
+.greenLightStrokeHover:hover {
+  stroke: var(--green-light) !important;
+}
+
+.greenStroke,
+.greenStrokeHover:hover {
+  stroke: var(--green) !important;
+}
+
+.greenDarkStroke,
+.greenDarkStrokeHover:hover {
+  stroke: var(--green-dark) !important;
+}
+
+.greenDarkerStroke,
+.greenDarkerStrokeHover:hover {
+  stroke: var(--green-darker) !important;
+}
+
+.redLighterStroke,
+.redLighterStrokeHover:hover {
+  stroke: var(--red-lighter) !important;
+}
+
+.redLightStroke,
+.redLightStrokeHover:hover {
+  stroke: var(--red-light) !important;
+}
+
+.redStroke,
+.redStrokeHover:hover {
+  stroke: var(--red) !important;
+}
+
+.redDarkStroke,
+.redDarkStrokeHover:hover {
+  stroke: var(--red-dark) !important;
+}
+
+.redDarkerStroke,
+.redDarkerStrokeHover:hover {
+  stroke: var(--red-darker) !important;
+}
+
+.yellowLighterStroke,
+.yellowLighterStrokeHover:hover {
+  stroke: var(--yellow-lighter) !important;
+}
+
+.yellowLightStroke,
+.yellowLightStrokeHover:hover {
+  stroke: var(--yellow-light) !important;
+}
+
+.yellowStroke,
+.yellowStrokeHover:hover {
+  stroke: var(--yellow) !important;
+}
+
+.yellowDarkStroke,
+.yellowDarkStrokeHover:hover {
+  stroke: var(--yellow-dark) !important;
+}
+
+.yellowDarkerStroke,
+.yellowDarkerStrokeHover:hover {
+  stroke: var(--yellow-darker) !important;
+}
+
+.purpleLighterStroke,
+.purpleLighterStrokeHover:hover {
+  stroke: var(--purple-lighter) !important;
+}
+
+.purpleLightStroke,
+.purpleLightStrokeHover:hover {
+  stroke: var(--purple-light) !important;
+}
+
+.purpleStroke,
+.purpleStrokeHover:hover {
+  stroke: var(--purple) !important;
+}
+
+.purpleDarkStroke,
+.purpleDarkStrokeHover:hover {
+  stroke: var(--purple-dark) !important;
+}
+
+.purpleDarkerStroke,
+.purpleDarkerStrokeHover:hover {
+  stroke: var(--purple-darker) !important;
+}
+
+.greyLighterStroke,
+.greyLighterStrokeHover:hover {
+  stroke: var(--grey-lighter) !important;
+}
+
+.greyLightStroke,
+.greyLightStrokeHover:hover {
+  stroke: var(--grey-light) !important;
+}
+
+.greyStroke,
+.greyStrokeHover:hover {
+  stroke: var(--grey) !important;
+}
+
+.greyDarkStroke,
+.greyDarkStrokeHover:hover {
+  stroke: var(--grey-dark) !important;
+}
+
+.greyDarkerStroke,
+.greyDarkerStrokeHover:hover {
+  stroke: var(--grey-darker) !important;
+}

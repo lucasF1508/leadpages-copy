@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="452px" height="452px" viewBox="0 0 452 452" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>Product/Product-Overview-v2/Backgrounds/Tan-Circle</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M226,452 C264.747325,452 340.080658,452 452,452 C452,345.796911 452,270.463578 452,226 C452,101.183647 350.816353,0 226,0 C101.183647,0 0,101.183647 0,226 C0,350.816353 101.183647,452 226,452 Z" id="path-1"></path>
+    </defs>
+    <g id="/product-v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Product/Product-Overview-v2/Backgrounds/Tan-Circle">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#F4E3CC" xlink:href="#path-1"></use>
+            <path d="M501.598212,-18.9999296 L14.396984,-18.9921344 L228.861739,226.999979 L14.3969529,473 L501.598274,473 L286.779266,227 L501.598212,-18.9999296 Z" id="Path" stroke="#FEF9F1" stroke-width="4" mask="url(#mask-2)"></path>
+        </g>
+    </g>
+</svg>

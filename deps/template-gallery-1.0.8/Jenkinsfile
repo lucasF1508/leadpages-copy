@@ -1,0 +1,11 @@
+javascriptLibBuild {
+    name = "template-gallery"
+    nodeVersion = 12
+    lint = false
+    test = true
+    testCommand = "yarn test:ci"
+    publish = true
+    installCommand = "yarn && yarn build:ci"
+    storybookDeploy = true
+    storybookServiceName = "template-gallery"
+}
