@@ -11,6 +11,7 @@
     "story": "turbo run story",
     "serve": "turbo run serve",
     "web": "turbo run web#start",
+    "studio": "turbo run studio#start",
     "dev": "yarn start",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "blast:node": "turbo run blast:node",
