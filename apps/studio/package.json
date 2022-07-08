@@ -16,7 +16,6 @@
     "sanity"
   ],
   "dependencies": {
-    "config": "*",
     "@sanity/base": "^2.25.4",
     "@sanity/components": "^2.2.6",
     "@sanity/core": "^2.25.0",
@@ -27,6 +26,7 @@
     "@sanity/production-preview": "^2.2.6",
     "@sanity/uuid": "^3.0.1",
     "@sanity/vision": "^2.25.4",
+    "config": "*",
     "immutability-helper": "^3.1.1",
     "lodash": "^4.17.21",
     "prop-types": "^15.7",
