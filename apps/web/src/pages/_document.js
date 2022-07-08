@@ -29,6 +29,7 @@ export default class Document extends NextDocument {
       sheet.seal()
     }
   }
+
   render() {
     return (
       <Html lang="en">

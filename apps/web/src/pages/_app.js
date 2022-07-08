@@ -7,7 +7,7 @@ import useSanityPreview from '@hooks/useSanityPreview'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
 
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+// import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { MarketingThemeProvider } from '@lp/ui'
 import GlobalStyles from '../legacy/components/GlobalStyles'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { getDoc } from '@lib'
+// import { getDoc } from '@lib'
 import HomePage from '@layouts/HomePage'
 
 const IndexPage = (props) => <HomePage {...props} />
