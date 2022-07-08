@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardList renders correctly 1`] = `
+<div
+  className="css-vswwps"
+>
+  
+  <div
+    className="css-gcxf6t"
+    onClick={[MockFunction]}
+  >
+    <div
+      className="css-18eo882"
+    >
+      <div
+        className="lp-icon"
+        data-qa-selector="add-item"
+      >
+        plus
+      </div>
+      <div
+        className="css-u17hks"
+      />
+    </div>
+  </div>
+  <div
+    onClick={[Function]}
+    role="button"
+    style={
+      Object {
+        "bottom": 0,
+        "display": "none",
+        "left": 0,
+        "position": "fixed",
+        "right": 0,
+        "top": 0,
+      }
+    }
+    tabIndex="0"
+  />
+</div>
+`;

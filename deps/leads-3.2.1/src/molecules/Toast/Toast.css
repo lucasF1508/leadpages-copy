@@ -1,0 +1,74 @@
+@import "../../theme/theme.css";
+
+.toast {
+  display: flex;
+  overflow: hidden;
+  align-items: stretch;
+  justify-content: space-between;
+
+  max-width: 360px;
+  margin: 30px;
+
+  border-radius: 3px;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-l4);
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  flex: 0 0 60px;
+  justify-content: center;
+
+  background-color: #ffffff;
+
+  &.error {
+    color: var(--red);
+  }
+
+  &.warning {
+    color: var(--yellow);
+  }
+
+  &.message {
+    color: var(--blue);
+  }
+}
+
+.indicator > .indicatorIcons {
+  font-size: 30px;
+}
+
+.toastMessage {
+  display: flex;
+  align-items: center;
+}
+
+.toastLink {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+
+  padding: 18px 18px 18px 0;
+
+  text-align: left;
+
+  & .toastMessage {
+    @apply --bodyHeading;
+  }
+}
+
+.close {
+  display: flex;
+  align-items: start;
+  flex: 0 0 48px;
+  justify-content: flex-end;
+
+  padding: 12px 12px 0 0;
+}

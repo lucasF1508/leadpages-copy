@@ -1,0 +1,95 @@
+@import "../../theme/theme.css";
+
+.conversion {
+  flex: 1 0 auto;
+
+  box-sizing: border-box;
+
+  width: 192px;
+  height: 50px;
+
+  padding: 9px 12px;
+
+  transition: box-shadow 0.3s ease;
+
+  border: 1px solid rgba(177, 186, 204, 0.4);
+  border-radius: 3px;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-l1);
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  flex: 1 0 14%;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+
+  border-radius: 15px;
+
+  & > i {
+    font-size: 12px;
+  }
+}
+
+.contentWrapper {
+  @apply --supportContent;
+
+  font-size: 13px;
+
+  display: flex;
+  flex: 0 1 86%;
+  flex-wrap: wrap;
+
+  width: 129;
+  min-width: 0;
+  height: 36px;
+
+  margin-left: 12px;
+
+  color: var(--grey-darker);
+
+  &.noAnalytics {
+    height: auto;
+  }
+}
+
+.pillHeadingWrapper {
+  display: flex;
+  flex: 1 0 100%;
+
+  max-width: 130px;
+}
+
+.pillHeading {
+  overflow: hidden;
+
+  padding-right: 5px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.conversionPercent {
+  font-weight: 700;
+}
+
+.convertedText {
+  color: var(--grey-dark);
+}
+
+.conversionsOverflow {
+  font-family: var(--font-family);
+  font-weight: 400;
+
+  flex: 0 0 18px;
+  justify-content: center;
+
+  min-width: 20px;
+  padding: 0 5px;
+
+  color: var(--grey-darker);
+  border-left: 1px solid var(--grey-darker);
+}

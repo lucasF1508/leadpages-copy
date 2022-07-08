@@ -1,0 +1,10 @@
+.slideInOutStyle {
+  transition: all 0.2s cubic-bezier(0.68, 0.01, 0.38, 0.99);
+  transform: translateX(0%);
+
+  &.animate {
+    transform: translateX(100%);
+
+    opacity: 0.01;
+  }
+}

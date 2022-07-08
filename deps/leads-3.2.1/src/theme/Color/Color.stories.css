@@ -1,0 +1,30 @@
+@import "../theme.css";
+
+.colorTitle {
+  @apply --inPageHeading;
+
+  width: 100%;
+  margin: 60px 0;
+}
+
+.colorSwatch {
+  font-family: 'Akkurat';
+  font-size: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  width: 176px;
+  height: 100px;
+  margin: 0 12px;
+  padding: 12px;
+
+  box-shadow: var(--shadow-l2);
+}
+
+.accent {
+  margin-top: 18px;
+}

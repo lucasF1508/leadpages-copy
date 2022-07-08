@@ -1,0 +1,24 @@
+import React from 'react';
+import { TaxonSection, Taxon, SortBy } from '../types/mandrel';
+import { Tracker } from '../types/tracker';
+import { UiFilterTypes } from '../hooks/useTemplateState';
+export declare type FilterSidebarProps = {
+    taxons: Taxon[];
+    currentFilters: UiFilterTypes;
+    onUpdateCategory: (value: Taxon) => void;
+    onUpdateTag: (value: Taxon) => void;
+    onSortSelect: (value: SortBy) => void;
+    onClearFilter: () => void;
+    legacyPageRoute?: string;
+    onSectionTransitionStart?: () => void;
+    onSectionTransitionEnd?: () => void;
+    orderByList?: SortBy[];
+    excludedSections?: TaxonSection[];
+    tracker?: Tracker;
+    expandedSection?: TaxonSection | 'none';
+    selectedTaxon?: Taxon | null;
+    listClass?: string;
+    listItemWidth?: number;
+};
+export declare const FilterSidebar: React.FC<FilterSidebarProps>;
+export default FilterSidebar;

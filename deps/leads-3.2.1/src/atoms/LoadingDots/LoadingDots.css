@@ -1,0 +1,77 @@
+@import "../../theme/theme.css";
+
+@keyframes loading {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0);
+  }
+}
+
+.loading {
+  min-width: 75px;
+
+  text-align: center;
+}
+
+.loading.md {
+  min-width: 55px;
+
+  & .dots {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.loading.sm {
+  min-width: 45px;
+
+  & .dots {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.loading.xs {
+  min-width: 25px;
+
+  & .dots {
+    width: 6px;
+    height: 6px;
+    margin: -1px;
+  }
+}
+
+.loading.inverted {
+  & .dots {
+    background-color: white;
+  }
+}
+
+.loading .dots {
+  display: inline-block;
+
+  width: 24px;
+  height: 24px;
+
+  animation: loading 1.3s infinite ease-in-out;
+  vertical-align: middle;
+
+  border-radius: 50%;
+  background-color: var(--blue);
+
+  &.dot1 {
+    animation-delay: 0s;
+  }
+
+  &.dot2 {
+    animation-delay: 0.1s;
+  }
+
+  &.dot3 {
+    animation-delay: 0.3s;
+  }
+}

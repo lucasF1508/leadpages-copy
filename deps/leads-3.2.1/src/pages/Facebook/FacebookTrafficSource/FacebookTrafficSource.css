@@ -1,0 +1,83 @@
+@import "../../../theme/theme.css";
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.trafficSourceBase {
+  display: flex;
+
+  align-items: center;
+
+  width: 430px;
+  height: 54px;
+
+  cursor: default;
+  transition: box-shadow 0.3s ease;
+
+  opacity: 0.5;
+
+  border: 1px dashed var(--grey);
+  border-radius: 3px;
+
+  &.populated {
+    border: 1px solid var(--grey);
+
+    background-color: #ffffff;
+  }
+
+  &.populated:hover {
+    transition: box-shadow 0.3s ease;
+
+    border: 1px solid var(--grey);
+    box-shadow: var(--shadow-l2);
+  }
+
+  &.tsEnabled {
+    cursor: pointer;
+
+    opacity: 1;
+  }
+
+  &.tsEnabled:hover {
+    border: 1px dashed var(--blue-dark);
+  }
+}
+
+.trafficSourceIcon {
+  padding: 0 8px;
+}
+
+.trafficSourceContent {
+  width: 87%;
+
+  & .title {
+    @apply --bodyDefault;
+
+    overflow: hidden;
+    flex: 1;
+
+    min-width: 0;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  & .analytics {
+    @apply --supportContent;
+
+    text-transform: capitalize;
+  }
+}
+
+.analyticsDisplay {
+  display: flex;
+  align-items: center;
+}
+
+.indicator {
+  & > div {
+    display: block;
+  }
+}

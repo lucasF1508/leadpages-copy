@@ -1,0 +1,35 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+export default function ContestGiveaway({ width, height, ...props }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={width}
+      height={height}
+      viewBox="-17 -15.5 72 72"
+      {...props}
+    >
+      <g fill="none" fillRule="evenodd">
+        <path
+          fill="#E7E6E6"
+          d="M5,11 L5,0 L33,0 L33,11 C33,18.7319865 26.7319865,25 19,25 C11.2680135,25 5,18.7319865 5,11 Z"
+        />
+        <circle cx="19" cy="30" r="5" fill="#FFDCEE" />
+        <polygon fill="#E7E6E6" points="19 35 29.044 41 8.956 41" />
+        <path
+          fill="#C3C2C1"
+          d="M33,10 C35.7614237,10 38,7.76142375 38,5 C38,2.23857625 35.7614237,-1.8189894e-12 33,-1.8189894e-12 L33,10 Z"
+        />
+        <path
+          fill="#C3C2C1"
+          d="M0,10 C2.76142375,10 5,7.76142375 5,5 C5,2.23857625 2.76142375,-1.8189894e-12 0,-1.8189894e-12 L0,10 Z"
+          transform="matrix(-1 0 0 1 5 0)"
+        />
+      </g>
+    </svg>
+  );
+}
+
+ContestGiveaway.propTypes = { width: PropTypes.number, height: PropTypes.number };
+
+ContestGiveaway.defaultProps = { width: 72, height: 72 };

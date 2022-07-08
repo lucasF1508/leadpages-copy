@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="60px" viewBox="0 0 48 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Product/Feature Index - 60</title>
+    <g id="Icons/Product/Feature-Index---60" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#C3C2C1" x="0" y="0" width="14" height="14"></rect>
+        <rect id="Rectangle" fill="#C3C2C1" x="0" y="17" width="14" height="14"></rect>
+        <rect id="Rectangle" fill="#C3C2C1" x="17" y="0" width="14" height="14"></rect>
+        <rect id="Rectangle" fill="#603EFF" x="17" y="17" width="14" height="14" rx="7"></rect>
+        <rect id="Rectangle" fill="#C3C2C1" x="34" y="0" width="14" height="14"></rect>
+        <rect id="Rectangle" fill="#C3C2C1" x="34" y="17" width="14" height="14"></rect>
+        <rect id="Rectangle" fill="#C3C2C1" x="0" y="34" width="14" height="14"></rect>
+        <rect id="Rectangle" fill="#C3C2C1" x="17" y="34" width="14" height="14"></rect>
+        <rect id="Rectangle" fill="#C3C2C1" x="34" y="34" width="14" height="14"></rect>
+        <polygon id="_icons/Product/triangle" fill="#E7E6E6" points="24 48 36 60 12 60"></polygon>
+    </g>
+</svg>

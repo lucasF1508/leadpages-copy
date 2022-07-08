@@ -1,0 +1,217 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = _interopDefault(require('react'));
+var classNames = _interopDefault(require('classnames'));
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var _extends_1 = createCommonjsModule(function (module) {
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+module.exports = _extends;
+});
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+var defineProperty = _defineProperty;
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+var objectWithoutPropertiesLoose = _objectWithoutPropertiesLoose;
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var objectWithoutProperties = _objectWithoutProperties;
+
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css = ":root {\n  /* colors */\n\n  /* blue */ /* Builder side nav */\n\n  /* green */\n\n  /* red */\n\n  /* yellow */\n\n  /* purple */\n\n  /* grey */\n\n  /* shadows */\n\n  /* typography */\n}\n\n.Color_blueLighterBackgroundColor__2O9Ll,\n.Color_blueLighterBackgroundColorHover__2xTDN:hover {\n  background-color: #deecfd !important;\n}\n\n.Color_blueLightBackgroundColor__1ydq-,\n.Color_blueLightBackgroundColorHover__262bb:hover {\n  background-color: #4692ff !important;\n}\n\n.Color_blueBackgroundColor__2AJ_A,\n.Color_blueBackgroundColorHover__LkBjd:hover {\n  background-color: #0069ff !important;\n}\n\n.Color_blueDarkBackgroundColor__7iv_a,\n.Color_blueDarkBackgroundColorHover__w4zex:hover {\n  background-color: #00419f !important;\n}\n\n.Color_blueDarkerBackgroundColor__Tk1Lk,\n.Color_blueDarkerBackgroundColorHover__2O91_:hover {\n  background-color: #00044c !important;\n}\n\n.Color_blueDarkerAccentBackgroundColor__3vURw,\n.Color_blueDarkerAccentBackgroundColorHover__2Cwsh:hover {\n  background-color: #202365 !important;\n}\n\n.Color_greenLighterBackgroundColor__1HMOi,\n.Color_greenLighterBackgroundColorHover__3iN8i:hover {\n  background-color: #e0f5f5 !important;\n}\n\n.Color_greenLightBackgroundColor__3BK4G,\n.Color_greenLightBackgroundColorHover__1QOD8:hover {\n  background-color: #b7ecec !important;\n}\n\n.Color_greenBackgroundColor__1l1lI,\n.Color_greenBackgroundColorHover__2Zw_K:hover {\n  background-color: #47c1bf !important;\n}\n\n.Color_greenDarkBackgroundColor__68W3g,\n.Color_greenDarkBackgroundColorHover__1PnBs:hover {\n  background-color: #00848e !important;\n}\n\n.Color_greenDarkerBackgroundColor__2oDhn,\n.Color_greenDarkerBackgroundColorHover__32lcV:hover {\n  background-color: #003135 !important;\n}\n\n.Color_redLighterBackgroundColor__c9lA4,\n.Color_redLighterBackgroundColorHover__3UlZn:hover {\n  background-color: #fbeae5 !important;\n}\n\n.Color_redLightBackgroundColor__31KpZ,\n.Color_redLightBackgroundColorHover__y3gM6:hover {\n  background-color: #feaf9a !important;\n}\n\n.Color_redBackgroundColor__3pnBX,\n.Color_redBackgroundColorHover__74wuT:hover {\n  background-color: #ed6347 !important;\n}\n\n.Color_redDarkBackgroundColor__2m4co,\n.Color_redDarkBackgroundColorHover__bMQgB:hover {\n  background-color: #bf0711 !important;\n}\n\n.Color_redDarkerBackgroundColor__2vZg0,\n.Color_redDarkerBackgroundColorHover__3Q1HW:hover {\n  background-color: #330101 !important;\n}\n\n.Color_yellowLighterBackgroundColor__2iwlE,\n.Color_yellowLighterBackgroundColorHover__2JA5R:hover {\n  background-color: #fcf1cd !important;\n}\n\n.Color_yellowLightBackgroundColor__27MZZ,\n.Color_yellowLightBackgroundColorHover__3G4ep:hover {\n  background-color: #ffea8a !important;\n}\n\n.Color_yellowBackgroundColor__33EjM,\n.Color_yellowBackgroundColorHover__1Dyui:hover {\n  background-color: #eec200 !important;\n}\n\n.Color_yellowDarkBackgroundColor__2xbca,\n.Color_yellowDarkBackgroundColorHover__1dN_8:hover {\n  background-color: #9c6f19 !important;\n}\n\n.Color_yellowDarkerBackgroundColor__ZieTt,\n.Color_yellowDarkerBackgroundColorHover__3rS0n:hover {\n  background-color: #573b00 !important;\n}\n\n.Color_purpleLighterBackgroundColor__1KDD8,\n.Color_purpleLighterBackgroundColorHover__2i80j:hover {\n  background-color: #dad9ff !important;\n}\n\n.Color_purpleLightBackgroundColor__CpCZn,\n.Color_purpleLightBackgroundColorHover__U8nh6:hover {\n  background-color: #a09ee8 !important;\n}\n\n.Color_purpleBackgroundColor__146LI,\n.Color_purpleBackgroundColorHover__2Me6A:hover {\n  background-color: #5e5cc4 !important;\n}\n\n.Color_purpleDarkBackgroundColor__1BFFb,\n.Color_purpleDarkBackgroundColorHover__2ix_a:hover {\n  background-color: #43418c !important;\n}\n\n.Color_purpleDarkerBackgroundColor__2JQAG,\n.Color_purpleDarkerBackgroundColorHover__ifx4K:hover {\n  background-color: #24235b !important;\n}\n\n.Color_greyLighterBackgroundColor__V1eyw,\n.Color_greyLighterBackgroundColorHover__2s75W:hover {\n  background-color: #f2f4f7 !important;\n}\n\n.Color_greyLightBackgroundColor__34Tl8,\n.Color_greyLightBackgroundColorHover__1N3Nm:hover {\n  background-color: #e4e7ed !important;\n}\n\n.Color_greyBackgroundColor__3PMEz,\n.Color_greyBackgroundColorHover__2pZzO:hover {\n  background-color: #b1bacc !important;\n}\n\n.Color_greyDarkBackgroundColor__2dfuA,\n.Color_greyDarkBackgroundColorHover__2UnAh:hover {\n  background-color: #797f89 !important;\n}\n\n.Color_greyDarkerBackgroundColor__t3FWs,\n.Color_greyDarkerBackgroundColorHover__2Gbry:hover {\n  background-color: #4c515d !important;\n}\n\n.Color_blueLighterColor__CIxzE,\n.Color_blueLighterColorHover__1oLaS:hover {\n  color: #deecfd !important;\n}\n\n.Color_blueLightColor__24JXA,\n.Color_blueLightColorHover__afcB5:hover {\n  color: #4692ff !important;\n}\n\n.Color_blueColor__69w0Y,\n.Color_blueColorHover__1zwKe:hover {\n  color: #0069ff !important;\n}\n\n.Color_blueDarkColor__122ns,\n.Color_blueDarkColorHover__37H8A:hover {\n  color: #00419f !important;\n}\n\n.Color_blueDarkerColor__2ztt_,\n.Color_blueDarkerColorHover__NpFhD:hover {\n  color: #00044c !important;\n}\n\n.Color_blueDarkerAccentColor__X5cvR,\n.Color_blueDarkerAccentColorHover__2PgW4:hover {\n  color: #202365 !important;\n}\n\n.Color_greenLighterColor__2OsIw,\n.Color_greenLighterColorHover__AtiPN:hover {\n  color: #e0f5f5 !important;\n}\n\n.Color_greenLightColor__OIjdq,\n.Color_greenLightColorHover__Go3Pz:hover {\n  color: #b7ecec !important;\n}\n\n.Color_greenColor__1zuE3,\n.Color_greenColorHover__11XGB:hover {\n  color: #47c1bf !important;\n}\n\n.Color_greenDarkColor__2fxkC,\n.Color_greenDarkColorHover__31Pom:hover {\n  color: #00848e !important;\n}\n\n.Color_greenDarkerColor__1Jt6k,\n.Color_greenDarkerColorHover__2tfjB:hover {\n  color: #003135 !important;\n}\n\n.Color_redLighterColor__3kwpy,\n.Color_redLighterColorHover__3LtH6:hover {\n  color: #fbeae5 !important;\n}\n\n.Color_redLightColor__3rius,\n.Color_redLightColorHover__3tTnr:hover {\n  color: #feaf9a !important;\n}\n\n.Color_redColor__3gDfM,\n.Color_redColorHover__2imvE:hover {\n  color: #ed6347 !important;\n}\n\n.Color_redDarkColor__6QG8B,\n.Color_redDarkColorHover__3EGL9:hover {\n  color: #bf0711 !important;\n}\n\n.Color_redDarkerColor__3eRDt,\n.Color_redDarkerColorHover__iPa6i:hover {\n  color: #330101 !important;\n}\n\n.Color_yellowLighterColor__3Qze9,\n.Color_yellowLighterColorHover__2S3sU:hover {\n  color: #fcf1cd !important;\n}\n\n.Color_yellowLightColor__2WLAw,\n.Color_yellowLightColorHover__1vKSS:hover {\n  color: #ffea8a !important;\n}\n\n.Color_yellowColor__1NdmM,\n.Color_yellowColorHover__1I_b_:hover {\n  color: #eec200 !important;\n}\n\n.Color_yellowDarkColor__2AI9B,\n.Color_yellowDarkColorHover__1Gdu8:hover {\n  color: #9c6f19 !important;\n}\n\n.Color_yellowDarkerColor__1V9e7,\n.Color_yellowDarkerColorHover__2v8Ca:hover {\n  color: #573b00 !important;\n}\n\n.Color_purpleLighterColor__2ZtJl,\n.Color_purpleLighterColorHover__1RvGe:hover {\n  color: #dad9ff !important;\n}\n\n.Color_purpleLightColor__zopqP,\n.Color_purpleLightColorHover__12QIq:hover {\n  color: #a09ee8 !important;\n}\n\n.Color_purpleColor__1fCVu,\n.Color_purpleColorHover__uyJ_1:hover {\n  color: #5e5cc4 !important;\n}\n\n.Color_purpleDarkColor__1YVQr,\n.Color_purpleDarkColorHover__T0TBj:hover {\n  color: #43418c !important;\n}\n\n.Color_purpleDarkerColor__3BbLp,\n.Color_purpleDarkerColorHover__1OxA-:hover {\n  color: #24235b !important;\n}\n\n.Color_greyLighterColor__2vpp_,\n.Color_greyLighterColorHover__1gaTG:hover {\n  color: #f2f4f7 !important;\n}\n\n.Color_greyLightColor__1cviF,\n.Color_greyLightColorHover__3JB1h:hover {\n  color: #e4e7ed !important;\n}\n\n.Color_greyColor__1KkJt,\n.Color_greyColorHover__28OKZ:hover {\n  color: #b1bacc !important;\n}\n\n.Color_greyDarkColor__1hCwU,\n.Color_greyDarkColorHover__1a0dU:hover {\n  color: #797f89 !important;\n}\n\n.Color_greyDarkerColor__1TMv5,\n.Color_greyDarkerColorHover__3AQZ_:hover {\n  color: #4c515d !important;\n}\n\n/* PATH */\n\n.Color_blueLighterStroke__1lkv9,\n.Color_blueLighterStrokeHover__Nx7TM:hover {\n  stroke: #deecfd !important;\n}\n\n.Color_blueLightStroke__3Fp-t,\n.Color_blueLightStrokeHover__22PdD:hover {\n  stroke: #4692ff !important;\n}\n\n.Color_blueStroke__3QKZB,\n.Color_blueStrokeHover__GUnwn:hover {\n  stroke: #0069ff !important;\n}\n\n.Color_blueDarkStroke__3MzHz,\n.Color_blueDarkStrokeHover__1Okji:hover {\n  stroke: #00419f !important;\n}\n\n.Color_blueDarkerStroke__1Antk,\n.Color_blueDarkerStrokeHover__19UR4:hover {\n  stroke: #00044c !important;\n}\n\n.Color_blueDarkerAccentStroke__1IX8w,\n.Color_blueDarkerAccentStrokeHover__5RgmU:hover {\n  stroke: #202365 !important;\n}\n\n.Color_greenLighterStroke__Slw3i,\n.Color_greenLighterStrokeHover__29D7g:hover {\n  stroke: #e0f5f5 !important;\n}\n\n.Color_greenLightStroke__3fdf0,\n.Color_greenLightStrokeHover__3kM7F:hover {\n  stroke: #b7ecec !important;\n}\n\n.Color_greenStroke__2Ncnq,\n.Color_greenStrokeHover__1zHLz:hover {\n  stroke: #47c1bf !important;\n}\n\n.Color_greenDarkStroke__3yDYC,\n.Color_greenDarkStrokeHover__Kj9D_:hover {\n  stroke: #00848e !important;\n}\n\n.Color_greenDarkerStroke__5fi3p,\n.Color_greenDarkerStrokeHover__HQlaj:hover {\n  stroke: #003135 !important;\n}\n\n.Color_redLighterStroke__1JoHB,\n.Color_redLighterStrokeHover__1UX_h:hover {\n  stroke: #fbeae5 !important;\n}\n\n.Color_redLightStroke__3WNuC,\n.Color_redLightStrokeHover__YY92w:hover {\n  stroke: #feaf9a !important;\n}\n\n.Color_redStroke__36OPE,\n.Color_redStrokeHover__7OcOU:hover {\n  stroke: #ed6347 !important;\n}\n\n.Color_redDarkStroke__2pODz,\n.Color_redDarkStrokeHover__3MbIh:hover {\n  stroke: #bf0711 !important;\n}\n\n.Color_redDarkerStroke__3zQoe,\n.Color_redDarkerStrokeHover__3wNEr:hover {\n  stroke: #330101 !important;\n}\n\n.Color_yellowLighterStroke__18foi,\n.Color_yellowLighterStrokeHover__3ihc4:hover {\n  stroke: #fcf1cd !important;\n}\n\n.Color_yellowLightStroke__29Umn,\n.Color_yellowLightStrokeHover__3-scF:hover {\n  stroke: #ffea8a !important;\n}\n\n.Color_yellowStroke__d3D-S,\n.Color_yellowStrokeHover__3qkKK:hover {\n  stroke: #eec200 !important;\n}\n\n.Color_yellowDarkStroke__2xNRv,\n.Color_yellowDarkStrokeHover__3s4pq:hover {\n  stroke: #9c6f19 !important;\n}\n\n.Color_yellowDarkerStroke__1VdAc,\n.Color_yellowDarkerStrokeHover__Ii8Na:hover {\n  stroke: #573b00 !important;\n}\n\n.Color_purpleLighterStroke__9y3s7,\n.Color_purpleLighterStrokeHover__1HrCc:hover {\n  stroke: #dad9ff !important;\n}\n\n.Color_purpleLightStroke__1tund,\n.Color_purpleLightStrokeHover__1Ox_1:hover {\n  stroke: #a09ee8 !important;\n}\n\n.Color_purpleStroke__RY0oK,\n.Color_purpleStrokeHover__1mx49:hover {\n  stroke: #5e5cc4 !important;\n}\n\n.Color_purpleDarkStroke__3NUMQ,\n.Color_purpleDarkStrokeHover__XnnHN:hover {\n  stroke: #43418c !important;\n}\n\n.Color_purpleDarkerStroke__qJtMZ,\n.Color_purpleDarkerStrokeHover__2K4FO:hover {\n  stroke: #24235b !important;\n}\n\n.Color_greyLighterStroke__dJfwI,\n.Color_greyLighterStrokeHover__2i3CF:hover {\n  stroke: #f2f4f7 !important;\n}\n\n.Color_greyLightStroke__3OfDx,\n.Color_greyLightStrokeHover__1PREo:hover {\n  stroke: #e4e7ed !important;\n}\n\n.Color_greyStroke__32C2f,\n.Color_greyStrokeHover__LK9Rf:hover {\n  stroke: #b1bacc !important;\n}\n\n.Color_greyDarkStroke__2HCod,\n.Color_greyDarkStrokeHover__101VY:hover {\n  stroke: #797f89 !important;\n}\n\n.Color_greyDarkerStroke___heCD,\n.Color_greyDarkerStrokeHover__2naq_:hover {\n  stroke: #4c515d !important;\n}\n";
+var styles = {"blueLighterBackgroundColor":"Color_blueLighterBackgroundColor__2O9Ll","blueLighterBackgroundColorHover":"Color_blueLighterBackgroundColorHover__2xTDN","blueLightBackgroundColor":"Color_blueLightBackgroundColor__1ydq-","blueLightBackgroundColorHover":"Color_blueLightBackgroundColorHover__262bb","blueBackgroundColor":"Color_blueBackgroundColor__2AJ_A","blueBackgroundColorHover":"Color_blueBackgroundColorHover__LkBjd","blueDarkBackgroundColor":"Color_blueDarkBackgroundColor__7iv_a","blueDarkBackgroundColorHover":"Color_blueDarkBackgroundColorHover__w4zex","blueDarkerBackgroundColor":"Color_blueDarkerBackgroundColor__Tk1Lk","blueDarkerBackgroundColorHover":"Color_blueDarkerBackgroundColorHover__2O91_","blueDarkerAccentBackgroundColor":"Color_blueDarkerAccentBackgroundColor__3vURw","blueDarkerAccentBackgroundColorHover":"Color_blueDarkerAccentBackgroundColorHover__2Cwsh","greenLighterBackgroundColor":"Color_greenLighterBackgroundColor__1HMOi","greenLighterBackgroundColorHover":"Color_greenLighterBackgroundColorHover__3iN8i","greenLightBackgroundColor":"Color_greenLightBackgroundColor__3BK4G","greenLightBackgroundColorHover":"Color_greenLightBackgroundColorHover__1QOD8","greenBackgroundColor":"Color_greenBackgroundColor__1l1lI","greenBackgroundColorHover":"Color_greenBackgroundColorHover__2Zw_K","greenDarkBackgroundColor":"Color_greenDarkBackgroundColor__68W3g","greenDarkBackgroundColorHover":"Color_greenDarkBackgroundColorHover__1PnBs","greenDarkerBackgroundColor":"Color_greenDarkerBackgroundColor__2oDhn","greenDarkerBackgroundColorHover":"Color_greenDarkerBackgroundColorHover__32lcV","redLighterBackgroundColor":"Color_redLighterBackgroundColor__c9lA4","redLighterBackgroundColorHover":"Color_redLighterBackgroundColorHover__3UlZn","redLightBackgroundColor":"Color_redLightBackgroundColor__31KpZ","redLightBackgroundColorHover":"Color_redLightBackgroundColorHover__y3gM6","redBackgroundColor":"Color_redBackgroundColor__3pnBX","redBackgroundColorHover":"Color_redBackgroundColorHover__74wuT","redDarkBackgroundColor":"Color_redDarkBackgroundColor__2m4co","redDarkBackgroundColorHover":"Color_redDarkBackgroundColorHover__bMQgB","redDarkerBackgroundColor":"Color_redDarkerBackgroundColor__2vZg0","redDarkerBackgroundColorHover":"Color_redDarkerBackgroundColorHover__3Q1HW","yellowLighterBackgroundColor":"Color_yellowLighterBackgroundColor__2iwlE","yellowLighterBackgroundColorHover":"Color_yellowLighterBackgroundColorHover__2JA5R","yellowLightBackgroundColor":"Color_yellowLightBackgroundColor__27MZZ","yellowLightBackgroundColorHover":"Color_yellowLightBackgroundColorHover__3G4ep","yellowBackgroundColor":"Color_yellowBackgroundColor__33EjM","yellowBackgroundColorHover":"Color_yellowBackgroundColorHover__1Dyui","yellowDarkBackgroundColor":"Color_yellowDarkBackgroundColor__2xbca","yellowDarkBackgroundColorHover":"Color_yellowDarkBackgroundColorHover__1dN_8","yellowDarkerBackgroundColor":"Color_yellowDarkerBackgroundColor__ZieTt","yellowDarkerBackgroundColorHover":"Color_yellowDarkerBackgroundColorHover__3rS0n","purpleLighterBackgroundColor":"Color_purpleLighterBackgroundColor__1KDD8","purpleLighterBackgroundColorHover":"Color_purpleLighterBackgroundColorHover__2i80j","purpleLightBackgroundColor":"Color_purpleLightBackgroundColor__CpCZn","purpleLightBackgroundColorHover":"Color_purpleLightBackgroundColorHover__U8nh6","purpleBackgroundColor":"Color_purpleBackgroundColor__146LI","purpleBackgroundColorHover":"Color_purpleBackgroundColorHover__2Me6A","purpleDarkBackgroundColor":"Color_purpleDarkBackgroundColor__1BFFb","purpleDarkBackgroundColorHover":"Color_purpleDarkBackgroundColorHover__2ix_a","purpleDarkerBackgroundColor":"Color_purpleDarkerBackgroundColor__2JQAG","purpleDarkerBackgroundColorHover":"Color_purpleDarkerBackgroundColorHover__ifx4K","greyLighterBackgroundColor":"Color_greyLighterBackgroundColor__V1eyw","greyLighterBackgroundColorHover":"Color_greyLighterBackgroundColorHover__2s75W","greyLightBackgroundColor":"Color_greyLightBackgroundColor__34Tl8","greyLightBackgroundColorHover":"Color_greyLightBackgroundColorHover__1N3Nm","greyBackgroundColor":"Color_greyBackgroundColor__3PMEz","greyBackgroundColorHover":"Color_greyBackgroundColorHover__2pZzO","greyDarkBackgroundColor":"Color_greyDarkBackgroundColor__2dfuA","greyDarkBackgroundColorHover":"Color_greyDarkBackgroundColorHover__2UnAh","greyDarkerBackgroundColor":"Color_greyDarkerBackgroundColor__t3FWs","greyDarkerBackgroundColorHover":"Color_greyDarkerBackgroundColorHover__2Gbry","blueLighterColor":"Color_blueLighterColor__CIxzE","blueLighterColorHover":"Color_blueLighterColorHover__1oLaS","blueLightColor":"Color_blueLightColor__24JXA","blueLightColorHover":"Color_blueLightColorHover__afcB5","blueColor":"Color_blueColor__69w0Y","blueColorHover":"Color_blueColorHover__1zwKe","blueDarkColor":"Color_blueDarkColor__122ns","blueDarkColorHover":"Color_blueDarkColorHover__37H8A","blueDarkerColor":"Color_blueDarkerColor__2ztt_","blueDarkerColorHover":"Color_blueDarkerColorHover__NpFhD","blueDarkerAccentColor":"Color_blueDarkerAccentColor__X5cvR","blueDarkerAccentColorHover":"Color_blueDarkerAccentColorHover__2PgW4","greenLighterColor":"Color_greenLighterColor__2OsIw","greenLighterColorHover":"Color_greenLighterColorHover__AtiPN","greenLightColor":"Color_greenLightColor__OIjdq","greenLightColorHover":"Color_greenLightColorHover__Go3Pz","greenColor":"Color_greenColor__1zuE3","greenColorHover":"Color_greenColorHover__11XGB","greenDarkColor":"Color_greenDarkColor__2fxkC","greenDarkColorHover":"Color_greenDarkColorHover__31Pom","greenDarkerColor":"Color_greenDarkerColor__1Jt6k","greenDarkerColorHover":"Color_greenDarkerColorHover__2tfjB","redLighterColor":"Color_redLighterColor__3kwpy","redLighterColorHover":"Color_redLighterColorHover__3LtH6","redLightColor":"Color_redLightColor__3rius","redLightColorHover":"Color_redLightColorHover__3tTnr","redColor":"Color_redColor__3gDfM","redColorHover":"Color_redColorHover__2imvE","redDarkColor":"Color_redDarkColor__6QG8B","redDarkColorHover":"Color_redDarkColorHover__3EGL9","redDarkerColor":"Color_redDarkerColor__3eRDt","redDarkerColorHover":"Color_redDarkerColorHover__iPa6i","yellowLighterColor":"Color_yellowLighterColor__3Qze9","yellowLighterColorHover":"Color_yellowLighterColorHover__2S3sU","yellowLightColor":"Color_yellowLightColor__2WLAw","yellowLightColorHover":"Color_yellowLightColorHover__1vKSS","yellowColor":"Color_yellowColor__1NdmM","yellowColorHover":"Color_yellowColorHover__1I_b_","yellowDarkColor":"Color_yellowDarkColor__2AI9B","yellowDarkColorHover":"Color_yellowDarkColorHover__1Gdu8","yellowDarkerColor":"Color_yellowDarkerColor__1V9e7","yellowDarkerColorHover":"Color_yellowDarkerColorHover__2v8Ca","purpleLighterColor":"Color_purpleLighterColor__2ZtJl","purpleLighterColorHover":"Color_purpleLighterColorHover__1RvGe","purpleLightColor":"Color_purpleLightColor__zopqP","purpleLightColorHover":"Color_purpleLightColorHover__12QIq","purpleColor":"Color_purpleColor__1fCVu","purpleColorHover":"Color_purpleColorHover__uyJ_1","purpleDarkColor":"Color_purpleDarkColor__1YVQr","purpleDarkColorHover":"Color_purpleDarkColorHover__T0TBj","purpleDarkerColor":"Color_purpleDarkerColor__3BbLp","purpleDarkerColorHover":"Color_purpleDarkerColorHover__1OxA-","greyLighterColor":"Color_greyLighterColor__2vpp_","greyLighterColorHover":"Color_greyLighterColorHover__1gaTG","greyLightColor":"Color_greyLightColor__1cviF","greyLightColorHover":"Color_greyLightColorHover__3JB1h","greyColor":"Color_greyColor__1KkJt","greyColorHover":"Color_greyColorHover__28OKZ","greyDarkColor":"Color_greyDarkColor__1hCwU","greyDarkColorHover":"Color_greyDarkColorHover__1a0dU","greyDarkerColor":"Color_greyDarkerColor__1TMv5","greyDarkerColorHover":"Color_greyDarkerColorHover__3AQZ_","blueLighterStroke":"Color_blueLighterStroke__1lkv9","blueLighterStrokeHover":"Color_blueLighterStrokeHover__Nx7TM","blueLightStroke":"Color_blueLightStroke__3Fp-t","blueLightStrokeHover":"Color_blueLightStrokeHover__22PdD","blueStroke":"Color_blueStroke__3QKZB","blueStrokeHover":"Color_blueStrokeHover__GUnwn","blueDarkStroke":"Color_blueDarkStroke__3MzHz","blueDarkStrokeHover":"Color_blueDarkStrokeHover__1Okji","blueDarkerStroke":"Color_blueDarkerStroke__1Antk","blueDarkerStrokeHover":"Color_blueDarkerStrokeHover__19UR4","blueDarkerAccentStroke":"Color_blueDarkerAccentStroke__1IX8w","blueDarkerAccentStrokeHover":"Color_blueDarkerAccentStrokeHover__5RgmU","greenLighterStroke":"Color_greenLighterStroke__Slw3i","greenLighterStrokeHover":"Color_greenLighterStrokeHover__29D7g","greenLightStroke":"Color_greenLightStroke__3fdf0","greenLightStrokeHover":"Color_greenLightStrokeHover__3kM7F","greenStroke":"Color_greenStroke__2Ncnq","greenStrokeHover":"Color_greenStrokeHover__1zHLz","greenDarkStroke":"Color_greenDarkStroke__3yDYC","greenDarkStrokeHover":"Color_greenDarkStrokeHover__Kj9D_","greenDarkerStroke":"Color_greenDarkerStroke__5fi3p","greenDarkerStrokeHover":"Color_greenDarkerStrokeHover__HQlaj","redLighterStroke":"Color_redLighterStroke__1JoHB","redLighterStrokeHover":"Color_redLighterStrokeHover__1UX_h","redLightStroke":"Color_redLightStroke__3WNuC","redLightStrokeHover":"Color_redLightStrokeHover__YY92w","redStroke":"Color_redStroke__36OPE","redStrokeHover":"Color_redStrokeHover__7OcOU","redDarkStroke":"Color_redDarkStroke__2pODz","redDarkStrokeHover":"Color_redDarkStrokeHover__3MbIh","redDarkerStroke":"Color_redDarkerStroke__3zQoe","redDarkerStrokeHover":"Color_redDarkerStrokeHover__3wNEr","yellowLighterStroke":"Color_yellowLighterStroke__18foi","yellowLighterStrokeHover":"Color_yellowLighterStrokeHover__3ihc4","yellowLightStroke":"Color_yellowLightStroke__29Umn","yellowLightStrokeHover":"Color_yellowLightStrokeHover__3-scF","yellowStroke":"Color_yellowStroke__d3D-S","yellowStrokeHover":"Color_yellowStrokeHover__3qkKK","yellowDarkStroke":"Color_yellowDarkStroke__2xNRv","yellowDarkStrokeHover":"Color_yellowDarkStrokeHover__3s4pq","yellowDarkerStroke":"Color_yellowDarkerStroke__1VdAc","yellowDarkerStrokeHover":"Color_yellowDarkerStrokeHover__Ii8Na","purpleLighterStroke":"Color_purpleLighterStroke__9y3s7","purpleLighterStrokeHover":"Color_purpleLighterStrokeHover__1HrCc","purpleLightStroke":"Color_purpleLightStroke__1tund","purpleLightStrokeHover":"Color_purpleLightStrokeHover__1Ox_1","purpleStroke":"Color_purpleStroke__RY0oK","purpleStrokeHover":"Color_purpleStrokeHover__1mx49","purpleDarkStroke":"Color_purpleDarkStroke__3NUMQ","purpleDarkStrokeHover":"Color_purpleDarkStrokeHover__XnnHN","purpleDarkerStroke":"Color_purpleDarkerStroke__qJtMZ","purpleDarkerStrokeHover":"Color_purpleDarkerStrokeHover__2K4FO","greyLighterStroke":"Color_greyLighterStroke__dJfwI","greyLighterStrokeHover":"Color_greyLighterStrokeHover__2i3CF","greyLightStroke":"Color_greyLightStroke__3OfDx","greyLightStrokeHover":"Color_greyLightStrokeHover__1PREo","greyStroke":"Color_greyStroke__32C2f","greyStrokeHover":"Color_greyStrokeHover__LK9Rf","greyDarkStroke":"Color_greyDarkStroke__2HCod","greyDarkStrokeHover":"Color_greyDarkStrokeHover__101VY","greyDarkerStroke":"Color_greyDarkerStroke___heCD","greyDarkerStrokeHover":"Color_greyDarkerStrokeHover__2naq_"};
+styleInject(css);
+
+var hexCodes = {
+  blueDarkerAccent: '#202365',
+  blueDarker: '#00044c',
+  blueDark: '#00419f',
+  blue: '#0069ff',
+  blueLight: '#4692ff',
+  blueLighter: '#deecfd',
+  greenDarker: '#003135',
+  greenDark: '#00848e',
+  green: '#47c1bf',
+  greenLight: '#b7ecec',
+  greenLighter: '#e0f5f5',
+  redDarker: '#330101',
+  redDark: '#bf0711',
+  red: '#ed6347',
+  redLight: '#feaf9a',
+  redLighter: '#fbeae5',
+  yellowDarker: '#573b00',
+  yellowDark: '#9c6f19',
+  yellow: '#eec200',
+  yellowLight: '#ffea8a',
+  yellowLighter: '#fcf1cd',
+  purpleDarker: '#24235b',
+  purpleDark: '#43418c',
+  purple: '#5e5cc4',
+  purpleLight: '#a09ee8',
+  purpleLighter: '#dad9ff',
+  greyDarker: '#4c515d',
+  greyDark: '#797f89',
+  grey: '#b1bacc',
+  greyLight: '#e4e7ed',
+  greyLighter: '#f2f4f7'
+};
+var colors = {
+  blueDarkerAccent: 'blueDarkerAccent',
+  blueDarker: 'blueDarker',
+  blueDark: 'blueDark',
+  blue: 'blue',
+  blueLight: 'blueLight',
+  blueLighter: 'blueLighter',
+  greenDarker: 'greenDarker',
+  greenDark: 'greenDark',
+  green: 'green',
+  greenLight: 'greenLight',
+  greenLighter: 'greenLighter',
+  redDarker: 'redDarker',
+  redDark: 'redDark',
+  red: 'red',
+  redLight: 'redLight',
+  redLighter: 'redLighter',
+  yellowDarker: 'yellowDarker',
+  yellowDark: 'yellowDark',
+  yellow: 'yellow',
+  yellowLight: 'yellowLight',
+  yellowLighter: 'yellowLighter',
+  purpleDarker: 'purpleDarker',
+  purpleDark: 'purpleDark',
+  purple: 'purple',
+  purpleLight: 'purpleLight',
+  purpleLighter: 'purpleLighter',
+  greyDarker: 'greyDarker',
+  greyDark: 'greyDark',
+  grey: 'grey',
+  greyLight: 'greyLight',
+  greyLighter: 'greyLighter'
+};
+
+var withColor = function withColor(WrappedComponent) {
+  return function (_ref) {
+    var _classNames;
+
+    var _ref$backgroundColor = _ref.backgroundColor,
+        backgroundColor = _ref$backgroundColor === void 0 ? '' : _ref$backgroundColor,
+        _ref$color = _ref.color,
+        color = _ref$color === void 0 ? '' : _ref$color,
+        _ref$strokeColor = _ref.strokeColor,
+        strokeColor = _ref$strokeColor === void 0 ? '' : _ref$strokeColor,
+        _ref$hoverBackgroundC = _ref.hoverBackgroundColor,
+        hoverBackgroundColor = _ref$hoverBackgroundC === void 0 ? '' : _ref$hoverBackgroundC,
+        _ref$hoverColor = _ref.hoverColor,
+        hoverColor = _ref$hoverColor === void 0 ? '' : _ref$hoverColor,
+        _ref$hoverStrokeColor = _ref.hoverStrokeColor,
+        hoverStrokeColor = _ref$hoverStrokeColor === void 0 ? '' : _ref$hoverStrokeColor,
+        className = _ref.className,
+        children = _ref.children,
+        props = objectWithoutProperties(_ref, ["backgroundColor", "color", "strokeColor", "hoverBackgroundColor", "hoverColor", "hoverStrokeColor", "className", "children"]);
+
+    return React.createElement(WrappedComponent, _extends_1({
+      className: classNames(className, (_classNames = {}, defineProperty(_classNames, "".concat(styles["".concat(backgroundColor, "BackgroundColor")]), backgroundColor), defineProperty(_classNames, "".concat(styles["".concat(color, "Color")]), color), defineProperty(_classNames, "".concat(styles["".concat(strokeColor, "Stroke")]), strokeColor), defineProperty(_classNames, "".concat(styles["".concat(hoverBackgroundColor, "BackgroundColorHover")]), hoverBackgroundColor), defineProperty(_classNames, "".concat(styles["".concat(hoverColor, "ColorHover")]), hoverColor), defineProperty(_classNames, "".concat(styles["".concat(hoverStrokeColor, "StrokeHover")]), hoverStrokeColor), _classNames))
+    }, props), children);
+  };
+};
+
+exports.default = withColor;
+exports.colors = colors;
+exports.hexCodes = hexCodes;

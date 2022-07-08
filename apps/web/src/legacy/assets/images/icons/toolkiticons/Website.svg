@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="30px" viewBox="0 0 24 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Icons/Product/Website-60</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Product/Websites" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="/product/websites" transform="translate(-200.000000, -3847.000000)">
+            <g id="Group-5" transform="translate(-46.000000, 2706.000000)">
+                <g id="All-Products" transform="translate(46.000000, 882.000000)">
+                    <g id="Active" transform="translate(170.000000, 235.000000)">
+                        <g id="Icons/Product/Website-60" transform="translate(30.000000, 24.000000)">
+                            <g>
+                                <g id="_icons/Product/website">
+                                    <circle id="Oval" fill="#E7E6E6" cx="12" cy="12" r="12"></circle>
+                                    <path d="M12,24 C18.627417,24 24,18.627417 24,12 C24,5.372583 18.627417,-3.55271368e-15 12,-3.55271368e-15 L12,24 Z" id="Oval" fill="#C3C2C1"></path>
+                                </g>
+                                <polygon id="_icons/Product/triangle" fill="#43E0F0" points="12 24 18 30 6 30"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

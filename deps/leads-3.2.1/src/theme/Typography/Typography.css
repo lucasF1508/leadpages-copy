@@ -1,0 +1,55 @@
+@import "../theme.css";
+
+.largeDisplayHeading {
+  @apply --largeDisplayHeading;
+
+  font-size: var(--largeHeading) !important;
+}
+
+.mediumDisplayHeading {
+  @apply --mediumDisplayHeading;
+
+  font-size: var(--mediumHeading) !important;
+}
+
+.inPageHeading {
+  @apply --inPageHeading;
+
+  font-size: var(--pageHeading) !important;
+}
+
+.headingDefault {
+  @apply --headingDefault;
+
+  font-size: var(--heading) !important;
+}
+
+.bodyHeading {
+  @apply --bodyHeading;
+
+  font-size: var(--smallHeading) !important;
+}
+
+.bodyDefault {
+  @apply --bodyDefault;
+
+  font-size: var(--body) !important;
+}
+
+.supportContent {
+  @apply --supportContent;
+
+  font-size: var(--support) !important;
+}
+
+.tableHeader {
+  @apply --tableHeader;
+
+  font-size: var(--smallestHeader) !important;
+}
+
+.inlineLink {
+  @apply --inlineLink;
+
+  font-size: var(--inline) !important;
+}

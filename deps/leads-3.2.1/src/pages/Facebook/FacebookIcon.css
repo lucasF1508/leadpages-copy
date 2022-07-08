@@ -1,0 +1,11 @@
+@import "../../theme/theme.css";
+
+.thumbnail {
+  border-radius: 3px;
+
+  object-fit: cover;
+}
+
+.hasImage {
+  border: 1px solid var(--grey);
+}
