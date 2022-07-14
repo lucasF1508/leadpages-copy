@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
+import { styled } from '@design'
 // Components
 import {
   FLOWS,
@@ -35,75 +36,85 @@ import { getTrialId } from '../../legacy/utils/trials'
 import backgroundImageSVG from '../../legacy/assets/images/shapes/wavy-line-gray_pricing.svg'
 import testimonialImageRonCollins from '../../legacy/assets/images/testimonials/ron-collins_far.png'
 
-const HeadlineContainer = styled.div`
-  position: relative;
-  background: #fff;
-  margin-top: -60px;
-  padding-top: 60px;
-  overflow: hidden;
-  z-index: -1;
-`
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-  color: #603eff;
-  padding-bottom: 3px;
-  border-bottom: 2px solid rgb(209, 198, 249);
-  &:hover {
-    border-bottom: 2px solid #603eff;
-  }
-`
-const SectionLink = styled.div`
-  font-family: Apercu Pro;
-  font-size: 18px;
-  line-height: 32px;
-  text-align: center;
-  color: #575452;
-  margin-bottom: 4rem;
-  padding-top: 3rem;
-`
-const SVGContainer = styled.img`
-  position: absolute;
-  top: -60vh;
-  bottom: 0;
-  left: 0;
-  right: 5%;
-  height: 120vh;
-  margin-left: auto;
-  z-index: -2;
-  @media (min-width: 768px) {
-    right: -15%;
-  }
-  @media (min-width: 992px) {
-    right: 5%;
-  }
-  @media (min-width: 1300px) {
-    right: 10%;
-  }
-  @media (max-width: 767px) {
-    display: none;
-  }
-`
+const HeadlineContainer = styled('div', {
+  position: 'relative',
+  background: '#fff',
+  mt: '-60px',
+  pt: '60px',
+  o: 'hidden',
+  z: -1,
+})
 
-const HeadlineCaption = styled(HeadlineSection)`
-  padding-top: 3rem;
-  & [class*='HeadlineSection__Caption'] {
-    padding-bottom: 50px;
-  }
-`
+const StyledLink = styled(Link, {
+  textDecoration: 'none',
+  cursor: 'pointer',
+  c: '#603eff',
+  pb: '3px',
+  bb: '2px solid rgb(209, 198, 249)',
 
-const PlanCompareWrapper = styled.div`
-  background-color: #f9f9f9;
-  padding-top: 16px;
-`
+  '&:hover': {
+    bb: '2px solid #603eff',
+  },
+})
 
-const AccordionSection = styled.div`
-  margin-bottom: 6rem;
-  @media (max-width: 576px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-`
+const SectionLink = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  lineHeight: '32px',
+  ta: 'center',
+  c: '#575452',
+  mb: '4rem',
+  pt: '3rem',
+})
+
+const SVGContainer = styled('img', {
+  position: 'absolute',
+  top: '-60vh',
+  bottom: 0,
+  left: 0,
+  right: '5%',
+  h: '120vh',
+  ml: 'auto',
+  z: -2,
+
+  '@media (min-width: 768px)': {
+    right: '-15%',
+  },
+
+  '@media (min-width: 992px)': {
+    right: '5%',
+  },
+
+  '@media (min-width: 1300px)': {
+    right: '10%',
+  },
+
+  '@media (max-width: 767px)': {
+    d: 'none',
+  },
+})
+
+const HeadlineCaption = styled(HeadlineSection, {
+  pt: '3rem',
+
+  '& [class*="HeadlineSection__Caption"]': {
+    pb: '50px',
+  },
+})
+
+const PlanCompareWrapper = styled('div', {
+  bc: '#f9f9f9',
+  pt: '16px',
+})
+
+const AccordionSection = styled('div', {
+  mb: '6rem',
+
+  '@media (max-width: 576px)': {
+    pr: '3rem',
+    pl: '3rem',
+  },
+})
 
 const Pricing = (props) => {
   const { planData: { trialPlans, generalPlans } = {} } = props || {}
