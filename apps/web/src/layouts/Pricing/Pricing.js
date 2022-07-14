@@ -8,10 +8,16 @@ import {
   checkPlanBundleEligibility,
   PlanCompareTable,
 } from '@lp/lib-upgrade-modal'
+import Accordion from '../../legacy/components/accordions/Accordion'
+import Link from '@components/Link'
+import FeatureIconsGrid from '../../legacy/components/grids/FeatureIconsGrid'
 import SpacerRow from '../../legacy/components/SpacerRow'
 import QuoteTestimonialsRotator from '../../legacy/components/rotators/QuoteTestimonialsRotator'
 import HeadlineSection from '../../legacy/components/layout/HeadlineSection'
+import SingleTestimonialWavesRow from '../../legacy/components/testimonials/SingleTestimonialWavesRow'
+import ReadyToGrow from '../../legacy/components/product/ReadyToGrow'
 // Data
+import { pricingFaqData } from '../../legacy/data/faq_data'
 import {
   testimonialsData,
   planFeaturesData,
@@ -19,6 +25,9 @@ import {
 import { HEADER_HEIGHT, PRICING_LOAD_TIMEOUT } from '../../legacy/constants'
 // Images
 import backgroundImageSVG from '../../legacy/assets/images/shapes/wavy-line-gray_pricing.svg'
+import testimonialImageRonCollins from '../../legacy/assets/images/testimonials/ron-collins_far.png'
+// Utils
+import { getLocalCoupon } from '../../legacy/utils/coupons'
 
 const Rack = dynamic(() => import('@components/Rack'))
 
@@ -36,6 +45,16 @@ const HeadlineCaption = styled(HeadlineSection)`
   & [class*='HeadlineSection__Caption'] {
     padding-bottom: 50px;
   }
+`
+
+const SectionLink = styled.div`
+  font-family: Apercu Pro;
+  font-size: 18px;
+  line-height: 32px;
+  text-align: center;
+  color: #575452;
+  margin-bottom: 4rem;
+  padding-top: 3rem;
 `
 
 const SVGContainer = styled.img`
@@ -61,9 +80,28 @@ const SVGContainer = styled.img`
   }
 `
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  cursor: pointer;
+  color: #603eff;
+  padding-bottom: 3px;
+  border-bottom: 2px solid rgb(209, 198, 249);
+  &:hover {
+    border-bottom: 2px solid #603eff;
+  }
+`
+
 const PlanCompareWrapper = styled.div`
   background-color: #f9f9f9;
   padding-top: 16px;
+`
+
+const AccordionSection = styled.div`
+  margin-bottom: 6rem;
+  @media (max-width: 576px) {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
 `
 
 const handleSelectPlan = (planId, planLevel, period) => {
@@ -84,23 +122,21 @@ const CONTACT_US_PLAN = {
 }
 
 const Pricing = (props) => {
-  const { data = {} } = props
-  console.log('Pricing', props)
-  const { planData: { trialPlans, generalPlans } = {} } = data || {}
+  const { planData: { trialPlans, generalPlans } = {} } = props || {}
 
   const [bundleData, setBundleData] = useState(null)
+  const [couponData, setCouponData] = useState(null)
   const [previousPlan, setPreviousPlan] = useState(null)
   const [flow, setFlow] = useState(FLOWS.SIGNUP)
   const [defaultBillingFrequency, setDefaultBillingFrequency] = useState(
     PLAN_PERIODS.ANNUAL
   )
-  const couponData = false
+  const images = {
+    testimonialImageRonCollins,
+  }
 
   return (
     <>
-      {/* {hero && <Hero {...hero} />}
-    {components && <Rack components={components} />} */}
-
       <HeadlineContainer>
         <SVGContainer src={backgroundImageSVG} alt="background image" />
         {couponData?.canRedeemCoupon ? (
@@ -118,14 +154,54 @@ const Pricing = (props) => {
         )}
       </HeadlineContainer>
       <PlanCompareWrapper>
-        {trialPlans}
-        {generalPlans}
+        <PlanCompareTable
+          plans={flow === FLOWS.REACTIVATION ? generalPlans : trialPlans}
+          onSelectPlan={handleSelectPlan}
+          coupon={couponData}
+          bundle={bundleData}
+          headerOffset={HEADER_HEIGHT}
+          flow={flow}
+          defaultBillingFrequency={defaultBillingFrequency}
+          previousPlan={previousPlan}
+          contactUsPlan={flow === FLOWS.REACTIVATION ? null : CONTACT_US_PLAN}
+          selectPlanButtonText="Start For Free"
+        />
       </PlanCompareWrapper>
       <SpacerRow backgroundColor="#f9f9f9" size="small" />
       <QuoteTestimonialsRotator
-        testimonialsArray={testimonialsData(data)}
+        testimonialsArray={testimonialsData}
         variant="gray"
       />
+      <SpacerRow size="small" />
+      <HeadlineSection
+        title="Outfit your business for today’s needs & tomorrow’s dreams"
+        caption="All Leadpages plans include the following:"
+      />
+      <FeatureIconsGrid
+        features={planFeaturesData}
+        itemsPerRow={4}
+        showSectionLink
+      />
+      <SingleTestimonialWavesRow
+        headline="So much easier than Wix and Squarespace."
+        imageAlt="Ron Collins"
+        image={images.testimonialImageRonCollins}
+        quote="“Leadpages just makes my life so much easier. I used to set all this up on Wix and Squarespace and it was always such a pain. I am building incredible quality landing pages in a matter of minutes, even on a tight budget!”"
+        name="Ron Collins • Marketing Consultant"
+        title="Ron Collins Marketing"
+      />
+      <AccordionSection>
+        <Accordion
+          sectionHeadline="You have questions.<br/>We have answers."
+          data={pricingFaqData}
+        />
+        <SectionLink>
+          Have more questions? See our{' '}
+          <StyledLink to="/faq">full FAQ page</StyledLink> or{' '}
+          <StyledLink to="/contact">contact us</StyledLink>.
+        </SectionLink>
+      </AccordionSection>
+      <ReadyToGrow headline="Ready to grow?" />
     </>
   )
 }

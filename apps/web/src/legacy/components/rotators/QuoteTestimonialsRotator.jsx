@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import NextImage from 'next/image'
+import Image from '@components/Image'
 import styled from 'styled-components'
-import { GATSBY_IMAGE } from '../../constants/types'
 // components
 import PaginationDots from './PaginationDots'
 import ReactSlick from './ReactSlick_Base'
@@ -42,7 +41,7 @@ const InnerContainer = styled.div`
   }
 `
 
-const QuotemarkImage = styled.img`
+const QuotemarkImage = styled(Image)`
   width: 64px;
   opacity: ${(props) => VARIANTS[props.variant].opacity};
   margin-left: calc((100% - 64px) / 2);
@@ -71,7 +70,7 @@ const Quote = styled.h4`
   }
 `
 
-const Image = styled(NextImage)`
+const StyledImage = styled(Image)`
   max-height: 60px;
   max-width: 60px;
   margin: 5px auto;
@@ -122,11 +121,11 @@ const QuoteTestimonialsRotator = ({ testimonialsArray, variant }) => {
           {typeof window !== 'undefined' && (
             <SlickRotator {...settings}>
               {testimonialsArray.map((item, index) => {
-                const { quote, image, imageAlt, clientName, clientTitle } = item
+                const { quote, image, clientName, clientTitle } = item
                 return (
                   <div key={index}>
                     <Quote>{quote}</Quote>
-                    <Image src={image} alt={imageAlt} />
+                    <StyledImage image={image} />
                     <ClientName>{clientName}</ClientName>
                     <ClientTitle>{clientTitle}</ClientTitle>
                   </div>
@@ -148,7 +147,7 @@ QuoteTestimonialsRotator.propTypes = {
   testimonialsArray: PropTypes.arrayOf(
     PropTypes.shape({
       quote: PropTypes.string.isRequired,
-      image: GATSBY_IMAGE.isRequired,
+      image: Image.isRequired,
       clientName: PropTypes.string.isRequired,
       clientTitle: PropTypes.string.isRequired,
     })
