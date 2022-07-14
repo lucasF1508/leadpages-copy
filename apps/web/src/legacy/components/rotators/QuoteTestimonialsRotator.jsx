@@ -115,7 +115,7 @@ const QuoteTestimonialsRotator = ({ testimonialsArray, variant }) => {
       <InnerContainer>
         <QuotemarkImage
           variant={variant}
-          src={VARIANTS[variant].quotemarkImage}
+          image={VARIANTS[variant].quotemarkImage}
         />
         <RotatorContainer>
           {typeof window !== 'undefined' && (
