@@ -246,3 +246,4 @@ HeadlineSection.propTypes = {
 }
 
 export default HeadlineSection
+export { Caption }
