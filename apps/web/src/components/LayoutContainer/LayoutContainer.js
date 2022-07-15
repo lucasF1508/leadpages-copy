@@ -7,7 +7,7 @@ import { m, AnimatePresence } from 'framer-motion'
 const $LayoutContainer = styled(m.div, {
   pt: '$headerHeight$s',
   mt: '-$headerHeight$s',
-  w: '100vw',
+  w: '100%',
   o: 'hidden',
 })
 

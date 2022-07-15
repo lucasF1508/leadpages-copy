@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
-import { GATSBY_IMAGE } from '../../constants/types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import Image from '@components/Image'
 // images
-import BackgroundImageSVG from '../../assets/images/shapes/wavy-lines-mirror-sand.svg';
+import BackgroundImageSVG from '../../assets/images/shapes/wavy-lines-mirror-sand.svg'
 
 const TestimonialContainer = styled.div`
   background: #fef9f1 url(${BackgroundImageSVG});
@@ -27,12 +26,12 @@ const TestimonialContainer = styled.div`
     padding-left: 1%;
     min-width: 287px;
   }
-`;
+`
 
 const ContentContainer = styled.div`
   max-width: 635px;
   margin: 0 auto;
-`;
+`
 
 const Headline = styled.div`
   font-family: 'Value Serif';
@@ -47,7 +46,7 @@ const Headline = styled.div`
     letter-spacing: -0.01rem;
     margin-bottom: 1.5rem;
   }
-`;
+`
 
 const TestimonialQuote = styled.div`
   max-width: 635px;
@@ -59,7 +58,7 @@ const TestimonialQuote = styled.div`
     line-height: 1.5rem;
     letter-spacing: normal;
   }
-`;
+`
 
 const TestimonialName = styled.div`
   font-family: 'Apercu Pro';
@@ -68,7 +67,7 @@ const TestimonialName = styled.div`
   font-weight: 500;
   margin-bottom: 1rem;
   color: #0f0c09;
-`;
+`
 
 const TestimonialTitle = styled.div`
   font-family: 'Apercu Pro';
@@ -76,7 +75,7 @@ const TestimonialTitle = styled.div`
   line-height: 1.25rem;
   margin-bottom: 1rem;
   color: #575452;
-`;
+`
 
 const FlexRow = styled.div`
   display: flex;
@@ -85,7 +84,7 @@ const FlexRow = styled.div`
   @media (max-width: 576px) {
     margin-top: 1.5rem;
   }
-`;
+`
 
 const FlexRowItem = styled.div`
   min-height: 1px;
@@ -93,7 +92,7 @@ const FlexRowItem = styled.div`
   text-align: center;
   text-decoration: none;
   width: 100%;
-`;
+`
 
 const FlexRowLeft = styled(FlexRowItem)`
   display: flex;
@@ -113,14 +112,14 @@ const FlexRowLeft = styled(FlexRowItem)`
   @media (max-width: 576px) {
     display: none;
   }
-`;
+`
 
-const TestimonialImage = styled(GatsbyImage)`
+const TestimonialImage = styled(Image)`
   width: 100%;
   height: 100%;
   max-width: 72px;
   max-height: 72px;
-`;
+`
 
 const FlexRowRight = styled(FlexRowItem)`
   text-align: left;
@@ -138,16 +137,22 @@ const FlexRowRight = styled(FlexRowItem)`
   @media (max-width: 576px) {
     margin-left: 0;
   }
-`;
+`
 
-const SingleTestimonialWavesRow = ({ image, imageAlt, quote, name, title, headline }) => (
+const SingleTestimonialWavesRow = ({
+  image,
+  quote,
+  name,
+  title,
+  headline,
+}) => (
   <TestimonialContainer>
     <ContentContainer>
       <Headline>{headline}</Headline>
       <TestimonialQuote>{quote}</TestimonialQuote>
       <FlexRow>
         <FlexRowLeft>
-          <TestimonialImage image={image} alt={imageAlt} />
+          <TestimonialImage image={image} />
         </FlexRowLeft>
         <FlexRowRight>
           <TestimonialName>{name}</TestimonialName>
@@ -156,20 +161,20 @@ const SingleTestimonialWavesRow = ({ image, imageAlt, quote, name, title, headli
       </FlexRow>
     </ContentContainer>
   </TestimonialContainer>
-);
+)
 
 SingleTestimonialWavesRow.defaultProps = {
   image: null,
   imageAlt: '',
-};
+}
 
 SingleTestimonialWavesRow.propTypes = {
-  image: GATSBY_IMAGE,
+  image: Image,
   imageAlt: PropTypes.string,
   quote: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   headline: PropTypes.string.isRequired,
-};
+}
 
-export default SingleTestimonialWavesRow;
+export default SingleTestimonialWavesRow

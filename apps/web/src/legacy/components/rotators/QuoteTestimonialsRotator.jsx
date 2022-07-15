@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import NextImage from 'next/image'
-import styled from 'styled-components'
-import { GATSBY_IMAGE } from '../../constants/types'
+import Image from '@components/Image'
+import { styled } from '@design'
 // components
 import PaginationDots from './PaginationDots'
 import ReactSlick from './ReactSlick_Base'
@@ -10,88 +9,99 @@ import ReactSlick from './ReactSlick_Base'
 import QuotemarkSVG_Gray from '../../assets/images/global/quote-mark_gray_62px@2x.svg'
 import QuotemarkSVG_Tan from '../../assets/images/global/quote-mark_tan_62px@2x.svg'
 
-const VARIANTS = {
-  gray: {
-    backgroundColor: '#f9f9f9',
-    quotemarkImage: QuotemarkSVG_Gray,
-    opacity: 1,
+const OuterContainer = styled('div', {
+  position: 'relative',
+  z: 4,
+  overflowX: 'hidden',
+
+  variants: {
+    variant: {
+      gray: {
+        bc: '#f9f9f9',
+      },
+      tan: {
+        bc: '#fef9f1',
+      },
+    },
   },
-  tan: {
-    backgroundColor: '#fef9f1',
-    quotemarkImage: QuotemarkSVG_Tan,
-    opacity: 0.3,
+})
+
+const InnerContainer = styled('div', {
+  w: '70%',
+  ml: 'auto',
+  mr: 'auto',
+  mw: '1140px',
+  pt: '3rem',
+  pb: '4rem',
+
+  '@media (max-width: 1023px)': {
+    w: '80%',
   },
-}
+})
 
-const OuterContainer = styled.div`
-  position: relative;
-  z-index: 4;
-  background-color: ${(props) => VARIANTS[props.variant].backgroundColor};
-  overflow-x: hidden;
-`
+const QuotemarkImage = styled(Image, {
+  w: '64px',
+  ml: 'calc((100% - 64px) / 2)',
 
-const InnerContainer = styled.div`
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 1140px;
-  padding-top: 3rem;
-  padding-bottom: 4rem;
-  @media (max-width: 1023px) {
-    width: 80%;
-  }
-`
+  variants: {
+    variant: {
+      gray: {
+        opacity: 1,
+      },
+      tan: {
+        opacity: 0.3,
+      },
+    },
+  },
+})
 
-const QuotemarkImage = styled.img`
-  width: 64px;
-  opacity: ${(props) => VARIANTS[props.variant].opacity};
-  margin-left: calc((100% - 64px) / 2);
-`
+const SlickRotator = styled(ReactSlick, {
+  '& .slick-slide > div': {
+    mb: '1rem',
+  },
 
-const SlickRotator = styled(ReactSlick)`
-  .slick-slide > div {
-    margin-bottom: 1rem;
-  }
-  .slick-slide > div > div {
-    outline: none;
-  }
-`
+  '& .slick-slide > div > div': {
+    outline: 'none',
+  },
+})
 
-const RotatorContainer = styled.div``
+const RotatorContainer = styled('div', {})
 
-const Quote = styled.h4`
-  width: 90%;
-  margin: 2rem auto;
-  color: #575452;
-  font-size: 22px;
-  line-height: 36px;
-  text-align: center;
-  @media (max-width: 576px) {
-    width: 100%;
-  }
-`
+const Quote = styled('h4', {
+  w: '90%',
+  m: '2rem auto',
+  c: '#575452',
+  fontSize: '22px',
+  lineHeight: '36px',
+  ta: 'center',
 
-const Image = styled(NextImage)`
-  max-height: 60px;
-  max-width: 60px;
-  margin: 5px auto;
-  margin-left: calc((100% - 60px) / 2);
-`
+  '@media (max-width: 576px)': {
+    w: '100%',
+  },
+})
 
-const ClientName = styled.p`
-  color: #0f0c09;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  text-align: center;
-`
+const StyledImage = styled(Image, {
+  maxHeight: '60px',
+  mw: '60px',
+  m: '5px auto',
+  ml: 'calc((100% - 60px) / 2))',
+})
 
-const ClientTitle = styled.p`
-  color: #575452;
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-`
+const ClientName = styled('p', {
+  c: '#0f0c09',
+  fontSize: '16px',
+  fontWeight: '500',
+  lineHeight: '24px',
+  ta: 'center',
+  mb: 0,
+})
+
+const ClientTitle = styled('p', {
+  c: '#575452',
+  fontSize: '14px',
+  lineHeight: '20px',
+  ta: 'center',
+})
 
 const QuoteTestimonialsRotator = ({ testimonialsArray, variant }) => {
   const settings = {
@@ -116,17 +126,17 @@ const QuoteTestimonialsRotator = ({ testimonialsArray, variant }) => {
       <InnerContainer>
         <QuotemarkImage
           variant={variant}
-          src={VARIANTS[variant].quotemarkImage}
+          image={variant === 'gray' ? QuotemarkSVG_Gray : QuotemarkSVG_Tan}
         />
         <RotatorContainer>
           {typeof window !== 'undefined' && (
             <SlickRotator {...settings}>
               {testimonialsArray.map((item, index) => {
-                const { quote, image, imageAlt, clientName, clientTitle } = item
+                const { quote, image, clientName, clientTitle } = item
                 return (
                   <div key={index}>
                     <Quote>{quote}</Quote>
-                    <Image src={image} alt={imageAlt} />
+                    <StyledImage image={image} />
                     <ClientName>{clientName}</ClientName>
                     <ClientTitle>{clientTitle}</ClientTitle>
                   </div>
@@ -148,12 +158,12 @@ QuoteTestimonialsRotator.propTypes = {
   testimonialsArray: PropTypes.arrayOf(
     PropTypes.shape({
       quote: PropTypes.string.isRequired,
-      image: GATSBY_IMAGE.isRequired,
+      image: Image.isRequired,
       clientName: PropTypes.string.isRequired,
       clientTitle: PropTypes.string.isRequired,
     })
   ),
-  variant: PropTypes.oneOf(Object.keys(VARIANTS)),
+  variant: PropTypes.oneOf(['gray', 'tan']),
 }
 
 export default QuoteTestimonialsRotator
