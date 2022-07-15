@@ -9,7 +9,9 @@ import {
 } from '@lp/lib-upgrade-modal'
 import Accordion from '../../legacy/components/accordions/Accordion'
 import FeatureIconsGrid from '../../legacy/components/grids/FeatureIconsGrid'
-import HeadlineSection from '../../legacy/components/layout/HeadlineSection'
+import HeadlineSection, {
+  Caption,
+} from '../../legacy/components/layout/HeadlineSection'
 import Layout from '../../legacy/components/Layout'
 import LoadingState from '../../legacy/components/LoadingState'
 import QuoteTestimonialsRotator from '../../legacy/components/rotators/QuoteTestimonialsRotator'
@@ -96,7 +98,7 @@ const SVGContainer = styled('img', {
 const HeadlineCaption = styled(HeadlineSection, {
   pt: '3rem',
 
-  '& [class*="HeadlineSection__Caption"]': {
+  [`& ${Caption}`]: {
     pb: '50px',
   },
 })
