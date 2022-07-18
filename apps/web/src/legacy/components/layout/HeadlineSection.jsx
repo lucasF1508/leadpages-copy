@@ -170,7 +170,6 @@ const HeadlineSection = ({
   className,
 }) => (
   <MainContainer className={className} css={{ bc: backgroundColor }}>
-    {console.log(button)}
     <InnerContainer noPadding={noPadding} css={{ bc: backgroundColor }}>
       {supertitle && !alternateSupertitle && (
         <Supertitle
