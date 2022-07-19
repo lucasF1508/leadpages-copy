@@ -69,7 +69,7 @@ export const {
     type: (variant) => getType(variant),
     typeSizes: (variant) => getTypeSizes(variant),
     typeStyles: (variant) => getTypeStyles(variant),
-    sizes: (array) => getSizes(array),
+    sizeArray: (array) => getSizes(array),
   },
   themeMap: {
     ...defaultThemeMap,

@@ -230,7 +230,7 @@ const Pricing = (props) => {
             />
           </>
         )}
-        <SpacerRow sizeArray={[2, 4, 6, 8]} backgroundColor="turquoise" />
+        <SpacerRow size="small" />
         <HeadlineSection
           title="Outfit your business for today’s needs & tomorrow’s dreams"
           caption="All Leadpages plans include the following:"

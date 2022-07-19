@@ -2,8 +2,8 @@ import { getMediaQueries, getRootBreakpoints } from '@design/utils/mediaQueries'
 
 export const breakpoints = {
   xs: 340,
-  s: 640,
-  m: 900,
+  s: 576,
+  m: 992,
   l: 1200,
   xl: 1600,
   xxl: 2000,

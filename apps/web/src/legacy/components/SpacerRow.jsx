@@ -1,6 +1,5 @@
 import { React } from 'react'
 import PropTypes from 'prop-types'
-// import styled from 'styled-components';
 import { styled } from '@design'
 
 const SpacerContainer = styled('div', {
@@ -71,9 +70,7 @@ const SpacerRow = ({ id, backgroundColor, size, sizeArray, border }) => {
     <SpacerContainer
       id={id}
       css={
-        sizeArray
-          ? { sizes: sizeArray, bc: backgroundColor }
-          : { bc: backgroundColor }
+        sizeArray ? { sizeArray, bc: backgroundColor } : { bc: backgroundColor }
       }
       className={size || ''}
       style={{ border: border ? '3px solid #603eff' : '' }}
