@@ -7,6 +7,7 @@ import {
   checkPlanBundleEligibility,
   PlanCompareTable,
 } from '@lp/lib-upgrade-modal'
+import Link from '@components/Link'
 import Accordion from '../../legacy/components/accordions/Accordion'
 import FeatureIconsGrid from '../../legacy/components/grids/FeatureIconsGrid'
 import HeadlineSection, {
@@ -18,7 +19,6 @@ import QuoteTestimonialsRotator from '../../legacy/components/rotators/QuoteTest
 import ReadyToGrow from '../../legacy/components/product/ReadyToGrow'
 import SpacerRow from '../../legacy/components/SpacerRow'
 import SingleTestimonialWavesRow from '../../legacy/components/testimonials/SingleTestimonialWavesRow'
-import Link from '@components/Link'
 // Data
 import { pricingFaqData } from '../../legacy/data/faq_data'
 import {
