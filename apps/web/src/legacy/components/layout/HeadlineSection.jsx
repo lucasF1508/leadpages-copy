@@ -16,11 +16,11 @@ const InnerContainer = styled('div', {
   m: '0 auto',
   bc: 'rgb(0,0,0,0)',
 
-  '@media (max-width: 576px)': {
+  '@<s': {
     mb: 0,
   },
 
-  '@media (min-width: 992px)': {
+  '@<m': {
     pr: '6rem',
     pl: '6rem',
   },
@@ -42,7 +42,7 @@ const Supertitle = styled('div', {
   tt: 'uppercase',
   opacity: 0.5,
   mb: '0.5rem',
-  c: '#0f0c09',
+  c: '$text',
 })
 
 const AlternateSupertitle = styled('div', {
@@ -54,7 +54,7 @@ const AlternateSupertitle = styled('div', {
   tt: 'none',
   opacity: 1,
   mb: '0.5rem',
-  c: '#575452',
+  c: '$textAlt',
 })
 
 const Title = styled('div', {
@@ -63,11 +63,11 @@ const Title = styled('div', {
   letterSpacing: '-0.03125rem',
   lineHeight: '3rem',
   ta: 'center',
-  c: '#0f0c09',
+  c: '$text',
   w: '70%',
   ml: '15%',
 
-  '@media (max-width: 767px)': {
+  '@<headlineSection': {
     fontSize: '1.5rem',
     lineHeight: '1.75rem',
     letterSpacing: 0,
@@ -85,7 +85,7 @@ const Title = styled('div', {
 
 const Subtitle = styled(Title, {
   fontSize: '2rem',
-  c: '#0f0c09',
+  c: '$text',
 })
 
 const Caption = styled('div', {
@@ -93,11 +93,11 @@ const Caption = styled('div', {
   fontSize: '18px',
   lineHeight: '28px',
   ta: 'center',
-  c: '#575452',
+  c: '$textAlt',
   pl: '4rem',
   pr: '4rem',
 
-  '@media (max-width: 767px)': {
+  '@<headlineSection': {
     fontSize: '1rem',
     lineHeight: '1.5rem',
     pl: 0,
@@ -120,7 +120,7 @@ const ButtonContents = styled('div', {
   d: 'flex',
   ai: 'center',
   jc: 'center',
-  c: '#603eff',
+  c: '$primary',
   fontSize: '16px',
   fontWeight: 500,
   lineHeight: '28px',
@@ -136,15 +136,15 @@ const ArrowSVG = styled(Image, {
 
 const Button = styled('button', {
   bc: 'transparent',
-  b: '3px solid #d1c6f9',
+  b: '3px solid $colors$secondary',
   br: '24px',
   p: '7px 33px',
   cursor: 'pointer',
   transition: 'all 0.3s ease',
 
   '&:hover': {
-    bc: '#603eff',
-    b: '3px solid #603eff',
+    bc: '$primary',
+    b: '3px solid $colors$primary',
 
     [`& ${ButtonContents}`]: {
       c: 'white',
@@ -169,8 +169,8 @@ const HeadlineSection = ({
   noPadding,
   className,
 }) => (
-  <MainContainer className={className} css={{ bc: backgroundColor }}>
-    <InnerContainer noPadding={noPadding} css={{ bc: backgroundColor }}>
+  <MainContainer className={className} css={{ backgroundColor }}>
+    <InnerContainer noPadding={noPadding} css={{ backgroundColor }}>
       {supertitle && !alternateSupertitle && (
         <Supertitle
           dangerouslySetInnerHTML={{ __html: supertitle }}

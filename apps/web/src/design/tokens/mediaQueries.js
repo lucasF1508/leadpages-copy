@@ -14,6 +14,7 @@ export const customBreakpoints = {
   teamMobile: 450,
   archiveMobile: 450,
   navigationMobile: 500,
+  headlineSection: 767,
   navigationDesktop: 1000,
 }
 
