@@ -64,6 +64,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-sanity": "^0.4.0",
     "next-sitemap": "^2.1.6",
+    "prop-types": "^15.8.1",
     "query": "*",
     "react": "^17.0.2",
     "react-animations": "^1.0.0",

@@ -9,15 +9,15 @@ const SpacerContainer = styled('div', {
   '&.small': {
     h: '3rem',
 
-    '@media (max-width: 992px)': {
+    '@<m': {
       h: '3rem',
     },
 
-    '@media (max-width: 576px)': {
+    '@<s': {
       h: '2rem',
     },
 
-    '@media (max-width: 340px)': {
+    '@<xs': {
       h: '2rem',
     },
   },
@@ -25,15 +25,15 @@ const SpacerContainer = styled('div', {
   '&.medium': {
     h: '8rem',
 
-    '@media (max-width: 992px)': {
+    '@<m': {
       h: '6rem',
     },
 
-    '@media (max-width: 576px)': {
+    '@<s': {
       h: '3rem',
     },
 
-    '@media (max-width: 340px)': {
+    '@<xs': {
       h: '2rem',
     },
   },
@@ -41,15 +41,15 @@ const SpacerContainer = styled('div', {
   '&.large': {
     h: '12rem',
 
-    '@media (max-width: 992px)': {
+    '@<m': {
       h: '9rem',
     },
 
-    '@media (max-width: 576px)': {
+    '@<s': {
       h: '6rem',
     },
 
-    '@media (max-width: 340px)': {
+    '@<xs': {
       h: '4rem',
     },
   },
@@ -66,14 +66,20 @@ const SpacerRow = ({ id, backgroundColor, size, sizeArray, border }) => {
       'LP Warn: You are attempting to use the <SpacerRow> component without passing in a valid sizeArray in the form of an array with one rem value per standard repo breakpoint (>992, >576, >340, <340) (e.g. sizeArray={6, 4, 2, 1}. Note that if both are passed in, the size string option will override the sizeArray.'
     )
   }
+
+  const borderStyle = border ? { b: '3px solid $colors$primary' } : {}
+  const backgroundColorStyle = backgroundColor ? { backgroundColor } : {}
+  const sizeArrayStyle = sizeArray ? { sizeArray } : {}
+
   return (
     <SpacerContainer
       id={id}
-      css={
-        sizeArray ? { sizeArray, bc: backgroundColor } : { bc: backgroundColor }
-      }
+      css={{
+        ...sizeArrayStyle,
+        ...backgroundColorStyle,
+        ...borderStyle,
+      }}
       className={size || ''}
-      style={{ border: border ? '3px solid #603eff' : '' }}
     />
   )
 }

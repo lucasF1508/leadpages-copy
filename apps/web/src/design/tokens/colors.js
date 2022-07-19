@@ -1,7 +1,6 @@
 import {
   pink,
   purple,
-  purpleA,
   mauve,
   gray,
   blue,
@@ -33,7 +32,7 @@ export const colors = {
   white: '#ffffff',
   black: '#000000',
   brand: '$purple10',
-  primary: '$purple10',
+  primary: '#603eff',
   secondary: '$pink10',
   buttonText: '$white',
   buttonBackground: '$brand',
