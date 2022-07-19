@@ -85,6 +85,14 @@ const SpacerRow = ({ id, backgroundColor, size, sizeArray, border }) => {
 }
 
 // To use, pass in either a sizeArray with 4 values, corresponding to the four standard repo breakpoints (>992, >576, >340, <=340) or a valid size in the form of a string ("small", "medium", or "large").
+SpacerRow.defaultProps = {
+  id: '',
+  backgroundColor: '',
+  size: 'small',
+  sizeArray: [],
+  border: false,
+}
+
 SpacerRow.propTypes = {
   id: PropTypes.string,
   backgroundColor: PropTypes.string,
