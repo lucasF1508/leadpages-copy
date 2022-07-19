@@ -2,7 +2,6 @@ import {
   pink,
   purple,
   mauve,
-  gray,
   blue,
   red,
   green,
@@ -11,15 +10,7 @@ import {
   whiteA,
 } from '@radix-ui/colors'
 
-// From U.S to Canadian :wink:
-const grey = Object.keys(gray)
-  .map((key) => ({
-    [key.replace('a', 'e')]: gray[key],
-  }))
-  .reduce((obj, field) => ({ ...obj, ...field }), {})
-
 export const colors = {
-  ...grey,
   ...blue,
   ...yellow,
   ...red,
@@ -29,17 +20,21 @@ export const colors = {
   ...purple,
   ...blackA,
   ...whiteA,
+  gray: '#f9f9f9',
+  tan: '#fef9f1',
   white: '#ffffff',
   black: '#000000',
+  purple: '#603eff',
+  purpleLight: '#d1c6f9',
   brand: '$purple10',
-  primary: '#603eff',
-  secondary: '#d1c6f9',
+  primary: '$purple',
+  secondary: '$purpleLight',
   buttonText: '$white',
   buttonBackground: '$brand',
   text: '#0f0c09',
   textAlt: '#575452',
-  background: '$mauve1',
-  backgroundAlt: '$blackA1',
+  background: '$gray',
+  backgroundAlt: '$tan',
   backgroundContrast: '$mauve3',
   border: '$purple10',
   link: '$primary',

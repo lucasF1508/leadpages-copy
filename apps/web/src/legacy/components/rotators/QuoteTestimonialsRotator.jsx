@@ -17,10 +17,10 @@ const OuterContainer = styled('div', {
   variants: {
     variant: {
       gray: {
-        bc: '#f9f9f9',
+        bc: '$background',
       },
       tan: {
-        bc: '#fef9f1',
+        bc: '$backgroundAlt',
       },
     },
   },
@@ -70,12 +70,12 @@ const RotatorContainer = styled('div', {})
 const Quote = styled('h4', {
   w: '90%',
   m: '2rem auto',
-  c: '#575452',
+  c: '$textAlt',
   fontSize: '22px',
   lineHeight: '36px',
   ta: 'center',
 
-  '@media (max-width: 576px)': {
+  '@<s': {
     w: '100%',
   },
 })
@@ -88,7 +88,7 @@ const StyledImage = styled(Image, {
 })
 
 const ClientName = styled('p', {
-  c: '#0f0c09',
+  c: '$text',
   fontSize: '16px',
   fontWeight: '500',
   lineHeight: '24px',
@@ -97,7 +97,7 @@ const ClientName = styled('p', {
 })
 
 const ClientTitle = styled('p', {
-  c: '#575452',
+  c: '$textAlt',
   fontSize: '14px',
   lineHeight: '20px',
   ta: 'center',
