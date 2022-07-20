@@ -1,180 +1,172 @@
 import React from 'react'
+import { styled } from '@design'
 import PropTypes from 'prop-types'
-import Link from 'next/link'
+import NextLink from 'next/link'
+// import Image from '@components/Image'
 import Image from 'next/image'
-import { GATSBY_IMAGE } from '../../constants/types'
-import styled from 'styled-components'
 // images
 import rightArrowPurpleSVG from '../../assets/images/global/arrow_right_purple.svg'
 
-const IconCardStyle_4Across = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: left;
-  text-decoration: none;
-  padding-right: 48px;
-  display: flex;
-  margin: 1rem 0;
-  @media (min-width: 1200px) {
-    max-width: 25%;
-  }
-  @media (min-width: 1024px) {
-    max-width: 20%;
-    &:nth-child(4n) {
-      padding-right: 0px;
-    }
-  }
-  @media (max-width: 1023px) {
-    text-align: center;
-    max-width: 325px;
-    &:nth-child(2n) {
-      padding-right: 0px;
-    }
-  }
-  @media (max-width: 899px) {
-    max-width: 38%;
-  }
-  @media (max-width: 600px) {
-    max-width: 100%;
-    padding-right: 0px;
-  }
-  & .details {
-    font-size: 14px;
-    line-height: 20px;
-    color: #575452;
-  }
-  & h3 {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    color: #0f0c09;
-  }
-`
+const IconCardStyle_4Across = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  ta: 'left',
+  textDecoration: 'none',
+  pr: '48px',
+  d: 'flex',
+  m: '1rem 0',
 
-const IconCardStyle_3Across = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 2%;
-  padding-right: 2%;
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem 0;
-  @media (min-width: 576px) and (max-width: 768px) {
-    flex: 0 0 48%;
-    max-width: 48%;
-  }
-  @media (min-width: 769px) and (max-width: 991px) {
-    flex: 0 0 29%;
-    max-width: 29%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0;
-    flex: 0 0 29%;
-    max-width: 29%;
-    text-align: left;
-  }
-  & .details {
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 1rem;
-    color: #575452;
-  }
-  & h3 {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    color: #0f0c09;
-  }
-`
+  '@media (min-width: 1200px)': {
+    mw: '25%',
+  },
 
-const ImageContainer = styled(Image)`
-  display: block;
-  height: 100%;
-  width: 100%;
-  max-height: 3rem;
-  max-width: 3rem;
-  margin-right: auto;
-  margin-bottom: 1rem;
-  @media (max-width: 1023px) {
-    margin-left: auto;
-  }
-`
+  '@media (min-width: 1024px)': {
+    mw: '20%',
 
-const InternalLink = styled(Link)`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-`
+    '&:nth-child(4n)': {
+      pr: '0px',
+    },
+  },
 
-const OutboundLink = styled.a`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-`
+  '@media (max-width: 1023px)': {
+    ta: 'center',
+    mw: '325px',
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`
+    '&:nth-child(2n)': {
+      pr: '0px',
+    },
+  },
 
-const CTA = styled.span`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 30px;
-  text-align: left;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  &:hover {
-    color: #4d32cc;
-  }
-  &:hover ${ArrowRightPurple} {
-    filter: invert(18%) sepia(97%) saturate(3719%) hue-rotate(249deg)
-      brightness(81%) contrast(95%);
-  }
-`
+  '@media (max-width: 899px)': {
+    mw: '38%',
+  },
 
-const IconCard = (props) => {
-  const { title, icon, alt, description, link, itemsPerRow } = props
+  '@media (max-width: 600px)': {
+    mw: '100%',
+    pr: '0px',
+  },
+
+  '& .details': {
+    fontSize: '14px',
+    lineHeight: '20px',
+    c: '$textAlt',
+  },
+
+  h3: {
+    fontSize: '16px',
+    lineHeight: '24px',
+    fontWeight: '500',
+    mb: '1rem',
+    c: '$text',
+  },
+})
+
+const IconCardStyle_3Across = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  ta: 'center',
+  textDecoration: 'none',
+  w: '100%',
+  px: '2%',
+  d: 'flex',
+  jc: 'space-between',
+  m: '1rem 0',
+
+  '@media (min-width: 576px) and (max-width: 768px)': {
+    f: '0 0 48%',
+    mw: '48%',
+  },
+
+  '@media (min-width: 769px) and (max-width: 991px)': {
+    f: '0 0 29%',
+    mw: '29%',
+  },
+
+  '@media (min-width: 992px)': {
+    mb: 0,
+    f: '0 0 29%',
+    mw: '29%',
+    ta: 'left',
+  },
+
+  '& .details': {
+    fontSize: '14px',
+    lineHeight: '20px',
+    mb: '1rem',
+    c: '$textAlt',
+  },
+
+  h3: {
+    fontSize: '16px',
+    lineHeight: '24px',
+    fontWeight: '500',
+    mb: '1rem',
+    c: '$text',
+  },
+})
+
+const ImageContainer = styled('div', {
+  h: '100%',
+  w: '100%',
+  maxHeight: '3rem',
+  mw: '3rem',
+  mr: 'auto',
+  mb: '1rem',
+
+  '@media (max-width: 1023px)': {
+    ml: 'auto',
+  },
+})
+
+const IconCardLink = styled('a', {
+  textDecoration: 'none',
+  c: '$primary',
+})
+
+const ArrowRightPurple = styled('div', {
+  d: 'inline-block',
+  w: '20px',
+  h: '10px',
+  filter:
+    'invert(18%) sepia(97%) saturate(3719%) hue-rotate(249deg) brightness(81%) contrast(95%)',
+})
+
+const CTA = styled('span', {
+  c: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '30px',
+  ta: 'left',
+  fontWeight: '500',
+  mb: '2rem',
+
+  '&:hover': {
+    c: '$indigoDark',
+  },
+})
+
+const IconCard = ({ title, icon, alt, description, link, itemsPerRow }) => {
   if (itemsPerRow === 3) {
     return (
       <IconCardStyle_3Across>
         <div>
-          <ImageContainer src={icon} alt={alt} width="48" height="48" />
+          <ImageContainer>
+            <Image src={icon} alt={alt} height={48} width={48} />
+          </ImageContainer>
           <h3>{title}</h3>
           <div className="details">{description}</div>
           {link && (
-            <>
-              {link.type === 'internal' && (
-                <InternalLink href={link.route} alt={link.altText}>
-                  <CTA>
-                    {link.label}
-                    &nbsp;
-                    <ArrowRightPurple
-                      src={rightArrowPurpleSVG}
-                      alt="purple right arrow"
-                    />
-                  </CTA>
-                </InternalLink>
-              )}
-              {link.type === 'outbound' && (
-                <OutboundLink href={link.route} alt={link.altText}>
-                  <CTA>
-                    {link.label}
-                    &nbsp;
-                    <ArrowRightPurple
-                      src={rightArrowPurpleSVG}
-                      alt="purple right arrow"
-                    />
-                  </CTA>
-                </OutboundLink>
-              )}
-            </>
+            <NextLink href={link.route} passHref>
+              <IconCardLink alt={link.altText}>
+                <CTA>
+                  {link.label}
+                  &nbsp;
+                  <ArrowRightPurple>
+                    <Image {...rightArrowPurpleSVG} />
+                  </ArrowRightPurple>
+                </CTA>
+              </IconCardLink>
+            </NextLink>
           )}
         </div>
       </IconCardStyle_3Across>
@@ -184,36 +176,23 @@ const IconCard = (props) => {
   return (
     <IconCardStyle_4Across>
       <div>
-        <ImageContainer src={icon} alt={alt} width="48" height="48" />
+        <ImageContainer>
+          <Image src={icon} alt={alt} height={48} width={48} />
+        </ImageContainer>
         <h3>{title}</h3>
         <div className="details">{description}</div>
         {link && (
-          <>
-            {link.type === 'internal' && (
-              <InternalLink href={link.route} alt={link.altText}>
-                <CTA>
-                  {link.label}
-                  &nbsp;
-                  <ArrowRightPurple
-                    src={rightArrowPurpleSVG}
-                    alt="purple right arrow"
-                  />
-                </CTA>
-              </InternalLink>
-            )}
-            {link.type === 'outbound' && (
-              <OutboundLink href={link.route} alt={link.altText}>
-                <CTA>
-                  {link.label}
-                  &nbsp;
-                  <ArrowRightPurple
-                    src={rightArrowPurpleSVG}
-                    alt="purple right arrow"
-                  />
-                </CTA>
-              </OutboundLink>
-            )}
-          </>
+          <NextLink href={link.route} passHref>
+            <IconCardLink alt={link.altText}>
+              <CTA>
+                {link.label}
+                &nbsp;
+                <ArrowRightPurple>
+                  <Image {...rightArrowPurpleSVG} />
+                </ArrowRightPurple>
+              </CTA>
+            </IconCardLink>
+          </NextLink>
         )}
       </div>
     </IconCardStyle_4Across>
@@ -230,7 +209,7 @@ IconCard.defaultProps = {
 IconCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  icon: GATSBY_IMAGE.isRequired,
+  icon: Image.isRequired,
   alt: PropTypes.string,
   link: PropTypes.shape({
     type: PropTypes.string.isRequired,

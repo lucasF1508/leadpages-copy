@@ -1,56 +1,60 @@
 import React from 'react'
+import { styled } from '@design'
 import PropTypes from 'prop-types'
-import Link from 'next/link'
-import { GATSBY_IMAGE } from '../../constants/types'
-import styled from 'styled-components'
+import NextLink from 'next/link'
+import Image from 'next/image'
 // components
 import IconCardsGrid from './IconCardsGrid'
 
-const SectionContainer = styled.div`
-  background-color: ${(props) => props.backgroundColor};
-  position: relative;
-  padding: 0 3rem;
-  @media (min-width: 577px) {
-    padding: 0 6rem;
-  }
-`
+const SectionContainer = styled('div', {
+  position: 'relative',
+  p: '0 3rem',
 
-const SectionLink = styled.div`
-  font-family: Apercu Pro;
-  font-size: 18px;
-  line-height: 32px;
-  text-align: center;
-  color: #575452;
-  margin-bottom: 4rem;
-  padding-top: 3rem;
-`
+  '@media (min-width: 577px)': {
+    p: '0 6rem',
+  },
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-  color: #603eff;
-  padding-bottom: 3px;
-  border-bottom: 2px solid rgb(209, 198, 249);
-  &:hover {
-    border-bottom: 2px solid #603eff;
-  }
-`
+const SectionLink = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  lineHeight: '32px',
+  ta: 'center',
+  color: '$textAlt',
+  mb: '4rem',
+  pt: '3rem',
+})
 
-const FeatureIconsGrid = (props) => {
-  const { features, itemsPerRow, showSectionLink, backgroundColor } = props
-  return (
-    <SectionContainer backgroundColor={backgroundColor}>
-      <IconCardsGrid items={features} itemsPerRow={itemsPerRow} />
-      {showSectionLink && (
-        <SectionLink>
-          Visit Leadpages{' '}
-          <StyledLink href="/product/feature-index">feature index</StyledLink>{' '}
-          for the full story.
-        </SectionLink>
-      )}
-    </SectionContainer>
-  )
-}
+const StyledLink = styled('a', {
+  d: 'inline',
+  c: '#603eff',
+  pb: '3px',
+  bb: '2px solid $colors$purpleLight',
+
+  '&:hover': {
+    bb: '2px solid $colors$primary',
+  },
+})
+
+const FeatureIconsGrid = ({
+  features,
+  itemsPerRow,
+  showSectionLink,
+  backgroundColor,
+}) => (
+  <SectionContainer css={backgroundColor ? { backgroundColor } : {}}>
+    <IconCardsGrid items={features} itemsPerRow={itemsPerRow} />
+    {showSectionLink && (
+      <SectionLink>
+        Visit Leadpages{' '}
+        <NextLink href="/product/feature-index" passHref>
+          <StyledLink>feature index</StyledLink>
+        </NextLink>{' '}
+        for the full story.
+      </SectionLink>
+    )}
+  </SectionContainer>
+)
 
 FeatureIconsGrid.defaultProps = {
   itemsPerRow: 4,
@@ -63,7 +67,7 @@ FeatureIconsGrid.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
-      icon: GATSBY_IMAGE.isRequired,
+      icon: Image.isRequired,
       alt: PropTypes.string.isRequired,
       link: PropTypes.shape({
         type: PropTypes.string.isRequired,

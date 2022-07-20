@@ -1,45 +1,42 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { GATSBY_IMAGE } from '../../constants/types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { styled } from '@design'
 // components
-import IconCard from '../cards/IconCard';
+import IconCard from '../cards/IconCard'
 
-const GridContainer = styled.div`
-  margin: auto;
-  @media (min-width: 1400px) {
-    max-width: 1200px;
-  }
-`;
+const GridContainer = styled('div', {
+  m: 'auto',
 
-const CardContainer = styled.div`
-  margin: auto;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  overflow: hidden;
-`;
+  '@media (min-width: 1400px)': {
+    mw: '1200px',
+  },
+})
 
-const IconCardsGrid = props => {
-  const { items, itemsPerRow } = props;
-  return (
-    <GridContainer>
-      <CardContainer>
-        {items.map((item, index) => (
-          <IconCard key={index} {...item} itemsPerRow={itemsPerRow} />
-        ))}
-      </CardContainer>
-    </GridContainer>
-  );
-};
+const CardContainer = styled('div', {
+  m: 'auto',
+  d: 'flex',
+  ff: 'row wrap',
+  jc: 'center',
+  o: 'hidden',
+})
+
+const IconCardsGrid = ({ items, itemsPerRow }) => (
+  <GridContainer>
+    <CardContainer>
+      {items.map((item, index) => (
+        <IconCard key={index} {...item} itemsPerRow={itemsPerRow} />
+      ))}
+    </CardContainer>
+  </GridContainer>
+)
 
 IconCardsGrid.defaultProps = {
   itemsPerRow: 4,
-};
+}
 
 IconCardsGrid.propTypes = {
-  items: PropTypes.arrayOf(GATSBY_IMAGE).isRequired,
+  items: PropTypes.arrayOf(IconCard).isRequired,
   itemsPerRow: PropTypes.number,
-};
+}
 
-export default IconCardsGrid;
+export default IconCardsGrid

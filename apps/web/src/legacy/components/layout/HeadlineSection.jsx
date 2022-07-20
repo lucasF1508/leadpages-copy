@@ -8,13 +8,11 @@ import ArrowRightPurple from '../../assets/images/global/arrow_right_purple.svg'
 
 const MainContainer = styled('div', {
   w: '100%',
-  bc: 'rgb(0,0,0,0)',
 })
 
 const InnerContainer = styled('div', {
   mw: '1140px',
   m: '0 auto',
-  bc: 'rgb(0,0,0,0)',
 
   '@<s': {
     mb: 0,
@@ -169,8 +167,14 @@ const HeadlineSection = ({
   noPadding,
   className,
 }) => (
-  <MainContainer className={className} css={{ backgroundColor }}>
-    <InnerContainer noPadding={noPadding} css={{ backgroundColor }}>
+  <MainContainer
+    className={className}
+    css={{ bc: backgroundColor || 'rgb(0,0,0,0)' }}
+  >
+    <InnerContainer
+      noPadding={noPadding}
+      css={{ bc: backgroundColor || 'rgb(0,0,0,0)' }}
+    >
       {supertitle && !alternateSupertitle && (
         <Supertitle
           dangerouslySetInnerHTML={{ __html: supertitle }}

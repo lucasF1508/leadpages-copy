@@ -13,20 +13,13 @@ const globalStyles = globalCss({
     '-webkit-font-smoothing': 'antialiased',
     '-moz-osx-font-smoothing': 'grayscale',
     'font-variant-ligatures': 'no-common-ligatures',
-    bc: '$background',
+    bc: '$white',
     fontSize: '16px',
     lh: 1.5,
     color: '$text',
     '*': {
       outlineColor: '$brand',
       outlineOffset: '$space$1',
-    },
-    [`
-      *,
-      *::before,
-      *::after
-    `]: {
-      boxSizing: 'border-box',
     },
     'body:not(.focus-outline)': {
       '*': {

@@ -26,6 +26,7 @@ export const colors = {
   black: '#000000',
   purple: '#603eff',
   purpleLight: '#d1c6f9',
+  indigoDark: '#4d32cc',
   brand: '$purple10',
   primary: '$purple',
   secondary: '$purpleLight',
