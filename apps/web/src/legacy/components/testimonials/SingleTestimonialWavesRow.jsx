@@ -1,151 +1,158 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import { styled } from '@design'
 import Image from '@components/Image'
 // images
 import BackgroundImageSVG from '../../assets/images/shapes/wavy-lines-mirror-sand.svg'
 
-const TestimonialContainer = styled.div`
-  background: #fef9f1 url(${BackgroundImageSVG});
-  background-position: top -160px center;
-  background-size: 1250px;
-  background-repeat: no-repeat;
-  padding-top: 6rem;
-  padding-bottom: 5.875rem;
-  padding-right: 6rem;
-  padding-left: 6rem;
-  @media (max-width: 992px) {
-    background: #fef9f1;
-  }
-  @media (max-width: 576px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (max-width: 320px) {
-    padding-right: 1%;
-    padding-left: 1%;
-    min-width: 287px;
-  }
-`
+const TestimonialContainer = styled('div', {
+  bc: '$backgroundAlt',
+  backgroundImage: `url("${BackgroundImageSVG.src}")`,
+  backgroundPosition: 'top -160px center',
+  backgroundSize: '1250px',
+  backgroundRepeat: 'no-repeat',
+  pt: '6rem',
+  pb: '5.875rem',
+  pr: '6rem',
+  pl: '6rem',
 
-const ContentContainer = styled.div`
-  max-width: 635px;
-  margin: 0 auto;
-`
+  '@<m': {
+    bc: '$backgroundAlt',
+  },
 
-const Headline = styled.div`
-  font-family: 'Value Serif';
-  font-size: 1.875rem;
-  letter-spacing: -0.03125rem;
-  line-height: 2.25rem;
-  margin-bottom: 2.2125rem;
-  color: #e28f44;
-  @media (max-width: 576px) {
-    font-size: 1.833rem;
-    line-height: 2.5rem;
-    letter-spacing: -0.01rem;
-    margin-bottom: 1.5rem;
-  }
-`
+  '@<s': {
+    pr: '3rem',
+    pl: '3rem',
+  },
 
-const TestimonialQuote = styled.div`
-  max-width: 635px;
-  color: #575452;
-  font-size: 1.375rem;
-  line-height: 2.25rem;
-  @media (max-width: 576px) {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    letter-spacing: normal;
-  }
-`
+  '@<xs': {
+    pr: '1%',
+    pl: '1%',
+    mw: '287px',
+  },
+})
 
-const TestimonialName = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: #0f0c09;
-`
+const ContentContainer = styled('div', {
+  mw: '635px',
+  m: '0 auto',
+})
 
-const TestimonialTitle = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  margin-bottom: 1rem;
-  color: #575452;
-`
+const Headline = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '1.875rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '2.25rem',
+  mb: '2.2125rem',
+  c: '$textHighlight',
 
-const FlexRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 2.5rem;
-  @media (max-width: 576px) {
-    margin-top: 1.5rem;
-  }
-`
+  '@<s': {
+    fontSize: '1.833rem',
+    lineHeight: '2.5rem',
+    letterSpacing: '-0.01rem',
+    mb: '1.5rem',
+  },
+})
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-`
+const TestimonialQuote = styled('div', {
+  mw: '635px',
+  c: '$textAlt',
+  fontSize: '1.375rem',
+  lineHeight: '2.25rem',
 
-const FlexRowLeft = styled(FlexRowItem)`
-  display: flex;
-  justify-content: left;
-  margin-bottom: 2rem;
-  @media (min-width: 576px) {
-    margin-bottom: 0rem;
-    flex: 0 0 24%;
-    max-width: 72px;
-    justify-content: flex-end;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    flex: 0 0 24%;
-    text-align: left;
-  }
-  @media (max-width: 576px) {
-    display: none;
-  }
-`
+  '@<s': {
+    fontSize: '1rem',
+    lineHeight: '1.5rem',
+    letterSpacing: 'normal',
+  },
+})
 
-const TestimonialImage = styled(Image)`
-  width: 100%;
-  height: 100%;
-  max-width: 72px;
-  max-height: 72px;
-`
+const TestimonialName = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '1rem',
+  lineHeight: '1.5rem',
+  fontWeight: 500,
+  mb: '1rem',
+  c: '$text',
+})
 
-const FlexRowRight = styled(FlexRowItem)`
-  text-align: left;
-  margin-left: 3%;
-  @media (min-width: 576px) {
-    flex: 0 0 69%;
-    max-width: 69%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    flex: 0 0 69%;
-    max-width: 69%;
-    text-align: left;
-  }
-  @media (max-width: 576px) {
-    margin-left: 0;
-  }
-`
+const TestimonialTitle = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '0.875rem',
+  lineHeight: '1.25rem',
+  mb: '1rem',
+  c: '$textAlt',
+})
 
-const SingleTestimonialWavesRow = ({
-  image,
-  quote,
-  name,
-  title,
-  headline,
-}) => (
+const FlexRow = styled('div', {
+  d: 'flex',
+  flexWrap: 'wrap',
+  mt: '2.5rem',
+
+  '@<s': {
+    mt: '1.5rem',
+  },
+})
+
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  ta: 'center',
+  textDecoration: 'none',
+  w: '100%',
+})
+
+const FlexRowLeft = styled(FlexRowItem, {
+  d: 'flex',
+  jc: 'left',
+  mb: '2rem',
+
+  '@>s': {
+    mb: 0,
+    f: '0 0 24%',
+    mw: '72px',
+    jc: 'flex-end',
+  },
+
+  '@>m': {
+    mb: 0,
+    f: '0 0 24%',
+    ta: 'left',
+  },
+
+  '@<s': {
+    d: 'none',
+  },
+})
+
+const TestimonialImage = styled(Image, {
+  w: '100%',
+  h: '100%',
+  mw: '72px',
+  maxHeight: '72px',
+})
+
+const FlexRowRight = styled(FlexRowItem, {
+  ta: 'left',
+  ml: '3%',
+
+  '@media (min-width: 576px)': {
+    f: '0 0 69%',
+    mw: '69%',
+  },
+
+  '@media (min-width: 992px)': {
+    mb: 0,
+    f: '0 0 69%',
+    mw: '69%',
+    ta: 'left',
+  },
+
+  '@media (max-width: 576px)': {
+    ml: 0,
+  },
+})
+
+const SingleTestimonialWavesRow = ({ image, quote, name, title, headline }) => (
   <TestimonialContainer>
     <ContentContainer>
       <Headline>{headline}</Headline>

@@ -39,7 +39,7 @@ import testimonialImageRonCollins from '../../legacy/assets/images/testimonials/
 
 const HeadlineContainer = styled('div', {
   position: 'relative',
-  background: '#fff',
+  background: '$white',
   mt: '-60px',
   pt: '60px',
   o: 'hidden',
@@ -49,12 +49,12 @@ const HeadlineContainer = styled('div', {
 const StyledLink = styled(Link, {
   textDecoration: 'none',
   cursor: 'pointer',
-  c: '#603eff',
+  c: '$primary',
   pb: '3px',
-  bb: '2px solid rgb(209, 198, 249)',
+  bb: '2px solid $colors$purpleLight',
 
   '&:hover': {
-    bb: '2px solid #603eff',
+    bb: '2px solid $colors$primary',
   },
 })
 
@@ -63,7 +63,7 @@ const SectionLink = styled('div', {
   fontSize: '18px',
   lineHeight: '32px',
   ta: 'center',
-  c: '#575452',
+  c: '$textAlt',
   mb: '4rem',
   pt: '3rem',
 })
@@ -104,7 +104,7 @@ const HeadlineCaption = styled(HeadlineSection, {
 })
 
 const PlanCompareWrapper = styled('div', {
-  bc: '#f9f9f9',
+  bc: '$background',
   pt: '16px',
 })
 
@@ -192,7 +192,10 @@ const Pricing = (props) => {
         ) : (
           <>
             <HeadlineContainer>
-              <SVGContainer src={backgroundImageSVG} alt="background image" />
+              <SVGContainer
+                src={backgroundImageSVG.src}
+                alt="background image"
+              />
               {couponData?.canRedeemCoupon ? (
                 <HeadlineCaption
                   title={couponData?.headerText || null}
@@ -223,7 +226,7 @@ const Pricing = (props) => {
                 selectPlanButtonText="Start For Free"
               />
             </PlanCompareWrapper>{' '}
-            <SpacerRow backgroundColor="#f9f9f9" size="small" />
+            <SpacerRow backgroundColor="$background" size="small" />
             <QuoteTestimonialsRotator
               testimonialsArray={testimonialsData}
               variant="gray"

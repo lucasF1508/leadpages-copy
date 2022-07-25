@@ -34,6 +34,7 @@ export const colors = {
   buttonBackground: '$brand',
   text: '#0f0c09',
   textAlt: '#575452',
+  textHighlight: '#e28f44',
   background: '$gray',
   backgroundAlt: '$tan',
   backgroundContrast: '$mauve3',
