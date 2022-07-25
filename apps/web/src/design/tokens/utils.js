@@ -2,11 +2,6 @@ export const utils = {
   d: (value) => ({
     display: value,
   }),
-  b: (value) => ({
-    border: value,
-  }),
-  bt: (value) => ({ borderTop: value }),
-  bb: (value) => ({ borderBottom: value }),
   p: (value) => ({
     padding: value,
   }),
@@ -93,6 +88,11 @@ export const utils = {
   bc: (value) => ({
     backgroundColor: value,
   }),
+  b: (value) => ({
+    border: value,
+  }),
+  bt: (value) => ({ borderTop: value }),
+  bb: (value) => ({ borderBottom: value }),
   br: (value) => ({
     borderRadius: value,
   }),

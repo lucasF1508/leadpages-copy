@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import styled, { keyframes } from 'styled-components'
+import { styled, keyframes } from '@design'
 // components
 import Wistia_DemoVideo from '../videos/Wistia_DemoVideo'
 // utilities
@@ -11,345 +11,347 @@ import playButtonSVG from '../../assets/images/global/play-button_purple.svg'
 import totemLeftSVG from '../../assets/images/totems/homepage-hero-totem-left.svg'
 import totemRightSVG from '../../assets/images/totems/homepage-hero-totem-right.svg'
 import wavyLineVerticalLavenderSVG from '../../assets/images/shapes/wavy-line-vertical-lavender.svg'
+import videoFallbackImage from '../../assets/images/heros/homepage-hero-fallback@2x.jpg'
 // videos
 const videoWebM =
   'https://static.leadpages.com/mktg/videos/homepage-hero-variant-w918.webm'
 const videoMp4 =
   'https://static.leadpages.com/mktg/videos/homepage-hero-variant-w918.mp4'
 
-const OuterContainer = styled.div`
-  position: relative;
-  min-height: 600px;
-  overflow-x: hidden;
-  overflow: hidden;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  minHeight: '600px',
+  ox: 'hidden',
+  o: 'hidden',
 
-  @media (max-width: 768px) {
-    height: 100%;
-  }
-`
+  '@media (max-width: 768px)': {
+    h: '100%',
+  },
+})
 
-const InnerContainer = styled.div`
-  max-width: 1140px;
-  padding: 0 4rem;
-  margin: 0 auto 52px auto;
-  min-height: 600px;
-  position: relative;
+const InnerContainer = styled('div', {
+  mw: '1140px',
+  p: '0 4rem',
+  m: '0 auto 52px auto',
+  minHeight: '600px',
+  position: 'relative',
 
-  @media (max-width: 768px) {
-    height: 100%;
-    min-height: 1px;
-  }
+  '@media (max-width: 768px)': {
+    height: '100%',
+    minHeight: '1px',
+  },
 
-  @media (min-width: 577px) and (max-width: 768px) {
-    margin-bottom: 44px;
-  }
+  '@media (min-width: 577px) and (max-width: 768px)': {
+    mb: '44px',
+  },
 
-  @media (min-width: 769px) {
-    margin-bottom: 36px;
-  }
-`
+  '@media (min-width: 769px)': {
+    mb: '36px',
+  },
+})
 
-const ShapesLeft = styled.div`
-  position: absolute;
-  top: -18%;
-  left: -69.85%;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+const ShapesLeft = styled('div', {
+  position: 'absolute',
+  top: '-18%',
+  left: '-69.85%',
+  w: '100%',
+  h: '100%',
+  z: -1,
 
-  img {
-    width: 70%;
-  }
+  img: {
+    width: '70%',
+  },
 
-  @media (min-width: 1066px) {
-    top: -48%;
-    left: -60.35%;
-  }
-`
+  '@media (min-width: 1066px)': {
+    top: '-48%',
+    left: '-60.35%',
+  },
+})
 
-const ShapesRight = styled.div`
-  position: absolute;
-  top: -3.75%;
-  right: -61%;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+const ShapesRight = styled('div', {
+  position: 'absolute',
+  top: '-3.75%',
+  right: '-61%',
+  width: '100%',
+  height: '100%',
+  z: -1,
 
-  img {
-    width: 110%;
-  }
+  img: {
+    width: '110%',
+  },
 
-  @media (min-width: 1066px) {
-    top: -27.25%;
-    right: -51%;
-  }
-`
+  '@media (min-width: 1066px)': {
+    top: '-27.25%',
+    right: '-51%',
+  },
+})
 
-const TextContainer = styled.div`
-  position: relative;
-  margin-top: 17px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  width: 100%;
+const TextContainer = styled('div', {
+  position: 'relative',
+  mt: '17px',
+  ml: 'auto',
+  mr: 'auto',
+  ta: 'center',
+  width: '100%',
 
-  @media (min-width: 577px) and (max-width: 768px) {
-    margin-top: 55px;
-  }
-  @media (min-width: 769px) {
-    margin-top: 68px;
-    max-width: 760px;
-  }
-`
+  '@media  (min-width: 577px) and (max-width: 768px)': {
+    mt: '55px',
+  },
 
-const Headline = styled.div`
-  font-family: 'Value Serif';
-  font-size: 28px;
-  line-height: 34px;
-  letter-spacing: 0;
-  color: #0f0c09;
-  margin-bottom: 2rem;
+  '@media  (min-width: 769px)': {
+    mt: '68px',
+    mw: '760px',
+  },
+})
 
-  @media (min-width: 577px) and (max-width: 768px) {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.5px;
-  }
+const Headline = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '28px',
+  lineHeight: '34px',
+  letterSpacing: '0',
+  color: '$text',
+  mb: '2rem',
 
-  @media (min-width: 769px) {
-    font-size: 56px;
-    line-height: 60px;
-    letter-spacing: 0;
-  }
-`
+  '@media  (min-width: 577px) and (max-width: 768px)': {
+    fontSize: '40px',
+    lineHeight: '48px',
+    letterSpacing: '-0.5px',
+  },
 
-const Caption = styled.div`
-  font-family: 'Apercu Pro';
-  color: #575452;
-  margin-bottom: 2rem;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0;
+  '@media  (min-width: 769px)': {
+    fontSize: '56px',
+    lineHeight: '60px',
+    letterSpacing: '0',
+  },
+})
 
-  @media (min-width: 577px) {
-    font-size: 18px;
-    line-height: 28px;
-  }
-`
+const Caption = styled('div', {
+  fontFamily: 'Apercu Pro',
+  c: '$textAlt',
+  mb: '2rem',
+  fontSize: '16px',
+  lineHeight: '24px',
+  letterSpacing: '0',
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`
+  '@media  (min-width: 577px)': {
+    fontSize: '18px',
+    lineHeight: '28px',
+  },
+})
 
-const Button = styled.button`
-  width: 209px;
-  height: 48px;
-  border-radius: 48px;
-  border: 3px solid #603eff;
-  background-color: #603eff;
-  color: #ffffff;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 28px;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
+const StyledLink = styled('a', {
+  textDecoration: 'none',
+  cursor: 'pointer',
+})
 
-  &:hover {
-    background-color: #4d32cc;
-    border: 3px solid #4d32cc;
-  }
-`
+const Button = styled('button', {
+  width: '209px',
+  height: '48px',
+  br: '48px',
+  b: '3px solid $colors$primary',
+  bc: '$primary',
+  c: '$white',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '28px',
+  textAlign: 'center',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
 
-const SVG = styled(Image)``
+  '&:hover': {
+    bc: '$primary',
+    border: '3px solid $colors$primary',
+  },
+})
 
-const VideoBrowserContainer = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 38px;
+const SVG = styled(Image, {})
 
-  @media (min-width: 577px) and (max-width: 768px) {
-    margin-top: 64px;
-  }
+const VideoBrowserContainer = styled('div', {
+  position: 'relative',
+  width: '100%',
+  mt: '38px',
 
-  @media (min-width: 769px) {
-    margin-top: 86px;
-  }
-`
+  '@media  (min-width: 577px) and (max-width: 768px)': {
+    mt: '64px',
+  },
 
-const RevealVideoBrowserAnimation = keyframes`
-  0% { opacity: 0; transform: translateY(25%) }
-  100% { opacity: 1; transform: translateY(0) }
-`
+  '@media  (min-width: 769px)': {
+    mt: '86px',
+  },
+})
 
-const VideoBrowser = styled.div`
-  width: 100%;
-  opacity: 0;
-  animation-delay: 0.5s;
-  animation-duration: 0.75s;
-  animation-name: ${RevealVideoBrowserAnimation};
-  animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
-  animation-fill-mode: forwards;
-`
+const RevealVideoBrowserAnimation = keyframes({
+  '0%': { opacity: '0', transform: 'translateY(25%)' },
+  '100%': { opacity: '1', transform: 'translateY(0)' },
+})
 
-const VideoBrowserChrome = styled.div`
-  width: 100%;
-  height: 11px;
-  background-color: #fff;
-  border: 2px solid #575452;
-  border-bottom: 0;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-  max-width: 918px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
+const VideoBrowser = styled('div', {
+  width: '100%',
+  opacity: '0',
+  animationDelay: '0.5s',
+  animationDuration: '0.75s',
+  animationName: `${RevealVideoBrowserAnimation}`,
+  animationTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
+  animationFillMode: 'forwards',
+})
 
-  & > span {
-    display: block;
-    width: 3px;
-    height: 3px;
-    border-radius: 3px;
-    background-color: #c3c2c1;
-    margin-left: 4px;
+const VideoBrowserChrome = styled('div', {
+  width: '100%',
+  height: '11px',
+  bc: '$white',
+  b: '2px solid $colors$textAlt',
+  bb: '0',
+  btlr: '7px',
+  btrr: '7px',
+  mw: '918px',
+  m: '0 auto',
+  d: 'flex',
+  ai: 'center',
 
-    &:nth-child(1) {
-      margin-left: 6px;
-    }
-  }
+  '& > span': {
+    d: 'block',
+    width: '3px',
+    height: '3px',
+    br: '3px',
+    bc: '#c3c2c1',
+    ml: '4px',
 
-  @media (min-width: 577px) and (max-width: 768px) {
-    height: 19px;
+    '&:nth-child(1)': {
+      ml: '6px',
+    },
+  },
 
-    & > span {
-      width: 7px;
-      height: 7px;
-      border-radius: 7px;
-    }
-  }
+  '@media  (min-width: 577px) and (max-width: 768px)': {
+    height: '19px',
 
-  @media (min-width: 769px) {
-    height: 26px;
-    border-width: 3px;
+    '& > span': {
+      width: '7px',
+      height: '7px',
+      br: '7px',
+    },
+  },
 
-    & > span {
-      width: 10px;
-      height: 10px;
-      border-radius: 10px;
-      margin-left: 6px;
+  '@media  (min-width: 769px)': {
+    height: '26px',
+    borderWidth: '3px',
 
-      &: nth-child(1) {
-        margin-left: 9px;
-      }
-    }
-  }
-`
+    '& > span': {
+      width: '10px',
+      height: '10px',
+      br: '10px',
+      ml: '6px',
 
-const VideoBrowserViewport = styled.div`
-  background-color: #fff;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 918px;
-  margin: 0 auto;
-  overflow: hidden;
-  border: 2px solid #575452;
-  border-bottom-right-radius: 7px;
-  border-bottom-left-radius: 7px;
+      '&: nth-child(1)': {
+        ml: '9px',
+      },
+    },
+  },
+})
 
-  @media (min-width: 769px) {
-    border-width: 3px;
-  }
-`
+const VideoBrowserViewport = styled('div', {
+  bc: '$white',
+  position: 'relative',
+  width: '100%',
+  height: '100%',
+  mw: '918px',
+  margin: '0 auto',
+  overflow: 'hidden',
+  b: '2px solid $colors$textAlt',
+  bbrr: '7px',
+  bblr: '7px',
 
-const Video = styled.video`
-  display: block;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-`
+  '@media  (min-width: 769px)': {
+    borderWidth: '3px',
+  },
+})
 
-const VideoFallbackImage = styled(Image)`
-  padding-top: 0;
-  & > div {
-    padding-bottom: 0 !important;
-  }
-`
+const Video = styled('video', {
+  d: 'block',
+  width: '100%',
+  position: 'absolute',
+  top: '0',
+  left: '0',
+})
 
-const VideoButtonContainer = styled.div`
-  position: relative;
-  margin-top: 52px;
-  text-align: center;
+const VideoFallbackImage = styled(Image, {
+  pt: '0',
 
-  @media (min-width: 577px) and (max-width: 768px) {
-    margin-top: 44px;
-  }
+  '& > div': {
+    pb: '0 !important',
+  },
+})
 
-  @media (min-width: 769px) {
-    margin-top: 36px;
-  }
-`
+const VideoButtonContainer = styled('div', {
+  position: 'relative',
+  mt: '52px',
+  textAlign: 'center',
 
-const WavyLineVerticalLavender = styled.div`
-  position: absolute;
-  top: -71px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: 0 auto;
-  background: url('${wavyLineVerticalLavenderSVG}') no-repeat;
-  width: 9px;
-  height: 66px;
-`
+  '@media  (min-width: 577px) and (max-width: 768px)': {
+    mt: '44px',
+  },
 
-const VideoButtonArrow = styled.span`
-  display: flex;
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-  margin-left: 10px;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  box-shadow: 0 0 2px 0 rgba(15, 12, 9, 0.04), 0 2px 4px 0 rgba(15, 12, 9, 0.08);
-  transition: all 0.3s ease;
+  '@media  (min-width: 769px)': {
+    mt: '36px',
+  },
+})
 
-  & ${SVG} {
-    width: 8px;
-    height: 10px;
-    margin-left: 2px;
-  }
-`
+const WavyLineVerticalLavender = styled('div', {
+  position: 'absolute',
+  top: '-71px',
+  left: '0',
+  bottom: '0',
+  right: '0',
+  m: '0 auto',
+  background: `url('${wavyLineVerticalLavenderSVG}') no-repeat`,
+  width: '9px',
+  height: '66px',
+})
 
-const VideoButton = styled.button`
-  background: none;
-  border: 0;
-  display: inline-flex;
-  align-items: center;
-  height: 30px;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #603eff;
+const VideoButtonArrow = styled('span', {
+  display: 'flex',
+  width: '30px',
+  height: '30px',
+  br: '30px',
+  ml: '10px',
+  ai: 'center',
+  jc: 'center',
+  bc: '$white',
+  bs: '0 0 2px 0 rgba(15, 12, 9, 0.04), 0 2px 4px 0 rgba(15, 12, 9, 0.08)',
+  transition: 'all 0.3s ease',
 
-  &:hover {
-    color: #4d32cc;
+  [`& ${SVG}`]: {
+    width: '8px',
+    height: '10px',
+    ml: '2px',
+  },
+})
 
-    & ${VideoButtonArrow} {
-      background-color: #603eff;
-    }
+const VideoButton = styled('button', {
+  background: 'none',
+  b: '0',
+  d: 'inline-flex',
+  ai: 'center',
+  height: '30px',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  fontWeight: '500',
+  cursor: 'pointer',
+  transition: 'all 0.3s ease',
+  color: '$primary',
 
-    & ${SVG} {
-      -webkit-filter: brightness(0) invert(1);
-      filter: brightness(0) invert(1);
-    }
-  }
-`
+  '&:hover': {
+    color: '$primary',
+
+    [`& ${VideoButtonArrow}`]: {
+      bc: '$primary',
+    },
+
+    [`& ${SVG}`]: {
+      filter: 'brightness(0) invert(1)',
+    },
+  },
+})
 
 const HomepageHeader = () => {
   const displayVideo = shouldDisplayVideo()
@@ -366,16 +368,22 @@ const HomepageHeader = () => {
             leads, and close sales. Easily build websites, landing pages,
             pop-ups, alert bars, and beyond.
           </Caption>
-          <StyledLink href="/pricing" data-qa-selector="hero-trial-link">
-            <Button>Start a Free Trial</Button>
-          </StyledLink>
+          <Link href="/pricing" passHref>
+            <StyledLink data-qa-selector="hero-trial-link">
+              <Button>Start a Free Trial</Button>
+            </StyledLink>
+          </Link>
         </TextContainer>
         <VideoBrowserContainer>
           <ShapesLeft>
-            <SVG src={totemLeftSVG} alt="shapes" />
+            <div style={{ width: '70%' }}>
+              <SVG src={totemLeftSVG} alt="shapes" />
+            </div>
           </ShapesLeft>
           <ShapesRight>
-            <SVG src={totemRightSVG} alt="shapes" />
+            <div style={{ width: '110%' }}>
+              <SVG src={totemRightSVG} alt="shapes" />
+            </div>
           </ShapesRight>
           <VideoBrowser>
             <VideoBrowserChrome>
@@ -384,10 +392,12 @@ const HomepageHeader = () => {
               <span></span>
             </VideoBrowserChrome>
             <VideoBrowserViewport>
-              {/* <VideoFallbackImage
-                src={getImage(images.heroFallbackImage)}
+              <VideoFallbackImage
+                src={videoFallbackImage}
                 alt="website template image"
-              /> */}
+                height="1080"
+                width="1920"
+              />
               {displayVideo && (
                 <Video autoPlay playsinline muted loop>
                   <source src={videoWebM} type="video/webm" />
