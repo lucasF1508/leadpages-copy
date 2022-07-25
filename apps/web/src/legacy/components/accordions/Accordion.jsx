@@ -1,14 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
 // material ui
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { VSTypography } from '@lp/ui';
+import Accordion from '@material-ui/core/Accordion'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import Image from 'next/image'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import { VSTypography } from '@lp/ui'
 // images
-import ArrowDownSVG from '../../assets/images/global/arrow_down_large.svg';
+import ArrowDownSVG from '../../assets/images/global/arrow_down_large.svg'
 
 const useStyles = makeStyles(({ palette, breakpoints }) => ({
   root: {
@@ -106,10 +107,10 @@ const useStyles = makeStyles(({ palette, breakpoints }) => ({
       color: 'red',
     },
   },
-}));
+}))
 
 const LPAccordion = ({ sectionHeadline, data }) => {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <>
       {/* eslint-disable-next-line react/no-danger */}
@@ -122,12 +123,15 @@ const LPAccordion = ({ sectionHeadline, data }) => {
       )}
       <div className={classes.root}>
         {data.map((accordionItem, index) => {
-          const { itemHeadline, itemDetail } = accordionItem;
+          const { itemHeadline, itemDetail } = accordionItem
           return (
             <Accordion
               key={itemHeadline}
               elevation={0}
-              classes={{ root: classes.accordionRoot, expanded: classes.expanded }}
+              classes={{
+                root: classes.accordionRoot,
+                expanded: classes.expanded,
+              }}
               data-gtm="faq-accordion-item-title"
               data-gtm-value={itemHeadline}
             >
@@ -140,7 +144,13 @@ const LPAccordion = ({ sectionHeadline, data }) => {
                   expandIcon: classes.expandIcon,
                 }}
                 expandIcon={
-                  <img className={classes.expandIconSvg} src={ArrowDownSVG} alt="arrow icon" />
+                  <Image
+                    className={classes.expandIconSvg}
+                    src={ArrowDownSVG}
+                    alt="arrow icon"
+                    width={18}
+                    height={12}
+                  />
                 }
               >
                 <Typography variant="h4" className={classes.itemHeadline}>
@@ -152,16 +162,16 @@ const LPAccordion = ({ sectionHeadline, data }) => {
                 <div dangerouslySetInnerHTML={{ __html: itemDetail }} />
               </AccordionDetails>
             </Accordion>
-          );
+          )
         })}
       </div>
     </>
-  );
-};
+  )
+}
 
 LPAccordion.defaultProps = {
   sectionHeadline: '',
-};
+}
 
 LPAccordion.propTypes = {
   sectionHeadline: PropTypes.string,
@@ -170,8 +180,8 @@ LPAccordion.propTypes = {
       category: PropTypes.string,
       itemHeadline: PropTypes.string.isRequired,
       itemDetail: PropTypes.string.isRequired,
-    }).isRequired,
+    }).isRequired
   ).isRequired,
-};
+}
 
-export default LPAccordion;
+export default LPAccordion

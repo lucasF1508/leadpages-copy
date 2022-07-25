@@ -2,17 +2,19 @@ import React from 'react'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { getCssText } from '@design/stitches.config'
 import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheets } from '@material-ui/core/styles'
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet()
+    const sheets = new ServerStyleSheets()
     const originalRenderPage = ctx.renderPage
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+            sheets.collect(sheet.collectStyles(<App {...props} />)),
         })
 
       const initialProps = await NextDocument.getInitialProps(ctx)

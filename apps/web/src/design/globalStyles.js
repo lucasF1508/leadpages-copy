@@ -118,7 +118,6 @@ const globalStyles = globalCss({
   a: {
     position: 'relative',
     color: 'inherit',
-    display: 'inline-block',
     textDecoration: 'none',
     cursor: 'pointer',
   },
