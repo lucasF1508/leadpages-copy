@@ -1,7 +1,7 @@
 import React from 'react'
 // components
 import BrandAssets from '../../legacy/components/press/BrandAssets'
-// import PressArticles from '../../legacy/components/press/PressArticles'
+import PressArticles from '../../legacy/components/press/PressArticles'
 import Layout from '../../legacy/components/Layout'
 import OurStory from '../../legacy/components/press/OurStory'
 // import PressHeader from '../../legacy/components/headers/PressHeader'
@@ -20,7 +20,7 @@ const Press = () => (
     /> */}
     {/* <PressHeader /> */}
     <OurStory />
-    {/* <PressArticles /> */}
+    <PressArticles />
     {/* <ThreeColumn /> */}
     <BrandAssets />
     {/* <SpeakingInquiries /> */}
