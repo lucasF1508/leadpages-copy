@@ -50,7 +50,6 @@ export const utils = {
   }),
   ta: (value) => ({ textAlign: value }),
   f: (value) => ({ flex: value }),
-  ff: (value) => ({ flexflow: value }),
   fd: (value) => ({ flexDirection: value }),
   fw: (value) => ({ flexWrap: value }),
   ff: (value) => ({ flexFlow: value }),

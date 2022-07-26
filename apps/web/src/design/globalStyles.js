@@ -74,14 +74,11 @@ const globalStyles = globalCss({
     h5,
     h6
   `]: {
-    mb: '$3',
-    fontFamily: '$heading',
-    '&:last-child': {
-      mb: 0,
-    },
-    '::selection': {
-      bc: '$grey2',
-    },
+    color: 'inherit',
+    fontFamily: 'inherit',
+    fontSize: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
   },
   button: {
     c: 'inherit',
@@ -89,24 +86,6 @@ const globalStyles = globalCss({
     b: 0,
     bc: 'unset',
     cursor: 'pointer',
-  },
-  h1: {
-    type: 'h1',
-  },
-  h2: {
-    type: 'h2',
-  },
-  h3: {
-    type: 'h3',
-  },
-  h4: {
-    type: 'h4',
-  },
-  h5: {
-    type: 'h5',
-  },
-  h6: {
-    type: 'h6',
   },
   [`
     dl,

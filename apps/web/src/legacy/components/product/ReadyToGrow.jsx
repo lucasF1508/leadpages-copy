@@ -1,185 +1,151 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import { styled } from '@design'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Link as ScrollLink } from 'react-scroll'
 // images
 import PlayButtonSVG from '../../assets/images/global/play-button_purple.svg'
 
-const RTGContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: ${(props) => `${6 * props.padding}rem`};
-  padding-bottom: ${(props) => `${6 * props.padding}rem`};
-  padding-right: 3rem;
-  padding-left: 3rem;
-  background-color: ${(props) => props.background || '#0a236d'};
-  z-index: ${(props) => props.zIndex};
-  text-align: center;
-  overflow-x: hidden;
+const RTGContainer = styled('div', {
+  position: 'relative',
+  d: 'flex',
+  fd: 'column',
+  jc: 'center',
+  px: '3rem',
+  ta: 'center',
+  ox: 'hidden',
 
-  @media (min-width: 576px) {
-    padding-top: ${(props) => `${10 * props.padding}rem`};
-    padding-bottom: ${(props) => `${10 * props.padding}rem`};
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
+  '@>s': {
+    px: '6rem',
+  },
 
-  @media (max-width: 360px) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-`
+  '@media (max-width: 360px)': {
+    px: '1rem',
+  },
+})
 
-const StyledLink = styled(Link)`
-  cursor: pointer;
-  text-decoration: none;
-`
+const ScrollingLink = styled(ScrollLink, {
+  cursor: 'pointer',
+  textDecoration: 'none',
+})
 
-const ScrollingLink = styled(ScrollLink)`
-  cursor: pointer;
-  text-decoration: none;
-`
+const FlexItem = styled('div', {
+  alignSelf: 'center',
+  c: '$white',
+})
 
-const DownloadLink = styled.a`
-  cursor: pointer;
-  text-decoration: none;
-`
+const RTGTitle = styled(FlexItem, {
+  fontFamily: 'Space Mono',
+  fontWeight: 700,
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  tt: 'uppercase',
+  opacity: 0.5,
+  mb: '0.5rem',
+})
 
-const FlexItem = styled.div`
-  align-self: center;
-  color: #ffffff;
-`
+const RTGHeadline = styled(FlexItem, {
+  mb: '2rem',
+  mw: '730px',
+  fontFamily: 'Value Serif',
+  fontWeight: 400,
+  letterSpacing: '-0.0625rem',
+  lineHeight: '3.75rem',
 
-const RTGTitle = styled(FlexItem)`
-  font-family: 'Space Mono';
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-transform: uppercase;
-  opacity: 0.5;
-  margin-bottom: 0.5rem;
-`
+  '@<s': {
+    letterSpacing: 0,
+  },
+})
 
-const RTGHeadline = styled(FlexItem)`
-  font-family: 'Value Serif';
-  font-size: ${(props) =>
-    props.headlineFontSize ? props.headlineFontSize : '3.5rem'};
-  font-weight: 400;
-  letter-spacing: -0.0625rem;
-  line-height: 3.75rem;
-  margin-bottom: 2rem;
-  max-width: 730px;
-  @media (max-width: 576px) {
-    font-size: ${(props) =>
-      props.mobileHeadlineFontSize ? props.mobileHeadlineFontSize : '1.875rem'};
-    line-height: ${(props) =>
-      props.mobileHeadlineLineHeight
-        ? props.mobileHeadlineLineHeight
-        : '2.125rem'};
-    letter-spacing: 0;
-  }
-`
+const RTGCaption = styled(FlexItem, {
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  letterSpacing: '-0.1px',
+  lineHeight: '28px',
+  mb: '2rem',
+})
 
-const RTGCaption = styled(FlexItem)`
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  letter-spacing: -0.1px;
-  line-height: 28px;
-  margin-bottom: 2rem;
-`
+const MainButtonContainer = styled('div', {
+  d: 'flex',
+  ff: 'row-reverse wrap',
+  jc: 'center',
+})
 
-const MainButtonContainer = styled.div`
-  display: flex;
-  flex-flow: row-reverse wrap;
-  justify-content: center;
-`
+const RTGButtonContainer = styled('div', {
+  alignSelf: 'center',
+  p: '0.75rem',
+})
 
-const RTGButtonContainer = styled.div`
-  align-self: center;
-  padding: 0.75rem;
-`
+const RTGButton = styled('button', {
+  w: 'auto',
+  h: '48px',
+  br: '48px',
+  b: '3px solid $colors$primary',
+  bc: '$primary',
+  c: '$white',
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  fontWeight: 500,
+  lineHeight: '30px',
+  ta: 'center',
+  p: '0 1.5rem',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
 
-const RTGButton = styled.button`
-  width: auto;
-  height: 48px;
-  border-radius: 48px;
-  border: 3px solid #603eff;
-  background-color: #603eff;
-  color: #ffffff;
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 30px;
-  text-align: center;
-  padding: 0 1.5rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  '@media (min-width: 341px) and (max-width: 425px)': {
+    h: 'auto',
+  },
 
-  @media (min-width: 341px) and (max-width: 425px) {
-    height: auto;
-  }
+  '@media (max-width: 340px)': {
+    w: '240px',
+    fontSize: '16px',
+    alignSelf: 'center',
+  },
 
-  @media (max-width: 340px) {
-    width: 240px;
-    font-size: 16px;
-    align-self: center;
-  }
+  '&:hover': {
+    bc: '$indigoDark',
+    b: '3px solid $colors$indigoDark',
+  },
+})
 
-  &:hover {
-    background-color: #4d32cc;
-    border: 3px solid #4d32cc;
-  }
-`
+const RTGVideoButton = styled(RTGButton, {
+  bc: 'transparent',
+  b: '3px solid $colors$offWhite',
+})
 
-const RTGVideoButton = styled(RTGButton)`
-  background-color: transparent;
-  border: 3px solid rgba(255, 255, 255, 0.7);
-`
+const PlayButtonIcon = styled('div', {
+  d: 'inline-block',
+  mr: '1rem',
+  filter:
+    'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7478%) hue-rotate(186deg) brightness(114%) contrast(100%)',
+})
 
-const PlayButtonIcon = styled.img`
-  margin-right: 1rem;
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7478%)
-    hue-rotate(186deg) brightness(114%) contrast(100%);
-`
+const BGImage = styled('div', {
+  position: 'absolute',
+  inset: 0,
+  z: '$content',
+  h: '100%',
+  w: 'auto',
 
-const OutboundLink = styled.a`
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-  }
-`
+  '@media (max-width: 768px)': {
+    d: 'none',
+  },
+})
 
-const BGImage = styled.img`
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  height: 100%;
-  width: auto;
-  @media (max-width: 768px) {
-    display: none;
-  }
-`
-
-const SubText = styled(FlexItem)`
-  font-family: 'Apercu Pro';
-  font-size: 12px;
-  letter-spacing: -0.1px;
-  line-height: 18px;
-  text-align: center;
-  color: #ffffff;
-  width: 500px;
-  max-width: 90%;
-  margin-top: 2rem;
-  margin-left: auto;
-  margin-right: auto;
-`
+const SubText = styled(FlexItem, {
+  fontFamily: 'Apercu Pro',
+  fontSize: '12px',
+  letterSpacing: '-0.1px',
+  lineHeight: '18px',
+  ta: 'center',
+  c: '$white',
+  w: '500px',
+  mw: '90%',
+  mt: '2rem',
+  mx: 'auto',
+})
 
 const ReadyToGrow = ({
   bgImage,
@@ -198,79 +164,97 @@ const ReadyToGrow = ({
   showDownloader,
   scrollTarget,
   zIndex,
-}) => (
-  <RTGContainer background={bgColor} padding={paddingScale} zIndex={zIndex}>
-    {bgImage && <BGImage src={bgImage} alt="background svg squiggly line" />}
-    <RTGTitle>{title}</RTGTitle>
-    <RTGHeadline
-      headlineFontSize={headlineFontSize}
-      mobileHeadlineFontSize={mobileHeadlineFontSize}
-      mobileHeadlineLineHeight={mobileHeadlineLineHeight}
+}) => {
+  const RTGHeadlineCss = {
+    fontSize: headlineFontSize || '3.5rem',
+
+    '@<s': {
+      fontSize: mobileHeadlineFontSize || '1.875rem',
+      lh: mobileHeadlineLineHeight || '2.125rem',
+    },
+  }
+  const RTGContainerPadding = paddingScale
+    ? { py: `${6 * paddingScale}rem`, '@>s': { py: `${10 * paddingScale}rem` } }
+    : {}
+  const RTGBackground = { bc: bgColor || '#0a236d' }
+  const RTGZindex = zIndex ? { zIndex } : {}
+
+  return (
+    <RTGContainer
+      css={{ ...RTGContainerPadding, ...RTGBackground, ...RTGZindex }}
     >
-      <h2>{headline}</h2>
-    </RTGHeadline>
-    {caption && (
-      <RTGCaption>
-        <div dangerouslySetInnerHTML={{ __html: caption }} />
-      </RTGCaption>
-    )}
-    <MainButtonContainer>
-      {showCTA && (
-        <RTGButtonContainer>
-          {!scrollTarget && (
-            <StyledLink href="/pricing" alt={buttonText}>
-              <RTGButton>{buttonText}</RTGButton>
-            </StyledLink>
-          )}
-          {scrollTarget && (
-            <ScrollingLink
-              href={scrollTarget}
-              smooth
-              duration={500}
-              offset={-15}
-              alt={buttonText}
-            >
-              <RTGButton>{buttonText}</RTGButton>
-            </ScrollingLink>
-          )}
-          {subText && (
-            <SubText>
-              <p>{subText}</p>
-            </SubText>
-          )}
-        </RTGButtonContainer>
+      {bgImage && (
+        <BGImage>
+          <Image image={bgImage} alt="background svg squiggly line" />
+        </BGImage>
       )}
-      {showDemoVideo && (
-        <RTGButtonContainer>
-          <OutboundLink
-            href=""
-            alt="wistia video"
-            data-leadbox-popup="nTViYpWLsxbkHpgfxpzrM2"
-            data-leadbox-domain="lps.leadpages.net"
-          >
-            <RTGVideoButton>
-              <PlayButtonIcon
-                src={PlayButtonSVG}
-                alt="play button icon"
-              ></PlayButtonIcon>
-              Watch a quick demo
-            </RTGVideoButton>
-          </OutboundLink>
-        </RTGButtonContainer>
+      <RTGTitle>{title}</RTGTitle>
+      <RTGHeadline css={RTGHeadlineCss}>
+        <h2>{headline}</h2>
+      </RTGHeadline>
+      {caption && (
+        <RTGCaption>
+          <div dangerouslySetInnerHTML={{ __html: caption }} />
+        </RTGCaption>
       )}
-      {showDownloader && (
-        <RTGButtonContainer>
-          <DownloadLink
-            href="https://s3.amazonaws.com/lpmarketinglibrary/Brand+Assets+-+Leadpages/Leadpages+Press+Kit.zip"
-            alt="Download Brand Assets"
-          >
-            <RTGButton>Download Brand Assets</RTGButton>
-          </DownloadLink>
-        </RTGButtonContainer>
-      )}
-    </MainButtonContainer>
-  </RTGContainer>
-)
+      <MainButtonContainer>
+        {showCTA && (
+          <RTGButtonContainer>
+            {!scrollTarget && (
+              <Link href="/pricing">
+                <a>
+                  <RTGButton>{buttonText}</RTGButton>
+                </a>
+              </Link>
+            )}
+            {scrollTarget && (
+              <ScrollingLink
+                href={scrollTarget}
+                smooth
+                duration={500}
+                offset={-15}
+              >
+                <RTGButton>{buttonText}</RTGButton>
+              </ScrollingLink>
+            )}
+            {subText && (
+              <SubText>
+                <p>{subText}</p>
+              </SubText>
+            )}
+          </RTGButtonContainer>
+        )}
+        {showDemoVideo && (
+          <RTGButtonContainer>
+            <Link href="">
+              <a
+                href=""
+                data-leadbox-popup="nTViYpWLsxbkHpgfxpzrM2"
+                data-leadbox-domain="lps.leadpages.net"
+              >
+                <RTGVideoButton>
+                  <PlayButtonIcon>
+                    <Image src={PlayButtonSVG} alt="play button icon" />
+                  </PlayButtonIcon>
+                  Watch a quick demo
+                </RTGVideoButton>
+              </a>
+            </Link>
+          </RTGButtonContainer>
+        )}
+        {showDownloader && (
+          <RTGButtonContainer>
+            <Link href="https://s3.amazonaws.com/lpmarketinglibrary/Brand+Assets+-+Leadpages/Leadpages+Press+Kit.zip">
+              <a>
+                <RTGButton>Download Brand Assets</RTGButton>
+              </a>
+            </Link>
+          </RTGButtonContainer>
+        )}
+      </MainButtonContainer>
+    </RTGContainer>
+  )
+}
 
 ReadyToGrow.defaultProps = {
   bgImage: null,
