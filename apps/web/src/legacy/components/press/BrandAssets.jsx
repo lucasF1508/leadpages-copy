@@ -1,152 +1,149 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
+import React from 'react'
+import Link from 'next/link'
+import { styled } from '@design'
 
-const OuterContainer = styled.div`
-  position: relative;
-  background-color: #603eff;
-  text-align: center;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  bc: '$primary',
+  ta: 'center',
+})
 
-const LPUContainer = styled.div`
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 4rem;
-  padding-bottom: 6rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 576px) {
-    padding-top: 4rem;
-    padding-bottom: 6rem;
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (min-width: 992px) {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const LPUContainer = styled('div', {
+  mw: '400px',
+  mx: 'auto',
+  pt: '4rem',
+  pb: '6rem',
+  px: '3rem',
 
-const Headline = styled.div`
-  width: 100%;
-  font-family: 'Value Serif';
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: -0.07px;
-  color: #ffffff;
-  margin-bottom: 2rem;
-  @media (max-width: 768px) {
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: -0.07px;
-  }
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-  }
-  @media (min-width: 993px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-  }
-`;
+  '@>s': {
+    pt: '4rem',
+    pb: '6rem',
+    px: '3rem',
+  },
 
-const Caption = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0px;
-  color: #ffffff;
-  margin-bottom: 2rem;
-  @media (max-width: 768px) {
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0px;
-  }
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0px;
-  }
-  @media (min-width: 993px) {
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: 0px;
-  }
-`;
+  '@>m': {
+    py: '10rem',
+    px: '6rem',
+  },
+})
 
-const Button = styled.button`
-  height: 48px;
-  padding-left: 2%;
-  padding-right: 2%;
-  color: #ffffff;
-  background: transparent;
-  border: 3px solid rgba(255, 255, 255, 0.7);
-  border-radius: 24px;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 30px;
-  text-align: center;
-  transition: all 0.3s ease;
-  min-width: 200px;
-  &:hover {
-    background-color: #ffffff;
-    color: #603eff;
-    cursor: pointer;
-    border: 3px solid #ffffff;
-  }
-  @media (max-width: 576px) {
-    font-size: 14px;
-  }
-`;
+const Headline = styled('div', {
+  w: '100%',
+  fontFamily: 'Value Serif',
+  fontSize: '20px',
+  lineHeight: '24px',
+  letterSpacing: '-0.07px',
+  c: '$white',
+  mb: '2rem',
 
-const FlexRow = styled.div`
-  min-width: 120%;
-  margin-left: -10%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
+  '@media (max-width: 768px)': {
+    fontSize: '20px',
+    lineHeight: '24px',
+    letterSpacing: '-0.07px',
+  },
 
-const OutboundLink = styled.a`
-  margin: 2%;
-  cursor: pointer;
-  text-decoration: none;
-`;
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+  },
 
-const StyledLink = styled(Link)`
-  margin: 2%;
-  cursor: pointer;
-  text-decoration: none;
-`;
+  '@media (min-width: 993px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+  },
+})
 
-const BrandAssets = () => {
-  return (
-    <OuterContainer>
-      <LPUContainer>
-        <Headline>Leadpages Brand Assets</Headline>
-        <Caption>
-          Here’s all the beauty of our brand boxed up neatly and ready for download.
-        </Caption>
-        <FlexRow>
-          <OutboundLink
-            href="https://www.dropbox.com/sh/bopv26efyxrvq2l/AADZ4y0MeChxUWFbpkuMTlmVa?dl=1"
-            alt="Download Brand Assets"
-          >
-            <Button>Download Brand Assets</Button>
-          </OutboundLink>
-          <StyledLink to="/brand" alt="Get Our Brand Guide">
+const Caption = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  letterSpacing: '0px',
+  c: '$white',
+  mb: '2rem',
+
+  '@media (max-width: 768px)': {
+    fontSize: '14px',
+    lineHeight: '20px',
+    letterSpacing: '0px',
+  },
+
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '16px',
+    lineHeight: '24px',
+    letterSpacing: '0px',
+  },
+
+  '@media (min-width: 993px)': {
+    fontSize: '18px',
+    lineHeight: '28px',
+    letterSpacing: '0px',
+  },
+})
+
+const Button = styled('button', {
+  h: '48px',
+  px: '2%',
+  c: '$white',
+  bc: 'transparent',
+  b: '3px solid $colors$offWhite',
+  br: '24px',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '30px',
+  ta: 'center',
+  transition: 'all 0.3s ease',
+  minWidth: '200px',
+
+  '&:hover': {
+    bc: '$white',
+    c: '$primary',
+    cursor: 'pointer',
+    b: '3px solid $colors$white',
+  },
+
+  '@<s': {
+    fontSize: '14px',
+  },
+})
+
+const FlexRow = styled('div', {
+  minWidth: '120%',
+  ml: '-10%',
+  d: 'flex',
+  flexWrap: 'wrap',
+  jc: 'space-around',
+})
+
+const StyledLink = styled('a', {
+  m: '2%',
+})
+
+const BrandAssets = () => (
+  <OuterContainer>
+    <LPUContainer>
+      <Headline>Leadpages Brand Assets</Headline>
+      <Caption>
+        Here’s all the beauty of our brand boxed up neatly and ready for
+        download.
+      </Caption>
+      <FlexRow>
+        <StyledLink
+          href="https://www.dropbox.com/sh/bopv26efyxrvq2l/AADZ4y0MeChxUWFbpkuMTlmVa?dl=1"
+          aria-label="Download Brand Assets"
+        >
+          <Button>Download Brand Assets</Button>
+        </StyledLink>
+        <Link href="/brand" aria-label="Get Our Brand Guide" passHref>
+          <StyledLink>
             <Button>Get Our Brand Guide</Button>
           </StyledLink>
-        </FlexRow>
-      </LPUContainer>
-    </OuterContainer>
-  );
-};
+        </Link>
+      </FlexRow>
+    </LPUContainer>
+  </OuterContainer>
+)
 
-export default BrandAssets;
+export default BrandAssets
