@@ -5,23 +5,10 @@ import { MarketingThemeProvider } from '@lp/ui'
 import GlobalStyles from './GlobalStyles'
 // components
 import Footer from './footer/Footer'
-import Header from './Header'
 // import Promotions from './promotions/Promotions'
 import ToastManager from './toasts/ToastManager'
 
-const Layout = ({
-  children,
-  hideBar,
-  hideSignUpFreeButton,
-  isPricingMenu,
-  isStartPageHeader,
-  noLogin,
-  slimFooter,
-  scrollTarget,
-  underlaidMenu,
-  headerBkgColor,
-  onPromotionsLoaded,
-}) => (
+const Layout = ({ children, hideBar, slimFooter, onPromotionsLoaded }) => (
   <MarketingThemeProvider>
     <GlobalStyles />
     <ToastManager />
@@ -29,15 +16,6 @@ const Layout = ({
     {hideBar && (
       <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
     )}
-    <Header
-      hideSignUpButton={hideSignUpFreeButton}
-      isPricingMenu={isPricingMenu}
-      isStartPageHeader={isStartPageHeader}
-      noLogin={noLogin}
-      scrollTarget={scrollTarget}
-      underlaidMenu={underlaidMenu}
-      headerBkgColor={headerBkgColor}
-    />
     {children}
     <Footer slimFooter={slimFooter} />
   </MarketingThemeProvider>

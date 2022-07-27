@@ -3,13 +3,13 @@ import Modal, { ModalProvider, ModalLink } from '@components/Modal'
 import NextLink from 'next/link'
 import { m } from 'framer-motion'
 import { styled } from '@design'
-import { link as linkTokens } from '@design/tokens/link'
+// import { link as linkTokens } from '@design/tokens/link'
 import { FiArrowRight as InternalIcon } from '@react-icons/all-files/fi/FiArrowRight'
 import { FiDownload as DownloadIcon } from '@react-icons/all-files/fi/FiDownload'
 import { FiExternalLink as ExternalIcon } from '@react-icons/all-files/fi/FiExternalLink'
 import { FiMaximize2 as ModalIcon } from '@react-icons/all-files/fi/FiMaximize2'
 
-export const $Link = styled(m.a, linkTokens)
+export const $Link = styled(m.a, {}) // Removing R&P base styles for migration. TODO: Reimplement `linkTokens`.
 
 const Link = ({
   children,

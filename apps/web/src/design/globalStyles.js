@@ -58,7 +58,6 @@ const globalStyles = globalCss({
     table,
     fieldset
   `]: {
-    mb: '$3',
     '&:last-child': {
       mb: 0,
     },
@@ -87,12 +86,23 @@ const globalStyles = globalCss({
     bc: 'unset',
     cursor: 'pointer',
   },
-  [`
-    dl,
-    ol,
-    ul
-  `]: {
-    ml: '$3',
+  h1: {
+    type: 'h1',
+  },
+  h2: {
+    type: 'h2',
+  },
+  h3: {
+    type: 'h3',
+  },
+  h4: {
+    type: 'h4',
+  },
+  h5: {
+    type: 'h5',
+  },
+  h6: {
+    type: 'h6',
   },
   a: {
     position: 'relative',

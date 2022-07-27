@@ -6,10 +6,8 @@ import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useSanityPreview from '@hooks/useSanityPreview'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
-
-// import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { MarketingThemeProvider } from '@lp/ui'
-import GlobalStyles from '../legacy/components/GlobalStyles'
+import GlobalStyles from '@legacy/components/GlobalStyles'
 
 const LayoutContainer = dynamic(() => import('@components/LayoutContainer'))
 const SEO = dynamic(() => import('@components/SEO'))
@@ -53,7 +51,8 @@ export default function App({
         <GlobalStyles />
         <SEO seo={pageData?.seo} siteMeta={siteMeta} />
         <LazyMotion features={loadFeatures} strict>
-          {navigation && <Header navigation={navigation} />}
+          {/* {navigation && <Header navigation={navigation} />} */}
+          <Header />
           <LayoutContainer>
             <Main {...pageData} {...meta} />
           </LayoutContainer>
