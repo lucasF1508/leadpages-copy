@@ -1,173 +1,167 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import Link from 'next/link'
 // images
-import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg';
+import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg'
 
-const OuterContainer = styled.div`
-  position: relative;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+})
 
-const LPUContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 4rem;
-  padding-bottom: 6rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 576px) {
-    padding-top: 4rem;
-    padding-bottom: 6rem;
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (min-width: 992px) {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const LPUContainer = styled('div', {
+  mw: '1140px',
+  mx: 'auto',
+  pt: '4rem',
+  pb: '6rem',
+  px: '3rem',
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-`;
+  '@>s': {
+    pt: '4rem',
+    pb: '6rem',
+    px: '3rem',
+  },
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-  margin-left: auto;
-  margin-right: auto;
-`;
+  '@>m': {
+    py: '10rem',
+    px: '6rem',
+  },
+})
 
-const FlexRow3 = styled(FlexRowItem)`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  @media (max-width: 768px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-    margin-bottom: 4rem;
-  }
+const FlexRow = styled('div', {
+  d: 'flex',
+  jc: 'space-between',
+  ai: 'flex-start',
+  flexWrap: 'wrap',
+})
 
-  @media (min-width: 769px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 27.3333%;
-    flex: 0 0 27.3333%;
-    max-width: 27.3333%;
-  }
-`;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  ta: 'center',
+  textDecoration: 'none',
+  w: '100%',
+  px: '1%',
+  mx: 'auto',
+})
 
-const FlexRow3Container = styled.div`
-  text-align: left;
-`;
+const FlexRow3 = styled(FlexRowItem, {
+  d: 'flex',
+  jc: 'space-between',
+  mb: '2rem',
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`;
+  '@media (max-width: 768px)': {
+    f: '0 0 100%',
+    mw: '100%',
+    mb: '4rem',
+  },
 
-const CTA = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 30px;
-  text-align: left;
-  font-weight: 500;
-  cursor: pointer;
-`;
+  '@media (min-width: 769px)': {
+    mb: 0,
+    f: '0 0 27.3333%',
+    mw: '27.3333%',
+  },
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`;
+const FlexRow3Container = styled('div', {
+  ta: 'left',
+})
 
-const OutboundLink = styled.a`
-  text-decoration: none;
-  cursor: pointer;
-`;
+const ArrowRightPurple = styled('img', {
+  w: '20px',
+  h: '10px',
+})
 
-const Title = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 500;
-  margin-bottom: 1.25rem;
-  color: #0f0c09;
-`;
+const CTA = styled('div', {
+  c: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '30px',
+  ta: 'left',
+  fontWeight: 500,
+  cursor: 'pointer',
+})
 
-const Copy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 2rem;
-  color: #575452;
-  @media (max-width: 992px) {
-    margin-bottom: 1rem;
-  }
-`;
+const Title = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  lineHeight: '28px',
+  fontWeight: 500,
+  mb: '1.25rem',
+  c: '$text',
+})
 
-const ThreeColumn = () => {
-  return (
-    <OuterContainer>
-      <LPUContainer>
-        <FlexRow>
-          <FlexRow3>
-            <FlexRow3Container>
-              <Title>Leadpages plans</Title>
-              <Copy>Helping small businesses grow big.</Copy>
-              <StyledLink to="/pricing">
+const Copy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  mb: '2rem',
+  c: '$textAlt',
+
+  '@<m': {
+    mb: '1rem',
+  },
+})
+
+const ThreeColumn = () => (
+  <OuterContainer>
+    <LPUContainer>
+      <FlexRow>
+        <FlexRow3>
+          <FlexRow3Container>
+            <Title>Leadpages plans</Title>
+            <Copy>Helping small businesses grow big.</Copy>
+            <Link href="/pricing">
+              <a>
                 <CTA>
                   Leadpages pricing&nbsp;
-                  <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
                 </CTA>
-              </StyledLink>
-            </FlexRow3Container>
-          </FlexRow3>
-          <FlexRow3>
-            <FlexRow3Container>
-              <Title>Tech Support</Title>
-              <Copy>Get in touch with our customer success team.</Copy>
-              <StyledLink to="/contact" data-gtm="contact-us-link">
+              </a>
+            </Link>
+          </FlexRow3Container>
+        </FlexRow3>
+        <FlexRow3>
+          <FlexRow3Container>
+            <Title>Tech Support</Title>
+            <Copy>Get in touch with our customer success team.</Copy>
+            <Link href="/contact" data-gtm="contact-us-link">
+              <a>
                 <CTA>
                   Leadpages Support &nbsp;
-                  <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
                 </CTA>
-              </StyledLink>
-            </FlexRow3Container>
-          </FlexRow3>
-          <FlexRow3>
-            <FlexRow3Container>
-              <Title>Blog</Title>
-              <Copy>Tips, advice, and announcements.</Copy>
-              <OutboundLink
-                href="https://www.leadpages.com/blog/"
-                alt="Leadpages blog"
-                rel="noopener"
-              >
-                <CTA>
-                  Visit Our Blog&nbsp;
-                  <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
-                </CTA>
-              </OutboundLink>
-            </FlexRow3Container>
-          </FlexRow3>
-        </FlexRow>
-      </LPUContainer>
-    </OuterContainer>
-  );
-};
+              </a>
+            </Link>
+          </FlexRow3Container>
+        </FlexRow3>
+        <FlexRow3>
+          <FlexRow3Container>
+            <Title>Blog</Title>
+            <Copy>Tips, advice, and announcements.</Copy>
+            <a
+              href="https://www.leadpages.com/blog/"
+              aria-label="Leadpages blog"
+              rel="noopener"
+            >
+              <CTA>
+                Visit Our Blog&nbsp;
+                <ArrowRightPurple
+                  src={rightArrowPurple.src}
+                  alt="purple right arrow"
+                />
+              </CTA>
+            </a>
+          </FlexRow3Container>
+        </FlexRow3>
+      </FlexRow>
+    </LPUContainer>
+  </OuterContainer>
+)
 
-export default ThreeColumn;
+export default ThreeColumn

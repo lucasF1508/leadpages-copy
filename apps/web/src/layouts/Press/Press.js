@@ -9,7 +9,7 @@ import ReadyToGrow from '../../legacy/components/product/ReadyToGrow'
 // import SEO from '../../legacy/components/SEO'
 import SpeakingInquiries from '../../legacy/components/press/SpeakingInquiries'
 // import Stats from '../../legacy/components/press/Stats'
-// import ThreeColumn from '../../legacy/components/press/ThreeColumn'
+import ThreeColumn from '../../legacy/components/press/ThreeColumn'
 
 const Press = () => (
   <Layout>
@@ -21,7 +21,7 @@ const Press = () => (
     {/* <PressHeader /> */}
     <OurStory />
     <PressArticles />
-    {/* <ThreeColumn /> */}
+    <ThreeColumn />
     <BrandAssets />
     <SpeakingInquiries />
     {/* <Stats /> */}
