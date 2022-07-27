@@ -29,6 +29,7 @@ export const colors = {
   purpleLight: '#d1c6f9',
   indigoDark: '#4d32cc',
   offWhite: 'rgba(255, 255, 255, 0.7)',
+  terracottaLight: '#dfae78',
   brand: '$purple10',
   primary: '$purple',
   secondary: '$purpleLight',

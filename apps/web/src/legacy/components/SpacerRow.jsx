@@ -88,7 +88,7 @@ const SpacerRow = ({ id, backgroundColor, size, sizeArray, border }) => {
 SpacerRow.defaultProps = {
   id: '',
   backgroundColor: '',
-  size: 'small',
+  size: '',
   sizeArray: [],
   border: false,
 }
