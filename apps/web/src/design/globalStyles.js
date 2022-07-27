@@ -58,9 +58,9 @@ const globalStyles = globalCss({
     table,
     fieldset
   `]: {
-    '&:last-child': {
-      mb: 0,
-    },
+    // '&:last-child': {
+    //   mb: 0,
+    // },
     '&::selection': {
       bc: '$grey2',
     },
