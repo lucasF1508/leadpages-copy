@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 // import { StaticQuery, graphql } from 'gatsby';
 import { MarketingThemeProvider } from '@lp/ui'
 import GlobalStyles from './GlobalStyles'
-// components
-import Footer from './footer/Footer'
 // import Promotions from './promotions/Promotions'
 import ToastManager from './toasts/ToastManager'
 
@@ -17,7 +15,6 @@ const Layout = ({ children, hideBar, slimFooter, onPromotionsLoaded }) => (
       <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
     )}
     {children}
-    <Footer slimFooter={slimFooter} />
   </MarketingThemeProvider>
 )
 

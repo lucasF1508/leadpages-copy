@@ -28,7 +28,14 @@ export const AppContext = React.createContext()
 export default function App({
   Component: Main,
   pageProps: {
-    data: { data = [{}], query, navigation, siteMeta, ...meta } = {},
+    data: {
+      data = [{}],
+      query,
+      navigation,
+      siteMeta,
+      slimFooter,
+      ...meta
+    } = {},
     slug,
     preview,
   } = {},
@@ -56,7 +63,8 @@ export default function App({
           <LayoutContainer>
             <Main {...pageData} {...meta} />
           </LayoutContainer>
-          {navigation && <Footer navigation={navigation} />}
+          {/* {navigation && <Footer navigation={navigation} />} */}
+          <Footer slimFooter={slimFooter} />
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>
