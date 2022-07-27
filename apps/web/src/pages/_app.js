@@ -7,7 +7,11 @@ import useSanityPreview from '@hooks/useSanityPreview'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
 import { MarketingThemeProvider } from '@lp/ui'
+
+// Legacy
 import GlobalStyles from '@legacy/components/GlobalStyles'
+import ToastManager from '@legacy/components/toasts/ToastManager'
+import Promotions from '@legacy/components/promotions/Promotions'
 
 const LayoutContainer = dynamic(() => import('@components/LayoutContainer'))
 const SEO = dynamic(() => import('@components/SEO'))
@@ -34,6 +38,7 @@ export default function App({
       navigation,
       siteMeta,
       slimFooter,
+      onPromotionsLoaded,
       ...meta
     } = {},
     slug,
@@ -56,6 +61,8 @@ export default function App({
     <AppContext.Provider value={siteMeta}>
       <MarketingThemeProvider>
         <GlobalStyles />
+        <ToastManager />
+        <Promotions onPromotionsLoaded={onPromotionsLoaded} />
         <SEO seo={pageData?.seo} siteMeta={siteMeta} />
         <LazyMotion features={loadFeatures} strict>
           {/* {navigation && <Header navigation={navigation} />} */}
