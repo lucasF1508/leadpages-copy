@@ -1,46 +1,27 @@
-import React from 'react'
-import { getDoc } from '@lib'
-import Pinion from '@components/Pinion'
-import Heading from '@components/Heading'
-import Text from '@components/Text'
+// components
+import SEO from '@legacy/components/SEO'
+import Head from 'next/head'
 
-const Custom404 = ({ heading, subHeading }) => (
+const Custom404 = () => (
   <>
-    <Pinion
-      css={{
-        box: [
-          { property: 'pt' },
-          { property: 'pb', multiplier: 3 },
-          { property: 'px' },
-        ],
-      }}
-    >
-      <Heading heading={heading} />
-      <Text content={subHeading} />
-    </Pinion>
+    <SEO
+      title="This page doesn’t exist [404 Error]"
+      description="This page helps visitors to a broken link find their way home again. Use Leadpages for your 404 error pages."
+      ogtitle="Sweet 404 Page from Leadpages"
+      ogdescription="Do you lose traffic from bad links? Here’s an example 404 Error page from Leadpages to help visitors find what they’re looking for."
+    />
+    <Head>
+      <meta
+        property="og:url"
+        content="https://lps.lpages.co/404-page-error-not-found/"
+      />
+      <link
+        rel="opengraph"
+        href="https://lps.lpages.co/404-page-error-not-found/"
+      />
+      <script src="//lps.lpages.co/_/js/404-page-error-not-found/" async />
+    </Head>
   </>
 )
-
-/* cSpell: disable  */
-export async function getStaticProps() {
-  const data = await getDoc('none')
-
-  return {
-    props: {
-      data: {
-        ...data,
-        data: [
-          {
-            heading: 'Error 404 - File Not Found',
-            subHeading: `The page you were looking for doesn't exist. Please use the navigation above.`,
-            seo: {
-              seoTitle: 'Error 404 - File Not Found',
-            },
-          },
-        ],
-      },
-    },
-  }
-}
 
 export default Custom404
