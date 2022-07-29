@@ -5,6 +5,7 @@ import React from 'react'
 import HomepageHeader from '@legacy/components/headers/HomepageHeader'
 import SpacerRow from '@legacy/components/SpacerRow'
 import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
+import FeaturedTemplates from '@legacy/components/templates/FeaturedTemplates'
 import FlexRow from '@legacy/components/layout/FlexRow'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ConnectedIntegrations from '@legacy/components/integrations/ConnectedIntegrations'
@@ -186,7 +187,7 @@ const HomePage = ({ hero, components }) => (
       imageMaxWidth="765px"
       padImage
     />
-    {/* <FeaturedTemplates /> */}
+    <FeaturedTemplates />
     <ConnectedIntegrations />
     <SpacerRow size="small" />
     <HeadlineSection

@@ -13,7 +13,7 @@ export const $Link = styled(m.a, {}) // Removing R&P base styles for migration. 
 
 const Link = ({
   children,
-  condition,
+  condition = 'external',
   url,
   label,
   target,
