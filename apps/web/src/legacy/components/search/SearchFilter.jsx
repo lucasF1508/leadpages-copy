@@ -1,101 +1,109 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { styled } from '@design'
 //  images
-import cancelSVG from '../../assets/images/global/x_solid-circle.svg';
+import cancelSVG from '@legacy/assets/images/global/x_solid-circle.svg'
 
-const SearchContainer = styled.div`
-  padding-bottom: 2rem;
-  position: relative;
-`;
+const SearchContainer = styled('div', {
+  paddingBottom: '2rem',
+  position: 'relative',
+})
 
-const SearchInput = styled.input`
-  border: none;
-  background-color: rgba(9, 19, 33, 0.06);
-  width: 100%;
-  height: 48px;
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  padding-left: 0.8rem;
-  padding-right: 2rem;
-  &:focus {
-    outline: none;
-    box-shadow: inset 0 -3px 0 0 #603eff;
-  }
-`;
+const SearchInput = styled('input', {
+  border: 'none',
+  backgroundColor: 'rgba(9, 19, 33, 0.06)',
+  width: '100%',
+  height: '48px',
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  paddingLeft: '0.8rem',
+  paddingRight: '2rem',
 
-const ClearSearch = styled.div`
-  color: #603eff;
-  font-family: Apercu Pro;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 24px;
-  cursor: pointer;
-  margin-top: 1rem;
-`;
+  '&:focus': {
+    outline: 'none',
+    boxShadow: 'inset 0 -3px 0 0 $colors$primary',
+  },
+})
 
-const ClearIcon = styled.img`
-  position: absolute;
-  right: -39px;
-  top: 12px;
-  cursor: pointer;
-  filter: opacity(50%);
-  &:hover {
-    filter: opacity(70%);
-  }
-`;
+const ClearSearch = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  cursor: 'pointer',
+  marginTop: '1rem',
+})
 
-export default function SearchFilter({ handleFilteredData, dataSet, searchableProperties }) {
-  const [searchValue, setSearchValue] = useState('');
+const ClearIcon = styled('img', {
+  position: 'absolute',
+  right: '-39px',
+  top: '12px',
+  cursor: 'pointer',
+  filter: 'opacity(50%)',
+
+  '&:hover': {
+    filter: 'opacity(70%)',
+  },
+})
+
+export default function SearchFilter({
+  handleFilteredData,
+  dataSet,
+  searchableProperties,
+}) {
+  const [searchValue, setSearchValue] = useState('')
 
   const searchWithProperty = (property, dataValues, searchVal) => {
     if (dataValues[property]) {
-      const lowerPropVal = dataValues[property].toLowerCase();
-      const lowerSearchVal = searchVal.toLowerCase();
-      return lowerPropVal.includes(lowerSearchVal);
+      const lowerPropVal = dataValues[property].toLowerCase()
+      const lowerSearchVal = searchVal.toLowerCase()
+      return lowerPropVal.includes(lowerSearchVal)
     }
-    return false;
-  };
+    return false
+  }
 
-  const filterData = searchVal => {
-    setSearchValue(searchVal);
-    let filteredData = [];
+  const filterData = (searchVal) => {
+    setSearchValue(searchVal)
+    let filteredData = []
 
-    filteredData = dataSet.filter(dataValues => {
-      let foundInSearch = false;
+    filteredData = dataSet.filter((dataValues) => {
+      let foundInSearch = false
       //   Evaluate each searchable prop value against the search value
-      searchableProperties.forEach(property => {
+      searchableProperties.forEach((property) => {
         if (searchWithProperty(property, dataValues, searchVal)) {
-          foundInSearch = true;
+          foundInSearch = true
         }
-      });
+      })
 
-      return foundInSearch;
-    });
+      return foundInSearch
+    })
 
-    handleFilteredData(filteredData, searchVal);
-  };
+    handleFilteredData(filteredData, searchVal)
+  }
 
   const clearSearch = () => {
-    setSearchValue('');
-    handleFilteredData(dataSet);
-  };
+    setSearchValue('')
+    handleFilteredData(dataSet)
+  }
 
   return (
     <SearchContainer>
       <SearchInput
         placeholder="Search..."
         value={searchValue}
-        onChange={event => filterData(event.target.value)}
+        onChange={(event) => filterData(event.target.value)}
       />
-      {searchValue.length >= 1 && <ClearIcon src={cancelSVG} onClick={() => clearSearch()} />}
+      {searchValue.length >= 1 && (
+        <ClearIcon src={cancelSVG.src} onClick={() => clearSearch()} />
+      )}
       {searchValue && searchValue.length >= 1 && (
         <ClearSearch onClick={clearSearch}>Clear Search</ClearSearch>
       )}
     </SearchContainer>
-  );
+  )
 }
 
 SearchFilter.propTypes = {
@@ -105,7 +113,7 @@ SearchFilter.propTypes = {
       category: PropTypes.string,
       feature: PropTypes.string,
       description: PropTypes.string,
-    }),
+    })
   ).isRequired,
   searchableProperties: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+}

@@ -368,7 +368,8 @@ export const featureIndexPageData = [
   {
     category: 'Publishing',
     feature: 'Flexible publishing options',
-    description: 'Publish pages to your free Leadpages domain or a domain that you own elsewhere.',
+    description:
+      'Publish pages to your free Leadpages domain or a domain that you own elsewhere.',
   },
   {
     category: 'Publishing',
@@ -469,7 +470,8 @@ export const featureIndexPageData = [
   {
     category: 'Site Builder',
     feature: 'Built-in 404 page',
-    description: 'Create and publish a custom 404 page to help recover your lost web traffic.',
+    description:
+      'Create and publish a custom 404 page to help recover your lost web traffic.',
   },
   {
     category: 'Site Builder',
@@ -491,11 +493,12 @@ export const featureIndexPageData = [
   },
   {
     category: 'Site Builder',
-    feature: 'Free Custom Domain<br/><span style="font-size:14px">*with annual purchase</span>',
+    feature:
+      'Free Custom Domain<br/><span style="font-size:14px">*with annual purchase</span>',
     description:
       'All annual Leadpages subscriptions include one (1) year of free domain registration, fulfilled by Hover. Your free domain must be registered within one year of becoming a Leadpages customer. Offer applies to domain extensions including: .com, .co, .info, .net, .biz, and .org. Domains registered through this promotion will renew after the first year, billed through Hover at the standard rate + tax. Subject to terms.',
   },
-];
+]
 
 export const featureIndexCategories = [
   'Builder',
@@ -506,4 +509,4 @@ export const featureIndexCategories = [
   'Publishing',
   'Security',
   'Site Builder',
-];
+]
