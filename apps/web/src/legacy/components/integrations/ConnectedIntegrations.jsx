@@ -1,177 +1,202 @@
 import React from 'react'
-import styled from 'styled-components'
+import { styled } from '@design'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from '@components/Image'
 
-const OuterContainer = styled.div`
-  padding-top: 6rem;
-  padding-right: 6rem;
-  padding-left: 6rem;
-  background-color: white;
-  @media (max-width: 425px) {
-    padding-right: 2%;
-    padding-left: 2%;
-  }
-  @media (min-width: 426px) and (max-width: 576px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (min-width: 577px) {
-    padding-top: 10rem;
-  }
-`
+// Assets
+import desktopImage from '@legacy/assets/images/integrations/leadpages_integrations_1208px@2x.png'
+import mobileOne from '@legacy/assets/images/integrations/drip-68px@2x.jpg'
+import mobileTwo from '@legacy/assets/images/integrations/google-analytics-68px@2x.jpg'
+import mobileThree from '@legacy/assets/images/integrations/salesforce-68px@2x.jpg'
+import mobileFour from '@legacy/assets/images/integrations/gotowebinar-68px@2x.jpg'
+import mobileFive from '@legacy/assets/images/integrations/Facebook-pixel-ads-68px@2x.jpg'
+import mobileSix from '@legacy/assets/images/integrations/open-table-68px@2x.jpg'
+import mobileSeven from '@legacy/assets/images/integrations/zapier-68px@2x.jpg'
+import mobileEight from '@legacy/assets/images/integrations/stripe-68px@2x.jpg'
+import mobileNine from '@legacy/assets/images/integrations/mailchimp_68px@2x.jpg'
 
-const InnerContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-`
+const OuterContainer = styled('div', {
+  paddingTop: '6rem',
+  paddingRight: '6rem',
+  paddingLeft: '6rem',
+  backgroundColor: 'white',
 
-const ImageContainer = styled.div`
-  width: 100%;
-  margin-bottom: 2rem;
-`
+  '@media (max-width: 425px)': {
+    paddingRight: '2%',
+    paddingLeft: '2%',
+  },
 
-const TextContainer = styled.div`
-  text-align: center;
-  @media (max-width: 425px) {
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
-  }
-`
+  '@media (min-width: 426px) and (max-width: 576px)': {
+    paddingRight: '3rem',
+    paddingLeft: '3rem',
+  },
 
-const Title = styled.div`
-  opacity: 0.5;
-  color: #000000;
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  font-family: 'Space Mono';
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-`
+  '@media (min-width: 577px)': {
+    paddingTop: '10rem',
+  },
+})
 
-const Heading = styled.div`
-  font-family: 'Value Serif';
-  font-size: 24px;
-  line-height: 30px;
-  letter-spacing: -0.08px;
-  color: #0f0c09;
-  margin-bottom: 2rem;
-  @media (max-width: 768px) {
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: -0.08px;
-  }
+const InnerContainer = styled('div', {
+  maxWidth: '1140px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+})
 
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-  }
+const ImageContainer = styled('div', {
+  width: '100%',
+  marginBottom: '2rem',
+})
 
-  @media (min-width: 993px) {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.5px;
-  }
-`
+const TextContainer = styled('div', {
+  textAlign: 'center',
 
-const Caption = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 4rem;
-  @media (max-width: 576px) {
-    font-size: 14px;
-    line-height: 20px;
-  }
-  @media (min-width: 577px) and (max-width: 991px) {
-    font-size: 16px;
-    line-height: 24px;
-  }
-  @media (min-width: 992px) {
-    font-size: 18px;
-    line-height: 28px;
-  }
-`
+  '@media (max-width: 425px)': {
+    paddingRight: '1.5rem',
+    paddingLeft: '1.5rem',
+  },
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`
+const Title = styled('div', {
+  opacity: 0.5,
+  color: '$black',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  fontFamily: `'Space Mono'`,
+  textTransform: 'uppercase',
+  marginBottom: '2rem',
+})
 
-const ButtonContainer = styled.div`
-  margin-top: 4rem;
-  text-align: center;
-  @media (max-width: 340px) {
-    padding: 0;
-  }
-`
+const Heading = styled('div', {
+  fontFamily: `'Value Serif'`,
+  fontSize: '24px',
+  lineHeight: '30px',
+  letterSpacing: '-0.08px',
+  color: '$text',
+  marginBottom: '2rem',
 
-const Button = styled.button`
-  height: 48px;
-  border-radius: 48px;
-  color: #603eff;
-  background: transparent;
-  border: 3px solid #d1c5f9;
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 30px;
-  text-align: center;
-  transition: all 0.3s ease;
-  margin-bottom: 4rem;
-  padding: 0rem 1rem;
-  @media (max-width: 425px) {
-    min-width: 240px;
-    font-size: 16px;
-    align-self: center;
-  }
-  &:hover {
-    border: 3px solid #603eff;
-    background-color: #603eff;
-    color: #fff;
-    cursor: pointer;
-  }
-`
+  '@media (max-width: 768px)': {
+    fontSize: '24px',
+    lineHeight: '30px',
+    letterSpacing: '-0.08px',
+  },
 
-const DesktopImage = styled(Image)`
-  display: none;
-  @media (min-width: 577px) {
-    display: block;
-  }
-`
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+  },
 
-const MobileImage = styled(Image)`
-  display: none;
-  @media (max-width: 576px) {
-    width: 100%;
-    height: 100%;
-    display: block;
-    margin: 3%;
-    max-width: 68px;
-    max-height: 68px;
-    box-shadow: 0 0 2px 0 rgba(15, 12, 9, 0.04),
-      0 2px 4px 0 rgba(15, 12, 9, 0.08);
-  }
-`
+  '@media (min-width: 993px)': {
+    fontSize: '40px',
+    lineHeight: '48px',
+    letterSpacing: '-0.5px',
+  },
+})
 
-const MobileFlexContainer = styled.div`
-  display: none;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 90%;
-  max-width: 357px;
-  margin: auto;
-  @media (max-width: 425px) {
-    width: 99%;
-  }
-  @media (max-width: 576px) {
-    display: flex;
-  }
-`
+const Caption = styled('div', {
+  color: '$textAlt',
+  fontFamily: `'Apercu Pro'`,
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '4rem',
+
+  '@media (max-width: 576px)': {
+    fontSize: '14px',
+    lineHeight: '20px',
+  },
+
+  '@media (min-width: 577px) and (max-width: 991px)': {
+    fontSize: '16px',
+    lineHeight: '24px',
+  },
+
+  '@media (min-width: 992px)': {
+    fontSize: '18px',
+    lineHeight: '28px',
+  },
+})
+
+const StyledLink = styled('a', {
+  textDecoration: 'none',
+  cursor: 'pointer',
+})
+
+const ButtonContainer = styled('div', {
+  marginTop: '4rem',
+  textAlign: 'center',
+
+  '@media (max-width: 340px)': {
+    padding: 0,
+  },
+})
+
+const Button = styled('button', {
+  height: '48px',
+  borderRadius: '48px',
+  color: '$primary',
+  background: 'transparent',
+  border: '3px solid $colors$secondary',
+  fontFamily: `'Apercu Pro'`,
+  fontSize: '18px',
+  fontWeight: 500,
+  lineHeight: '30px',
+  textAlign: 'center',
+  transition: 'all 0.3s ease',
+  marginBottom: '4rem',
+  padding: '0rem 1rem',
+  '@media (max-width: 425px)': {
+    minWidth: '240px',
+    fontSize: '16px',
+    alignSelf: 'center',
+  },
+  '&:hover': {
+    border: '3px solid $colors$primary',
+    backgroundColor: '$primary',
+    color: '$white',
+    cursor: 'pointer',
+  },
+})
+
+const DesktopImage = styled(Image, {
+  display: 'none',
+
+  '@media (min-width: 577px)': {
+    display: 'block',
+  },
+})
+
+const MobileImage = styled(Image, {
+  display: 'none',
+
+  '@media (max-width: 576px)': {
+    width: '100%',
+    height: '100%',
+    display: 'block',
+    margin: '3%',
+    maxWidth: '68px',
+    maxHeight: '68px',
+    boxShadow: `0 0 2px 0 rgba(15, 12, 9, 0.04),
+      0 2px 4px 0 rgba(15, 12, 9, 0.08)`,
+  },
+})
+
+const MobileFlexContainer = styled('div', {
+  display: 'none',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  width: '90%',
+  maxWidth: '357px',
+  margin: 'auto',
+
+  '@media (max-width: 425px)': {
+    width: '99%',
+  },
+
+  '@media (max-width: 576px)': {
+    display: 'flex',
+  },
+})
 
 const ConnectedIntegrations = () => (
   <OuterContainer>
@@ -187,50 +212,28 @@ const ConnectedIntegrations = () => (
         </Caption>
       </TextContainer>
       <ImageContainer>
-        {/* <DesktopImage
-          src={getImage(data.desktopImage)}
-          alt="Desktop integrations image"
-        /> */}
+        <DesktopImage image={desktopImage} alt="Desktop integrations image" />
         <MobileFlexContainer>
-          {/* <MobileImage src={getImage(data.mobileOne)} alt="drip integration" /> */}
-          {/* <MobileImage
-            src={getImage(data.mobileTwo)}
-            alt="google analytics integration"
-          />
+          <MobileImage image={mobileOne} alt="drip integration" />
+          <MobileImage image={mobileTwo} alt="google analytics integration" />
+          <MobileImage image={mobileThree} alt="salesforce integration" />
+          <MobileImage image={mobileFour} alt="gotowebinar integration" />
           <MobileImage
-            src={getImage(data.mobileThree)}
-            alt="salesforce integration"
-          />
-          <MobileImage
-            src={getImage(data.mobileFour)}
-            alt="gotowebinar integration"
-          />
-          <MobileImage
-            src={getImage(data.mobileFive)}
+            image={mobileFive}
             alt="Facebook pixel ads integration"
           />
-          <MobileImage
-            src={getImage(data.mobileSix)}
-            alt="OpenTable integration"
-          />
-          <MobileImage
-            src={getImage(data.mobileSeven)}
-            alt="Zapier integration"
-          />
-          <MobileImage
-            src={getImage(data.mobileEight)}
-            alt="Stripe integration"
-          />
-          <MobileImage
-            src={getImage(data.mobileNine)}
-            alt="Mailchimp integration"
-          /> */}
+          <MobileImage image={mobileSix} alt="OpenTable integration" />
+          <MobileImage image={mobileSeven} alt="Zapier integration" />
+          <MobileImage image={mobileEight} alt="Stripe integration" />
+          <MobileImage image={mobileNine} alt="Mailchimp integration" />
         </MobileFlexContainer>
       </ImageContainer>
       <ButtonContainer>
-        <StyledLink href="/integrations">
-          <Button>Explore Leadpages Integrations</Button>
-        </StyledLink>
+        <Link href="/integrations" passHref>
+          <StyledLink>
+            <Button>Explore Leadpages Integrations</Button>
+          </StyledLink>
+        </Link>
       </ButtonContainer>
     </InnerContainer>
   </OuterContainer>
