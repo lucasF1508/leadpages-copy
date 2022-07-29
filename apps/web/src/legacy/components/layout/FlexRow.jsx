@@ -1,274 +1,370 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
-import Image from 'next/image'
-import styled from 'styled-components'
-import { GATSBY_IMAGE } from '../../constants/types'
+import Image from '@components/Image'
+import { styled } from '@design'
+import { GATSBY_IMAGE } from '@legacy/constants/types'
 // images
-import checkInCircleSVG from '../../assets/images/global/check_in-circle.svg'
-import rightArrowSVG from '../../assets/images/global/arrow_right.svg'
+import checkInCircleSVG from '@legacy/assets/images/global/check_in-circle.svg'
+import rightArrowSVG from '@legacy/assets/images/global/arrow_right.svg'
 
-const OuterContainer = styled.div`
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: visible !important;
-  padding-top: 9rem;
-  @media (max-width: 768px) {
-    padding-top: 3rem;
-  }
-`
+const OuterContainer = styled('div', {
+  position: 'relative',
+  overflowX: 'hidden',
+  overflowY: 'visible !important',
+  paddingTop: '9rem',
 
-const BackgroundImage = styled(Image)`
-  position: absolute;
-  bottom: 0px;
-  z-index: -1;
-  width: 100%;
-  ${(props) => (props.reverse ? 'left: 0' : 'right: 0')};
-  margin-left: ${(props) => (props.reverse && props.margin ? props.margin : 0)};
-  margin-right: ${(props) =>
-    !props.reverse && props.margin ? props.margin : 0};
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`
+  '@media (max-width: 768px)': {
+    paddingTop: '3rem',
+  },
+})
 
-const FlexContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: 3rem;
-  margin-bottom: 0;
-  @media (min-width: 576px) {
-    flex-direction: ${(props) => (props.reverse ? 'row-reverse' : 'row')};
-  }
-`
+const BackgroundImage = styled(Image, {
+  position: 'absolute',
+  bottom: '0px',
+  zIndex: -1,
+  width: '100%',
+  mx: 0,
 
-const RowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  justify-content: space-between;
-  text-align: left;
-`
+  '@media (max-width: 768px)': {
+    width: '80%',
+  },
 
-const TextContainer = styled(RowItem)`
-  color: #575452;
-  padding-left: ${(props) => (props.reverse ? '10%' : '5%')};
-  padding-right: ${(props) => (props.reverse ? '1%' : '5%')};
-  margin-right: 1%;
-  @media (max-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 75%;
-    flex: 0 0 75%;
-    max-width: 75%;
-    margin-bottom: 2rem;
-    padding-left: 12.5%;
-    padding-right: 12.5%;
-  }
-  @media (min-width: 577px) and (max-width: 991px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 66%;
-    flex: 0 0 66%;
-    max-width: 66%;
-    margin-bottom: 4rem;
-    padding-left: 10%;
-    padding-right: 20%;
-  }
-  @media (min-width: 992px) {
-    ${(props) => (props.reverse ? 'margin-right: auto' : 'margin-left: auto')};
-    margin-top: auto;
-    margin-bottom: auto;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 33%;
-    flex: 0 0 33%;
-    max-width: 570px;
-  }
-`
+  variants: {
+    reverse: {
+      true: {
+        left: 0,
+      },
+      false: {
+        right: 0,
+      },
+    },
+  },
+})
 
-const ImageContainer = styled(RowItem)`
-  position: relative;
-  align-self: flex-end;
-  padding-left: ${(props) => (props.reverse && props.padImage ? '3rem' : 0)};
-  padding-right: ${(props) => (!props.reverse && props.padImage ? '3rem' : 0)};
-  ${(props) =>
-    !props.reverse && props.narrowOverride
-      ? 'margin-left:-3rem; margin-right:3rem'
-      : null};
-  ${(props) =>
-    props.reverse && props.narrowOverride
-      ? 'margin-right:-3rem; margin-left:3rem'
-      : null};
-  @media (max-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 90%;
-    flex: 0 0 90%;
-    max-width: 90%;
-    padding-left: ${(props) => (props.reverse && props.padImage ? '3rem' : 0)};
-    padding-right: ${(props) =>
-      !props.reverse && props.padImage ? '3rem' : 0};
-  }
-  @media (min-width: 577px) and (max-width: 991px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 80%;
-    flex: 0 0 80%;
-    max-width: 80%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-    width: 46%;
-  }
-  @media (max-width: 991px) {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  > .gatsby-image-wrapper {
-    ${(props) =>
-      props.imageMaxWidth
-        ? `max-width: ${props.imageMaxWidth}`
-        : `max-width: auto`};
-  }
-  > .gatsby-image-wrapper > picture img {
-    object-fit: contain !important;
-  }
-`
+const FlexContainer = styled('div', {
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+  width: '100%',
+  marginTop: '3rem',
+  marginBottom: 0,
+  fd: 'row',
 
-const Title = styled.div`
-  font-family: 'Space Mono';
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-transform: uppercase;
-  opacity: 0.5;
-  color: #000000;
-  margin-bottom: 26px;
-`
+  variants: {
+    reverse: {
+      true: {
+        '@media (min-width: 576px)': {
+          fd: 'row-reverse',
+        },
+      },
+    },
+  },
+})
 
-const Headline = styled.h3`
-  width: 100%;
-  font-family: 'Value Serif';
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: -0.07px;
-  color: #0f0c09;
-  margin-bottom: 16px;
-  @media (max-width: 768px) {
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: -0.07px;
-    margin-bottom: 16px;
-  }
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-    margin-bottom: 22px;
-  }
-  @media (min-width: 993px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-    margin-bottom: 26px;
-  }
-`
+const RowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  justifyContent: 'space-between',
+  textAlign: 'left',
+})
 
-const Caption = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0px;
-  color: #575452;
-  margin-bottom: 16px;
-  @media (max-width: 768px) {
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0px;
-    margin-bottom: 16px;
-  }
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0px;
-    margin-bottom: 16px;
-  }
-  @media (min-width: 993px) {
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: 0px;
-    margin-bottom: 24px;
-  }
-`
+const TextContainer = styled(RowItem, {
+  color: '$textAlt',
+  px: '5%',
+  marginRight: '1%',
 
-const LinkHolder = styled.div`
-  display: flex;
-  flex-direction: column;
-`
+  '@media (max-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 75%',
+    flex: '0 0 75%',
+    maxWidth: '75%',
+    marginBottom: '2rem',
+    paddingLeft: '12.5%',
+    paddingRight: '12.5%',
+  },
 
-const StyledLink = styled(Link)`
-  width: fit-content;
-  margin-bottom: 1rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-`
+  '@media (min-width: 577px) and (max-width: 991px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 66%',
+    flex: '0 0 66%',
+    maxWidth: '66%',
+    marginBottom: '4rem',
+    paddingLeft: '10%',
+    paddingRight: '20%',
+  },
 
-const OutboundStyledLink = styled.a`
-  width: fit-content;
-  margin-bottom: 1rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-`
+  '@media (min-width: 992px)': {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 33%',
+    flex: '0 0 33%',
+    maxWidth: '570px',
+  },
 
-const TextWrapper = styled.span`
-  padding-bottom: 2px;
-  transition: all 0.3s ease;
-  border-bottom: 2px solid transparent;
-`
+  variants: {
+    reverse: {
+      true: {
+        pl: '10%',
+        pr: '1%',
 
-const CheckInCircle = styled(Image)`
-  width: 18px;
-  height: 18px;
-  margin-bottom: -3px;
-  margin-right: 20px;
-  filter: brightness(0) saturate(100%) invert(3%) sepia(4%) saturate(4575%)
-    hue-rotate(349deg) brightness(97%) contrast(96%);
-  transition: filter 0.3s ease;
-`
+        '@media (min-width: 992px)': {
+          mr: 'auto',
+        },
 
-const ArrowRight = styled(Image)`
-  width: 20px;
-  height: 10px;
-  margin-left: 17px;
-  filter: brightness(0) saturate(100%) invert(32%) sepia(9%) saturate(194%)
-    hue-rotate(341deg) brightness(94%) contrast(87%);
-  transition: filter 0.3s ease;
-`
+        '@media (max-width: 576px)': {
+          px: '12.5%',
+        },
 
-const CTA = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 30px;
-  text-align: left;
-  font-weight: 500;
-  &:hover ${ArrowRight}, &:hover ${CheckInCircle} {
-    filter: invert(23%) sepia(63%) saturate(3382%) hue-rotate(243deg)
-      brightness(102%) contrast(107%);
-    transition: filter 0.3s ease;
-  }
-  &:hover ${TextWrapper} {
-    color: #603eff;
-    border-bottom: 2px solid #603eff;
-    transition: all 0.3s ease;
-  }
-`
+        '@media (min-width: 577px) and (max-width: 991px)': {
+          pl: '10%',
+          pr: '20%',
+        },
+      },
+      false: {
+        '@media (min-width: 992px)': {
+          ml: 'auto',
+        },
+      },
+    },
+  },
+})
+
+const ImageContainer = styled(RowItem, {
+  position: 'relative',
+  alignSelf: 'flex-end',
+  pl: 0,
+  pr: 0,
+
+  '@media (max-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 90%',
+    flex: '0 0 90%',
+    maxWidth: '90%',
+  },
+
+  '@media (min-width: 577px) and (max-width: 991px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 80%',
+    flex: '0 0 80%',
+    maxWidth: '80%',
+  },
+
+  '@media (min-width: 992px)': {
+    marginBottom: '0rem',
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 46%',
+    flex: '0 0 46%',
+    maxWidth: '46%',
+    width: '46%',
+  },
+
+  '@media (max-width: 991px)': {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
+
+  '> .image-wrapper': {
+    mw: 'auto',
+  },
+
+  '> .image-wrapper > picture img': {
+    objectFit: 'contain !important',
+  },
+
+  variants: {
+    reverse: {
+      true: {},
+      false: {},
+    },
+    padImage: {
+      true: {},
+      false: {},
+    },
+    narrowOverride: {
+      true: {},
+      false: {},
+    },
+  },
+
+  compoundVariants: [
+    {
+      padImage: true,
+      reverse: true,
+      css: {
+        '@media (min-width: 992px)': {
+          pl: '3rem',
+        },
+      },
+    },
+    {
+      padImage: true,
+      reverse: false,
+      css: {
+        pr: '3rem',
+      },
+    },
+    {
+      narrowOverride: true,
+      reverse: false,
+      css: {
+        ml: '-3rem',
+        mr: '3rem',
+      },
+    },
+    {
+      narrowOverride: true,
+      reverse: true,
+      css: {
+        ml: '3rem',
+        mr: '-3rem',
+      },
+    },
+  ],
+})
+
+const Title = styled('div', {
+  fontFamily: `'Space Mono'`,
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  textTransform: 'uppercase',
+  opacity: 0.5,
+  color: '$black',
+  marginBottom: '26px',
+})
+
+const Headline = styled('h3', {
+  width: '100%',
+  fontFamily: `'Value Serif'`,
+  fontSize: '20px',
+  lineHeight: '24px',
+  letterSpacing: '-0.07px',
+  color: '$text',
+  marginBottom: '16px',
+
+  '@media (max-width: 768px)': {
+    fontSize: '20px',
+    lineHeight: '24px',
+    letterSpacing: '-0.07px',
+    marginBottom: '16px',
+  },
+
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+    marginBottom: '22px',
+  },
+
+  '@media (min-width: 993px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+    marginBottom: '26px',
+  },
+})
+
+const Caption = styled('div', {
+  fontFamily: `'Apercu Pro'`,
+  fontSize: '14px',
+  lineHeight: '20px',
+  letterSpacing: '0px',
+  color: '$textAlt',
+  marginBottom: '16px',
+
+  '@media (max-width: 768px)': {
+    fontSize: '14px',
+    lineHeight: '20px',
+    letterSpacing: '0px',
+    marginBottom: '16px',
+  },
+
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '16px',
+    lineHeight: '24px',
+    letterSpacing: '0px',
+    marginBottom: '16px',
+  },
+
+  '@media (min-width: 993px)': {
+    fontSize: '18px',
+    lineHeight: '28px',
+    letterSpacing: '0px',
+    marginBottom: '24px',
+  },
+})
+
+const LinkHolder = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+})
+
+const StyledLink = styled('a', {
+  width: 'fit-content',
+  marginBottom: '1rem',
+  textDecoration: 'none',
+  transition: 'all 0.3s ease',
+})
+
+const OutboundStyledLink = styled('a', {
+  width: 'fit-content',
+  marginBottom: '1rem',
+  textDecoration: 'none',
+  transition: 'all 0.3s ease',
+})
+
+const TextWrapper = styled('span', {
+  paddingBottom: '2px',
+  transition: 'all 0.3s ease',
+  borderBottom: '2px solid transparent',
+})
+
+const CheckInCircle = styled('img', {
+  width: '18px',
+  height: '18px',
+  marginBottom: '-3px',
+  marginRight: '20px',
+  filter: `brightness(0) saturate(100%) invert(3%) sepia(4%) saturate(4575%)
+    hue-rotate(349deg) brightness(97%) contrast(96%)`,
+  transition: 'filter 0.3s ease',
+})
+
+const ArrowRight = styled('img', {
+  width: '20px',
+  height: '10px',
+  marginLeft: '17px',
+  filter: `brightness(0) saturate(100%) invert(32%) sepia(9%) saturate(194%)
+    hue-rotate(341deg) brightness(94%) contrast(87%)`,
+  transition: 'filter 0.3s ease',
+})
+
+const CTA = styled('div', {
+  color: '$textAlt',
+  fontFamily: `'Apercu Pro'`,
+  fontSize: '16px',
+  lineHeight: '30px',
+  textAlign: 'left',
+  fontWeight: 500,
+
+  [`&:hover ${ArrowRight}, &:hover ${CheckInCircle}`]: {
+    filter: `invert(23%) sepia(63%) saturate(3382%) hue-rotate(243deg)
+      brightness(102%) contrast(107%)`,
+    transition: 'filter 0.3s ease',
+  },
+
+  [`&:hover ${TextWrapper}`]: {
+    color: '$primary',
+    borderBottom: '2px solid $colors$primary',
+    transition: 'all 0.3s ease',
+  },
+})
 
 const FlexRow = ({
   title,
@@ -287,6 +383,7 @@ const FlexRow = ({
   arrows,
   checkmarks,
 }) => {
+  console.log({ bgImageMargin, flexDirectionReverse })
   return (
     <OuterContainer>
       <FlexContainer reverse={flexDirectionReverse}>
@@ -307,53 +404,61 @@ const FlexRow = ({
                     <CTA>
                       {checkmarks && (
                         <CheckInCircle
-                          src={checkInCircleSVG}
+                          src={checkInCircleSVG.src}
                           alt="checkmark circle"
                         />
                       )}
                       <TextWrapper>{text}</TextWrapper>
                       {arrows && (
-                        <ArrowRight src={rightArrowSVG} alt="right arrow" />
+                        <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
                       )}
                     </CTA>
                   </OutboundStyledLink>
                 ) : (
-                  <StyledLink key={index} href={link} alt={linkAlt || text}>
-                    <CTA>
-                      {checkmarks && (
-                        <CheckInCircle
-                          src={checkInCircleSVG}
-                          alt="checkmark circle"
-                        />
-                      )}
-                      <TextWrapper>{text}</TextWrapper>
-                      {arrows && (
-                        <ArrowRight src={rightArrowSVG} alt="right arrow" />
-                      )}
-                    </CTA>
-                  </StyledLink>
+                  <Link href={link} passHref>
+                    <StyledLink key={index} aria-label={linkAlt || text}>
+                      <CTA>
+                        {checkmarks && (
+                          <CheckInCircle
+                            src={checkInCircleSVG.src}
+                            alt="checkmark circle"
+                          />
+                        )}
+                        <TextWrapper>{text}</TextWrapper>
+                        {arrows && (
+                          <ArrowRight
+                            src={rightArrowSVG.src}
+                            alt="right arrow"
+                          />
+                        )}
+                      </CTA>
+                    </StyledLink>
+                  </Link>
                 )
               })}
           </LinkHolder>
         </TextContainer>
-        <ImageContainer
-          reverse={flexDirectionReverse}
-          padImage={padImage}
-          imageMaxWidth={imageMaxWidth}
-          narrowOverride={narrowOverride}
-        >
+        <ImageContainer reverse={flexDirectionReverse} padImage={padImage}>
           {bgImage && (
             <BackgroundImage
-              src={bgImage}
+              image={bgImage}
               alt={bgImageAlt}
               reverse={flexDirectionReverse}
               margin={bgImageMargin}
+              css={{
+                ...(flexDirectionReverse
+                  ? { ml: bgImageMargin }
+                  : { mr: bgImageMargin }),
+              }}
             />
           )}
           <Image
-            className="gatsby-image-wrapper"
-            src={image}
+            className="image-wrapper"
+            image={image}
             alt={imageAlt || title}
+            css={{
+              ...(imageMaxWidth ? { maxWidth: imageMaxWidth } : {}),
+            }}
           />
         </ImageContainer>
       </FlexContainer>
