@@ -1,270 +1,270 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import Image from '@components/Image'
+import { styled } from '@design'
+//image
+import rightImage from '@legacy/assets/images/totems/work-perks-leadpages_right_782px@2x.png'
+import leftImage from '@legacy/assets/images/totems/work-perks-leadpages_left_610px@2x.png'
 
-const TransformContainer = styled.div``;
+const TransformContainer = styled('div', {})
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-`;
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  position: 'relative',
+})
 
-const ConversionOuterContainer = styled(FlexRow)`
-  flex-wrap: wrap;
-  margin-top: 3rem;
-`;
+const ConversionOuterContainer = styled(FlexRow, {
+  flexWrap: 'wrap',
+  marginTop: '3rem',
+})
 
-const ConversionContainer = styled(FlexRow)`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  flex-wrap: wrap;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 576px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (min-width: 992px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const ConversionContainer = styled(FlexRow, {
+  maxWidth: '1140px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  flexWrap: 'wrap',
+  paddingRight: '3rem',
+  paddingLeft: '3rem',
 
-const SkillOuterContainer = styled(FlexRow)`
-  flex-wrap: wrap;
-  margin-top: 3rem;
-  margin-bottom: 6rem;
-  @media (max-width: 576px) {
-    margin-bottom: 4rem;
-  }
-`;
+  '@media (min-width: 576px)': {
+    paddingRight: '3rem',
+    paddingLeft: '3rem',
+  },
 
-const SkillContainer = styled(FlexRow)`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  flex-wrap: wrap;
-  flex-direction: row;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 576px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-    flex-direction: row-reverse;
-  }
-  @media (min-width: 992px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+  '@media (min-width: 992px)': {
+    paddingRight: '6rem',
+    paddingLeft: '6rem',
+  },
+})
 
-const FlexRowItem6 = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-  justify-content: space-between;
-  text-align: left;
-  margin-right: 1%;
-  margin-bottom: 2rem;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
+const SkillOuterContainer = styled(FlexRow, {
+  flexWrap: 'wrap',
+  marginTop: '3rem',
+  marginBottom: '6rem',
 
-  @media (min-width: 992px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  '@media (max-width: 576px)': {
+    marginBottom: '4rem',
+  },
+})
 
-const ConversionTextContainer = styled(FlexRowItem6)`
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+const SkillContainer = styled(FlexRow, {
+  maxWidth: '1140px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  flexWrap: 'wrap',
+  flexDirection: 'row',
+  paddingRight: '3rem',
+  paddingLeft: '3rem',
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  '@media (min-width: 576px)': {
+    paddingRight: '3rem',
+    paddingLeft: '3rem',
+    flexDirection: 'row-reverse',
+  },
 
-const ConversionCopyContainer = styled(FlexRowItem6)`
-  display: flex;
-  flex-wrap: wrap;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+  '@media (min-width: 992px)': {
+    paddingRight: '6rem',
+    paddingLeft: '6rem',
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-`;
+const FlexRowItem6 = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  paddingLeft: '1%',
+  paddingRight: '1%',
+  justifyContent: 'space-between',
+  textAlign: 'left',
+  marginRight: '1%',
+  marginBottom: '2rem',
 
-const ConversionImageContainer = styled(FlexRowItem6)`
-  align-self: flex-end;
-  margin-bottom: 0rem;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  @media (min-width: 577px) and (max-width: 993px) {
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  @media (min-width: 992px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  '@media (min-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 46%',
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
 
-const SkillTextContainer = styled(FlexRowItem6)`
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+  '@media (min-width: 992px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 46%',
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+const ConversionTextContainer = styled(FlexRowItem6, {
+  '@media (min-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const SkillHeadingContainer = styled(FlexRowItem6)`
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+  '@media (min-width: 992px)': {
+    marginBottom: '0rem',
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 46%',
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-`;
+const ConversionCopyContainer = styled(FlexRowItem6, {
+  display: 'flex',
+  flexWrap: 'wrap',
 
-const SkillCopyContainer = styled(FlexRowItem6)`
-  display: flex;
-  flex-wrap: wrap;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+  '@media (min-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-  @media (min-width: 992px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-`;
+  '@media (min-width: 992px)': {
+    marginBottom: '0rem',
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
+})
 
-const SkillImageContainer = styled(FlexRowItem6)`
-  align-self: flex-end;
-  position: relative;
-  margin-bottom: 0rem;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+const ConversionImageContainer = styled(FlexRowItem6, {
+  alignSelf: 'flex-end',
+  marginBottom: '0rem',
 
-  @media (min-width: 992px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  '@media (min-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const FlexRowItem6Heading = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  margin-bottom: 1rem;
-`;
+  '@media (min-width: 577px) and (max-width: 993px)': {
+    maxWidth: '80%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 
-const FlexRowItem6Copy = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 1rem;
-`;
+  '@media (min-width: 992px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 46%',
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
 
-const PFTitle = styled.div`
-  font-family: 'Value Serif';
-  font-size: 30px;
-  letter-spacing: -0.1px;
-  line-height: 36px;
-  color: #0f0c09;
-  margin-bottom: 2rem;
-`;
+const SkillTextContainer = styled(FlexRowItem6, {
+  '@media (min-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const TransformCopy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  color: #575452;
-  margin-bottom: 4rem;
-`;
+  '@media (min-width: 992px)': {
+    marginBottom: '0rem',
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 46%',
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
+
+const SkillHeadingContainer = styled(FlexRowItem6, {
+  '@media (min-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
+
+  '@media (min-width: 992px)': {
+    marginBottom: '0rem',
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
+})
+
+const SkillCopyContainer = styled(FlexRowItem6, {
+  display: 'flex',
+  flexWrap: 'wrap',
+
+  '@media (min-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
+
+  '@media (min-width: 992px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
+})
+
+const SkillImageContainer = styled(FlexRowItem6, {
+  alignSelf: 'flex-end',
+  position: 'relative',
+  marginBottom: '0rem',
+
+  '@media (min-width: 576px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 100%',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
+
+  '@media (min-width: 992px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 46%',
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
+
+const FlexRowItem6Heading = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  marginBottom: '1rem',
+})
+
+const FlexRowItem6Copy = styled('div', {
+  color: '#575452',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '1rem',
+})
+
+const PFTitle = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '30px',
+  letterSpacing: '-0.1px',
+  lineHeight: '36px',
+  color: '#0f0c09',
+  marginBottom: '2rem',
+})
+
+const TransformCopy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  color: '#575452',
+  marginBottom: '4rem',
+})
 
 const WorkPerks = () => {
-  const images = useStaticQuery(graphql`
-    query WorkPerksQuery {
-      rightImage: file(
-        relativePath: { eq: "assets/images/totems/work-perks-leadpages_right_782px@2x.png" }
-      ) {
-        ...constrained
-      }
-      leftImage: file(
-        relativePath: { eq: "assets/images/totems/work-perks-leadpages_left_610px@2x.png" }
-      ) {
-        ...constrained
-      }
-    }
-  `);
   return (
     <TransformContainer>
       <SkillOuterContainer>
@@ -273,31 +273,35 @@ const WorkPerks = () => {
             <SkillHeadingContainer>
               <PFTitle>Why you’ll love working here</PFTitle>
               <TransformCopy>
-                We love keeping our employees happy and healthy. In addition to meaningful projects,
-                career development opportunities, and a supportive team, you’ll find amazing
-                benefits and perks that make working at Leadpages even better.
+                We love keeping our employees happy and healthy. In addition to
+                meaningful projects, career development opportunities, and a
+                supportive team, you’ll find amazing benefits and perks that
+                make working at Leadpages even better.
               </TransformCopy>
             </SkillHeadingContainer>
             <SkillCopyContainer>
               <FlexRowItem6>
                 <FlexRowItem6Heading>Health benefits</FlexRowItem6Heading>
                 <FlexRowItem6Copy>
-                  In addition to medical, dental and vision, we offer a $50/month wellness allowance
-                  and are proud to support growing families with a full year of paid parental leave.
+                  In addition to medical, dental and vision, we offer a
+                  $50/month wellness allowance and are proud to support growing
+                  families with a full year of paid parental leave.
                 </FlexRowItem6Copy>
               </FlexRowItem6>
               <FlexRowItem6>
-                <FlexRowItem6Heading>Compensation & rewards</FlexRowItem6Heading>
+                <FlexRowItem6Heading>
+                  Compensation & rewards
+                </FlexRowItem6Heading>
                 <FlexRowItem6Copy>
-                  Competitive salaries, flexible vacation and paid time off, AND career-defining
-                  work? Check, check, check.
+                  Competitive salaries, flexible vacation and paid time off, AND
+                  career-defining work? Check, check, check.
                 </FlexRowItem6Copy>
               </FlexRowItem6>
             </SkillCopyContainer>
           </SkillTextContainer>
           <SkillImageContainer>
-            <GatsbyImage
-              image={getImage(images.leftImage)}
+            <Image
+              image={leftImage}
               alt="Leadpages work perks careers left image"
             />
           </SkillImageContainer>
@@ -308,40 +312,45 @@ const WorkPerks = () => {
           <ConversionTextContainer>
             <ConversionCopyContainer>
               <FlexRowItem6>
-                <FlexRowItem6Heading>Hybrid work environment</FlexRowItem6Heading>
+                <FlexRowItem6Heading>
+                  Hybrid work environment
+                </FlexRowItem6Heading>
                 <FlexRowItem6Copy>
-                  Do you do your best work from home or away from it? We offer flexibile hours,
-                  remote work, and a beautiful dog-friendly office that’s loaded with snacks,
-                  coffee, and great people.
+                  Do you do your best work from home or away from it? We offer
+                  flexibile hours, remote work, and a beautiful dog-friendly
+                  office that’s loaded with snacks, coffee, and great people.
                 </FlexRowItem6Copy>
               </FlexRowItem6>
               <FlexRowItem6>
-                <FlexRowItem6Heading>Professional development</FlexRowItem6Heading>
+                <FlexRowItem6Heading>
+                  Professional development
+                </FlexRowItem6Heading>
                 <FlexRowItem6Copy>
-                  We want Leadpages to be a place where you grow, so we offer up to $1,000 (USD) a
-                  year towards continuing education, conferences, and courses.
+                  We want Leadpages to be a place where you grow, so we offer up
+                  to $1,000 (USD) a year towards continuing education,
+                  conferences, and courses.
                 </FlexRowItem6Copy>
               </FlexRowItem6>
               <FlexRowItem6>
                 <FlexRowItem6Heading>People first</FlexRowItem6Heading>
                 <FlexRowItem6Copy>
-                  Leadpages believes in diversity, equity, and inclusion. We’re looking for people
-                  from diverse backgrounds to bring their unique perspectives, skills, and
-                  experiences to the team.
+                  Leadpages believes in diversity, equity, and inclusion. We’re
+                  looking for people from diverse backgrounds to bring their
+                  unique perspectives, skills, and experiences to the team.
                 </FlexRowItem6Copy>
               </FlexRowItem6>
             </ConversionCopyContainer>
           </ConversionTextContainer>
           <ConversionImageContainer>
-            <GatsbyImage
-              image={getImage(images.rightImage)}
+            <Image
+              image={rightImage}
               alt="Leadpages work perks careers right image"
             />
           </ConversionImageContainer>
         </ConversionContainer>
       </ConversionOuterContainer>
     </TransformContainer>
-  );
-};
+  )
+}
 
-export default WorkPerks;
+export default WorkPerks
