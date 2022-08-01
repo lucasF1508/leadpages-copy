@@ -1,11 +1,10 @@
 import React from 'react'
-// import { useStaticQuery, graphql } from 'gatsby'
-// import { getImage } from 'gatsby-plugin-image'
 import { styled } from '@design'
 // components
 import CheckoutsFeatures from '@legacy/components/product/CheckoutsFeatures'
+import CloseSalesCollectPayments from '@legacy/components/product/CloseSalesCollectPayments'
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
-// import CloseSalesCollectPayments from '@legacy/components/product/CloseSalesCollectPayments'
+import CloseSalesCollectPayments from '@legacy/components/product/CloseSalesCollectPayments'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 // import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 // import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
@@ -90,8 +89,8 @@ const CheckoutsProductPage = () => {
         bgImage={semicircleGraySVG}
         bgImageAltText="Easily sell your services online"
       />
-      {/* <TurnYourExpertiseIntoRevenue />
-      <CloseSalesCollectPayments /> */}
+      {/* <TurnYourExpertiseIntoRevenue /> */}
+      <CloseSalesCollectPayments />
       <CheckoutsFeatures />
       <SpacerRow size="small" />
       <HeadlineSection

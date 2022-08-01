@@ -1,197 +1,186 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
 // images
-import checkSVG from '../../assets/images/global/check_in-circle.svg';
+import checkSVG from '@legacy/assets/images/global/check_in-circle.svg'
 
-const OuterContainer = styled.div`
-  position: relative;
-  background-color: #f7f7f7;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  backgroundColor: '$grayAlt',
+})
 
-const MainContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 3rem;
-  padding-bottom: 1rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  text-align: center;
-  @media (min-width: 576px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-    padding-top: 6rem;
-    padding-bottom: 3rem;
-  }
-  @media (max-width: 576px) {
-    max-height: 500px;
-  }
-`;
+const MainContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  paddingTop: '3rem',
+  paddingBottom: '1rem',
+  px: '3rem',
+  textAlign: 'center',
 
-const MainHeading = styled.div`
-  font-family: 'Value Serif';
-  font-size: 1.875rem;
-  letter-spacing: -0.03125rem;
-  line-height: 2.25rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: #0f0c09;
-  @media (max-width: 576px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-    margin-bottom: 1rem;
-  }
-  @media (min-width: 577px) {
-    flex-direction: row-reverse;
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-  @media (min-width: 992px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+  '@>s': {
+    px: '6rem',
+    paddingTop: '6rem',
+    paddingBottom: '3rem',
+  },
 
-const Flexbox = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-`;
+  '@<s': {
+    maxHeight: '500px',
+  },
+})
 
-const FlexRowItem = styled.div`
-  display: column;
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 2%;
-  padding-right: 2%;
-`;
+const MainHeading = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '1.875rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '2.25rem',
+  textAlign: 'center',
+  marginBottom: '3rem',
+  color: '$text',
 
-const FlexRowLeft = styled(FlexRowItem)`
-  text-align: left;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 37%;
-    flex: 0 0 37%;
-    max-width: 37%;
-    margin-left: 2rem;
-  }
+  '@<s': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+    marginBottom: '1rem',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 37%;
-    flex: 0 0 37%;
-    max-width: 37%;
-    margin-left: 4rem;
-  }
-`;
+  '@media (min-width: 577px)': {
+    flexDirection: 'row-reverse',
+    paddingRight: '6rem',
+    paddingLeft: '6rem',
+  },
 
-const FlexRowRight = styled(FlexRowItem)`
-  text-align: left;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 37%;
-    flex: 0 0 37%;
-    max-width: 37%;
-    margin-left: 2rem;
-  }
+  '@>m': {
+    px: '6rem',
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 37%;
-    flex: 0 0 37%;
-    max-width: 37%;
-    text-align: left;
-    margin-left: 4rem;
-  }
-`;
+const Flexbox = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  marginBottom: '2rem',
+  flexWrap: 'wrap',
+})
 
-const MainCopy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  color: #575452;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-`;
+const FlexRowItem = styled('div', {
+  display: 'column',
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  px: '2%',
+})
 
-const SVG = styled.img`
-  position: relative;
-  top: 5px;
-  display: inline-block;
-`;
+const FlexRowLeft = styled(FlexRowItem, {
+  textAlign: 'left',
 
-const FeatureCopy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  color: #575452;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-`;
+  '@>s': {
+    flex: '0 0 37%',
+    maxWidth: '37%',
+    marginLeft: '2rem',
+  },
 
-const FeatureContainer = styled.div`
-  margin-bottom: -10px;
-`;
+  '@>m': {
+    marginBottom: 0,
+    marginLeft: '4rem',
+  },
+})
 
-const FeatureItem = styled.p`
-  display: flex;
-  padding-left: 3%;
-  position: relative;
-  top: -20px;
-  left: 22px;
-`;
+const FlexRowRight = styled(FlexRowItem, {
+  textAlign: 'left',
 
-const CloseSalesCollectPayments = () => {
-  return (
-    <OuterContainer>
-      <MainContainer>
-        <MainHeading>Close Sales & Collect Payments Seamlessly</MainHeading>
-        <Flexbox>
-          <FlexRowLeft>
-            <MainCopy>
-              Leadpages Checkouts are powered by the popular payment gateway Stripe, which accepts
-              all major credit cards swiftly and securely. Stripe is free to set up and its pricing
-              system is based on a percentage of your sales, so you only pay if you’re actually
-              making money.
-            </MainCopy>
-          </FlexRowLeft>
-          <FlexRowRight>
-            <FeatureCopy>
-              <FeatureContainer>
-                <SVG src={checkSVG} alt="check mark SVG" />
-                <FeatureItem>Accept credit cards</FeatureItem>
-              </FeatureContainer>
-              <FeatureContainer>
-                <SVG src={checkSVG} alt="check mark SVG" />
-                <FeatureItem>Secure payment processing (SCA compliant)</FeatureItem>
-              </FeatureContainer>
-              <FeatureContainer>
-                <SVG src={checkSVG} alt="check mark SVG" />
-                <FeatureItem>
-                  Customizable form fields (including shipping-related fields)
-                </FeatureItem>
-              </FeatureContainer>
-              <FeatureContainer>
-                <SVG src={checkSVG} alt="check mark SVG" />
-                <FeatureItem>Automatic receipt delivery</FeatureItem>
-              </FeatureContainer>
-              <FeatureContainer>
-                <SVG src={checkSVG} alt="check mark SVG" />
-                <FeatureItem>Refund processing</FeatureItem>
-              </FeatureContainer>
-            </FeatureCopy>
-          </FlexRowRight>
-        </Flexbox>
-      </MainContainer>
-    </OuterContainer>
-  );
-};
+  '@>s': {
+    flex: '0 0 37%',
+    maxWidth: '37%',
+    marginLeft: '2rem',
+  },
 
-export default CloseSalesCollectPayments;
+  '@>m': {
+    marginBottom: 0,
+    marginLeft: '4rem',
+  },
+})
+
+const MainCopy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  color: '$textAlt',
+  marginTop: '1rem',
+  marginBottom: '2rem',
+})
+
+const SVG = styled('img', {
+  position: 'relative',
+  top: '5px',
+  display: 'inline-block',
+})
+
+const FeatureCopy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  color: '$textAlt',
+  my: '1rem',
+})
+
+const FeatureContainer = styled('div', {
+  marginBottom: '-10px',
+})
+
+const FeatureItem = styled('p', {
+  display: 'flex',
+  paddingLeft: '3%',
+  position: 'relative',
+  top: '-20px',
+  left: '22px',
+})
+
+const CloseSalesCollectPayments = () => (
+  <OuterContainer>
+    <MainContainer>
+      <MainHeading>Close Sales & Collect Payments Seamlessly</MainHeading>
+      <Flexbox>
+        <FlexRowLeft>
+          <MainCopy>
+            Leadpages Checkouts are powered by the popular payment gateway
+            Stripe, which accepts all major credit cards swiftly and securely.
+            Stripe is free to set up and its pricing system is based on a
+            percentage of your sales, so you only pay if you’re actually making
+            money.
+          </MainCopy>
+        </FlexRowLeft>
+        <FlexRowRight>
+          <FeatureCopy>
+            <FeatureContainer>
+              <SVG src={checkSVG.src} alt="check mark SVG" />
+              <FeatureItem>Accept credit cards</FeatureItem>
+            </FeatureContainer>
+            <FeatureContainer>
+              <SVG src={checkSVG.src} alt="check mark SVG" />
+              <FeatureItem>
+                Secure payment processing (SCA compliant)
+              </FeatureItem>
+            </FeatureContainer>
+            <FeatureContainer>
+              <SVG src={checkSVG.src} alt="check mark SVG" />
+              <FeatureItem>
+                Customizable form fields (including shipping-related fields)
+              </FeatureItem>
+            </FeatureContainer>
+            <FeatureContainer>
+              <SVG src={checkSVG.src} alt="check mark SVG" />
+              <FeatureItem>Automatic receipt delivery</FeatureItem>
+            </FeatureContainer>
+            <FeatureContainer>
+              <SVG src={checkSVG.src} alt="check mark SVG" />
+              <FeatureItem>Refund processing</FeatureItem>
+            </FeatureContainer>
+          </FeatureCopy>
+        </FlexRowRight>
+      </Flexbox>
+    </MainContainer>
+  </OuterContainer>
+)
+
+export default CloseSalesCollectPayments
