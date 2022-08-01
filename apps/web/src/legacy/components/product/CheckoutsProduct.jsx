@@ -1,292 +1,273 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useStaticQuery, graphql, Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import React from 'react'
+import { styled } from '@design'
+import Link from 'next/link'
 // images
-import checkSVG from '../../assets/images/global/check_in-circle.svg';
-import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg';
-import stripeLogo from '../../assets/images/integrations/Stripe-Logo-46px@2x.svg';
+import featuredImage from '@legacy/assets/images/product/checkouts/leadpages-checkout-payment-forms_751px@2x.png'
+import checkSVG from '@legacy/assets/images/global/check_in-circle.svg'
+import rightArrowPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
+import stripeLogo from '@legacy/assets/images/integrations/Stripe-Logo-46px@2x.svg'
 
-const OuterContainer = styled.div`
-  position: relative;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+})
 
-const MainContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-`;
+const MainContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+})
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-`;
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  position: 'relative',
+})
 
-const OuterFlexContainer = styled(FlexRow)`
-  flex-wrap: wrap;
-`;
+const OuterFlexContainer = styled(FlexRow, {
+  flexWrap: 'wrap',
+})
 
-const InnerFlexContainer = styled(FlexRow)`
-  display: flex;
-  flex-wrap: row wrap;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 0;
-  @media (max-width: 1023px) {
-    flex-flow: column wrap;
-    align-items: center;
-  }
-`;
+const InnerFlexContainer = styled(FlexRow, {
+  display: 'flex',
+  flexWrap: 'row wrap',
+  justifyContent: 'center',
+  width: '100%',
+  marginBottom: 0,
 
-const FlexRowItem6 = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-  justify-content: space-between;
-  text-align: left;
-  margin-right: 1%;
-`;
+  '@media (max-width: 1023px)': {
+    flexFlow: 'column wrap',
+    alignItems: 'center',
+  },
+})
 
-const TextContainer = styled(FlexRowItem6)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-left: 3rem;
-  width: 50%;
-  @media (max-width: 1023px) {
-    width: 40%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  @media (max-width: 576px) {
-    width: 70%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  @media (max-width: 374px) {
-    width: 85%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-`;
+const FlexRowItem6 = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+  justifyContent: 'space-between',
+  textAlign: 'left',
+  marginRight: '1%',
+})
 
-const ImageContainer = styled(FlexRowItem6)`
-  position: relative;
-  display: flex;
-  @media (max-width: 1023px) {
-    width: 90%;
-    max-width: 600px;
-  }
-`;
+const TextContainer = styled(FlexRowItem6, {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  marginLeft: '3rem',
+  width: '50%',
 
-const CustomImage = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: -1px;
-  align-self: flex-end;
-`;
+  '@media (max-width: 1023px)': {
+    width: '40%',
+    mx: 'auto',
+  },
 
-const Title = styled.div`
-  font-family: 'Space Mono';
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-transform: uppercase;
-  opacity: 0.5;
-  color: #000000;
-  margin-bottom: 26px;
-`;
+  '@<s': {
+    width: '70%',
+    mx: 'auto',
+  },
 
-const Headline = styled.div`
-  font-family: 'Value Serif';
-  font-size: 24px;
-  line-height: 24px;
-  letter-spacing: -0.07px;
-  color: #0f0c09;
-  margin-bottom: 16px;
-  @media (max-width: 768px) {
-    font-size: 24px;
-    line-height: 24px;
-    letter-spacing: -0.07px;
-    margin-bottom: 16px;
-  }
+  '@media (max-width: 374px)': {
+    width: '85%',
+    mx: 'auto',
+  },
+})
 
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 24px;
-    line-height: 30px;
-    letter-spacing: -0.08px;
-    margin-bottom: 22px;
-  }
+const ImageContainer = styled(FlexRowItem6, {
+  position: 'relative',
+  display: 'flex',
 
-  @media (min-width: 993px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-    margin-bottom: 26px;
-  }
-`;
+  '@media (max-width: 1023px)': {
+    width: '90%',
+    maxWidth: '600px',
+  },
+})
 
-const Caption = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0px;
-  color: #575452;
-  margin-bottom: 16px;
-  @media (max-width: 768px) {
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0px;
-    margin-bottom: 16px;
-  }
+const CustomImage = styled('img', {
+  width: '100%',
+  marginBottom: '-1px',
+  alignSelf: 'flex-end',
+})
 
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0px;
-    margin-bottom: 16px;
-  }
+const Headline = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '24px',
+  lineHeight: '24px',
+  letterSpacing: '-0.07px',
+  color: '$text',
+  marginBottom: '16px',
 
-  @media (min-width: 993px) {
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: 0px;
-    margin-bottom: 24px;
-  }
-`;
+  '@media (max-width: 768px)': {
+    fontSize: '24px',
+    lineHeight: '24px',
+    letterSpacing: '-0.07px',
+    marginBottom: '16px',
+  },
 
-const SVGContainer = styled.div`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  width: 50%;
-  overflow-x: hidden;
-  @media (max-width: 480px) {
-    display: none;
-  }
-`;
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '24px',
+    lineHeight: '30px',
+    letterSpacing: '-0.08px',
+    marginBottom: '22px',
+  },
 
-const FeaturesContainer = styled.div`
-  margin-bottom: 2rem;
-  display: block;
-`;
+  '@media (min-width: 993px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+    marginBottom: '26px',
+  },
+})
 
-const FeatureContainer = styled.div`
-  position: relative;
-  padding-right: 3%;
-`;
+const Caption = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  letterSpacing: '0px',
+  color: '$textAlt',
+  marginBottom: '16px',
 
-const Feature = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  display: block;
-  padding-left: 24px;
-  margin-bottom: 0.75rem;
-`;
+  '@media (max-width: 768px)': {
+    fontSize: '14px',
+    lineHeight: '20px',
+    letterSpacing: '0px',
+    marginBottom: '16px',
+  },
 
-const SVG = styled.img`
-  position: absolute;
-  top: 2px;
-  display: inline;
-`;
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '16px',
+    lineHeight: '24px',
+    letterSpacing: '0px',
+    marginBottom: '16px',
+  },
 
-const CTA = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  text-align: left;
-  font-weight: 500;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-`;
+  '@media (min-width: 993px)': {
+    fontSize: '18px',
+    lineHeight: '28px',
+    letterSpacing: '0px',
+    marginBottom: '24px',
+  },
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`;
+const FeaturesContainer = styled('div', {
+  marginBottom: '2rem',
+  display: 'block',
+})
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`;
+const FeatureContainer = styled('div', {
+  position: 'relative',
+  paddingRight: '3%',
+})
 
-const StripeSVG = styled.img`
-  position: relative;
-  display: inline-block;
-  left: 5px;
-  bottom: -5px;
-`;
+const Feature = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  display: 'block',
+  paddingLeft: '24px',
+  marginBottom: '0.75rem',
+})
 
-const CheckoutsProduct = () => {
-  const images = useStaticQuery(graphql`
-    query CheckoutsProductQuery {
-      featuredImage: file(
-        relativePath: {
-          eq: "assets/images/product/checkouts/leadpages-checkout-payment-forms_751px@2x.png"
-        }
-      ) {
-        ...constrained
-      }
-    }
-  `);
-  return (
-    <OuterContainer>
-      <MainContainer>
-        <OuterFlexContainer>
-          <InnerFlexContainer>
-            <TextContainer>
-              <Headline>Sell your products and services online</Headline>
-              <Caption>
-                Include an online checkout form on any webpage, sales page, or pop-up.
-                <br />
-                <span style={{ fontSize: '14px' }}>Powered by</span>
-                <StripeSVG src={stripeLogo} alt="stripe integration logo"></StripeSVG>
-              </Caption>
+const SVG = styled('img', {
+  position: 'absolute',
+  top: '2px',
+  display: 'inline',
+})
 
-              <FeaturesContainer>
-                <FeatureContainer>
-                  <SVG src={checkSVG} alt="check mark svg" />
-                  <Feature>Accept all major credit cards</Feature>
-                </FeatureContainer>
-                <FeatureContainer>
-                  <SVG src={checkSVG} alt="Leadpages work perks careers left image" />
-                  <Feature>Collect shipping information</Feature>
-                </FeatureContainer>
-                <FeatureContainer>
-                  <SVG src={checkSVG} alt="Leadpages work perks careers left image" />
-                  <Feature>Send automatic receipts</Feature>
-                </FeatureContainer>
-                <FeatureContainer>
-                  <SVG src={checkSVG} alt="Leadpages work perks careers left image" />
-                  <Feature>Easily process refunds</Feature>
-                </FeatureContainer>
-                <StyledLink to="/product/checkouts" alt="Leadpages checkouts product detail page">
+const CTA = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  textAlign: 'left',
+  fontWeight: 500,
+  marginTop: '2rem',
+  marginBottom: '1rem',
+})
+
+const ArrowRightPurple = styled('img', {
+  width: '20px',
+  height: '10px',
+})
+
+const StripeSVG = styled('img', {
+  position: 'relative',
+  display: 'inline-block',
+  left: '5px',
+  bottom: '-5px',
+})
+
+const CheckoutsProduct = () => (
+  <OuterContainer>
+    <MainContainer>
+      <OuterFlexContainer>
+        <InnerFlexContainer>
+          <TextContainer>
+            <Headline>Sell your products and services online</Headline>
+            <Caption>
+              Include an online checkout form on any webpage, sales page, or
+              pop-up.
+              <br />
+              <span style={{ fontSize: '14px' }}>Powered by</span>
+              <StripeSVG
+                src={stripeLogo.src}
+                alt="stripe integration logo"
+              ></StripeSVG>
+            </Caption>
+
+            <FeaturesContainer>
+              <FeatureContainer>
+                <SVG src={checkSVG.src} alt="check mark svg" />
+                <Feature>Accept all major credit cards</Feature>
+              </FeatureContainer>
+              <FeatureContainer>
+                <SVG
+                  src={checkSVG.src}
+                  alt="Leadpages work perks careers left image"
+                />
+                <Feature>Collect shipping information</Feature>
+              </FeatureContainer>
+              <FeatureContainer>
+                <SVG
+                  src={checkSVG.src}
+                  alt="Leadpages work perks careers left image"
+                />
+                <Feature>Send automatic receipts</Feature>
+              </FeatureContainer>
+              <FeatureContainer>
+                <SVG
+                  src={checkSVG.src}
+                  alt="Leadpages work perks careers left image"
+                />
+                <Feature>Easily process refunds</Feature>
+              </FeatureContainer>
+              <Link
+                href="/product/checkouts"
+                aria-label="Leadpages checkouts product detail page"
+              >
+                <a>
                   <CTA>
                     Leadpages Checkouts
-                    <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
+                    <ArrowRightPurple
+                      src={rightArrowPurple.src}
+                      alt="purple right arrow"
+                    />
                   </CTA>
-                </StyledLink>
-              </FeaturesContainer>
-            </TextContainer>
-            <ImageContainer>
-              <CustomImage
-                image={getImage(images.featuredImage)}
-                alt="Leadpages checkouts product image"
-              />
-            </ImageContainer>
-          </InnerFlexContainer>
-        </OuterFlexContainer>
-      </MainContainer>
-    </OuterContainer>
-  );
-};
+                </a>
+              </Link>
+            </FeaturesContainer>
+          </TextContainer>
+          <ImageContainer>
+            <CustomImage
+              src={featuredImage.src}
+              alt="Leadpages checkouts product image"
+            />
+          </ImageContainer>
+        </InnerFlexContainer>
+      </OuterFlexContainer>
+    </MainContainer>
+  </OuterContainer>
+)
 
-export default CheckoutsProduct;
+export default CheckoutsProduct

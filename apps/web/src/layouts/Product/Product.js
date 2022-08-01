@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@design'
 // components
-// import CheckoutsProduct from '@legacy/components/product/CheckoutsProduct'
+import CheckoutsProduct from '@legacy/components/product/CheckoutsProduct'
 // import ColumnsLeft from '@legacy/components/columns/ColumnsLeft'
 // import ColumnsRight from '@legacy/components/columns/ColumnsRight'
 // import ConnectAccount from '@legacy/components/product/ConnectAccount'
@@ -281,7 +281,7 @@ const ProductPage = () => {
         clientTitle="Executive Coach & Consultant"
       /> */}
       <SpacerRow sizeArray={[4.5, 4.5, 4.5, 4.5]} />
-      {/* <CheckoutsProduct /> */}
+      <CheckoutsProduct />
       <ReadyToGrow
         title="Ready to get online and grow?"
         headline="Try Leadpages Free for 14 days"
