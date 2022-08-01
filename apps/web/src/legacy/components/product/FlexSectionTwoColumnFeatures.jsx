@@ -1,200 +1,182 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
-import { GATSBY_IMAGE } from '../../constants/types';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Image from '@components/Image'
 
-const OuterContainer = styled.div`
-  position: relative;
-  overflow: hidden;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  overflow: 'hidden',
+})
 
-const FlexRow = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-`;
+const FlexRow = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  display: 'flex',
+  justifyContent: 'space-between',
+  position: 'relative',
+})
 
-const InnerContainer = styled(FlexRow)`
-  flex-wrap: wrap;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  flex-direction: ${props => (props.flexReverse ? 'row-reverse' : 'row')};
-  @media (min-width: 576px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (min-width: 992px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const InnerContainer = styled(FlexRow, {
+  flexWrap: 'wrap',
+  px: '3rem',
 
-const FlexRowItem6 = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-  justify-content: space-between;
-  text-align: left;
-  margin-right: 1%;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
+  '@>m': {
+    px: '6rem',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  variants: {
+    flexReverse: {
+      true: {
+        flexDirection: 'row-reverse',
+      },
+      false: {
+        flexDirection: 'row',
+      },
+    },
+  },
+})
 
-const TextContainer = styled(FlexRowItem6)`
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+const FlexRowItem6 = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+  justifyContent: 'space-between',
+  textAlign: 'left',
+  marginRight: '1%',
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  '@>s': {
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
 
-const HeadingContainer = styled(FlexRowItem6)`
-  margin-top: 4rem;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+  '@>m': {
+    marginBottom: 0,
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-`;
+const TextContainer = styled(FlexRowItem6, {
+  '@>s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const CopyContainer = styled(FlexRowItem6)`
-  display: flex;
-  flex-wrap: wrap;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+  '@>m': {
+    marginBottom: 0,
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-`;
+const HeadingContainer = styled(FlexRowItem6, {
+  marginTop: '4rem',
 
-const ImageContainer = styled(FlexRowItem6)`
-  align-self: flex-end;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+  '@>s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  '@>m': {
+    marginBottom: 0,
+  },
+})
 
-const FlexRowItem6Heading = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  margin-bottom: 1.25rem;
-  color: #0f0c09;
-`;
+const CopyContainer = styled(FlexRowItem6, {
+  display: 'flex',
+  flexWrap: 'wrap',
 
-const FlexRowItem6Copy = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 3rem;
-`;
+  '@>s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const Heading = styled.div`
-  font-family: 'Value Serif';
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.1px;
-  color: #0f0c09;
-  margin-bottom: 2rem;
-  text-align: left;
-  @media (max-width: 767px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-    text-align: center;
-  }
-`;
+  '@>m': {
+    marginBottom: 0,
+  },
+})
 
-const TransformCopy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  color: #575452;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
-`;
+const ImageContainer = styled(FlexRowItem6, {
+  alignSelf: 'flex-end',
 
-const BackgroundImageContainer = styled.img`
-  position: absolute;
-  right: ${props => (props.flexReverse ? '' : 0)};
-  left: ${props => (props.flexReverse ? 0 : '')};
-  bottom: 0;
-  z-index: -1;
-  overflow-x: hidden;
-  height: 90%;
-  @media (max-width: 991px) {
-    max-height: 55%;
-  }
-  @media (max-width: 480px) {
-    display: none;
-  }
-  &.leftoffset {
-    left: ${props => props.bgImageOffsetLeft};
-  }
-  &.rightoffset {
-    right: ${props => props.bgImageOffsetRight};
-  }
-`;
+  '@>s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
+
+  '@>m': {
+    marginBottom: 0,
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
+
+const FlexRowItem6Heading = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  marginBottom: '1.25rem',
+  color: '$text',
+})
+
+const FlexRowItem6Copy = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '3rem',
+})
+
+const Heading = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '30px',
+  lineHeight: '36px',
+  letterSpacing: '-0.1px',
+  color: '$text',
+  marginBottom: '2rem',
+  textAlign: 'left',
+
+  '@media (max-width: 767px)': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+    textAlign: 'center',
+  },
+})
+
+const TransformCopy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  color: '$textAlt',
+  marginTop: '2rem',
+  marginBottom: '4rem',
+})
+
+const BackgroundImageContainer = styled('img', {
+  position: 'absolute',
+  bottom: 0,
+  zIndex: -1,
+  overflowX: 'hidden',
+  height: '90%',
+
+  '@media (max-width: 991px)': {
+    maxHeight: '55%',
+  },
+
+  '@media (max-width: 480px)': {
+    display: 'none',
+  },
+
+  variants: {
+    flexReverse: {
+      false: {
+        right: 0,
+      },
+    },
+  },
+})
 
 const FlexSectionTwoColumnFeatures = ({
   flexReverse,
@@ -215,10 +197,17 @@ const FlexSectionTwoColumnFeatures = ({
 }) => (
   <OuterContainer>
     <BackgroundImageContainer
-      src={bgImage}
+      src={bgImage.src}
       alt={bgImageAlt}
-      bgImageOffsetLeft={bgImageOffsetLeft}
-      bgImageOffsetRight={bgImageOffsetRight}
+      flexReverse={flexReverse}
+      css={{
+        ...(bgImageOffsetRight
+          ? { '&.rightoffset': { right: bgImageOffsetRight } }
+          : {}),
+        ...(bgImageOffsetLeft
+          ? { '&.leftoffset': { left: bgImageOffsetLeft } }
+          : {}),
+      }}
       className={`${flexReverse && bgImageOffsetLeft ? 'leftoffset' : ''} ${
         !flexReverse && bgImageOffsetRight ? 'rightoffset' : ''
       }`}
@@ -245,11 +234,11 @@ const FlexSectionTwoColumnFeatures = ({
         </CopyContainer>
       </TextContainer>
       <ImageContainer>
-        <GatsbyImage image={image} alt={imageAlt} />
+        <Image image={image} alt={imageAlt} />
       </ImageContainer>
     </InnerContainer>
   </OuterContainer>
-);
+)
 
 FlexSectionTwoColumnFeatures.propTypes = {
   flexReverse: PropTypes.bool,
@@ -265,9 +254,9 @@ FlexSectionTwoColumnFeatures.propTypes = {
   feature2Caption: PropTypes.string,
   feature3Heading: PropTypes.string,
   feature3Caption: PropTypes.string,
-  image: GATSBY_IMAGE.isRequired,
+  image: Image.isRequired,
   imageAlt: PropTypes.string.isRequired,
-};
+}
 
 FlexSectionTwoColumnFeatures.defaultProps = {
   flexReverse: false,
@@ -277,6 +266,6 @@ FlexSectionTwoColumnFeatures.defaultProps = {
   feature2Caption: '',
   feature3Heading: '',
   feature3Caption: '',
-};
+}
 
-export default FlexSectionTwoColumnFeatures;
+export default FlexSectionTwoColumnFeatures

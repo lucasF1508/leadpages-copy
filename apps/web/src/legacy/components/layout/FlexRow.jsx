@@ -382,25 +382,39 @@ const FlexRow = ({
   narrowOverride,
   arrows,
   checkmarks,
-}) => {
-  console.log({ bgImageMargin, flexDirectionReverse })
-  return (
-    <OuterContainer>
-      <FlexContainer reverse={flexDirectionReverse}>
-        <TextContainer reverse={flexDirectionReverse}>
-          {title && <Title>{title}</Title>}
-          {headline && <Headline>{headline}</Headline>}
-          {caption && <Caption>{caption}</Caption>}
-          <LinkHolder>
-            {!!ctaArray.length &&
-              ctaArray.map((item, index) => {
-                const { text, link, linkAlt, outbound } = item
-                return outbound ? (
-                  <OutboundStyledLink
-                    key={index}
-                    href={link}
-                    alt={linkAlt || TextEncoder}
-                  >
+}) => (
+  <OuterContainer>
+    <FlexContainer reverse={flexDirectionReverse}>
+      <TextContainer reverse={flexDirectionReverse}>
+        {title && <Title>{title}</Title>}
+        {headline && <Headline>{headline}</Headline>}
+        {caption && <Caption>{caption}</Caption>}
+        <LinkHolder>
+          {!!ctaArray.length &&
+            ctaArray.map((item, index) => {
+              const { text, link, linkAlt, outbound } = item
+              return outbound ? (
+                <OutboundStyledLink
+                  key={index}
+                  href={link}
+                  alt={linkAlt || TextEncoder}
+                >
+                  <CTA>
+                    {checkmarks && (
+                      <CheckInCircle
+                        src={checkInCircleSVG.src}
+                        alt="checkmark circle"
+                      />
+                    )}
+                    <TextWrapper>{text}</TextWrapper>
+                    {arrows && (
+                      <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
+                    )}
+                  </CTA>
+                </OutboundStyledLink>
+              ) : (
+                <Link href={link} passHref>
+                  <StyledLink key={index} aria-label={linkAlt || text}>
                     <CTA>
                       {checkmarks && (
                         <CheckInCircle
@@ -413,58 +427,42 @@ const FlexRow = ({
                         <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
                       )}
                     </CTA>
-                  </OutboundStyledLink>
-                ) : (
-                  <Link href={link} passHref>
-                    <StyledLink key={index} aria-label={linkAlt || text}>
-                      <CTA>
-                        {checkmarks && (
-                          <CheckInCircle
-                            src={checkInCircleSVG.src}
-                            alt="checkmark circle"
-                          />
-                        )}
-                        <TextWrapper>{text}</TextWrapper>
-                        {arrows && (
-                          <ArrowRight
-                            src={rightArrowSVG.src}
-                            alt="right arrow"
-                          />
-                        )}
-                      </CTA>
-                    </StyledLink>
-                  </Link>
-                )
-              })}
-          </LinkHolder>
-        </TextContainer>
-        <ImageContainer reverse={flexDirectionReverse} padImage={padImage}>
-          {bgImage && (
-            <BackgroundImage
-              image={bgImage}
-              alt={bgImageAlt}
-              reverse={flexDirectionReverse}
-              margin={bgImageMargin}
-              css={{
-                ...(flexDirectionReverse
-                  ? { ml: bgImageMargin }
-                  : { mr: bgImageMargin }),
-              }}
-            />
-          )}
-          <Image
-            className="image-wrapper"
-            image={image}
-            alt={imageAlt || title}
+                  </StyledLink>
+                </Link>
+              )
+            })}
+        </LinkHolder>
+      </TextContainer>
+      <ImageContainer
+        reverse={flexDirectionReverse}
+        padImage={padImage}
+        narrowOverride={narrowOverride}
+      >
+        {bgImage && (
+          <BackgroundImage
+            image={bgImage}
+            alt={bgImageAlt}
+            reverse={flexDirectionReverse}
+            margin={bgImageMargin}
             css={{
-              ...(imageMaxWidth ? { maxWidth: imageMaxWidth } : {}),
+              ...(flexDirectionReverse
+                ? { ml: bgImageMargin }
+                : { mr: bgImageMargin }),
             }}
           />
-        </ImageContainer>
-      </FlexContainer>
-    </OuterContainer>
-  )
-}
+        )}
+        <Image
+          className="image-wrapper"
+          image={image}
+          alt={imageAlt || title}
+          css={{
+            ...(imageMaxWidth ? { maxWidth: imageMaxWidth } : {}),
+          }}
+        />
+      </ImageContainer>
+    </FlexContainer>
+  </OuterContainer>
+)
 
 FlexRow.defaultProps = {
   title: '',
