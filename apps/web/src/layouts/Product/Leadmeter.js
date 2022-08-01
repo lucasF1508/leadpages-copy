@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@design'
 // components
-// import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
+import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 // import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
 // import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import LeadmeterMakeTheMost from '@legacy/components/product/LeadmeterMakeTheMost'
@@ -9,10 +9,10 @@ import LeadmeterMakeTheMost from '@legacy/components/product/LeadmeterMakeTheMos
 // import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
 // import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
-// import SpacerRow from '@legacy/components/SpacerRow'
+import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
-// import heroImage from '@legacy/assets/images/heros/leadmeter-hero_600px@2x.png'
+import heroImage from '@legacy/assets/images/heros/leadmeter-hero_600px@2x.png'
 import productFeatureImage1 from '@legacy/assets/images/product/leadmeter/improve-cro_page-layout-and-content.png'
 import productFeatureImage2 from '@legacy/assets/images/product/leadmeter/improve-cro_call-to-action-countdown.png'
 import productFeatureImage3 from '@legacy/assets/images/product/leadmeter/improve-cro_readability.png'
@@ -20,9 +20,8 @@ import realtimeAnalysisFeatureIcon from '@legacy/assets/images/icons/featureicon
 import expertMarketingAdviceFeatureIcon from '@legacy/assets/images/icons/featureicons/cyan_monitor-award.png'
 import stepbystepGuidanceFeatureIcon from '@legacy/assets/images/icons/featureicons/rose_argyle.png'
 import betterResultsFeatureIcon from '@legacy/assets/images/icons/featureicons/camel_chart.png'
-
 // import circleForestLightSVG from '@legacy/assets/images/shapes/circle-forest-light.svg'
-// import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
+import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 
 const ClickRevealSection_Desktop = styled('div', {
   display: 'block',
@@ -103,7 +102,7 @@ const LeadmeterProductPage = () => {
         description="Get data-powered, real-time conversion tips at your fingertips with Leadpages Leadmeter—helping you guess less and grow more."
         image="https://static.leadpages.com/images/og/og-leadmeter.jpg"
       />
-      {/* <ChildPageHeader
+      <ChildPageHeader
         headingText="Leadmeter"
         subheadingText="Get data-powered, real-time conversion tips at your fingertips, helping you build higher-performing pages so you can guess less and grow more."
         outboundCTA={false}
@@ -112,7 +111,7 @@ const LeadmeterProductPage = () => {
         bgImage={semicircleGraySVG}
         bgImageAltText="Capture your audience background"
       />
-      <SpacerRow size="small" /> */}
+      <SpacerRow size="small" />
       {/* <HeadlineSection
         title="Improve Your Conversion Rates with Custom, Real-time Recommendations"
         caption="The Leadmeter is built-in technology that instantly analyzes your page's content, compares it to tens of thousands of pages in our database, rates its ability to convert, and provides step-by-step guidance on how to optimize your page as you build it."

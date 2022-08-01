@@ -1,7 +1,4 @@
 import React from 'react'
-// import { useStaticQuery, graphql } from 'gatsby';
-// import { getImage } from 'gatsby-plugin-image';
-// import styled from 'styled-components';
 import { styled } from '@design'
 // components
 // import CheckoutsProduct from '@legacy/components/product/CheckoutsProduct'
@@ -10,13 +7,12 @@ import { styled } from '@design'
 // import ConnectAccount from '@legacy/components/product/ConnectAccount'
 import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
-import Layout from '@legacy/components/Layout'
 import ProductPageHeader from '@legacy/components/headers/ProductPageHeader'
 // import ProductToolkitClickReveal from '@legacy/components/click-reveals/ProductToolkitClickReveal'
 // import ProductToolkitRotator from '@legacy/components/rotators/ProductToolkitRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 // import Resources from '@legacy/components/product/Resources'
-// import SEO from '@legacy/components/SEO'
+import SEO from '@legacy/components/SEO'
 // import SingleTestimonialQuoteRow from '@legacy/components/testimonials/SingleTestimonialQuoteRow'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
@@ -37,9 +33,9 @@ import revealImage1 from '@legacy/assets/images/product/website-builder/website-
 import revealImage2 from '@legacy/assets/images/product/landing-page-builder/landing-page-builder_736px@2x.png'
 import revealImage3 from '@legacy/assets/images/product/pop-up-builder/pop-up-form-builder_736px@2x.png'
 import revealImage4 from '@legacy/assets/images/product/alert-bars/alert-bar-builder_736px@2x.png'
-import testimonialImage1 from '@legacy/assets/images/testimonials/jackie-ellis-color-circle.png'
-import testimonialImage2 from '@legacy/assets/images/testimonials/kailei-carr-color-circle.png'
-import testimonialImage3 from '@legacy/assets/images/testimonials/greg-benz-color-circle.png'
+// import testimonialImage1 from '@legacy/assets/images/testimonials/jackie-ellis-color-circle.png'
+// import testimonialImage2 from '@legacy/assets/images/testimonials/kailei-carr-color-circle.png'
+// import testimonialImage3 from '@legacy/assets/images/testimonials/greg-benz-color-circle.png'
 import AlertBarsIconSVG from '@legacy/assets/images/icons/toolkiticons/AlertBars.svg'
 import LandingPagesIconSVG from '@legacy/assets/images/icons/toolkiticons/LandingPages.svg'
 import PopupsIconSVG from '@legacy/assets/images/icons/toolkiticons/Popup.svg'
@@ -231,13 +227,13 @@ const ProductPage = () => {
   ]
 
   return (
-    <Layout underlaidMenu>
-      {/* <SEO
+    <>
+      <SEO
         pathname="/product"
         title="Website & Landing Page Builder | Leadpages"
         description="Discover the tools you need to get online and grow your business: easy-to-make websites, landing pages, & more."
         image="https://static.leadpages.com/images/og/og-product.jpg"
-      /> */}
+      />
       <ProductPageHeader />
       <SpacerRow sizeArray={[3.5, 3.5, 3.5, 3.5]} backgroundColor="$grayAlt" />
       <FeatureIconsGrid
@@ -324,7 +320,7 @@ const ProductPage = () => {
         mobileHeadlineFontSize="30px"
         mobileHeadlineLineHeight="40px"
       />
-    </Layout>
+    </>
   )
 }
 

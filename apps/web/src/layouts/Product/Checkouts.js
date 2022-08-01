@@ -4,25 +4,25 @@ import React from 'react'
 import { styled } from '@design'
 // components
 import CheckoutsFeatures from '@legacy/components/product/CheckoutsFeatures'
-// import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
+import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 // import CloseSalesCollectPayments from '@legacy/components/product/CloseSalesCollectPayments'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 // import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 // import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-// import SEO from '@legacy/components/SEO'
+import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // import TurnYourExpertiseIntoRevenue from '@legacy/components/product/TurnYourExpertiseIntoRevenue'
 // images
-// import heroImage from '@legacy/assets/images/heros/checkouts-hero_600px@2x.png'
+import heroImage from '@legacy/assets/images/heros/checkouts-hero_600px@2x.png'
 import productFeatureImage1 from '@legacy/assets/images/product/checkouts/turn-any-webpage-into-a-checkout.png'
 import productFeatureImage2 from '@legacy/assets/images/product/checkouts/easily-upsell-your-email-subscribers.png'
 import productFeatureImage3 from '@legacy/assets/images/product/checkouts/recurring-services_623px@2x.png'
 import productFeatureImage4 from '@legacy/assets/images/product/checkouts/sales-page-live-webinar@2x.png'
 import productFeatureImage5 from '@legacy/assets/images/product/checkouts/event-signup-landing-pages@2x.png'
 // import circleForestLightSVG from '@legacy/assets/images/shapes/circle-forest-light.svg'
-// import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
+import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 
 const ClickRevealSection_Desktop = styled('div', {
   display: 'block',
@@ -71,7 +71,7 @@ const CheckoutsProductPage = () => {
 
   return (
     <>
-      {/* <SEO
+      <SEO
         pathname="/product/checkouts"
         title="Leadpages Checkout Widget"
         description="Create a Leadpages checkout and then embed it on any web page or pop-up you want. Easily sell online services, deliver products, and accept recurring payments."
@@ -85,12 +85,12 @@ const CheckoutsProductPage = () => {
         CTAtext=""
         link=""
         linkText=""
-        image={getImage(images.heroImage)}
+        image={heroImage}
         imageAltText="Easily sell your services online"
         bgImage={semicircleGraySVG}
         bgImageAltText="Easily sell your services online"
       />
-      <TurnYourExpertiseIntoRevenue />
+      {/* <TurnYourExpertiseIntoRevenue />
       <CloseSalesCollectPayments /> */}
       <CheckoutsFeatures />
       <SpacerRow size="small" />

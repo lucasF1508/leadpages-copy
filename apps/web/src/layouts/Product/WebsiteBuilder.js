@@ -1,8 +1,6 @@
 import React from 'react'
-// import { useStaticQuery, graphql } from 'gatsby'
-// import { getImage } from 'gatsby-plugin-image'
 // components
-// import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
+import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 import ConversionFirstBuilder from '@legacy/components/product/ConversionFirstBuilder'
 // import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
 // import FlexSectionReverse from '@legacy/components/product/FlexSectionReverse'
@@ -15,14 +13,14 @@ import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
-// import heroImage from '@legacy/assets/images/heros/website-builder-hero_657px@2x.png'
+import heroImage from '@legacy/assets/images/heros/website-builder-hero_657px@2x.png'
 // import flexImageOne from '@legacy/assets/images/product/website-builder/build-a-business_leadpages_sites-624px@2x.png'
 // import flexTwoColumnImage from '@legacy/assets/images/product/website-builder/fast-high-converting-sites_Leadpages-665px@2x.png'
 // import siteTestimonialImage1 from '@legacy/assets/images/testimonials/clayton-poland.png'
 // import siteTestimonialImage2 from '@legacy/assets/images/testimonials/collin-belt.png'
 // import circleForestDarkSVG from '@legacy/assets/images/shapes/circle-forest-dark.svg'
 // import wedgeLavenderSVG from '@legacy/assets/images/shapes/wedge-lavender.svg'
-// import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
+import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 // import wavyLinesHourglassTan from '@legacy/assets/images/shapes/wavy-lines-hourglass-tan.svg'
 
 const WebsiteBuilderProductPage = () => (
@@ -33,7 +31,7 @@ const WebsiteBuilderProductPage = () => (
       description="Build high-converting websites in minutes⁠—no coding required. Choose from a collection of templates that keep your online presence professional across devices."
       image="https://static.leadpages.com/images/og/og-sites.jpg"
     />
-    {/* <ChildPageHeader
+    <ChildPageHeader
       headingText="Leadpages Site Builder"
       subheadingText="Experience the only online website builder that lets you easily create a high-converting website with code-free customizations."
       outboundCTA={false}
@@ -41,11 +39,11 @@ const WebsiteBuilderProductPage = () => (
       CTAtext="Visit the template gallery"
       link="/website-templates"
       linkText="Leadpages Sites Template Gallery"
-      image={getImage(images.heroImage)}
+      image={heroImage}
       imageAltText="Capture your audience"
       bgImage={semicircleGraySVG}
       bgImageAltText="Capture your audience background"
-    /> */}
+    />
     {/* <SpacerRow size="small" />
     <HeadlineSection subtitle="Don’t just build a website. Build a business." /> */}
     {/* <FlexSectionReverse

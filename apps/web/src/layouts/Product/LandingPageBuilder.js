@@ -1,8 +1,6 @@
 import React from 'react'
-// import { useStaticQuery, graphql } from 'gatsby'
-// import { getImage } from 'gatsby-plugin-image'
 // components
-// import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
+import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 // import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
 import EasilyTest from '@legacy/components/product/EasilyTest'
 // import GetInspired_LandingPage from '@legacy/components/product/GetInspired_LandingPage'
@@ -11,17 +9,17 @@ import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 // import PowerfulFeatures from '@legacy/components/product/PowerfulFeatures'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 // import SaveTime from '@legacy/components/product/SaveTime'
-// import SEO from '@legacy/components/SEO'
+import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import TakeControl from '@legacy/components/product/TakeControl'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
-// import heroImage from '@legacy/assets/images/heros/landing-page-builder-hero_831px@2x.png'
-// import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
+import heroImage from '@legacy/assets/images/heros/landing-page-builder-hero_831px@2x.png'
+import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 
 const LandingPageBuilderProductPage = () => (
   <>
-    {/* <SEO
+    <SEO
       pathname="/product/landing-page-builder"
       title="Create Professional Landing Pages with Leadpages"
       description="Use Leadpages' drag-n-drop landing page builder to create a professional page for your business. Integrations, templates, etc.—everything you need is here."
@@ -34,14 +32,14 @@ const LandingPageBuilderProductPage = () => (
       CTAtext="Visit the template gallery "
       link="/templates"
       linkText="Visit the template gallery"
-      image={getImage(images.heroImage)}
+      image={heroImage}
       imageAltText="Confidently grow your business"
       bgImage={semicircleGraySVG}
       bgImageAltText="Confidently grow your business"
     />
-    <PowerfulFeatures />
+    {/* <PowerfulFeatures />
     <TakeControl />
-    <HomePageTraffic /> */}
+    <HomePageTraffic />  */}
     <EasilyTest />
     {/* <SaveTime />
     <GetInspired_LandingPage /> */}

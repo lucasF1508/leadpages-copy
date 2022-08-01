@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from '@design'
 // components
-// import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
+import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 // import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
 // import MakeTheMost from '@legacy/components/product/MakeTheMost'
 import GetInspired_AlertBars from '@legacy/components/product/GetInspired_AlertBars'
@@ -15,13 +15,13 @@ import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
-// import heroImage from '@legacy/assets/images/heros/alert-bars-hero_615px@2x.png'
+import heroImage from '@legacy/assets/images/heros/alert-bars-hero_615px@2x.png'
 import productFeatureImage1 from '@legacy/assets/images/product/alert-bars/flexible-mobile_friendly-alert-bar-624px@2x.png'
 import productFeatureImage2 from '@legacy/assets/images/product/alert-bars/flexible-form-text-alert-bar-624px@2x.png'
 import productFeatureImage3 from '@legacy/assets/images/product/alert-bars/flexible-publishing-alert-bar-624px@2x.png'
 import productFeatureImage4 from '@legacy/assets/images/product/alert-bars/analytics-alert-bar-624px@2x.png'
 // import circleSandSideSVG from '@legacy/assets/images/shapes/circle-sand-side.svg'
-// import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
+import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 
 const ClickRevealSection_Desktop = styled('div', {
   display: 'block',
@@ -71,7 +71,7 @@ const AlertBarsProductPage = () => {
         description="Capture your audience’s attention & boost conversions with mobile-friendly alert bars! Add alert bars to any landing page, web page, or website."
         image="https://static.leadpages.com/images/og/og-alert-bars.jpg"
       />
-      {/* <ChildPageHeader
+      <ChildPageHeader
         headingText="Alert Bars"
         subheadingText="Capture your audience's attention and boost conversions with a non-intrusive, mobile-friendly alert bar."
         showCTA={false}
@@ -81,7 +81,7 @@ const AlertBarsProductPage = () => {
         imageAltText="Alert Bars"
         bgImage={semicircleGraySVG}
         bgImageAltText="Capture your audience's attention"
-      /> */}
+      />
       <SpacerRow size="small" />
       <HeadlineSection
         title="Flexible options to fit your needs"

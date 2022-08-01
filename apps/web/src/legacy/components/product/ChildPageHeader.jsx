@@ -1,176 +1,158 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { GATSBY_IMAGE } from '../../constants/types';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
+import Image from 'next/image'
 // images
-import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg';
+import rightArrowPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
 
-const OuterContainer = styled.div`
-  margin-top: -60px;
-  padding-top: 108px;
-  position: relative;
-  background-color: #f7f7f7;
-`;
+const OuterContainer = styled('div', {
+  marginTop: '-60px',
+  paddingTop: '108px',
+  position: 'relative',
+})
 
-const HeaderContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 992px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-  z-index: 2;
-`;
+const HeaderContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  px: '3rem',
+  zIndex: '$aboveContent',
 
-const FlexRow = styled.div`
-  padding-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
+  '@media (min-width: 992px)': {
+    px: '6rem',
+  },
+})
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-`;
+const FlexRow = styled('div', {
+  paddingTop: '3rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  flexWrap: 'wrap',
+})
 
-const FlexRowLeft = styled(FlexRowItem)`
-  justify-content: space-between;
-  text-align: left;
-  @media (max-width: 575px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 80%;
-    flex: 0 0 80%;
-    max-width: 80%;
-  }
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 40.6666%;
-    flex: 0 0 40.6666%;
-    max-width: 40.6666%;
-  }
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 45%;
-    flex: 0 0 45%;
-    max-width: 45%;
-  }
-`;
-const HeaderImgLeft = styled.div`
-  width: 100%;
-`;
+const FlexRowLeft = styled(FlexRowItem, {
+  justifyContent: 'space-between',
+  textAlign: 'left',
 
-const FlexRowRight = styled(FlexRowItem)`
-  text-align: left;
-  align-self: flex-end;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 45%;
-    flex: 0 0 45%;
-    max-width: 45%;
-  }
+  '@media (max-width: 575px)': {
+    WebkitBoxFlex: 0,
+    MsFlex: '0 0 80%',
+    flex: '0 0 80%',
+    maxWidth: '80%',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 45%;
-    flex: 0 0 45%;
-    max-width: 45%;
-    text-align: left;
-  }
-`;
+  '@>s': {
+    flex: '0 0 40.6666%',
+    maxWidth: '40.6666%',
+  },
 
-const SmallHeading = styled.div`
-  font-family: 'Space Mono';
-  opacity: 0.5;
-  color: #000000;
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-transform: uppercase;
-`;
+  '@>m': {
+    marginBottom: '0rem',
+    flex: '0 0 45%',
+    maxWidth: '45%',
+  },
+})
 
-const LeftHeading = styled.div`
-  margin-top: 1rem;
-  font-family: 'Value Serif';
-  font-size: 2.5rem;
-  letter-spacing: -0.03125rem;
-  line-height: 3rem;
-  color: #0f0c09;
-  margin-bottom: 2rem;
-  @media (max-width: 576px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-  }
-`;
+const HeaderImgLeft = styled('div', {
+  width: '100%',
+})
 
-const LeftSubHeading = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 1.125rem;
-  line-height: 1.875rem;
-  margin-bottom: 2rem;
-  @media (max-width: 576px) {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-`;
+const FlexRowRight = styled(FlexRowItem, {
+  textAlign: 'left',
+  alignSelf: 'flex-end',
 
-const LeftCTA = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 30px;
-  text-align: left;
-  font-weight: 500;
-  margin-bottom: 3rem;
-`;
+  '@>s': {
+    flex: '0 0 45%',
+    maxWidth: '45%',
+  },
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`;
+  '@>m': {
+    marginBottom: '0rem',
+    flex: '0 0 45%',
+    maxWidth: '45%',
+    textAlign: 'left',
+  },
+})
 
-const SVGContainer = styled.img`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  overflow-x: hidden;
-  width: 100%;
-  @media (min-width: 992px) and (max-width: 1439px) {
-    width: 90%;
-  }
-  @media (min-width: 1440px) {
-    width: 70%;
-  }
-  /* max-width: 667px;
-  max-height: 583px; */
-`;
+const SmallHeading = styled('div', {
+  fontFamily: 'Space Mono',
+  opacity: 0.5,
+  color: '$black',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  textTransform: 'uppercase',
+})
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`;
+const LeftHeading = styled('div', {
+  marginTop: '1rem',
+  fontFamily: 'Value Serif',
+  fontSize: '2.5rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '3rem',
+  color: '$text',
+  marginBottom: '2rem',
 
-const OutboundLink = styled.a`
-  text-decoration: none;
-  &:hover {
-    cursor: pointer;
-  }
-`;
+  '@<s': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+  },
+})
+
+const LeftSubHeading = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '1.125rem',
+  lineHeight: '1.875rem',
+  marginBottom: '2rem',
+
+  '@<s': {
+    fontSize: '1rem',
+    lineHeight: '1.5rem',
+  },
+})
+
+const LeftCTA = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '30px',
+  textAlign: 'left',
+  fontWeight: 500,
+  marginBottom: '3rem',
+})
+
+const BackgroundImage = styled('img', {
+  position: 'absolute',
+  right: 0,
+  bottom: 0,
+  overflowX: 'hidden',
+  width: '100%',
+
+  '@media (min-width: 992px) and (max-width: 1439px)': {
+    width: '90%',
+  },
+
+  '@media (min-width: 1440px)': {
+    width: '70%',
+  },
+})
+
+const ArrowRightPurple = styled('img', {
+  width: '20px',
+  height: '10px',
+})
+
 const ChildPageHeader = ({
   bgColor,
   bgImage,
@@ -189,8 +171,8 @@ const ChildPageHeader = ({
   image,
   imageAltText,
 }) => (
-  <OuterContainer style={{ backgroundColor: bgColor }}>
-    <SVGContainer src={bgImage} alt={bgImageAltText} />
+  <OuterContainer css={{ bc: bgColor || '$grayAlt' }}>
+    <BackgroundImage src={bgImage.src} alt={bgImageAltText} />
     <HeaderContainer>
       <FlexRow>
         <FlexRowLeft>
@@ -200,47 +182,65 @@ const ChildPageHeader = ({
           </LeftHeading>
           <LeftSubHeading>{subheadingText}</LeftSubHeading>
           {outboundCTA === 'true' && (
-            <OutboundLink href={link} alt={linkText} rel="noopener nofollow" target="_blank">
-              <LeftCTA>
-                {CTAtext}
-                <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
-              </LeftCTA>
-            </OutboundLink>
+            <Link href={link}>
+              <a
+                aria-label={linkText}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <LeftCTA>
+                  {CTAtext}
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
+                </LeftCTA>
+              </a>
+            </Link>
           )}
           {!!showCTA && (
-            <StyledLink to={link} alt={linkText}>
-              <LeftCTA>
-                {CTAtext}
-                <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
-              </LeftCTA>
-            </StyledLink>
+            <Link href={link}>
+              <a aria-label={linkText}>
+                <LeftCTA>
+                  {CTAtext}
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
+                </LeftCTA>
+              </a>
+            </Link>
           )}
           {!!showLB && (
-            <OutboundLink
-              href=""
-              alt={linkText}
-              data-leadbox-popup={dataleadboxpopup}
-              data-leadbox-domain={dataleadboxdomain}
-            >
-              <LeftCTA>
-                {CTAtext}
-                <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
-              </LeftCTA>
-            </OutboundLink>
+            <Link href="">
+              <a
+                aria-label={linkText}
+                data-leadbox-popup={dataleadboxpopup}
+                data-leadbox-domain={dataleadboxdomain}
+              >
+                <LeftCTA>
+                  {CTAtext}
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
+                </LeftCTA>
+              </a>
+            </Link>
           )}
         </FlexRowLeft>
         <FlexRowRight>
           <HeaderImgLeft>
-            <GatsbyImage image={image} alt={imageAltText} />
+            <Image src={image} alt={imageAltText} />
           </HeaderImgLeft>
         </FlexRowRight>
       </FlexRow>
     </HeaderContainer>
   </OuterContainer>
-);
+)
 
 ChildPageHeader.defaultProps = {
-  bgColor: '#f7f7f7',
+  bgColor: '',
   bgImage: '',
   bgImageAltText: '',
   smallHeading: '',
@@ -254,7 +254,7 @@ ChildPageHeader.defaultProps = {
   showLB: false,
   dataleadboxpopup: '',
   dataleadboxdomain: '',
-};
+}
 
 ChildPageHeader.propTypes = {
   bgColor: PropTypes.string,
@@ -271,8 +271,8 @@ ChildPageHeader.propTypes = {
   showLB: PropTypes.bool,
   dataleadboxpopup: PropTypes.string,
   dataleadboxdomain: PropTypes.string,
-  image: GATSBY_IMAGE.isRequired,
+  image: Image.isRequired,
   imageAltText: PropTypes.string.isRequired,
-};
+}
 
-export default ChildPageHeader;
+export default ChildPageHeader
