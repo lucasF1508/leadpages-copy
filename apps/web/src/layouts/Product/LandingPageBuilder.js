@@ -5,7 +5,7 @@ import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 import EasilyTest from '@legacy/components/product/EasilyTest'
 import GetInspired_LandingPage from '@legacy/components/product/GetInspired_LandingPage'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
-// import HomePageTraffic from '@legacy/components/product/HomePageTraffic'
+import HomePageTraffic from '@legacy/components/product/HomePageTraffic'
 // import PowerfulFeatures from '@legacy/components/product/PowerfulFeatures'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 // import SaveTime from '@legacy/components/product/SaveTime'
@@ -37,9 +37,9 @@ const LandingPageBuilderProductPage = () => (
       bgImage={semicircleGraySVG}
       bgImageAltText="Confidently grow your business"
     />
-    {/* <PowerfulFeatures />
-    <TakeControl />
-    <HomePageTraffic />  */}
+    {/* <PowerfulFeatures /> */}
+    {/* <TakeControl /> */}
+    <HomePageTraffic />
     <EasilyTest />
     {/* <SaveTime /> */}
     <GetInspired_LandingPage />
