@@ -1,47 +1,47 @@
 import React, { useState, useEffect } from 'react'
+import { styled } from '@design'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import Image from 'next/image'
 // images
-import arrowRightWhiteSVG from '../../assets/images/global/arrow_right_white.svg'
+import arrowRightWhiteSVG from '@legacy/assets/images/global/arrow_right_white.svg'
 
-const ArrowButton = styled.div`
-  position: absolute;
-  z-index: 10;
-  width: 42px;
-  height: 42px;
-  background-color: #603eff;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  &:focus {
-    outline: 0;
-  }
-  &:hover {
-    background-color: #4d32cc;
-  }
-  &.arrow-right {
-    right: ${(props) => props.rightOffset};
-  }
-  &.arrow-left {
-    transform: rotate(180deg);
-    left: ${(props) => props.leftOffset};
-  }
-`
+const ArrowButton = styled('div', {
+  position: 'absolute',
+  zIndex: 10,
+  width: '42px',
+  height: '42px',
+  backgroundColor: '$primary',
+  borderRadius: '50%',
+  border: 'none',
+  cursor: 'pointer',
+  display: 'flex !important',
+  justifyContent: 'center',
+  alignItems: 'center',
 
-const ArrowSVG = styled(Image)`
-  height: 12px;
-  width: 12px;
-  margin-left: 1px;
-  display: block;
-`
+  '&:focus': {
+    outline: 0,
+  },
 
-const NavigationArrows = (props) => {
-  const { onClick, variant } = props
+  '&:hover': {
+    backgroundColor: '$indigoDark',
+  },
+})
+
+const ArrowSVG = styled('img', {
+  height: '12px',
+  width: '12px',
+  marginLeft: '1px',
+  display: 'block',
+})
+
+const NavigationArrows = ({
+  onClick,
+  variant,
+  leftOffset,
+  rightOffset,
+  ...props
+}) => {
   const [topOffset, setTopOffset] = useState(0)
+
   useEffect(() => {
     const slideImageEl = document
       .getElementById('slide-image')
@@ -49,8 +49,10 @@ const NavigationArrows = (props) => {
     const arrowButtonEl = document
       .getElementById('arrow-button')
       .getBoundingClientRect()
-    setTopOffset(slideImageEl?.height / 2 - arrowButtonEl.height / 2)
+    setTopOffset(slideImageEl.height / 2 - arrowButtonEl.height / 2)
   }, [])
+
+  const topOffsetStyle = `${topOffset}px`
 
   return (
     <ArrowButton
@@ -58,9 +60,25 @@ const NavigationArrows = (props) => {
       id="arrow-button"
       className={variant}
       onClick={onClick}
-      style={{ top: topOffset + 'px' }}
+      leftOffset={leftOffset}
+      rightOffset={rightOffset}
+      css={{
+        top: topOffsetStyle,
+        ...(rightOffset
+          ? {
+              '&.arrow-right': {
+                right: rightOffset,
+              },
+            }
+          : {}),
+        ...(leftOffset
+          ? {
+              '&.arrow-left': { transform: 'rotate(180deg)', left: leftOffset },
+            }
+          : {}),
+      }}
     >
-      <ArrowSVG src={arrowRightWhiteSVG} alt="navigation arrow icon" />
+      <ArrowSVG src={arrowRightWhiteSVG.src} alt="navigation arrow icon" />
     </ArrowButton>
   )
 }
