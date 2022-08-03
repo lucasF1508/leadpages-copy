@@ -1,176 +1,153 @@
-import React from 'react';
-import { StaticQuery, graphql, Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import Image from '@components/Image'
+import Link from 'next/link'
 // images
-import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg';
+import imageOne from '@legacy/assets/images/integrations/leadpages-integrations-product-550px@2x.png'
+import rightArrowPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
 
-const STContainer = styled.div`
-  padding-top: 6rem;
-  padding-right: 6rem;
-  padding-left: 6rem;
-  background-color: #f7f7f7;
-  @media (min-width: 576px) {
-    padding-top: 10rem;
-  }
-`;
+const STContainer = styled('div', {
+  paddingTop: '6rem',
+  px: '6rem',
+  backgroundColor: '$grayAlt',
 
-const FlexRow = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
+  '@>s': {
+    paddingTop: '10rem',
+  },
+})
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-`;
+const FlexRow = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  display: 'flex',
+  justifyContent: 'space-between',
+  flexWrap: 'wrap',
+})
 
-const FlexRowLeft = styled(FlexRowItem)`
-  text-align: left;
-  align-self: center;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+})
 
-  @media (max-width: 900px) {
-    padding-bottom: 3rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+const FlexRowLeft = styled(FlexRowItem, {
+  textAlign: 'left',
+  alignSelf: 'center',
 
-  @media (min-width: 992px) {
-    padding-bottom: 10rem;
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 40.6666%;
-    flex: 0 0 40.6666%;
-    max-width: 40.6666%;
-  }
-`;
-const HeaderImgLeft = styled.div`
-  width: 100%;
-`;
+  '@media (max-width: 900px)': {
+    paddingBottom: '3rem',
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const LeftContainer = styled.div``;
+  '@>m': {
+    paddingBottom: '10rem',
+    marginBottom: 0,
+    flex: '0 0 40.6666%',
+    maxWidth: '40.6666%',
+  },
+})
+const HeaderImgLeft = styled('div', {
+  width: '100%',
+})
 
-const FlexRowRight = styled(FlexRowItem)`
-  align-self: flex-end;
-  @media (max-width: 900px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+const LeftContainer = styled('div', {})
 
-  @media (min-width: 992px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 49%;
-    flex: 0 0 49%;
-    max-width: 49%;
-  }
-`;
+const FlexRowRight = styled(FlexRowItem, {
+  alignSelf: 'flex-end',
 
-const LeftMiniHeading = styled.div`
-  opacity: 0.5;
-  color: #000000;
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  font-family: 'Space Mono';
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-`;
+  '@media (max-width: 900px)': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const LeftHeading = styled.div`
-  font-family: 'Value Serif';
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.1px;
-  color: #0f0c09;
-  margin-bottom: 2rem;
-`;
+  '@>m': {
+    flex: '0 0 49%',
+    maxWidth: '49%',
+  },
+})
 
-const LeftSubHeading = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  line-height: 28px;
-  margin-bottom: 2rem;
-`;
+const LeftMiniHeading = styled('div', {
+  opacity: 0.5,
+  color: '$black',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  fontFamily: 'Space Mono',
+  textTransform: 'uppercase',
+  marginBottom: '2rem',
+})
 
-const LeftCTA = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 30px;
-  text-align: left;
-  font-weight: 500;
-`;
+const LeftHeading = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '30px',
+  lineHeight: '36px',
+  letterSpacing: '-0.1px',
+  color: '$text',
+  marginBottom: '2rem',
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`;
+const LeftSubHeading = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  lineHeight: '28px',
+  marginBottom: '2rem',
+})
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`;
+const LeftCTA = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '30px',
+  textAlign: 'left',
+  fontWeight: 500,
+})
 
-const SimpleSetup = () => (
-  <StaticQuery
-    query={graphql`
-      query SaveTimeQuery {
-        imageOne: file(
-          relativePath: {
-            eq: "assets/images/integrations/leadpages-integrations-product-550px@2x.png"
-          }
-        ) {
-          ...constrained
-        }
-      }
-    `}
-    render={data => (
-      <STContainer>
-        <FlexRow>
-          <FlexRowLeft>
-            <LeftContainer>
-              <LeftMiniHeading>Send Your Leads to the Apps You Love</LeftMiniHeading>
-              <LeftHeading>Save time with Leadpages integrations</LeftHeading>
-              <LeftSubHeading>
-                Become a true marketing pro when you use our seamless integrations that connect your
-                lead generation tools and marketing automation platforms. Create landing pages that
-                capture email addresses inside segmented lists, and nurture your new leads with
-                email marketing that works for you like a 24/7 sales team.
-              </LeftSubHeading>
-              <StyledLink to="/integrations">
-                <LeftCTA>
-                  Explore all Leadpages integrations&nbsp;
-                  <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
-                </LeftCTA>
-              </StyledLink>
-            </LeftContainer>
-          </FlexRowLeft>
-          <FlexRowRight>
-            <HeaderImgLeft>
-              <GatsbyImage
-                image={getImage(data.imageOne)}
-                alt="Explore all Leadpages integrations"
-              />
-            </HeaderImgLeft>
-          </FlexRowRight>
-        </FlexRow>
-      </STContainer>
-    )}
-  />
-);
+const ArrowRightPurple = styled('img', {
+  width: '20px',
+  height: '10px',
+})
 
-export default SimpleSetup;
+const SaveTime = () => (
+  <STContainer>
+    <FlexRow>
+      <FlexRowLeft>
+        <LeftContainer>
+          <LeftMiniHeading>
+            Send Your Leads to the Apps You Love
+          </LeftMiniHeading>
+          <LeftHeading>Save time with Leadpages integrations</LeftHeading>
+          <LeftSubHeading>
+            Become a true marketing pro when you use our seamless integrations
+            that connect your lead generation tools and marketing automation
+            platforms. Create landing pages that capture email addresses inside
+            segmented lists, and nurture your new leads with email marketing
+            that works for you like a 24/7 sales team.
+          </LeftSubHeading>
+          <Link href="/integrations">
+            <a>
+              <LeftCTA>
+                Explore all Leadpages integrations&nbsp;
+                <ArrowRightPurple
+                  src={rightArrowPurple.src}
+                  alt="purple right arrow"
+                />
+              </LeftCTA>
+            </a>
+          </Link>
+        </LeftContainer>
+      </FlexRowLeft>
+      <FlexRowRight>
+        <HeaderImgLeft>
+          <Image image={imageOne} alt="Explore all Leadpages integrations" />
+        </HeaderImgLeft>
+      </FlexRowRight>
+    </FlexRow>
+  </STContainer>
+)
+
+export default SaveTime

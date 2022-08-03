@@ -10,7 +10,7 @@ import HomePageTraffic from '@legacy/components/product/HomePageTraffic'
 // import HomePageTraffic from '@legacy/components/product/HomePageTraffic'
 import PowerfulFeatures from '@legacy/components/product/PowerfulFeatures'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-// import SaveTime from '@legacy/components/product/SaveTime'
+import SaveTime from '@legacy/components/product/SaveTime'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import TakeControl from '@legacy/components/product/TakeControl'
@@ -48,6 +48,8 @@ const LandingPageBuilderProductPage = () => (
     <EasilyTest />
     {/* <SaveTime /> */}
     <GetInspired_LandingPage />
+    <SaveTime />
+    {/* <GetInspired_LandingPage /> */}
     <SpacerRow size="small" />
     <HeadlineSection
       supertitle="Customer Success Team"
