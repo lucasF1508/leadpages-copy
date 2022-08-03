@@ -6,7 +6,7 @@ import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 // import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import LeadmeterMakeTheMost from '@legacy/components/product/LeadmeterMakeTheMost'
 // import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
-// import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
+import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
 // import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
@@ -123,11 +123,11 @@ const LeadmeterProductPage = () => {
           imageSide="left"
           itemArray={productFeaturesArray}
         />
-      </ClickRevealSection_Desktop>
+      </ClickRevealSection_Desktop> */}
       <RotatorSection_Mobile>
         <ProductFeaturesRotator itemArray={productFeaturesArray} />
       </RotatorSection_Mobile>
-      <SpacerRow size="small" />
+      {/* <SpacerRow size="small" />
       <HeadlineSection
         subtitle="Data-Driven Analysis of 4 Conversion Categories"
         caption="The Leadmeter analyzes your content and considers four key conversion categories to scientifically predict how your page will perform (before you publish it)."
@@ -136,8 +136,8 @@ const LeadmeterProductPage = () => {
         features={leadmeterFeaturesArray}
         showSectionCaption={false}
         itemsPerRow={4}
-      /> */}
-      <LeadmeterMakeTheMost />
+      />
+      <LeadmeterMakeTheMost /> */}
       {/* <SpacerRow size="small" backgroundColor="$grayAlt" />
       <HeadlineSection
         title="Access the complete conversion toolkit"
