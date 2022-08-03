@@ -11,7 +11,7 @@ import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 // import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
-// import SimpleSetup from '@legacy/components/product/SimpleSetup'
+import SimpleSetup from '@legacy/components/product/SimpleSetup'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
@@ -100,7 +100,7 @@ const AlertBarsProductPage = () => {
       </RotatorSection_Mobile>
       <SpacerRow size="small" /> */}
       <MakeTheMost />
-      {/* <SimpleSetup /> */}
+      <SimpleSetup />
       <GetInspired_AlertBars />
       {/* <ProductTestimonialsRotator /> */}
       <SpacerRow size="small" />
