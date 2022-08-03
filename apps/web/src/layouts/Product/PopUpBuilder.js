@@ -1,17 +1,17 @@
 import React from 'react'
 import { styled } from '@design'
 // components
-// import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
+import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 // import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
 import FlexSectionTwoColumnFeatures from '@legacy/components/product/FlexSectionTwoColumnFeatures'
-// import HeadlineSection from '@legacy/components/layout/HeadlineSection'
-// import PopUpTogether from '@legacy/components/product/PopUpTogether'
+import HeadlineSection from '@legacy/components/layout/HeadlineSection'
+import PopUpTogether from '@legacy/components/product/PopUpTogether'
 // import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 // import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
 // import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
 // import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-// import SEO from '@legacy/components/SEO'
-// import SpacerRow from '@legacy/components/SpacerRow'
+import SEO from '@legacy/components/SEO'
+import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // animations
 // import Animation_ClickTriggeredPopup from '@legacy/components/animations/Animation_ClickTriggeredPopup'
@@ -21,10 +21,10 @@ import FlexSectionTwoColumnFeatures from '@legacy/components/product/FlexSection
 // import Animation_SidebarPopup from '@legacy/components/animations/Animation_SidebarPopup'
 // import Animation_TimeDelayedPopup from '@legacy/components/animations/Animation_TimeDelayedPopup'
 // images
-// import heroImage from '@legacy/assets/images/heros/pop-up-builder-hero_634px@2x.png'
+import heroImage from '@legacy/assets/images/heros/pop-up-builder-hero_634px@2x.png'
 import flexSectionTwoColumnImage from '@legacy/assets/images/product/pop-up-builder/flexible-publishing-options-702px@2x.png'
 // import circleSandSideSVG from '@legacy/assets/images/shapes/circle-sand-side.svg'
-// import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
+import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 import wedgeRoseSVG from '@legacy/assets/images/shapes/wedge-rose.svg'
 
 const ClickRevealSection_Desktop = styled('div', {
@@ -82,7 +82,7 @@ const PopUpBuilderProductPage = () => {
 
   return (
     <>
-      {/* <SEO
+      <SEO
         pathname="/product/pop-up-builder"
         title="Add Pop-ups to Any Landing Page or Website in Minutes | Leadpages"
         description="Easily build and add pop-ups to any website or landing page with Leadpages Pop-up Builder. Collect more leads and scale quickly. Try for free for 14 days."
@@ -106,7 +106,7 @@ const PopUpBuilderProductPage = () => {
         title="Target your audience at just the right time"
         caption="Find the right moment for your message by choosing from behavior and time-triggered pop-up
         settings."
-      /> */}
+      />
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
       {/* <ClickRevealSection_Desktop>
         <ProductFeaturesClickReveal
@@ -136,12 +136,12 @@ const PopUpBuilderProductPage = () => {
         bgImage={wedgeRoseSVG}
         bgImageAlt="background svg"
       />
-      {/* <PopUpTogether />
+      <PopUpTogether />
       <SpacerRow size="small" />
       <HeadlineSection
         title="Get inspired"
         caption="With Leadpages pop-up builder, the possibilities are endless."
-      /> */}
+      />
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
       {/* <ClickRevealSection_Desktop>
         <ProductFeaturesClickReveal
