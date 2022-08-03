@@ -1,140 +1,138 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
 // images
-import bkgSVG from '../../assets/images/shapes/wavy-lines-hourglass-gray.svg';
+import bkgSVG from '@legacy/assets/images/shapes/wavy-lines-hourglass-gray.svg'
 
-const OuterContainer = styled.div`
-  position: relative;
-  margin-top: -60px;
-  padding-top: 60px;
-  background-color: #f7f7f7;
-  z-index: -2;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  marginTop: '-60px',
+  paddingTop: '60px',
+  backgroundColor: '$grayAlt',
+  zIndex: -2,
+})
 
-const HeaderContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 6rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 992px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const HeaderContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  paddingTop: '6rem',
+  px: '3rem',
 
-const FlexRow = styled.div`
-  padding-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 3rem;
-  @media (max-width: 576px) {
-    display: block;
-  }
-`;
+  '@>m': {
+    px: '6rem',
+  },
+})
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-`;
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  py: '3rem',
 
-const FlexRowLeft = styled(FlexRowItem)`
-  justify-content: space-between;
-  text-align: left;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  @media (min-width: 768px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 60%;
-    flex: 0 0 60%;
-    max-width: 60%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
-`;
+  '@<s': {
+    display: 'block',
+  },
+})
 
-const SmallHeading = styled.div`
-  font-family: 'Space Mono';
-  opacity: 0.5;
-  color: #000000;
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-transform: uppercase;
-`;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+})
 
-const LeftHeading = styled.div`
-  margin-top: 1rem;
-  font-family: 'Value Serif';
-  font-size: 2.5rem;
-  letter-spacing: -0.03125rem;
-  line-height: 3rem;
-  color: #0f0c09;
-  margin-bottom: 2rem;
-  @media (max-width: 576px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-  }
-`;
+const FlexRowLeft = styled(FlexRowItem, {
+  justifyContent: 'space-between',
+  textAlign: 'left',
 
-const SVGContainer = styled.img`
-  position: absolute;
-  right: 0;
-  overflow-x: hidden;
-  bottom: -30px;
-  width: 100%;
-  z-index: -1;
-  @media (max-width: 490px) {
-    display: none;
-  }
-  @media (min-width: 491px) and (max-width: 767px) {
-    bottom: -40px;
-  }
-  @media (min-width: 768px) and (max-width: 1030px) {
-    bottom: -30px;
-    width: 70%;
-  }
+  '@>s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-  @media (min-width: 1031px) and (max-width: 1299px) {
-    bottom: -50px;
-    width: 70%;
-  }
-  @media (min-width: 1300px) {
-    bottom: -80px;
-    width: 70%;
-  }
-`;
+  '@media (min-width: 768px)': {
+    flex: '0 0 60%',
+    maxWidth: '60%',
+  },
 
-function FeaturesIndexHeader() {
-  return (
-    <OuterContainer>
-      <SVGContainer src={bkgSVG} alt="background svg" />
-      <HeaderContainer>
-        <FlexRow>
-          <FlexRowLeft>
-            <h1>
-              <SmallHeading>Leadpages Features</SmallHeading>
-            </h1>
-            <LeftHeading>Bold features to build your business</LeftHeading>
-          </FlexRowLeft>
-        </FlexRow>
-      </HeaderContainer>
-    </OuterContainer>
-  );
-}
+  '@>m': {
+    marginBottom: '0rem',
+    flex: '0 0 50%',
+    maxWidth: '50%',
+  },
+})
 
-export default FeaturesIndexHeader;
+const SmallHeading = styled('div', {
+  fontFamily: 'Space Mono',
+  opacity: 0.5,
+  color: '$black',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  textTransform: 'uppercase',
+})
+
+const LeftHeading = styled('div', {
+  marginTop: '1rem',
+  fontFamily: 'Value Serif',
+  fontSize: '2.5rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '3rem',
+  color: '$text',
+  marginBottom: '2rem',
+
+  '@<s': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+  },
+})
+
+const BackgroundImage = styled('img', {
+  position: 'absolute',
+  right: 0,
+  overflowX: 'hidden',
+  bottom: '-30px',
+  width: '100%',
+  zIndex: '$under',
+
+  '@media (max-width: 490px)': {
+    display: 'none',
+  },
+
+  '@media (min-width: 491px) and (max-width: 767px)': {
+    bottom: '-40px',
+  },
+
+  '@media (min-width: 768px) and (max-width: 1030px)': {
+    bottom: '-30px',
+    width: '70%',
+  },
+
+  '@media (min-width: 1031px) and (max-width: 1299px)': {
+    bottom: '-50px',
+    width: '70%',
+  },
+
+  '@media (min-width: 1300px)': {
+    bottom: '-80px',
+    width: '70%',
+  },
+})
+
+const FeaturesIndexHeader = () => (
+  <OuterContainer>
+    <BackgroundImage src={bkgSVG.src} alt="background svg" />
+    <HeaderContainer>
+      <FlexRow>
+        <FlexRowLeft>
+          <h1>
+            <SmallHeading>Leadpages Features</SmallHeading>
+          </h1>
+          <LeftHeading>Bold features to build your business</LeftHeading>
+        </FlexRowLeft>
+      </FlexRow>
+    </HeaderContainer>
+  </OuterContainer>
+)
+
+export default FeaturesIndexHeader
