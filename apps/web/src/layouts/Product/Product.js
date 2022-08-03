@@ -11,7 +11,7 @@ import ProductPageHeader from '@legacy/components/headers/ProductPageHeader'
 // import ProductToolkitClickReveal from '@legacy/components/click-reveals/ProductToolkitClickReveal'
 // import ProductToolkitRotator from '@legacy/components/rotators/ProductToolkitRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-// import Resources from '@legacy/components/product/Resources'
+import Resources from '@legacy/components/product/Resources'
 import SEO from '@legacy/components/SEO'
 // import SingleTestimonialQuoteRow from '@legacy/components/testimonials/SingleTestimonialQuoteRow'
 import SpacerRow from '@legacy/components/SpacerRow'
@@ -307,7 +307,7 @@ const ProductPage = () => {
       /> */}
       <ConnectAccount />
       <SpacerRow sizeArray={[0, 0, 1.5, 1.5]} />
-      {/* <Resources /> */}
+      <Resources />
       <SpacerRow size="small" backgroundColor="$grayAlt" />
       <HeadlineSection
         title="Access the complete conversion toolkit"
