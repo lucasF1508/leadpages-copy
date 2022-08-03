@@ -11,7 +11,7 @@ import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
-// import TurnYourExpertiseIntoRevenue from '@legacy/components/product/TurnYourExpertiseIntoRevenue'
+import TurnYourExpertiseIntoRevenue from '@legacy/components/product/TurnYourExpertiseIntoRevenue'
 // images
 import heroImage from '@legacy/assets/images/heros/checkouts-hero_600px@2x.png'
 import productFeatureImage1 from '@legacy/assets/images/product/checkouts/turn-any-webpage-into-a-checkout.png'
@@ -88,7 +88,7 @@ const CheckoutsProductPage = () => {
         bgImage={semicircleGraySVG}
         bgImageAltText="Easily sell your services online"
       />
-      {/* <TurnYourExpertiseIntoRevenue /> */}
+      <TurnYourExpertiseIntoRevenue />
       <CloseSalesCollectPayments />
       <CheckoutsFeatures />
       <SpacerRow size="small" />
