@@ -1,183 +1,175 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
-import { GATSBY_IMAGE } from '../../constants/types';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Image from '@components/Image'
 
-const OuterContainer = styled.div`
-  position: relative;
-  margin-top: 6rem;
-  margin-bottom: 11rem;
-  @media (max-width: 576px) {
-    margin-bottom: 4.5rem;
-    margin-top: 2rem;
-  }
-  @media (min-width: 577px) and (max-width: 991px) {
-    margin-bottom: 8.5rem;
-    margin-top: 2rem;
-  }
+const OuterContainer = styled('div', {
+  position: 'relative',
+  marginTop: '6rem',
+  marginBottom: '11rem',
 
-  @media (min-width: 992px) {
-    margin-bottom: 11rem;
-  }
-`;
+  '@<s': {
+    marginBottom: '4.5rem',
+    marginTop: '2rem',
+  },
 
-const MainContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 2;
-  position: relative;
-`;
+  '@media (min-width: 577px) and (max-width: 991px)': {
+    marginBottom: '8.5rem',
+    marginTop: '2rem',
+  },
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-`;
+  '@>m': {
+    marginBottom: '11rem',
+  },
+})
 
-const OuterFlexContainer = styled(FlexRow)`
-  flex-wrap: wrap;
-  margin-top: 3rem;
-  margin-bottom: 6rem;
-`;
+const MainContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  zIndex: 2,
+  position: 'relative',
+})
 
-const ReverseInnerFlexContainer = styled(FlexRow)`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  margin-bottom: 0;
-  flex-direction: row-reverse;
-  @media (max-width: 991px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-`;
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  position: 'relative',
+})
 
-const FlexRowItem6 = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  padding-left: 1%;
-  padding-right: 1%;
-  justify-content: space-between;
-  text-align: left;
-  margin-right: 1%;
-`;
+const OuterFlexContainer = styled(FlexRow, {
+  flexWrap: 'wrap',
+  marginTop: '3rem',
+  marginBottom: '6rem',
+})
 
-const TextContainer = styled(FlexRowItem6)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+const ReverseInnerFlexContainer = styled(FlexRow, {
+  display: 'flex',
+  flexWrap: 'wrap',
+  width: '100%',
+  marginBottom: 0,
+  flexDirection: 'row-reverse',
 
-  @media (max-width: 576px) {
-    max-width: 100%;
-    margin-bottom: 2rem;
-  }
-  @media (min-width: 577px) and (max-width: 991px) {
-    max-width: 66%;
-    margin-bottom: 4rem;
-  }
+  '@media (max-width: 991px)': {
+    px: '3rem',
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-top: auto;
-    margin-bottom: auto;
-    max-width: 40%;
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 34%;
-    flex: 0 0 34%;
-    width: 34%;
-  }
-`;
+const FlexRowItem6 = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textDecoration: 'none',
+  px: '1%',
+  justifyContent: 'space-between',
+  textAlign: 'left',
+  marginRight: '1%',
+})
 
-const ReverseImageContainer = styled(FlexRowItem6)`
-  position: relative;
-  @media (max-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+const TextContainer = styled(FlexRowItem6, {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
 
-  @media (min-width: 577px) and (max-width: 991px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 66%;
-    flex: 0 0 66%;
-    max-width: 66%;
-    margin-right: auto;
-  }
+  '@<s': {
+    maxWidth: '100%',
+    marginBottom: '2rem',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 64%;
-    flex: 0 0 64%;
-    max-width: 630px;
-    width: 64%;
-  }
-`;
+  '@media (min-width: 577px) and (max-width: 991px)': {
+    maxWidth: '66%',
+    marginBottom: '4rem',
+  },
 
-const Title = styled.div`
-  font-family: 'Space Mono';
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-transform: uppercase;
-  opacity: 0.5;
-  color: #000000;
-  margin-bottom: 26px;
-`;
+  '@media (min-width: 992px)': {
+    my: 'auto',
+    maxWidth: '40%',
+    marginBottom: 0,
+    flex: '0 0 34%',
+    width: '34%',
+  },
+})
 
-const Headline = styled.div`
-  font-family: 'Apercu Pro';
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 32px;
-  color: #0f0c09;
-  margin-bottom: 16px;
-`;
+const ReverseImageContainer = styled(FlexRowItem6, {
+  position: 'relative',
 
-const Caption = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0px;
-  color: #575452;
-  margin-bottom: 16px;
-  @media (max-width: 768px) {
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0px;
-    margin-bottom: 16px;
-  }
+  '@<s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0px;
-    margin-bottom: 16px;
-  }
+  '@media (min-width: 577px) and (max-width: 991px)': {
+    flex: '0 0 66%',
+    maxWidth: '66%',
+    marginRight: 'auto',
+  },
 
-  @media (min-width: 993px) {
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: 0px;
-    margin-bottom: 24px;
-  }
-`;
+  '@media (min-width: 992px)': {
+    marginBottom: 0,
+    flex: '0 0 64%',
+    maxWidth: '630px',
+    width: '64%',
+  },
+})
 
-const SVGContainer = styled.img`
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 1;
-  width: 50%;
-  max-width: 800px;
-  overflow-x: hidden;
-  margin-left: -25vw;
-`;
+const Title = styled('div', {
+  fontFamily: 'Space Mono',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  textTransform: 'uppercase',
+  opacity: 0.5,
+  color: '$black',
+  marginBottom: '26px',
+})
+
+const Headline = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontWeight: 500,
+  fontSize: '22px',
+  lineHeight: '32px',
+  color: '$text',
+  marginBottom: '16px',
+})
+
+const Caption = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  letterSpacing: '0px',
+  color: '$textAlt',
+  marginBottom: '16px',
+
+  '@media (max-width: 768px)': {
+    fontSize: '14px',
+    lineHeight: '20px',
+    letterSpacing: '0px',
+    marginBottom: '16px',
+  },
+
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '16px',
+    lineHeight: '24px',
+    letterSpacing: '0px',
+    marginBottom: '16px',
+  },
+
+  '@media (min-width: 993px)': {
+    fontSize: '18px',
+    lineHeight: '28px',
+    letterSpacing: '0px',
+    marginBottom: '24px',
+  },
+})
+
+const BackgroundImage = styled('img', {
+  position: 'absolute',
+  left: 0,
+  bottom: 0,
+  zIndex: 1,
+  width: '50%',
+  maxWidth: '800px',
+  overflowX: 'hidden',
+  marginLeft: '-25vw',
+})
 
 const FlexSectionReverse = ({
   bgImage,
@@ -190,7 +182,7 @@ const FlexSectionReverse = ({
   children,
 }) => (
   <OuterContainer>
-    <SVGContainer src={bgImage} alt={bgImageAlt} />
+    <BackgroundImage src={bgImage.src} alt={bgImageAlt} />
     <MainContainer>
       <OuterFlexContainer>
         <ReverseInnerFlexContainer>
@@ -200,14 +192,14 @@ const FlexSectionReverse = ({
             <Caption>{caption}</Caption>
           </TextContainer>
           <ReverseImageContainer>
-            {image && <GatsbyImage image={image} alt={imageAlt} />}
+            {image && <Image image={image} alt={imageAlt} />}
             {children}
           </ReverseImageContainer>
         </ReverseInnerFlexContainer>
       </OuterFlexContainer>
     </MainContainer>
   </OuterContainer>
-);
+)
 
 FlexSectionReverse.defaultProps = {
   bgImage: '',
@@ -217,7 +209,7 @@ FlexSectionReverse.defaultProps = {
   caption: '',
   imageAlt: '',
   children: '',
-};
+}
 
 FlexSectionReverse.propTypes = {
   bgImage: PropTypes.node,
@@ -225,9 +217,9 @@ FlexSectionReverse.propTypes = {
   title: PropTypes.string,
   headline: PropTypes.string,
   caption: PropTypes.string,
-  image: GATSBY_IMAGE.isRequired,
+  image: Image.isRequired,
   imageAlt: PropTypes.string,
   children: PropTypes.node,
-};
+}
 
-export default FlexSectionReverse;
+export default FlexSectionReverse
