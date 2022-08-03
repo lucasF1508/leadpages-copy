@@ -4,7 +4,7 @@ import { styled } from '@design'
 import CheckoutsProduct from '@legacy/components/product/CheckoutsProduct'
 // import ColumnsLeft from '@legacy/components/columns/ColumnsLeft'
 // import ColumnsRight from '@legacy/components/columns/ColumnsRight'
-// import ConnectAccount from '@legacy/components/product/ConnectAccount'
+import ConnectAccount from '@legacy/components/product/ConnectAccount'
 import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ProductPageHeader from '@legacy/components/headers/ProductPageHeader'
@@ -305,7 +305,7 @@ const ProductPage = () => {
         clientName="Greg Benz"
         clientTitle="Photographer and Software Developer"
       /> */}
-      {/* <ConnectAccount /> */}
+      <ConnectAccount />
       <SpacerRow sizeArray={[0, 0, 1.5, 1.5]} />
       {/* <Resources /> */}
       <SpacerRow size="small" backgroundColor="$grayAlt" />
