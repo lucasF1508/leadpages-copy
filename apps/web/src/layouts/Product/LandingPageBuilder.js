@@ -13,7 +13,7 @@ import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SaveTime from '@legacy/components/product/SaveTime'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
-// import TakeControl from '@legacy/components/product/TakeControl'
+import TakeControl from '@legacy/components/product/TakeControl'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
 import heroImage from '@legacy/assets/images/heros/landing-page-builder-hero_831px@2x.png'
@@ -39,17 +39,12 @@ const LandingPageBuilderProductPage = () => (
       bgImage={semicircleGraySVG}
       bgImageAltText="Confidently grow your business"
     />
-    {/* <PowerfulFeatures /> */}
-    {/* <TakeControl /> */}
-    <HomePageTraffic />
     <PowerfulFeatures />
-    {/* <TakeControl /> */}
-    {/* <HomePageTraffic />  */}
+    <TakeControl />
+    <HomePageTraffic />
     <EasilyTest />
-    {/* <SaveTime /> */}
-    <GetInspired_LandingPage />
     <SaveTime />
-    {/* <GetInspired_LandingPage /> */}
+    <GetInspired_LandingPage />
     <SpacerRow size="small" />
     <HeadlineSection
       supertitle="Customer Success Team"
