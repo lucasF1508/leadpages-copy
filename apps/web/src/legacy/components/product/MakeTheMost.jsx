@@ -1,247 +1,206 @@
-import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import Image from '@components/Image'
 // images
-import webBkgSVG from '../../assets/images/shapes/rounded-square-lavender.svg';
+import image1 from '@legacy/assets/images/product/alert-bars/all-web-properties-614px@2x.png'
+import webBkgSVG from '@legacy/assets/images/shapes/rounded-square-lavender.svg'
 
-const MainContainer = styled.div`
-  margin-top: 6rem;
-`;
+const MainContainer = styled('div', {
+  marginTop: '6rem',
+})
 
-const InnerContainer = styled.div`
-  position: relative;
-`;
+const InnerContainer = styled('div', {
+  position: 'relative',
+})
 
-const FlexRow = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-`;
+const FlexRow = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  display: 'flex',
+  justifyContent: 'space-between',
+  position: 'relative',
+})
 
-const WebPropertiesOuterContainer = styled(FlexRow)`
-  flex-wrap: wrap;
-  margin-top: 3rem;
-`;
+const WebPropertiesOuterContainer = styled(FlexRow, {
+  flexWrap: 'wrap',
+  marginTop: '3rem',
+})
 
-const WebPropertiesContainer = styled(FlexRow)`
-  flex-wrap: wrap;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 576px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (min-width: 992px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const WebPropertiesContainer = styled(FlexRow, {
+  flexWrap: 'wrap',
+  px: '3rem',
 
-const FlexRowItem6 = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-  justify-content: space-between;
-  text-align: left;
-  margin-right: 1%;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
+  '@>m': {
+    px: '6rem',
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+const FlexRowItem6 = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+  justifyContent: 'space-between',
+  textAlign: 'left',
+  marginRight: '1%',
 
-const WebPropertiesTextContainer = styled(FlexRowItem6)`
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+  '@>s': {
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  '@>m': {
+    marginBottom: 0,
+  },
+})
 
-const WebPropertiesHeadingContainer = styled(FlexRowItem6)`
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+const WebPropertiesTextContainer = styled(FlexRowItem6, {
+  '@>s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-`;
+  '@>m': {
+    marginBottom: 0,
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
 
-const WebPropertiesSectionContainer = styled(FlexRowItem6)`
-  display: flex;
-  flex-wrap: wrap;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+const WebPropertiesHeadingContainer = styled(FlexRowItem6, {
+  '@>s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-`;
+  '@>m': {
+    marginBottom: 0,
+  },
+})
 
-const ConversionImageContainer = styled(FlexRowItem6)`
-  align-self: flex-end;
-  @media (max-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  @media (min-width: 577px) and (max-width: 991px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 80%;
-    flex: 0 0 80%;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+const WebPropertiesSectionContainer = styled(FlexRowItem6, {
+  display: 'flex',
+  flexWrap: 'wrap',
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 46%;
-    flex: 0 0 46%;
-    max-width: 46%;
-  }
-`;
+  '@>s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const WPSectionHeading = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  margin-bottom: 2rem;
-`;
+  '@>m': {
+    marginBottom: 0,
+  },
+})
 
-const WPSectionCopy = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 4rem;
-`;
+const ConversionImageContainer = styled(FlexRowItem6, {
+  alignSelf: 'flex-end',
 
-const LeftHeading = styled.div`
-  font-family: 'Value Serif';
-  font-size: 1.875rem;
-  letter-spacing: -0.03125rem;
-  line-height: 2.25rem;
-  color: #0f0c09;
-  margin-bottom: 2rem;
-  @media (max-width: 576px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-  }
-`;
+  '@<s': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+  },
 
-const WebPropertiesCopy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  color: #575452;
-  margin-bottom: 4rem;
-`;
+  '@media (min-width: 577px) and (max-width: 991px)': {
+    flex: '0 0 80%',
+    maxWidth: '80%',
+    mx: 'auto',
+  },
 
-const SVGRightContainer = styled.img`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  overflow-x: hidden;
-  @media (max-width: 768px) {
-    max-width: 80%;
-  }
-`;
+  '@>m': {
+    marginBottom: 0,
+    flex: '0 0 46%',
+    maxWidth: '46%',
+  },
+})
+
+const WPSectionHeading = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  marginBottom: '2rem',
+})
+
+const WPSectionCopy = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '4rem',
+})
+
+const LeftHeading = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '1.875rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '2.25rem',
+  color: '$text',
+  marginBottom: '2rem',
+
+  '@<s': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+  },
+})
+
+const WebPropertiesCopy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  color: '$textAlt',
+  marginBottom: '4rem',
+})
+
+const BackgroundImage = styled('img', {
+  position: 'absolute',
+  right: 0,
+  bottom: 0,
+  zIndex: -1,
+  overflowX: 'hidden',
+
+  '@media (max-width: 768px)': {
+    maxWidth: '80%',
+  },
+})
 
 const MakeTheMost = () => (
-  <StaticQuery
-    query={graphql`
-      query MakeTheMostQuery {
-        image1: file(
-          relativePath: { eq: "assets/images/product/alert-bars/all-web-properties-614px@2x.png" }
-        ) {
-          ...constrained
-        }
-      }
-    `}
-    render={data => (
-      <MainContainer>
-        <InnerContainer>
-          <SVGRightContainer src={webBkgSVG} alt="background svg" />
-          <WebPropertiesOuterContainer>
-            <WebPropertiesContainer>
-              <WebPropertiesTextContainer>
-                <WebPropertiesHeadingContainer>
-                  <LeftHeading>Make the most of all your web properties</LeftHeading>
-                  <WebPropertiesCopy>
-                    Leadpages is much more than a landing page software; you’ll access a versatile
-                    conversion toolkit.
-                  </WebPropertiesCopy>
-                </WebPropertiesHeadingContainer>
-                <WebPropertiesSectionContainer>
-                  <WPSectionHeading>Capture leads anywhere</WPSectionHeading>
-                  <WPSectionCopy>
-                    More than 90% of your web traffic isn’t ready to buy when they visit your
-                    website for the first time. Make the most of your hard-won traffic by varying
-                    the message, volume, and placement of your promotions across all the web
-                    properties you own. Less intrusive than a pop-up and more prominent than on-page
-                    text, alert bars (sometimes called sticky bars or sticky headers) are an
-                    attention-grabbing way to increase your conversions.
-                  </WPSectionCopy>
-                </WebPropertiesSectionContainer>
-              </WebPropertiesTextContainer>
-              <ConversionImageContainer>
-                <GatsbyImage image={getImage(data.image1)} alt="Capture leads anywhere" />
-              </ConversionImageContainer>
-            </WebPropertiesContainer>
-          </WebPropertiesOuterContainer>
-        </InnerContainer>
-      </MainContainer>
-    )}
-  />
-);
+  <MainContainer>
+    <InnerContainer>
+      <BackgroundImage src={webBkgSVG.src} alt="background svg" />
+      <WebPropertiesOuterContainer>
+        <WebPropertiesContainer>
+          <WebPropertiesTextContainer>
+            <WebPropertiesHeadingContainer>
+              <LeftHeading>
+                Make the most of all your web properties
+              </LeftHeading>
+              <WebPropertiesCopy>
+                Leadpages is much more than a landing page software; you’ll
+                access a versatile conversion toolkit.
+              </WebPropertiesCopy>
+            </WebPropertiesHeadingContainer>
+            <WebPropertiesSectionContainer>
+              <WPSectionHeading>Capture leads anywhere</WPSectionHeading>
+              <WPSectionCopy>
+                More than 90% of your web traffic isn’t ready to buy when they
+                visit your website for the first time. Make the most of your
+                hard-won traffic by varying the message, volume, and placement
+                of your promotions across all the web properties you own. Less
+                intrusive than a pop-up and more prominent than on-page text,
+                alert bars (sometimes called sticky bars or sticky headers) are
+                an attention-grabbing way to increase your conversions.
+              </WPSectionCopy>
+            </WebPropertiesSectionContainer>
+          </WebPropertiesTextContainer>
+          <ConversionImageContainer>
+            <Image image={image1} alt="Capture leads anywhere" />
+          </ConversionImageContainer>
+        </WebPropertiesContainer>
+      </WebPropertiesOuterContainer>
+    </InnerContainer>
+  </MainContainer>
+)
 
-export default MakeTheMost;
+export default MakeTheMost

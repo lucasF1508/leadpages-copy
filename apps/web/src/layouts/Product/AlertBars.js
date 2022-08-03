@@ -3,7 +3,7 @@ import { styled } from '@design'
 // components
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 // import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
-// import MakeTheMost from '@legacy/components/product/MakeTheMost'
+import MakeTheMost from '@legacy/components/product/MakeTheMost'
 import GetInspired_AlertBars from '@legacy/components/product/GetInspired_AlertBars'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 // import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
@@ -98,9 +98,9 @@ const AlertBarsProductPage = () => {
       <RotatorSection_Mobile>
         <ProductFeaturesRotator itemArray={productFeaturesArray} />
       </RotatorSection_Mobile>
-      <SpacerRow size="small" />
+      <SpacerRow size="small" /> */}
       <MakeTheMost />
-      <SimpleSetup /> */}
+      {/* <SimpleSetup /> */}
       <GetInspired_AlertBars />
       {/* <ProductTestimonialsRotator /> */}
       <SpacerRow size="small" />
