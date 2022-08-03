@@ -7,6 +7,8 @@ import GetInspired_LandingPage from '@legacy/components/product/GetInspired_Land
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import HomePageTraffic from '@legacy/components/product/HomePageTraffic'
 // import PowerfulFeatures from '@legacy/components/product/PowerfulFeatures'
+// import HomePageTraffic from '@legacy/components/product/HomePageTraffic'
+import PowerfulFeatures from '@legacy/components/product/PowerfulFeatures'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 // import SaveTime from '@legacy/components/product/SaveTime'
 import SEO from '@legacy/components/SEO'
@@ -40,6 +42,9 @@ const LandingPageBuilderProductPage = () => (
     {/* <PowerfulFeatures /> */}
     {/* <TakeControl /> */}
     <HomePageTraffic />
+    <PowerfulFeatures />
+    {/* <TakeControl /> */}
+    {/* <HomePageTraffic />  */}
     <EasilyTest />
     {/* <SaveTime /> */}
     <GetInspired_LandingPage />
