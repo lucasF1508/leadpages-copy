@@ -9,7 +9,7 @@ import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 // import PublishingOptionsGrid from '@legacy/components/grids/PublishingOptionsGrid'
 import SEO from '@legacy/components/SEO'
-// import SiteTestimonial from '@legacy/components/product/SiteTestimonial'
+import SiteTestimonial from '@legacy/components/product/SiteTestimonial'
 import SpacerRow from '@legacy/components/SpacerRow'
 // import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
@@ -19,9 +19,12 @@ import flexImageOne from '@legacy/assets/images/product/website-builder/build-a-
 // import siteTestimonialImage1 from '@legacy/assets/images/testimonials/clayton-poland.png'
 // import siteTestimonialImage2 from '@legacy/assets/images/testimonials/collin-belt.png'
 import circleForestDarkSVG from '@legacy/assets/images/shapes/circle-forest-dark.svg'
+import siteTestimonialImage1 from '@legacy/assets/images/testimonials/clayton-poland.png'
+import siteTestimonialImage2 from '@legacy/assets/images/testimonials/collin-belt.png'
+// import circleForestDarkSVG from '@legacy/assets/images/shapes/circle-forest-dark.svg'
 // import wedgeLavenderSVG from '@legacy/assets/images/shapes/wedge-lavender.svg'
 import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
-// import wavyLinesHourglassTan from '@legacy/assets/images/shapes/wavy-lines-hourglass-tan.svg'
+import wavyLinesHourglassTan from '@legacy/assets/images/shapes/wavy-lines-hourglass-tan.svg'
 
 const WebsiteBuilderProductPage = () => (
   <>
@@ -54,8 +57,8 @@ const WebsiteBuilderProductPage = () => (
       headline="Beautiful websites with the full conversion power of Leadpages"
       caption="Engineered to be the easiest, most effective online website builder, Leadpages sites help you transform web traffic into leads and sales. It’s everything you need to get online and grow."
     />
-    {/* <SiteTestimonial
-      image={getImage(images.siteTestimonialImage1)}
+    <SiteTestimonial
+      image={siteTestimonialImage1}
       imageAlt="Clayton Poland"
       header="See What All The Buzz Is About"
       caption="I was able to accomplish in a few hours what took a few weeks in WordPress."
@@ -64,7 +67,7 @@ const WebsiteBuilderProductPage = () => (
       title="ClaytonPoland.com"
       bgImage={wavyLinesHourglassTan}
       bgImageAlt="tan wavy line background SVG"
-    /> */}
+    />
     {/* <FlexSectionTwoColumnFeatures
       mainHeading="Create a high-converting website in half the time"
       mainCaption="Forget the time and expense of hiring a web developer—our website creator is the only partner you need."
@@ -79,14 +82,14 @@ const WebsiteBuilderProductPage = () => (
       bgImage={wedgeLavenderSVG}
       bgImageAlt="background svg"
     /> */}
-    {/* <SiteTestimonial
-      image={getImage(images.siteTestimonialImage2)}
+    <SiteTestimonial
+      image={siteTestimonialImage2}
       imageAlt="Collin Belt"
       caption="Better results with Leadpages sites"
       quote="“The ability to spin up high-converting websites that require zero back-end maintenance means that I can set up sites that deliver better results in a shorter amount of time.”"
       name="Collin Belt"
       title="Founder, BeltCreative"
-    /> */}
+    />
     <ConversionFirstBuilder />
     <SpacerRow size="small" />
     <HeadlineSection
