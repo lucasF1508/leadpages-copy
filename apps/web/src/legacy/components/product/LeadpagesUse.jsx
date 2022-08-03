@@ -1,192 +1,158 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import Image from '@components/Image'
+// images
+import CollectLeadsImage from '@legacy/assets/images/icons/featureicons/lilac_inbound.png'
+import SellProductsImage from '@legacy/assets/images/icons/featureicons/coral_megaphone.png'
+import EngageAudienceImage from '@legacy/assets/images/icons/featureicons/forest_credit-card.png'
 
-const OuterContainer = styled.div`
-  position: relative;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+})
 
-const LPUContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 4rem;
-  padding-bottom: 6rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 576px) {
-    padding-top: 4rem;
-    padding-bottom: 6rem;
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (min-width: 992px) {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const LPUContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  paddingTop: '4rem',
+  paddingBottom: '6rem',
+  px: '3rem',
 
-const LPUHeadline = styled.div`
-  font-family: 'Value Serif';
-  font-size: 1.875rem;
-  letter-spacing: -0.03125rem;
-  line-height: 2.25rem;
-  text-align: center;
-  margin-bottom: 5rem;
-  color: #0f0c09;
-  @media (max-width: 576px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-  }
-`;
+  '@>m': {
+    py: '10rem',
+    px: '6rem',
+  },
+})
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-`;
+const LPUHeadline = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '1.875rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '2.25rem',
+  textAlign: 'center',
+  marginBottom: '5rem',
+  color: '$text',
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-  margin-left: auto;
-  margin-right: auto;
-`;
+  '@<s': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+  },
+})
 
-const FlexRow3 = styled(FlexRowItem)`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 29.3333%;
-    flex: 0 0 29.3333%;
-    max-width: 29.3333%;
-    margin-bottom: 0;
-  }
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'flex-start',
+  flexWrap: 'wrap',
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 27.3333%;
-    flex: 0 0 27.3333%;
-    max-width: 27.3333%;
-    margin-bottom: 0;
-  }
-`;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+  mx: 'auto',
+})
 
-const FlexRow3Container = styled.div`
-  text-align: center;
-`;
+const FlexRow3 = styled(FlexRowItem, {
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '2rem',
 
-const ImageContainer = styled(GatsbyImage)`
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2rem;
-  height: 100%;
-  width: 100%;
-  max-height: 48px;
-  max-width: 48px;
-`;
+  '@>s': {
+    flex: '0 0 29.3333%',
+    maxWidth: '29.3333%',
+    marginBottom: 0,
+  },
 
-const FlexRow3Heading = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #0f0c09;
-`;
+  '@>m': {
+    flex: '0 0 27.3333%',
+    maxWidth: '27.3333%',
+  },
+})
 
-const FlexRow3Copy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  text-align: center;
-  margin-bottom: 1.25rem;
-  color: #575452;
-`;
+const FlexRow3Container = styled('div', {
+  textAlign: 'center',
+})
 
-function LeadpagesUse() {
-  const images = useStaticQuery(graphql`
-    query LeadpagesUseQuery {
-      CollectLeadsImage: file(
-        relativePath: { eq: "assets/images/icons/featureicons/lilac_inbound.png" }
-      ) {
-        ...fixed
-      }
-      SellProductsImage: file(
-        relativePath: { eq: "assets/images/icons/featureicons/coral_megaphone.png" }
-      ) {
-        ...fixed
-      }
-      EngageAudienceImage: file(
-        relativePath: { eq: "assets/images/icons/featureicons/forest_credit-card.png" }
-      ) {
-        ...fixed
-      }
-    }
-  `);
-  return (
-    <OuterContainer>
-      <LPUContainer>
-        <LPUHeadline>What is Leadpages used for?</LPUHeadline>
-        <FlexRow>
-          <FlexRow3>
-            <FlexRow3Container>
-              <ImageContainer
-                image={getImage(images.CollectLeadsImage)}
-                alt="collect quality leads"
-              />
-              <FlexRow3Heading>Collect quality leads</FlexRow3Heading>
-              <FlexRow3Copy>
-                Grow your email subscriber list with opt-in offers, instant digital file delivery,
-                and conversion-optimized content.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
-          <FlexRow3>
-            <FlexRow3Container>
-              <ImageContainer
-                image={getImage(images.SellProductsImage)}
-                alt="sell products & services"
-              />
-              <FlexRow3Heading>Sell products & services</FlexRow3Heading>
-              <FlexRow3Copy>
-                Increase your revenue with high-converting sales pages and built-in checkouts
-                powered by Stripe.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
-          <FlexRow3>
-            <FlexRow3Container>
-              <ImageContainer
-                image={getImage(images.EngageAudienceImage)}
-                alt="engage your audience"
-              />
-              <FlexRow3Heading>Engage your audience</FlexRow3Heading>
-              <FlexRow3Copy>
-                Connect with your community by offering webinars, downloadable resources, and
-                appointment scheduling.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
-        </FlexRow>
-      </LPUContainer>
-    </OuterContainer>
-  );
-}
+const StyledImage = styled(Image, {
+  display: 'block',
+  mx: 'auto',
+  marginBottom: '2rem',
+  height: '100%',
+  width: '100%',
+  maxHeight: '48px',
+  maxWidth: '48px',
+})
 
-export default LeadpagesUse;
+const FlexRow3Heading = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  lineHeight: '28px',
+  fontWeight: 500,
+  textAlign: 'center',
+  marginBottom: '2rem',
+  color: '$text',
+})
+
+const FlexRow3Copy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  textAlign: 'center',
+  marginBottom: '1.25rem',
+  color: '$textAlt',
+})
+
+const LeadpagesUse = () => (
+  <OuterContainer>
+    <LPUContainer>
+      <LPUHeadline>What is Leadpages used for?</LPUHeadline>
+      <FlexRow>
+        <FlexRow3>
+          <FlexRow3Container>
+            <StyledImage
+              image={CollectLeadsImage}
+              alt="collect quality leads"
+            />
+            <FlexRow3Heading>Collect quality leads</FlexRow3Heading>
+            <FlexRow3Copy>
+              Grow your email subscriber list with opt-in offers, instant
+              digital file delivery, and conversion-optimized content.
+            </FlexRow3Copy>
+          </FlexRow3Container>
+        </FlexRow3>
+        <FlexRow3>
+          <FlexRow3Container>
+            <StyledImage
+              image={SellProductsImage}
+              alt="sell products & services"
+            />
+            <FlexRow3Heading>Sell products & services</FlexRow3Heading>
+            <FlexRow3Copy>
+              Increase your revenue with high-converting sales pages and
+              built-in checkouts powered by Stripe.
+            </FlexRow3Copy>
+          </FlexRow3Container>
+        </FlexRow3>
+        <FlexRow3>
+          <FlexRow3Container>
+            <StyledImage
+              image={EngageAudienceImage}
+              alt="engage your audience"
+            />
+            <FlexRow3Heading>Engage your audience</FlexRow3Heading>
+            <FlexRow3Copy>
+              Connect with your community by offering webinars, downloadable
+              resources, and appointment scheduling.
+            </FlexRow3Copy>
+          </FlexRow3Container>
+        </FlexRow3>
+      </FlexRow>
+    </LPUContainer>
+  </OuterContainer>
+)
+
+export default LeadpagesUse
