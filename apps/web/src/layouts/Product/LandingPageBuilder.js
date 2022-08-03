@@ -3,7 +3,7 @@ import React from 'react'
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 // import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
 import EasilyTest from '@legacy/components/product/EasilyTest'
-// import GetInspired_LandingPage from '@legacy/components/product/GetInspired_LandingPage'
+import GetInspired_LandingPage from '@legacy/components/product/GetInspired_LandingPage'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 // import HomePageTraffic from '@legacy/components/product/HomePageTraffic'
 // import PowerfulFeatures from '@legacy/components/product/PowerfulFeatures'
@@ -41,8 +41,8 @@ const LandingPageBuilderProductPage = () => (
     <TakeControl />
     <HomePageTraffic />  */}
     <EasilyTest />
-    {/* <SaveTime />
-    <GetInspired_LandingPage /> */}
+    {/* <SaveTime /> */}
+    <GetInspired_LandingPage />
     <SpacerRow size="small" />
     <HeadlineSection
       supertitle="Customer Success Team"
