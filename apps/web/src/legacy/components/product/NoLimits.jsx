@@ -1,190 +1,167 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
 // images
-import rightbkgSVG from '../../assets/images/shapes/bounce-tan.svg';
+import rightbkgSVG from '@legacy/assets/images/shapes/bounce-tan.svg'
 
-const NLContainer = styled.div`
-  position: relative;
-`;
+const NLContainer = styled('div', {
+  position: 'relative',
+})
 
-const FlexBoxContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 576px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-    padding-top: 3rem;
-  }
-  @media (min-width: 992px) {
-    padding-right: 12rem;
-    padding-left: 12rem;
-  }
-`;
+const FlexBoxContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  textAlign: 'left',
+  py: '3rem',
+  px: '3rem',
 
-const NLHeadline = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 1.375rem;
-  font-weight: 500;
-  line-height: 2rem;
-  margin-bottom: 2rem;
-  color: #0f0c09;
-  @media (max-width: 576px) {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-  }
-`;
+  '@>m': {
+    px: '12rem',
+  },
+})
 
-const NLCaption = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 4rem;
-  color: #575452;
-`;
+const NLHeadline = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '1.375rem',
+  fontWeight: 500,
+  lineHeight: '2rem',
+  marginBottom: '2rem',
+  color: '$text',
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
+  '@<s': {
+    fontSize: '1.125rem',
+    lineHeight: '1.75rem',
+  },
+})
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-  margin-left: auto;
-  margin-right: auto;
-`;
+const NLCaption = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  marginBottom: '4rem',
+  color: '$textAlt',
+})
 
-const FlexRow3 = styled(FlexRowItem)`
-  display: flex;
-  justify-content: space-between;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100%;
-  flex: 0 0 100%;
-  max-width: 100%;
-  margin-bottom: 2rem;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 31.3333%;
-    flex: 0 0 31.3333%;
-    max-width: 31.3333%;
-    margin-bottom: 0;
-  }
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  flexWrap: 'wrap',
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 31.3333%;
-    flex: 0 0 31.3333%;
-    max-width: 31.3333%;
-    margin-bottom: 0;
-  }
-`;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+  mx: 'auto',
+})
 
-const FlexRow3Container = styled.div`
-  margin-right: 2rem;
-`;
+const FlexRow3 = styled(FlexRowItem, {
+  display: 'flex',
+  justifyContent: 'space-between',
+  flex: '0 0 100%',
+  maxWidth: '100%',
+  marginBottom: '2rem',
 
-const FlexRow6Container = styled.div`
-  padding-left: 1%;
-  padding-right: 1%;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 49%;
-    flex: 0 0 49%;
-    max-width: 49%;
-  }
+  '@>s': {
+    flex: '0 0 31.3333%',
+    maxWidth: '31.3333%',
+    marginBottom: 0,
+  },
+})
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 60%;
-    flex: 0 0 60%;
-    max-width: 60%;
-  }
-`;
+const FlexRow3Container = styled('div', {
+  marginRight: '2rem',
+})
 
-const FlexRow3Heading = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  margin-bottom: 1.25rem;
-  color: #0f0c09;
-`;
+const FlexRow6Container = styled('div', {
+  px: '1%',
 
-const FlexRow3Copy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 2rem;
-  color: #575452;
-`;
+  '@>s': {
+    flex: '0 0 49%',
+    maxWidth: '49%',
+  },
 
-const SVGRightContainer = styled.img`
-  position: absolute;
-  right: 0;
-  z-index: -1;
-  @media (max-width: 576px) {
-    display: none;
-  }
-`;
+  '@>m': {
+    marginBottom: 0,
+    flex: '0 0 60%',
+    maxWidth: '60%',
+  },
+})
 
-function NoLimits() {
-  return (
-    <NLContainer>
-      <SVGRightContainer src={rightbkgSVG} alt="background svg" />
-      <FlexBoxContainer>
-        <FlexRow>
-          <FlexRow6Container>
-            <NLHeadline>Because you don’t believe in limits, neither do we</NLHeadline>
-            <NLCaption>
-              Leadpages is the only platform that doesn’t limit your growth or charge you more for
-              your success. We want to partner with you on your small business journey, which means
-              cheering you on—not capping your capabilities.
-            </NLCaption>
-          </FlexRow6Container>
-        </FlexRow>
-        <FlexRow>
-          <FlexRow3>
-            <FlexRow3Container>
-              <FlexRow3Heading>Unlimited traffic & page views</FlexRow3Heading>
-              <FlexRow3Copy>
-                The sky’s the limit when it comes to page views and web traffic.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
-          <FlexRow3>
-            <FlexRow3Container>
-              <FlexRow3Heading>Unlimited lead generation</FlexRow3Heading>
-              <FlexRow3Copy>
-                Collect as many leads, opt-ins, and subscribers as you can.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
-          <FlexRow3>
-            <FlexRow3Container>
-              <FlexRow3Heading>Unlimited publishing</FlexRow3Heading>
-              <FlexRow3Copy>
-                Publish as many pages, pop-ups, and alert bars as you like&mdash;anywhere on the
-                web.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
-        </FlexRow>
-      </FlexBoxContainer>
-    </NLContainer>
-  );
-}
+const FlexRow3Heading = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  marginBottom: '1.25rem',
+  color: '$text',
+})
 
-export default NoLimits;
+const FlexRow3Copy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '2rem',
+  color: '$textAlt',
+})
+
+const BackgroundImage = styled('img', {
+  position: 'absolute',
+  right: 0,
+  zIndex: '$under',
+
+  '@<s': {
+    display: 'none',
+  },
+})
+
+const NoLimits = () => (
+  <NLContainer>
+    <BackgroundImage src={rightbkgSVG.src} alt="background svg" />
+    <FlexBoxContainer>
+      <FlexRow>
+        <FlexRow6Container>
+          <NLHeadline>
+            Because you don’t believe in limits, neither do we
+          </NLHeadline>
+          <NLCaption>
+            Leadpages is the only platform that doesn’t limit your growth or
+            charge you more for your success. We want to partner with you on
+            your small business journey, which means cheering you on—not capping
+            your capabilities.
+          </NLCaption>
+        </FlexRow6Container>
+      </FlexRow>
+      <FlexRow>
+        <FlexRow3>
+          <FlexRow3Container>
+            <FlexRow3Heading>Unlimited traffic & page views</FlexRow3Heading>
+            <FlexRow3Copy>
+              The sky’s the limit when it comes to page views and web traffic.
+            </FlexRow3Copy>
+          </FlexRow3Container>
+        </FlexRow3>
+        <FlexRow3>
+          <FlexRow3Container>
+            <FlexRow3Heading>Unlimited lead generation</FlexRow3Heading>
+            <FlexRow3Copy>
+              Collect as many leads, opt-ins, and subscribers as you can.
+            </FlexRow3Copy>
+          </FlexRow3Container>
+        </FlexRow3>
+        <FlexRow3>
+          <FlexRow3Container>
+            <FlexRow3Heading>Unlimited publishing</FlexRow3Heading>
+            <FlexRow3Copy>
+              Publish as many pages, pop-ups, and alert bars as you
+              like&mdash;anywhere on the web.
+            </FlexRow3Copy>
+          </FlexRow3Container>
+        </FlexRow3>
+      </FlexRow>
+    </FlexBoxContainer>
+  </NLContainer>
+)
+
+export default NoLimits
