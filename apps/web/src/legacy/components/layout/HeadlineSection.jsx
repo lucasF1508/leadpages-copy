@@ -4,7 +4,7 @@ import Image from '@components/Image'
 import PropTypes from 'prop-types'
 import { styled } from '@design'
 // images
-import ArrowRightPurple from '../../assets/images/global/arrow_right_purple.svg'
+import ArrowRightPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
 
 const MainContainer = styled('div', {
   w: '100%',

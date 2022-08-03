@@ -1,478 +1,522 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { Link } from 'gatsby';
-import { Link as ScrollLink } from 'react-scroll';
-import debounce from 'lodash.debounce';
-import styled from 'styled-components';
-import { GATSBY_IMAGE } from '../../constants/types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Image from '@components/Image'
+import Link from '@components/Link'
+import { Link as ScrollLink } from 'react-scroll'
+import debounce from 'lodash.debounce'
+import { styled } from '@design'
+import { GATSBY_IMAGE } from '@legacy/constants/types'
 // components
-import SearchFilter from '../search/SearchFilter';
-import Tooltip from '../tooltips/Tooltip_GreatWhite';
+import SearchFilter from '../search/SearchFilter'
+import Tooltip from '../tooltips/Tooltip_GreatWhite'
 // images
-import closeXSVG from '../../assets/images/global/x_close.svg';
-import downArrowSVG from '../../assets/images/global/arrow_down_large.svg';
+import closeXSVG from '@legacy/assets/images/global/x_close.svg'
+import downArrowSVG from '@legacy/assets/images/global/arrow_down_large.svg'
 
-const OuterContainer = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: #f7f7f7;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  width: '100%',
+  height: '100%',
+  background: '$grayAlt',
+})
 
-const InnerContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 1;
-  background: #f7f7f7;
-  min-height: 200px;
-`;
+const InnerContainer = styled('div', {
+  maxWidth: '1140px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  zIndex: 1,
+  background: '$grayAlt',
+  minHeight: '200px',
+})
 
-const BodyContainer = styled.div`
-  display: flex;
-  padding-top: 2rem;
-`;
+const BodyContainer = styled('div', {
+  display: 'flex',
+  paddingTop: '2rem',
+})
 
-const MainContainer = styled.div`
-  max-width: 1140px;
-  @media (max-width: 768px) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  @media (min-width: 769px) and (max-width: 992px) {
-    margin-left: 35%;
-    width: 65%;
-    padding-right: 4rem;
-    padding-left: 4rem;
-  }
-  @media (min-width: 993px) {
-    margin-left: 30%;
-    width: 70%;
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const MainContainer = styled('div', {
+  maxWidth: '1140px',
 
-const Section = styled.div`
-  padding-top: 1rem;
-  width: 100%;
-  padding-top: 85px;
-  margin-top: -85px;
-  margin-bottom: 5.5rem;
-  @media (min-width: 992px) {
-    margin-bottom: 6.25rem;
-  }
-`;
+  '@media (max-width: 768px)': {
+    paddingLeft: '1.5rem',
+    paddingRight: '1.5rem',
+  },
 
-const SectionTitle = styled.div`
-  color: #0f0c09;
-  font-family: 'Value Serif';
-  font-size: 30px;
-  letter-spacing: -0.1px;
-  line-height: 36px;
-  margin-bottom: 24px;
-  @media (max-width: 576px) {
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #edecec;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 24px;
-  }
-`;
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    marginLeft: '35%',
+    width: '65%',
+    paddingRight: '4rem',
+    paddingLeft: '4rem',
+  },
 
-const SectionIntegration = styled.div`
-  margin-top: 3rem;
-  padding-right: 2%;
-`;
+  '@media (min-width: 993px)': {
+    marginLeft: '30%',
+    width: '70%',
+    paddingRight: '6rem',
+    paddingLeft: '6rem',
+  },
+})
 
-const SectionIntegrationTitle = styled.div`
-  padding-bottom: 0.5rem;
-  color: #0f0c09;
-  font-family: Apercu Pro;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 28px;
-`;
+const Section = styled('div', {
+  paddingTop: '1rem',
+  width: '100%',
+  paddingTop: '85px',
+  marginTop: '-85px',
+  marginBottom: '5.5rem',
 
-const SectionIntegrationCopy = styled.div`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 14px;
-  line-height: 20px;
-`;
+  '@media (min-width: 992px)': {
+    marginBottom: '6.25rem',
+  },
+})
 
-const SectionIntegrationConnection = styled.div`
-  color: #575452;
-  font-size: 12px;
-  line-height: 18px;
-  font-family: Apercu Pro;
-  margin-bottom: 20px;
-`;
+const SectionTitle = styled('div', {
+  color: '$text',
+  fontFamily: `'Value Serif'`,
+  fontSize: '30px',
+  letterSpacing: '-0.1px',
+  lineHeight: '36px',
+  marginBottom: '24px',
 
-const SidebarContainer = styled.div`
-  position: absolute;
-  top: 32px;
-  min-height: 150px;
-  padding-bottom: 2rem;
-  &.scrolled {
-    position: fixed !important;
-    top: 91px !important;
-  }
-  @media (max-width: 768px) {
-    display: none;
-  }
-  @media (min-width: 769px) and (max-width: 875px) {
-    padding-right: 4rem;
-    margin-left: 4rem;
-    min-width: 200px;
-    max-width: 200px;
-    border-right: 1px solid rgba(15, 12, 9, 0.08);
-  }
-  @media (min-width: 876px) and (max-width: 992px) {
-    padding-right: 4rem;
-    margin-left: 4rem;
-    min-width: 200px;
-    max-width: 200px;
-    border-right: 1px solid rgba(15, 12, 9, 0.08);
-  }
-  @media (min-width: 993px) {
-    padding-right: 4rem;
-    margin-left: 6rem;
-    min-width: 200px;
-    max-width: 200px;
-    border-right: 1px solid rgba(15, 12, 9, 0.08);
-  }
-`;
+  '@media (max-width: 576px)': {
+    paddingBottom: '1rem',
+    borderBottom: '1px solid #edecec',
+  },
 
-const SidebarHeading = styled.div`
-  color: rgba(15, 12, 9, 0.5);
-  font-family: Apercu Pro;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  padding-bottom: 0.25rem;
-  padding-top: 0.25rem;
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-`;
+  '@media (min-width: 992px)': {
+    marginBottom: '24px',
+  },
+})
 
-const IntegrationsMobileMenuContainer = styled.div`
-  display: none;
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  z-index: 1501;
-  height: 72px;
-  background: #fff;
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-  &.scrolled {
-    @media (max-width: 768px) {
-      display: block;
-    }
-  }
-`;
+const SectionIntegration = styled('div', {
+  marginTop: '3rem',
+  paddingRight: '2%',
+})
 
-const MainMenuFlexbox = styled.div`
-  margin-top: 24px;
-  margin-left: 32px;
-  margin-right: 24px;
-  display: flex;
-  justify-content: space-between;
-`;
+const SectionIntegrationTitle = styled('div', {
+  paddingBottom: '0.5rem',
+  color: '$text',
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  fontWeight: 500,
+  lineHeight: '28px',
+})
 
-const MainMenuHeading = styled.div`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  cursor: pointer;
-`;
+const SectionIntegrationCopy = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+})
 
-const MainMenuIcon = styled.img`
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-`;
+const SectionIntegrationConnection = styled('div', {
+  color: '$textAlt',
+  fontSize: '12px',
+  lineHeight: '18px',
+  fontFamily: 'Apercu Pro',
+  marginBottom: '20px',
+})
 
-const MainMenuSubmenu = styled.div`
-  z-index: 1501;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-`;
+const SidebarContainer = styled('div', {
+  position: 'absolute',
+  top: '32px',
+  minHeight: '150px',
+  paddingBottom: '2rem',
 
-const SubmenuHeader = styled.div`
-  height: 72px;
-  width: 100%;
-  background: #fff;
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-`;
+  '&.scrolled': {
+    position: 'fixed !important',
+    top: '91px !important',
+  },
 
-const SubmenuHeaderFlexbox = styled.div`
-  padding-top: 24px;
-  margin-left: 32px;
-  margin-right: 24px;
-  display: flex;
-  justify-content: space-between;
-`;
+  '@media (max-width: 768px)': {
+    display: 'none',
+  },
 
-const SubmenuHeaderHeading = styled.div`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  cursor: pointer;
-`;
+  '@media (min-width: 769px) and (max-width: 875px)': {
+    paddingRight: '4rem',
+    marginLeft: '4rem',
+    minWidth: '200px',
+    maxWidth: '200px',
+    borderRight: '1px solid rgba(15, 12, 9, 0.08)',
+  },
 
-const SubmenuHeaderIcon = styled.img`
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-`;
+  '@media (min-width: 876px) and (max-width: 992px)': {
+    paddingRight: '4rem',
+    marginLeft: '4rem',
+    minWidth: '200px',
+    maxWidth: '200px',
+    borderRight: '1px solid rgba(15, 12, 9, 0.08)',
+  },
 
-const SubmenuContent = styled.div`
-  width: 100%;
-  background: #fff;
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-  padding-top: 1rem;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-  padding-bottom: 1rem;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-`;
+  '@media (min-width: 993px)': {
+    paddingRight: '4rem',
+    marginLeft: '6rem',
+    minWidth: '200px',
+    maxWidth: '200px',
+    borderRight: '1px solid rgba(15, 12, 9, 0.08)',
+  },
+})
 
-const SubmenuLink = styled.div`
-  margin-bottom: 0.75rem;
-  color: #575452;
-  &:hover {
-    color: #603eff;
-    cursor: pointer;
-  }
-`;
+const SidebarHeading = styled('div', {
+  color: 'rgba(15, 12, 9, 0.5)',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  paddingBottom: '0.25rem',
+  paddingTop: '0.25rem',
+  marginTop: '0.25rem',
+  marginBottom: '0.25rem',
+})
 
-const SidebarScrollLink = styled(ScrollLink)`
-  &.activeIntegrationsLink {
-    color: #603eff;
-  }
-  > .heading {
-    &:hover {
-      color: #603eff;
-      cursor: pointer;
-    }
-  }
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-`;
+const IntegrationsMobileMenuContainer = styled('div', {
+  display: 'none',
+  position: 'fixed',
+  top: '0px',
+  width: '100%',
+  zIndex: 1501,
+  height: '72px',
+  background: '$white',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
 
-const SubmenuScrollLink = styled(ScrollLink)`
-  display: none;
-  z-index: 1501;
-  &.activeIntegrationsSection {
-    display: block;
-    transition: all 0.3s ease;
-  }
-`;
+  '&.scrolled': {
+    '@media (max-width: 768px)': {
+      display: 'block',
+    },
+  },
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`;
+const MainMenuFlexbox = styled('div', {
+  marginTop: '24px',
+  marginLeft: '32px',
+  marginRight: '24px',
+  display: 'flex',
+  justifyContent: 'space-between',
+})
 
-const SubpageCardArrow = styled.img`
-  position: absolute;
-  top: 3.5rem;
-  right: 3.5rem;
-  transform: rotate(-90deg);
-`;
+const MainMenuHeading = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  cursor: 'pointer',
+})
 
-const IntegrationContainer = styled.div`
-  position: relative;
-  background: #fff;
-  margin-bottom: 24px;
-  width: 100%;
-  transition: all 0.3s ease 0s;
+const MainMenuIcon = styled('img', {
+  width: '16px',
+  height: '16px',
+  cursor: 'pointer',
+})
 
-  &.hasSubpage {
-    box-shadow: 0 0 2px 0 rgba(15, 12, 9, 0.04), 0 2px 4px 0 rgba(15, 12, 9, 0.08);
+const MainMenuSubmenu = styled('div', {
+  zIndex: 1501,
+  width: '100%',
+  height: '100%',
+  position: 'fixed',
+  top: 0,
+})
 
-    &:hover {
-      box-shadow: 0 4px 8px 0 rgba(15, 12, 9, 0.04), 0 10px 20px 0 rgba(15, 12, 9, 0.08);
-    }
-    &:hover ${SectionIntegrationTitle} {
-      color: #603eff;
-    }
-    &:hover ${SubpageCardArrow} {
-      filter: invert(36%) sepia(74%) saturate(7035%) hue-rotate(245deg) brightness(99%)
-        contrast(105%);
-    }
-  }
-`;
+const SubmenuHeader = styled('div', {
+  height: '72px',
+  width: '100%',
+  background: '$white',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+})
 
-const IntegrationFlexbox = styled.div`
-  padding: 3rem;
-  @media (max-width: 400px) {
-    padding: 10%;
-  }
-  @media (min-width: 577px) {
-    display: flex;
-  }
-`;
+const SubmenuHeaderFlexbox = styled('div', {
+  paddingTop: '24px',
+  marginLeft: '32px',
+  marginRight: '24px',
+  display: 'flex',
+  justifyContent: 'space-between',
+})
 
-const IntegrationTextContainer = styled.div``;
+const SubmenuHeaderHeading = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  cursor: 'pointer',
+})
 
-const IntegrationImageContainer = styled.div`
-  width: 48px;
-  height: 48px;
-  padding-right: 48px;
-  @media (max-width: 576px) {
-    margin-bottom: 16px;
-  }
-`;
+const SubmenuHeaderIcon = styled('img', {
+  width: '16px',
+  height: '16px',
+  cursor: 'pointer',
+})
 
-const IntegrationImage = styled(GatsbyImage)`
-  width: 48px;
-  height: 48px;
-`;
+const SubmenuContent = styled('div', {
+  width: '100%',
+  background: '#fff',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+  paddingTop: '1rem',
+  paddingLeft: '2.5rem',
+  paddingRight: '2.5rem',
+  paddingBottom: '1rem',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+})
 
-const NoIntegrationsContainer = styled.div`
-  text-align: center;
-  margin: 2rem auto;
-  padding-left: 2rem;
-  @media (max-width: 767px) {
-    padding-left: 1rem;
-  }
-`;
+const SubmenuLink = styled('div', {
+  marginBottom: '0.75rem',
+  color: '$textAlt',
 
-const NoIntegrationsHeading = styled.div`
-  font-family: 'Value Serif';
-  font-size: 1.875rem;
-  letter-spacing: -0.03125rem;
-  line-height: 2.25rem;
-  color: #0f0c09;
-  margin-bottom: 2rem;
+  '&:hover': {
+    color: '$primary',
+    cursor: 'pointer',
+  },
+})
 
-  @media (max-width: 576px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-  }
-`;
+const SidebarScrollLink = styled(ScrollLink, {
+  '&.activeIntegrationsLink': {
+    color: '$primary',
+  },
 
-const NoIntegrationsCaption = styled.div`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  margin-bottom: 3.3rem;
-  @media (max-width: 576px) {
-    font-size: 1rem;
-  }
-`;
+  '> .heading': {
+    '&:hover': {
+      color: '$primary',
+      cursor: 'pointer',
+    },
+  },
 
-const OutboundLink = styled.a`
-  text-decoration: none;
-  color: #000;
-`;
+  marginTop: '0.25rem',
+  marginBottom: '0.25rem',
+})
 
-const NoIntegrationsButton = styled.button`
-  width: 278px;
-  height: 48px;
-  color: #603eff;
-  background-color: transparent;
-  border: 3px solid #d1c5f9;
-  border-radius: 48px;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 30px;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  transition: all 0.3s ease;
-  &:hover {
-    background-color: #603eff;
-    color: #ffffff;
-    cursor: pointer;
-    border: 3px solid #603eff;
-  }
-  @media (max-width: 340px) {
-    width: 80%;
-    min-width: 140px;
-  }
-`;
+const SubmenuScrollLink = styled(ScrollLink, {
+  display: 'none',
+  zIndex: 1501,
+
+  '&.activeIntegrationsSection': {
+    display: 'block',
+    transition: 'all 0.3s ease',
+  },
+})
+
+const StyledLink = styled(Link, {
+  textDecoration: 'none',
+})
+
+const SubpageCardArrow = styled('img', {
+  position: 'absolute',
+  top: '3.5rem',
+  right: '3.5rem',
+  transform: 'rotate(-90deg)',
+})
+
+const IntegrationContainer = styled('div', {
+  position: 'relative',
+  background: '$white',
+  marginBottom: '24px',
+  width: '100%',
+  transition: 'all 0.3s ease 0s',
+
+  '&.hasSubpage': {
+    boxShadow: `0 0 2px 0 rgba(15, 12, 9, 0.04),
+      0 2px 4px 0 rgba(15, 12, 9, 0.08)`,
+
+    '&:hover': {
+      boxShadow: `0 4px 8px 0 rgba(15, 12, 9, 0.04),
+        0 10px 20px 0 rgba(15, 12, 9, 0.08)`,
+    },
+
+    [`&:hover ${SectionIntegrationTitle}`]: {
+      color: '$primary',
+    },
+
+    [`&:hover ${SubpageCardArrow}`]: {
+      filter: `invert(36%) sepia(74%) saturate(7035%) hue-rotate(245deg)
+        brightness(99%) contrast(105%)`,
+    },
+  },
+})
+
+const IntegrationFlexbox = styled('div', {
+  padding: '3rem',
+
+  '@media (max-width: 400px)': {
+    padding: '10%',
+  },
+
+  '@media (min-width: 577px)': {
+    display: 'flex',
+  },
+})
+
+const IntegrationTextContainer = styled('div', {})
+
+const IntegrationImageContainer = styled('div', {
+  width: '48px',
+  height: '48px',
+  paddingRight: '48px',
+
+  '@media (max-width: 576px)': {
+    marginBottom: '16px',
+  },
+})
+
+const IntegrationImage = styled(Image, {
+  width: '48px',
+  height: '48px',
+})
+
+const NoIntegrationsContainer = styled('div', {
+  textAlign: 'center',
+  margin: '2rem auto',
+  paddingLeft: '2rem',
+
+  '@media (max-width: 767px)': {
+    paddingLeft: '1rem',
+  },
+})
+
+const NoIntegrationsHeading = styled('div', {
+  fontFamily: `'Value Serif'`,
+  fontSize: '1.875rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '2.25rem',
+  color: '$text',
+  marginBottom: '2rem',
+
+  '@media (max-width: 576px)': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+  },
+})
+
+const NoIntegrationsCaption = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '1.125rem',
+  lineHeight: '1.75rem',
+  marginBottom: '3.3rem',
+
+  '@media (max-width: 576px)': {
+    fontSize: '1rem',
+  },
+})
+
+const OutboundLink = styled('a', {
+  textDecoration: 'none',
+  color: '$black',
+})
+
+const NoIntegrationsButton = styled('button', {
+  width: '278px',
+  height: '48px',
+  color: '$primary',
+  backgroundColor: 'transparent',
+  border: '3px solid $colors$secondary',
+  borderRadius: '48px',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '30px',
+  textAlign: 'center',
+  marginBottom: '2.5rem',
+  transition: 'all 0.3s ease',
+
+  '&:hover': {
+    backgroundColor: '$primary',
+    color: '$white',
+    cursor: 'pointer',
+    border: '3px solid $colors$primary',
+  },
+
+  '@media (max-width: 340px)': {
+    width: '80%',
+    minWidth: '140px',
+  },
+})
 
 class IntegrationsContent extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       filteredIntegrations: props.integrations,
       filteredCategories: props.categories,
       integrationsSidebarScrolled: false,
       integrationsMainMenuScrolled: false,
       showIntegrationsSubMenu: false,
-    };
+    }
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleIntegrationsScroll);
+    window.addEventListener('scroll', this.handleIntegrationsScroll)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleIntegrationsScroll);
+    window.removeEventListener('scroll', this.handleIntegrationsScroll)
   }
 
   toggleSubMenu = () => {
-    const { showIntegrationsSubMenu } = this.state;
-    this.setState({ showIntegrationsSubMenu: !showIntegrationsSubMenu });
-  };
+    const { showIntegrationsSubMenu } = this.state
+    this.setState({ showIntegrationsSubMenu: !showIntegrationsSubMenu })
+  }
 
-  setSidebar = integrationsSidebarScrolled => this.setState({ integrationsSidebarScrolled });
+  setSidebar = (integrationsSidebarScrolled) =>
+    this.setState({ integrationsSidebarScrolled })
 
-  setMainMenu = integrationsMainMenuScrolled => this.setState({ integrationsMainMenuScrolled });
+  setMainMenu = (integrationsMainMenuScrolled) =>
+    this.setState({ integrationsMainMenuScrolled })
 
-  setSubMenu = showIntegrationsSubMenu => this.setState({ showIntegrationsSubMenu });
+  setSubMenu = (showIntegrationsSubMenu) =>
+    this.setState({ showIntegrationsSubMenu })
 
-  setFilteredCategories = categories => this.setState({ filteredCategories: categories });
+  setFilteredCategories = (categories) =>
+    this.setState({ filteredCategories: categories })
 
-  setFilteredIntegrations = filteredData => this.setState({ filteredIntegrations: filteredData });
+  setFilteredIntegrations = (filteredData) =>
+    this.setState({ filteredIntegrations: filteredData })
 
   handleIntegrationsScroll = () => {
-    const mainContainerTop = document.getElementById('maincontainer').getBoundingClientRect().top;
-    const containerHeight = document.getElementById('container').scrollHeight;
-    const sidebarHeight = document.getElementById('sidebar').clientHeight;
-    const scrollOffset = containerHeight - sidebarHeight;
-    if (window.innerWidth > 768 && mainContainerTop <= 92 && window.scrollY < scrollOffset) {
-      this.setSidebar(true);
-    } else if (window.innerWidth <= 768 && window.scrollY > 323 && window.scrollY < scrollOffset) {
-      this.setMainMenu(true);
+    const mainContainerTop = document
+      .getElementById('maincontainer')
+      .getBoundingClientRect().top
+    const containerHeight = document.getElementById('container').scrollHeight
+    const sidebarHeight = document.getElementById('sidebar').clientHeight
+    const scrollOffset = containerHeight - sidebarHeight
+    if (
+      window.innerWidth > 768 &&
+      mainContainerTop <= 92 &&
+      window.scrollY < scrollOffset
+    ) {
+      this.setSidebar(true)
+    } else if (
+      window.innerWidth <= 768 &&
+      window.scrollY > 323 &&
+      window.scrollY < scrollOffset
+    ) {
+      this.setMainMenu(true)
     } else {
-      this.setSidebar(false);
-      this.setMainMenu(false);
-      this.setSubMenu(false);
+      this.setSidebar(false)
+      this.setMainMenu(false)
+      this.setSubMenu(false)
     }
-  };
+  }
 
   handleFilteredData = (filteredData, searchQuery) => {
     // Get distinct category values from filtered data
-    let distinctCategories = [...new Set(filteredData.map(feature => feature.category))];
-    distinctCategories = Array.from(distinctCategories);
+    let distinctCategories = [
+      ...new Set(filteredData.map((feature) => feature.category)),
+    ]
+    distinctCategories = Array.from(distinctCategories)
 
-    this.setFilteredCategories(distinctCategories);
-    this.setFilteredIntegrations(filteredData);
+    this.setFilteredCategories(distinctCategories)
+    this.setFilteredIntegrations(filteredData)
 
     if (searchQuery && searchQuery !== '') {
-      window.dataLayer = window.dataLayer || [];
+      window.dataLayer = window.dataLayer || []
       window.dataLayer.push({
         event: 'integrationsSearched',
         integrationsSearchQuery: searchQuery,
-      });
+      })
     }
-  };
+  }
 
   render() {
     const {
@@ -481,10 +525,10 @@ class IntegrationsContent extends React.Component {
       filteredCategories,
       showIntegrationsSubMenu,
       filteredIntegrations,
-    } = this.state;
-    const { integrations } = this.props;
-    const classSidebarScrolled = integrationsSidebarScrolled ? 'scrolled' : '';
-    const classMainMenuScrolled = integrationsMainMenuScrolled ? 'scrolled' : '';
+    } = this.state
+    const { integrations } = this.props
+    const classSidebarScrolled = integrationsSidebarScrolled ? 'scrolled' : ''
+    const classMainMenuScrolled = integrationsMainMenuScrolled ? 'scrolled' : ''
 
     return (
       <div>
@@ -500,7 +544,7 @@ class IntegrationsContent extends React.Component {
                 dataSet={integrations}
                 searchableProperties={['integration']}
               />
-              {filteredCategories.map(item => (
+              {filteredCategories.map((item) => (
                 <SidebarScrollLink
                   key={item}
                   activeClass="activeIntegrationsLink"
@@ -520,7 +564,7 @@ class IntegrationsContent extends React.Component {
             >
               <MainMenuFlexbox>
                 <MainMenuHeading>
-                  {filteredCategories.map(item => (
+                  {filteredCategories.map((item) => (
                     <SubmenuScrollLink
                       key={item}
                       activeClass="activeIntegrationsSection"
@@ -540,12 +584,18 @@ class IntegrationsContent extends React.Component {
               <MainMenuSubmenu>
                 <SubmenuHeader>
                   <SubmenuHeaderFlexbox>
-                    <SubmenuHeaderHeading>Jump to a Section...</SubmenuHeaderHeading>
-                    <SubmenuHeaderIcon src={closeXSVG} alt="close x" onClick={this.toggleSubMenu} />
+                    <SubmenuHeaderHeading>
+                      Jump to a Section...
+                    </SubmenuHeaderHeading>
+                    <SubmenuHeaderIcon
+                      src={closeXSVG}
+                      alt="close x"
+                      onClick={this.toggleSubMenu}
+                    />
                   </SubmenuHeaderFlexbox>
                 </SubmenuHeader>
                 <SubmenuContent>
-                  {filteredCategories.map(item => (
+                  {filteredCategories.map((item) => (
                     <ScrollLink
                       key={item}
                       activeClass="activeIntegrationsLink"
@@ -564,13 +614,13 @@ class IntegrationsContent extends React.Component {
 
             <BodyContainer>
               <MainContainer id="maincontainer">
-                {filteredCategories.map(item => (
+                {filteredCategories.map((item) => (
                   <Section name={item} key={item}>
                     <SectionTitle>{item}</SectionTitle>
                     <SectionIntegration>
                       {/* eslint-disable-next-line array-callback-return, consistent-return */}
 
-                      {filteredIntegrations.map(eachIntegration => {
+                      {filteredIntegrations.map((eachIntegration) => {
                         const {
                           integration,
                           category,
@@ -579,15 +629,18 @@ class IntegrationsContent extends React.Component {
                           tooltip,
                           icon,
                           subpage,
-                        } = eachIntegration;
+                        } = eachIntegration
                         if (category === item) {
                           return (
                             <>
                               {/* Subpage included here */}
                               {subpage ? (
-                                <StyledLink to={subpage.route}>
-                                  <IntegrationContainer key={integration} className="hasSubpage">
-                                    <SubpageCardArrow src={downArrowSVG} />
+                                <StyledLink url={subpage.route}>
+                                  <IntegrationContainer
+                                    key={integration}
+                                    className="hasSubpage"
+                                  >
+                                    <SubpageCardArrow src={downArrowSVG.src} />
                                     <IntegrationFlexbox>
                                       <IntegrationImageContainer>
                                         <IntegrationImage
@@ -624,7 +677,9 @@ class IntegrationsContent extends React.Component {
                                       />
                                     </IntegrationImageContainer>
                                     <IntegrationTextContainer>
-                                      <SectionIntegrationTitle key={integration}>
+                                      <SectionIntegrationTitle
+                                        key={integration}
+                                      >
                                         {integration}
                                       </SectionIntegrationTitle>
                                       <SectionIntegrationConnection>
@@ -632,13 +687,15 @@ class IntegrationsContent extends React.Component {
                                           <span>{connection}</span>
                                         </Tooltip>
                                       </SectionIntegrationConnection>
-                                      <SectionIntegrationCopy>{description}</SectionIntegrationCopy>
+                                      <SectionIntegrationCopy>
+                                        {description}
+                                      </SectionIntegrationCopy>
                                     </IntegrationTextContainer>
                                   </IntegrationFlexbox>
                                 </IntegrationContainer>
                               )}
                             </>
-                          );
+                          )
                         }
                       })}
                     </SectionIntegration>
@@ -653,15 +710,17 @@ class IntegrationsContent extends React.Component {
                       Unlock more possibilities with Zapier!
                       <br />
                       <br />
-                      Connect your Leadpages account to hundreds of apps when you get started with a
-                      free Zapier account.
+                      Connect your Leadpages account to hundreds of apps when
+                      you get started with a free Zapier account.
                     </NoIntegrationsCaption>
                     <OutboundLink
                       href="https://zapier.com/apps/leadpages/integrations"
                       alt="Zapier Leadpages Integrations"
                       target="_blank"
                     >
-                      <NoIntegrationsButton>See What’s Possible</NoIntegrationsButton>
+                      <NoIntegrationsButton>
+                        See What’s Possible
+                      </NoIntegrationsButton>
                     </OutboundLink>
                   </NoIntegrationsContainer>
                 )}
@@ -670,7 +729,7 @@ class IntegrationsContent extends React.Component {
           </InnerContainer>
         </OuterContainer>
       </div>
-    );
+    )
   }
 }
 
@@ -683,9 +742,9 @@ IntegrationsContent.propTypes = {
       connection: PropTypes.string.isRequired,
       tooltip: PropTypes.string.isRequired,
       icon: GATSBY_IMAGE.isRequired,
-    }).isRequired,
+    }).isRequired
   ).isRequired,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+}
 
-export default IntegrationsContent;
+export default IntegrationsContent
