@@ -8,7 +8,7 @@ import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import PopUpTogether from '@legacy/components/product/PopUpTogether'
 // import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 // import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
-// import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
+import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
 // import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
@@ -108,8 +108,8 @@ const PopUpBuilderProductPage = () => {
         settings."
       />
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
-      {/* <ClickRevealSection_Desktop>
-        <ProductFeaturesClickReveal
+      {/* <ClickRevealSection_Desktop> */}
+        {/* <ProductFeaturesClickReveal
           animations
           backgroundImage={circleSandSideSVG}
           imageSide="left"
@@ -156,9 +156,9 @@ const PopUpBuilderProductPage = () => {
       <RotatorSection_Mobile>
         <ProductFeaturesRotator animations itemArray={productFeaturesArray2} />
       </RotatorSection_Mobile>
-      <SpacerRow size="medium" />
+      <SpacerRow size="medium" /> */}
       <ProductTestimonialsRotator />
-      <SpacerRow size="small" />
+      {/* <SpacerRow size="small" />
       <HeadlineSection
         supertitle="Customer Success Team"
         title="Real people answering real questions. Imagine that."

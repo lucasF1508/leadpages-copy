@@ -1,193 +1,178 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
 // components
-import PaginationDots from './PaginationDots';
-import ReactSlick from './ReactSlick_Base';
+import Image from '@components/Image'
+import PaginationDots from '@legacy/components/rotators/PaginationDots'
+import ReactSlick from '@legacy/components/rotators/ReactSlick_Base'
+// images
+import customer1 from '@legacy/assets/images/testimonials/arlin-godwin.png'
+import customer2 from '@legacy/assets/images/testimonials/eddette-steynberg.png'
+import customer3 from '@legacy/assets/images/testimonials/jackie-ellis_bw.png'
+import customer4 from '@legacy/assets/images/testimonials/ron-collins_close.png'
 
-const TestimonialsContainer = styled.div`
-  padding-top: 4rem;
-  padding-bottom: 3rem;
-  padding-right: 6rem;
-  padding-left: 6rem;
-  background: #fef9f1;
-  @media (max-width: 576px) {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-`;
+const TestimonialsContainer = styled('div', {
+  paddingTop: '4rem',
+  paddingBottom: '3rem',
+  px: '6rem',
+  background: '$tan',
 
-const RotatorContainer = styled.div`
-  position: relative;
-  z-index: 4;
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-`;
+  '@<s': {
+    px: '3rem',
+  },
+})
 
-const TabSection = styled.div`
-  margin-bottom: 10px;
-`;
+const RotatorContainer = styled('div', {
+  position: 'relative',
+  zIndex: 4,
+  maxWidth: '1140px',
+  mx: 'auto',
+})
 
-const TestimonialsHeader = styled.div`
-  font-family: 'Value Serif';
-  font-size: 1.875rem;
-  letter-spacing: -0.03125rem;
-  line-height: 2.25rem;
-  margin-bottom: 2rem;
-  color: #e28f44;
-  @media (max-width: 576px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-    text-align: center;
-  }
-`;
+const TabSection = styled('div', {
+  marginBottom: '10px',
+})
 
-const TestimonialsQuote = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 22px;
-  line-height: 32px;
-  margin-bottom: 2rem;
-  color: #575452;
-  @media (max-width: 576px) {
-    text-align: center;
-  }
-`;
+const TestimonialsHeader = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '1.875rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '2.25rem',
+  marginBottom: '2rem',
+  color: '$textHighlight',
 
-const TestimonialsName = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: #0f0c09;
-  @media (max-width: 576px) {
-    text-align: center;
-  }
-`;
+  '@<s': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+    textAlign: 'center',
+  },
+})
 
-const TestimonialsTitle = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 1rem;
-  color: #575452;
-  @media (max-width: 576px) {
-    text-align: center;
-  }
-`;
+const TestimonialsQuote = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '22px',
+  lineHeight: '32px',
+  marginBottom: '2rem',
+  color: '$textAlt',
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-`;
+  '@<s': {
+    textAlign: 'center',
+  },
+})
 
-const FlexRowItem = styled.div`
-  display: column;
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-`;
+const TestimonialsName = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  marginBottom: '1rem',
+  color: '$text',
 
-const FlexRowLeft = styled(FlexRowItem)`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  @media (min-width: 576px) {
-    margin-bottom: 2rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 24%;
-    flex: 0 0 24%;
-    max-width: 156px;
-    justify-content: flex-end;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 24%;
-    flex: 0 0 24%;
-    max-width: 24%;
-    text-align: left;
-  }
-`;
+  '@<s': {
+    textAlign: 'center',
+  },
+})
 
-const HeaderImgLeft = styled.div`
-  width: 100%;
-  max-width: 156px;
-`;
+const TestimonialsTitle = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '1rem',
+  color: '$textAlt',
 
-const TestimonialsImageContainer = styled.div`
-  width: 100%;
-  max-width: 156px;
-  @media (max-width: 576px) {
-    width: 100%;
-    max-width: 126px;
-  }
-`;
+  '@<s': {
+    textAlign: 'center',
+  },
+})
 
-const FlexRowRight = styled(FlexRowItem)`
-  text-align: left;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 69%;
-    flex: 0 0 90%;
-    max-width: 90%;
-    margin-left: 0%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 69%;
-    flex: 0 0 69%;
-    max-width: 69%;
-    text-align: left;
-    margin-left: 3%;
-  }
-`;
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  flexWrap: 'wrap',
+})
 
-const Image = styled(GatsbyImage)`
-  width: 100%;
-  height: 100%;
-  max-width: 156px;
-  max-height: 156px;
-`;
+const FlexRowItem = styled('div', {
+  display: 'column',
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+})
 
-const SlickRotator = styled(ReactSlick)`
-  .slick-slide > div > div {
-    outline: none;
-  }
-`;
+const FlexRowLeft = styled(FlexRowItem, {
+  display: 'flex',
+  justifyContent: 'center',
+  marginBottom: '2rem',
 
-const ProductTestimonialsRotator = props => {
-  const images = useStaticQuery(graphql`
-    query ProductTestimonialsRotatorQuery {
-      customer1: file(relativePath: { eq: "assets/images/testimonials/arlin-godwin.png" }) {
-        ...fixed
-      }
-      customer2: file(relativePath: { eq: "assets/images/testimonials/eddette-steynberg.png" }) {
-        ...fixed
-      }
-      customer3: file(relativePath: { eq: "assets/images/testimonials/jackie-ellis_bw.png" }) {
-        ...fixed
-      }
-      customer4: file(relativePath: { eq: "assets/images/testimonials/ron-collins_close.png" }) {
-        ...fixed
-      }
-    }
-  `);
-  let testimonialsArray =
-    props.overrideTestimonialsArray && props.overrideTestimonialsArray.length === 1
-      ? props.overrideTestimonialsArray
+  '@>s': {
+    marginBottom: '2rem',
+    flex: '0 0 24%',
+    maxWidth: '156px',
+    justifyContent: 'flex-end',
+  },
+
+  '@>m': {
+    marginBottom: 0,
+    flex: '0 0 24%',
+    maxWidth: '24%',
+    textAlign: 'left',
+  },
+})
+
+const HeaderImgLeft = styled('div', {
+  width: '100%',
+  maxWidth: '156px',
+})
+
+const TestimonialsImageContainer = styled('div', {
+  width: '100%',
+  maxWidth: '156px',
+
+  '@<s': {
+    width: '100%',
+    maxWidth: '126px',
+  },
+})
+
+const FlexRowRight = styled(FlexRowItem, {
+  textAlign: 'left',
+
+  '@>s': {
+    flex: '0 0 90%',
+    maxWidth: '90%',
+    marginLeft: 0,
+  },
+
+  '@>m': {
+    marginBottom: 0,
+    flex: '0 0 69%',
+    maxWidth: '69%',
+    marginLeft: '3%',
+  },
+})
+
+const StyledImage = styled(Image, {
+  width: '100%',
+  height: '100%',
+  maxWidth: '156px',
+  maxHeight: '156px',
+})
+
+const SlickRotator = styled(ReactSlick, {
+  '.slick-slide > div > div': {
+    outline: 'none',
+  },
+})
+
+const ProductTestimonialsRotator = ({ overrideTestimonialsArray }) => {
+  const testimonialsArray =
+    overrideTestimonialsArray && overrideTestimonialsArray.length === 1
+      ? overrideTestimonialsArray
       : [
           {
-            customerImage: getImage(images.customer1),
+            customerImage: customer1,
             customerImageAltText: 'Arlin Godwin',
             testimonialHeader: 'From struggle to success',
             testimonialQuote:
@@ -196,25 +181,27 @@ const ProductTestimonialsRotator = props => {
             testimonialTitle: 'Artist, Arlin Godwin Music',
           },
           {
-            customerImage: getImage(images.customer2),
+            customerImage: customer2,
             customerImageAltText: 'Eddette Steynberg',
-            testimonialHeader: 'Leadpages is the only tool you need to get started',
+            testimonialHeader:
+              'Leadpages is the only tool you need to get started',
             testimonialQuote:
               '“Leadpages has completely changed my marketing strategy workflow. No expensive or complicated website, simply a landing page and thank you page to lead clients towards your list.”',
             testimonialName: 'Eddette Steynberg',
             testimonialTitle: 'Content Strategist, Online Marketing Consultant',
           },
           {
-            customerImage: getImage(images.customer3),
+            customerImage: customer3,
             customerImageAltText: 'Jackie Ellis',
-            testimonialHeader: 'I tried other platforms, but nothing else compared',
+            testimonialHeader:
+              'I tried other platforms, but nothing else compared',
             testimonialQuote:
               '“I absolutely LOVE Leadpages. The simplicity and ease of use is why I recommend it to all my clients and use it exclusively for my own business.”',
             testimonialName: 'Jackie Ellis',
             testimonialTitle: 'Facebook Ads Strategist',
           },
           {
-            customerImage: getImage(images.customer4),
+            customerImage: customer4,
             customerImageAltText: 'Ron Collins',
             testimonialHeader: 'Could not be simpler to use',
             testimonialQuote:
@@ -222,9 +209,10 @@ const ProductTestimonialsRotator = props => {
             testimonialName: 'Ron Collins',
             testimonialTitle: 'Digital Marketer, Ron Collins Marketing',
           },
-        ];
+        ]
+
   const settings = {
-    appendDots: dots => <PaginationDots dots={dots} margin=".5rem 0 0 0" />,
+    appendDots: (dots) => <PaginationDots dots={dots} margin=".5rem 0 0 0" />,
     arrows: false,
     autoplay: testimonialsArray.length > 1,
     autoplaySpeed: 7500,
@@ -239,46 +227,54 @@ const ProductTestimonialsRotator = props => {
     slidesToShow: 1,
     speed: 500,
     touchThreshold: 50,
-  };
+  }
+
   return (
     <TestimonialsContainer>
       <RotatorContainer>
         {typeof window !== 'undefined' && (
           <SlickRotator {...settings}>
-            {testimonialsArray.map((item, index) => {
-              const {
-                customerImage,
-                customerImageAltText,
-                testimonialHeader,
-                testimonialQuote,
-                testimonialName,
-                testimonialTitle,
-              } = item;
-              return (
+            {testimonialsArray.map(
+              (
+                {
+                  customerImage,
+                  customerImageAltText,
+                  testimonialHeader,
+                  testimonialQuote,
+                  testimonialName,
+                  testimonialTitle,
+                },
+                index
+              ) => (
                 <TabSection key={index}>
                   <FlexRow>
                     <FlexRowLeft>
                       <HeaderImgLeft>
                         <TestimonialsImageContainer>
-                          <Image image={customerImage} alt={customerImageAltText} />
+                          <StyledImage
+                            image={customerImage}
+                            alt={customerImageAltText}
+                          />
                         </TestimonialsImageContainer>
                       </HeaderImgLeft>
                     </FlexRowLeft>
                     <FlexRowRight>
-                      <TestimonialsHeader>{testimonialHeader}</TestimonialsHeader>
+                      <TestimonialsHeader>
+                        {testimonialHeader}
+                      </TestimonialsHeader>
                       <TestimonialsQuote>{testimonialQuote}</TestimonialsQuote>
                       <TestimonialsName>{testimonialName}</TestimonialsName>
                       <TestimonialsTitle>{testimonialTitle}</TestimonialsTitle>
                     </FlexRowRight>
                   </FlexRow>
                 </TabSection>
-              );
-            })}
+              )
+            )}
           </SlickRotator>
         )}
       </RotatorContainer>
     </TestimonialsContainer>
-  );
-};
+  )
+}
 
-export default ProductTestimonialsRotator;
+export default ProductTestimonialsRotator

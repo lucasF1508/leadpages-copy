@@ -8,7 +8,7 @@ import GetInspired_AlertBars from '@legacy/components/product/GetInspired_AlertB
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 // import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 // import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
-// import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
+import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import SimpleSetup from '@legacy/components/product/SimpleSetup'
@@ -102,7 +102,7 @@ const AlertBarsProductPage = () => {
       <MakeTheMost />
       <SimpleSetup />
       <GetInspired_AlertBars />
-      {/* <ProductTestimonialsRotator /> */}
+      <ProductTestimonialsRotator />
       <SpacerRow size="small" />
       <HeadlineSection
         supertitle="Customer Success Team"
