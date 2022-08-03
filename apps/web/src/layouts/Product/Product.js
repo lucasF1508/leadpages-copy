@@ -9,7 +9,7 @@ import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ProductPageHeader from '@legacy/components/headers/ProductPageHeader'
 // import ProductToolkitClickReveal from '@legacy/components/click-reveals/ProductToolkitClickReveal'
-// import ProductToolkitRotator from '@legacy/components/rotators/ProductToolkitRotator'
+import ProductToolkitRotator from '@legacy/components/rotators/ProductToolkitRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import Resources from '@legacy/components/product/Resources'
 import SEO from '@legacy/components/SEO'
@@ -251,10 +251,10 @@ const ProductPage = () => {
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
       {/* <ClickRevealSection_Desktop>
         <ProductToolkitClickReveal itemArray={productToolkitArray} />
-      </ClickRevealSection_Desktop>
+      </ClickRevealSection_Desktop> */}
       <RotatorSection_Mobile>
         <ProductToolkitRotator itemArray={productToolkitArray} />
-      </RotatorSection_Mobile> */}
+      </RotatorSection_Mobile>
       <SpacerRow size="small" />
       {/* <SingleTestimonialQuoteRow
         quote="I absolutely LOVE Leadpages. The simplicity and ease-of-use is why I recommend it to all my clients and use it exclusively for my own business."
