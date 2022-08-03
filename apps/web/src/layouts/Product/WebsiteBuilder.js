@@ -7,7 +7,7 @@ import FlexSectionReverse from '@legacy/components/product/FlexSectionReverse'
 // import FlexSectionTwoColumnFeatures from '@legacy/components/product/FlexSectionTwoColumnFeatures'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-// import PublishingOptionsGrid from '@legacy/components/grids/PublishingOptionsGrid'
+import PublishingOptionsGrid from '@legacy/components/grids/PublishingOptionsGrid'
 import SEO from '@legacy/components/SEO'
 import SiteTestimonial from '@legacy/components/product/SiteTestimonial'
 import SpacerRow from '@legacy/components/SpacerRow'
@@ -97,8 +97,8 @@ const WebsiteBuilderProductPage = () => (
       title="Real people answering real questions. Imagine that."
       caption="We work hard to build a product that helps your business grow with online marketing, and our support team works even harder to partner with you to generate leads. With custom videos, phone, email, and chat — we’re here when you need us."
     />
-    {/* <CustomerSuccessTestimonialsRotator />
-    <PublishingOptionsGrid /> */}
+    {/* <CustomerSuccessTestimonialsRotator /> */}
+    <PublishingOptionsGrid />
     <SpacerRow size="small" backgroundColor="#f7f7f7" />
     <HeadlineSection
       title="Access the complete conversion toolkit"
