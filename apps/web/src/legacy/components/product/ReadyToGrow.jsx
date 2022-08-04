@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Link as ScrollLink } from 'react-scroll'
 // images
-import PlayButtonSVG from '../../assets/images/global/play-button_purple.svg'
+import PlayButtonSVG from '@legacy/assets/images/global/play-button_purple.svg'
 
 const RTGContainer = styled('div', {
   position: 'relative',
