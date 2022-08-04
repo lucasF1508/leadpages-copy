@@ -1,173 +1,170 @@
-import React from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import Image from '@components/Image'
+import Link from 'next/link'
 // images
-import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg';
+import foregroundImage from '@legacy/assets/images/product/a-b-testing/a-b-testing_leadmeter_analytics-820px@2x.png'
+import rightArrowPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
 
-const OuterContainer = styled.div`
-  display: flex;
-  position: relative;
-  flex-wrap: wrap;
-`;
+const OuterContainer = styled('div', {
+  display: 'flex',
+  position: 'relative',
+  flexWrap: 'wrap',
+})
 
-const InnerContainer = styled.div`
-  display: flex;
-  position: relative;
-  justify-content: flex-end;
-  flex-flow: row wrap;
-  width: 100%;
-  @media (max-width: 1023px) {
-    margin-bottom: 3rem;
-  }
-  @media (max-width: 576px) {
-    flex-flow: column-reverse wrap;
-  }
-`;
+const InnerContainer = styled('div', {
+  display: 'flex',
+  position: 'relative',
+  justifyContent: 'flex-end',
+  flexFlow: 'row wrap',
+  width: '100%',
 
-const ColumnsContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-flow: column wrap;
-  max-height: 400px;
-  margin-top: 2rem;
-  margin-right: 15vw;
-  @media (max-width: 1023px) {
-    max-height: none;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  @media (min-width: 576px) {
-    max-width: 100%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    max-width: 50%;
-  }
-`;
+  '@media (max-width: 1023px)': {
+    marginBottom: '3rem',
+  },
 
-const ColumnItem = styled.div`
-  position: relative;
-  width: 244px;
-  margin: 1rem;
-  margin-bottom: 0;
-  text-align: left;
-  @media (max-width: 1023px) {
-    margin-top: 2rem;
-  }
-`;
+  '@<s': {
+    flexFlow: 'column-reverse wrap',
+  },
+})
 
-const ItemHeader = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  margin-bottom: 1rem;
-`;
+const ColumnsContainer = styled('div', {
+  position: 'relative',
+  display: 'flex',
+  flexFlow: 'column wrap',
+  maxHeight: '400px',
+  marginTop: '2rem',
+  marginRight: '15vw',
 
-const ItemText = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 1rem;
-`;
+  '@media (max-width: 1023px)': {
+    maxHeight: 'none',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+  },
 
-const CTA = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  text-align: left;
-  font-weight: 500;
-  margin-bottom: 1rem;
-`;
+  '@>s': {
+    maxWidth: '100%',
+  },
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`;
+  '@>m': {
+    marginBottom: '0rem',
+    maxWidth: '50%',
+  },
+})
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`;
+const ColumnItem = styled('div', {
+  position: 'relative',
+  width: '244px',
+  marginTop: '1rem',
+  mx: '1rem',
+  marginBottom: 0,
+  textAlign: 'left',
 
-const ImageContainer = styled.div`
-  position: relative;
-  right: 0;
-  margin-bottom: 0;
-  width: 50vw;
-  max-width: 661px;
-  min-width: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  @media (max-width: 1023px) {
-    align-self: center;
-    max-width: 70%;
-    min-width: auto;
-  }
-  @media (max-width: 576px) {
-    align-self: flex-end;
-    width: 100%;
-    max-width: 100%;
-    min-width: auto;
-  }
-`;
+  '@media (max-width: 1023px)': {
+    marginTop: '2rem',
+  },
+})
 
-const CustomImage = styled(GatsbyImage)`
-  width: 100%;
-  max-width: 661px;
-  @media (max-width: 576px) {
-    max-width: 95%;
-    align-self: flex-end;
-  }
-`;
+const ItemHeader = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  marginBottom: '1rem',
+})
 
-const ColumnsLeft = props => {
-  const images = useStaticQuery(graphql`
-    query ColumnsLeftQuery {
-      foregroundImage: file(
-        relativePath: {
-          eq: "assets/images/product/a-b-testing/a-b-testing_leadmeter_analytics-820px@2x.png"
-        }
-      ) {
-        ...constrained
-      }
-    }
-  `);
-  return (
-    <OuterContainer>
-      <InnerContainer>
-        <ColumnsContainer>
-          {props.columnItems.map((item, index) => {
-            const { header, text, internalLink: link } = item;
-            return (
-              <ColumnItem key={index}>
-                <ItemHeader>{header}</ItemHeader>
-                <ItemText>{text}</ItemText>
-                {link && (
-                  <StyledLink to={link.route} alt={link.altText}>
+const ItemText = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '1rem',
+})
+
+const CTA = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  textAlign: 'left',
+  fontWeight: 500,
+  marginBottom: '1rem',
+})
+
+const ArrowRightPurple = styled('img', {
+  width: '20px',
+  height: '10px',
+})
+
+const ImageContainer = styled('div', {
+  position: 'relative',
+  right: 0,
+  marginBottom: 0,
+  width: '50vw',
+  maxWidth: '661px',
+  minWidth: '500px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
+
+  '@media (max-width: 1023px)': {
+    alignSelf: 'center',
+    maxWidth: '70%',
+    minWidth: 'auto',
+  },
+
+  '@<s': {
+    alignSelf: 'flex-end',
+    width: '100%',
+    maxWidth: '100%',
+    minWidth: 'auto',
+  },
+})
+
+const CustomImage = styled(Image, {
+  width: '100%',
+  maxWidth: '661px',
+
+  '@<s': {
+    maxWidth: '95%',
+    alignSelf: 'flex-end',
+  },
+})
+
+const ColumnsLeft = (props) => (
+  <OuterContainer>
+    <InnerContainer>
+      <ColumnsContainer>
+        {props.columnItems.map(
+          ({ header, text, internalLink: link }, index) => (
+            <ColumnItem key={index}>
+              <ItemHeader>{header}</ItemHeader>
+              <ItemText>{text}</ItemText>
+              {link && (
+                <Link href={link.route}>
+                  <a aria-label={link.altText}>
                     <CTA>
                       {`${link.text}`}
-                      <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
+                      <ArrowRightPurple
+                        src={rightArrowPurple.src}
+                        alt="purple right arrow"
+                      />
                     </CTA>
-                  </StyledLink>
-                )}
-              </ColumnItem>
-            );
-          })}
-        </ColumnsContainer>
-        <ImageContainer>
-          <CustomImage
-            image={getImage(images.foregroundImage)}
-            alt="leadmeter with a/b testing and analytics"
-          />
-        </ImageContainer>
-      </InnerContainer>
-    </OuterContainer>
-  );
-};
+                  </a>
+                </Link>
+              )}
+            </ColumnItem>
+          )
+        )}
+      </ColumnsContainer>
+      <ImageContainer>
+        <CustomImage
+          image={foregroundImage}
+          alt="leadmeter with a/b testing and analytics"
+        />
+      </ImageContainer>
+    </InnerContainer>
+  </OuterContainer>
+)
 
-export default ColumnsLeft;
+export default ColumnsLeft

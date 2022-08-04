@@ -7,10 +7,10 @@ const shouldDisplayVideo = () => {
       (!!document.createElement('video').canPlayType('video/mp4') ||
         !!document.createElement('video').canPlayType('video/webm')) &&
       !window.matchMedia('(prefers-reduced-motion)').matches &&
-      window.innerWidth > 576;
-    return displayVideo;
+      window.innerWidth > 576
+    return displayVideo
   }
-  return false;
-};
+  return false
+}
 
-export default shouldDisplayVideo;
+export default shouldDisplayVideo

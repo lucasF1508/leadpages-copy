@@ -1,34 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
 // components
-import ToolkitCard from '../cards/ToolkitCard';
+import ToolkitCard from '@legacy/components/cards/ToolkitCard'
 // icon images
-import AlertBarsIconSVG from '../../assets/images/icons/toolkiticons/AlertBars.svg';
-import CheckoutsIconSVG from '../../assets/images/icons/toolkiticons/Checkouts.svg';
-import FeatureIndexIconSVG from '../../assets/images/icons/toolkiticons/FeatureIndex.svg';
-import LandingPagesIconSVG from '../../assets/images/icons/toolkiticons/LandingPages.svg';
-import LeadmeterIconSVG from '../../assets/images/icons/toolkiticons/Leadmeter.svg';
-import PopupsIconSVG from '../../assets/images/icons/toolkiticons/Popup.svg';
-import WebsitesIconSVG from '../../assets/images/icons/toolkiticons/Website.svg';
+import AlertBarsIconSVG from '@legacy/assets/images/icons/toolkiticons/AlertBars.svg'
+import CheckoutsIconSVG from '@legacy/assets/images/icons/toolkiticons/Checkouts.svg'
+import FeatureIndexIconSVG from '@legacy/assets/images/icons/toolkiticons/FeatureIndex.svg'
+import LandingPagesIconSVG from '@legacy/assets/images/icons/toolkiticons/LandingPages.svg'
+import LeadmeterIconSVG from '@legacy/assets/images/icons/toolkiticons/Leadmeter.svg'
+import PopupsIconSVG from '@legacy/assets/images/icons/toolkiticons/Popup.svg'
+import WebsitesIconSVG from '@legacy/assets/images/icons/toolkiticons/Website.svg'
 
-const SectionContainer = styled.div`
-  background-color: #f7f7f7;
-  position: relative;
-  padding: 0rem 3rem;
-  padding-bottom: 3rem;
-  @media (min-width: 577px) {
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-`;
+const SectionContainer = styled('div', {
+  backgroundColor: '$grayAlt',
+  position: 'relative',
+  padding: '0rem 3rem',
+  paddingBottom: '3rem',
 
-const GridContainer = styled.div`
-  display: flex;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
+  '@media (min-width: 577px)': {
+    paddingRight: '3rem',
+    paddingLeft: '3rem',
+  },
+})
+
+const GridContainer = styled('div', {
+  display: 'flex',
+  marginBottom: '1rem',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+})
 
 const toolkitProductsArray = [
   {
@@ -80,27 +81,24 @@ const toolkitProductsArray = [
     alt: 'Leadpages feature index',
     linkRoute: '/product/feature-index',
   },
-];
+]
 
-const ToolkitCardsGrid = props => {
-  const { hide } = props;
-  return (
-    <SectionContainer>
-      <GridContainer>
-        {toolkitProductsArray.map((item, index) => (
-          <ToolkitCard key={index} hide={hide} {...item} />
-        ))}
-      </GridContainer>
-    </SectionContainer>
-  );
-};
+const ToolkitCardsGrid = ({ hide }) => (
+  <SectionContainer>
+    <GridContainer>
+      {toolkitProductsArray.map((item, index) => (
+        <ToolkitCard key={index} hide={hide} {...item} />
+      ))}
+    </GridContainer>
+  </SectionContainer>
+)
 
 ToolkitCardsGrid.defaultProps = {
   hide: '',
-};
+}
 
 ToolkitCardsGrid.propTypes = {
   hide: PropTypes.string,
-};
+}
 
-export default ToolkitCardsGrid;
+export default ToolkitCardsGrid

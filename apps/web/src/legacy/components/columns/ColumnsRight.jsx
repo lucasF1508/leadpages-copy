@@ -1,171 +1,159 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link, useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Image from '@components/Image'
+import Link from 'next/link'
 // utilities
-import shouldDisplayVideo from '../../utils/should-display-video';
+import shouldDisplayVideo from '@legacy/utils/should-display-video'
 // images
-import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg';
+import builderCreativityStatic from '@legacy/assets/images/product/landing-page-builder/landing-page-builder-creativity-still_340px@2x.png'
+import rightArrowPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
 // videos
 const builderCreativityWebm =
-  'https://static.leadpages.com/mktg/videos/landing-page-builder-creativity.webm';
+  'https://static.leadpages.com/mktg/videos/landing-page-builder-creativity.webm'
 const builderCreativityMp4 =
-  'https://static.leadpages.com/mktg/videos/landing-page-builder-creativity.mp4';
+  'https://static.leadpages.com/mktg/videos/landing-page-builder-creativity.mp4'
 
-const OuterContainer = styled.div`
-  display: flex;
-  position: relative;
-  flex-wrap: wrap;
-`;
+const OuterContainer = styled('div', {
+  display: 'flex',
+  position: 'relative',
+  flexWrap: 'wrap',
+})
 
-const InnerContainer = styled.div`
-  display: flex;
-  position: relative;
-  justify-content: space-around;
-  flex-flow: row wrap;
-  margin-left: 10%;
-  @media (max-width: 1023px) {
-    flex-flow: column wrap;
-    align-items: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-`;
+const InnerContainer = styled('div', {
+  display: 'flex',
+  position: 'relative',
+  justifyContent: 'space-around',
+  flexFlow: 'row wrap',
+  marginLeft: '10%',
+  width: '100%',
 
-const ImageContainer = styled.div`
-  position: relative;
-  margin-bottom: 0;
-  margin-right: 4vw;
-  width: 50vw;
-  max-width: 661px;
-  min-width: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  @media (max-width: 1023px) {
-    margin-bottom: 1rem;
-  }
-  @media (max-width: 576px) {
-    margin-left: 0;
-    margin-right: 0;
-    width: 90%;
-    min-width: auto;
-  }
-`;
+  '@media (max-width: 1023px)': {
+    flexFlow: 'column wrap',
+    alignItems: 'center',
+    mx: 'auto',
+  },
+})
 
-const BuilderVideoHolder = styled.div`
-  width: 100%;
-  max-width: 661px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-`;
+const ImageContainer = styled('div', {
+  position: 'relative',
+  marginBottom: 0,
+  marginRight: '4vw',
+  width: '50vw',
+  maxWidth: '661px',
+  minWidth: '500px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-end',
 
-const DesktopFallbackImage = styled(GatsbyImage)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  @media (max-width: 576px) {
-    display: none;
-  }
-`;
+  '@media (max-width: 1023px)': {
+    marginBottom: '1rem',
+  },
 
-const DesktopVideo = styled.video`
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-  width: 100%;
-  @media (max-width: 576px) {
-    display: none;
-  }
-`;
+  '@<s': {
+    mx: 0,
+    width: '90%',
+    minWidth: 'auto',
+  },
+})
 
-const StaticMobileImage = styled(GatsbyImage)`
-  width: 100%;
-  @media (min-width: 577px) {
-    display: none !important;
-  }
-`;
+const BuilderVideoHolder = styled('div', {
+  width: '100%',
+  maxWidth: '661px',
+  left: 0,
+  right: 0,
+  mx: 'auto',
+})
 
-const ColumnsContainer = styled.div`
-  position: relative;
-  display: flex;
-  flex-flow: column wrap;
-  max-height: 400px;
-  @media (max-width: 1023px) {
-    max-height: none;
-    max-width: 100%;
-    flex-direction: row;
-    margin-bottom: 0rem;
-  }
-  @media (max-width: 576px) {
-    flex-direction: column;
-  }
-`;
+const DesktopFallbackImage = styled(Image, {
+  width: '100%',
 
-const ColumnItem = styled.div`
-  position: relative;
-  width: 244px;
-  margin: 1rem;
-  margin-bottom: 0;
-  text-align: left;
-  @media (max-width: 1023px) {
-    margin-top: 2rem;
-  }
-`;
+  '@<s': {
+    display: 'none',
+  },
+})
 
-const ItemHeader = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  margin-bottom: 1rem;
-`;
+const DesktopVideo = styled('video', {
+  width: '100%',
 
-const ItemText = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 1rem;
-`;
+  '@<s': {
+    display: 'none',
+  },
+})
 
-const CTA = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  text-align: left;
-  font-weight: 500;
-  margin-bottom: 1rem;
-`;
+const StaticMobileImage = styled(Image, {
+  width: '100%',
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`;
+  '@>s': {
+    display: 'none !important',
+  },
+})
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`;
+const ColumnsContainer = styled('div', {
+  position: 'relative',
+  display: 'flex',
+  flexFlow: 'column wrap',
+  maxHeight: '400px',
+
+  '@media (max-width: 1023px)': {
+    maxHeight: 'none',
+    maxWidth: '100%',
+    flexDirection: 'row',
+    marginBottom: '0rem',
+  },
+
+  '@<s': {
+    flexDirection: 'column',
+  },
+})
+
+const ColumnItem = styled('div', {
+  position: 'relative',
+  width: '244px',
+  marginTop: '1rem',
+  mx: '1rem',
+  marginBottom: 0,
+  textAlign: 'left',
+
+  '@media (max-width: 1023px)': {
+    marginTop: '2rem',
+  },
+})
+
+const ItemHeader = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  marginBottom: '1rem',
+})
+
+const ItemText = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '1rem',
+})
+
+const CTA = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  textAlign: 'left',
+  fontWeight: 500,
+  marginBottom: '1rem',
+})
+
+const ArrowRightPurple = styled('img', {
+  width: '20px',
+  height: '10px',
+})
 
 const ColumnsRight = ({ columnItems }) => {
-  const displayVideo = shouldDisplayVideo();
-  const images = useStaticQuery(graphql`
-    query ColumnsRightQuery {
-      builderCreativityStatic: file(
-        relativePath: {
-          eq: "assets/images/product/landing-page-builder/landing-page-builder-creativity-still_340px@2x.png"
-        }
-      ) {
-        ...constrained
-      }
-    }
-  `);
+  const displayVideo = shouldDisplayVideo()
+
   return (
     <OuterContainer>
       <InnerContainer>
@@ -173,7 +161,7 @@ const ColumnsRight = ({ columnItems }) => {
           <BuilderVideoHolder>
             {!displayVideo && (
               <DesktopFallbackImage
-                image={getImage(images.builderCreativityStatic)}
+                image={builderCreativityStatic}
                 alt="customize a landing page template"
               />
             )}
@@ -185,33 +173,35 @@ const ColumnsRight = ({ columnItems }) => {
             )}
           </BuilderVideoHolder>
           <StaticMobileImage
-            image={getImage(images.builderCreativityStatic)}
+            image={builderCreativityStatic}
             alt="using landing page builder"
           />
         </ImageContainer>
         <ColumnsContainer>
-          {columnItems.map((item, index) => {
-            const { header, text, internalLink: link } = item;
-            return (
-              <ColumnItem key={index}>
-                <ItemHeader>{header}</ItemHeader>
-                <ItemText>{text}</ItemText>
-                {link && (
-                  <StyledLink to={link.route} alt={link.altText}>
+          {columnItems.map(({ header, text, internalLink: link }, index) => (
+            <ColumnItem key={index}>
+              <ItemHeader>{header}</ItemHeader>
+              <ItemText>{text}</ItemText>
+              {link && (
+                <Link href={link.route}>
+                  <a aria-label={link.altText}>
                     <CTA>
                       {`${link.text}`}
-                      <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
+                      <ArrowRightPurple
+                        src={rightArrowPurple.src}
+                        alt="purple right arrow"
+                      />
                     </CTA>
-                  </StyledLink>
-                )}
-              </ColumnItem>
-            );
-          })}
+                  </a>
+                </Link>
+              )}
+            </ColumnItem>
+          ))}
         </ColumnsContainer>
       </InnerContainer>
     </OuterContainer>
-  );
-};
+  )
+}
 
 ColumnsRight.propTypes = {
   columnItems: PropTypes.arrayOf(
@@ -223,8 +213,8 @@ ColumnsRight.propTypes = {
         text: PropTypes.string.isRequired,
         altText: PropTypes.string.isRequired,
       }),
-    }),
+    })
   ).isRequired,
-};
+}
 
-export default ColumnsRight;
+export default ColumnsRight

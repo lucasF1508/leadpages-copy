@@ -2,20 +2,20 @@ import React from 'react'
 import { styled } from '@design'
 // components
 import CheckoutsProduct from '@legacy/components/product/CheckoutsProduct'
-// import ColumnsLeft from '@legacy/components/columns/ColumnsLeft'
-// import ColumnsRight from '@legacy/components/columns/ColumnsRight'
+import ColumnsLeft from '@legacy/components/columns/ColumnsLeft'
+import ColumnsRight from '@legacy/components/columns/ColumnsRight'
 import ConnectAccount from '@legacy/components/product/ConnectAccount'
 import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ProductPageHeader from '@legacy/components/headers/ProductPageHeader'
-// import ProductToolkitClickReveal from '@legacy/components/click-reveals/ProductToolkitClickReveal'
+import ProductToolkitClickReveal from '@legacy/components/click-reveals/ProductToolkitClickReveal'
 import ProductToolkitRotator from '@legacy/components/rotators/ProductToolkitRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import Resources from '@legacy/components/product/Resources'
 import SEO from '@legacy/components/SEO'
-// import SingleTestimonialQuoteRow from '@legacy/components/testimonials/SingleTestimonialQuoteRow'
+import SingleTestimonialQuoteRow from '@legacy/components/testimonials/SingleTestimonialQuoteRow'
 import SpacerRow from '@legacy/components/SpacerRow'
-// import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
+import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // icon images
 import featureIcon1 from '@legacy/assets/images/icons/featureicons/cyan_monitor.png'
 import featureIcon2 from '@legacy/assets/images/icons/featureicons/lilac_inbound.png'
@@ -33,9 +33,9 @@ import revealImage1 from '@legacy/assets/images/product/website-builder/website-
 import revealImage2 from '@legacy/assets/images/product/landing-page-builder/landing-page-builder_736px@2x.png'
 import revealImage3 from '@legacy/assets/images/product/pop-up-builder/pop-up-form-builder_736px@2x.png'
 import revealImage4 from '@legacy/assets/images/product/alert-bars/alert-bar-builder_736px@2x.png'
-// import testimonialImage1 from '@legacy/assets/images/testimonials/jackie-ellis-color-circle.png'
-// import testimonialImage2 from '@legacy/assets/images/testimonials/kailei-carr-color-circle.png'
-// import testimonialImage3 from '@legacy/assets/images/testimonials/greg-benz-color-circle.png'
+import testimonialImage1 from '@legacy/assets/images/testimonials/jackie-ellis-color-circle.png'
+import testimonialImage2 from '@legacy/assets/images/testimonials/kailei-carr-color-circle.png'
+import testimonialImage3 from '@legacy/assets/images/testimonials/greg-benz-color-circle.png'
 import AlertBarsIconSVG from '@legacy/assets/images/icons/toolkiticons/AlertBars.svg'
 import LandingPagesIconSVG from '@legacy/assets/images/icons/toolkiticons/LandingPages.svg'
 import PopupsIconSVG from '@legacy/assets/images/icons/toolkiticons/Popup.svg'
@@ -249,37 +249,37 @@ const ProductPage = () => {
         caption="Build & publish code-free content that’s conversion-optimized from the ground up."
       />
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
-      {/* <ClickRevealSection_Desktop>
+      <ClickRevealSection_Desktop>
         <ProductToolkitClickReveal itemArray={productToolkitArray} />
-      </ClickRevealSection_Desktop> */}
+      </ClickRevealSection_Desktop>
       <RotatorSection_Mobile>
         <ProductToolkitRotator itemArray={productToolkitArray} />
       </RotatorSection_Mobile>
       <SpacerRow size="small" />
-      {/* <SingleTestimonialQuoteRow
+      <SingleTestimonialQuoteRow
         quote="I absolutely LOVE Leadpages. The simplicity and ease-of-use is why I recommend it to all my clients and use it exclusively for my own business."
-        image={getImage(images.testimonialImage1)}
+        image={testimonialImage1}
         clientName="Jackie Ellis"
         clientTitle="Facebook Ads Strategist"
-      /> */}
+      />
       <SpacerRow size="small" />
       <HeadlineSection
         title="Where you have the creative freedom to be yourself..."
         caption="Forget freelancers, delays, and extra expenses—our intuitive tools make it easy to create, publish, and update your content at the drop of a hat."
       />
-      {/* <ColumnsRight columnItems={columnItemsRightArray} /> */}
+      <ColumnsRight columnItems={columnItemsRightArray} />
       <SpacerRow size="small" />
       <HeadlineSection
         title="...and the confidence to get it right"
         caption="Transform your web traffic into business growth with the world’s #1 conversion marketing platform for small businesses."
       />
-      {/* <ColumnsLeft columnItems={columnItemsLeftArray} /> */}
-      {/* <SingleTestimonialQuoteRow
+      <ColumnsLeft columnItems={columnItemsLeftArray} />
+      <SingleTestimonialQuoteRow
         quote="I haven’t seen anything that would meet my needs and sell my online program as well as Leadpages."
-        image={getImage(images.testimonialImage2)}
+        image={testimonialImage2}
         clientName="Kailei Carr"
         clientTitle="Executive Coach & Consultant"
-      /> */}
+      />
       <SpacerRow sizeArray={[4.5, 4.5, 4.5, 4.5]} />
       <CheckoutsProduct />
       <ReadyToGrow
@@ -299,12 +299,12 @@ const ProductPage = () => {
         caption="Outfit your business with the features that fit today’s needs and tomorrow’s dreams."
       />
       <FeatureIconsGrid features={productPageFeaturesArray2} itemsPerRow={4} />
-      {/* <SingleTestimonialQuoteRow
+      <SingleTestimonialQuoteRow
         quote="Leadpages saves me so much time on marketing that I can focus on things that drive new value in my business."
-        image={getImage(images.testimonialImage3)}
+        image={testimonialImage3}
         clientName="Greg Benz"
         clientTitle="Photographer and Software Developer"
-      /> */}
+      />
       <ConnectAccount />
       <SpacerRow sizeArray={[0, 0, 1.5, 1.5]} />
       <Resources />
@@ -314,7 +314,7 @@ const ProductPage = () => {
         caption="Explore more Leadpages tools"
         backgroundColor="$grayAlt"
       />
-      {/* <ToolkitCardsGrid hide={['featureindex']} /> */}
+      <ToolkitCardsGrid hide={['featureindex']} />
       <ReadyToGrow
         paddingScale={0.75}
         mobileHeadlineFontSize="30px"
