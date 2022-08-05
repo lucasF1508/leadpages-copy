@@ -2,28 +2,28 @@ import React from 'react'
 import { styled } from '@design'
 // components
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
-// import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
+import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
 import FlexSectionTwoColumnFeatures from '@legacy/components/product/FlexSectionTwoColumnFeatures'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import PopUpTogether from '@legacy/components/product/PopUpTogether'
-// import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
-// import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
+import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
+import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
 import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
-// import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
+import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
-// import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
+import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // animations
-// import Animation_ClickTriggeredPopup from '@legacy/components/animations/Animation_ClickTriggeredPopup'
-// import Animation_ExitIntentPopup from '@legacy/components/animations/Animation_ExitIntentPopup'
-// import Animation_GuestBioPopup from '@legacy/components/animations/Animation_GuestBioPopup'
-// import Animation_LandingPagePopup from '@legacy/components/animations/Animation_LandingPagePopup'
-// import Animation_SidebarPopup from '@legacy/components/animations/Animation_SidebarPopup'
-// import Animation_TimeDelayedPopup from '@legacy/components/animations/Animation_TimeDelayedPopup'
+import Animation_ClickTriggeredPopup from '@legacy/components/animations/Animation_ClickTriggeredPopup'
+import Animation_ExitIntentPopup from '@legacy/components/animations/Animation_ExitIntentPopup'
+import Animation_GuestBioPopup from '@legacy/components/animations/Animation_GuestBioPopup'
+import Animation_LandingPagePopup from '@legacy/components/animations/Animation_LandingPagePopup'
+import Animation_SidebarPopup from '@legacy/components/animations/Animation_SidebarPopup'
+import Animation_TimeDelayedPopup from '@legacy/components/animations/Animation_TimeDelayedPopup'
 // images
 import heroImage from '@legacy/assets/images/heros/pop-up-builder-hero_634px@2x.png'
 import flexSectionTwoColumnImage from '@legacy/assets/images/product/pop-up-builder/flexible-publishing-options-702px@2x.png'
-// import circleSandSideSVG from '@legacy/assets/images/shapes/circle-sand-side.svg'
+import circleSandSideSVG from '@legacy/assets/images/shapes/circle-sand-side.svg'
 import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 import wedgeRoseSVG from '@legacy/assets/images/shapes/wedge-rose.svg'
 
@@ -44,41 +44,41 @@ const RotatorSection_Mobile = styled('div', {
 })
 
 const PopUpBuilderProductPage = () => {
-  // const productFeaturesArray1 = [
-  //   {
-  //     title: 'Trigger events',
-  //     text: 'Trigger your pop-up to appear whenever a visitor clicks on an image, button, or hyperlink text.',
-  //     animation: <Animation_ClickTriggeredPopup active duration={86400000} />,
-  //   },
-  //   {
-  //     title: 'Time delays',
-  //     text: 'Trigger your pop-up to appear after a certain amount of time has passed or a certain number of page views have occurred.',
-  //     animation: <Animation_TimeDelayedPopup active duration={86400000} />,
-  //   },
-  //   {
-  //     title: 'Exit intent pop-ups',
-  //     text: 'Trigger an exit pop-up to appear when visitors move their mouse in a way that indicates an intent to leave the page.',
-  //     animation: <Animation_ExitIntentPopup active duration={86400000} />,
-  //   },
-  // ]
+  const productFeaturesArray1 = [
+    {
+      title: 'Trigger events',
+      text: 'Trigger your pop-up to appear whenever a visitor clicks on an image, button, or hyperlink text.',
+      animation: <Animation_ClickTriggeredPopup active duration={86400000} />,
+    },
+    {
+      title: 'Time delays',
+      text: 'Trigger your pop-up to appear after a certain amount of time has passed or a certain number of page views have occurred.',
+      animation: <Animation_TimeDelayedPopup active duration={86400000} />,
+    },
+    {
+      title: 'Exit intent pop-ups',
+      text: 'Trigger an exit pop-up to appear when visitors move their mouse in a way that indicates an intent to leave the page.',
+      animation: <Animation_ExitIntentPopup active duration={86400000} />,
+    },
+  ]
 
-  // const productFeaturesArray2 = [
-  //   {
-  //     title: 'Landing page pop-up',
-  //     text: 'Simplify your landing page design and focus your audience on the opt-in form by including a pop-up that appears on the click of a button.',
-  //     animation: <Animation_LandingPagePopup active duration={86400000} />,
-  //   },
-  //   {
-  //     title: 'Blog sidebar button',
-  //     text: 'Invite your blog visitors to subscribe to your email newsletter or blog feed by including a sidebar image that triggers a pop-up opt-in form to appear.',
-  //     animation: <Animation_SidebarPopup active duration={86400000} />,
-  //   },
-  //   {
-  //     title: 'Guest blog link',
-  //     text: 'Reach new audiences and collect opt-ins for your email list by including a pop-up link within your guest blog post’s bio box.',
-  //     animation: <Animation_GuestBioPopup active duration={86400000} />,
-  //   },
-  // ]
+  const productFeaturesArray2 = [
+    {
+      title: 'Landing page pop-up',
+      text: 'Simplify your landing page design and focus your audience on the opt-in form by including a pop-up that appears on the click of a button.',
+      animation: <Animation_LandingPagePopup active duration={86400000} />,
+    },
+    {
+      title: 'Blog sidebar button',
+      text: 'Invite your blog visitors to subscribe to your email newsletter or blog feed by including a sidebar image that triggers a pop-up opt-in form to appear.',
+      animation: <Animation_SidebarPopup active duration={86400000} />,
+    },
+    {
+      title: 'Guest blog link',
+      text: 'Reach new audiences and collect opt-ins for your email list by including a pop-up link within your guest blog post’s bio box.',
+      animation: <Animation_GuestBioPopup active duration={86400000} />,
+    },
+  ]
 
   return (
     <>
@@ -108,8 +108,8 @@ const PopUpBuilderProductPage = () => {
         settings."
       />
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
-      {/* <ClickRevealSection_Desktop> */}
-        {/* <ProductFeaturesClickReveal
+      <ClickRevealSection_Desktop>
+        <ProductFeaturesClickReveal
           animations
           backgroundImage={circleSandSideSVG}
           imageSide="left"
@@ -121,7 +121,7 @@ const PopUpBuilderProductPage = () => {
       <RotatorSection_Mobile>
         <ProductFeaturesRotator animations itemArray={productFeaturesArray1} />
       </RotatorSection_Mobile>
-      <SpacerRow size="small" /> */}
+      <SpacerRow size="small" />
       <FlexSectionTwoColumnFeatures
         mainHeading="Flexible publishing options"
         mainCaption="Easily publish your pop-up on a web page, landing page, or third-party website without hiring a developer."
@@ -143,7 +143,7 @@ const PopUpBuilderProductPage = () => {
         caption="With Leadpages pop-up builder, the possibilities are endless."
       />
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
-      {/* <ClickRevealSection_Desktop>
+      <ClickRevealSection_Desktop>
         <ProductFeaturesClickReveal
           animations
           backgroundImage={circleSandSideSVG}
@@ -156,9 +156,9 @@ const PopUpBuilderProductPage = () => {
       <RotatorSection_Mobile>
         <ProductFeaturesRotator animations itemArray={productFeaturesArray2} />
       </RotatorSection_Mobile>
-      <SpacerRow size="medium" /> */}
+      <SpacerRow size="medium" />
       <ProductTestimonialsRotator />
-      {/* <SpacerRow size="small" />
+      <SpacerRow size="small" />
       <HeadlineSection
         supertitle="Customer Success Team"
         title="Real people answering real questions. Imagine that."
@@ -172,7 +172,7 @@ const PopUpBuilderProductPage = () => {
         backgroundColor="$grayAlt"
       ></HeadlineSection>
       <ToolkitCardsGrid hide={['popups']} />
-      <ReadyToGrow headline="Don't let your web traffic slip through the cracks." /> */}
+      <ReadyToGrow headline="Don't let your web traffic slip through the cracks." />
     </>
   )
 }

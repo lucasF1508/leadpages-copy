@@ -5,8 +5,8 @@ import { styled } from '@design'
 import { GATSBY_IMAGE } from '@legacy/constants/types'
 
 // Components
-import PaginationDots from './PaginationDots'
-import ReactSlick from './ReactSlick_Base'
+import PaginationDots from '@legacy/components/rotators/PaginationDots'
+import ReactSlick from '@legacy/components/rotators/ReactSlick_Base'
 
 // Images
 import archStepLeftRose from '@legacy/assets/images/shapes/arch-stepleft-rose.svg'

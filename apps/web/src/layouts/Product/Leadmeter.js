@@ -2,15 +2,15 @@ import React from 'react'
 import { styled } from '@design'
 // components
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
-// import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
-// import HeadlineSection from '@legacy/components/layout/HeadlineSection'
+import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
+import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import LeadmeterMakeTheMost from '@legacy/components/product/LeadmeterMakeTheMost'
-// import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
+import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
-// import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
+import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
-// import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
+import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
 import heroImage from '@legacy/assets/images/heros/leadmeter-hero_600px@2x.png'
 import productFeatureImage1 from '@legacy/assets/images/product/leadmeter/improve-cro_page-layout-and-content.png'
@@ -20,7 +20,7 @@ import realtimeAnalysisFeatureIcon from '@legacy/assets/images/icons/featureicon
 import expertMarketingAdviceFeatureIcon from '@legacy/assets/images/icons/featureicons/cyan_monitor-award.png'
 import stepbystepGuidanceFeatureIcon from '@legacy/assets/images/icons/featureicons/rose_argyle.png'
 import betterResultsFeatureIcon from '@legacy/assets/images/icons/featureicons/camel_chart.png'
-// import circleForestLightSVG from '@legacy/assets/images/shapes/circle-forest-light.svg'
+import circleForestLightSVG from '@legacy/assets/images/shapes/circle-forest-light.svg'
 import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 
 const ClickRevealSection_Desktop = styled('div', {
@@ -112,22 +112,22 @@ const LeadmeterProductPage = () => {
         bgImageAltText="Capture your audience background"
       />
       <SpacerRow size="small" />
-      {/* <HeadlineSection
+      <HeadlineSection
         title="Improve Your Conversion Rates with Custom, Real-time Recommendations"
         caption="The Leadmeter is built-in technology that instantly analyzes your page's content, compares it to tens of thousands of pages in our database, rates its ability to convert, and provides step-by-step guidance on how to optimize your page as you build it."
-      /> */}
+      />
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
-      {/* <ClickRevealSection_Desktop>
+      <ClickRevealSection_Desktop>
         <ProductFeaturesClickReveal
           backgroundImage={circleForestLightSVG}
           imageSide="left"
           itemArray={productFeaturesArray}
         />
-      </ClickRevealSection_Desktop> */}
+      </ClickRevealSection_Desktop>
       <RotatorSection_Mobile>
         <ProductFeaturesRotator itemArray={productFeaturesArray} />
       </RotatorSection_Mobile>
-      {/* <SpacerRow size="small" />
+      <SpacerRow size="small" />
       <HeadlineSection
         subtitle="Data-Driven Analysis of 4 Conversion Categories"
         caption="The Leadmeter analyzes your content and considers four key conversion categories to scientifically predict how your page will perform (before you publish it)."
@@ -137,8 +137,8 @@ const LeadmeterProductPage = () => {
         showSectionCaption={false}
         itemsPerRow={4}
       />
-      <LeadmeterMakeTheMost /> */}
-      {/* <SpacerRow size="small" backgroundColor="$grayAlt" />
+      <LeadmeterMakeTheMost />
+      <SpacerRow size="small" backgroundColor="$grayAlt" />
       <HeadlineSection
         title="Access the complete conversion toolkit"
         caption="Explore more Leadpages tools"
@@ -148,7 +148,7 @@ const LeadmeterProductPage = () => {
       <ReadyToGrow
         headline="Ready to guess less and grow more?"
         caption="Experience the only platform that offers real-time tips for how to<br/> optimize your page as you build it."
-      /> */}
+      />
     </>
   )
 }

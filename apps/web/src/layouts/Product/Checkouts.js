@@ -5,12 +5,12 @@ import CheckoutsFeatures from '@legacy/components/product/CheckoutsFeatures'
 import CloseSalesCollectPayments from '@legacy/components/product/CloseSalesCollectPayments'
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
-// import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
+import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
-// import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
+import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 import TurnYourExpertiseIntoRevenue from '@legacy/components/product/TurnYourExpertiseIntoRevenue'
 // images
 import heroImage from '@legacy/assets/images/heros/checkouts-hero_600px@2x.png'
@@ -19,7 +19,7 @@ import productFeatureImage2 from '@legacy/assets/images/product/checkouts/easily
 import productFeatureImage3 from '@legacy/assets/images/product/checkouts/recurring-services_623px@2x.png'
 import productFeatureImage4 from '@legacy/assets/images/product/checkouts/sales-page-live-webinar@2x.png'
 import productFeatureImage5 from '@legacy/assets/images/product/checkouts/event-signup-landing-pages@2x.png'
-// import circleForestLightSVG from '@legacy/assets/images/shapes/circle-forest-light.svg'
+import circleForestLightSVG from '@legacy/assets/images/shapes/circle-forest-light.svg'
 import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 
 const ClickRevealSection_Desktop = styled('div', {
@@ -98,11 +98,11 @@ const CheckoutsProductPage = () => {
       />
       {/* this section uses a click-reveal on desktop and a rotator on mobile */}
       <ClickRevealSection_Desktop>
-        {/* <ProductFeaturesClickReveal
+        <ProductFeaturesClickReveal
           backgroundImage={circleForestLightSVG}
           imageSide="left"
           itemArray={productFeaturesArray}
-        /> */}
+        />
       </ClickRevealSection_Desktop>
       <RotatorSection_Mobile>
         <ProductFeaturesRotator itemArray={productFeaturesArray} />
@@ -114,7 +114,7 @@ const CheckoutsProductPage = () => {
         caption="Explore more Leadpages tools"
         backgroundColor="$grayAlt"
       />
-      {/* <ToolkitCardsGrid hide={['checkouts']} /> */}
+      <ToolkitCardsGrid hide={['checkouts']} />
       <ReadyToGrow
         headline="Ready to grow?"
         caption="Take Leadpages for a test drive when you start your free 14-day trial.<br>No obligation. No reason not to."

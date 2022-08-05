@@ -1,11 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { getSrc } from 'gatsby-plugin-image';
-import PropTypes from 'prop-types';
-import anime from 'animejs';
-import { useAnimationPlayPause, useAnimationCanceled } from './animationHooks';
+import React, { useEffect, useRef, useState } from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import anime from 'animejs'
+import {
+  useAnimationPlayPause,
+  useAnimationCanceled,
+} from '@legacy/components/animations/animationHooks'
+// images
+import furniture from '@legacy/assets/images/animations/time-delayed-popup_furniture.jpg'
 
-function AnimationTimeline({
+const AnimationTimeline = ({
   svg,
   site,
   timer,
@@ -14,10 +18,11 @@ function AnimationTimeline({
   duration,
   transitionTime,
   cb = () => {},
-}) {
+}) => {
   const intro = anime.timeline({
     complete: cb,
-  });
+  })
+
   return intro
     .add({
       targets: [svg],
@@ -38,7 +43,7 @@ function AnimationTimeline({
         duration: 2500,
         easing: 'linear',
       },
-      '-=2500',
+      '-=2500'
     )
     .add({
       targets: [popupContainer],
@@ -53,12 +58,12 @@ function AnimationTimeline({
         duration: 300,
         easing: 'easeInOutSine',
       },
-      '-=300',
+      '-=300'
     )
     .add({
       targets: [svg],
       opacity: [1, 1],
-      duration: duration,
+      duration,
       easing: 'easeInOutSine',
     })
     .add({
@@ -66,34 +71,46 @@ function AnimationTimeline({
       opacity: [1, 0],
       duration: transitionTime,
       easing: 'easeInOutSine',
-    });
+    })
 }
 
-export default function Animation_TimeDelayedPopup({
+const $Animation_TimeDelayedPopupSvg = styled('svg', {
+  background: '$white',
+  borderRadius: '5px',
+
+  variants: {
+    active: {
+      true: {
+        display: 'block',
+      },
+      false: {
+        display: 'none',
+      },
+    },
+  },
+})
+
+const Animation_TimeDelayedPopup = ({
   cb,
   active = false,
   canceled = false,
   duration = 12000,
   transitionTime = 175,
-}) {
-  const images = useStaticQuery(graphql`
-    query TimeDelayedPopupAnimationQuery {
-      furniture: file(
-        relativePath: { eq: "assets/images/animations/time-delayed-popup_furniture.jpg" }
-      ) {
-        ...fixed
-      }
-    }
-  `);
-  const furnitureSrc = getSrc(images.furniture);
-  const [animation, setAnimation] = useState(null);
-  const svg = useRef(null);
-  const site = useRef(null);
-  const timer = useRef(null);
-  const popupContainer = useRef(null);
-  const popup = useRef(null);
+}) => {
+  const [animation, setAnimation] = useState(null)
+  const svg = useRef(null)
+  const site = useRef(null)
+  const timer = useRef(null)
+  const popupContainer = useRef(null)
+  const popup = useRef(null)
   useEffect(() => {
-    if (svg.current && site.current && popupContainer.current && popup.current && timer.current) {
+    if (
+      svg.current &&
+      site.current &&
+      popupContainer.current &&
+      popup.current &&
+      timer.current
+    ) {
       const anim = AnimationTimeline({
         svg: svg.current,
         site: site.current,
@@ -103,26 +120,32 @@ export default function Animation_TimeDelayedPopup({
         duration,
         transitionTime,
         cb,
-      });
+      })
       if (!active) {
-        anim.restart();
-        anim.pause();
+        anim.restart()
+        anim.pause()
       }
-      setAnimation(anim);
+      setAnimation(anim)
     }
-  }, [svg.current, site.current, timer.current, popupContainer.current, popup.current]);
+  }, [
+    svg.current,
+    site.current,
+    timer.current,
+    popupContainer.current,
+    popup.current,
+  ])
 
-  useAnimationPlayPause({ active, animation });
-  useAnimationCanceled({ active, canceled, animation, transitionTime });
+  useAnimationPlayPause({ active, animation })
+  useAnimationCanceled({ active, canceled, animation, transitionTime })
 
   return (
-    <svg
+    <$Animation_TimeDelayedPopupSvg
       ref={svg}
       xmlns="http://www.w3.org/2000/svg"
       width="100%"
       viewBox="0 0 630 455"
       opacity="0"
-      style={{ background: '#fff', borderRadius: '5px', display: active ? 'block' : 'none' }}
+      active={active}
     >
       <g transform="translate(3 22)">
         <g fill="none" fillRule="evenodd">
@@ -137,9 +160,30 @@ export default function Animation_TimeDelayedPopup({
             <rect width="68" height="10" x="364" y="25" fill="#FFF" />
             <rect width="123" height="15" x="63" y="23" fill="#FFF" />
 
-            <rect width="436" height="173" x="92" y="100" fill="#E7E6E6" rx="1.5" />
-            <rect width="390" height="36" x="117" y="313" fill="#E7E6E6" rx="1.5" />
-            <rect width="274" height="36" x="175" y="363" fill="#E7E6E6" rx="1.5" />
+            <rect
+              width="436"
+              height="173"
+              x="92"
+              y="100"
+              fill="#E7E6E6"
+              rx="1.5"
+            />
+            <rect
+              width="390"
+              height="36"
+              x="117"
+              y="313"
+              fill="#E7E6E6"
+              rx="1.5"
+            />
+            <rect
+              width="274"
+              height="36"
+              x="175"
+              y="363"
+              fill="#E7E6E6"
+              rx="1.5"
+            />
 
             <rect width="201" height="155" x="92" y="439" fill="#E7E6E6" />
             <rect width="201" height="26" x="92" y="614" fill="#E7E6E6" />
@@ -153,7 +197,6 @@ export default function Animation_TimeDelayedPopup({
 
             <rect width="624" height="26" x="0" y="941" fill="#E7E6E6" />
           </g>
-          {/* <circle cx="532.5" cy="342.5" r="46.5" fill="#8FEFEF"/> */}
           <g transform="translate(485 296) scale(.4)">
             <circle cx="150" cy="150" r="150" fill="#8FEFEF" />
             <path
@@ -176,7 +219,7 @@ export default function Animation_TimeDelayedPopup({
               height="341.091"
               x="102.153"
               y="44.955"
-              href={furnitureSrc}
+              href={furniture.src}
             />
           </g>
           <path
@@ -197,20 +240,40 @@ export default function Animation_TimeDelayedPopup({
           />
           &nbsp;
           <g transform="translate(10.947 -16)">
-            <ellipse fill="#C3C2C1" cx="5.474" cy="5.468" rx="5.474" ry="5.468" />
-            <ellipse fill="#C3C2C1" cx="23.719" cy="5.468" rx="5.474" ry="5.468" />
-            <ellipse fill="#C3C2C1" cx="41.965" cy="5.468" rx="5.474" ry="5.468" />
+            <ellipse
+              fill="#C3C2C1"
+              cx="5.474"
+              cy="5.468"
+              rx="5.474"
+              ry="5.468"
+            />
+            <ellipse
+              fill="#C3C2C1"
+              cx="23.719"
+              cy="5.468"
+              rx="5.474"
+              ry="5.468"
+            />
+            <ellipse
+              fill="#C3C2C1"
+              cx="41.965"
+              cy="5.468"
+              rx="5.474"
+              ry="5.468"
+            />
           </g>
         </g>
       </g>
-    </svg>
-  );
+    </$Animation_TimeDelayedPopupSvg>
+  )
 }
 
 Animation_TimeDelayedPopup.propTypes = {
   cb: PropTypes.func,
-};
+}
 
 Animation_TimeDelayedPopup.defaultProps = {
   cb: () => {},
-};
+}
+
+export default Animation_TimeDelayedPopup

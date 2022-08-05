@@ -1,11 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { getSrc } from 'gatsby-plugin-image';
-import PropTypes from 'prop-types';
-import anime from 'animejs';
-import { useAnimationPlayPause, useAnimationCanceled } from './animationHooks';
+import React, { useEffect, useRef, useState } from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import anime from 'animejs'
+import {
+  useAnimationPlayPause,
+  useAnimationCanceled,
+} from '@legacy/components/animations/animationHooks'
+// images
+import coastlineBackground from '@legacy/assets/images/animations/landing-page-popup_coastline-background.jpg'
+import coastlineDetail from '@legacy/assets/images/animations/landing-page-popup-coastline-detail.jpg'
 
-function AnimationTimeline({
+const AnimationTimeline = ({
   svg,
   cursorDefault,
   cursorPointer,
@@ -14,10 +19,11 @@ function AnimationTimeline({
   duration,
   transitionTime,
   cb = () => {},
-}) {
+}) => {
   const intro = anime.timeline({
     complete: cb,
-  });
+  })
+
   return intro
     .add({
       targets: [svg],
@@ -39,7 +45,7 @@ function AnimationTimeline({
         duration: 100,
         easing: 'easeInOutSine',
       },
-      '-=100',
+      '-=100'
     )
     .add(
       {
@@ -48,7 +54,7 @@ function AnimationTimeline({
         duration: 100,
         easing: 'easeInOutSine',
       },
-      '-=100',
+      '-=100'
     ) // relative offset
     .add(
       {
@@ -57,7 +63,7 @@ function AnimationTimeline({
         duration: 300,
         easing: 'easeInOutSine',
       },
-      '+=300',
+      '+=300'
     ) // relative offset
     .add(
       {
@@ -67,12 +73,12 @@ function AnimationTimeline({
         duration: 300,
         easing: 'easeInOutSine',
       },
-      '-=300',
+      '-=300'
     )
     .add({
       targets: [svg],
       opacity: [1, 1],
-      duration: duration,
+      duration,
       easing: 'easeInOutSine',
     })
     .add({
@@ -80,38 +86,38 @@ function AnimationTimeline({
       opacity: [1, 0],
       duration: transitionTime,
       easing: 'easeInOutSine',
-    });
+    })
 }
 
-export default function Animation_LandingPagePopup({
+const $Animation_LandingPagePopupSvg = styled('svg', {
+  background: '$white',
+  borderRadius: '5px',
+
+  variants: {
+    active: {
+      true: {
+        display: 'block',
+      },
+      false: {
+        display: 'none',
+      },
+    },
+  },
+})
+
+const Animation_LandingPagePopup = ({
   cb,
   active = false,
   canceled = false,
   duration = 12000,
   transitionTime = 175,
-}) {
-  const images = useStaticQuery(graphql`
-    query LandingPagePopupAnimationQuery {
-      coastlineBackground: file(
-        relativePath: { eq: "assets/images/animations/landing-page-popup_coastline-background.jpg" }
-      ) {
-        ...fixed
-      }
-      coastlineDetail: file(
-        relativePath: { eq: "assets/images/animations/landing-page-popup-coastline-detail.jpg" }
-      ) {
-        ...fixed
-      }
-    }
-  `);
-  const coastlineBackgroundSrc = getSrc(images.coastlineBackground);
-  const coastlineDetailSrc = getSrc(images.coastlineDetail);
-  const [animation, setAnimation] = useState(null);
-  const svg = useRef(null);
-  const cursorDefault = useRef(null);
-  const cursorPointer = useRef(null);
-  const popupContainer = useRef(null);
-  const popup = useRef(null);
+}) => {
+  const [animation, setAnimation] = useState(null)
+  const svg = useRef(null)
+  const cursorDefault = useRef(null)
+  const cursorPointer = useRef(null)
+  const popupContainer = useRef(null)
+  const popup = useRef(null)
 
   useEffect(() => {
     if (
@@ -130,12 +136,12 @@ export default function Animation_LandingPagePopup({
         duration,
         transitionTime,
         cb,
-      });
+      })
       if (!active) {
-        anim.restart();
-        anim.pause();
+        anim.restart()
+        anim.pause()
       }
-      setAnimation(anim);
+      setAnimation(anim)
     }
   }, [
     svg.current,
@@ -143,19 +149,18 @@ export default function Animation_LandingPagePopup({
     cursorPointer.current,
     popupContainer.current,
     popup.current,
-  ]);
+  ])
 
-  useAnimationPlayPause({ active, animation });
-  useAnimationCanceled({ active, canceled, animation, transitionTime });
+  useAnimationPlayPause({ active, animation })
+  useAnimationCanceled({ active, canceled, animation, transitionTime })
 
   return (
-    <svg
+    <$Animation_LandingPagePopupSvg
       ref={svg}
       xmlns="http://www.w3.org/2000/svg"
       width="100%"
       viewBox="0 0 630 455"
       opacity="0"
-      style={{ background: '#fff', borderRadius: '5px', display: active ? 'block' : 'none' }}
     >
       <g transform="translate(3 22)">
         <defs>
@@ -168,7 +173,11 @@ export default function Animation_LandingPagePopup({
             filterUnits="objectBoundingBox"
           >
             <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1" />
-            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2" />
+            <feGaussianBlur
+              in="shadowOffsetOuter1"
+              result="shadowBlurOuter1"
+              stdDeviation="2"
+            />
             <feColorMatrix
               in="shadowBlurOuter1"
               result="shadowMatrixOuter1"
@@ -181,7 +190,7 @@ export default function Animation_LandingPagePopup({
           </filter>
         </defs>
         <g fill="none" fillRule="evenodd">
-          <image width="624" height="431" href={coastlineBackgroundSrc} />
+          <image width="624" height="431" href={coastlineBackground.src} />
           <rect width="624" height="431" fill="#0F0C09" fillOpacity=".27" />
           <g transform="translate(231.392 277)">
             <rect width="180.317" height="32.93" fill="#8FEFEF" rx="16.465" />
@@ -197,7 +206,12 @@ export default function Animation_LandingPagePopup({
               </tspan>
             </text>
           </g>
-          <text fill="#FFF" fontFamily="Raleway-Bold, Raleway" fontSize="26" fontWeight="bold">
+          <text
+            fill="#FFF"
+            fontFamily="Raleway-Bold, Raleway"
+            fontSize="26"
+            fontWeight="bold"
+          >
             <tspan x="171.286" y="209.002">
               10 Tips to Improve your&nbsp;
             </tspan>
@@ -206,7 +220,12 @@ export default function Animation_LandingPagePopup({
               Landscape Photography
             </tspan>
           </text>
-          <text fill="#FFF" fontFamily="Raleway-SemiBold, Raleway" fontSize="13" fontWeight="500">
+          <text
+            fill="#FFF"
+            fontFamily="Raleway-SemiBold, Raleway"
+            fontSize="13"
+            fontWeight="500"
+          >
             <tspan x="190.773" y="151">
               Ready to step up your photography game?
             </tspan>
@@ -232,7 +251,12 @@ export default function Animation_LandingPagePopup({
           </g>
         </g>
 
-        <g id="cursorPointer" ref={cursorPointer} transform="translate(11 88.5)" opacity={0}>
+        <g
+          id="cursorPointer"
+          ref={cursorPointer}
+          transform="translate(11 88.5)"
+          opacity={0}
+        >
           <path
             fill="#000"
             d="M14.8262838,50.665721 L34.2132568,50.665721 C34.2132568,50.2494746 34.2047432,49.8817717 34.2143919,49.5146268 C34.2620676,47.7564601 34.6497162,46.0691558 35.3989054,44.4761486 C35.9897432,43.2201558 36.6225811,41.9814601 37.2872027,40.7611775 C38.2446892,39.0018949 39.0835541,37.1996486 39.0971757,35.1664022 C39.129527,30.3427428 39.1142027,25.5190833 39.1051216,20.6948659 C39.1039865,19.9187283 38.625527,19.4411051 37.8502297,19.4171123 C37.0425811,19.3920036 36.2326622,19.3897717 35.4250135,19.4176703 C34.6360946,19.4444529 34.1894189,19.9142645 34.1820405,20.6982138 C34.1695541,22.1400109 34.1746622,23.581808 34.1723919,25.0236051 L34.1723919,25.6290036 L31.7806622,25.6290036 L31.7806622,24.9851051 C31.7800946,22.8045543 31.7835,20.6240036 31.7772568,18.4434529 C31.7744189,17.4658877 31.3141216,17.0111413 30.3396081,17.0027717 C29.6437703,16.997192 28.9485,16.9944022 28.2526622,16.9999819 C27.3309324,17.0072355 26.8660946,17.45975 26.8626892,18.3658949 C26.8564459,20.1580978 26.8598514,21.9508587 26.8592838,23.7430616 L26.8592838,24.3099601 L24.4499595,24.3099601 L24.4499595,23.7776558 C24.4493919,21.1909022 24.4533649,18.6041486 24.4465541,16.016837 C24.4437162,15.0805616 23.9720676,14.61075 23.0344459,14.5956848 C22.3204459,14.5845254 21.6058784,14.5822935 20.8924459,14.5940109 C19.977527,14.6085181 19.5285811,15.0716341 19.5274459,15.9878225 C19.5246081,18.1499601 19.5268784,20.3126558 19.5251757,22.4753514 C19.5251757,22.6360471 19.5098514,22.7967428 19.4996351,22.9870109 L17.1476351,22.9870109 C17.1340135,22.8257572 17.1124459,22.6818007 17.1118784,22.5384022 C17.1107432,18.287779 17.1147162,14.0371558 17.1096081,9.78653261 C17.1079054,8.0869529 17.1771486,6.38067754 17.0500135,4.68946739 C16.9177703,2.93297464 14.8767973,2.02125 13.3528784,2.95082971 C12.5333108,3.45132971 12.1870946,4.19789493 12.1882297,5.14588768 C12.1961757,12.9457645 12.1939054,20.7456413 12.1876622,28.5449601 C12.1876622,28.9305181 12.1683649,29.3272355 12.0758514,29.6988442 C11.8147703,30.7467138 10.6699865,31.1222283 9.82317568,30.4431775 C9.58082432,30.2490036 9.37706757,29.9945688 9.19998649,29.7379022 C8.29301351,28.4238804 7.41271622,27.0914457 6.49836486,25.7818877 C5.8047973,24.7875833 4.80758108,24.2630906 3.59412162,24.2307283 C2.72517568,24.2072935 2.30006757,24.9387935 2.67352703,25.6859167 C3.10374324,26.5474239 3.55098649,27.4011196 3.95282432,28.2749022 C4.87341892,30.2746703 5.3637973,32.398308 5.7662027,34.5448225 C6.09312162,36.2890399 6.34568919,38.0711993 7.61704054,39.4599891 C8.73401351,40.6802717 9.88617568,41.8715399 11.0530946,43.0460688 C12.2478243,44.2479384 13.6060135,45.3460254 14.0924189,47.0355616 C14.4250135,48.1933514 14.5776892,49.4008007 14.8262838,50.665721 M26.6799324,14.6966775 C28.0222297,14.668779 29.2561216,14.6062862 30.4888784,14.6269312 C32.1615,14.6548297 33.3272838,15.4605399 33.9567162,16.9949601 C33.9907703,17.0775399 34.0327703,17.1567717 34.0043919,17.0970688 C35.454527,17.07475 36.8206622,16.9893804 38.1799865,17.0496413 C40.0047162,17.1299891 41.5042297,18.6761268 41.5144459,20.4856268 C41.5416892,25.4197645 41.5558784,30.3544601 41.5065,35.2885978 C41.4843649,37.5517283 40.6630946,39.615663 39.5727973,41.5919964 C38.8037432,42.9869239 38.0102838,44.3868732 37.4432838,45.8649384 C37.0073919,47.0015254 36.8155541,48.2536123 36.6844459,49.472221 C36.5607162,50.6221993 36.6577703,51.7956123 36.6577703,53.0069674 L12.2126351,53.0069674 C12.2126351,52.2771413 12.1899324,51.5277862 12.2177432,50.7801051 C12.2648514,49.5068152 12.2080946,48.2430109 11.4816081,47.143808 C11.0672838,46.5172065 10.5320676,45.9603514 10.0070676,45.4129819 C8.71925676,44.0710616 7.35312162,42.7983297 6.11582432,41.4134457 C4.76728378,39.9041341 3.95168919,38.134808 3.60774324,36.1177428 C3.21668919,33.8272717 2.78533784,31.5289891 1.80117568,29.3874964 C1.33747297,28.3786848 0.861283784,27.3715471 0.315851351,26.4045833 C-0.0990405405,25.6686196 -0.0689594595,24.9555326 0.196094595,24.2184529 C0.843689189,22.4156486 2.71495946,21.4732355 4.71109459,21.9536486 C6.38258108,22.3559457 7.74474324,23.2079674 8.67044595,24.6731993 C8.97806757,25.159192 9.31690541,25.6250978 9.76414865,26.0988152 L9.76414865,25.3795906 C9.76358108,18.615308 9.75904054,11.8510254 9.76471622,5.08674275 C9.76698649,2.50277899 11.6189595,0.471764493 14.1571216,0.240206522 C17.0727162,-0.0253876812 19.5149595,2.13340217 19.5308514,5.01364855 C19.5427703,7.21261232 19.5240405,9.41213406 19.5195,11.6116558 C19.5189324,11.8487935 19.5195,12.0859312 19.5195,12.2058949 C20.5337432,12.2058949 21.4815811,12.2399312 22.4265811,12.1991993 C24.4647162,12.1110399 25.983527,12.8218949 26.6799324,14.6966775"
@@ -298,7 +322,12 @@ export default function Animation_LandingPagePopup({
               </text>
             </g>
 
-            <image width="328.09" height="219" y="-58" href={coastlineDetailSrc} />
+            <image
+              width="328.09"
+              height="219"
+              y="-58"
+              href={coastlineDetail.src}
+            />
             <g transform="translate(306.35 3)">
               <circle cx="9" cy="9" r="9" fill="#F2F4F7" />
               <polygon
@@ -327,18 +356,32 @@ export default function Animation_LandingPagePopup({
         />
         <g transform="translate(10.947 -16)">
           <ellipse fill="#C3C2C1" cx="5.474" cy="5.468" rx="5.474" ry="5.468" />
-          <ellipse fill="#C3C2C1" cx="23.719" cy="5.468" rx="5.474" ry="5.468" />
-          <ellipse fill="#C3C2C1" cx="41.965" cy="5.468" rx="5.474" ry="5.468" />
+          <ellipse
+            fill="#C3C2C1"
+            cx="23.719"
+            cy="5.468"
+            rx="5.474"
+            ry="5.468"
+          />
+          <ellipse
+            fill="#C3C2C1"
+            cx="41.965"
+            cy="5.468"
+            rx="5.474"
+            ry="5.468"
+          />
         </g>
       </g>
-    </svg>
-  );
+    </$Animation_LandingPagePopupSvg>
+  )
 }
 
 Animation_LandingPagePopup.propTypes = {
   cb: PropTypes.func,
-};
+}
 
 Animation_LandingPagePopup.defaultProps = {
   cb: () => {},
-};
+}
+
+export default Animation_LandingPagePopup

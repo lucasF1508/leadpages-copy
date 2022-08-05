@@ -1,8 +1,8 @@
 import React from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
+import Image from '@components/Image'
 import Link from 'next/link'
-import Image from 'next/image'
 // images
 import rightArrowPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
 
@@ -231,7 +231,7 @@ const ChildPageHeader = ({
         </FlexRowLeft>
         <FlexRowRight>
           <HeaderImgLeft>
-            <Image src={image} alt={imageAltText} />
+            <Image image={image} alt={imageAltText} />
           </HeaderImgLeft>
         </FlexRowRight>
       </FlexRow>

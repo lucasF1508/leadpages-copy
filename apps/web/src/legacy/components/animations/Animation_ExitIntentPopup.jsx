@@ -1,13 +1,63 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { getSrc } from 'gatsby-plugin-image';
-import { InView } from 'react-intersection-observer';
-import PropTypes from 'prop-types';
-import anime from 'animejs';
-import { useAnimationPlayPause, useAnimationCanceled } from './animationHooks';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react'
+import { styled } from '@design'
+import { InView } from 'react-intersection-observer'
+import PropTypes from 'prop-types'
+import anime from 'animejs'
+import {
+  useAnimationPlayPause,
+  useAnimationCanceled,
+} from '@legacy/components/animations/animationHooks'
+// images
+import tomatoBasil from '@legacy/assets/images/animations/exit-intent-popup_tomato-basil.jpg'
 
-function AnimationTimeline({
+const $AnimationSvg = styled('svg', {
+  background: '$white',
+  borderRadius: '5px',
+
+  variants: {
+    siloVariant: {
+      true: {},
+      false: {},
+    },
+    active: {
+      true: {},
+      false: {},
+    },
+  },
+
+  compoundVariants: [
+    {
+      siloVariant: true,
+      active: true,
+      css: {
+        visibility: 'visible',
+      },
+    },
+    {
+      siloVariant: true,
+      active: false,
+      css: {
+        visibility: 'hidden',
+      },
+    },
+    {
+      siloVariant: false,
+      active: true,
+      css: {
+        display: 'block',
+      },
+    },
+    {
+      siloVariant: false,
+      active: false,
+      css: {
+        display: 'none',
+      },
+    },
+  ],
+})
+
+const AnimationTimeline = ({
   svg,
   cursorDefault,
   popupContainer,
@@ -15,10 +65,11 @@ function AnimationTimeline({
   duration,
   transitionTime,
   cb = () => {},
-}) {
+}) => {
   const intro = anime.timeline({
     complete: cb,
-  });
+  })
+
   return intro
     .add({
       targets: [svg],
@@ -47,12 +98,12 @@ function AnimationTimeline({
         duration: 300,
         easing: 'easeInOutSine',
       },
-      '-=300',
+      '-=300'
     )
     .add({
       targets: [svg],
       opacity: [1, 1],
-      duration: duration,
+      duration,
       easing: 'easeInOutSine',
     })
     .add({
@@ -60,29 +111,31 @@ function AnimationTimeline({
       opacity: [1, 0],
       duration: transitionTime,
       easing: 'easeInOutSine',
-    });
+    })
 }
 
-function Animation({ cb, active, canceled, duration, transitionTime, siloVariant }) {
-  const images = useStaticQuery(graphql`
-    query ExitIntentPopupAnimationQuery {
-      tomatoBasil: file(
-        relativePath: { eq: "assets/images/animations/exit-intent-popup_tomato-basil.jpg" }
-      ) {
-        ...fixed
-      }
-    }
-  `);
-  const tomatoBasilSrc = getSrc(images.tomatoBasil);
-  const [animation, setAnimation] = useState(null);
-  const svg = useRef(null);
-  const site = useRef(null);
-  const cursorDefault = useRef(null);
-  const popupContainer = useRef(null);
-  const popup = useRef(null);
+const Animation = ({
+  cb,
+  active,
+  canceled,
+  duration,
+  transitionTime,
+  siloVariant,
+}) => {
+  const [animation, setAnimation] = useState(null)
+  const svg = useRef(null)
+  const site = useRef(null)
+  const cursorDefault = useRef(null)
+  const popupContainer = useRef(null)
+  const popup = useRef(null)
 
   useEffect(() => {
-    if (svg.current && cursorDefault.current && popupContainer.current && popup.current) {
+    if (
+      svg.current &&
+      cursorDefault.current &&
+      popupContainer.current &&
+      popup.current
+    ) {
       const anim = AnimationTimeline({
         svg: svg.current,
         cursorDefault: cursorDefault.current,
@@ -91,33 +144,32 @@ function Animation({ cb, active, canceled, duration, transitionTime, siloVariant
         duration,
         transitionTime,
         cb,
-      });
+      })
       if (!active) {
-        anim.restart();
-        anim.pause();
+        anim.restart()
+        anim.pause()
       }
-      setAnimation(anim);
+      setAnimation(anim)
     }
-  }, [svg.current, cursorDefault.current, popupContainer.current, popup.current]);
+  }, [
+    svg.current,
+    cursorDefault.current,
+    popupContainer.current,
+    popup.current,
+  ])
 
-  useAnimationPlayPause({ active, animation });
-  useAnimationCanceled({ active, canceled, animation, transitionTime });
+  useAnimationPlayPause({ active, animation })
+  useAnimationCanceled({ active, canceled, animation, transitionTime })
 
   return (
-    <svg
+    <$AnimationSvg
       ref={svg}
       xmlns="http://www.w3.org/2000/svg"
       width="100%"
       viewBox="0 0 630 455"
       opacity="0"
-      style={{
-        background: '#fff',
-        borderRadius: '5px',
-      }}
-      // only if silo variant
-      style={siloVariant ? { visibility: active ? 'visible' : 'hidden' } : {}}
-      // only if not silo variant
-      style={!siloVariant ? { display: active ? 'block' : 'none' } : {}}
+      siloVariant={siloVariant}
+      active={active}
     >
       <g transform="translate(3 22)">
         <defs>
@@ -130,7 +182,11 @@ function Animation({ cb, active, canceled, duration, transitionTime, siloVariant
             filterUnits="objectBoundingBox"
           >
             <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1" />
-            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2" />
+            <feGaussianBlur
+              in="shadowOffsetOuter1"
+              result="shadowBlurOuter1"
+              stdDeviation="2"
+            />
             <feColorMatrix
               in="shadowBlurOuter1"
               result="shadowMatrixOuter1"
@@ -168,7 +224,13 @@ function Animation({ cb, active, canceled, duration, transitionTime, siloVariant
             <g ref={popup} transform="translate(121 104)">
               <rect width="380.1" height="232.05" fill="#FFF" />
               <g transform="translate(280.35)">
-                <image width="342.232" height="236" x="-82.35" y="-2" href={tomatoBasilSrc} />
+                <image
+                  width="342.232"
+                  height="236"
+                  x="-82.35"
+                  y="-2"
+                  href={tomatoBasil.src}
+                />
                 <g transform="translate(113 6)">
                   <circle cx="9" cy="9" r="9" fill="#F2F4F7" />
                   <polygon
@@ -179,7 +241,11 @@ function Animation({ cb, active, canceled, duration, transitionTime, siloVariant
                 </g>
               </g>
               <g transform="translate(31.5 32.6)">
-                <text fill="#0F0C09" fontFamily="Poppins-Regular, Poppins" fontSize="19">
+                <text
+                  fill="#0F0C09"
+                  fontFamily="Poppins-Regular, Poppins"
+                  fontSize="19"
+                >
                   <tspan x="12.569" y="20.924">
                     Before you go, grab&nbsp;
                   </tspan>
@@ -211,7 +277,12 @@ function Animation({ cb, active, canceled, duration, transitionTime, siloVariant
                   </text>
                 </g>
                 <g transform="translate(0 112.825)">
-                  <rect width="209.475" height="40.95" fill="#F65B1C" rx="1.536" />
+                  <rect
+                    width="209.475"
+                    height="40.95"
+                    fill="#F65B1C"
+                    rx="1.536"
+                  />
                   <text
                     fill="#FFF"
                     fontFamily="Poppins-Regular, Poppins"
@@ -243,9 +314,27 @@ function Animation({ cb, active, canceled, duration, transitionTime, siloVariant
             fill="rgba(0,0,0,0)"
           />
           <g transform="translate(10.947 -16)">
-            <ellipse fill="#C3C2C1" cx="5.474" cy="5.468" rx="5.474" ry="5.468" />
-            <ellipse fill="#C3C2C1" cx="23.719" cy="5.468" rx="5.474" ry="5.468" />
-            <ellipse fill="#C3C2C1" cx="41.965" cy="5.468" rx="5.474" ry="5.468" />
+            <ellipse
+              fill="#C3C2C1"
+              cx="5.474"
+              cy="5.468"
+              rx="5.474"
+              ry="5.468"
+            />
+            <ellipse
+              fill="#C3C2C1"
+              cx="23.719"
+              cy="5.468"
+              rx="5.474"
+              ry="5.468"
+            />
+            <ellipse
+              fill="#C3C2C1"
+              cx="41.965"
+              cy="5.468"
+              rx="5.474"
+              ry="5.468"
+            />
           </g>
           <g transform="translate(12 0)">
             <g
@@ -267,8 +356,8 @@ function Animation({ cb, active, canceled, duration, transitionTime, siloVariant
           </g>
         </g>
       </g>
-    </svg>
-  );
+    </$AnimationSvg>
+  )
 }
 
 Animation.defaultProps = {
@@ -278,7 +367,7 @@ Animation.defaultProps = {
   duration: 86400000,
   transitionTime: 175,
   siloVariant: false,
-};
+}
 
 Animation.propTypes = {
   cb: PropTypes.func,
@@ -287,48 +376,43 @@ Animation.propTypes = {
   duration: PropTypes.number,
   transitionTime: PropTypes.number,
   siloVariant: PropTypes.bool,
-};
+}
 
-const Container = styled.div`
-  display: column;
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  position: relative;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100%;
-  flex: 0 0 100%;
-  max-width: 652px;
-  margin-top: 27px;
-  margin-bottom: 72px;
-`;
+const Container = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  flex: '0 0 100%',
+  maxWidth: '652px',
+  marginTop: '27px',
+  marginBottom: '72px',
+})
 
-const twentyFourHours = 86400000;
+const twentyFourHours = 86400000
 
-const Animation_ExitIntentPopup = props => {
-  if (props.siloVariant) {
-    return (
-      <InView triggerOnce rootMargin="300px 0px 0px 0px">
-        {({ inView, ref }) => (
-          <div ref={ref}>
-            <Container>
-              <div style={{ background: '#fff' }}>
-                <Animation
-                  active={inView}
-                  canceled={false}
-                  duration={twentyFourHours}
-                  transitionTime={300}
-                  siloVariant={props.siloVariant}
-                />
-              </div>
-            </Container>
-          </div>
-        )}
-      </InView>
-    );
-  } else return <Animation {...props} />;
-};
+const Animation_ExitIntentPopup = ({ siloVariant, ...props }) =>
+  siloVariant ? (
+    <InView triggerOnce rootMargin="300px 0px 0px 0px">
+      {({ inView, ref }) => (
+        <div ref={ref}>
+          <Container>
+            <div css={{ background: '$white' }}>
+              <Animation
+                active={inView}
+                canceled={false}
+                duration={twentyFourHours}
+                transitionTime={300}
+                siloVariant={siloVariant}
+              />
+            </div>
+          </Container>
+        </div>
+      )}
+    </InView>
+  ) : (
+    <Animation {...props} />
+  )
 
-export default Animation_ExitIntentPopup;
+export default Animation_ExitIntentPopup

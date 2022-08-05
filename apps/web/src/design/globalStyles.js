@@ -29,12 +29,12 @@ const globalStyles = globalCss({
     '@<xs': {
       fontSize: '14px',
     },
-    '@>xxl': {
-      fontSize: '18px',
-    },
-    '@>xxxl': {
-      fontSize: '20px',
-    },
+    // '@>xxl': {
+    //   fontSize: '18px',
+    // },
+    // '@>xxxl': {
+    //   fontSize: '20px',
+    // },
   },
   body: {
     type: 'baseType',
