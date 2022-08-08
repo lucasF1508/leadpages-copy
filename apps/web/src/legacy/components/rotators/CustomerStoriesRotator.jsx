@@ -406,7 +406,7 @@ const CustomerStoriesRotator = ({ showBackgroundImage }) => {
     <OuterContainer>
       {showBackgroundImage && (
         <BackgroundSVG
-          src={WavyLineDiagonalGraySVG.svg}
+          src={WavyLineDiagonalGraySVG.src}
           alt="background wavy line"
         />
       )}

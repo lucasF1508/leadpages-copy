@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import Image from '@components/Image'
 import PropTypes from 'prop-types'
 import { styled } from '@design'
 // images
@@ -125,7 +124,7 @@ const ButtonContents = styled('div', {
   transition: 'all 0.3s ease',
 })
 
-const ArrowSVG = styled(Image, {
+const ArrowSVG = styled('img', {
   h: '12px',
   w: '12px',
   ml: '12px',
@@ -208,13 +207,15 @@ const HeadlineSection = ({
       )}
       {button && (
         <ButtonHolder>
-          <StyledLink href={button.route} alt={button.text}>
-            <Button>
-              <ButtonContents>
-                <span>{button.text}</span>{' '}
-                <ArrowSVG image={ArrowRightPurple} alt="right arrow" />
-              </ButtonContents>
-            </Button>
+          <StyledLink href={button.route}>
+            <a aria-label={button.text}>
+              <Button>
+                <ButtonContents>
+                  <span>{button.text}</span>{' '}
+                  <ArrowSVG src={ArrowRightPurple.src} alt="right arrow" />
+                </ButtonContents>
+              </Button>
+            </a>
           </StyledLink>
         </ButtonHolder>
       )}
