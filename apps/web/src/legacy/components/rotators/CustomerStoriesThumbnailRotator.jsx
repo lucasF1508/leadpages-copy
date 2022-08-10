@@ -1,236 +1,197 @@
 import React from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import styled from 'styled-components'
+import { styled } from '@design'
+// images
+import fscThumbnail from '@legacy/assets/images/customers/fsc/FSC_Hero-full-width@2x.jpg'
+import gregThumbnail from '@legacy/assets/images/customers/greg/Greg-Benz-Photography_1440px@2x.jpg'
+import jodyThumbnail from '@legacy/assets/images/customers/jody/Jody-Hero-full-width@2x.jpg'
+import kaileiThumbnail from '@legacy/assets/images/customers/kailei/Hero-Kailei-Carr_Leadpages_full-width_1440px@2x.jpg'
+import kateThumbnail from '@legacy/assets/images/customers/kate/Hero-Kate-Wilkinson_Leadpages_full-width@2x.jpg'
+import sallyThumbnail from '@legacy/assets/images/customers/sally/Sally_Hero-full-width@2x.jpg'
+import sayerThumbnail from '@legacy/assets/images/customers/sayer/Sayer-Hero-full-width@2x.jpg'
+import shohawkThumbnail from '@legacy/assets/images/customers/shohawk/ShoHawk-Hero@2x.jpg'
 // components
+import Image from '@components/Image'
+import Link from 'next/link'
 import NavigationArrows from './NavigationArrows'
 import PaginationDots from './PaginationDots'
 import ReactSlick from './ReactSlick_Base'
 
-const OuterContainer = styled.div`
-  padding-top: 6rem;
-  position: relative;
-  background: #fff;
-  width: 100%;
-`
+const OuterContainer = styled('div', {
+  paddingTop: '6rem',
+  position: 'relative',
+  background: '$white',
+  width: '100%',
+})
 
-const HeadlineContainer = styled.div`
-  margin-bottom: 4rem;
-  text-align: center;
-  max-width: 1140px;
-  @media (max-width: 768px) {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-  @media (min-width: 993px) {
-    margin-left: auto;
-    margin-right: auto;
-  }
-`
+const HeadlineContainer = styled('div', {
+  marginBottom: '4rem',
+  textAlign: 'center',
+  maxWidth: '1140px',
 
-const Headline = styled.h2`
-  font-family: 'Value Serif';
-  font-size: 2.5rem;
-  letter-spacing: -0.03125rem;
-  line-height: 3rem;
-  margin-bottom: 2rem;
-  color: #0f0c09;
-  @media (max-width: 576px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-  }
-`
+  '@media (max-width: 768px)': {
+    px: '3rem',
+  },
 
-const SlickRotator = styled(ReactSlick)`
-  position: relative;
-  margin: 0 6rem;
-  @media (max-width: 900px) {
-    margin: 0;
-  }
-  .slick-slide > div {
-    margin: 0 1rem;
-  }
-  .slick-slide > div > div {
-    outline: none;
-  }
-`
+  '@media (min-width: 993px)': {
+    mx: 'auto',
+  },
+})
 
-const ThumbnailImage = styled(GatsbyImage)`
-  width: 100%;
-  height: 100%;
-`
+const Headline = styled('h2', {
+  fontFamily: 'Value Serif',
+  fontSize: '2.5rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '3rem',
+  marginBottom: '2rem',
+  color: '$text',
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-`
+  '@<s': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+  },
+})
 
-const ThumbnailOverlayBG = styled.div`
-  display: none;
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  @media (max-width: 480px) {
-    max-width: 100%;
-  }
-  background-color: rgba(96, 62, 255, 0.9);
-`
+const SlickRotator = styled(ReactSlick, {
+  position: 'relative',
+  margin: '0 6rem',
 
-const ThumbnailOverlayText = styled.div`
-  margin: 0;
-  position: absolute;
-  width: 95%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  text-align: center;
-  font-size: 16px;
-  line-height: 18px;
-  font-weight: 500;
-  max-width: 250px;
-  @media (max-width: 480px) {
-    max-width: 104px;
-  }
-  @media (min-width: 769px) {
-    font-size: 18px;
-    line-height: 30px;
-  }
-`
+  '@media (max-width: 900px)': {
+    margin: 0,
+  },
 
-const ThumbnailSection = styled.div`
-  position: relative;
-  cursor: pointer;
-`
+  '.slick-slide > div': {
+    margin: '0 1rem',
+  },
 
-const ImageContainer = styled.div`
-  position: relative;
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  &:hover ${ThumbnailOverlayBG} {
-    display: block;
-  }
-  * {
-    pointer-events: none;
-  }
-`
+  '.slick-slide > div > div': {
+    outline: 'none',
+  },
+})
 
-const RotatorContainer = styled.div``
+const ThumbnailImage = styled(Image, {
+  width: '100%',
+  height: '100%',
+})
 
-const ButtonContainer = styled.div`
-  margin-top: 4rem;
-  margin-bottom: 4rem;
-  text-align: center;
-  @media (max-width: 340px) {
-    padding: 0;
-  }
-`
+const StyledLink = styled('a', {
+  color: '$primary',
+})
 
-const Button = styled.button`
-  width: 278px;
-  height: 48px;
-  border-radius: 48px;
-  color: #603eff;
-  background-color: #fff;
-  border: 3px solid #d1c5f9;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 30px;
-  text-align: center;
-  transition: all 0.3s ease;
-  @media (max-width: 340px) {
-    width: 240px;
-    font-size: 16px;
-    align-self: center;
-  }
-  &:hover {
-    border: 3px solid #603eff;
-    background-color: #603eff;
-    color: #fff;
-    cursor: pointer;
-  }
-`
+const ThumbnailOverlayBG = styled('div', {
+  display: 'none',
+  position: 'absolute',
+  zIndex: 1,
+  width: '100%',
+  height: '100%',
 
-const ThumbnailTitle = styled.div`
-  color: #0f0c09;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 24px;
-  margin-top: 0.5rem;
-  text-align: center;
-  @media (max-width: 600px) {
-    font-size: 14px;
-  }
-  @media (max-width: 425px) {
-    display: none;
-  }
-`
+  '@media (max-width: 480px)': {
+    maxWidth: '100%',
+  },
+
+  backgroundColor: 'rgba(96, 62, 255, 0.9)',
+})
+
+const ThumbnailOverlayText = styled('div', {
+  margin: 0,
+  position: 'absolute',
+  width: '95%',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  color: '$white',
+  textAlign: 'center',
+  fontSize: '16px',
+  lineHeight: '18px',
+  fontWeight: 500,
+  maxWidth: '250px',
+
+  '@media (max-width: 480px)': {
+    maxWidth: '104px',
+  },
+
+  '@media (min-width: 769px)': {
+    fontSize: '18px',
+    lineHeight: '30px',
+  },
+})
+
+const ThumbnailSection = styled('div', {
+  position: 'relative',
+  cursor: 'pointer',
+})
+
+const ImageContainer = styled('div', {
+  position: 'relative',
+  cursor: 'pointer',
+  width: '100%',
+  height: '100%',
+
+  [`&:hover ${ThumbnailOverlayBG}`]: {
+    display: 'block',
+  },
+
+  '*': {
+    pointerEvents: 'none',
+  },
+})
+
+const RotatorContainer = styled('div', {})
+
+const ButtonContainer = styled('div', {
+  my: '4rem',
+  textAlign: 'center',
+
+  '@media (max-width: 340px)': {
+    padding: 0,
+  },
+})
+
+const Button = styled('button', {
+  width: '278px',
+  height: '48px',
+  borderRadius: '48px',
+  color: '$primary',
+  backgroundColor: '$white',
+  border: '3px solid $colors$purpleLight',
+  fontSize: '18px',
+  fontWeight: 500,
+  lineHeight: '30px',
+  textAlign: 'center',
+  transition: 'all 0.3s ease',
+
+  '@<xs': {
+    width: '240px',
+    fontSize: '16px',
+    alignSelf: 'center',
+  },
+
+  '&:hover': {
+    border: '3px solid $colors$primary',
+    backgroundColor: '$primary',
+    color: '$white',
+    cursor: 'pointer',
+  },
+})
+
+const ThumbnailTitle = styled('div', {
+  color: '$text',
+  fontSize: '18px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  marginTop: '0.5rem',
+  textAlign: 'center',
+
+  '@media (max-width: 600px)': {
+    fontSize: '14px',
+  },
+
+  '@media (max-width: 425px)': {
+    display: 'none',
+  },
+})
 
 const CustomerStoriesThumbnailRotator = () => {
-  const images = useStaticQuery(graphql`
-    query CustomerStoriesThumbnailRotatorQuery {
-      fscThumbnail: file(
-        relativePath: {
-          eq: "assets/images/customers/fsc/FSC_Hero-full-width@2x.jpg"
-        }
-      ) {
-        ...constrained
-      }
-      gregThumbnail: file(
-        relativePath: {
-          eq: "assets/images/customers/greg/Greg-Benz-Photography_1440px@2x.jpg"
-        }
-      ) {
-        ...constrained
-      }
-      jodyThumbnail: file(
-        relativePath: {
-          eq: "assets/images/customers/jody/Jody-Hero-full-width@2x.jpg"
-        }
-      ) {
-        ...constrained
-      }
-      kaileiThumbnail: file(
-        relativePath: {
-          eq: "assets/images/customers/kailei/Hero-Kailei-Carr_Leadpages_full-width_1440px@2x.jpg"
-        }
-      ) {
-        ...constrained
-      }
-      kateThumbnail: file(
-        relativePath: {
-          eq: "assets/images/customers/kate/Hero-Kate-Wilkinson_Leadpages_full-width@2x.jpg"
-        }
-      ) {
-        ...constrained
-      }
-      sallyThumbnail: file(
-        relativePath: {
-          eq: "assets/images/customers/sally/Sally_Hero-full-width@2x.jpg"
-        }
-      ) {
-        ...constrained
-      }
-      sayerThumbnail: file(
-        relativePath: {
-          eq: "assets/images/customers/sayer/Sayer-Hero-full-width@2x.jpg"
-        }
-      ) {
-        ...constrained
-      }
-      shohawkThumbnail: file(
-        relativePath: {
-          eq: "assets/images/customers/shohawk/ShoHawk-Hero@2x.jpg"
-        }
-      ) {
-        ...constrained
-      }
-    }
-  `)
   const storiesArray = [
     {
       id: 'greg',
@@ -238,7 +199,7 @@ const CustomerStoriesThumbnailRotator = () => {
       title: 'Greg’s Story',
       overlayText: 'Artists & Educators',
       link: '/customers/greg',
-      imageSrc: getImage(images.gregThumbnail),
+      imageSrc: gregThumbnail,
       imageAltText: 'Greg - Artist & Educator',
     },
     {
@@ -247,7 +208,7 @@ const CustomerStoriesThumbnailRotator = () => {
       title: 'Kate’s Story',
       overlayText: 'Consultants',
       link: '/customers/kate',
-      imageSrc: getImage(images.kateThumbnail),
+      imageSrc: kateThumbnail,
       imageAltText: 'Kate - Consultants',
     },
     {
@@ -256,7 +217,7 @@ const CustomerStoriesThumbnailRotator = () => {
       title: 'FSC’s Story',
       overlayText: 'Teams & Non-Profits',
       link: '/customers/fsc',
-      imageSrc: getImage(images.fscThumbnail),
+      imageSrc: fscThumbnail,
       imageAltText: 'FSC - Teams & Non-Profits',
     },
     {
@@ -265,7 +226,7 @@ const CustomerStoriesThumbnailRotator = () => {
       title: 'Kailei’s Story',
       overlayText: 'Consultants & Coaches',
       link: '/customers/kailei',
-      imageSrc: getImage(images.kaileiThumbnail),
+      imageSrc: kaileiThumbnail,
       imageAltText: 'Kailei - Consultants & Coaches',
     },
     {
@@ -274,7 +235,7 @@ const CustomerStoriesThumbnailRotator = () => {
       title: 'Sayer’s Story',
       overlayText: 'Ecommerce',
       link: '/customers/sayer',
-      imageSrc: getImage(images.sayerThumbnail),
+      imageSrc: sayerThumbnail,
       imageAltText: 'Sayer - Ecommerce',
     },
     {
@@ -283,7 +244,7 @@ const CustomerStoriesThumbnailRotator = () => {
       title: 'Sally’s Story',
       overlayText: 'Speakers & Coaches',
       link: '/customers/sally',
-      imageSrc: getImage(images.sallyThumbnail),
+      imageSrc: sallyThumbnail,
       imageAltText: 'Sally - Speakers & Coaches',
     },
     {
@@ -292,7 +253,7 @@ const CustomerStoriesThumbnailRotator = () => {
       title: 'Jody’s Story',
       overlayText: 'Health & Fitness',
       link: '/customers/jody',
-      imageSrc: getImage(images.jodyThumbnail),
+      imageSrc: jodyThumbnail,
       imageAltText: 'Jody - Health & Fitness',
     },
     {
@@ -301,16 +262,18 @@ const CustomerStoriesThumbnailRotator = () => {
       title: 'Shohawk’s Story',
       overlayText: 'Film',
       link: '/customers/shohawk',
-      imageSrc: getImage(images.shohawkThumbnail),
+      imageSrc: shohawkThumbnail,
       imageAltText: 'Shohawk - Film',
     },
   ]
+
   const rotatorSwiped = () => {
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({
       event: 'customerRotatorSwiped',
     })
   }
+
   const settings = {
     autoplay: true,
     autoplaySpeed: 4000,
@@ -379,6 +342,7 @@ const CustomerStoriesThumbnailRotator = () => {
       },
     ],
   }
+
   return (
     <OuterContainer>
       <HeadlineContainer>
@@ -387,13 +351,14 @@ const CustomerStoriesThumbnailRotator = () => {
       <RotatorContainer>
         {typeof window !== 'undefined' && (
           <SlickRotator {...settings}>
-            {storiesArray.map((item, index) => {
-              const { name, title, overlayText, link, imageSrc, imageAltText } =
-                item
-              return (
+            {storiesArray.map(
+              (
+                { name, title, overlayText, link, imageSrc, imageAltText },
+                index
+              ) => (
                 <ThumbnailSection key={index}>
-                  <StyledLink href={link} alt={imageAltText}>
-                    <>
+                  <Link href={link} passHref>
+                    <StyledLink aria-label={imageAltText}>
                       <ImageContainer
                         data-gtm="customer-story-link"
                         data-value={name}
@@ -408,17 +373,19 @@ const CustomerStoriesThumbnailRotator = () => {
                         </div>
                       </ImageContainer>
                       <ThumbnailTitle>{title}</ThumbnailTitle>
-                    </>
-                  </StyledLink>
+                    </StyledLink>
+                  </Link>
                 </ThumbnailSection>
               )
-            })}
+            )}
           </SlickRotator>
         )}
       </RotatorContainer>
       <ButtonContainer>
-        <StyledLink to="/customers">
-          <Button>Back to all Stories</Button>
+        <StyledLink href="/customers">
+          <a>
+            <Button>Back to all Stories</Button>
+          </a>
         </StyledLink>
       </ButtonContainer>
     </OuterContainer>

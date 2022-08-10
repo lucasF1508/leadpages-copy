@@ -1,71 +1,71 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
 
-const OuterContainer = styled.div`
-  padding-top: 7rem;
-  padding-bottom: 5rem;
-  background-color: #fef9f1;
-  text-align: center;
-  @media (max-width: 576px) {
-    padding-top: 4rem;
-    padding-bottom: 3rem;
-  }
-  @media (max-width: 360px) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-`;
+const OuterContainer = styled('div', {
+  paddingTop: '7rem',
+  paddingBottom: '5rem',
+  backgroundColor: '$tan',
+  textAlign: 'center',
 
-const InnerContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-right: 15%;
-  padding-left: 15%;
-`;
+  '@<s': {
+    paddingTop: '4rem',
+    paddingBottom: '3rem',
+  },
 
-const Heading = styled.div`
-  opacity: 0.5;
-  color: #000000;
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  font-family: 'Space Mono';
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-`;
+  '@media (max-width: 360px)': {
+    px: '1rem',
+  },
+})
 
-const Quote = styled.div`
-  font-family: 'Value Serif';
-  color: #e28f44;
-  margin-bottom: 4rem;
-  @media (max-width: 424px) {
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: -0.07px;
-  }
+const InnerContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  px: '15%',
+})
 
-  @media (min-width: 425px) and (max-width: 992px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-  }
+const Heading = styled('div', {
+  opacity: 0.5,
+  color: '$black',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  fontFamily: 'Space Mono',
+  textTransform: 'uppercase',
+  marginBottom: '2rem',
+})
 
-  @media (min-width: 993px) {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.5px;
-  }
-`;
+const Quote = styled('div', {
+  fontFamily: 'Value Serif',
+  color: '$textHighlight',
+  marginBottom: '4rem',
 
-const Author = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  color: #0f0c09;
-`;
+  '@media (max-width: 424px)': {
+    fontSize: '20px',
+    lineHeight: '24px',
+    letterSpacing: '-0.07px',
+  },
+
+  '@media (min-width: 425px) and (max-width: 992px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+  },
+
+  '@media (min-width: 993px)': {
+    fontSize: '40px',
+    lineHeight: '48px',
+    letterSpacing: '-0.5px',
+  },
+})
+
+const Author = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  color: '$text',
+})
 
 const QuoteComponent = ({ heading, quote, author }) => (
   <OuterContainer>
@@ -75,17 +75,17 @@ const QuoteComponent = ({ heading, quote, author }) => (
       <Author>{author}</Author>
     </InnerContainer>
   </OuterContainer>
-);
+)
 
 QuoteComponent.defaultProps = {
   heading: '',
   author: '',
-};
+}
 
 QuoteComponent.propTypes = {
   heading: PropTypes.string,
   quote: PropTypes.string.isRequired,
   author: PropTypes.string,
-};
+}
 
-export default QuoteComponent;
+export default QuoteComponent

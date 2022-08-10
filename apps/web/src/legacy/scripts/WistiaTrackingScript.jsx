@@ -1,10 +1,14 @@
 import React from 'react'
-import Head from 'next/head'
+import Script from 'next/script'
 
 const WistiaTrackingScript = () => (
-  <Head>
-    <script class="_iub_cs_activate" data-iub-purposes="4,5">
-      {`
+  <Script
+    id="wistia-tracking-script"
+    strategy="beforeInteractive"
+    className="_iub_cs_activate"
+    data-iub-purposes="4,5"
+  >
+    {`
           function fbTrackingEvent (videoId, percent) {
             fbq('trackCustom', 'WistiaWatched', {
               percent: percent + '%',
@@ -58,8 +62,7 @@ const WistiaTrackingScript = () => (
             }
           });
         `}
-    </script>
-  </Head>
+  </Script>
 )
 
 export default WistiaTrackingScript
