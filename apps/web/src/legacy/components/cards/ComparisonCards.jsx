@@ -1,165 +1,174 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
 // Images
-import ArrowRightPurple from '../../assets/images/global/arrow_right_purple.svg';
-import leadpagesLogoSVG from '../../assets/images/global/leadpages-wordmark_white.svg';
+import ArrowRightPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
+import leadpagesLogoSVG from '@legacy/assets/images/global/leadpages-wordmark_white.svg'
 
-const CardImageItem = styled.div`
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: #0a236d;
-  height: 180px;
-`;
+const CardImageItem = styled('div', {
+  display: 'flex',
+  overflow: 'hidden',
+  position: 'relative',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: '100%',
+  backgroundColor: '#0a236d',
+  height: '180px',
+})
 
-const TextContentItem = styled.div`
-  padding: 2.25rem 2.18rem 2.4rem 2.25rem;
-`;
+const TextContentItem = styled('div', {
+  padding: '2.25rem 2.18rem 2.4rem 2.25rem',
+})
 
-const CompetitorSVG = styled.img`
-  width: 50%;
-  max-height: 41px;
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  transform: translate(50%, -50%);
-  transition: 0.5s;
-`;
+const CompetitorSVG = styled('img', {
+  width: '50%',
+  maxHeight: '41px',
+  position: 'absolute',
+  right: '50%',
+  top: '50%',
+  transform: 'translate(50%, -50%)',
+  transition: '0.5s',
+})
 
-const LeadpagesSVG = styled.img`
-  max-height: 26px;
-  max-width: 60%;
-`;
+const LeadpagesSVG = styled('img', {
+  maxHeight: '26px',
+  maxWidth: '60%',
+})
 
-const CardTitle = styled.div`
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 24px;
-  color: #0f0c09;
-  margin-bottom: 1.8rem;
-`;
-const CardDescription = styled.div`
-  line-height: 24px;
-  color: #575452;
-  margin-bottom: 2.3rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-`;
+const CardTitle = styled('div', {
+  fontSize: '18px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  color: '$text',
+  marginBottom: '1.8rem',
+})
 
-const CardLinkItem = styled.div``;
+const CardDescription = styled('div', {
+  lineHeight: '24px',
+  fontWeight: 500,
+  color: '$textAlt',
+  marginBottom: '2.3rem',
+  display: '-webkit-box',
+  WebkitLineClamp: 4,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+})
 
-const StyledLink = styled(Link)`
-  font-weight: 500;
-  line-height: 24px;
-  color: #603eff;
-  text-decoration: none;
-  cursor: pointer;
-`;
+const CardLinkItem = styled('div', {})
 
-const StyledBottomText = styled.span`
-  padding-bottom: 0.5rem;
-`;
+const StyledLink = styled('a', {
+  fontWeight: 500,
+  lineHeight: '24px',
+  color: '$primary',
+})
 
-const ArrowSVG = styled.img`
-  height: 11px;
-  width: 12px;
-  margin-left: 12px;
-`;
+const StyledBottomText = styled('span', {
+  paddingBottom: '0.5rem',
+})
 
-const VersusText = styled.span`
-  font-weight: 500;
-  font-size: 13.9px;
-  line-height: 17px;
-  text-align: center;
-  color: #c3c2c1;
-  margin: 0 1.2rem 0 1.2rem;
-`;
+const ArrowSVG = styled('img', {
+  height: '11px',
+  width: '12px',
+  marginLeft: '12px',
+})
 
-const VersusContainer = styled.div`
-  position: absolute;
-  left: -175px;
-  transition: 0.5s;
-  display: flex;
-  align-items: center;
-`;
+const VersusText = styled('span', {
+  fontWeight: 500,
+  fontSize: '13.9px',
+  lineHeight: '17px',
+  textAlign: 'center',
+  color: '#c3c2c1',
+  margin: '0 1.2rem 0 1.2rem',
+})
 
-const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 350px;
-  background-color: #ffffff;
-  margin-right: 1rem;
-  margin-left: 1rem;
-  margin-bottom: 2.2rem;
-  transition: all 0.3s ease;
+const VersusContainer = styled('div', {
+  position: 'absolute',
+  left: '-175px',
+  transition: '0.5s',
+  display: 'flex',
+  alignItems: 'center',
+})
 
-  box-shadow: 0 0 2px 0 rgba(15, 12, 9, 0.04), 0 2px 4px 0 rgba(15, 12, 9, 0.08);
+const CardContainer = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '350px',
+  backgroundColor: '$white',
+  mx: '1rem',
+  marginBottom: '2.2rem',
+  transition: 'all 0.3s ease',
 
-  &:hover {
-    box-shadow: 0 4px 8px 0 rgba(15, 12, 9, 0.04), 0 10px 20px 0 rgba(15, 12, 9, 0.08);
-  }
+  boxShadow:
+    '0 0 2px 0 rgba(15, 12, 9, 0.04), 0 2px 4px 0 rgba(15, 12, 9, 0.08)',
 
-  & ${CardTitle}, ${StyledBottomText} {
-    transition: all 0.3s ease;
-  }
+  '&:hover': {
+    boxShadow: `0 4px 8px 0 rgba(15, 12, 9, 0.04),
+      0 10px 20px 0 rgba(15, 12, 9, 0.08)`,
+  },
 
-  &:hover ${CardTitle} {
-    color: #603eff;
-  }
-  &:hover ${StyledBottomText} {
-    border-bottom: solid 3px #603eff;
-  }
+  [`& ${CardTitle}, ${StyledBottomText}`]: {
+    transition: 'all 0.3s ease',
+  },
 
-  &:hover ${CompetitorSVG} {
-    right: 2rem;
-    max-height: 26px;
-    max-width: 30%;
-    transform: translate(0, -50%);
-  }
+  [`&:hover ${CardTitle}`]: {
+    color: '$primary',
+  },
 
-  &:hover ${VersusContainer} {
-    left: 2.25rem;
-    -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0) scale(1, 1);
-  }
+  [`&:hover ${StyledBottomText}`]: {
+    borderBottom: 'solid 3px $colors$primary',
+  },
 
-  &:hover ${CardImageItem} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
+  [`&:hover ${CompetitorSVG}`]: {
+    right: '2rem',
+    maxHeight: '26px',
+    maxWidth: '30%',
+    transform: 'translate(0, -50%)',
+  },
 
-const ComparisonCards = ({ image, imageAlt, title, description, link, linkAlt }) => {
-  return (
-    <CardContainer>
-      <StyledLink to={link} alt={linkAlt}>
+  [`&:hover ${VersusContainer}`]: {
+    left: '2.25rem',
+    WebkitBackfaceVisibility: 'hidden',
+    WebkitTransform: 'translateZ(0) scale(1, 1)',
+  },
+
+  [`&:hover ${CardImageItem}`]: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})
+
+const ComparisonCards = ({
+  image,
+  imageAlt,
+  title,
+  description,
+  link,
+  linkAlt,
+}) => (
+  <CardContainer>
+    <Link href={link} passHref>
+      <StyledLink aria-label={linkAlt}>
         <CardImageItem>
           <VersusContainer>
-            <LeadpagesSVG src={leadpagesLogoSVG} alt="Leadpages logo" />
+            <LeadpagesSVG src={leadpagesLogoSVG.src} alt="Leadpages logo" />
             <VersusText>vs.</VersusText>
           </VersusContainer>
-          <CompetitorSVG src={image} alt={imageAlt} />
+          <CompetitorSVG src={image.src} alt={imageAlt} />
         </CardImageItem>
         <TextContentItem>
           <CardTitle>{title}</CardTitle>
           <CardDescription>{description}</CardDescription>
           <CardLinkItem>
             <StyledBottomText>Read Comparison</StyledBottomText>
-            <ArrowSVG src={ArrowRightPurple} alt="right arrow" />
+            <ArrowSVG src={ArrowRightPurple.src} alt="right arrow" />
           </CardLinkItem>
         </TextContentItem>
       </StyledLink>
-    </CardContainer>
-  );
-};
+    </Link>
+  </CardContainer>
+)
 
 ComparisonCards.propTypes = {
   image: PropTypes.string.isRequired,
@@ -168,6 +177,6 @@ ComparisonCards.propTypes = {
   description: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   linkAlt: PropTypes.string.isRequired,
-};
+}
 
-export default ComparisonCards;
+export default ComparisonCards
