@@ -1,191 +1,203 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
-import { Link as ScrollLink } from 'react-scroll';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
+import { Link as ScrollLink } from 'react-scroll'
 // Assets
-import closeMenuIcon from '../../assets/images/global/x_close.svg';
-import downArrowIcon from '../../assets/images/global/arrow_down_large.svg';
+import closeMenuIcon from '@legacy/assets/images/global/x_close.svg'
+import downArrowIcon from '@legacy/assets/images/global/arrow_down_large.svg'
 
-const DesktopMenuContainer = styled.div`
-  background: #fff;
-  position: sticky;
-  top: 60px;
-  height: 60px;
-  width: 100%;
-  border-top: 1px solid rgba(15, 12, 9, 0.08);
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-  z-index: 49;
-  display: none;
-  @media (min-width: 992px) {
-    &.desktopMenuVisible {
-      display: block;
-      transition: all 0.3s ease;
-    }
-  }
-`;
+const DesktopMenuContainer = styled('div', {
+  background: '$white',
+  position: 'sticky',
+  top: '60px',
+  height: '60px',
+  width: '100%',
+  borderTop: '1px solid rgba(15, 12, 9, 0.08)',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+  zIndex: 49,
+  display: 'none',
 
-const DesktopMenuFlexbox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 18px;
-  padding-bottom: 18px;
-  max-width: 300px;
+  '@>m': {
+    '&.desktopMenuVisible': {
+      display: 'block',
+      transition: 'all 0.3s ease',
+    },
+  },
+})
 
-  &.activesection {
-    display: block;
-  }
+const DesktopMenuFlexbox = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  mx: 'auto',
+  py: '18px',
+  maxWidth: '300px',
 
-  &.section {
-    display: block;
-  }
-`;
+  '&.activesection': {
+    display: 'block',
+  },
 
-const DesktopMenuHeading = styled.div`
-  color: #0f0c09;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  cursor: pointer;
-`;
+  '&.section': {
+    display: 'block',
+  },
+})
 
-const DesktopMenuIcon = styled.img`
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-  padding-top: 5px;
-`;
+const DesktopMenuHeading = styled('div', {
+  color: '$text',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  cursor: 'pointer',
+})
 
-const DesktopSubMenuContainer = styled.div`
-  background: #fff;
-  position: sticky;
-  top: 60px;
-  width: 100%;
-  border-top: 1px solid rgba(15, 12, 9, 0.08);
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-  z-index: 49;
-  @media (max-width: 991px) {
-    display: none;
-  }
-`;
+const DesktopMenuIcon = styled('img', {
+  width: '16px',
+  height: '16px',
+  cursor: 'pointer',
+  paddingTop: '5px',
+})
 
-const DesktopSubMenuHeader = styled.div`
-  height: 60px;
-  width: 100%;
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-`;
+const DesktopSubMenuContainer = styled('div', {
+  background: '$white',
+  position: 'sticky',
+  top: '60px',
+  width: '100%',
+  borderTop: '1px solid rgba(15, 12, 9, 0.08)',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+  zIndex: 49,
 
-const DesktopSubMenuTextContainer = styled.div`
-  padding: 3%;
-`;
+  '@<m': {
+    display: 'none',
+  },
+})
 
-const SubMenuFlexbox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin: 0 25%;
-  margin: ${props => (props.numberOfColumns === 3 ? '0 15%' : '')};
-  margin: ${props => (props.numberOfColumns >= 4 ? '0 5%' : '')};
-`;
+const DesktopSubMenuHeader = styled('div', {
+  height: '60px',
+  width: '100%',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+})
 
-const SubMenuColumn = styled.div`
-  padding-left: 2%;
-  padding-right: 2%;
-`;
+const DesktopSubMenuTextContainer = styled('div', {
+  padding: '3%',
+})
 
-const ColumnHeader = styled(DesktopMenuHeading)`
-  margin-bottom: 15px;
-  cursor: auto;
-`;
+const SubMenuFlexbox = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-around',
+  margin: '0 25%',
+})
 
-const ColumnItem = styled(DesktopMenuHeading)`
-  color: rgba(15, 12, 9, 0.5);
-  margin-bottom: 15px;
-`;
+const SubMenuColumn = styled('div', {
+  px: '2%',
+})
 
-const DesktopMenuColumnItem = styled(ColumnItem)`
-  cursor: default;
-`;
+const ColumnHeader = styled(DesktopMenuHeading, {
+  marginBottom: '15px',
+  cursor: 'auto',
+})
 
-const ColumnLink = styled(Link)`
-  text-decoration: none;
-  color: rgba(15, 12, 9, 0.5);
-  padding-bottom: 2px;
-  &:hover {
-    color: #603eff;
-    cursor: pointer;
-    border-bottom: 3px solid #603eff;
-  }
-  &.active {
-    color: #603eff;
-    cursor: pointer;
-    border-bottom: 3px solid #603eff;
-  }
-  &.activeRoute {
-    color: #603eff;
-    text-decoration: none;
-  }
-`;
+const ColumnItem = styled(DesktopMenuHeading, {
+  color: 'rgba(15, 12, 9, 0.5)',
+  marginBottom: '15px',
+})
 
-const StyledScrollLink = styled(ScrollLink)`
-  text-decoration: none;
-  color: rgba(15, 12, 9, 0.5);
-  padding-bottom: 2px;
-  &:hover {
-    color: #603eff;
-    cursor: pointer;
-    border-bottom: 3px solid #603eff;
-  }
-  &.active {
-    color: #603eff;
-    cursor: pointer;
-    border-bottom: none !important;
-  }
-  &.activeRoute {
-    color: #603eff;
-    text-decoration: none;
-    border-bottom: none;
-  }
-`;
+const DesktopMenuColumnItem = styled(ColumnItem, {
+  cursor: 'default',
+})
 
-const SiloDesktopMenu = ({ pageRoutes, verbiage, numberOfColumns, useScrollLink }) => {
-  const [showDesktopMenuBar, setShowDesktopMenuBar] = useState(false);
-  const [showDesktopSubMenu, setShowDesktopSubMenu] = useState(false);
+const ColumnLink = styled('a', {
+  color: 'rgba(15, 12, 9, 0.5)',
+  paddingBottom: '2px',
+
+  '&:hover': {
+    color: '$primary',
+    cursor: 'pointer',
+    borderBottom: '3px solid $colors$primary',
+  },
+
+  '&.active': {
+    color: '$primary',
+    cursor: 'pointer',
+    borderBottom: '3px solid $colors$primary',
+  },
+
+  '&.activeRoute': {
+    color: '$primary',
+    textDecoration: 'none',
+  },
+})
+
+const StyledScrollLink = styled(ScrollLink, {
+  textDecoration: 'none',
+  color: 'rgba(15, 12, 9, 0.5)',
+  paddingBottom: '2px',
+
+  '&:hover': {
+    color: '$primary',
+    cursor: 'pointer',
+    borderBottom: '3px solid $colors$primary',
+  },
+
+  '&.active': {
+    color: '$primary',
+    cursor: 'pointer',
+    borderBottom: 'none !important',
+  },
+
+  '&.activeRoute': {
+    color: '$primary',
+    textDecoration: 'none',
+    borderBottom: 'none',
+  },
+})
+
+const SiloDesktopMenu = ({
+  pageRoutes,
+  verbiage,
+  numberOfColumns,
+  useScrollLink,
+}) => {
+  const [showDesktopMenuBar, setShowDesktopMenuBar] = useState(false)
+  const [showDesktopSubMenu, setShowDesktopSubMenu] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window !== 'undefined') {
         if (window.innerWidth > 991 && window.scrollY >= 1630) {
-          setShowDesktopMenuBar(true);
+          setShowDesktopMenuBar(true)
         } else {
-          setShowDesktopMenuBar(false);
+          setShowDesktopMenuBar(false)
         }
       }
-    };
+    }
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll)
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  });
+      window.removeEventListener('scroll', handleScroll)
+    }
+  })
 
   const handleRouteClick = () => {
-    setShowDesktopSubMenu(false);
-  };
+    setShowDesktopSubMenu(false)
+  }
 
   const toggleDesktopSubMenuVisibility = () => {
-    setShowDesktopSubMenu(!showDesktopSubMenu);
-  };
+    setShowDesktopSubMenu(!showDesktopSubMenu)
+  }
+
+  const marginOption1 = numberOfColumns === 3 ? { margin: '0 15%' } : {}
+  const marginOption2 = numberOfColumns >= 4 ? { margin: '0 5%' } : {}
 
   return (
     <>
       {/* Desktop Menu Bar */}
-      <DesktopMenuContainer className={showDesktopMenuBar ? 'desktopMenuVisible' : ''}>
+      <DesktopMenuContainer
+        className={showDesktopMenuBar ? 'desktopMenuVisible' : ''}
+      >
         <DesktopMenuFlexbox onClick={toggleDesktopSubMenuVisibility}>
           <DesktopMenuHeading>{verbiage.menu.title_closed}</DesktopMenuHeading>
-          <DesktopMenuIcon src={downArrowIcon} alt="down arrow" />
+          <DesktopMenuIcon src={downArrowIcon.src} alt="down arrow" />
         </DesktopMenuFlexbox>
       </DesktopMenuContainer>
 
@@ -194,70 +206,65 @@ const SiloDesktopMenu = ({ pageRoutes, verbiage, numberOfColumns, useScrollLink 
         <DesktopSubMenuContainer>
           <DesktopSubMenuHeader>
             <DesktopMenuFlexbox>
-              <DesktopMenuHeading>{verbiage.menu.title_open}</DesktopMenuHeading>
+              <DesktopMenuHeading>
+                {verbiage.menu.title_open}
+              </DesktopMenuHeading>
               <DesktopMenuIcon
-                src={closeMenuIcon}
+                src={closeMenuIcon.src}
                 alt="close menu icon"
                 onClick={toggleDesktopSubMenuVisibility}
               />
             </DesktopMenuFlexbox>
           </DesktopSubMenuHeader>
           <DesktopSubMenuTextContainer>
-            <SubMenuFlexbox numberOfColumns={numberOfColumns}>
-              {pageRoutes.map(section => {
-                const { sectionName, sectionPages } = section;
-                return (
-                  <SubMenuColumn key={sectionName}>
-                    <ColumnHeader>{sectionName}</ColumnHeader>
-                    {sectionPages.map(page => {
-                      const { pageName, pageUrl } = page;
-                      return (
-                        <DesktopMenuColumnItem key={pageUrl}>
-                          {useScrollLink ? (
-                            <StyledScrollLink
-                              key={pageUrl}
-                              to={pageUrl}
-                              alt={pageName}
-                              spy
-                              smooth
-                              duration={300}
-                              offset={-550}
-                              style={{ textDecoration: 'none' }}
-                              onClick={() => handleRouteClick()}
-                            >
-                              {pageName}
-                            </StyledScrollLink>
-                          ) : (
-                            <ColumnLink
-                              onClick={() => handleRouteClick()}
-                              activeStyle={{ color: '#603eff' }}
-                              partiallyActive={false}
-                              to={pageUrl}
-                              alt={pageName}
-                              style={{ textDecoration: 'none' }}
-                            >
-                              {pageName}
-                            </ColumnLink>
-                          )}
-                        </DesktopMenuColumnItem>
-                      );
-                    })}
-                  </SubMenuColumn>
-                );
-              })}
+            <SubMenuFlexbox css={{ ...marginOption1, ...marginOption2 }}>
+              {pageRoutes.map(({ sectionName, sectionPages }) => (
+                <SubMenuColumn key={sectionName}>
+                  <ColumnHeader>{sectionName}</ColumnHeader>
+                  {sectionPages.map(({ pageName, pageUrl }) => (
+                    <DesktopMenuColumnItem key={pageUrl}>
+                      {useScrollLink ? (
+                        <StyledScrollLink
+                          key={pageUrl}
+                          to={pageUrl}
+                          aria-label={pageName}
+                          spy
+                          smooth
+                          duration={300}
+                          offset={-550}
+                          css={{ textDecoration: 'none' }}
+                          onClick={() => handleRouteClick()}
+                        >
+                          {pageName}
+                        </StyledScrollLink>
+                      ) : (
+                        <Link href={pageUrl} passHref>
+                          <ColumnLink
+                            onClick={() => handleRouteClick()}
+                            aria-label={pageName}
+                            css={{ textDecoration: 'none' }}
+                          >
+                            {pageName}
+                          </ColumnLink>
+                        </Link>
+                      )}
+                    </DesktopMenuColumnItem>
+                  ))}
+                </SubMenuColumn>
+              ))}
             </SubMenuFlexbox>
           </DesktopSubMenuTextContainer>
         </DesktopSubMenuContainer>
       )}
     </>
-  );
-};
+  )
+}
 
 SiloDesktopMenu.defaultProps = {
   pageRoutes: [],
   numberOfColumns: null,
   useScrollLink: false,
-};
+}
 
 SiloDesktopMenu.propTypes = {
   pageRoutes: PropTypes.arrayOf(
@@ -270,9 +277,9 @@ SiloDesktopMenu.propTypes = {
           pageUrl: PropTypes.string,
           pageTitle: PropTypes.string,
           pageSupertitle: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ),
   verbiage: PropTypes.shape({
     main: PropTypes.shape({
@@ -286,6 +293,6 @@ SiloDesktopMenu.propTypes = {
   }).isRequired,
   numberOfColumns: PropTypes.number,
   useScrollLink: PropTypes.bool,
-};
+}
 
-export default SiloDesktopMenu;
+export default SiloDesktopMenu

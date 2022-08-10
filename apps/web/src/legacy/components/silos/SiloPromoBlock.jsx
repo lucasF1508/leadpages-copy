@@ -1,138 +1,116 @@
-import React from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { GATSBY_IMAGE } from '../../constants/types';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Image from '@components/Image'
+import Link from 'next/link'
 // Images
-import rightArrowSVG from '../../assets/images/global/arrow_right_white.svg';
+import defaultPromoImage from '@legacy/assets/images/silos/landing-page-examples/Product-Leadpages_Landing-Pages@2x.png'
+import rightArrowSVG from '@legacy/assets/images/global/arrow_right_white.svg'
 
-const FlexContainer = styled.div`
-  display: flex;
-  background-color: #f7f7f7;
-  margin: 1rem 0;
-  box-sizing: border-box;
+const FlexContainer = styled('div', {
+  display: 'flex',
+  backgroundColor: '$grayAlt',
+  margin: '1rem 0',
+  boxSizing: 'border-box',
 
-  @media (max-width: 425px) {
-    display: block;
-  }
-`;
+  '@media (max-width: 425px)': {
+    display: 'block',
+  },
+})
 
-const ImageFlexItem = styled.div`
-  max-width: 35%;
-  flex: 0 0 35%;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+const ImageFlexItem = styled('div', {
+  maxWidth: '35%',
+  flex: '0 0 35%',
+  paddingTop: '2.5rem',
+  paddingBottom: '2.5rem',
 
-  @media (max-width: 425px) {
-    max-width: 100%;
-    padding-bottom: 0;
-  }
-`;
+  '@media (max-width: 425px)': {
+    maxWidth: '100%',
+    paddingBottom: 0,
+  },
+})
 
-const ContentFlexItem = styled.div`
-  max-width: 51%;
-  margin: 3.75rem 3.75rem 1.25rem 3.5rem;
-  flex: 0 0 51%;
-  padding-bottom: 2.5rem;
+const ContentFlexItem = styled('div', {
+  maxWidth: '51%',
+  margin: '3.75rem 3.75rem 1.25rem 3.5rem',
+  flex: '0 0 51%',
+  paddingBottom: '2.5rem',
 
-  @media (max-width: 425px) {
-    margin: 2.5rem 2.25rem 0 2.25rem;
-    max-width: 100%;
-  }
-`;
+  '@media (max-width: 425px)': {
+    margin: '2.5rem 2.25rem 0 2.25rem',
+    maxWidth: '100%',
+  },
+})
 
-const ImageContainer = styled(GatsbyImage)`
-  display: block;
-  width: 100%;
-  max-width: 340px;
-`;
+const ImageContainer = styled(Image, {
+  display: 'block',
+  width: '100%',
+  maxWidth: '340px',
+})
 
-const Headline = styled.h2`
-  font-size: 30px;
-  font-family: Value Serif;
-  line-height: 36px;
-`;
+const Headline = styled('h2', {
+  fontSize: '30px',
+  fontFamily: 'Value Serif',
+  lineHeight: '36px',
+})
 
-const MainText = styled.p`
-  font-size: 18px;
-  line-height: 32px;
-  color: #575452;
-  margin: 1.25rem 0;
+const MainText = styled('p', {
+  fontSize: '18px',
+  lineHeight: '32px',
+  color: '$textAlt',
+  margin: '1.25rem 0',
 
-  @media (max-width: 425px) {
-    margin-bottom: 1.5rem;
-  }
-`;
+  '@media (max-width: 425px)': {
+    marginBottom: '1.5rem',
+  },
+})
 
-const InternalStyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`;
+const Button = styled('button', {
+  width: 'auto',
+  height: '48px',
+  borderRadius: '48px',
+  border: '3px solid $colors$primary',
+  backgroundColor: '$primary',
+  color: '$white',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '28px',
+  textAlign: 'center',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+  padding: '0 1rem',
 
-const ExternalStyledLink = styled.a`
-  text-decoration: none;
-  cursor: pointer;
-`;
+  '@media (max-width: 340px)': {
+    width: '240px',
+    fontSize: '16px',
+    alignSelf: 'center',
+  },
 
-const Button = styled.button`
-  width: auto;
-  height: 48px;
-  border-radius: 48px;
-  border: 3px solid #603eff;
-  background-color: #603eff;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 28px;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  padding: 0 1rem;
+  '@media (min-width: 426px) and (max-width: 768px)': {
+    fontSize: '14px',
+    padding: 0,
+    width: '100%',
+  },
 
-  @media (max-width: 340px) {
-    width: 240px;
-    font-size: 16px;
-    align-self: center;
-  }
+  '@media (max-width: 425px)': {
+    maxWidth: '100%',
+  },
 
-  @media (min-width: 426px) and (max-width: 768px) {
-    font-size: 14px;
-    padding: 0;
-    width: 100%;
-  }
+  '&:hover': {
+    backgroundColor: '$indigoDark',
+    border: '3px solid $colors$indigoDark',
+  },
+})
 
-  @media (max-width: 425px) {
-    max-width: 100%;
-  }
-
-  &:hover {
-    background-color: #4d32cc;
-    border: 3px solid #4d32cc;
-  }
-`;
-const ArrowRight = styled.img`
-  margin-top: auto;
-  margin-bottom: auto;
-  width: 20px;
-  height: 10px;
-`;
+const ArrowRight = styled('img', {
+  my: 'auto',
+  width: '20px',
+  height: '10px',
+})
 
 const SiloPromoBlock = ({ overridePromoContent }) => {
-  const image = useStaticQuery(graphql`
-    query SiloPromoBlockQuery {
-      defaultPromoImage: file(
-        relativePath: {
-          eq: "assets/images/silos/landing-page-examples/Product-Leadpages_Landing-Pages@2x.png"
-        }
-      ) {
-        ...constrained
-      }
-    }
-  `);
-
   const defaultPromoContent = {
-    promoImage: getImage(image.defaultPromoImage),
+    promoImage: defaultPromoImage,
     promoImageAlt: 'Landing page builder',
     headlineText: 'Create Unlimited Landing Pages with Leadpages',
     mainText:
@@ -141,7 +119,7 @@ const SiloPromoBlock = ({ overridePromoContent }) => {
     linkAlt: 'Landing page builder',
     externalLink: false,
     buttonText: 'Discover Landing Pages',
-  };
+  }
 
   // Use override content or fallback to default promo content
   const {
@@ -153,7 +131,7 @@ const SiloPromoBlock = ({ overridePromoContent }) => {
     linkAlt,
     externalLink,
     buttonText,
-  } = overridePromoContent || defaultPromoContent;
+  } = overridePromoContent || defaultPromoContent
 
   return (
     <FlexContainer>
@@ -167,32 +145,38 @@ const SiloPromoBlock = ({ overridePromoContent }) => {
         <Headline>{headlineText}</Headline>
         <MainText>{mainText}</MainText>
         {externalLink ? (
-          <ExternalStyledLink href={link} alt={linkAlt}>
-            <Button>
-              {buttonText}
-              <ArrowRight src={rightArrowSVG} />
-            </Button>
-          </ExternalStyledLink>
+          <Button
+            as="a"
+            href={link}
+            aria-label={linkAlt}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {buttonText}
+            <ArrowRight src={rightArrowSVG.src} />
+          </Button>
         ) : (
-          <InternalStyledLink to={link} alt={linkAlt}>
-            <Button>
-              {buttonText}
-              <ArrowRight src={rightArrowSVG} />
-            </Button>
-          </InternalStyledLink>
+          <Link href={link}>
+            <a aria-label={linkAlt}>
+              <Button>
+                {buttonText}
+                <ArrowRight src={rightArrowSVG.src} />
+              </Button>
+            </a>
+          </Link>
         )}
       </ContentFlexItem>
     </FlexContainer>
-  );
-};
+  )
+}
 
 SiloPromoBlock.defaultProps = {
   overridePromoContent: null,
-};
+}
 
 SiloPromoBlock.propTypes = {
   overridePromoContent: PropTypes.shape({
-    promoImage: GATSBY_IMAGE.isRequired,
+    promoImage: Image.isRequired,
     promoImageAlt: PropTypes.string.isRequired,
     headlineText: PropTypes.string.isRequired,
     mainText: PropTypes.string.isRequired,
@@ -201,6 +185,6 @@ SiloPromoBlock.propTypes = {
     externalLink: PropTypes.bool.isRequired,
     buttonText: PropTypes.string.isRequired,
   }),
-};
+}
 
-export default SiloPromoBlock;
+export default SiloPromoBlock

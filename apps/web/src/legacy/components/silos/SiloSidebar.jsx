@@ -1,141 +1,140 @@
-import React from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { Link as ScrollLink } from 'react-scroll';
+import React from 'react'
+import { styled } from '@design'
+import Link from 'next/link'
+import PropTypes from 'prop-types'
+import { Link as ScrollLink } from 'react-scroll'
 // Components
-import SiloCompareImage from './SiloCompareImage';
+import SiloCompareImage from './SiloCompareImage'
 
-const SidebarContainer = styled.div`
-  @media (max-width: 991px) {
-    display: none;
-  }
-  @media (min-width: 992px) {
-    position: absolute;
-    top: 6rem;
-    padding-right: 2rem;
-    margin-left: 2rem;
-    min-width: 200px;
-    max-width: 200px;
-    border-right: 1px solid rgba(15, 12, 9, 0.08);
-  }
-`;
+const SidebarContainer = styled('div', {
+  '@media (max-width: 991px)': {
+    display: 'none',
+  },
 
-const SidebarSection = styled.div`
-  padding-bottom: 16px;
-`;
+  '@>m': {
+    position: 'absolute',
+    top: '6rem',
+    paddingRight: '2rem',
+    marginLeft: '2rem',
+    width: '200px',
+    borderRight: '1px solid rgba(15, 12, 9, 0.08)',
+  },
+})
 
-const SidebarInnerSeparator = styled.hr`
-  background-color: #0f0c09;
-  opacity: 0.08;
-  margin-bottom: 16px;
-`;
+const SidebarSection = styled('div', {
+  paddingBottom: '16px',
+})
 
-const SidebarHeading = styled.div`
-  font-family: Apercu Pro;
-  font-weight: 500;
-  color: #0f0c09;
-  margin-bottom: 28px;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: 0px;
-  margin-bottom: 24px;
-`;
+const SidebarInnerSeparator = styled('hr', {
+  backgroundColor: '$text',
+  opacity: 0.08,
+  marginBottom: '16px',
+})
 
-const SidebarSubHeading = styled.div`
-  color: inherit;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  padding-bottom: 1rem;
-  &:hover {
-    color: #603eff;
-    cursor: pointer;
-  }
-`;
+const SidebarHeading = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontWeight: 500,
+  color: '$text',
+  fontSize: '18px',
+  lineHeight: '28px',
+  letterSpacing: '0px',
+  marginBottom: '24px',
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: rgba(15, 12, 9, 0.5);
-  cursor: pointer;
-  &:hover {
-    color: #603eff;
-  }
-  &.active {
-    color: #603eff;
-  }
-  &.activeRoute {
-    color: #603eff;
-    text-decoration: none;
-  }
-`;
+const SidebarSubHeading = styled('div', {
+  color: 'inherit',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  paddingBottom: '1rem',
 
-const StyledScrollLink = styled(ScrollLink)`
-  text-decoration: none;
-  color: rgba(15, 12, 9, 0.5);
-  cursor: pointer;
-  &:hover {
-    color: #603eff;
-  }
-  &.active {
-    color: rgba(15, 12, 9, 0.5);
-  }
-`;
+  '&:hover': {
+    color: '$primary',
+    cursor: 'pointer',
+  },
+})
 
-const SiloSidebar = ({ pageRoutes, competitorImage, className, useScrollLink }) => {
-  return (
-    <SidebarContainer id="silo-sidebar" className={className}>
-      {competitorImage && <SiloCompareImage competitorImage={competitorImage} />}
-      {pageRoutes.map(section => {
-        const { sectionName, sectionPages } = section;
-        return (
-          <SidebarSection key={sectionName}>
-            <SidebarInnerSeparator />
-            <SidebarHeading>{sectionName}</SidebarHeading>
-            {sectionPages.map(page => {
-              const { pageName, pageUrl } = page;
-              if (useScrollLink) {
-                return (
-                  <StyledScrollLink
-                    key={pageUrl}
-                    to={pageUrl}
-                    alt={pageName}
-                    spy
-                    smooth
-                    duration={300}
-                    offset={-100}
-                  >
-                    <SidebarSubHeading>{pageName}</SidebarSubHeading>
-                  </StyledScrollLink>
-                );
-              }
-              return (
-                <StyledLink
-                  key={pageUrl}
-                  activeStyle={{ color: '#603eff' }}
-                  partiallyActive={false}
-                  to={pageUrl}
-                  alt={pageName}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <SidebarSubHeading>{pageName}</SidebarSubHeading>
-                </StyledLink>
-              );
-            })}
-          </SidebarSection>
-        );
-      })}
-    </SidebarContainer>
-  );
-};
+const StyledLink = styled('a', {
+  color: 'rgba(15, 12, 9, 0.5)',
+
+  [`
+    &:hover,
+    &.active
+  `]: {
+    color: '$primary',
+  },
+
+  '&.activeRoute': {
+    color: '$primary',
+    textDecoration: 'none',
+  },
+})
+
+const StyledScrollLink = styled(ScrollLink, {
+  textDecoration: 'none',
+  color: 'rgba(15, 12, 9, 0.5)',
+  cursor: 'pointer',
+
+  '&:hover': {
+    color: '$primary',
+  },
+
+  '&.active': {
+    color: 'rgba(15, 12, 9, 0.5)',
+  },
+})
+
+const SiloSidebar = ({
+  pageRoutes,
+  competitorImage,
+  className,
+  useScrollLink,
+}) => (
+  <SidebarContainer id="silo-sidebar" className={className}>
+    {competitorImage && <SiloCompareImage competitorImage={competitorImage} />}
+    {pageRoutes.map(({ sectionName, sectionPages }) => (
+      <SidebarSection key={sectionName}>
+        <SidebarInnerSeparator />
+        <SidebarHeading>{sectionName}</SidebarHeading>
+        {sectionPages.map(({ pageName, pageUrl }) => {
+          if (useScrollLink) {
+            return (
+              <StyledScrollLink
+                key={pageUrl}
+                to={pageUrl}
+                alt={pageName}
+                spy
+                smooth
+                duration={300}
+                offset={-100}
+              >
+                <SidebarSubHeading>{pageName}</SidebarSubHeading>
+              </StyledScrollLink>
+            )
+          }
+          return (
+            <Link href={pageUrl} key={pageUrl} passHref>
+              <StyledLink
+                aria-label={pageName}
+                css={{ textDecoration: 'none' }}
+              >
+                <SidebarSubHeading>{pageName}</SidebarSubHeading>
+              </StyledLink>
+            </Link>
+          )
+        })}
+      </SidebarSection>
+    ))}
+  </SidebarContainer>
+)
 
 SiloSidebar.defaultProps = {
   pageRoutes: [],
   competitorImage: null,
   className: '',
   useScrollLink: false,
-};
+}
 
 SiloSidebar.propTypes = {
   pageRoutes: PropTypes.arrayOf(
@@ -148,13 +147,13 @@ SiloSidebar.propTypes = {
           pageUrl: PropTypes.string,
           pageTitle: PropTypes.string,
           pageSupertitle: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ),
   competitorImage: PropTypes.string,
   className: PropTypes.string,
   useScrollLink: PropTypes.bool,
-};
+}
 
-export default SiloSidebar;
+export default SiloSidebar

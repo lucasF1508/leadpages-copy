@@ -1,201 +1,203 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
-import { Link as ScrollLink } from 'react-scroll';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-
+import React, { useState, useEffect } from 'react'
+import { styled } from '@design'
+import Link from 'next/link'
+import { Link as ScrollLink } from 'react-scroll'
+import PropTypes from 'prop-types'
 // Assets
-import closeMenuIcon from '../../assets/images/global/x_close.svg';
-import downArrowIcon from '../../assets/images/global/arrow_down_large.svg';
+import closeMenuIcon from '@legacy/assets/images/global/x_close.svg'
+import downArrowIcon from '@legacy/assets/images/global/arrow_down_large.svg'
 
-const MobileSubMenuSection = styled.div`
-  padding-bottom: 16px;
-`;
+const MobileSubMenuSection = styled('div', {
+  paddingBottom: '16px',
+})
 
-const SubmenuInnerSeparator = styled.hr`
-  background-color: #0f0c09;
-  opacity: 0.08;
-  margin-bottom: 16px;
-`;
+const SubmenuInnerSeparator = styled('hr', {
+  backgroundColor: '$text',
+  opacity: 0.08,
+  marginBottom: '16px',
+})
 
-const MobileSubMenuHeading = styled.div`
-  font-family: Apercu Pro;
-  font-weight: 500;
-  color: #0f0c09;
-  margin-bottom: 28px;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: 0px;
-  margin-bottom: 24px;
-`;
+const MobileSubMenuHeading = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontWeight: 500,
+  color: '$text',
+  fontSize: '18px',
+  lineHeight: '28px',
+  letterSpacing: '0px',
+  marginBottom: '24px',
+})
 
-const MobileSubMenuSubheading = styled.div`
-  color: inherit;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  padding-bottom: 1rem;
-  &:hover {
-    color: #603eff;
-    cursor: pointer;
-  }
-`;
+const MobileSubMenuSubheading = styled('div', {
+  color: 'inherit',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  paddingBottom: '1rem',
 
-const MobileMenuContainer = styled.div`
-  display: none;
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  z-index: 1501;
-  height: 72px;
-  background: #fff;
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-  @media (max-width: 991px) {
-    &.mobileMenuVisible {
-      display: block;
-      transition: all 0.3s ease;
-    }
-  }
-`;
+  '&:hover': {
+    color: '$primary',
+    cursor: 'pointer',
+  },
+})
 
-const MobileMenuFlexbox = styled.div`
-  margin-top: 24px;
-  margin-left: 32px;
-  margin-right: 24px;
-  display: flex;
-  justify-content: space-between;
-`;
+const MobileMenuContainer = styled('div', {
+  display: 'none',
+  position: 'fixed',
+  top: '0px',
+  width: '100%',
+  zIndex: 1501,
+  height: '72px',
+  background: '$white',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
 
-const MobileMenuHeading = styled.div`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  cursor: pointer;
-`;
+  '@media (max-width: 991px)': {
+    '&.mobileMenuVisible': {
+      display: 'block',
+      transition: 'all 0.3s ease',
+    },
+  },
+})
 
-const MobileMenuIcon = styled.img`
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-`;
+const MobileMenuFlexbox = styled('div', {
+  marginTop: '24px',
+  marginLeft: '32px',
+  marginRight: '24px',
+  display: 'flex',
+  justifyContent: 'space-between',
+})
 
-const MobileMenuSubmenu = styled.div`
-  z-index: 150;
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-`;
+const MobileMenuHeading = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  cursor: 'pointer',
+})
 
-const SubmenuHeader = styled.div`
-  height: 72px;
-  width: 100%;
-  background: #fff;
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-`;
+const MobileMenuIcon = styled('img', {
+  width: '16px',
+  height: '16px',
+  cursor: 'pointer',
+})
 
-const SubmenuHeaderFlexbox = styled.div`
-  padding-top: 24px;
-  margin-left: 32px;
-  margin-right: 24px;
-  display: flex;
-  justify-content: space-between;
-`;
+const MobileMenuSubmenu = styled('div', {
+  zIndex: 150,
+  width: '100%',
+  height: '100%',
+  position: 'fixed',
+  top: 0,
+})
 
-const SubmenuHeaderHeading = styled.div`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  cursor: pointer;
-`;
+const SubmenuHeader = styled('div', {
+  height: '72px',
+  width: '100%',
+  background: '$white',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+})
 
-const SubmenuHeaderIcon = styled.img`
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-`;
+const SubmenuHeaderFlexbox = styled('div', {
+  paddingTop: '24px',
+  marginLeft: '32px',
+  marginRight: '24px',
+  display: 'flex',
+  justifyContent: 'space-between',
+})
 
-const SubmenuContent = styled.div`
-  width: 100%;
-  background: #fff;
-  border-bottom: 1px solid rgba(15, 12, 9, 0.08);
-  padding-top: 1rem;
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-  padding-bottom: 1rem;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  height: 90%;
-  overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-  ::-webkit-scrollbar {
-    display: none;
-  } /* Chrome */
-  @media (max-width: 350px) {
-    max-width: 85%;
-  }
-`;
+const SubmenuHeaderHeading = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  cursor: 'pointer',
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: rgba(15, 12, 9, 0.5);
-  cursor: pointer;
+const SubmenuHeaderIcon = styled('img', {
+  width: '16px',
+  height: '16px',
+  cursor: 'pointer',
+})
 
+const SubmenuContent = styled('div', {
+  width: '100%',
+  background: '$white',
+  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+  py: '1rem',
+  px: '2.5rem',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  height: '90%',
+  overflowY: 'scroll',
+  scrollbarWidth: 'none',
+  MsOverflowStyle: 'none',
+
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
+
+  '@media (max-width: 350px)': {
+    maxWidth: '85%',
+  },
+})
+
+const StyledLink = styled('a', {
+  color: 'rgba(15, 12, 9, 0.5)',
+
+  [`
+    &:hover,
+    &.active,
+    &.activeRoute
+  `]: {
+    color: '$primary',
+  },
+})
+
+const StyledScrollLink = styled(ScrollLink, {
+  textDecoration: 'none',
+  color: 'rgba(15, 12, 9, 0.5)',
+  cursor: 'pointer',
+
+  [`
   &:hover,
   &.active,
-  &.activeRoute {
-    color: #603eff;
-  }
-`;
-
-const StyledScrollLink = styled(ScrollLink)`
-  text-decoration: none;
-  color: rgba(15, 12, 9, 0.5);
-  cursor: pointer;
-
-  &:hover,
-  &.active,
-  &.activeRoute {
-    color: #603eff;
-  }
-`;
+  &.activeRoute
+  `]: {
+    color: '$primary',
+  },
+})
 
 const SiloMobileMenu = ({ pageRoutes, verbiage, useScrollLink }) => {
-  const [showMobileMenuBar, setShowMobileMenuBar] = useState(false);
-  const [showMobileSubMenu, setShowMobileSubMenu] = useState(false);
+  const [showMobileMenuBar, setShowMobileMenuBar] = useState(false)
+  const [showMobileSubMenu, setShowMobileSubMenu] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window !== 'undefined') {
         if (window.innerWidth <= 991 && window.scrollY > 72) {
-          setShowMobileMenuBar(true);
+          setShowMobileMenuBar(true)
         } else {
-          setShowMobileMenuBar(false);
+          setShowMobileMenuBar(false)
         }
       }
-    };
+    }
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll)
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  });
+      window.removeEventListener('scroll', handleScroll)
+    }
+  })
 
   const handleRouteClick = () => {
-    setShowMobileSubMenu(false);
-  };
+    setShowMobileSubMenu(false)
+  }
 
   const toggleMobileSubMenuVisibility = () => {
-    setShowMobileSubMenu(!showMobileSubMenu);
-  };
+    setShowMobileSubMenu(!showMobileSubMenu)
+  }
 
   return (
     <>
@@ -206,7 +208,7 @@ const SiloMobileMenu = ({ pageRoutes, verbiage, useScrollLink }) => {
       >
         <MobileMenuFlexbox>
           <MobileMenuHeading>{verbiage.menu.title_closed}</MobileMenuHeading>
-          <MobileMenuIcon src={downArrowIcon} alt="down arrow" />
+          <MobileMenuIcon src={downArrowIcon.src} alt="down arrow" />
         </MobileMenuFlexbox>
       </MobileMenuContainer>
 
@@ -215,68 +217,68 @@ const SiloMobileMenu = ({ pageRoutes, verbiage, useScrollLink }) => {
         <MobileMenuSubmenu>
           <SubmenuHeader>
             <SubmenuHeaderFlexbox>
-              <SubmenuHeaderHeading>{verbiage.menu.title_open}</SubmenuHeaderHeading>
+              <SubmenuHeaderHeading>
+                {verbiage.menu.title_open}
+              </SubmenuHeaderHeading>
               <SubmenuHeaderIcon
-                src={closeMenuIcon}
+                src={closeMenuIcon.src}
                 alt="close menu icon"
                 onClick={toggleMobileSubMenuVisibility}
               />
             </SubmenuHeaderFlexbox>
           </SubmenuHeader>
           <SubmenuContent>
-            {pageRoutes.map(section => {
-              const { sectionName, sectionPages } = section;
-              return (
-                <MobileSubMenuSection key={sectionName}>
-                  <SubmenuInnerSeparator />
-                  <MobileSubMenuHeading>{sectionName}</MobileSubMenuHeading>
-                  {sectionPages.map(page => {
-                    const { pageName, pageUrl } = page;
-                    if (useScrollLink) {
-                      return (
-                        <StyledScrollLink
-                          key={pageUrl}
-                          to={pageUrl}
-                          alt={pageName}
-                          spy
-                          smooth
-                          duration={300}
-                          offset={-100}
-                          style={{ textDecoration: 'none' }}
-                          onClick={() => handleRouteClick()}
-                        >
-                          <MobileSubMenuSubheading>{pageName}</MobileSubMenuSubheading>
-                        </StyledScrollLink>
-                      );
-                    }
+            {pageRoutes.map(({ sectionName, sectionPages }) => (
+              <MobileSubMenuSection key={sectionName}>
+                <SubmenuInnerSeparator />
+                <MobileSubMenuHeading>{sectionName}</MobileSubMenuHeading>
+                {sectionPages.map(({ pageName, pageUrl }) => {
+                  if (useScrollLink) {
                     return (
+                      <StyledScrollLink
+                        key={pageUrl}
+                        to={pageUrl}
+                        aria-label={pageName}
+                        spy
+                        smooth
+                        duration={300}
+                        offset={-100}
+                        css={{ textDecoration: 'none' }}
+                        onClick={() => handleRouteClick()}
+                      >
+                        <MobileSubMenuSubheading>
+                          {pageName}
+                        </MobileSubMenuSubheading>
+                      </StyledScrollLink>
+                    )
+                  }
+                  return (
+                    <Link href={pageUrl} key={pageUrl} passHref>
                       <StyledLink
                         onClick={() => handleRouteClick()}
-                        activeStyle={{ color: '#603eff' }}
-                        partiallyActive={false}
-                        to={pageUrl}
-                        alt={pageName}
-                        key={pageUrl}
-                        style={{ textDecoration: 'none' }}
+                        aria-label={pageName}
+                        css={{ textDecoration: 'none' }}
                       >
-                        <MobileSubMenuSubheading>{pageName}</MobileSubMenuSubheading>
+                        <MobileSubMenuSubheading>
+                          {pageName}
+                        </MobileSubMenuSubheading>
                       </StyledLink>
-                    );
-                  })}
-                </MobileSubMenuSection>
-              );
-            })}
+                    </Link>
+                  )
+                })}
+              </MobileSubMenuSection>
+            ))}
           </SubmenuContent>
         </MobileMenuSubmenu>
       )}
     </>
-  );
-};
+  )
+}
 
 SiloMobileMenu.defaultProps = {
   pageRoutes: [],
   useScrollLink: false,
-};
+}
 
 SiloMobileMenu.propTypes = {
   pageRoutes: PropTypes.arrayOf(
@@ -289,9 +291,9 @@ SiloMobileMenu.propTypes = {
           pageUrl: PropTypes.string,
           pageTitle: PropTypes.string,
           pageSupertitle: PropTypes.string,
-        }),
+        })
       ),
-    }),
+    })
   ),
   verbiage: PropTypes.shape({
     main: PropTypes.shape({
@@ -304,6 +306,6 @@ SiloMobileMenu.propTypes = {
     }),
   }).isRequired,
   useScrollLink: PropTypes.bool,
-};
+}
 
-export default SiloMobileMenu;
+export default SiloMobileMenu

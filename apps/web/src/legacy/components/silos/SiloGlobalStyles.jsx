@@ -1,601 +1,617 @@
-import { Link } from 'gatsby';
-import { Link as ScrollLink } from 'react-scroll';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import { styled } from '@design'
+import { Link as ScrollLink } from 'react-scroll'
+import Image from '@components/Image'
 
-export const OuterContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  position: relative;
-`;
+export const OuterContainer = styled('div', {
+  width: '100%',
+  height: '100%',
+  background: '$white',
+  position: 'relative',
+})
 
-export const InnerContainer = styled.div`
-  max-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 1;
-  background: #fff;
-`;
+export const InnerContainer = styled('div', {
+  maxWidth: '1440px',
+  mx: 'auto',
+  zIndex: 1,
+  background: '$white',
+})
 
-export const BodyContainer = styled.div`
-  display: flex;
-  padding-top: 3rem;
-`;
+export const BodyContainer = styled('div', {
+  display: 'flex',
+  paddingTop: '3rem',
+})
 
-export const MainContainer = styled.div`
-  max-width: 816px;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  overflow-x: auto;
-  @media (max-width: 576px) {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-  @media (min-width: 577px) and (max-width: 991px) {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-  @media (min-width: 992px) {
-    margin-left: 30%;
-    width: 70%;
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+export const MainContainer = styled('div', {
+  maxWidth: '816px',
+  py: '3rem',
+  overflowX: 'auto',
 
-export const SectionContainer = styled.div`
-  margin-top: 96px;
-  &.first {
-    margin-top: 0 !important;
-  }
-`;
+  '@<s': {
+    px: '24px',
+  },
 
-export const PageTitle = styled.h1`
-  font-family: 'Value Serif';
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.1px;
-  color: #0f0c09;
-  width: 80%;
-  @media (max-width: 768px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-  @media (min-width: 769px) {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.5px;
-    margin-bottom: 41px;
-  }
-`;
+  '@media (min-width: 577px) and (max-width: 991px)': {
+    px: '3rem',
+  },
 
-export const SectionTitle = styled.h2`
-  font-family: 'Value Serif';
-  font-size: 40px;
-  line-height: 48px;
-  color: #0f0c09;
-  margin-bottom: 1.5rem;
-`;
+  '@>m': {
+    marginLeft: '30%',
+    width: '70%',
+    px: '6rem',
+  },
+})
 
-export const PageSupertitle = styled.div`
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  opacity: 0.5;
-  color: #000000;
-  font-family: 'Space Mono';
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  width: 80%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
+export const SectionContainer = styled('div', {
+  marginTop: '96px',
 
-export const H2 = styled.h2`
-  color: #0f0c09;
-  font-family: 'Value Serif';
-  font-size: 24px;
-  letter-spacing: -0.08px;
-  line-height: 1.75em;
-  margin-bottom: 18px;
-  margin-top: 42px;
-  width: 80%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
+  '&.first': {
+    marginTop: '0 !important',
+  },
+})
 
-export const H3 = styled.h3`
-  color: #0f0c09;
-  font-family: Apercu Pro;
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 32px;
-  margin-bottom: 16px;
-  margin-top: 36px;
-  width: 80%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
+export const PageTitle = styled('h1', {
+  fontFamily: 'Value Serif',
+  fontSize: '30px',
+  lineHeight: '36px',
+  letterSpacing: '-0.1px',
+  color: '$text',
+  width: '80%',
 
-export const H4 = styled.h4`
-  color: #0f0c09;
-  font-family: Apercu Pro;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 24px;
-  margin-bottom: 16px;
-  width: 80%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
+  '@media (max-width: 768px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+    marginBottom: '2rem',
+    width: '100%',
+  },
 
-export const ParagraphLarge = styled.p`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 22px;
-  line-height: 36px;
-  margin-bottom: 60px;
-  width: 80%;
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 18px;
-    line-height: 28px;
-  }
-`;
+  '@media (min-width: 769px)': {
+    fontSize: '40px',
+    lineHeight: '48px',
+    letterSpacing: '-0.5px',
+    marginBottom: '41px',
+  },
+})
 
-export const ParagraphAccent = styled.div`
-  font-family: 'Value Serif';
-  font-size: 30px;
-  letter-spacing: -0.17px;
-  line-height: 40px;
-  color: #0b236d;
-  margin-bottom: 60px;
-  width: 80%;
-  @media (max-width: 768px) {
-    font-size: 20px;
-    letter-spacing: -0.07px;
-    line-height: 24px;
-    width: 100%;
-  }
-`;
+export const SectionTitle = styled('h2', {
+  fontFamily: 'Value Serif',
+  fontSize: '40px',
+  lineHeight: '48px',
+  color: '$text',
+  marginBottom: '1.5rem',
+})
 
-export const ParagraphSmall = styled.p`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 18px;
-  line-height: 28px;
-  margin-bottom: 45px;
-  width: 80%;
-  @media (max-width: 768px) {
-    width: 100%;
-    font-size: 18px;
-    line-height: 28px;
-  }
-`;
+export const PageSupertitle = styled('div', {
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  opacity: 0.5,
+  color: '$black',
+  fontFamily: 'Space Mono',
+  textTransform: 'uppercase',
+  marginBottom: '1rem',
+  width: '80%',
 
-export const TextTitle = styled.h1`
-  font-family: 'Value Serif';
-  font-size: 30px;
-  line-height: 36px;
-  letter-spacing: -0.1px;
-  color: #0f0c09;
-  width: 80%;
-  @media (max-width: 768px) {
-    font-size: 30px;
-    line-height: 36px;
-    letter-spacing: -0.1px;
-    margin-bottom: 2rem;
-    width: 100%;
-  }
-  @media (min-width: 769px) {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.5px;
-    margin-bottom: 41px;
-  }
-`;
+  '@media (max-width: 768px)': {
+    width: '100%',
+  },
+})
 
-export const TextSupertitle = styled.div`
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  opacity: 0.5;
-  color: #000000;
-  font-family: 'Space Mono';
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  width: 80%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
+export const H2 = styled('h2', {
+  color: '$text',
+  fontFamily: 'Value Serif',
+  fontSize: '24px',
+  letterSpacing: '-0.08px',
+  lineHeight: '1.75em',
+  marginBottom: '18px',
+  marginTop: '42px',
+  width: '80%',
 
-export const UL = styled.ul`
-  margin-top: 24px;
-  margin-bottom: 45px;
-  margin-left: 32px;
-  width: calc(80% - 32px);
-  @media (max-width: 768px) {
-    width: calc(100% - 32px);
-  }
-`;
+  '@media (max-width: 768px)': {
+    width: '100%',
+  },
+})
 
-export const OL = styled.ol`
-  margin-top: 24px;
-  margin-bottom: 45px;
-  margin-left: 32px;
-  width: calc(80% - 32px);
-  @media (max-width: 768px) {
-    width: calc(100% - 32px);
-  }
-`;
+export const H3 = styled('h3', {
+  color: '$text',
+  fontFamily: 'Apercu Pro',
+  fontSize: '22px',
+  fontWeight: 500,
+  lineHeight: '32px',
+  marginBottom: '16px',
+  marginTop: '36px',
+  width: '80%',
 
-export const ListItem = styled.li`
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 18px;
-`;
+  '@media (max-width: 768px)': {
+    width: '100%',
+  },
+})
 
-export const ArticleLink = styled(Link)`
-  text-decoration: none;
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: inherit;
-  line-height: inherit;
-  padding-bottom: 2px;
-  border-bottom: 3px solid #d1c6f9;
-  transition: all 0.3s ease;
-  &:hover {
-    border-bottom: 3px solid #603eff;
-    color: #603eff;
-  }
-`;
+export const H4 = styled('h4', {
+  color: '$text',
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  fontWeight: 500,
+  lineHeight: '24px',
+  marginBottom: '16px',
+  width: '80%',
 
-export const HeaderLink = styled(ArticleLink)`
-  color: #0f0c09;
-  font-family: inherit;
-`;
+  '@media (max-width: 768px)': {
+    width: '100%',
+  },
+})
 
-export const SiloScrollLink = styled(ScrollLink)`
-  text-decoration: none;
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: inherit;
-  line-height: inherit;
-  padding-bottom: 2px;
-  border-bottom: 3px solid #d1c6f9;
-  transition: all 0.3s ease;
-  &:hover {
-    border-bottom: 3px solid #603eff;
-    color: #603eff;
-    cursor: pointer;
-  }
-`;
+export const ParagraphLarge = styled('p', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '22px',
+  lineHeight: '36px',
+  marginBottom: '60px',
+  width: '80%',
 
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: rgba(15, 12, 9, 0.5);
-  cursor: pointer;
-  &:hover {
-    color: #603eff;
-  }
-`;
+  '@media (max-width: 768px)': {
+    width: '100%',
+    fontSize: '18px',
+    lineHeight: '28px',
+  },
+})
 
-export const OutboundLink = styled.a`
-  text-decoration: none;
-  color: #575452;
-  font-family: Apercu Pro;
-  font-size: inherit;
-  line-height: inherit;
-  padding-bottom: 2px;
-  border-bottom: 3px solid #d1c6f9;
-  transition: all 0.3s ease;
-  &:hover {
-    border-bottom: 3px solid #603eff;
-    color: #603eff;
-  }
-`;
+export const ParagraphAccent = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '30px',
+  letterSpacing: '-0.17px',
+  lineHeight: '40px',
+  color: '#0b236d',
+  marginBottom: '60px',
+  width: '80%',
 
-export const TemplateLink = styled.a`
-  text-decoration: none;
-  cursor: pointer;
-`;
+  '@media (max-width: 768px)': {
+    fontSize: '20px',
+    letterSpacing: '-0.07px',
+    lineHeight: '24px',
+    width: '100%',
+  },
+})
 
-export const Image = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: 72px;
-`;
+export const ParagraphSmall = styled('p', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  lineHeight: '28px',
+  marginBottom: '45px',
+  width: '80%',
 
-export const TemplateImage = styled(Image)`
-  max-width: 652px;
-`;
+  '@media (max-width: 768px)': {
+    width: '100%',
+    fontSize: '18px',
+    lineHeight: '28px',
+  },
+})
 
-export const Image1 = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: 72px;
-  max-width: 652px;
-`;
+export const TextTitle = styled('h1', {
+  fontFamily: 'Value Serif',
+  fontSize: '30px',
+  lineHeight: '36px',
+  letterSpacing: '-0.1px',
+  color: '$text',
+  width: '80%',
 
-export const Image2 = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: 30px;
-  max-width: 652px;
-`;
+  '@media (max-width: 768px)': {
+    fontSize: '30px',
+    lineHeight: '36px',
+    letterSpacing: '-0.1px',
+    marginBottom: '2rem',
+    width: '100%',
+  },
 
-export const Image3 = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: 30px;
-`;
+  '@media (min-width: 769px)': {
+    fontSize: '40px',
+    lineHeight: '48px',
+    letterSpacing: '-0.5px',
+    marginBottom: '41px',
+  },
+})
 
-export const DesktopVideoHolder = styled.div`
-  position: relative;
-  width: 100%;
-  margin-top: 48px;
-  margin-bottom: 72px;
-  max-width: 652px;
-`;
+export const TextSupertitle = styled('div', {
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  opacity: 0.5,
+  color: '$black',
+  fontFamily: 'Space Mono',
+  textTransform: 'uppercase',
+  marginBottom: '1rem',
+  width: '80%',
 
-export const DesktopOnlyVideo = styled.video`
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
-  max-width: 652px;
-  z-index: 1;
-  @media (max-width: 568px) {
-    display: none;
-  }
-`;
+  '@media (max-width: 768px)': {
+    width: '100%',
+  },
+})
 
-export const DesktopFallbackImage = styled(GatsbyImage)`
+export const UL = styled('ul', {
+  marginTop: '24px',
+  marginBottom: '45px',
+  marginLeft: '32px',
+  width: 'calc(80% - 32px)',
+
+  '@media (max-width: 768px)': {
+    width: 'calc(100% - 32px)',
+  },
+})
+
+export const OL = styled('ol', {
+  marginTop: '24px',
+  marginBottom: '45px',
+  marginLeft: '32px',
+  width: 'calc(80% - 32px)',
+
+  '@media (max-width: 768px)': {
+    width: 'calc(100% - 32px)',
+  },
+})
+
+export const ListItem = styled('li', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  marginBottom: '18px',
+})
+
+export const ArticleLink = styled('a', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: 'inherit',
+  lineHeight: 'inherit',
+  paddingBottom: '2px',
+  borderBottom: '3px solid $colors$purpleLight',
+  transition: 'all 0.3s ease',
+
+  '&:hover': {
+    borderBottom: '3px solid $colors$primary',
+    color: '$primary',
+  },
+})
+
+export const HeaderLink = styled(ArticleLink, {
+  color: '$text',
+  fontFamily: 'inherit',
+})
+
+export const SiloScrollLink = styled(ScrollLink, {
+  textDecoration: 'none',
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: 'inherit',
+  lineHeight: 'inherit',
+  paddingBottom: '2px',
+  borderBottom: '3px solid $colors$purpleLight',
+  transition: 'all 0.3s ease',
+
+  '&:hover': {
+    borderBottom: '3px solid $colors$primary',
+    color: '$primary',
+    cursor: 'pointer',
+  },
+})
+
+export const StyledLink = styled('a', {
+  color: 'rgba(15, 12, 9, 0.5)',
+  cursor: 'pointer',
+
+  '&:hover': {
+    color: '$primary',
+  },
+})
+
+export const OutboundLink = styled('a', {
+  textDecoration: 'none',
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: 'inherit',
+  lineHeight: 'inherit',
+  paddingBottom: '2px',
+  borderBottom: '3px solid $colors$purpleLight',
+  transition: 'all 0.3s ease',
+
+  '&:hover': {
+    borderBottom: '3px solid $colors$primary',
+    color: '$primary',
+  },
+})
+
+export const TemplateLink = styled('a', {})
+
+export const StyledImageComponent = styled(Image, {
+  width: '100%',
+  marginBottom: '72px',
+})
+
+export const TemplateImage = styled(Image, {
+  maxWidth: '652px',
+})
+
+export const Image1 = styled(Image, {
+  width: '100%',
+  marginBottom: '72px',
+  maxWidth: '652px',
+})
+
+export const Image2 = styled(Image, {
+  width: '100%',
+  marginBottom: '30px',
+  maxWidth: '652px',
+})
+
+export const Image3 = styled(Image, {
+  width: '100%',
+  marginBottom: '30px',
+})
+
+export const DesktopVideoHolder = styled('div', {
+  position: 'relative',
+  width: '100%',
+  marginTop: '48px',
+  marginBottom: '72px',
+  maxWidth: '652px',
+})
+
+export const DesktopOnlyVideo = styled('video', {
+  position: 'relative',
+  top: 0,
+  left: 0,
+  width: '100%',
+  maxWidth: '652px',
+  zIndex: 1,
+
+  '@media (max-width: 568px)': {
+    display: 'none',
+  },
+})
+
+export const DesktopFallbackImage = styled(Image, {
   /* position: absolute; */
-  top: 0;
-  left: 0;
-  width: 100%;
-  max-width: 652px;
-  display: block;
-  @media (max-width: 568px) {
-    display: none;
-  }
-`;
+  top: 0,
+  left: 0,
+  width: '100%',
+  maxWidth: '652px',
+  display: 'block',
 
-export const MobileOnlyImage = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: 72px;
-  max-width: 652px;
-  @media (min-width: 569px) {
-    display: none !important;
-  }
-`;
+  '@media (max-width: 568px)': {
+    display: 'none',
+  },
+})
 
-export const ImageWithBorder = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: 72px;
-  border: 1px solid #c3c2c1;
-`;
+export const MobileOnlyImage = styled(Image, {
+  width: '100%',
+  marginBottom: '72px',
+  maxWidth: '652px',
 
-export const ImageWithBorder2 = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: 72px;
-  border: 1px solid #c3c2c1;
-`;
+  '@media (min-width: 569px)': {
+    display: 'none !important',
+  },
+})
 
-export const SmallImage = styled(GatsbyImage)`
-  width: 95%;
-  max-width: 542px;
-  margin-bottom: 36px;
-  &:hover {
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 8px 10px 0 rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-  }
-`;
+export const ImageWithBorder = styled(Image, {
+  width: '100%',
+  marginBottom: '72px',
+  border: '1px solid #c3c2c1',
+})
 
-export const SmallImage2 = styled(GatsbyImage)`
-  width: 100%;
-  max-width: 542px;
-  margin-bottom: 72px;
-  &:hover {
-    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 8px 10px 0 rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-  }
-`;
+export const ImageWithBorder2 = styled(Image, {
+  width: '100%',
+  marginBottom: '72px',
+  border: '1px solid #c3c2c1',
+})
 
-export const BGImageWrapper = styled.div`
-  @media (max-width: 568px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 70%;
-    flex: 0 0 70%;
-    max-width: 70%;
-    position: relative;
-    margin-left: auto;
-  }
-  @media (min-width: 569px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 40%;
-    flex: 0 0 40%;
-    max-width: 40%;
-    width: 40%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-`;
+export const SmallImage = styled(Image, {
+  width: '95%',
+  maxWidth: '542px',
+  marginBottom: '36px',
 
-export const BGImage = styled(GatsbyImage)`
-  width: 100%;
-  margin-bottom: -7px;
-`;
+  '&:hover': {
+    boxShadow:
+      '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 8px 10px 0 rgba(0, 0, 0, 0.25)',
+    cursor: 'pointer',
+  },
+})
 
-export const TextContainer = styled.div`
-  align-self: center;
-  @media (max-width: 768px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-    padding-top: 5%;
-    padding-left: 10%;
-    padding-right: 10%;
-    margin-bottom: 2rem;
-  }
-  @media (min-width: 769px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 50%;
-    width: 50%;
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-`;
+export const SmallImage2 = styled(Image, {
+  width: '100%',
+  maxWidth: '542px',
+  marginBottom: '72px',
 
-export const ImageContainer = styled.div`
-  display: flex;
-  min-height: 562px;
-  @media (max-width: 568px) {
-    display: block;
-  }
-  background-color: #0b236d;
-  position: relative;
-  margin-top: 54px;
-  margin-bottom: 72px;
-`;
+  '&:hover': {
+    boxShadow:
+      '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 8px 10px 0 rgba(0, 0, 0, 0.25)',
+    cursor: 'pointer',
+  },
+})
 
-export const Title = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 12px;
-  letter-spacing: 0px;
-  line-height: 18px;
-  color: #ffffff;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-`;
+export const BGImageWrapper = styled('div', {
+  '@media (max-width: 568px)': {
+    flex: '0 0 70%',
+    maxWidth: '70%',
+    position: 'relative',
+    marginLeft: 'auto',
+  },
 
-export const Headline = styled.div`
-  font-family: 'Value Serif';
-  font-size: 30px;
-  letter-spacing: -0.1px;
-  line-height: 36px;
-  color: #ffffff;
-  margin-bottom: 2rem;
-`;
+  '@media (min-width: 569px)': {
+    marginBottom: '0rem',
+    flex: '0 0 40%',
+    maxWidth: '40%',
+    width: '40%',
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+  },
+})
 
-export const Button = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 3rem;
-  padding-left: 10%;
-  padding-right: 10%;
-  border: 3px solid #603eff;
-  border-radius: 27px;
-  background-color: #603eff;
-  color: #ffffff;
-  cursor: pointer;
-  font-family: Apercu Pro;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.875rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  &:hover {
-    background-color: #4d32cc;
-    border: 3px solid #4d32cc;
-  }
-`;
+export const BGImage = styled(Image, {
+  width: '100%',
+  marginBottom: '-7px',
+})
 
-export const DefinitionHolder = styled.div`
-  background-color: #f9f9f9;
-  width: 80%;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-  h3 {
-    margin-bottom: 0px;
-    padding: 24px;
-    padding-bottom: 18px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  p:nth-child(2) {
-    font-size: 14px;
-    padding: 24px;
-    padding-top: 0px;
-    margin-bottom: 18px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  p:nth-child(3) {
-    font-style: italic;
-    font-size: 18px;
-    padding: 24px;
-    padding-top: 0px;
-    box-sizing: border-box;
-    width: 100%;
-  }
-`;
+export const TextContainer = styled('div', {
+  alignSelf: 'center',
 
-export const TemplatePreviewHolder = styled.div`
-  min-width: 200px;
-  min-height: 200px;
-  height: 815px;
-  position: relative;
-  margin-top: 2rem;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 8px 10px 0 rgba(0, 0, 0, 0.25);
-  cursor: default !important;
-  overflow: scroll;
-  @media (max-width: 770px) {
-    display: none;
-  }
-  &.solotemplate {
-    margin-bottom: 4rem;
-  }
-`;
+  '@media (max-width: 768px)': {
+    flex: '0 0 100%',
+    maxWidth: '100%',
+    paddingTop: '5%',
+    px: '10%',
+    marginBottom: '2rem',
+  },
 
-export const StaticPreviewImage = styled.img`
-  width: 100%;
-  margin-top: 2rem;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.25), 0 8px 10px 0 rgba(0, 0, 0, 0.25);
-`;
+  '@media (min-width: 769px)': {
+    flex: '0 0 50%',
+    maxWidth: '50%',
+    width: '50%',
+    px: '5%',
+  },
+})
 
-export const StaticTemplateLink = styled.a`
-  text-decoration: none;
-  cursor: pointer;
-  @media (min-width: 771px) {
-    display: none;
-  }
-`;
+export const ImageContainer = styled('div', {
+  display: 'flex',
+  minHeight: '562px',
 
-export const IframeWrapper = styled.div`
-  transition: 0.8s all ease;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  cursor: pointer;
-`;
+  '@media (max-width: 568px)': {
+    display: 'block',
+  },
+  // I have a feeling this is a typo. It's one letter off from our darkBlue token.
+  // It happens a few times throughout the codebase but the difference is almost negligible. Thoughts?
+  backgroundColor: '#0b236d',
+  position: 'relative',
+  marginTop: '54px',
+  marginBottom: '72px',
+})
 
-export const SmallHeadline = styled.div`
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
-  color: #0f0c09;
-  margin-bottom: 1rem;
-`;
+export const Title = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '12px',
+  letterSpacing: '0px',
+  lineHeight: '18px',
+  color: '$white',
+  my: '2rem',
+})
 
-export const PurpleText = styled.span`
-  color: #603eff;
-`;
+export const Headline = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '30px',
+  letterSpacing: '-0.1px',
+  lineHeight: '36px',
+  color: '$white',
+  marginBottom: '2rem',
+})
+
+export const Button = styled('a', {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  height: '3rem',
+  px: '10%',
+  border: '3px solid $colors$primary',
+  borderRadius: '27px',
+  backgroundColor: '$primary',
+  color: '$white',
+  cursor: 'pointer',
+  fontFamily: 'Apercu Pro',
+  fontSize: '1rem',
+  fontWeight: 500,
+  lineHeight: '1.875rem',
+  textDecoration: 'none',
+  transition: 'all 0.3s ease',
+
+  '&:hover': {
+    backgroundColor: '$indigoDark',
+    border: '3px solid $colors$indigoDark',
+  },
+})
+
+export const DefinitionHolder = styled('div', {
+  backgroundColor: '$gray',
+  width: '80%',
+
+  '@media (max-width: 768px)': {
+    width: '100%',
+  },
+
+  h3: {
+    marginBottom: '0px',
+    padding: '24px',
+    paddingBottom: '18px',
+    width: '100%',
+    boxSizing: 'border-box',
+  },
+
+  '& p:nth-child(2)': {
+    fontSize: '14px',
+    padding: '24px',
+    paddingTop: '0px',
+    marginBottom: '18px',
+    width: '100%',
+    boxSizing: 'border-box',
+  },
+
+  '& p:nth-child(3)': {
+    fontStyle: 'italic',
+    fontSize: '18px',
+    padding: '24px',
+    paddingTop: '0px',
+    boxSizing: 'border-box',
+    width: '100%',
+  },
+})
+
+export const TemplatePreviewHolder = styled('div', {
+  width: '200px',
+  height: '815px',
+  position: 'relative',
+  marginTop: '2rem',
+  boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 8px 10px 0 rgba(0, 0, 0, 0.25)',
+  cursor: 'default !important',
+  overflow: 'scroll',
+
+  '@media (max-width: 770px)': {
+    display: 'none',
+  },
+
+  '&.solotemplate': {
+    marginBottom: '4rem',
+  },
+})
+
+export const StaticPreviewImage = styled('img', {
+  width: '100%',
+  marginTop: '2rem',
+  boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25), 0 8px 10px 0 rgba(0, 0, 0, 0.25)',
+})
+
+export const StaticTemplateLink = styled('a', {
+  '@media (min-width: 771px)': {
+    display: 'none',
+  },
+})
+
+export const IframeWrapper = styled('div', {
+  transition: '0.8s all ease',
+  width: '100%',
+  height: '100%',
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  overflow: 'hidden',
+  cursor: 'pointer',
+})
+
+export const SmallHeadline = styled('div', {
+  fontWeight: 500,
+  fontSize: '18px',
+  lineHeight: '24px',
+  color: '$text',
+  marginBottom: '1rem',
+})
+
+export const PurpleText = styled('span', {
+  color: '$primary',
+})
