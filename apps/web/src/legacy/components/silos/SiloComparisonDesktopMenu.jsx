@@ -293,7 +293,7 @@ const SiloComparisonDesktopMenu = ({
           <DesktopSubMenuTextContainer>
             <SubMenuFlexbox>
               <ColumnContainer>
-                <SiloCompareImage competitorImage={competitorImage.src} />
+                <SiloCompareImage competitorImage={competitorImage} />
                 <Link href="/comparisons">
                   <a>
                     <BackToContainer>

@@ -44,7 +44,7 @@ export const bottomNavigationData = {
     nextUrl: '/comparisons/leadpages-vs-instapage',
     nextTitle: 'Leadpages vs Instapage',
   },
-};
+}
 
 export const pageLinks = [
   {
@@ -101,7 +101,7 @@ export const pageLinks = [
       },
     ],
   },
-];
+]
 
 export const overridePromoContent = {
   promoImageAlt: 'Landing page builder',
@@ -112,4 +112,4 @@ export const overridePromoContent = {
   linkAlt: 'Landing page builder',
   externalLink: false,
   buttonText: 'Try Leadpages free for 14 days',
-};
+}
