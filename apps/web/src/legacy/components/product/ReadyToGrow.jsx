@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@design'
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Link as ScrollLink } from 'react-scroll'
 // images
 import PlayButtonSVG from '@legacy/assets/images/global/play-button_purple.svg'
@@ -122,7 +122,7 @@ const PlayButtonIcon = styled('div', {
     'brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7478%) hue-rotate(186deg) brightness(114%) contrast(100%)',
 })
 
-const BGImage = styled('div', {
+const BGImage = styled('img', {
   position: 'absolute',
   inset: 0,
   z: '$content',
@@ -184,9 +184,7 @@ const ReadyToGrow = ({
       css={{ ...RTGContainerPadding, ...RTGBackground, ...RTGZindex }}
     >
       {bgImage && (
-        <BGImage>
-          <Image image={bgImage} alt="background svg squiggly line" />
-        </BGImage>
+        <BGImage src={bgImage.src} alt="background svg squiggly line" />
       )}
       <RTGTitle>{title}</RTGTitle>
       <RTGHeadline css={RTGHeadlineCss}>

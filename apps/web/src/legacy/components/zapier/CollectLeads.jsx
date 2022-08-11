@@ -1,232 +1,209 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import Image from '@components/Image'
+import useImageParser from '@hooks/useImageParser'
+// images
+import LeadpagesIcon from '@legacy/assets/images/integrations/Leadpages-Leadpages-Zapier@2x.jpg'
+import ZapierIcon from '@legacy/assets/images/integrations/zapierlogo_50px@2x.png'
+import IntegrationsIcon from '@legacy/assets/images/integrations/Infinite-Integrations@2x.jpg'
 
-const OuterContainer = styled.div`
-  position: relative;
-  background-color: #f7f7f7;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  backgroundColor: '$grayAlt',
+})
 
-const LPUContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 4rem;
-  padding-bottom: 12rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 576px) {
-    padding-top: 4rem;
-    padding-bottom: 10rem;
-    padding-right: 3rem;
-    padding-left: 3rem;
-  }
-  @media (min-width: 992px) {
-    padding-top: 10rem;
-    padding-bottom: 6rem;
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const LPUContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  paddingTop: '4rem',
+  paddingBottom: '12rem',
+  px: '3rem',
 
-const Headline = styled.div`
-  font-family: 'Value Serif';
-  font-size: 2.5rem;
-  letter-spacing: -0.03125rem;
-  line-height: 3rem;
-  text-align: center;
-  margin-bottom: 6rem;
-  color: #0f0c09;
+  '@>s': {
+    paddingBottom: '10rem',
+  },
 
-  @media (max-width: 767px) {
-    margin-bottom: 3rem;
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-  }
-`;
+  '@>m': {
+    paddingTop: '10rem',
+    paddingBottom: '6rem',
+    px: '6rem',
+  },
+})
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-`;
+const Headline = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '2.5rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '3rem',
+  textAlign: 'center',
+  marginBottom: '6rem',
+  color: '$text',
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-  margin-left: auto;
-  margin-right: auto;
-  align-self: flex-start;
-`;
+  '@media (max-width: 767px)': {
+    marginBottom: '3rem',
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+  },
+})
 
-const FlexRow3 = styled(FlexRowItem)`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  max-width: 23.3333%;
-  margin-bottom: 0;
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-`;
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+})
 
-const FlexRow3Container = styled.div`
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  min-height: 158px;
-`;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+  mx: 'auto',
+  alignSelf: 'flex-start',
+})
 
-const SVGIcon = styled.img`
-  max-width: 158px;
-  max-height: 158px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2rem;
-`;
+const FlexRow3 = styled(FlexRowItem, {
+  display: 'flex',
+  justifyContent: 'space-between',
+  maxWidth: '23.3333%',
+  marginBottom: 0,
 
-const ImageIcon = styled(GatsbyImage)`
-  width: 100%;
-  height: 100%;
-  max-width: 158px;
-  max-height: 158px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2rem;
-`;
+  '@media (max-width: 768px)': {
+    maxWidth: '100%',
+  },
+})
 
-const FlexRow3Heading = styled.div`
-  font-family: 'Apercu Pro';
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #0f0c09;
-  @media (max-width: 768px) {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0px;
-  }
+const FlexRow3Container = styled('div', {
+  textAlign: 'center',
+  mx: 'auto',
+  minHeight: '158px',
+})
 
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: 0px;
-  }
+const ImageIcon = styled(Image, {
+  width: '100%',
+  height: '100%',
+  display: 'block',
+  mx: 'auto',
+  marginBottom: '2rem',
+})
 
-  @media (min-width: 993px) {
-    font-size: 22px;
-    line-height: 36px;
-    letter-spacing: 0px;
-  }
-`;
+const FlexRow3Heading = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontWeight: 500,
+  textAlign: 'center',
+  marginBottom: '2rem',
+  color: '$text',
 
-const FlexRow3Copy = styled.div`
-  font-family: 'Apercu Pro';
-  text-align: center;
-  margin-bottom: 1.25rem;
-  color: #575452;
+  '@media (max-width: 768px)': {
+    fontSize: '16px',
+    lineHeight: '24px',
+    letterSpacing: '0px',
+  },
 
-  @media (max-width: 768px) {
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0px;
-  }
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '18px',
+    lineHeight: '28px',
+    letterSpacing: '0px',
+  },
 
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0px;
-  }
+  '@media (min-width: 993px)': {
+    fontSize: '22px',
+    lineHeight: '36px',
+    letterSpacing: '0px',
+  },
+})
 
-  @media (min-width: 993px) {
-    font-size: 18px;
-    line-height: 28px;
-    letter-spacing: 0px;
-  }
-`;
+const FlexRow3Copy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  textAlign: 'center',
+  marginBottom: '1.25rem',
+  color: '$textAlt',
 
-const Character = styled.div`
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  margin-right: 10px;
-  color: #bfbebd;
-  font-size: 80px;
-  @media (max-width: 768px) {
-    margin-left: auto;
-    margin-right: auto;
-  }
-`;
+  '@media (max-width: 768px)': {
+    fontSize: '14px',
+    lineHeight: '20px',
+    letterSpacing: '0px',
+  },
+
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '16px',
+    lineHeight: '24px',
+    letterSpacing: '0px',
+  },
+
+  '@media (min-width: 993px)': {
+    fontSize: '18px',
+    lineHeight: '28px',
+    letterSpacing: '0px',
+  },
+})
+
+const Character = styled('div', {
+  display: 'inline-block',
+  verticalAlign: 'middle',
+  mx: '10px',
+  color: '$darkGray',
+  fontSize: '80px',
+
+  '@media (max-width: 768px)': {
+    mx: 'auto',
+  },
+})
 
 const CollectLeads = () => {
-  const images = useStaticQuery(graphql`
-    query CollectLeadsQuery {
-      LeadpagesIcon: file(
-        relativePath: { eq: "assets/images/integrations/Leadpages-Leadpages-Zapier@2x.jpg" }
-      ) {
-        ...fixed
-      }
-      ZapierIcon: file(relativePath: { eq: "assets/images/integrations/zapierlogo_50px@2x.png" }) {
-        ...fixed
-      }
-      IntegrationsIcon: file(
-        relativePath: { eq: "assets/images/integrations/Infinite-Integrations@2x.jpg" }
-      ) {
-        ...fixed
-      }
-    }
-  `);
+  const collectLeadsData = [
+    {
+      image: LeadpagesIcon,
+      heading: 'Leadpages',
+      copy: 'Easily build stunning webpages and campaigns to capture leads and convert customers.',
+      character: '+',
+    },
+    {
+      image: ZapierIcon,
+      heading: 'Zapier',
+      copy: 'Instantly move info between your web apps and trigger automatic actions.',
+      character: '=',
+    },
+    {
+      image: IntegrationsIcon,
+      heading: 'Infinite Integrations',
+      copy: 'Send leads to your favorite web apps—and get endless lead nurture possibilities.',
+    },
+  ]
+
   return (
     <OuterContainer>
       <LPUContainer>
         <Headline>Collect leads + connect to powerful workflows</Headline>
         <FlexRow>
-          <FlexRow3>
-            <FlexRow3Container>
-              <ImageIcon image={getImage(images.LeadpagesIcon)} alt="Leadpage Icon" />
-              <FlexRow3Heading>Leadpages</FlexRow3Heading>
-              <FlexRow3Copy>
-                Easily build stunning webpages and campaigns to capture leads and convert customers.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
-          <Character>+</Character>
-          <FlexRow3>
-            <FlexRow3Container>
-              <ImageIcon image={getImage(images.ZapierIcon)} alt="Zapier Icon" />
-              <FlexRow3Heading>Zapier</FlexRow3Heading>
-              <FlexRow3Copy>
-                Instantly move info between your web apps and trigger automatic actions.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
-          <Character>=</Character>
-          <FlexRow3>
-            <FlexRow3Container>
-              <ImageIcon
-                image={getImage(images.IntegrationsIcon)}
-                alt="Leadpages Integrations Icons"
-              />
-              <FlexRow3Heading>Infinite Integrations</FlexRow3Heading>
-              <FlexRow3Copy>
-                Send leads to your favorite web apps—and get endless lead nurture possibilities.
-              </FlexRow3Copy>
-            </FlexRow3Container>
-          </FlexRow3>
+          {collectLeadsData.map(({ image, heading, copy, character }) => {
+            const { height, width } = useImageParser(image)
+            const maxSize = 158
+            const css =
+              height <= maxSize
+                ? { maxWidth: width, maxHeight: height }
+                : { maxWidth: maxSize, maxHeight: maxSize }
+
+            return (
+              <>
+                <FlexRow3 key={heading}>
+                  <FlexRow3Container>
+                    <ImageIcon image={image} alt="Leadpage Icon" css={css} />
+                    <FlexRow3Heading>{heading}</FlexRow3Heading>
+                    <FlexRow3Copy>{copy}</FlexRow3Copy>
+                  </FlexRow3Container>
+                </FlexRow3>
+                {character && <Character>{character}</Character>}
+              </>
+            )
+          })}
         </FlexRow>
       </LPUContainer>
     </OuterContainer>
-  );
-};
+  )
+}
 
-export default CollectLeads;
+export default CollectLeads

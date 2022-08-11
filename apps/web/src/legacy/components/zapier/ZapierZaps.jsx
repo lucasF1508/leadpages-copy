@@ -1,229 +1,206 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Image from '@components/Image'
 
-const OuterContainer = styled.div`
-  position: relative;
-  background-color: #f7f7f7;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  backgroundColor: '$grayAlt',
+})
 
-const Container = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 6rem;
-  padding-bottom: 3rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  text-align: center;
-  @media (min-width: 576px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-  }
-`;
+const Container = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  paddingTop: '6rem',
+  paddingBottom: '3rem',
+  px: '3rem',
+  textAlign: 'center',
 
-const InnerContainer = styled.div`
-  position: relative;
-  z-index: 2;
-`;
+  '@>s': {
+    px: '6rem',
+    paddingTop: '10rem',
+    paddingBottom: '10rem',
+  },
+})
 
-const Subtitle = styled.div`
-  font-family: 'Space Mono';
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-align: center;
-  text-transform: uppercase;
-  opacity: 0.5;
-  margin-bottom: 0.5rem;
-`;
+const InnerContainer = styled('div', {
+  position: 'relative',
+  zIndex: 2,
+})
 
-const Headline = styled.div`
-  font-family: 'Value Serif';
-  font-size: 2.5rem;
-  letter-spacing: -0.03125rem;
-  line-height: 3rem;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #0f0c09;
+const Subtitle = styled('div', {
+  fontFamily: 'Space Mono',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  textAlign: 'center',
+  textTransform: 'uppercase',
+  opacity: 0.5,
+  marginBottom: '0.5rem',
+})
 
-  @media (max-width: 767px) {
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    letter-spacing: 0;
-  }
-`;
+const Headline = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '2.5rem',
+  letterSpacing: '-0.03125rem',
+  lineHeight: '3rem',
+  textAlign: 'center',
+  marginBottom: '1.5rem',
+  color: '$text',
 
-const Footnote = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 12px;
-  line-height: 18px;
-  color: #575452;
-  text-align: center;
-`;
+  '@media (max-width: 767px)': {
+    fontSize: '1.5rem',
+    lineHeight: '1.75rem',
+    letterSpacing: 0,
+  },
+})
 
-const Flexbox = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  text-align: center;
-`;
+const Footnote = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '12px',
+  lineHeight: '18px',
+  color: '$textAlt',
+  textAlign: 'center',
+})
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 2%;
-  padding-right: 2%;
-`;
+const Flexbox = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  marginBottom: '2rem',
+  flexWrap: 'wrap',
+  textAlign: 'center',
+})
 
-const FlexRowLeft = styled(FlexRowItem)`
-  justify-content: space-between;
-  text-align: center;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 80%;
-    flex: 0 0 80%;
-    max-width: 80%;
-  }
-  @media (min-width: 768px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 44%;
-    flex: 0 0 44%;
-    max-width: 44%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 29%;
-    flex: 0 0 29%;
-    max-width: 29%;
-  }
-`;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  px: '2%',
+})
 
-const LogosContainer = styled.div`
-  width: 100%;
-  margin-top: 2rem;
-  text-align: center;
-  height: 48px;
+const FlexRowLeft = styled(FlexRowItem, {
+  justifyContent: 'space-between',
+  textAlign: 'center',
 
-  &::before {
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    height: 0;
-  }
-`;
+  '@>s': {
+    flex: '0 0 80%',
+    maxWidth: '80%',
+  },
 
-const FlexRowMiddle = styled(FlexRowItem)`
-  text-align: center;
-  align-self: center;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 80%;
-    flex: 0 0 80%;
-    max-width: 80%;
-  }
-  @media (min-width: 768px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 44%;
-    flex: 0 0 44%;
-    max-width: 44%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 29%;
-    flex: 0 0 29%;
-    max-width: 29%;
-    text-align: center;
-  }
-`;
+  '@media (min-width: 768px)': {
+    flex: '0 0 44%',
+    maxWidth: '44%',
+  },
 
-const FlexRowRight = styled(FlexRowItem)`
-  text-align: center;
-  align-self: center;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 80%;
-    flex: 0 0 80%;
-    max-width: 80%;
-  }
-  @media (min-width: 768px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 44%;
-    flex: 0 0 44%;
-    max-width: 44%;
-  }
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 29%;
-    flex: 0 0 29%;
-    max-width: 29%;
-    text-align: center;
-  }
-`;
+  '@>m': {
+    marginBottom: '0rem',
+    flex: '0 0 29%',
+    maxWidth: '29%',
+  },
+})
 
-const FeaturesContainer = styled.div`
-  margin-bottom: 2rem;
-`;
+const LogosContainer = styled('div', {
+  width: '100%',
+  marginTop: '2rem',
+  textAlign: 'center',
+  height: '48px',
 
-const FeatureContainer = styled.div`
-  position: relative;
-  margin-bottom: 0.5rem;
-  display: block;
-`;
+  '&::before': {
+    content: '',
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    height: 0,
+  },
+})
 
-const Feature = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  color: #575452;
-  margin-bottom: 0.5rem;
-  margin-top: 2rem;
-`;
+const FlexRowMiddle = styled(FlexRowItem, {
+  textAlign: 'center',
+  alignSelf: 'center',
 
-const SVGIcon = styled.img`
-  width: 48px;
-  height: 48px;
-  display: inline-block;
-  vertical-align: middle;
-`;
+  '@>s': {
+    flex: '0 0 80%',
+    maxWidth: '80%',
+  },
 
-const ImageIcon = styled(GatsbyImage)`
-  height: 100%;
-  width: 100%;
-  max-width: 48px;
-  max-height: 48px;
-  display: inline-block;
-  vertical-align: middle;
-`;
+  '@media (min-width: 768px)': {
+    flex: '0 0 44%',
+    maxWidth: '44%',
+  },
 
-const Character = styled.div`
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  margin-right: 10px;
-  color: #bfbebd;
-  font-size: 20px;
-`;
+  '@>m': {
+    marginBottom: 0,
+    flex: '0 0 29%',
+    maxWidth: '29%',
+  },
+})
 
-const RightArrow = styled.img`
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  margin-right: 10px;
-  color: #bfbebd;
-  width: 12px;
-  height: 12px;
-`;
+const FlexRowRight = styled(FlexRowItem, {
+  textAlign: 'center',
+  alignSelf: 'center',
+
+  '@>s': {
+    flex: '0 0 80%',
+    maxWidth: '80%',
+  },
+
+  '@media (min-width: 768px)': {
+    flex: '0 0 44%',
+    maxWidth: '44%',
+  },
+
+  '@>m': {
+    marginBottom: '0rem',
+    flex: '0 0 29%',
+    maxWidth: '29%',
+  },
+})
+
+const FeaturesContainer = styled('div', {
+  marginBottom: '2rem',
+})
+
+const FeatureContainer = styled('div', {
+  position: 'relative',
+  marginBottom: '0.5rem',
+  display: 'block',
+})
+
+const Feature = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  color: '$textAlt',
+  marginBottom: '0.5rem',
+  marginTop: '2rem',
+})
+
+const ImageIcon = styled(Image, {
+  height: '100%',
+  width: '100%',
+  maxWidth: '48px',
+  maxHeight: '48px',
+  display: 'inline-block',
+  verticalAlign: 'middle',
+})
+
+const Character = styled('div', {
+  display: 'inline-block',
+  verticalAlign: 'middle',
+  mx: '10px',
+  color: '$darkGray',
+  fontSize: '20px',
+})
+
+const RightArrow = styled('img', {
+  display: 'inline-block',
+  verticalAlign: 'middle',
+  mx: '10px',
+  color: '$darkGray',
+  width: '12px',
+  height: '12px',
+})
 
 const ZapierZaps = ({
   leadpagesIcon,
@@ -244,7 +221,7 @@ const ZapierZaps = ({
           <FlexRowLeft>
             <LogosContainer>
               <ImageIcon image={leadpagesIcon} alt="Leadpages Icon" />
-              <RightArrow src={rightArrowIcon} />
+              <RightArrow src={rightArrowIcon.src} />
               <ImageIcon image={hubspotIcon} alt="Hubspot Icon" />
               <Character>+</Character>
               <ImageIcon image={dripIcon} alt="Drip Icon" />
@@ -252,8 +229,8 @@ const ZapierZaps = ({
             <FeaturesContainer>
               <FeatureContainer>
                 <Feature>
-                  Capture leads, update your Hubspot CRM contacts, and engage them with automated
-                  Drip emails
+                  Capture leads, update your Hubspot CRM contacts, and engage
+                  them with automated Drip emails
                 </Feature>
               </FeatureContainer>
             </FeaturesContainer>
@@ -261,7 +238,7 @@ const ZapierZaps = ({
           <FlexRowMiddle>
             <LogosContainer>
               <ImageIcon image={leadpagesIcon} alt="Leadpages Icon" />
-              <RightArrow src={rightArrowIcon} />
+              <RightArrow src={rightArrowIcon.src} />
               <ImageIcon image={sheetsIcon} alt="Sheets Icon" />
               <Character>+</Character>
               <ImageIcon image={slackIcon} alt="Slack Icon" />
@@ -269,8 +246,8 @@ const ZapierZaps = ({
             <FeaturesContainer>
               <FeatureContainer>
                 <Feature>
-                  Record Leadpages form submissions in a Google Sheet and send a Slack notification
-                  to your sales team
+                  Record Leadpages form submissions in a Google Sheet and send a
+                  Slack notification to your sales team
                 </Feature>
               </FeatureContainer>
             </FeaturesContainer>
@@ -278,7 +255,7 @@ const ZapierZaps = ({
           <FlexRowRight>
             <LogosContainer>
               <ImageIcon image={leadpagesIcon} alt="Leadpages Icon" />
-              <RightArrow src={rightArrowIcon} />
+              <RightArrow src={rightArrowIcon.src} />
               <ImageIcon image={demioIcon} alt="Demio Icon" />
               <Character>+</Character>
               <ImageIcon image={mailchimpIcon} alt="Mailchimp Icon" />
@@ -286,21 +263,21 @@ const ZapierZaps = ({
             <FeaturesContainer>
               <FeatureContainer>
                 <Feature>
-                  Sign-up new leads as Demio webinar registrants and send instant nurture emails
-                  with Mailchimp
+                  Sign-up new leads as Demio webinar registrants and send
+                  instant nurture emails with Mailchimp
                 </Feature>
               </FeatureContainer>
             </FeaturesContainer>
           </FlexRowRight>
         </Flexbox>
         <Footnote>
-          Mutli-step Zaps are a premium feature on Zapier and require a paid Zapier plan starting at
-          $20/month.
+          Mutli-step Zaps are a premium feature on Zapier and require a paid
+          Zapier plan starting at $20/month.
         </Footnote>
       </InnerContainer>
     </Container>
   </OuterContainer>
-);
+)
 
 ZapierZaps.propTypes = {
   demioIcon: PropTypes.object.isRequired,
@@ -311,6 +288,6 @@ ZapierZaps.propTypes = {
   rightArrowIcon: PropTypes.node.isRequired,
   sheetsIcon: PropTypes.object.isRequired,
   slackIcon: PropTypes.object.isRequired,
-};
+}
 
-export default ZapierZaps;
+export default ZapierZaps

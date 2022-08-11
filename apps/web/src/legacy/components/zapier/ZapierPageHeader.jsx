@@ -1,181 +1,162 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { GATSBY_IMAGE } from '../../constants/types';
-import styled from 'styled-components';
+import React from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import Image from '@components/Image'
+import Link from 'next/link'
 
-const OuterContainer = styled.div`
-  margin-top: -60px;
-  padding-top: 108px;
-  position: relative;
-`;
+const OuterContainer = styled('div', {
+  marginTop: '-60px',
+  paddingTop: '108px',
+  position: 'relative',
+})
 
-const HeaderContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-right: 2rem;
-  padding-left: 2rem;
-  @media (min-width: 992px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-  z-index: 2;
-`;
+const HeaderContainer = styled('div', {
+  maxWidth: '1140px',
+  mx: 'auto',
+  px: '2rem',
+  zIndex: 2,
 
-const FlexRow = styled.div`
-  padding-top: 3rem;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  width: 100%;
-`;
+  '@>m': {
+    px: '6rem',
+  },
+})
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
-`;
+const FlexRow = styled('div', {
+  paddingTop: '3rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  flexWrap: 'wrap',
+  width: '100%',
+})
 
-const FlexRowLeft = styled(FlexRowItem)`
-  justify-content: space-between;
-  text-align: left;
-  margin-bottom: 4rem;
-  @media (max-width: 575px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 40.6666%;
-    flex: 0 0 40.6666%;
-    max-width: 40.6666%;
-  }
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textAlign: 'center',
+  textDecoration: 'none',
+  width: '100%',
+  px: '1%',
+})
 
-  @media (min-width: 992px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 45%;
-    flex: 0 0 45%;
-    max-width: 45%;
-  }
-`;
-const HeaderImgLeft = styled.div`
-  width: 100%;
-`;
+const FlexRowLeft = styled(FlexRowItem, {
+  justifyContent: 'space-between',
+  textAlign: 'left',
+  marginBottom: '4rem',
+  flex: '0 0 100%',
+  maxWidth: '100%',
 
-const FlexRowRight = styled(FlexRowItem)`
-  text-align: left;
-  align-self: flex-end;
-  @media (min-width: 576px) {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 45%;
-    flex: 0 0 45%;
-    max-width: 45%;
-  }
+  '@>s': {
+    flex: '0 0 40.6666%',
+    maxWidth: '40.6666%',
+  },
 
-  @media (min-width: 992px) {
-    margin-bottom: 0rem;
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 45%;
-    flex: 0 0 45%;
-    max-width: 45%;
-    text-align: left;
-  }
-`;
+  '@>m': {
+    flex: '0 0 45%',
+    maxWidth: '45%',
+  },
+})
 
-const SmallHeading = styled.div`
-  font-family: 'Space Mono';
-  opacity: 0.5;
-  color: #000000;
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-transform: uppercase;
-`;
+const HeaderImgLeft = styled('div', {
+  width: '100%',
+})
 
-const LeftHeading = styled.div`
-  margin-top: 1rem;
-  font-family: 'Value Serif';
-  font-size: 28px;
-  line-height: 34px;
-  letter-spacing: 0px;
-  color: #0f0c09;
-  margin-bottom: 2rem;
-  @media (max-width: 768px) {
-    font-size: 28px;
-    line-height: 34px;
-    letter-spacing: 0;
-  }
+const FlexRowRight = styled(FlexRowItem, {
+  textAlign: 'left',
+  alignSelf: 'flex-end',
 
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 40px;
-    line-height: 48px;
-    letter-spacing: -0.5px;
-  }
+  '@>s': {
+    flex: '0 0 45%',
+    maxWidth: '45%',
+  },
 
-  @media (min-width: 993px) {
-    font-size: 56px;
-    line-height: 60px;
-    letter-spacing: 0;
-  }
-`;
+  '@>m': {
+    marginBottom: 0,
+  },
+})
 
-const LeftSubHeading = styled.div`
-  color: #575452;
-  font-family: 'Apercu Pro';
-  font-size: 1.125rem;
-  line-height: 1.875rem;
-  margin-bottom: 2rem;
-  @media (max-width: 576px) {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-`;
+const SmallHeading = styled('div', {
+  fontFamily: 'Space Mono',
+  opacity: 0.5,
+  color: '$black',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  textTransform: 'uppercase',
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  cursor: pointer;
-`;
+const LeftHeading = styled('div', {
+  marginTop: '1rem',
+  fontFamily: 'Value Serif',
+  fontSize: '28px',
+  lineHeight: '34px',
+  letterSpacing: '0px',
+  color: '$text',
+  marginBottom: '2rem',
 
-const RTGButtonContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
+  '@media (max-width: 768px)': {
+    fontSize: '28px',
+    lineHeight: '34px',
+    letterSpacing: 0,
+  },
 
-const RTGButton = styled.button`
-  width: 278px;
-  height: 48px;
-  border-radius: 48px;
-  border: 3px solid #603eff;
-  background-color: #603eff;
-  color: #ffffff;
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 30px;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '40px',
+    lineHeight: '48px',
+    letterSpacing: '-0.5px',
+  },
 
-  @media (max-width: 340px) {
-    width: 240px;
-    font-size: 16px;
-    align-self: center;
-  }
+  '@media (min-width: 993px)': {
+    fontSize: '56px',
+    lineHeight: '60px',
+    letterSpacing: 0,
+  },
+})
 
-  &:hover {
-    background-color: #4d32cc;
-    border: 3px solid #4d32cc;
-  }
-`;
+const LeftSubHeading = styled('div', {
+  color: '$textAlt',
+  fontFamily: 'Apercu Pro',
+  fontSize: '1.125rem',
+  lineHeight: '1.875rem',
+  marginBottom: '2rem',
+
+  '@<s': {
+    fontSize: '1rem',
+    lineHeight: '1.5rem',
+  },
+})
+
+const RTGButtonContainer = styled('div', {
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+})
+
+const RTGButton = styled('button', {
+  width: '278px',
+  height: '48px',
+  borderRadius: '48px',
+  border: '3px solid $colors$primary',
+  backgroundColor: '$primary',
+  color: '$white',
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  fontWeight: 500,
+  lineHeight: '30px',
+  textAlign: 'center',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+
+  '@<xs': {
+    width: '240px',
+    fontSize: '16px',
+    alignSelf: 'center',
+  },
+
+  '&:hover': {
+    backgroundColor: '$indigoDark',
+    border: '3px solid $colors$indigoDark',
+  },
+})
 
 const ZapierPageHeader = ({ image, imageAltText }) => (
   <OuterContainer>
@@ -187,32 +168,34 @@ const ZapierPageHeader = ({ image, imageAltText }) => (
             <h1>Send your leads to the tools you love</h1>
           </LeftHeading>
           <LeftSubHeading>
-            Easily collect leads on your Leadpages site, landing pages, pop-ups, and alert bars,
-            then let the data flow to 1400+ apps through Zapier.
+            Easily collect leads on your Leadpages site, landing pages, pop-ups,
+            and alert bars, then let the data flow to 1400+ apps through Zapier.
           </LeftSubHeading>
           <RTGButtonContainer>
-            <StyledLink to="/pricing" alt="Leadpages Free Trial">
-              <RTGButton>Try It Free</RTGButton>
-            </StyledLink>
+            <Link href="/pricing" aria-label="Leadpages Free Trial">
+              <a>
+                <RTGButton>Try It Free</RTGButton>
+              </a>
+            </Link>
           </RTGButtonContainer>
         </FlexRowLeft>
         <FlexRowRight>
           <HeaderImgLeft>
-            <GatsbyImage image={image} alt={imageAltText} />
+            <Image image={image} alt={imageAltText} />
           </HeaderImgLeft>
         </FlexRowRight>
       </FlexRow>
     </HeaderContainer>
   </OuterContainer>
-);
+)
 
 ZapierPageHeader.defaultProps = {
   imageAltText: 'Zapier header background',
-};
+}
 
 ZapierPageHeader.propTypes = {
-  image: GATSBY_IMAGE.isRequired,
+  image: Image.isRequired,
   imageAltText: PropTypes.string,
-};
+}
 
-export default ZapierPageHeader;
+export default ZapierPageHeader

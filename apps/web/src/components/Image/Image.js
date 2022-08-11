@@ -110,11 +110,11 @@ const Image = ({
     <$Figure
       ref={ref}
       className={className}
+      width={width}
+      height={height}
       type={type}
       shape={shape}
       css={css}
-      width={width}
-      height={height}
       {...props}
     >
       <NextImage

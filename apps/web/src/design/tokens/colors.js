@@ -24,6 +24,7 @@ export const colors = {
   gray: '#f9f9f9',
   grayAlt: '#f7f7f7',
   lightGray: '#edecec',
+  darkGray: '#bfbebd',
   tan: '#fef9f1',
   black: '#000000',
   purple: '#603eff',
