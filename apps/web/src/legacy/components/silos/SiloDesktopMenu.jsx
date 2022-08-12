@@ -3,6 +3,8 @@ import { styled } from '@design'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import { Link as ScrollLink } from 'react-scroll'
+import { useRouter } from 'next/router'
+
 // Assets
 import closeMenuIcon from '@legacy/assets/images/global/x_close.svg'
 import downArrowIcon from '@legacy/assets/images/global/arrow_down_large.svg'
@@ -160,6 +162,7 @@ const SiloDesktopMenu = ({
 }) => {
   const [showDesktopMenuBar, setShowDesktopMenuBar] = useState(false)
   const [showDesktopSubMenu, setShowDesktopSubMenu] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -243,6 +246,9 @@ const SiloDesktopMenu = ({
                             onClick={() => handleRouteClick()}
                             aria-label={pageName}
                             css={{ textDecoration: 'none' }}
+                            className={
+                              router.pathname === pageUrl ? 'activeRoute' : ''
+                            }
                           >
                             {pageName}
                           </ColumnLink>

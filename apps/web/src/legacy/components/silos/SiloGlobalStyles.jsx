@@ -478,9 +478,7 @@ export const ImageContainer = styled('div', {
   '@media (max-width: 568px)': {
     display: 'block',
   },
-  // I have a feeling this is a typo. It's one letter off from our darkBlue token.
-  // It happens a few times throughout the codebase but the difference is almost negligible. Thoughts?
-  backgroundColor: '#0b236d',
+  backgroundColor: '$darkBlue',
   position: 'relative',
   marginTop: '54px',
   marginBottom: '72px',

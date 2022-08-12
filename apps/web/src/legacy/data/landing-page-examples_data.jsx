@@ -7,7 +7,7 @@ export const verbiage = {
     title_closed: 'Landing Page Examples',
     title_open: 'Landing Page Examples',
   },
-};
+}
 
 export const pageRoutes = [
   {
@@ -46,4 +46,4 @@ export const pageRoutes = [
       },
     ],
   },
-];
+]

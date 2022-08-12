@@ -3,6 +3,7 @@ import { styled } from '@design'
 import Link from 'next/link'
 import { Link as ScrollLink } from 'react-scroll'
 import PropTypes from 'prop-types'
+import { useRouter } from 'next/router'
 // Assets
 import closeMenuIcon from '@legacy/assets/images/global/x_close.svg'
 import downArrowIcon from '@legacy/assets/images/global/arrow_down_large.svg'
@@ -173,6 +174,7 @@ const StyledScrollLink = styled(ScrollLink, {
 const SiloMobileMenu = ({ pageRoutes, verbiage, useScrollLink }) => {
   const [showMobileMenuBar, setShowMobileMenuBar] = useState(false)
   const [showMobileSubMenu, setShowMobileSubMenu] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -258,6 +260,9 @@ const SiloMobileMenu = ({ pageRoutes, verbiage, useScrollLink }) => {
                         onClick={() => handleRouteClick()}
                         aria-label={pageName}
                         css={{ textDecoration: 'none' }}
+                        className={
+                          router.pathname === pageUrl ? 'activeRoute' : ''
+                        }
                       >
                         <MobileSubMenuSubheading>
                           {pageName}

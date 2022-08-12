@@ -8,7 +8,6 @@ const $LayoutContainer = styled(m.div, {
   pt: '$headerHeight$s',
   mt: '-$headerHeight$s',
   w: '100%',
-  o: 'hidden',
 })
 
 const LayoutContainer = ({ children, ...props }) => {
