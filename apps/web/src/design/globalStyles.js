@@ -110,6 +110,20 @@ const globalStyles = globalCss({
     textDecoration: 'none',
     cursor: 'pointer',
   },
+
+  '&.lp-bar__iframe-wrapper': {
+    zIndex: 150,
+  },
+
+  '@media (min-width: 768px)': {
+    '&.lp-bar__iframe-wrapper': {
+      position: 'relative',
+    },
+
+    '&.lp-bar__pusher': {
+      height: 0,
+    },
+  },
 })
 
 export default globalStyles

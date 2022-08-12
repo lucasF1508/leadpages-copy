@@ -1,13 +1,11 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React from 'react'
+import Script from 'next/script'
 
-const LB_DownloadUltimateWebsiteWorkbook = () => {
-  return (
-    <Helmet>
-      <script src="//static.leadpages.com/leadboxes/current/embed.js" async defer />
-      <script>{`window.addEventListener('LPLeadboxesReady',function(){LPLeadboxes.setExitIntent('xsYZAyvjTfTuHxGm76Kvvc',{dontShowFor:'2d',domain:'lps.lpages.co'});});`}</script>
-    </Helmet>
-  );
-};
+const LB_DownloadUltimateWebsiteWorkbook = () => (
+  <>
+    <Script src="//static.leadpages.com/leadboxes/current/embed.js" />
+    <Script id="exit-intent">{`window.addEventListener('LPLeadboxesReady',function(){LPLeadboxes.setExitIntent('xsYZAyvjTfTuHxGm76Kvvc',{dontShowFor:'2d',domain:'lps.lpages.co'});});`}</Script>
+  </>
+)
 
-export default LB_DownloadUltimateWebsiteWorkbook;
+export default LB_DownloadUltimateWebsiteWorkbook

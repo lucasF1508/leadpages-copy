@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Head from 'next/head'
-import { alertBarData } from '../../data/alert-bar_data'
+import Script from 'next/script'
+import { alertBarData } from '@legacy/data/alert-bar_data'
 
 const AlertBars = () => {
   /* note: any page can disable alert bars by passing the prop `hideBar`
@@ -13,7 +13,7 @@ const AlertBars = () => {
     const matchingAlertBar = alertBarData.find((bar) =>
       new RegExp(bar?.placementRegex, 'i').test(currentPath)
     )
-    return matchingAlertBar || null
+    return matchingAlertBar || undefined
   }
 
   useEffect(() => {
@@ -24,15 +24,11 @@ const AlertBars = () => {
   return (
     <>
       {alertBarProps && (
-        <Head>
-          <script
-            src={alertBarProps.src}
-            data-bar={alertBarProps.id}
-            data-bar-domain={alertBarProps.domain}
-            async
-            defer
-          />
-        </Head>
+        <Script
+          src={alertBarProps.src}
+          data-bar={alertBarProps.id}
+          data-bar-domain={alertBarProps.domain}
+        />
       )}
     </>
   )

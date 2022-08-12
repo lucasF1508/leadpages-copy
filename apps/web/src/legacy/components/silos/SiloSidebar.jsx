@@ -3,6 +3,7 @@ import { styled } from '@design'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { Link as ScrollLink } from 'react-scroll'
+import { useRouter } from 'next/router'
 // Components
 import SiloCompareImage from './SiloCompareImage'
 
@@ -90,44 +91,51 @@ const SiloSidebar = ({
   competitorImage,
   className,
   useScrollLink,
-}) => (
-  <SidebarContainer id="silo-sidebar" className={className}>
-    {competitorImage && <SiloCompareImage competitorImage={competitorImage} />}
-    {pageRoutes.map(({ sectionName, sectionPages }) => (
-      <SidebarSection key={sectionName}>
-        <SidebarInnerSeparator />
-        <SidebarHeading>{sectionName}</SidebarHeading>
-        {sectionPages.map(({ pageName, pageUrl }) => {
-          if (useScrollLink) {
+}) => {
+  const router = useRouter()
+
+  return (
+    <SidebarContainer id="silo-sidebar" className={className}>
+      {competitorImage && (
+        <SiloCompareImage competitorImage={competitorImage} />
+      )}
+      {pageRoutes.map(({ sectionName, sectionPages }) => (
+        <SidebarSection key={sectionName}>
+          <SidebarInnerSeparator />
+          <SidebarHeading>{sectionName}</SidebarHeading>
+          {sectionPages.map(({ pageName, pageUrl }) => {
+            if (useScrollLink) {
+              return (
+                <StyledScrollLink
+                  key={pageUrl}
+                  to={pageUrl}
+                  alt={pageName}
+                  spy
+                  smooth
+                  duration={300}
+                  offset={-100}
+                >
+                  <SidebarSubHeading>{pageName}</SidebarSubHeading>
+                </StyledScrollLink>
+              )
+            }
             return (
-              <StyledScrollLink
-                key={pageUrl}
-                to={pageUrl}
-                alt={pageName}
-                spy
-                smooth
-                duration={300}
-                offset={-100}
-              >
-                <SidebarSubHeading>{pageName}</SidebarSubHeading>
-              </StyledScrollLink>
+              <Link href={pageUrl} key={pageUrl} passHref>
+                <StyledLink
+                  aria-label={pageName}
+                  css={{ textDecoration: 'none' }}
+                  className={router.pathname === pageUrl ? 'activeRoute' : ''}
+                >
+                  <SidebarSubHeading>{pageName}</SidebarSubHeading>
+                </StyledLink>
+              </Link>
             )
-          }
-          return (
-            <Link href={pageUrl} key={pageUrl} passHref>
-              <StyledLink
-                aria-label={pageName}
-                css={{ textDecoration: 'none' }}
-              >
-                <SidebarSubHeading>{pageName}</SidebarSubHeading>
-              </StyledLink>
-            </Link>
-          )
-        })}
-      </SidebarSection>
-    ))}
-  </SidebarContainer>
-)
+          })}
+        </SidebarSection>
+      ))}
+    </SidebarContainer>
+  )
+}
 
 SiloSidebar.defaultProps = {
   pageRoutes: [],

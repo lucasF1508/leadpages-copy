@@ -562,7 +562,8 @@ export const DefinitionHolder = styled('div', {
 })
 
 export const TemplatePreviewHolder = styled('div', {
-  width: '200px',
+  minWidth: '200px',
+  minHeight: '200px',
   height: '815px',
   position: 'relative',
   marginTop: '2rem',
