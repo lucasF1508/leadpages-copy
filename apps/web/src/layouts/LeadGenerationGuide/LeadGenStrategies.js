@@ -31,9 +31,7 @@ import {
 import { pageRoutes, verbiage } from '@legacy/data/lead-generation-guide_data'
 // images
 import image1 from '@legacy/assets/images/silos/lead-generation-guide/1-1-use-lead-magnets-to-give-people-what-they-want.jpg'
-import image2 from '@legacy/assets/images/silos/lead-generation-guide/3-1-good-vs-bad-lead-form.jpg'
 import image3 from '@legacy/assets/images/silos/lead-generation-guide/4-1-lead-magnet-match-content.jpg'
-import image4 from '@legacy/assets/images/silos/lead-generation-guide/5-1-landing-page-design-checklist.png'
 
 const LeadGenerationStrategies = () => (
   <>
