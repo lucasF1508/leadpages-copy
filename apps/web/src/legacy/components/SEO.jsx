@@ -23,9 +23,9 @@ const SEO = ({
   const twitterUsername = 'TEST twitterUsername'
 
   const seo = {
-    title: title || defaultTitle,
-    description: description || defaultDescription,
-    image: image ? `${image || defaultImage}` : null,
+    title,
+    description,
+    image: image ? `${image}` : null,
     keywords,
     url: `${siteUrl}${pathname || '/'}`,
     canonical: canonical ? `${siteUrl}${canonical}` : '',
@@ -34,6 +34,7 @@ const SEO = ({
   return (
     <Head>
       {/* STANDARD METADATA */}
+      <title>{seo.title}</title>
       <meta name="title" content={seo.title} />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />

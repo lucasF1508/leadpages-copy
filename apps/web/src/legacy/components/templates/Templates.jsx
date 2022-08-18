@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import clsx from 'clsx'
 import AppBar from '@material-ui/core/AppBar'
 import Backdrop from '@material-ui/core/Backdrop'
@@ -13,7 +14,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import { VSTypography } from '@lp/ui'
-import debounce from 'lodash.debounce'
+import debounce from 'lodash/debounce'
 import {
   useInfiniteScrollRef,
   Gallery,
@@ -371,6 +372,12 @@ const Templates = ({
     })
   }
 
+  const { asPath } = useRouter()
+  const activeWebsiteLink =
+    asPath === '/website-templates' ? ' active-template' : ''
+  const activeLandingPageLink =
+    asPath === '/templates' ? ' active-template' : ''
+
   return (
     <div ref={containerRef}>
       <Backdrop
@@ -381,21 +388,15 @@ const Templates = ({
         <AppBar color="inherit" classes={{ root: classes.appBar }}>
           <Toolbar classes={{ root: classes.toolbar }}>
             <Grid className={classes.tabContainer} container justify="center">
-              <Link
-                className={classes.tabLink}
-                partiallyActive
-                href="/templates"
-                activeClassName="active-template"
-              >
-                Landing Pages
+              <Link href="/templates">
+                <a className={`${classes.tabLink}${activeLandingPageLink}`}>
+                  Landing Pages
+                </a>
               </Link>
-              <Link
-                className={classes.tabLink}
-                partiallyActive
-                href="/website-templates"
-                activeClassName="active-template"
-              >
-                Websites
+              <Link href="/website-templates">
+                <a className={`${classes.tabLink}${activeWebsiteLink}`}>
+                  Websites
+                </a>
               </Link>
             </Grid>
           </Toolbar>

@@ -255,248 +255,194 @@ const RedbrickRow = styled(FlexRow, {
   borderTop: '1px solid rgba(15, 12, 9, 0.08)',
 })
 
-const Footer = ({ slimFooter }) => (
-  <FooterContainer slimFooter={slimFooter}>
-    {!slimFooter && (
-      <InnerContainer>
-        <FlexRow>
-          <Col4>
-            <FlexColumn>
-              <FlexColumnItem>
-                <Link href="/" passHref>
-                  <StyledLink>
-                    <LogoIconContainer
-                      src={logoIconSVG.src}
-                      alt="Leadpages SVG logo"
-                    />
-                  </StyledLink>
-                </Link>
-              </FlexColumnItem>
-            </FlexColumn>
-          </Col4>
-          <Col2>
-            <SmallCaps>Product</SmallCaps>
-            <FlexColumn>
-              <FlexColumnItem>
-                <Link href="/product/feature-index" passHref>
-                  <FooterLink data-gtm="footer-link">Features</FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/integrations" passHref>
-                  <FooterLink data-gtm="footer-link">Integrations</FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/templates" passHref>
-                  <FooterLink data-gtm="footer-link">Templates</FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/pricing" passHref>
-                  <FooterLink data-gtm="footer-link">Pricing</FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/demo" passHref>
-                  <OutboundFooterLink data-gtm="footer-link">
-                    Watch a Demo
-                  </OutboundFooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/comparisons" passHref>
-                  <FooterLink data-gtm="footer-link">Comparisons</FooterLink>
-                </Link>
-              </FlexColumnItem>
-            </FlexColumn>
-          </Col2>
-          <Col2>
-            <SmallCaps>Resources</SmallCaps>
-            <FlexColumn>
-              <FlexColumnItem>
-                <OutboundFooterLink
-                  href="https://www.leadpages.com/blog/"
-                  alt="Leadpages Blog"
-                  rel="noopener"
-                  data-gtm="footer-link"
-                >
-                  Blog
-                </OutboundFooterLink>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/podcast" passHref>
+const Footer = ({ slimFooter, isPreviewPage }) => {
+  if (isPreviewPage) return null
+
+  return (
+    <FooterContainer slimFooter={slimFooter}>
+      {!slimFooter && (
+        <InnerContainer>
+          <FlexRow>
+            <Col4>
+              <FlexColumn>
+                <FlexColumnItem>
+                  <Link href="/" passHref>
+                    <StyledLink>
+                      <LogoIconContainer
+                        src={logoIconSVG.src}
+                        alt="Leadpages SVG logo"
+                      />
+                    </StyledLink>
+                  </Link>
+                </FlexColumnItem>
+              </FlexColumn>
+            </Col4>
+            <Col2>
+              <SmallCaps>Product</SmallCaps>
+              <FlexColumn>
+                <FlexColumnItem>
+                  <Link href="/product/feature-index" passHref>
+                    <FooterLink data-gtm="footer-link">Features</FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/integrations" passHref>
+                    <FooterLink data-gtm="footer-link">Integrations</FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/templates" passHref>
+                    <FooterLink data-gtm="footer-link">Templates</FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/pricing" passHref>
+                    <FooterLink data-gtm="footer-link">Pricing</FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/demo" passHref>
+                    <OutboundFooterLink data-gtm="footer-link">
+                      Watch a Demo
+                    </OutboundFooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/comparisons" passHref>
+                    <FooterLink data-gtm="footer-link">Comparisons</FooterLink>
+                  </Link>
+                </FlexColumnItem>
+              </FlexColumn>
+            </Col2>
+            <Col2>
+              <SmallCaps>Resources</SmallCaps>
+              <FlexColumn>
+                <FlexColumnItem>
                   <OutboundFooterLink
-                    aria-label="Leadpages podcast"
+                    href="https://www.leadpages.com/blog/"
+                    alt="Leadpages Blog"
+                    rel="noopener"
                     data-gtm="footer-link"
                   >
-                    Podcast
+                    Blog
                   </OutboundFooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/webinars" passHref>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/podcast" passHref>
+                    <OutboundFooterLink
+                      aria-label="Leadpages podcast"
+                      data-gtm="footer-link"
+                    >
+                      Podcast
+                    </OutboundFooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/webinars" passHref>
+                    <OutboundFooterLink
+                      alt="Leadpages webinar"
+                      data-gtm="footer-link"
+                    >
+                      Webinar
+                    </OutboundFooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/landing-pages-guide" passHref>
+                    <FooterLink data-gtm="footer-link">
+                      Landing Pages Guide
+                    </FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/why-leadpages" passHref>
+                    <OutboundFooterLink
+                      href="/why-leadpages"
+                      alt="Why Leadpages"
+                      data-gtm="footer-link"
+                    >
+                      Why Leadpages?
+                    </OutboundFooterLink>
+                  </Link>
+                </FlexColumnItem>
+              </FlexColumn>
+            </Col2>
+            <Col2>
+              <SmallCaps>Community</SmallCaps>
+              <FlexColumn>
+                <FlexColumnItem>
                   <OutboundFooterLink
-                    alt="Leadpages webinar"
+                    href="https://support.leadpages.com/hc/en-us"
+                    alt="visit the help center"
+                    target="_blank"
+                    rel="noreferrer noopener"
                     data-gtm="footer-link"
                   >
-                    Webinar
+                    Help Center
                   </OutboundFooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/landing-pages-guide" passHref>
-                  <FooterLink data-gtm="footer-link">
-                    Landing Pages Guide
-                  </FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/why-leadpages" passHref>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/customers" passHref>
+                    <FooterLink data-gtm="footer-link">
+                      Customer Stories
+                    </FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
                   <OutboundFooterLink
-                    href="/why-leadpages"
-                    alt="Why Leadpages"
+                    href="https://www.facebook.com/groups/leadpages/"
+                    alt="Leadpages Facebook"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     data-gtm="footer-link"
                   >
-                    Why Leadpages?
+                    Facebook Group
                   </OutboundFooterLink>
-                </Link>
-              </FlexColumnItem>
-            </FlexColumn>
-          </Col2>
-          <Col2>
-            <SmallCaps>Community</SmallCaps>
-            <FlexColumn>
-              <FlexColumnItem>
-                <OutboundFooterLink
-                  href="https://support.leadpages.com/hc/en-us"
-                  alt="visit the help center"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  data-gtm="footer-link"
-                >
-                  Help Center
-                </OutboundFooterLink>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/customers" passHref>
-                  <FooterLink data-gtm="footer-link">
-                    Customer Stories
-                  </FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <OutboundFooterLink
-                  href="https://www.facebook.com/groups/leadpages/"
-                  alt="Leadpages Facebook"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  data-gtm="footer-link"
-                >
-                  Facebook Group
-                </OutboundFooterLink>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/affiliates" passHref>
-                  <OutboundFooterLink data-gtm="footer-link">
-                    Affiliate Program
-                  </OutboundFooterLink>
-                </Link>
-              </FlexColumnItem>
-            </FlexColumn>
-          </Col2>
-          <Col2>
-            <SmallCaps>Company</SmallCaps>
-            <FlexColumn>
-              <FlexColumnItem>
-                <Link href="/contact" passHref>
-                  <FooterLink data-gtm="footer-link_contact-us-link">
-                    Contact
-                  </FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/press" passHref>
-                  <FooterLink data-gtm="footer-link">Press</FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/careers" passHref>
-                  <FooterLink data-gtm="footer-link">Careers</FooterLink>
-                </Link>
-              </FlexColumnItem>
-              <FlexColumnItem>
-                <Link href="/faq" passHref>
-                  <FooterLink data-gtm="footer-link">FAQs</FooterLink>
-                </Link>
-              </FlexColumnItem>
-            </FlexColumn>
-          </Col2>
-        </FlexRow>
-      </InnerContainer>
-    )}
-    <FooterRowBottom>
-      <FooterCopyright>
-        ©{new Date().getFullYear()} Leadpages (US), Inc. All Rights Reserved.
-      </FooterCopyright>
-      <FooterIconsMobileContainer>
-        <a
-          href="https://www.facebook.com/Leadpages"
-          rel="noreferrer noopener"
-          alt="Leadpages Facebook Page"
-          target="_blank"
-          data-gtm="footer-link"
-        >
-          <SocialIconContainer src={facebookSVG.src} alt="facebook icon" />
-        </a>
-        <a
-          href="https://www.linkedin.com/company/leadpages"
-          rel="noreferrer noopener"
-          alt="Leadpages LinkedIn Company Page"
-          target="_blank"
-          data-gtm="footer-link"
-        >
-          <SocialIconContainer src={linkedinSVG.src} alt="linkedin icon" />
-        </a>
-        <a
-          href="https://www.twitter.com/Leadpages"
-          rel="noreferrer noopener"
-          alt="Leadpages Twitter Account"
-          target="_blank"
-          data-gtm="footer-link"
-        >
-          <SocialIconContainer src={twitterSVG.src} alt="twitter icon" />
-        </a>
-        <a
-          href="https://www.instagram.com/leadpages/"
-          rel="noreferrer noopener"
-          alt="Leadpages Instagram Page"
-          target="_blank"
-          data-gtm="footer-link"
-        >
-          <SocialIconContainer src={instagramSVG.src} alt="instagram icon" />
-        </a>
-        <a
-          href="https://www.pinterest.com/leadpagesHQ/"
-          rel="noreferrer noopener"
-          alt="Leadpages Pinterest Account"
-          target="_blank"
-          data-gtm="footer-link"
-        >
-          <SocialIconContainer src={pinterestSVG.src} alt="pinterest icon" />
-        </a>
-      </FooterIconsMobileContainer>
-      <FooterTOS>
-        <FooterTOSText>
-          <Link href="/privacy" passHref>
-            <StyledLink data-gtm="footer-link">Privacy Policy</StyledLink>
-          </Link>
-          &nbsp;&nbsp;|&nbsp;&nbsp;
-          <Link href="/legal" passHref>
-            <StyledLink data-gtm="footer-link">Legal</StyledLink>
-          </Link>
-        </FooterTOSText>
-        <FooterIconsDesktopContainer>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/affiliates" passHref>
+                    <OutboundFooterLink data-gtm="footer-link">
+                      Affiliate Program
+                    </OutboundFooterLink>
+                  </Link>
+                </FlexColumnItem>
+              </FlexColumn>
+            </Col2>
+            <Col2>
+              <SmallCaps>Company</SmallCaps>
+              <FlexColumn>
+                <FlexColumnItem>
+                  <Link href="/contact" passHref>
+                    <FooterLink data-gtm="footer-link_contact-us-link">
+                      Contact
+                    </FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/press" passHref>
+                    <FooterLink data-gtm="footer-link">Press</FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/careers" passHref>
+                    <FooterLink data-gtm="footer-link">Careers</FooterLink>
+                  </Link>
+                </FlexColumnItem>
+                <FlexColumnItem>
+                  <Link href="/faq" passHref>
+                    <FooterLink data-gtm="footer-link">FAQs</FooterLink>
+                  </Link>
+                </FlexColumnItem>
+              </FlexColumn>
+            </Col2>
+          </FlexRow>
+        </InnerContainer>
+      )}
+      <FooterRowBottom>
+        <FooterCopyright>
+          ©{new Date().getFullYear()} Leadpages (US), Inc. All Rights Reserved.
+        </FooterCopyright>
+        <FooterIconsMobileContainer>
           <a
             href="https://www.facebook.com/Leadpages"
             rel="noreferrer noopener"
@@ -542,21 +488,87 @@ const Footer = ({ slimFooter }) => (
           >
             <SocialIconContainer src={pinterestSVG.src} alt="pinterest icon" />
           </a>
-        </FooterIconsDesktopContainer>
-      </FooterTOS>
-    </FooterRowBottom>
-    <RedbrickRow>
-      <RedbrickFooter />
-    </RedbrickRow>
-  </FooterContainer>
-)
+        </FooterIconsMobileContainer>
+        <FooterTOS>
+          <FooterTOSText>
+            <Link href="/privacy" passHref>
+              <StyledLink data-gtm="footer-link">Privacy Policy</StyledLink>
+            </Link>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            <Link href="/legal" passHref>
+              <StyledLink data-gtm="footer-link">Legal</StyledLink>
+            </Link>
+          </FooterTOSText>
+          <FooterIconsDesktopContainer>
+            <a
+              href="https://www.facebook.com/Leadpages"
+              rel="noreferrer noopener"
+              alt="Leadpages Facebook Page"
+              target="_blank"
+              data-gtm="footer-link"
+            >
+              <SocialIconContainer src={facebookSVG.src} alt="facebook icon" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/leadpages"
+              rel="noreferrer noopener"
+              alt="Leadpages LinkedIn Company Page"
+              target="_blank"
+              data-gtm="footer-link"
+            >
+              <SocialIconContainer src={linkedinSVG.src} alt="linkedin icon" />
+            </a>
+            <a
+              href="https://www.twitter.com/Leadpages"
+              rel="noreferrer noopener"
+              alt="Leadpages Twitter Account"
+              target="_blank"
+              data-gtm="footer-link"
+            >
+              <SocialIconContainer src={twitterSVG.src} alt="twitter icon" />
+            </a>
+            <a
+              href="https://www.instagram.com/leadpages/"
+              rel="noreferrer noopener"
+              alt="Leadpages Instagram Page"
+              target="_blank"
+              data-gtm="footer-link"
+            >
+              <SocialIconContainer
+                src={instagramSVG.src}
+                alt="instagram icon"
+              />
+            </a>
+            <a
+              href="https://www.pinterest.com/leadpagesHQ/"
+              rel="noreferrer noopener"
+              alt="Leadpages Pinterest Account"
+              target="_blank"
+              data-gtm="footer-link"
+            >
+              <SocialIconContainer
+                src={pinterestSVG.src}
+                alt="pinterest icon"
+              />
+            </a>
+          </FooterIconsDesktopContainer>
+        </FooterTOS>
+      </FooterRowBottom>
+      <RedbrickRow>
+        <RedbrickFooter />
+      </RedbrickRow>
+    </FooterContainer>
+  )
+}
 
 Footer.defaultProps = {
   slimFooter: false,
+  isPreviewPage: false,
 }
 
 Footer.propTypes = {
   slimFooter: PropTypes.bool,
+  isPreviewPage: PropTypes.bool,
 }
 
 export default Footer

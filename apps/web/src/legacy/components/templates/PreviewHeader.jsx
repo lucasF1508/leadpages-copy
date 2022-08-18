@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import clsx from 'clsx'
-// import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
@@ -13,11 +12,12 @@ import Tabs from '@material-ui/core/Tabs'
 import Typography from '@material-ui/core/Typography'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import SvgIcon from '@material-ui/core/SvgIcon'
+import NextLink from 'next/link'
 import { FLOWS } from '@lp/lib-upgrade-modal'
 
-import { DeviceKind, TemplateKind } from '../../constants/templates'
-import { planRouter } from '../../utils/plan-router'
-import { getTrialId } from '../../utils/trials'
+import { DeviceKind, TemplateKind } from '@legacy/constants/templates'
+import { planRouter } from '@legacy/utils/plan-router'
+import { getTrialId } from '@legacy/utils/trials'
 import { Events } from './tracker'
 
 const useStyles = makeStyles(
@@ -109,17 +109,10 @@ const PreviewHeader = ({
   device,
   templateId,
   templateKind,
-  goBack,
+  galleryRoot,
+  planData,
 }) => {
   const classes = useStyles()
-
-  // const { planData } = useStaticQuery(graphql`
-  //   query PreviewHeader {
-  //     planData {
-  //       ...trialPlans
-  //     }
-  //   }
-  // `);
 
   const doSelectTemplate = () => {
     try {
@@ -153,9 +146,11 @@ const PreviewHeader = ({
       >
         <Grid container className={classes.left} wrap="nowrap">
           <Grid container className={classes.leftLg} wrap="nowrap">
-            <IconButton id="gallery-return" aria-label="Back" onClick={goBack}>
-              <ArrowBackIcon color="primary" />
-            </IconButton>
+            <NextLink href={galleryRoot} passHref>
+              <IconButton id="gallery-return" aria-label="Back">
+                <ArrowBackIcon color="primary" />
+              </IconButton>
+            </NextLink>
             <Divider className={classes.titleDivider} orientation="vertical" />
             <Typography
               className={classes.title}
@@ -168,20 +163,21 @@ const PreviewHeader = ({
             </Typography>
           </Grid>
           <Grid container className={classes.leftSm} wrap="nowrap">
-            <Link
-              component="button"
-              underline="hover"
-              className={classes.link}
-              variant="body2"
-              onClick={goBack}
-            >
-              <SvgIcon>
-                <ArrowBackIcon color="primary" />
-              </SvgIcon>
-              <Typography className={classes.linkText} variant="body2">
-                ALL TEMPLATES
-              </Typography>
-            </Link>
+            <NextLink href={galleryRoot} passHref>
+              <Link
+                component="button"
+                underline="hover"
+                className={classes.link}
+                variant="body2"
+              >
+                <SvgIcon>
+                  <ArrowBackIcon color="primary" />
+                </SvgIcon>
+                <Typography className={classes.linkText} variant="body2">
+                  ALL TEMPLATES
+                </Typography>
+              </Link>
+            </NextLink>
           </Grid>
         </Grid>
 
@@ -211,7 +207,7 @@ PreviewHeader.propTypes = {
   device: PropTypes.oneOf([DeviceKind.Mobile, DeviceKind.Desktop]).isRequired,
   templateId: PropTypes.string.isRequired,
   templateKind: PropTypes.string.isRequired,
-  goBack: PropTypes.func.isRequired,
+  galleryRoot: PropTypes.string.isRequired,
 }
 
 PreviewHeader.defaultProps = {

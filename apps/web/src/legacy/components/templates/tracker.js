@@ -3,7 +3,7 @@ export const Events = {
   templateGalleryFiltered: 'templateGalleryFiltered',
   templatePreviewed: 'templatePreviewed',
   useTemplateButtonClicked: 'useTemplateButtonClicked',
-};
+}
 
 // Preserve original name mapping for GTM events
 const filterKindMap = {
@@ -12,24 +12,24 @@ const filterKindMap = {
   Industries: 'Industry',
   Style: 'Style',
   Color: 'Color',
-};
+}
 
 const tracker = {
   onUpdateFilter: ({ value, kind }) => {
-    window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || []
     window.dataLayer.push({
       event: Events.templateGalleryFiltered,
       templateFilterKind: filterKindMap[kind] || kind,
       templateFilterValue: value,
-    });
+    })
   },
   onUpdateSearch: ({ value }) => {
-    window.dataLayer = window.dataLayer || [];
+    window.dataLayer = window.dataLayer || []
     window.dataLayer.push({
       event: Events.templateGallerySearched,
       templateSearchQuery: value,
-    });
+    })
   },
-};
+}
 
-export default tracker;
+export default tracker

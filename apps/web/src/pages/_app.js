@@ -38,6 +38,7 @@ export default function App({
       navigation,
       siteMeta,
       slimFooter,
+      isPreviewPage,
       onPromotionsLoaded,
       ...meta
     } = {},
@@ -66,12 +67,12 @@ export default function App({
         <SEO seo={pageData?.seo} siteMeta={siteMeta} />
         <LazyMotion features={loadFeatures} strict>
           {/* {navigation && <Header navigation={navigation} />} */}
-          <Header />
+          <Header isPreviewPage={isPreviewPage} />
           <LayoutContainer>
             <Main {...pageData} {...meta} />
           </LayoutContainer>
           {/* {navigation && <Footer navigation={navigation} />} */}
-          <Footer slimFooter={slimFooter} />
+          <Footer slimFooter={slimFooter} isPreviewPage={isPreviewPage} />
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>

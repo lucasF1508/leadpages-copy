@@ -29,6 +29,8 @@ const {
   HCAPTCHA_SITEKEY,
   LEADPAGES_API_HOST,
   STARGATE_API_HOST,
+  LEADPAGES_TRIAL_HOST,
+  LEADPAGES_REACTIVATION_HOST,
 } = process.env
 
 module.exports = withPlugins([[withBundleAnalyzer]], {
@@ -55,6 +57,8 @@ module.exports = withPlugins([[withBundleAnalyzer]], {
     HCAPTCHA_SITEKEY,
     LEADPAGES_API_HOST,
     STARGATE_API_HOST,
+    LEADPAGES_TRIAL_HOST,
+    LEADPAGES_REACTIVATION_HOST,
   },
   poweredByHeader: false,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],

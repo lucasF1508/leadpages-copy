@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
 export const baseFilters = {
   categories: {
@@ -9,19 +9,19 @@ export const baseFilters = {
     operator: '',
     value: 24,
   },
-};
+}
 
 export const TemplateKind = {
   LandingPage: 'LeadpageTemplate',
   Site: 'SiteTemplate',
-};
+}
 
 export const DeviceKind = {
   Mobile: 'mobile',
   Desktop: 'desktop',
-};
+}
 
-export const templatesBaseUrl = `${process.env.STARGATE_API_HOST}/template/v2/`;
+export const templatesBaseUrl = `${process.env.STARGATE_API_HOST}/template/v2/`
 
 export const TemplateShape = PropTypes.shape({
   template: PropTypes.shape({
@@ -43,7 +43,7 @@ export const TemplateShape = PropTypes.shape({
   _meta: PropTypes.shape({
     id: PropTypes.string.isRequired,
   }),
-});
+})
 
 export const TaxonShape = PropTypes.shape({
   label: PropTypes.string.isRequired,
@@ -51,7 +51,7 @@ export const TaxonShape = PropTypes.shape({
   type: PropTypes.string.isRequired,
   section: PropTypes.string.isRequired,
   count: PropTypes.number,
-});
+})
 
 export const TemplateState = PropTypes.shape({
   ui: PropTypes.shape({
@@ -68,7 +68,7 @@ export const TemplateState = PropTypes.shape({
     order_by: PropTypes.string,
   }).isRequired,
   getScrollTopRef: PropTypes.shape({ current: PropTypes.func }),
-});
+})
 
 export const TemplateActions = PropTypes.shape({
   onResetSearch: PropTypes.func.isRequired,
@@ -79,4 +79,4 @@ export const TemplateActions = PropTypes.shape({
   onUpdateCategory: PropTypes.func.isRequired,
   onUpdateTag: PropTypes.func.isRequired,
   init: PropTypes.func.isRequired,
-});
+})

@@ -950,7 +950,11 @@ class Header extends React.Component {
       scrollTarget,
       underlaidMenu,
       headerBkgColor,
+      isPreviewPage,
     } = this.props
+
+    if (isPreviewPage) return null
+
     const classScrolled = isScrolled ? 'scrolled' : ''
     const productMenuOpen = mouseOverProductLink || mouseOverProductMenu
     const resourcesMenuOpen = mouseOverResourcesLink || mouseOverResourcesMenu
@@ -1674,6 +1678,7 @@ Header.defaultProps = {
   scrollTarget: '',
   underlaidMenu: false,
   headerBkgColor: null,
+  isPreviewPage: false,
 }
 
 Header.propTypes = {
@@ -1684,6 +1689,7 @@ Header.propTypes = {
   scrollTarget: PropTypes.string,
   underlaidMenu: PropTypes.bool,
   headerBkgColor: PropTypes.string,
+  isPreviewPage: PropTypes.bool,
 }
 
 export default Header

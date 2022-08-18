@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useTabLinkStyles = makeStyles(() => ({
   link: {
@@ -54,26 +54,29 @@ const useTabLinkStyles = makeStyles(() => ({
       '-webkit-appearance': 'none',
     },
   },
-}));
+}))
 
 export const TabLink = ({ children, active, onClick }) => {
-  const classes = useTabLinkStyles();
+  const classes = useTabLinkStyles()
   return (
     <li className={active ? `${classes.link} linkActive` : classes.link}>
       <button type="button" onClick={onClick}>
         {children}
       </button>
     </li>
-  );
-};
+  )
+}
 
-TabLink.displayName = 'TabLink';
+TabLink.displayName = 'TabLink'
 
 TabLink.propTypes = {
   active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
-};
+  children: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
+  ]).isRequired,
+}
 
 const useTabGroupStyles = makeStyles(() => ({
   tabGroup: {
@@ -85,14 +88,16 @@ const useTabGroupStyles = makeStyles(() => ({
     cursor: 'pointer',
     color: '#797f89',
   },
-}));
+}))
 
 export const TabGroup = ({ children }) => {
-  const classes = useTabGroupStyles();
-  return <ul className={classes.tabGroup}>{children}</ul>;
-};
+  const classes = useTabGroupStyles()
+  return <ul className={classes.tabGroup}>{children}</ul>
+}
 
 TabGroup.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
-    .isRequired,
-};
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+}

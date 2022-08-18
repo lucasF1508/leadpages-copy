@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useRouter } from 'next/router'
 import { useTemplateState } from '@lp/template-gallery'
+import { useRouter } from 'next/router'
 // Components
+import SEO from '@legacy/components/SEO'
 import Gallery from '@legacy/components/templates/Gallery'
 import Preview from '@legacy/components/templates/Preview'
-import SEO from '@legacy/components/SEO'
 import tracker from '@legacy/components/templates/tracker'
 // Utils
 import {
@@ -16,16 +16,17 @@ import {
 import usePreviewTemplate from '@legacy/hooks/usePreviewTemplate'
 
 const SEO_DEFAULTS = {
+  title: 'Build Your Website Faster with These Free Templates | Leadpages',
+  description:
+    'Grow your business faster when you start with our high-converting, mobile-responsive templates. Use our drag-and-drop builder to customize your own website.',
   image: 'https://static.leadpages.com/images/og/og-templates.jpg',
-  canonical: '/templates',
+  canonical: '/website-templates',
 }
 
 const GallerySEO = ({ pathname }) => (
   <SEO
     pathname={pathname}
-    title="Website & Landing Page Template Gallery | Leadpages"
-    description="Grow your leads and conversion with the best website and landing page templates from Leadpages. All templates are fully customizable and user-friendly across devices."
-    ogtitle="Landing Page Templates by Leadpages"
+    ogtitle="Website Templates by Leadpages"
     ogdescription="Get free, high-converting website and landing page templates with Leadpages. Easily customize with a code-free builder & turn more clicks into customers."
     {...SEO_DEFAULTS}
   />
@@ -36,20 +37,15 @@ GallerySEO.propTypes = {
 }
 
 const PreviewSEO = ({ pathname }) => (
-  <SEO
-    pathname={pathname}
-    title="Get more leads with high-converting landing page templates | Leadpages"
-    description="Get more leads and grow quicker with high-converting templates for landing pages and websites. Designed by pros and easy to customize, start for free today."
-    noIndex
-    {...SEO_DEFAULTS}
-  />
+  <SEO pathname={pathname} noIndex {...SEO_DEFAULTS} />
 )
 
 PreviewSEO.propTypes = {
   pathname: PropTypes.string.isRequired,
 }
 
-const LandingPageTemplates = () => {
+const WebsiteTemplates = (props) => {
+  const { planData } = props || {}
   const router = useRouter()
   const pathname = router.asPath
   const templateId = pathname.split('preview/')[1]
@@ -58,7 +54,7 @@ const LandingPageTemplates = () => {
   const [previewTemplate, handlePreviewTemplate] = usePreviewTemplate()
 
   const [state, actions] = useTemplateState({
-    kind: TemplateKind.LandingPage,
+    kind: TemplateKind.Site,
     baseUrl: templatesBaseUrl,
     baseFilters,
     hideSidebar: false,
@@ -68,9 +64,10 @@ const LandingPageTemplates = () => {
   return isPreviewing ? (
     <Preview
       templateId={templateId}
-      galleryRoot="/templates"
+      galleryRoot="/website-templates"
       SEO={<SEOMatch pathname={pathname} />}
       previewTemplate={previewTemplate}
+      planData={planData}
     />
   ) : (
     <Gallery
@@ -84,4 +81,4 @@ const LandingPageTemplates = () => {
   )
 }
 
-export default LandingPageTemplates
+export default WebsiteTemplates
