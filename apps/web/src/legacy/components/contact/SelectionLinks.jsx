@@ -1,88 +1,79 @@
-import React, { createElement, useState } from 'react';
-import { Link as GatsbyLink } from 'gatsby';
-import { Link as ScrollLink } from 'react-scroll';
-import Typography from '@material-ui/core/Typography';
+import React, { createElement, useState } from 'react'
+import { styled, keyframes } from '@design'
+import { Link as ScrollLink } from 'react-scroll'
+import Link from 'next/link'
+import Typography from '@material-ui/core/Typography'
 // styling
-import { makeStyles } from '@material-ui/core/styles';
-import styled, { keyframes } from 'styled-components';
-import { fadeIn } from 'react-animations';
+import { makeStyles } from '@material-ui/core/styles'
+import { fadeIn } from 'react-animations'
 
 const useStyles = makeStyles(() => ({
   sectionHeader: {
     margin: '16px 0',
   },
-}));
+}))
 
-const InternalLink = styled(GatsbyLink)`
-  color: #603eff;
-  text-decoration: none;
-  cursor: pointer;
-  &:hover {
-    color: #4d32cc;
-  }
-`;
+const StyledLink = styled('a', {
+  color: '$primary',
 
-const OutboundLink = styled.a`
-  color: #603eff;
-  text-decoration: none;
-  cursor: pointer;
-  &:hover {
-    color: #4d32cc;
-  }
-`;
+  '&:hover': {
+    color: '$indigoDark',
+  },
+})
 
-const ScrollToLink = styled(ScrollLink)`
-  color: #603eff;
-  text-decoration: none;
-  cursor: pointer;
-  &:hover {
-    color: #4d32cc;
-  }
-`;
+const ScrollToLink = styled(ScrollLink, {
+  color: '$primary',
 
-const SectionHolderAnimation = keyframes`${fadeIn}`;
+  '&:hover': {
+    color: '$indigoDark',
+  },
+})
 
-const SectionHolder = styled.div`
-  padding: 1rem 0;
-  animation: 0.5s ${SectionHolderAnimation};
-`;
+const SectionHolderAnimation = keyframes(fadeIn)
 
-const FormHolder = styled.div``;
+const SectionHolder = styled('div', {
+  padding: '1rem 0',
+  animation: `0.5s ${SectionHolderAnimation}`,
+})
 
-const SelectionLinks = props => {
-  const classes = useStyles();
-  const { parent, selection, linkArray, contactForm } = props;
-  const [showContactForm, setShowContactForm] = useState(false);
+const FormHolder = styled('div', {})
+
+const SelectionLinks = ({ parent, selection, linkArray, contactForm }) => {
+  const classes = useStyles()
+  const [showContactForm, setShowContactForm] = useState(false)
 
   return (
     <>
-      {linkArray.map((section, index) => {
-        const { sectionLinks } = section;
-        return (
-          <SectionHolder key={index}>
-            <Typography variant="h4" className={classes.sectionHeader}>
-              We think these might help:
+      {linkArray.map(({ sectionLinks }, index) => (
+        <SectionHolder key={index}>
+          <Typography variant="h4" className={classes.sectionHeader}>
+            We think these might help:
+          </Typography>
+          {sectionLinks.map(({ type, text, route }, idx) => (
+            <Typography key={idx} variant="h5">
+              {type === 'outbound' && (
+                <StyledLink
+                  href={route}
+                  aria-label="form link"
+                  data-gtm="contact-resource-link"
+                >
+                  {text}
+                </StyledLink>
+              )}
+              {type === 'internal' && (
+                <Link href={route} passHref>
+                  <StyledLink
+                    aria-label="form link"
+                    data-gtm="contact-resource-link"
+                  >
+                    {text}
+                  </StyledLink>
+                </Link>
+              )}
             </Typography>
-            {sectionLinks.map((item, index) => {
-              const { type, text, route } = item;
-              return (
-                <Typography key={index} variant="h5">
-                  {type === 'outbound' && (
-                    <OutboundLink href={route} alt="form link" data-gtm="contact-resource-link">
-                      {text}
-                    </OutboundLink>
-                  )}
-                  {type === 'internal' && (
-                    <InternalLink to={route} alt="form link" data-gtm="contact-resource-link">
-                      {text}
-                    </InternalLink>
-                  )}
-                </Typography>
-              );
-            })}
-          </SectionHolder>
-        );
-      })}
+          ))}
+        </SectionHolder>
+      ))}
       <SectionHolder id="formtop">
         {!showContactForm && (
           <>
@@ -109,12 +100,14 @@ const SelectionLinks = props => {
             <Typography variant="h4" className={classes.sectionHeader}>
               Contact our team
             </Typography>
-            <FormHolder>{createElement(contactForm, { parent, selection })}</FormHolder>
+            <FormHolder>
+              {createElement(contactForm, { parent, selection })}
+            </FormHolder>
           </>
         )}
       </SectionHolder>
     </>
-  );
-};
+  )
+}
 
-export default SelectionLinks;
+export default SelectionLinks

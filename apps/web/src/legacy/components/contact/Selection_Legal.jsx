@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 // components
-import SelectionLinks from './SelectionLinks';
-import Form_Support from './Form_Support';
+import SelectionLinks from './SelectionLinks'
+import Form_Support from './Form_Support'
 
 const linkArray = [
   {
@@ -9,7 +9,8 @@ const linkArray = [
       {
         type: 'outbound',
         text: 'Leadpages and data protection',
-        route: 'https://support.leadpages.com/hc/en-us/articles/360003799812-Leadpages-and-GDPR',
+        route:
+          'https://support.leadpages.com/hc/en-us/articles/360003799812-Leadpages-and-GDPR',
       },
       {
         type: 'internal',
@@ -23,17 +24,15 @@ const linkArray = [
       },
     ],
   },
-];
+]
 
-const Selection_Legal = () => {
-  return (
-    <SelectionLinks
-      parent="legal"
-      selection="Legal & privacy questions"
-      linkArray={linkArray}
-      contactForm={Form_Support}
-    />
-  );
-};
+const Selection_Legal = () => (
+  <SelectionLinks
+    parent="legal"
+    selection="Legal & privacy questions"
+    linkArray={linkArray}
+    contactForm={Form_Support}
+  />
+)
 
-export default Selection_Legal;
+export default Selection_Legal

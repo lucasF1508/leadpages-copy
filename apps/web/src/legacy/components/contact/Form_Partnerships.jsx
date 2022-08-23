@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useForm, FormContext } from 'react-hook-form';
-import { scroller } from 'react-scroll';
+import React, { useState } from 'react'
+import { useForm, FormContext } from 'react-hook-form'
+import { scroller } from 'react-scroll'
 // components
-import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid'
 import {
   ErrorMessage_Main,
   Field_CompanyName,
@@ -12,12 +12,12 @@ import {
   Field_Message,
   Field_Name,
   SubmitButton,
-} from './FormFields';
+} from './FormFields'
 
-const Form_Partnerships = props => {
-  const [formHasError, setFormHasError] = useState(null);
-  const [submitDisabled, setSubmitDisabled] = useState(false);
-  const methods = useForm({ mode: 'onBlur' });
+const Form_Partnerships = (props) => {
+  const [formHasError, setFormHasError] = useState(null)
+  const [submitDisabled, setSubmitDisabled] = useState(false)
+  const methods = useForm({ mode: 'onBlur' })
 
   const scrollToFormTop = () => {
     scroller.scrollTo('formtop', {
@@ -25,38 +25,49 @@ const Form_Partnerships = props => {
       delay: 0,
       offset: -50,
       smooth: 'ease',
-    });
-  };
+    })
+  }
 
-  const preSubmissionCheck = e => {
-    e.preventDefault();
-    methods.triggerValidation();
+  const preSubmissionCheck = (e) => {
+    e.preventDefault()
+    methods.triggerValidation()
     // this check is here because without it the form still tries to submit to drip
-    const requiredFields = ['full_name', 'email', 'job_title', 'company_name', 'contact_message'];
-    const { fields } = methods.getValues({ nest: true });
+    const requiredFields = [
+      'full_name',
+      'email',
+      'job_title',
+      'company_name',
+      'contact_message',
+    ]
+    const { fields } = methods.getValues({ nest: true })
     if (
       methods.formState.isValid &&
-      requiredFields.map(fieldname => fields[fieldname]).every(value => value !== '')
+      requiredFields
+        .map((fieldname) => fields[fieldname])
+        .every((value) => value !== '')
     ) {
-      setFormHasError(false);
-      setSubmitDisabled(true);
-      window.dataLayer = window.dataLayer || [];
+      setFormHasError(false)
+      setSubmitDisabled(true)
+      window.dataLayer = window.dataLayer || []
       window.dataLayer.push({
         event: 'contactFormSubmitted',
         formSelection: `Partnerships — ${props.selection}`,
-        companyName: document.getElementsByName('fields[company_name]')?.[0]?.value || null,
-        jobTitle: document.getElementsByName('fields[job_title]')?.[0]?.value || null,
-      });
+        companyName:
+          document.getElementsByName('fields[company_name]')?.[0]?.value ||
+          null,
+        jobTitle:
+          document.getElementsByName('fields[job_title]')?.[0]?.value || null,
+      })
       // sync lead attribution data using attribution syncer (loaded by GTM)
       if (window.lpAttributionSyncer) {
-        window.lpAttributionSyncer.directLeadSync(fields.email);
+        window.lpAttributionSyncer.directLeadSync(fields.email)
       }
-      document.getElementById('dripform').submit();
+      document.getElementById('dripform').submit()
     } else {
-      setFormHasError(true);
-      scrollToFormTop();
+      setFormHasError(true)
+      scrollToFormTop()
     }
-  };
+  }
   return (
     <FormContext {...methods}>
       <form
@@ -65,7 +76,13 @@ const Form_Partnerships = props => {
         method="post"
         data-drip-embedded-form="361097189"
       >
-        <Grid container direction="row" justify="flex-start" alignItems="flex-start" spacing={2}>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+          spacing={2}
+        >
           {formHasError && <ErrorMessage_Main />}
           <Field_Name />
           <Field_Email />
@@ -73,11 +90,14 @@ const Form_Partnerships = props => {
           <Field_CompanyName parentForm={props.parent} />
           <Field_Message />
           <Field_Consent />
-          <SubmitButton disabled={submitDisabled} preSubmission={preSubmissionCheck} />
+          <SubmitButton
+            disabled={submitDisabled}
+            preSubmission={preSubmissionCheck}
+          />
         </Grid>
       </form>
     </FormContext>
-  );
-};
+  )
+}
 
-export default Form_Partnerships;
+export default Form_Partnerships

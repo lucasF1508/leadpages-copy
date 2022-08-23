@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 // components
-import SelectionLinks from './SelectionLinks';
-import Form_Support from './Form_Support';
+import SelectionLinks from './SelectionLinks'
+import Form_Support from './Form_Support'
 
 const linkArray = [
   {
@@ -15,21 +15,20 @@ const linkArray = [
       {
         type: 'outbound',
         text: 'Log in to Leadpages',
-        route: 'https://support.leadpages.com/hc/en-us/articles/203522310-Log-in-to-Leadpages',
+        route:
+          'https://support.leadpages.com/hc/en-us/articles/203522310-Log-in-to-Leadpages',
       },
     ],
   },
-];
+]
 
-const Selection_AccountAccess = () => {
-  return (
-    <SelectionLinks
-      parent="accountaccess"
-      selection="Account access"
-      linkArray={linkArray}
-      contactForm={Form_Support}
-    />
-  );
-};
+const Selection_AccountAccess = () => (
+  <SelectionLinks
+    parent="accountaccess"
+    selection="Account access"
+    linkArray={linkArray}
+    contactForm={Form_Support}
+  />
+)
 
-export default Selection_AccountAccess;
+export default Selection_AccountAccess

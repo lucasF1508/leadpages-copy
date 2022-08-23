@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import React, { useState, useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
 // components
-import { PhoneInput } from '@lp/ui';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import Collapse from '@material-ui/core/Collapse';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormLabel from '@material-ui/core/FormLabel';
-import Grid from '@material-ui/core/Grid';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import TextField from '@material-ui/core/TextField';
+import { PhoneInput } from '@lp/ui'
+import Button from '@material-ui/core/Button'
+import Checkbox from '@material-ui/core/Checkbox'
+import Collapse from '@material-ui/core/Collapse'
+import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import FormLabel from '@material-ui/core/FormLabel'
+import Grid from '@material-ui/core/Grid'
+import Radio from '@material-ui/core/Radio'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import TextField from '@material-ui/core/TextField'
+import Link from 'next/link'
 // styling
-import styled from 'styled-components';
+import { styled } from '@design'
 // images
-import errorSVG from '../../assets/images/global/error.svg';
+import errorSVG from '@legacy/assets/images/global/error.svg'
 
 export const DRIP_FIELDS = {
   NAME: 'fields[full_name]',
@@ -33,42 +34,53 @@ export const DRIP_FIELDS = {
   STRATEGY: 'fields[strategy]',
   GOALS: 'fields[goals]',
   CONSENT: 'fields[eu_consent]',
-};
+}
+
+const StyledLink = styled('a', {
+  color: 'rgb(0, 0, 238)',
+  textDecoration: 'underline',
+})
 
 export const ErrorMessage_Main = () => {
-  const Container = styled.div`
-    height: 4.5rem;
-    display: flex;
-    align-items: center;
-    background-color: #ffe5de;
-  `;
-  const Icon = styled.img`
-    margin-left: 2rem;
-    margin-right: 1.25rem;
-  `;
-  const Text = styled.p`
-    font-size: 16px;
-    color: #575452;
-  `;
+  const Container = styled('div', {
+    height: '4.5rem',
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: '#ffe5de',
+  })
+
+  const Icon = styled('img', {
+    marginLeft: '2rem',
+    marginRight: '1.25rem',
+  })
+
+  const Text = styled('p', {
+    fontSize: '16px',
+    color: '$textAlt',
+  })
+
   return (
     <Grid item xs={12}>
       <Container>
-        <Icon src={errorSVG} alt="error icon" />
+        <Icon src={errorSVG.src} alt="error icon" />
         <Text>Oops! Please fix the issues below.</Text>
       </Container>
     </Grid>
-  );
-};
+  )
+}
 
-export const Field_CompanyName = props => {
-  const { register, errors } = useFormContext();
+export const Field_CompanyName = (props) => {
+  const { register, errors } = useFormContext()
   const hasError =
-    props.parentForm === 'partnerships' && errors.fields && errors.fields.company_name;
+    props.parentForm === 'partnerships' &&
+    errors.fields &&
+    errors.fields.company_name
+
   return (
     <Grid item xs={12}>
       <TextField
         name={DRIP_FIELDS.COMPANY_NAME}
-        label={`Company name` + `${props.parentForm === 'partnerships' ? '*' : ''}`}
+        label={`Company name ${props.parentForm === 'partnerships' ? '*' : ''}`}
         placeholder="Your company name"
         fullWidth
         inputRef={
@@ -79,11 +91,11 @@ export const Field_CompanyName = props => {
             : null
         }
         error={!!hasError}
-        helperText={!!hasError ? 'This field is required' : ''}
+        helperText={hasError ? 'This field is required' : ''}
       />
     </Grid>
-  );
-};
+  )
+}
 
 export const Field_CompanyWebsite = () => (
   <Grid item xs={12}>
@@ -94,20 +106,23 @@ export const Field_CompanyWebsite = () => (
       fullWidth
     />
   </Grid>
-);
+)
 
 export const Field_Consent = () => {
-  const [isChecked, setIsChecked] = useState(false);
-  const handleCheckboxChange = e => {
-    setIsChecked(e.target.checked);
-  };
+  const [isChecked, setIsChecked] = useState(false)
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked)
+  }
   return (
     <Grid item xs={12}>
       <FormControlLabel
         label={
           <p>
             Send me cool marketing info and offers by email or Facebook. (
-            <a href="https://www.leadpages.com/privacy">Privacy Policy</a>)
+            <Link href="https://www.leadpages.com/privacy" passHref>
+              <StyledLink>Privacy Policy</StyledLink>
+            </Link>
+            )
           </p>
         }
         control={
@@ -120,19 +135,21 @@ export const Field_Consent = () => {
         }
       />
     </Grid>
-  );
-};
+  )
+}
 
-export const Field_Email = props => {
-  const { register, errors } = useFormContext();
-  const hasError = errors.fields && errors.fields.email;
+export const Field_Email = (props) => {
+  const { register, errors } = useFormContext()
+  const hasError = errors.fields && errors.fields.email
+
   return (
     <Grid item xs={12}>
       <TextField
         name={DRIP_FIELDS.EMAIL}
         label="Email address*"
         placeholder={
-          props.parentForm === 'legal' || props.parentForm === 'consideringleadpages'
+          props.parentForm === 'legal' ||
+          props.parentForm === 'consideringleadpages'
             ? 'Your email address'
             : 'Your Leadpages email address'
         }
@@ -144,15 +161,15 @@ export const Field_Email = props => {
           },
         })}
         error={!!hasError}
-        helperText={!!hasError ? 'Enter a valid email address' : ''}
+        helperText={hasError ? 'Enter a valid email address' : ''}
       />
     </Grid>
-  );
-};
+  )
+}
 
 export const Field_JobTitle = () => {
-  const { register, errors } = useFormContext();
-  const hasError = errors.fields && errors.fields.job_title;
+  const { register, errors } = useFormContext()
+  const hasError = errors.fields && errors.fields.job_title
   return (
     <Grid item xs={12}>
       <TextField
@@ -164,11 +181,11 @@ export const Field_JobTitle = () => {
           required: true,
         })}
         error={!!hasError}
-        helperText={!!hasError ? 'This field is required' : ''}
+        helperText={hasError ? 'This field is required' : ''}
       />
     </Grid>
-  );
-};
+  )
+}
 
 export const Field_MarketingGoals = () => (
   <Grid item xs={12}>
@@ -181,7 +198,7 @@ export const Field_MarketingGoals = () => (
       rows={4}
     />
   </Grid>
-);
+)
 
 export const Field_MarketingStrategy = () => (
   <Grid item xs={12}>
@@ -194,7 +211,7 @@ export const Field_MarketingStrategy = () => (
       rows={2}
     />
   </Grid>
-);
+)
 
 export const Field_MarketingTools = () => (
   <Grid item xs={12}>
@@ -207,11 +224,12 @@ export const Field_MarketingTools = () => (
       rows={2}
     />
   </Grid>
-);
+)
 
 export const Field_Message = () => {
-  const { register, errors } = useFormContext();
-  const hasError = errors.fields && errors.fields.contact_message;
+  const { register, errors } = useFormContext()
+  const hasError = errors.fields && errors.fields.contact_message
+
   return (
     <Grid item xs={12}>
       <TextField
@@ -225,15 +243,16 @@ export const Field_Message = () => {
           required: true,
         })}
         error={!!hasError}
-        helperText={!!hasError ? 'This field is required' : ''}
+        helperText={hasError ? 'This field is required' : ''}
       />
     </Grid>
-  );
-};
+  )
+}
 
 export const Field_Name = () => {
-  const { register, errors } = useFormContext();
-  const hasError = errors.fields && errors.fields.full_name;
+  const { register, errors } = useFormContext()
+  const hasError = errors.fields && errors.fields.full_name
+
   return (
     <Grid item xs={12}>
       <TextField
@@ -245,19 +264,19 @@ export const Field_Name = () => {
           required: true,
         })}
         error={!!hasError}
-        helperText={!!hasError ? 'This field is required' : ''}
+        helperText={hasError ? 'This field is required' : ''}
       />
     </Grid>
-  );
-};
+  )
+}
 
 export const Field_OpenTicket = () => {
-  const { register, errors } = useFormContext();
-  const groupHasError = errors.fields && errors.fields.open_ticket;
-  const [hasOpenTicket, setHasOpenTicket] = useState('');
-  const handleRadioChange = e => {
-    setHasOpenTicket(e.target.value);
-  };
+  const { register, errors } = useFormContext()
+  const groupHasError = errors.fields && errors.fields.open_ticket
+  const [hasOpenTicket, setHasOpenTicket] = useState('')
+  const handleRadioChange = (e) => {
+    setHasOpenTicket(e.target.value)
+  }
 
   return (
     <Grid item xs={12}>
@@ -289,20 +308,23 @@ export const Field_OpenTicket = () => {
             control={<Radio />}
           />
         </RadioGroup>
-        {!!groupHasError && <FormHelperText error>This field is required</FormHelperText>}
+        {!!groupHasError && (
+          <FormHelperText error>This field is required</FormHelperText>
+        )}
       </FormControl>
       <Collapse in={hasOpenTicket === 'Yes'} timeout={300}>
         <Field_TicketNumber hasOpenTicket={hasOpenTicket} />
       </Collapse>
     </Grid>
-  );
-};
+  )
+}
 
 export const Field_PhoneNumber = () => {
-  const [phoneNumber, setPhoneNumber] = useState();
-  const handleChange = value => {
-    setPhoneNumber(value);
-  };
+  const [phoneNumber, setPhoneNumber] = useState()
+  const handleChange = (value) => {
+    setPhoneNumber(value)
+  }
+
   return (
     <Grid item xs={12}>
       <PhoneInput
@@ -318,34 +340,42 @@ export const Field_PhoneNumber = () => {
         autoComplete="off"
       />
     </Grid>
-  );
-};
+  )
+}
 
-export const SubmitButton = props => (
+export const SubmitButton = (props) => (
   <Grid item xs={12}>
-    <Button type="submit" fullWidth disabled={props.disabled} onClick={e => props.preSubmission(e)}>
+    <Button
+      type="submit"
+      fullWidth
+      disabled={props.disabled}
+      onClick={(e) => props.preSubmission(e)}
+    >
       Submit
     </Button>
   </Grid>
-);
+)
 
 const Field_TicketNumber = ({ hasOpenTicket }) => {
-  const { register, unregister, errors } = useFormContext();
-  const hasError = errors.fields && errors.fields.ticket_number;
+  const { register, unregister, errors } = useFormContext()
+  const hasError = errors.fields && errors.fields.ticket_number
+
   useEffect(() => {
     if (hasOpenTicket !== 'No') {
-      register(DRIP_FIELDS.TICKET_NUMBER, { required: true });
+      register(DRIP_FIELDS.TICKET_NUMBER, { required: true })
     } else {
-      unregister(DRIP_FIELDS.TICKET_NUMBER);
+      unregister(DRIP_FIELDS.TICKET_NUMBER)
     }
-  }, [hasOpenTicket]);
-  const NumberField = styled(TextField)`
-    input[type='number']::-webkit-inner-spin-button,
-    input[type='number']::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  `;
+  }, [hasOpenTicket])
+
+  const NumberField = styled(TextField, {
+    [`input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button`]: {
+      WebkitAppearance: 'none',
+      margin: 0,
+    },
+  })
+
   return (
     <Grid item xs={12}>
       <NumberField
@@ -361,9 +391,11 @@ const Field_TicketNumber = ({ hasOpenTicket }) => {
             : null
         }
         error={hasOpenTicket !== 'No' && !!hasError}
-        helperText={hasOpenTicket !== 'No' && !!hasError ? 'This field is required' : ''}
+        helperText={
+          hasOpenTicket !== 'No' && !!hasError ? 'This field is required' : ''
+        }
         type="number"
       />
     </Grid>
-  );
-};
+  )
+}

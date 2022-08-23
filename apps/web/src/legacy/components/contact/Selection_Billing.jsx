@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 // components
-import SelectionLinks from './SelectionLinks';
-import Form_Support from './Form_Support';
+import SelectionLinks from './SelectionLinks'
+import Form_Support from './Form_Support'
 
 const linkArray = [
   {
@@ -25,17 +25,15 @@ const linkArray = [
       },
     ],
   },
-];
+]
 
-const Selection_Billing = () => {
-  return (
-    <SelectionLinks
-      parent="billing"
-      selection="Billing"
-      linkArray={linkArray}
-      contactForm={Form_Support}
-    />
-  );
-};
+const Selection_Billing = () => (
+  <SelectionLinks
+    parent="billing"
+    selection="Billing"
+    linkArray={linkArray}
+    contactForm={Form_Support}
+  />
+)
 
-export default Selection_Billing;
+export default Selection_Billing
