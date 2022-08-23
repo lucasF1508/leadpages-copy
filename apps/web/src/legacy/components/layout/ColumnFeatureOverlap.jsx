@@ -1,141 +1,148 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
-import { GATSBY_IMAGE } from '../../constants/types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { styled } from '@design'
+import Image from '@components/Image'
+import Link from 'next/link'
 
-const OuterContainer = styled.div`
-  position: relative;
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 4rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 577px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+  maxWidth: '1140px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  paddingTop: '4rem',
+  paddingRight: '3rem',
+  paddingLeft: '3rem',
 
-const InnerContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: start;
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
+  '@>s': {
+    paddingRight: '6rem',
+    paddingLeft: '6rem',
+  },
+})
 
-const ColumnSection = styled.div`
-  position: relative;
-  display: flex;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 48%;
-  flex: 0 0 48%;
-  width: 100%;
-  min-height: 1px;
-  max-width: 48%;
-  text-decoration: none;
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-`;
+const InnerContainer = styled('div', {
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+  alignItems: 'start',
 
-const TextSection = styled(ColumnSection)`
-  z-index: 4;
-  align-self: center;
-  margin-left: -10%;
-  padding: 5%;
-  background: #fff;
-  @media (max-width: 768px) {
-    margin-left: -5%;
-  }
-`;
+  '@media (max-width: 768px)': {
+    display: 'block',
+  },
+})
 
-const Title = styled.div`
-  font-family: 'Value Serif';
-  font-size: 24px;
-  line-height: 30px;
-  font-weight: 500;
-  margin-bottom: 1.25rem;
-  color: #0f0c09;
-  @media (max-width: 844px) {
-    padding-top: 20px;
-  }
-`;
+const ColumnSection = styled('div', {
+  position: 'relative',
+  display: 'flex',
+  WebkitBoxFlex: 0,
+  MsFlex: '0 0 48%',
+  flex: '0 0 48%',
+  width: '100%',
+  minHeight: '1px',
+  maxWidth: '48%',
+  textDecoration: 'none',
 
-const MainText = styled.div`
-  font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 1.25rem;
-  color: #575452;
-`;
+  '@media (max-width: 768px)': {
+    maxWidth: '100%',
+  },
+})
 
-const Supertitle = styled.div`
-  font-family: 'Space Mono';
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  margin-bottom: 1.25rem;
-  color: #0b236d;
-  background: #8fefef;
-  text-transform: uppercase;
-  text-align: center;
-  border-radius: 3px;
-  display: inline-block;
-  padding: 4px 8px;
-  @media (max-width: 844px) {
-    margin-top: 30px;
-  }
-`;
+const TextSection = styled(ColumnSection, {
+  zIndex: 4,
+  alignSelf: 'center',
+  marginLeft: '-10%',
+  padding: '5%',
+  background: '$white',
 
-const TextContainer = styled.div`
-  z-index: 2;
-  position: relative;
-  background: #fff;
-  width: 100%;
-`;
+  '@media (max-width: 768px)': {
+    marginLeft: '-5%',
+  },
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-  z-index: 4;
-`;
+const Title = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '24px',
+  lineHeight: '30px',
+  fontWeight: 500,
+  marginBottom: '1.25rem',
+  color: '$text',
 
-const OutboundLink = styled.a`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-  z-index: 4;
-`;
+  '@media (max-width: 844px)': {
+    paddingTop: '20px',
+  },
+})
 
-const Button = styled.button`
-  width: 222px;
-  height: 48px;
-  border-radius: 48px;
-  border: 3px solid #603eff;
-  background-color: #603eff;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 28px;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  @media (max-width: 340px) {
-    width: 240px;
-    font-size: 16px;
-    align-self: center;
-  }
-  &:hover {
-    background-color: #4d32cc;
-    border: 3px solid #4d32cc;
-  }
-`;
+const MainText = styled('div', {
+  fontSize: '16px',
+  lineHeight: '24px',
+  marginBottom: '1.25rem',
+  color: '$textAlt',
+})
+
+const Supertitle = styled('div', {
+  fontFamily: 'Space Mono',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  marginBottom: '1.25rem',
+  color: '#0b236d',
+  background: '#8fefef',
+  textTransform: 'uppercase',
+  textAlign: 'center',
+  borderRadius: '3px',
+  display: 'inline-block',
+  padding: '4px 8px',
+
+  '@media (max-width: 844px)': {
+    marginTop: '30px',
+  },
+})
+
+const TextContainer = styled('div', {
+  zIndex: 2,
+  position: 'relative',
+  background: '$white',
+  width: '100%',
+})
+
+const StyledLink = styled('a', {
+  textDecoration: 'none',
+  color: '$primary',
+  cursor: 'pointer',
+  zIndex: 4,
+})
+
+const OutboundLink = styled('a', {
+  textDecoration: 'none',
+  color: '$primary',
+  cursor: 'pointer',
+  zIndex: 4,
+})
+
+const Button = styled('button', {
+  width: '222px',
+  height: '48px',
+  borderRadius: '48px',
+  border: '3px solid $colors$primary',
+  backgroundColor: '$primary',
+  color: '$white',
+  fontSize: '16px',
+  fontWeight: 500,
+  lineHeight: '28px',
+  textAlign: 'center',
+  transition: 'all 0.3s ease',
+  cursor: 'pointer',
+
+  '@<xs': {
+    width: '240px',
+    fontSize: '16px',
+    alignSelf: 'center',
+  },
+
+  '&:hover': {
+    backgroundColor: '$indigoDark',
+    border: '3px solid $colors$indigoDark',
+  },
+})
 
 const ColumnFeatureOverlap = ({
   image,
@@ -151,7 +158,7 @@ const ColumnFeatureOverlap = ({
   <OuterContainer>
     <InnerContainer>
       <ColumnSection>
-        <GatsbyImage image={image} alt={imageAlt} />
+        <Image image={image} alt={imageAlt} />
       </ColumnSection>
       <TextSection>
         <TextContainer>
@@ -159,8 +166,10 @@ const ColumnFeatureOverlap = ({
           <Title>{title}</Title>
           <MainText>{text}</MainText>
           {link && (
-            <StyledLink to={link} alt={linkAlt}>
-              <Button>{buttonText}</Button>
+            <StyledLink href={link}>
+              <a aria-label={linkAlt}>
+                <Button>{buttonText}</Button>
+              </a>
             </StyledLink>
           )}
           {outboundLink && (
@@ -172,17 +181,17 @@ const ColumnFeatureOverlap = ({
       </TextSection>
     </InnerContainer>
   </OuterContainer>
-);
+)
 
 ColumnFeatureOverlap.defaultProps = {
   supertitle: '',
   link: '',
   outboundLink: '',
   linkAlt: '',
-};
+}
 
 ColumnFeatureOverlap.propTypes = {
-  image: GATSBY_IMAGE.isRequired,
+  image: Image.isRequired,
   imageAlt: PropTypes.string.isRequired,
   supertitle: PropTypes.string,
   title: PropTypes.string.isRequired,
@@ -191,6 +200,6 @@ ColumnFeatureOverlap.propTypes = {
   outboundLink: PropTypes.string,
   linkAlt: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
-};
+}
 
-export default ColumnFeatureOverlap;
+export default ColumnFeatureOverlap

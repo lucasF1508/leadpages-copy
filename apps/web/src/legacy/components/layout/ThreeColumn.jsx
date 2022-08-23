@@ -1,228 +1,235 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { GATSBY_IMAGE } from '../../constants/types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
+import Image from '@components/Image'
+import { styled } from '@design'
 // images
-import rightArrowPurpleSVG from '../../assets/images/global/arrow_right_purple.svg';
+import rightArrowPurpleSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 
-const OuterContainer = styled.div`
-  position: relative;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+})
 
-const LPUContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 3rem;
-  padding-bottom: 6rem;
-  padding-right: 3rem;
-  padding-left: 3rem;
-  @media (min-width: 577px) {
-    padding-right: 6rem;
-    padding-left: 6rem;
-  }
-`;
+const LPUContainer = styled('div', {
+  maxWidth: '1140px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  paddingTop: '3rem',
+  paddingBottom: '6rem',
+  paddingRight: '3rem',
+  paddingLeft: '3rem',
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  flex-wrap: wrap;
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
+  '@>s': {
+    paddingRight: '6rem',
+    paddingLeft: '6rem',
+  },
+})
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-decoration: none;
-  width: 100%;
-`;
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'start',
+  flexWrap: 'wrap',
 
-const FlexRow3 = styled(FlexRowItem)`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 29.3333%;
-  flex: 0 0 29.3333%;
-  max-width: 29.3333%;
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-`;
+  '@media (max-width: 768px)': {
+    display: 'block',
+  },
+})
 
-const FlexRow3Container = styled.div`
-  width: 100%;
-`;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textDecoration: 'none',
+  width: '100%',
+})
 
-const ImageContainer = styled(GatsbyImage)`
-  display: block;
-  width: 100%;
-  max-width: 350px;
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-`;
+const FlexRow3 = styled(FlexRowItem, {
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '2rem',
+  flex: '0 0 29.3333%',
+  maxWidth: '29.3333%',
 
-const FlexRow3Heading = styled.div`
-  padding-top: 1.5rem;
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  color: #0f0c09;
-`;
+  '@media (max-width: 768px)': {
+    maxWidth: '100%',
+  },
+})
 
-const FlexRow3Copy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 1.25rem;
-  color: #575452;
-`;
+const FlexRow3Container = styled('div', {
+  width: '100%',
+})
 
-const FlexRow3Webinar = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  margin-bottom: 1.25rem;
-  color: #0f0c09;
-`;
+const ImageContainer = styled(Image, {
+  display: 'block',
+  width: '100%',
+  maxWidth: '350px',
 
-const TextContainer = styled.div`
-  z-index: 2;
-  position: relative;
-  background: #fff;
-`;
+  '@media (max-width: 768px)': {
+    maxWidth: '100%',
+  },
+})
 
-const GalleryQuoteSection = styled.div`
-  position: relative;
-  background: #fff;
-  z-index: -1;
-  width: 100%;
-  display: none;
-  &.activeBlock {
-    display: block;
-    z-index: 3;
-  }
-`;
+const FlexRow3Heading = styled('div', {
+  paddingTop: '1.5rem',
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  marginBottom: '1.5rem',
+  color: '$text',
+})
 
-const GalleryQuoteTitle = styled.div`
-  font-family: 'Space Mono';
-  font-size: 12px;
-  letter-spacing: 2px;
-  line-height: 18px;
-  text-transform: uppercase;
-  opacity: 0.5;
-  color: #000;
-  margin-bottom: 1rem;
-  padding-top: 2rem;
-  @media (min-width: 769px) and (max-width: 992px) {
-    padding-right: 3.25rem;
-    padding-left: 3.25rem;
-    padding-top: 2rem;
-  }
+const FlexRow3Copy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '1.25rem',
+  color: '$textAlt',
+})
 
-  @media (min-width: 993px) {
-    padding-left: 5rem;
-    padding-right: 0.9rem;
-    padding-top: 4rem;
-  }
-`;
+const FlexRow3Webinar = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  marginBottom: '1.25rem',
+  color: '$text',
+})
 
-const GalleryQuote = styled.div`
-  font-family: 'Value Serif';
-  font-size: 1.25rem;
-  line-height: 1.5rem;
-  letter-spacing: -0.07px;
-  color: #0f0c09;
-  margin-bottom: 1rem;
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-    letter-spacing: -0.07px;
-    padding-right: 3.25rem;
-    padding-left: 3.25rem;
-    margin-bottom: 1rem;
-  }
-  @media (min-width: 993px) {
-    font-size: 1.875rem;
-    letter-spacing: -0.03125rem;
-    line-height: 2.25rem;
-    padding-left: 5rem;
-    padding-right: 0.9rem;
-    margin-bottom: 2rem;
-  }
-`;
+const TextContainer = styled('div', {
+  zIndex: 2,
+  position: 'relative',
+  background: '$white',
+})
 
-const GalleryQuoteLink = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 0.875rem;
-  line-height: 1.5rem;
-  text-align: left;
-  font-weight: 500;
-  @media (min-width: 769px) and (max-width: 992px) {
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    padding-right: 3.25rem;
-    padding-left: 3.25rem;
-    padding-bottom: 1.75rem;
-  }
-  @media (min-width: 993px) {
-    padding-left: 5rem;
-    padding-right: 0.9rem;
-    font-size: 18px;
-    line-height: 30px;
-    padding-bottom: 4rem;
-  }
-`;
+const GalleryQuoteSection = styled('div', {
+  position: 'relative',
+  background: '$white',
+  zIndex: -1,
+  width: '100%',
+  display: 'none',
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-  z-index: 4;
-`;
+  '&.activeBlock': {
+    display: 'block',
+    zIndex: 3,
+  },
+})
 
-const OutboundLink = styled.a`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-  z-index: 4;
-`;
+const GalleryQuoteTitle = styled('div', {
+  fontFamily: 'Space Mono',
+  fontSize: '12px',
+  letterSpacing: '2px',
+  lineHeight: '18px',
+  textTransform: 'uppercase',
+  opacity: 0.5,
+  color: '$black',
+  marginBottom: '1rem',
+  paddingTop: '2rem',
 
-const BigTabImage = styled.div`
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-`;
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    paddingRight: '3.25rem',
+    paddingLeft: '3.25rem',
+    paddingTop: '2rem',
+  },
 
-const GalleryContainer = styled.div`
-  position: relative;
-  z-index: 4;
-`;
+  '@>m': {
+    paddingLeft: '5rem',
+    paddingRight: '0.9rem',
+    paddingTop: '4rem',
+  },
+})
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`;
+const GalleryQuote = styled('div', {
+  fontFamily: 'Value Serif',
+  fontSize: '1.25rem',
+  lineHeight: '1.5rem',
+  letterSpacing: '-0.07px',
+  color: '$text',
+  marginBottom: '1rem',
 
-const CTA = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 30px;
-  text-align: left;
-  font-weight: 500;
-  margin-bottom: 2rem;
-`;
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '1.25rem',
+    lineHeight: '1.5rem',
+    letterSpacing: '-0.07px',
+    paddingRight: '3.25rem',
+    paddingLeft: '3.25rem',
+    marginBottom: '1rem',
+  },
+
+  '@>m': {
+    fontSize: '1.875rem',
+    letterSpacing: '-0.03125rem',
+    lineHeight: '2.25rem',
+    paddingLeft: '5rem',
+    paddingRight: '0.9rem',
+    marginBottom: '2rem',
+  },
+})
+
+const GalleryQuoteLink = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '0.875rem',
+  lineHeight: '1.5rem',
+  textAlign: 'left',
+  fontWeight: 500,
+
+  '@media (min-width: 769px) and (max-width: 992px)': {
+    fontSize: '0.875rem',
+    lineHeight: '1.5rem',
+    paddingRight: '3.25rem',
+    paddingLeft: '3.25rem',
+    paddingBottom: '1.75rem',
+  },
+
+  '@>m': {
+    paddingLeft: '5rem',
+    paddingRight: '0.9rem',
+    fontSize: '18px',
+    lineHeight: '30px',
+    paddingBottom: '4rem',
+  },
+})
+
+const StyledLink = styled('a', {
+  textDecoration: 'none',
+  color: '$primary',
+  cursor: 'pointer',
+  zIndex: 4,
+})
+
+const OutboundLink = styled('a', {
+  textDecoration: 'none',
+  color: '$primary',
+  cursor: 'pointer',
+  zIndex: 4,
+})
+
+const BigTabImage = styled('div', {
+  width: '100%',
+  height: '100%',
+  zIndex: -1,
+})
+
+const GalleryContainer = styled('div', {
+  position: 'relative',
+  zIndex: 4,
+})
+
+const ArrowRightPurple = styled('img', {
+  width: '20px',
+  height: '10px',
+})
+
+const CTA = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '30px',
+  textAlign: 'left',
+  fontWeight: 500,
+  marginBottom: '2rem',
+})
 
 const ThreeColumn = ({
   column1image,
@@ -259,30 +266,41 @@ const ThreeColumn = ({
         <FlexRow3>
           <FlexRow3Container>
             {column1link && (
-              <StyledLink to={column1link} alt={column1linkAlt}>
-                <GalleryContainer>
-                  <BigTabImage>
-                    <ImageContainer image={column1image} alt={column1imageAlt} />
-                  </BigTabImage>
-                  <TextContainer>
-                    <FlexRow3Heading>{column1heading}</FlexRow3Heading>
-                    <FlexRow3Copy>{column1copy}</FlexRow3Copy>
-                    <FlexRow3Webinar>{column1webinar}</FlexRow3Webinar>
+              <StyledLink href={column1link}>
+                <a aria-label={column1linkAlt}>
+                  <GalleryContainer>
+                    <BigTabImage>
+                      <ImageContainer
+                        image={column1image}
+                        alt={column1imageAlt}
+                      />
+                    </BigTabImage>
+                    <TextContainer>
+                      <FlexRow3Heading>{column1heading}</FlexRow3Heading>
+                      <FlexRow3Copy>{column1copy}</FlexRow3Copy>
+                      <FlexRow3Webinar>{column1webinar}</FlexRow3Webinar>
 
-                    <CTA>
-                      {column1CTA}
-                      &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
-                    </CTA>
-                  </TextContainer>
-                </GalleryContainer>
+                      <CTA>
+                        {column1CTA}
+                        &nbsp;
+                        <ArrowRightPurple
+                          src={rightArrowPurpleSVG.src}
+                          alt="purple right arrow"
+                        />
+                      </CTA>
+                    </TextContainer>
+                  </GalleryContainer>
+                </a>
               </StyledLink>
             )}
             {column1outboundlink && (
               <OutboundLink href={column1outboundlink} alt={column1linkAlt}>
                 <GalleryContainer>
                   <BigTabImage>
-                    <ImageContainer image={column1image} alt={column1imageAlt} />
+                    <ImageContainer
+                      image={column1image}
+                      alt={column1imageAlt}
+                    />
                   </BigTabImage>
                   <TextContainer>
                     <FlexRow3Heading>{column1heading}</FlexRow3Heading>
@@ -292,7 +310,10 @@ const ThreeColumn = ({
                     <CTA>
                       {column1CTA}
                       &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
+                      <ArrowRightPurple
+                        src={rightArrowPurpleSVG.src}
+                        alt="purple right arrow"
+                      />
                     </CTA>
                   </TextContainer>
                 </GalleryContainer>
@@ -303,30 +324,41 @@ const ThreeColumn = ({
         <FlexRow3>
           <FlexRow3Container>
             {column2link && (
-              <StyledLink to={column2link} alt={column2linkAlt}>
-                <GalleryContainer>
-                  <BigTabImage>
-                    <ImageContainer image={column2image} alt={column2imageAlt} />
-                  </BigTabImage>
-                  <TextContainer>
-                    <FlexRow3Heading>{column2heading}</FlexRow3Heading>
-                    <FlexRow3Copy>{column2copy}</FlexRow3Copy>
-                    <FlexRow3Webinar>{column2webinar}</FlexRow3Webinar>
+              <StyledLink href={column2link}>
+                <a aria-label={column2linkAlt}>
+                  <GalleryContainer>
+                    <BigTabImage>
+                      <ImageContainer
+                        image={column2image}
+                        alt={column2imageAlt}
+                      />
+                    </BigTabImage>
+                    <TextContainer>
+                      <FlexRow3Heading>{column2heading}</FlexRow3Heading>
+                      <FlexRow3Copy>{column2copy}</FlexRow3Copy>
+                      <FlexRow3Webinar>{column2webinar}</FlexRow3Webinar>
 
-                    <CTA>
-                      {column2CTA}
-                      &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
-                    </CTA>
-                  </TextContainer>
-                </GalleryContainer>
+                      <CTA>
+                        {column2CTA}
+                        &nbsp;
+                        <ArrowRightPurple
+                          src={rightArrowPurpleSVG.src}
+                          alt="purple right arrow"
+                        />
+                      </CTA>
+                    </TextContainer>
+                  </GalleryContainer>
+                </a>
               </StyledLink>
             )}
             {column2outboundlink && (
               <OutboundLink href={column2outboundlink} alt={column2linkAlt}>
                 <GalleryContainer>
                   <BigTabImage>
-                    <ImageContainer image={column2image} alt={column2imageAlt} />
+                    <ImageContainer
+                      image={column2image}
+                      alt={column2imageAlt}
+                    />
                   </BigTabImage>
                   <TextContainer>
                     <FlexRow3Heading>{column2heading}</FlexRow3Heading>
@@ -336,7 +368,10 @@ const ThreeColumn = ({
                     <CTA>
                       {column2CTA}
                       &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
+                      <ArrowRightPurple
+                        src={rightArrowPurpleSVG.src}
+                        alt="purple right arrow"
+                      />
                     </CTA>
                   </TextContainer>
                 </GalleryContainer>
@@ -347,30 +382,41 @@ const ThreeColumn = ({
         <FlexRow3>
           <FlexRow3Container>
             {column3link && (
-              <StyledLink to={column3link} alt={column3linkAlt}>
-                <GalleryContainer>
-                  <BigTabImage>
-                    <ImageContainer image={column3image} alt={column3imageAlt} />
-                  </BigTabImage>
-                  <TextContainer>
-                    <FlexRow3Heading>{column3heading}</FlexRow3Heading>
-                    <FlexRow3Copy>{column3copy}</FlexRow3Copy>
-                    <FlexRow3Webinar>{column3webinar}</FlexRow3Webinar>
+              <StyledLink href={column3link}>
+                <a aria-label={column3linkAlt}>
+                  <GalleryContainer>
+                    <BigTabImage>
+                      <ImageContainer
+                        image={column3image}
+                        alt={column3imageAlt}
+                      />
+                    </BigTabImage>
+                    <TextContainer>
+                      <FlexRow3Heading>{column3heading}</FlexRow3Heading>
+                      <FlexRow3Copy>{column3copy}</FlexRow3Copy>
+                      <FlexRow3Webinar>{column3webinar}</FlexRow3Webinar>
 
-                    <CTA>
-                      {column3CTA}
-                      &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
-                    </CTA>
-                  </TextContainer>
-                </GalleryContainer>
+                      <CTA>
+                        {column3CTA}
+                        &nbsp;
+                        <ArrowRightPurple
+                          src={rightArrowPurpleSVG.src}
+                          alt="purple right arrow"
+                        />
+                      </CTA>
+                    </TextContainer>
+                  </GalleryContainer>
+                </a>
               </StyledLink>
             )}
             {column3outboundlink && (
               <OutboundLink href={column3outboundlink} alt={column3linkAlt}>
                 <GalleryContainer>
                   <BigTabImage>
-                    <ImageContainer image={column3image} alt={column3imageAlt} />
+                    <ImageContainer
+                      image={column3image}
+                      alt={column3imageAlt}
+                    />
                   </BigTabImage>
                   <TextContainer>
                     <FlexRow3Heading>{column3heading}</FlexRow3Heading>
@@ -380,7 +426,10 @@ const ThreeColumn = ({
                     <CTA>
                       {column3CTA}
                       &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
+                      <ArrowRightPurple
+                        src={rightArrowPurpleSVG.src}
+                        alt="purple right arrow"
+                      />
                     </CTA>
                   </TextContainer>
                 </GalleryContainer>
@@ -391,7 +440,7 @@ const ThreeColumn = ({
       </FlexRow>
     </LPUContainer>
   </OuterContainer>
-);
+)
 
 ThreeColumn.defaultProps = {
   column1imageAlt: '',
@@ -418,10 +467,10 @@ ThreeColumn.defaultProps = {
   column3outboundlink: '',
   column3linkAlt: '',
   column3CTA: '',
-};
+}
 
 ThreeColumn.propTypes = {
-  column1image: GATSBY_IMAGE.isRequired,
+  column1image: Image.isRequired,
   column1imageAlt: PropTypes.string,
   column1heading: PropTypes.string,
   column1copy: PropTypes.string,
@@ -430,7 +479,7 @@ ThreeColumn.propTypes = {
   column1outboundlink: PropTypes.string,
   column1linkAlt: PropTypes.string,
   column1CTA: PropTypes.string,
-  column2image: GATSBY_IMAGE.isRequired,
+  column2image: Image.isRequired,
   column2imageAlt: PropTypes.string,
   column2heading: PropTypes.string,
   column2copy: PropTypes.string,
@@ -439,7 +488,7 @@ ThreeColumn.propTypes = {
   column2outboundlink: PropTypes.string,
   column2linkAlt: PropTypes.string,
   column2CTA: PropTypes.string,
-  column3image: GATSBY_IMAGE.isRequired,
+  column3image: Image.isRequired,
   column3imageAlt: PropTypes.string,
   column3heading: PropTypes.string,
   column3copy: PropTypes.string,
@@ -448,6 +497,6 @@ ThreeColumn.propTypes = {
   column3outboundlink: PropTypes.string,
   column3linkAlt: PropTypes.string,
   column3CTA: PropTypes.string,
-};
+}
 
-export default ThreeColumn;
+export default ThreeColumn

@@ -1,151 +1,143 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import { GATSBY_IMAGE } from '../../constants/types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import Image from '@components/Image'
+import Link from 'next/link'
+import { styled } from '@design'
 // images
-import rightArrowPurpleSVG from '../../assets/images/global/arrow_right_purple.svg';
+import rightArrowPurpleSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 
-const OuterContainer = styled.div`
-  position: relative;
-`;
+const OuterContainer = styled('div', {
+  position: 'relative',
+})
 
-const LPUContainer = styled.div`
-  max-width: 1140px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 3rem;
-  padding-bottom: ${props => props.paddingBottom || '6rem'};
-  padding-right: ${props => props.paddingRight || '3rem'};
-  padding-left: ${props => props.paddingLeft || '3rem'};
-  @media (min-width: 992px) {
-    padding-right: ${props => props.paddingRightDesktop || '6rem'};
-    padding-left: ${props => props.paddingLeftDesktop || '6rem'};
-  }
-`;
+const LPUContainer = styled('div', {
+  maxWidth: '1140px',
+  marginLeft: 'auto',
+  marginRight: 'auto',
+})
 
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  flex-wrap: wrap;
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
+const FlexRow = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'start',
+  flexWrap: 'wrap',
 
-const FlexRowItem = styled.div`
-  min-height: 1px;
-  position: relative;
-  text-decoration: none;
-  width: 100%;
-`;
+  '@media (max-width: 768px)': {
+    display: 'block',
+  },
+})
 
-const FlexRow3 = styled(FlexRowItem)`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 29.3333%;
-  flex: 0 0 29.3333%;
-  max-width: 29.3333%;
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-`;
+const FlexRowItem = styled('div', {
+  minHeight: '1px',
+  position: 'relative',
+  textDecoration: 'none',
+  width: '100%',
+})
 
-const FlexRow3Container = styled.div`
-  width: 100%;
-`;
+const FlexRow3 = styled(FlexRowItem, {
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '2rem',
+  flex: '0 0 29.3333%',
+  maxWidth: '29.3333%',
 
-const ImageContainer = styled(GatsbyImage)`
-  display: block;
-  width: 100%;
-  max-width: 350px;
-  @media (max-width: 768px) {
-    max-width: 100%;
-  }
-`;
+  '@media (max-width: 768px)': {
+    maxWidth: '100%',
+  },
+})
 
-const FlexRow3Heading = styled.div`
-  padding-top: 1.5rem;
-  font-family: 'Apercu Pro';
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  color: #0f0c09;
-`;
+const FlexRow3Container = styled('div', {
+  width: '100%',
+})
 
-const FlexRow3Copy = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 1.25rem;
-  color: #575452;
-`;
+const ImageContainer = styled(Image, {
+  display: 'block',
+  width: '100%',
+  maxWidth: '350px',
 
-const FlexRow3Webinar = styled.div`
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 500;
-  margin-bottom: 1.25rem;
-  color: #0f0c09;
-`;
+  '@media (max-width: 768px)': {
+    maxWidth: '100%',
+  },
+})
 
-const TextContainer = styled.div`
-  z-index: 2;
-  position: relative;
-  background: #fff;
-  text-align: left;
-  width: 75%;
-  padding-right: 10%;
-  margin-top: -15%;
-  margin-right: auto;
-  margin-left: -1px;
-`;
+const FlexRow3Heading = styled('div', {
+  paddingTop: '1.5rem',
+  fontFamily: 'Apercu Pro',
+  fontSize: '18px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  marginBottom: '1.5rem',
+  color: '$text',
+})
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-  z-index: 4;
-`;
+const FlexRow3Copy = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '14px',
+  lineHeight: '20px',
+  marginBottom: '1.25rem',
+  color: '$textAlt',
+})
 
-const OutboundLink = styled.a`
-  text-decoration: none;
-  color: #603eff;
-  cursor: pointer;
-  z-index: 4;
-`;
+const FlexRow3Webinar = styled('div', {
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '24px',
+  fontWeight: 500,
+  marginBottom: '1.25rem',
+  color: '$text',
+})
 
-const BigTabImage = styled.div`
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-`;
+const TextContainer = styled('div', {
+  zIndex: 2,
+  position: 'relative',
+  background: '$white',
+  textAlign: 'left',
+  width: '75%',
+  paddingRight: '10%',
+  marginTop: '-15%',
+  marginRight: 'auto',
+  marginLeft: '-1px',
+})
 
-const GalleryContainer = styled.div`
-  position: relative;
-  z-index: 4;
-`;
+const StyledLink = styled('a', {
+  textDecoration: 'none',
+  color: '$primary',
+  cursor: 'pointer',
+  zIndex: 4,
+})
 
-const ArrowRightPurple = styled.img`
-  width: 20px;
-  height: 10px;
-`;
+const OutboundLink = styled('a', {
+  textDecoration: 'none',
+  color: '$primary',
+  cursor: 'pointer',
+  zIndex: 4,
+})
 
-const CTA = styled.div`
-  color: #603eff;
-  font-family: 'Apercu Pro';
-  font-size: 16px;
-  line-height: 30px;
-  text-align: left;
-  font-weight: 500;
-  margin-bottom: 2rem;
-`;
+const BigTabImage = styled('div', {
+  width: '100%',
+  height: '100%',
+  zIndex: -1,
+})
+
+const GalleryContainer = styled('div', {
+  position: 'relative',
+  zIndex: 4,
+})
+
+const ArrowRightPurple = styled('img', {
+  width: '20px',
+  height: '10px',
+})
+
+const CTA = styled('div', {
+  color: '$primary',
+  fontFamily: 'Apercu Pro',
+  fontSize: '16px',
+  lineHeight: '30px',
+  textAlign: 'left',
+  fontWeight: 500,
+  marginBottom: '2rem',
+})
 
 const ThreeColumnOverlap = ({
   column1image,
@@ -183,40 +175,57 @@ const ThreeColumnOverlap = ({
 }) => (
   <OuterContainer>
     <LPUContainer
-      paddingBottom={paddingBottom}
-      paddingLeft={paddingLeft}
-      paddingLeftDesktop={paddingLeftDesktop}
-      paddingRight={paddingRight}
-      paddingRightDesktop={paddingRightDesktop}
+      css={{
+        paddingTop: '3rem',
+        paddingBottom: paddingBottom || '6rem',
+        paddingRight: paddingRight || '3rem',
+        paddingLeft: paddingLeft || '3rem',
+
+        '@>m': {
+          paddingRight: paddingRightDesktop || '6rem',
+          paddingLeft: paddingLeftDesktop || '6rem',
+        },
+      }}
     >
       <FlexRow>
         <FlexRow3>
           <FlexRow3Container>
             {column1link && (
-              <StyledLink to={column1link} alt={column1linkAlt}>
-                <GalleryContainer>
-                  <BigTabImage>
-                    <ImageContainer image={column1image} alt={column1imageAlt} />
-                  </BigTabImage>
-                  <TextContainer>
-                    <FlexRow3Heading>{column1heading}</FlexRow3Heading>
-                    <FlexRow3Copy>{column1copy}</FlexRow3Copy>
-                    <FlexRow3Webinar>{column1webinar}</FlexRow3Webinar>
+              <StyledLink href={column1link}>
+                <a aria-label={column1linkAlt}>
+                  <GalleryContainer>
+                    <BigTabImage>
+                      <ImageContainer
+                        image={column1image}
+                        alt={column1imageAlt}
+                      />
+                    </BigTabImage>
+                    <TextContainer>
+                      <FlexRow3Heading>{column1heading}</FlexRow3Heading>
+                      <FlexRow3Copy>{column1copy}</FlexRow3Copy>
+                      <FlexRow3Webinar>{column1webinar}</FlexRow3Webinar>
 
-                    <CTA>
-                      {column1CTA}
-                      &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
-                    </CTA>
-                  </TextContainer>
-                </GalleryContainer>
+                      <CTA>
+                        {column1CTA}
+                        &nbsp;
+                        <ArrowRightPurple
+                          src={rightArrowPurpleSVG.src}
+                          alt="purple right arrow"
+                        />
+                      </CTA>
+                    </TextContainer>
+                  </GalleryContainer>
+                </a>
               </StyledLink>
             )}
             {column1outboundlink && (
               <OutboundLink href={column1outboundlink} alt={column1linkAlt}>
                 <GalleryContainer>
                   <BigTabImage>
-                    <ImageContainer image={column1image} alt={column1imageAlt} />
+                    <ImageContainer
+                      image={column1image}
+                      alt={column1imageAlt}
+                    />
                   </BigTabImage>
                   <TextContainer>
                     <FlexRow3Heading>{column1heading}</FlexRow3Heading>
@@ -225,7 +234,10 @@ const ThreeColumnOverlap = ({
                     <CTA>
                       {column1CTA}
                       &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
+                      <ArrowRightPurple
+                        src={rightArrowPurpleSVG.src}
+                        alt="purple right arrow"
+                      />
                     </CTA>
                   </TextContainer>
                 </GalleryContainer>
@@ -236,30 +248,41 @@ const ThreeColumnOverlap = ({
         <FlexRow3>
           <FlexRow3Container>
             {column2link && (
-              <StyledLink to={column2link} alt={column2linkAlt}>
-                <GalleryContainer>
-                  <BigTabImage>
-                    <ImageContainer image={column2image} alt={column2imageAlt} />
-                  </BigTabImage>
-                  <TextContainer>
-                    <FlexRow3Heading>{column2heading}</FlexRow3Heading>
-                    <FlexRow3Copy>{column2copy}</FlexRow3Copy>
-                    <FlexRow3Webinar>{column2webinar}</FlexRow3Webinar>
+              <StyledLink href={column2link}>
+                <a aria-label={column2linkAlt}>
+                  <GalleryContainer>
+                    <BigTabImage>
+                      <ImageContainer
+                        image={column2image}
+                        alt={column2imageAlt}
+                      />
+                    </BigTabImage>
+                    <TextContainer>
+                      <FlexRow3Heading>{column2heading}</FlexRow3Heading>
+                      <FlexRow3Copy>{column2copy}</FlexRow3Copy>
+                      <FlexRow3Webinar>{column2webinar}</FlexRow3Webinar>
 
-                    <CTA>
-                      {column2CTA}
-                      &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
-                    </CTA>
-                  </TextContainer>
-                </GalleryContainer>
+                      <CTA>
+                        {column2CTA}
+                        &nbsp;
+                        <ArrowRightPurple
+                          src={rightArrowPurpleSVG.src}
+                          alt="purple right arrow"
+                        />
+                      </CTA>
+                    </TextContainer>
+                  </GalleryContainer>
+                </a>
               </StyledLink>
             )}
             {column2outboundlink && (
               <OutboundLink href={column2outboundlink} alt={column2linkAlt}>
                 <GalleryContainer>
                   <BigTabImage>
-                    <ImageContainer image={column2image} alt={column2imageAlt} />
+                    <ImageContainer
+                      image={column2image}
+                      alt={column2imageAlt}
+                    />
                   </BigTabImage>
                   <TextContainer>
                     <FlexRow3Heading>{column2heading}</FlexRow3Heading>
@@ -268,7 +291,10 @@ const ThreeColumnOverlap = ({
                     <CTA>
                       {column2CTA}
                       &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
+                      <ArrowRightPurple
+                        src={rightArrowPurpleSVG.src}
+                        alt="purple right arrow"
+                      />
                     </CTA>
                   </TextContainer>
                 </GalleryContainer>
@@ -279,30 +305,41 @@ const ThreeColumnOverlap = ({
         <FlexRow3>
           <FlexRow3Container>
             {column3link && (
-              <StyledLink to={column3link} alt={column3linkAlt}>
-                <GalleryContainer>
-                  <BigTabImage>
-                    <ImageContainer image={column3image} alt={column3imageAlt} />
-                  </BigTabImage>
-                  <TextContainer>
-                    <FlexRow3Heading>{column3heading}</FlexRow3Heading>
-                    <FlexRow3Copy>{column3copy}</FlexRow3Copy>
-                    <FlexRow3Webinar>{column3webinar}</FlexRow3Webinar>
+              <StyledLink href={column3link}>
+                <a aria-label={column3linkAlt}>
+                  <GalleryContainer>
+                    <BigTabImage>
+                      <ImageContainer
+                        image={column3image}
+                        alt={column3imageAlt}
+                      />
+                    </BigTabImage>
+                    <TextContainer>
+                      <FlexRow3Heading>{column3heading}</FlexRow3Heading>
+                      <FlexRow3Copy>{column3copy}</FlexRow3Copy>
+                      <FlexRow3Webinar>{column3webinar}</FlexRow3Webinar>
 
-                    <CTA>
-                      {column3CTA}
-                      &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
-                    </CTA>
-                  </TextContainer>
-                </GalleryContainer>
+                      <CTA>
+                        {column3CTA}
+                        &nbsp;
+                        <ArrowRightPurple
+                          src={rightArrowPurpleSVG.src}
+                          alt="purple right arrow"
+                        />
+                      </CTA>
+                    </TextContainer>
+                  </GalleryContainer>
+                </a>
               </StyledLink>
             )}
             {column3outboundlink && (
               <OutboundLink href={column3outboundlink} alt={column3linkAlt}>
                 <GalleryContainer>
                   <BigTabImage>
-                    <ImageContainer image={column3image} alt={column3imageAlt} />
+                    <ImageContainer
+                      image={column3image}
+                      alt={column3imageAlt}
+                    />
                   </BigTabImage>
                   <TextContainer>
                     <FlexRow3Heading>{column3heading}</FlexRow3Heading>
@@ -311,7 +348,10 @@ const ThreeColumnOverlap = ({
                     <CTA>
                       {column3CTA}
                       &nbsp;
-                      <ArrowRightPurple src={rightArrowPurpleSVG} alt="purple right arrow" />
+                      <ArrowRightPurple
+                        src={rightArrowPurpleSVG.src}
+                        alt="purple right arrow"
+                      />
                     </CTA>
                   </TextContainer>
                 </GalleryContainer>
@@ -322,7 +362,7 @@ const ThreeColumnOverlap = ({
       </FlexRow>
     </LPUContainer>
   </OuterContainer>
-);
+)
 
 ThreeColumnOverlap.defaultProps = {
   column1imageAlt: '',
@@ -354,10 +394,10 @@ ThreeColumnOverlap.defaultProps = {
   paddingLeftDesktop: '6rem',
   paddingRight: '3rem',
   paddingRightDesktop: '6rem',
-};
+}
 
 ThreeColumnOverlap.propTypes = {
-  column1image: GATSBY_IMAGE.isRequired,
+  column1image: Image.isRequired,
   column1imageAlt: PropTypes.string,
   column1heading: PropTypes.string,
   column1copy: PropTypes.string,
@@ -366,7 +406,7 @@ ThreeColumnOverlap.propTypes = {
   column1outboundlink: PropTypes.string,
   column1linkAlt: PropTypes.string,
   column1CTA: PropTypes.string,
-  column2image: GATSBY_IMAGE.isRequired,
+  column2image: Image.isRequired,
   column2imageAlt: PropTypes.string,
   column2heading: PropTypes.string,
   column2copy: PropTypes.string,
@@ -375,7 +415,7 @@ ThreeColumnOverlap.propTypes = {
   column2outboundlink: PropTypes.string,
   column2linkAlt: PropTypes.string,
   column2CTA: PropTypes.string,
-  column3image: GATSBY_IMAGE.isRequired,
+  column3image: Image.isRequired,
   column3imageAlt: PropTypes.string,
   column3heading: PropTypes.string,
   column3copy: PropTypes.string,
@@ -389,6 +429,6 @@ ThreeColumnOverlap.propTypes = {
   paddingLeftDesktop: PropTypes.string,
   paddingRight: PropTypes.string,
   paddingRightDesktop: PropTypes.string,
-};
+}
 
-export default ThreeColumnOverlap;
+export default ThreeColumnOverlap
