@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
@@ -16,9 +15,7 @@ import sallyTestimonial from '@legacy/assets/images/testimonials/sally-zimney-72
 
 const integrationName = 'Zapier'
 
-const headerBkgColor = '#f7f7f7'
-
-const IntegrationsSubpageZapier = () => {
+const Zapier = () => {
   const integrationInfo = [
     {
       image: columnImage1,
@@ -87,7 +84,7 @@ const IntegrationsSubpageZapier = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/zapier"
         title="Connect Leadpages to 2000+ Apps With Zapier"
@@ -101,8 +98,8 @@ const IntegrationsSubpageZapier = () => {
         testimonial={testimonial}
         integrationInfo={integrationInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageZapier
+export default Zapier

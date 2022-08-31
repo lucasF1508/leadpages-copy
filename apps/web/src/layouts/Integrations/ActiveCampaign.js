@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
@@ -8,8 +7,6 @@ import heroImage from '@legacy/assets/images/integrations/subpages/ActiveCampaig
 import twoColumnImage from '@legacy/assets/images/integrations/subpages/ActiveCampaign-connect_730px@2x.png'
 
 const integrationName = 'ActiveCampaign'
-
-const headerBkgColor = '#f7f7f7'
 
 const testimonial = {
   quote:
@@ -51,7 +48,7 @@ const integrationInfo = [
   },
 ]
 
-const IntegrationsSubpageActiveCampaign = () => {
+const ActiveCampaign = () => {
   const heroData = {
     headlineText: 'Leadpages + ActiveCampaign',
     tooltipText: '  •  Last Updated August 2020',
@@ -76,7 +73,7 @@ const IntegrationsSubpageActiveCampaign = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/active-campaign"
         title="Connect your Leadpages to ActiveCampaign | Get Online & Grow"
@@ -90,8 +87,8 @@ const IntegrationsSubpageActiveCampaign = () => {
         testimonial={testimonial}
         integrationInfo={integrationInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageActiveCampaign
+export default ActiveCampaign

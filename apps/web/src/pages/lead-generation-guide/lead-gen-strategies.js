@@ -7,7 +7,7 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/lead-generation-guide/lead-gen-strategies'
 
-  const data = {}
+  const data = { underlaidMenu: true }
 
   return {
     props: {

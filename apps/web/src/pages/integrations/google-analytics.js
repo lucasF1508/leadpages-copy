@@ -1,11 +1,11 @@
 import React from 'react'
-import Comparisons from '@layouts/Comparisons'
+import GoogleAnalytics from '@layouts/Integrations/GoogleAnalytics'
 
-const ComparisonsPage = (props) => <Comparisons {...props} />
+const GoogleAnalyticsPage = (props) => <GoogleAnalytics {...props} />
 
 export async function getStaticProps(context) {
   const { preview = false } = context
-  const slug = '/comparisons'
+  const slug = '/integrations/google-analytics'
 
   const data = { headerBkgColor: '$grayAlt' }
 
@@ -18,4 +18,4 @@ export async function getStaticProps(context) {
   }
 }
 
-export default ComparisonsPage
+export default GoogleAnalyticsPage

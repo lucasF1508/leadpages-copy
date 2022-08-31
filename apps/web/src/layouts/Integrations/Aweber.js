@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
@@ -9,8 +8,6 @@ import twoColumnImage from '@legacy/assets/images/integrations/subpages/AWeber-c
 import marcoTestimonial from '@legacy/assets/images/testimonials/Marco-Cirillo-72px@2x.png'
 
 const integrationName = 'AWeber'
-
-const headerBkgColor = '#f7f7f7'
 
 const integrationInfo = [
   {
@@ -45,7 +42,7 @@ const integrationInfo = [
   },
 ]
 
-const IntegrationsSubpageAWeber = () => {
+const Aweber = () => {
   const testimonial = {
     quote: `"Leadpages is easy to use! I had been using ClickFunnels since 2015 but I immediately switched to Leadpages as soon as I saw it. I love the templates and the "clean" pages. It's also great that you can live chat with the support team."`,
     clientName: 'Marco Cirillo',
@@ -78,7 +75,7 @@ const IntegrationsSubpageAWeber = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/aweber"
         title="Connect your Leadpages to AWeber| Get Online & Grow"
@@ -92,8 +89,8 @@ const IntegrationsSubpageAWeber = () => {
         testimonial={testimonial}
         integrationInfo={integrationInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageAWeber
+export default Aweber

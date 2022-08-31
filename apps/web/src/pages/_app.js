@@ -40,6 +40,13 @@ export default function App({
       slimFooter,
       isPreviewPage,
       onPromotionsLoaded,
+      isPricingMenu = false,
+      underlaidMenu = false,
+      isStartPageHeader = false,
+      scrollTarget = '',
+      noLogin = false,
+      headerBkgColor = null,
+      hideSignUpButton = false,
       ...meta
     } = {},
     slug,
@@ -67,7 +74,16 @@ export default function App({
         <SEO seo={pageData?.seo} siteMeta={siteMeta} />
         <LazyMotion features={loadFeatures} strict>
           {/* {navigation && <Header navigation={navigation} />} */}
-          <Header isPreviewPage={isPreviewPage} />
+          <Header
+            isPreviewPage={isPreviewPage}
+            isPricingMenu={isPricingMenu}
+            underlaidMenu={underlaidMenu}
+            isStartPageHeader={isStartPageHeader}
+            scrollTarget={scrollTarget}
+            noLogin={noLogin}
+            headerBkgColor={headerBkgColor}
+            hideSignUpButton={hideSignUpButton}
+          />
           <LayoutContainer>
             <Main {...pageData} {...meta} />
           </LayoutContainer>

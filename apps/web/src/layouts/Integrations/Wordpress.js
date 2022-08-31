@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
@@ -9,8 +8,6 @@ import twoColumnImage from '@legacy/assets/images/integrations/subpages/WordPres
 import sallyTestimonial from '@legacy/assets/images/testimonials/sally-zimney-72px@2x.png'
 
 const integrationName = 'WordPress'
-
-const headerBkgColor = '#f7f7f7'
 
 const integrationInfo = [
   {
@@ -35,7 +32,7 @@ const integrationInfo = [
   },
 ]
 
-const IntegrationsSubpageWordPress = () => {
+const Wordpress = () => {
   const testimonial = {
     quote: `“Leadpages takes the daunting tasks - tasks that my business depends on, but that are not in my wheelhouse as founder - and makes them doable and beautiful. Leadpages is essential.”`,
     clientName: 'Sally Zimney',
@@ -63,7 +60,7 @@ const IntegrationsSubpageWordPress = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/wordpress"
         title="Connect & Publish Leadpages to WordPress | Get Online & Grow"
@@ -77,8 +74,8 @@ const IntegrationsSubpageWordPress = () => {
         testimonial={testimonial}
         integrationInfo={integrationInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageWordPress
+export default Wordpress

@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 
@@ -10,8 +9,6 @@ import twoColumnImage from '@legacy/assets/images/integrations/subpages/Google-A
 import pamTestimonial from '@legacy/assets/images/testimonials/pam-moore.png'
 
 const integrationName = 'Google Analytics'
-
-const headerBkgColor = '#f7f7f7'
 
 const integrationInfo = [
   {
@@ -31,7 +28,7 @@ const integrationInfo = [
   },
 ]
 
-const IntegrationsSubpageGoogleAnalytics = () => {
+const GoogleAnalytics = () => {
   const testimonial = {
     quote: `“Leadpages helped us more than double our email subscriber list to over 35,000 in less than 6 months. We now have an average conversion rate of 60% to 80%+ on all landing pages.”`,
     clientName: 'Pam Moore',
@@ -58,7 +55,7 @@ const IntegrationsSubpageGoogleAnalytics = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/google-analytics"
         title="Use Leadpages With Google Analytics | Get Online & Grow"
@@ -72,8 +69,8 @@ const IntegrationsSubpageGoogleAnalytics = () => {
         testimonial={testimonial}
         integrationInfo={integrationInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageGoogleAnalytics
+export default GoogleAnalytics

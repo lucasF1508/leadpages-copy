@@ -7,7 +7,7 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/landing-pages-guide/'
 
-  const data = {}
+  const data = { underlaidMenu: true }
 
   return {
     props: {

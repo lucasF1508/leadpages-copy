@@ -1,11 +1,11 @@
 import React from 'react'
-import Comparisons from '@layouts/Comparisons'
+import ActiveCampaign from '@layouts/Integrations/ActiveCampaign'
 
-const ComparisonsPage = (props) => <Comparisons {...props} />
+const ActiveCampaignPage = (props) => <ActiveCampaign {...props} />
 
 export async function getStaticProps(context) {
   const { preview = false } = context
-  const slug = '/comparisons'
+  const slug = '/integrations/active-campaign'
 
   const data = { headerBkgColor: '$grayAlt' }
 
@@ -18,4 +18,4 @@ export async function getStaticProps(context) {
   }
 }
 
-export default ComparisonsPage
+export default ActiveCampaignPage

@@ -21,9 +21,20 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/compare-plans'
 
+  const layoutProps = {
+    hideBar: true,
+    isStartPageHeader: true,
+    slimFooter: true,
+    scrollTarget: 'destination',
+    noLogin: true,
+  }
+
   const rawPlanData = await getPlanData()
   const planData = getGroupedPlanData(rawPlanData)
-  const data = { planData }
+  const data = {
+    planData,
+    ...layoutProps,
+  }
 
   return {
     props: {

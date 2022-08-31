@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
@@ -8,8 +7,6 @@ import heroImage from '@legacy/assets/images/integrations/subpages/Infusionsoft+
 import twoColumnImage from '@legacy/assets/images/integrations/subpages/Infusionsoft-connect_730px@2x.png'
 
 const integrationName = 'InfusionSoft'
-
-const headerBkgColor = '#f7f7f7'
 
 const testimonial = {
   quote: `“I am sooooo happy. These pages are so easy to put together and publish. Not only that but the integration with my email auto responder is fabulous.”`,
@@ -40,7 +37,7 @@ const integrationInfo = [
   },
 ]
 
-const IntegrationsSubpageInfusionSoft = () => {
+const InfusionSoft = () => {
   const heroData = {
     headlineText: 'Leadpages + Infusionsoft',
     tooltipText: '  •  Last Updated August 2020',
@@ -65,7 +62,7 @@ const IntegrationsSubpageInfusionSoft = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/infusion-soft"
         title="Connect your Leadpages to Infusionsoft | Get Online & Grow"
@@ -79,8 +76,8 @@ const IntegrationsSubpageInfusionSoft = () => {
         testimonial={testimonial}
         integrationInfo={integrationInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageInfusionSoft
+export default InfusionSoft

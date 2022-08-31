@@ -7,7 +7,7 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/marketing-resources'
 
-  const data = {}
+  const data = { underlaidMenu: true }
 
   return {
     props: {

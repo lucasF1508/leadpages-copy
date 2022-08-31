@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Link from '@components/Link'
 import { Link as ScrollLink } from 'react-scroll'
 import { styled } from '@design'
+import { withRouter } from 'next/router'
 // images
 import burgerSVG from '@legacy/assets/images/global/burger.svg'
 import closeSVG from '@legacy/assets/images/global/x_close.svg'
@@ -26,11 +27,12 @@ const HeaderContainer = styled('header', {
   },
 
   '&.scrolled': {
-    background: '#fff',
+    background: '$white',
     zIndex: 1501,
     borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+
     '&:hover': {
-      background: '#ffffff !important',
+      background: '$white !important',
     },
   },
 
@@ -44,8 +46,10 @@ const HeaderContainer = styled('header', {
       },
     },
     isStartPageHeader: {
-      '&:hover': {
-        background: 'none',
+      true: {
+        '&:hover': {
+          background: 'none',
+        },
       },
     },
   },
@@ -64,8 +68,8 @@ const DesktopMenuContainer = styled('div', {
 
   '*': {
     '.active': {
-      color: '#603eff',
-      borderBottom: '3px solid #603eff',
+      color: '$primary',
+      borderBottom: '3px solid $colors$primary',
       textDecoration: 'none',
       paddingBottom: '0.5rem',
       marginRight: '16px',
@@ -101,8 +105,8 @@ const MobileMenuContainer = styled('div', {
 
   '*': {
     '.active': {
-      color: '#603eff',
-      borderBottom: '3px solid #603eff',
+      color: '$primary',
+      borderBottom: '3px solid $colors$primary',
       textDecoration: 'none',
       paddingBottom: '0.5rem',
       marginRight: '16px',
@@ -401,7 +405,7 @@ const StyledLink = styled(Link, {
   },
 })
 
-const OutboundLink = styled('a', {
+const OutboundLink = styled(Link, {
   textDecoration: 'none',
   whiteSpace: 'nowrap',
   color: 'inherit',
@@ -486,7 +490,7 @@ const MobileMenuLink = styled(Link, {
   },
 })
 
-const MobileOutboundLink = styled('a', {
+const MobileOutboundLink = styled(Link, {
   textDecoration: 'none',
   color: '$textAlt',
   paddingBottom: '0.5rem',
@@ -796,23 +800,6 @@ const ArrowRight = styled('img', {
   height: '10px',
 })
 
-const mobileMenuRouteActive = ({ isCurrent }) =>
-  isCurrent ? { className: 'active active-mobile-menu' } : null
-
-const mainMenuRouteActive = ({ isCurrent }) =>
-  isCurrent ? { className: 'active-main-menu active' } : null
-
-const mobileMenuSubRouteActive = ({ isPartiallyCurrent }) =>
-  isPartiallyCurrent ? { className: 'active active-mobile-menu' } : null
-
-const mainMenuSubRouteActive = ({ isPartiallyCurrent, location, href }) => {
-  const isTemplateRoute =
-    href === '/templates' && location.pathname.match(/templates\/?$/)
-  return isPartiallyCurrent || isTemplateRoute
-    ? { className: 'active-main-menu active' }
-    : null
-}
-
 const subNavHoverTimeout = 150
 
 class Header extends React.Component {
@@ -951,6 +938,7 @@ class Header extends React.Component {
       underlaidMenu,
       headerBkgColor,
       isPreviewPage,
+      router,
     } = this.props
 
     if (isPreviewPage) return null
@@ -958,6 +946,280 @@ class Header extends React.Component {
     const classScrolled = isScrolled ? 'scrolled' : ''
     const productMenuOpen = mouseOverProductLink || mouseOverProductMenu
     const resourcesMenuOpen = mouseOverResourcesLink || mouseOverResourcesMenu
+    const path = router.asPath
+
+    const mainNavigation = [
+      {
+        _id: 'product',
+        condition: 'internal',
+        url: '/product',
+        onMouseEnter: this.enterProductLink,
+        onMouseLeave: this.leaveProductLink,
+        dataGtm: 'desktop-menu-link',
+        label: 'Product',
+      },
+      {
+        _id: 'templates',
+        condition: 'internal',
+        url: '/templates',
+        dataGtm: 'desktop-menu-link',
+        label: 'Templates',
+      },
+      {
+        _id: 'pricing',
+        condition: 'internal',
+        url: '/pricing',
+        dataGtm: 'desktop-menu-link',
+        label: 'Pricing',
+      },
+      {
+        _id: 'resources',
+        condition: 'internal',
+        url: '/marketing-resources',
+        onMouseEnter: this.enterResourcesLink,
+        onMouseLeave: this.leaveResourcesLink,
+        dataGtm: 'desktop-menu-link',
+        label: 'Resources',
+      },
+    ]
+
+    const mobileProductMenu = [
+      {
+        _id: 'product',
+        condition: 'internal',
+        url: '/product',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Product Overview',
+      },
+      {
+        _id: 'websites',
+        condition: 'internal',
+        url: '/product/website-builder',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Websites',
+      },
+      {
+        _id: 'landing-page-builder',
+        condition: 'internal',
+        url: '/product/landing-page-builder',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Landing Pages',
+      },
+      {
+        _id: 'pop-up-builder',
+        condition: 'internal',
+        url: '/product/pop-up-builder',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Pop-up Forms',
+      },
+      {
+        _id: 'alert-bars',
+        condition: 'internal',
+        url: '/product/alert-bars',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Alert Bars',
+      },
+      {
+        _id: 'integrations',
+        condition: 'internal',
+        url: '/integrations',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Integrations',
+      },
+      {
+        _id: 'feature-index',
+        condition: 'internal',
+        url: '/product/feature-index',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: false,
+        label: 'Feature Index',
+      },
+    ]
+
+    const mobileResourcesMenu = [
+      {
+        _id: 'marketing-resources',
+        condition: 'internal',
+        url: '/marketing-resources',
+        ariaLabel: 'marketing resources',
+        rel: 'noopener',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Resource Library',
+      },
+      {
+        _id: 'blog',
+        condition: 'external',
+        url: 'https://www.leadpages.com/blog',
+        ariaLabel: 'Leadpages blog',
+        rel: 'noopener',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Blog',
+      },
+      {
+        _id: 'webinars',
+        condition: 'external',
+        url: '/webinars',
+        ariaLabel: 'Leadpages webinar',
+        rel: 'noopener',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Webinars',
+      },
+
+      {
+        _id: 'podcast',
+        condition: 'external',
+        url: 'https://www.leadpages.com/podcast',
+        ariaLabel: 'Leadpages podcast',
+        rel: 'noopener',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Podcast',
+      },
+      {
+        _id: 'customers',
+        condition: 'internal',
+        url: '/customers',
+        ariaLabel: 'Leadpages customers',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: true,
+        label: 'Customer Stories',
+      },
+      {
+        _id: 'support',
+        condition: 'external',
+        url: 'https://support.leadpages.com/hc/en-us',
+        ariaLabel: 'Leadpages support',
+        rel: 'noopener',
+        dataGtm: 'mobile-menu-link',
+        hasSeparator: false,
+        label: 'Support',
+      },
+    ]
+
+    const productSubmenu = [
+      {
+        _id: 'product',
+        condition: 'internal',
+        url: '/product',
+        dataGtm: 'desktop-menu-link',
+        label: 'Product Overview',
+        isListItem: false,
+      },
+      {
+        _id: 'websites',
+        condition: 'internal',
+        url: '/product/website-builder',
+        dataGtm: 'desktop-menu-link',
+        label: 'Websites',
+        isListItem: true,
+      },
+      {
+        _id: 'landing-page-builder',
+        condition: 'internal',
+        url: '/product/landing-page-builder',
+        dataGtm: 'desktop-menu-link',
+        label: 'Landing Pages',
+        isListItem: true,
+      },
+      {
+        _id: 'pop-up-builder',
+        condition: 'internal',
+        url: '/product/pop-up-builder',
+        dataGtm: 'desktop-menu-link',
+        label: 'Pop-up Forms',
+        isListItem: true,
+      },
+      {
+        _id: 'alert-bars',
+        condition: 'internal',
+        url: '/product/alert-bars',
+        dataGtm: 'desktop-menu-link',
+        label: 'Alert Bars',
+        isListItem: true,
+      },
+      {
+        _id: 'integrations',
+        condition: 'internal',
+        url: '/integrations',
+        dataGtm: 'desktop-menu-link',
+        label: 'Integrations',
+        isListItem: false,
+      },
+      {
+        _id: 'feature-index',
+        condition: 'internal',
+        url: '/product/feature-index',
+        dataGtm: 'desktop-menu-link',
+        label: 'Feature Index',
+        isListItem: false,
+      },
+    ]
+
+    const resourcesSubmenu = [
+      {
+        _id: 'resources',
+        condition: 'internal',
+        url: '/marketing-resources',
+        ariaLabel: 'Resource Library',
+        rel: 'noopener',
+        dataGtm: 'desktop-menu-link',
+        label: 'Resource Library',
+      },
+      {
+        _id: 'blog',
+        condition: 'external',
+        url: 'https://www.leadpages.com/blog',
+        ariaLabel: 'Leadpages Blog',
+        rel: 'noopener',
+        dataGtm: 'desktop-menu-link',
+        label: 'Blog',
+      },
+      {
+        _id: 'webinars',
+        condition: 'external',
+        url: 'https://lp.leadpages.com/webinars',
+        ariaLabel: 'Leadpages Webinar',
+        rel: 'noopener',
+        dataGtm: 'desktop-menu-link',
+        label: 'Webinars',
+      },
+      {
+        _id: 'podcast',
+        condition: 'external',
+        url: 'https://lp.leadpages.com/podcast',
+        ariaLabel: 'Leadpages Podcast',
+        rel: 'noopener',
+        dataGtm: 'desktop-menu-link',
+        label: 'Podcast',
+      },
+      {
+        _id: 'customer-stories',
+        condition: 'internal',
+        url: '/customers',
+        ariaLabel: 'Customer Stories',
+        rel: 'noopener',
+        dataGtm: 'desktop-menu-link',
+        label: 'Customer Stories',
+      },
+      {
+        _id: 'support',
+        condition: 'external',
+        url: 'https://support.leadpages.com/hc/en-us',
+        ariaLabel: 'Leadpages Support',
+        rel: 'noopener',
+        dataGtm: 'desktop-menu-link',
+        label: 'Support',
+      },
+    ]
 
     return (
       <HeaderContainer
@@ -966,9 +1228,12 @@ class Header extends React.Component {
         isStartPageHeader={isStartPageHeader}
         underlaidMenu={underlaidMenu}
         id="siteheader"
-        style={
+        css={
           headerBkgColor && !isScrolled
-            ? { backgroundColor: headerBkgColor }
+            ? {
+                background: headerBkgColor,
+                '&:hover': { background: headerBkgColor },
+              }
             : {}
         }
       >
@@ -987,7 +1252,7 @@ class Header extends React.Component {
                     ? 'start-page-header-scrolled'
                     : ''
                 }`}
-                style={isPricingMenu ? { top: 3 } : { top: 7 }}
+                css={isPricingMenu ? { top: 3 } : { top: 7 }}
               />
               <LogoIconContainer
                 src={logoIconSVG.src}
@@ -1004,43 +1269,29 @@ class Header extends React.Component {
             {/* Links Conditional */}
             {!isPricingMenu && !isStartPageHeader && (
               <LinksContainer>
-                <StyledLink
-                  condition="internal"
-                  getProps={mainMenuSubRouteActive}
-                  url="/product"
-                  onMouseEnter={this.enterProductLink}
-                  onMouseLeave={this.leaveProductLink}
-                  data-gtm="desktop-menu-link"
-                  className="testing"
-                >
-                  Product
-                </StyledLink>
-                <StyledLink
-                  condition="internal"
-                  getProps={mainMenuSubRouteActive}
-                  url="/templates"
-                  data-gtm="desktop-menu-link"
-                >
-                  Templates
-                </StyledLink>
-                <StyledLink
-                  condition="internal"
-                  getProps={mainMenuSubRouteActive}
-                  url="/pricing"
-                  data-gtm="desktop-menu-link"
-                >
-                  Pricing
-                </StyledLink>
-                <StyledLink
-                  condition="internal"
-                  getProps={mainMenuSubRouteActive}
-                  url="/marketing-resources"
-                  onMouseEnter={this.enterResourcesLink}
-                  onMouseLeave={this.leaveResourcesLink}
-                  data-gtm="desktop-menu-link"
-                >
-                  Resources
-                </StyledLink>
+                {mainNavigation.map(
+                  ({
+                    _id,
+                    condition,
+                    url,
+                    onMouseEnter,
+                    onMouseLeave,
+                    dataGtm,
+                    label,
+                  }) => (
+                    <StyledLink
+                      key={_id}
+                      condition={condition}
+                      url={url}
+                      onMouseEnter={onMouseEnter}
+                      onMouseLeave={onMouseLeave}
+                      data-gtm={dataGtm}
+                      className={path === url && 'active-main-menu active'}
+                    >
+                      {label}
+                    </StyledLink>
+                  )
+                )}
               </LinksContainer>
             )}
           </MenuContainer>
@@ -1065,82 +1316,33 @@ class Header extends React.Component {
                           <ArrowLeft src={leftArrow.src} alt="left arrow" />
                           Product
                         </MobileMenuSubmenuHeadingContainer>
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/product"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Product Overview
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/product/website-builder"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Websites
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/product/landing-page-builder"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Landing Pages
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/product/pop-up-builder"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Pop-up Forms
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/product/alert-bars"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Alert Bars
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/integrations"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Integrations
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/product/feature-index"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Feature Index
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
+                        {mobileProductMenu.map(
+                          ({
+                            _id,
+                            condition,
+                            url,
+                            dataGtm,
+                            hasSeparator,
+                            label,
+                          }) => (
+                            <>
+                              <MobileMenuInnerItem>
+                                <MobileMenuLink
+                                  key={_id}
+                                  condition={condition}
+                                  url={url}
+                                  dataGtm={dataGtm}
+                                  className={
+                                    path === url && 'active active-mobile-menu'
+                                  }
+                                >
+                                  {label}
+                                </MobileMenuLink>
+                              </MobileMenuInnerItem>
+                              {hasSeparator && <MobileMenuInnerSeparator />}
+                            </>
+                          )
+                        )}
                       </MobileMenuInnerProductContainer>
                     )}
 
@@ -1159,84 +1361,44 @@ class Header extends React.Component {
                           <ArrowLeft src={leftArrow.src} alt="left arrow" />
                           Resources
                         </MobileMenuSubmenuHeadingContainer>
+                        {mobileResourcesMenu.map(
+                          ({
+                            _id,
+                            condition,
+                            url,
+                            ariaLabel,
+                            rel,
+                            dataGtm,
+                            hasSeparator,
+                            label,
+                          }) => {
+                            const Component =
+                              condition === 'internal'
+                                ? MobileMenuLink
+                                : MobileOutboundLink
 
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/marketing-resources"
-                            alt="marketing resources"
-                            rel="noopener"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Resource Library
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileOutboundLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="https://www.leadpages.com/blog/"
-                            alt="Leadpages blog"
-                            rel="noopener"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Blog
-                          </MobileOutboundLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileOutboundLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/webinars/"
-                            alt="Leadpages webinar"
-                            rel="noopener"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Webinars
-                          </MobileOutboundLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileOutboundLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="https://www.leadpages.com/podcast"
-                            alt="Leadpages podcast"
-                            rel="noopener"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Podcast
-                          </MobileOutboundLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileMenuLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="/customers"
-                            alt="Leadpages podcast"
-                            rel="noopener"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Customer Stories
-                          </MobileMenuLink>
-                        </MobileMenuInnerItem>
-                        <MobileMenuInnerSeparator />
-                        <MobileMenuInnerItem>
-                          <MobileOutboundLink
-                            condition="internal"
-                            getProps={mobileMenuRouteActive}
-                            url="https://support.leadpages.com/hc/en-us"
-                            alt="Leadpages support"
-                            rel="noopener"
-                            data-gtm="mobile-menu-link"
-                          >
-                            Support
-                          </MobileOutboundLink>
-                        </MobileMenuInnerItem>
+                            return (
+                              <>
+                                <MobileMenuInnerItem key={_id}>
+                                  <Component
+                                    condition={condition}
+                                    url={url}
+                                    aria-label={ariaLabel}
+                                    rel={rel}
+                                    data-gtm={dataGtm}
+                                    className={
+                                      path === url &&
+                                      'active active-mobile-menu'
+                                    }
+                                  >
+                                    {label}
+                                  </Component>
+                                </MobileMenuInnerItem>
+                                {hasSeparator && <MobileMenuInnerSeparator />}
+                              </>
+                            )
+                          }
+                        )}
                       </MobileMenuInnerResourcesContainer>
                     )}
 
@@ -1255,7 +1417,11 @@ class Header extends React.Component {
                     <MobileMenuExpandableContainer
                       onClick={this.toggleMobileProductMenu}
                     >
-                      <MobileMenuInnerItem getProps={mobileMenuSubRouteActive}>
+                      <MobileMenuInnerItem
+                        className={
+                          path === '/product' && 'active active-mobile-menu'
+                        }
+                      >
                         Product
                       </MobileMenuInnerItem>
 
@@ -1267,8 +1433,10 @@ class Header extends React.Component {
                     <MobileMenuInnerItem>
                       <MobileMenuLink
                         condition="internal"
-                        getProps={mobileMenuRouteActive}
                         url="/templates"
+                        className={
+                          path === '/templates' && 'active active-mobile-menu'
+                        }
                       >
                         Templates
                       </MobileMenuLink>
@@ -1277,8 +1445,10 @@ class Header extends React.Component {
                     <MobileMenuInnerItem>
                       <MobileMenuLink
                         condition="internal"
-                        getProps={mobileMenuRouteActive}
                         url="/pricing"
+                        className={
+                          path === '/pricing' && 'active active-mobile-menu'
+                        }
                       >
                         Pricing
                       </MobileMenuLink>
@@ -1298,7 +1468,7 @@ class Header extends React.Component {
                         <OutboundLink
                           condition="internal"
                           url="https://my.leadpages.com/login/"
-                          alt="Leadpages login"
+                          aria-label="Leadpages login"
                           rel="noopener"
                           target="_blank"
                           className="loginbutton"
@@ -1313,7 +1483,7 @@ class Header extends React.Component {
                             <StyledButtonLink
                               condition="internal"
                               url="/pricing"
-                              alt="Start Free Trial"
+                              aria-label="Start Free Trial"
                               data-gtm="mobile-menu-link"
                             >
                               <MobileMenuSignUpButton>
@@ -1325,12 +1495,11 @@ class Header extends React.Component {
                           )}
                           {scrollTarget && (
                             <ScrollingButtonLink
-                              condition="internal"
-                              url={scrollTarget}
+                              to={scrollTarget}
                               smooth
                               duration={500}
                               offset={-15}
-                              alt="Start Free Trial"
+                              aria-label="Start Free Trial"
                               data-gtm="mobile-menu-link"
                             >
                               <MobileMenuSignUpButton>
@@ -1358,11 +1527,11 @@ class Header extends React.Component {
                     <StartPageLoginOutboundLink
                       condition="external"
                       url="https://my.leadpages.com/login/"
-                      alt="Leadpages login"
+                      aria-label="Leadpages login"
                       rel="noopener"
                       target="_blank"
                       className={`${
-                        isScrolled ? 'button-scrolled' : ''
+                        isScrolled && 'button-scrolled'
                       } 'loginbutton'`}
                       data-gtm="mobile-menu-link_login-button"
                     >
@@ -1372,7 +1541,7 @@ class Header extends React.Component {
                     <OutboundLink
                       condition="external"
                       url="https://my.leadpages.com/login/"
-                      alt="Leadpages login"
+                      aria-label="Leadpages login"
                       rel="noopener"
                       target="_blank"
                       className="loginbutton"
@@ -1389,12 +1558,11 @@ class Header extends React.Component {
                 (isStartPageHeader ? (
                   scrollTarget ? (
                     <StartPageTrialScrollingLink
-                      condition="internal"
-                      url={scrollTarget}
+                      to={scrollTarget}
                       smooth
                       duration={500}
                       offset={-15}
-                      alt="Try Start Plan Free"
+                      aria-label="Try Start Plan Free"
                       data-gtm="mobile-menu-link"
                     >
                       <SignUpButton
@@ -1409,7 +1577,7 @@ class Header extends React.Component {
                     <StartPageTrialOutboundLink
                       condition="external"
                       url="https://my.leadpages.com/order-leadpages/12LcHxUf6q14/t/d3yy2ARDnfEVTPU7"
-                      alt="Try Start Plan Free"
+                      aria-label="Try Start Plan Free"
                       data-gtm="mobile-menu-link"
                     >
                       <SignUpButton
@@ -1425,12 +1593,10 @@ class Header extends React.Component {
                   <StyledButtonLink
                     condition="internal"
                     url="/pricing"
-                    alt="Start Free Trial"
+                    aria-label="Start Free Trial"
                     data-gtm="mobile-menu-link"
                   >
-                    <SignUpButton
-                      className={isScrolled ? 'button-scrolled' : ''}
-                    >
+                    <SignUpButton className={isScrolled && 'button-scrolled'}>
                       Start Free Trial
                     </SignUpButton>
                   </StyledButtonLink>
@@ -1442,7 +1608,7 @@ class Header extends React.Component {
                   alt="Burger Icon SVG"
                   className={`${
                     isStartPageHeader && !isScrolled ? 'start-page-header' : ''
-                  } ${hideSignUpButton ? 'sign-up-button-hidden' : ''}`}
+                  } ${hideSignUpButton && 'sign-up-button-hidden'}`}
                 />
               )}
             </SignUpContainer>
@@ -1454,12 +1620,10 @@ class Header extends React.Component {
                 <OutboundButtonLink
                   condition="internal"
                   url="/demo"
-                  alt="Start Free Trial"
+                  aria-label="Start Free Trial"
                   data-gtm="desktop-menu-link"
                 >
-                  <WatchDemoButton
-                    className={isScrolled ? 'button-scrolled' : ''}
-                  >
+                  <WatchDemoButton className={isScrolled && 'button-scrolled'}>
                     Watch Demo
                   </WatchDemoButton>
                 </OutboundButtonLink>
@@ -1475,98 +1639,36 @@ class Header extends React.Component {
                 scrolled={isScrolled}
               >
                 <DesktopSubMenuTextContainer>
-                  <SubMenuItem>
-                    <ProductLinkContainer>
-                      <ProductSubMenuLink
-                        condition="internal"
-                        getProps={mainMenuRouteActive}
-                        url="/product"
-                        data-gtm="desktop-menu-link"
-                      >
-                        Product Overview
-                      </ProductSubMenuLink>
-                    </ProductLinkContainer>
-                  </SubMenuItem>
-                  <SubMenuList>
-                    <SubMenuListItem>
-                      <ProductLinkContainer>
+                  {productSubmenu.map(
+                    ({ _id, condition, url, dataGtm, label, isListItem }) => {
+                      const Component = () => (
                         <ProductSubMenuLink
-                          condition="internal"
-                          getProps={mainMenuRouteActive}
-                          url="/product/website-builder"
-                          data-gtm="desktop-menu-link"
+                          condition={condition}
+                          url={url}
+                          data-gtm={dataGtm}
+                          className={path === url && 'active-main-menu active'}
                         >
-                          Websites
+                          {label}
                         </ProductSubMenuLink>
-                      </ProductLinkContainer>
-                    </SubMenuListItem>
-                  </SubMenuList>
-                  <SubMenuList>
-                    <SubMenuListItem>
-                      <ProductLinkContainer>
-                        <ProductSubMenuLink
-                          condition="internal"
-                          getProps={mainMenuRouteActive}
-                          url="/product/landing-page-builder"
-                          data-gtm="desktop-menu-link"
-                        >
-                          Landing Pages
-                        </ProductSubMenuLink>
-                      </ProductLinkContainer>
-                    </SubMenuListItem>
-                  </SubMenuList>
-                  <SubMenuList>
-                    <SubMenuListItem>
-                      <ProductLinkContainer>
-                        <ProductSubMenuLink
-                          condition="internal"
-                          getProps={mainMenuRouteActive}
-                          url="/product/pop-up-builder"
-                          data-gtm="desktop-menu-link"
-                        >
-                          Pop-up Forms
-                        </ProductSubMenuLink>
-                      </ProductLinkContainer>
-                    </SubMenuListItem>
-                  </SubMenuList>
-                  <SubMenuList>
-                    <SubMenuListItem>
-                      <ProductLinkContainer>
-                        <ProductSubMenuLink
-                          condition="internal"
-                          getProps={mainMenuRouteActive}
-                          url="/product/alert-bars"
-                          data-gtm="desktop-menu-link"
-                        >
-                          Alert Bars
-                        </ProductSubMenuLink>
-                      </ProductLinkContainer>
-                    </SubMenuListItem>
-                  </SubMenuList>
-                  <SubMenuItem>
-                    <ProductLinkContainer>
-                      <ProductSubMenuLink
-                        condition="internal"
-                        getProps={mainMenuRouteActive}
-                        url="/integrations"
-                        data-gtm="desktop-menu-link"
-                      >
-                        Integrations
-                      </ProductSubMenuLink>
-                    </ProductLinkContainer>
-                  </SubMenuItem>
-                  <SubMenuItem>
-                    <ProductLinkContainer>
-                      <ProductSubMenuLink
-                        condition="internal"
-                        getProps={mainMenuRouteActive}
-                        url="/product/feature-index"
-                        data-gtm="desktop-menu-link"
-                      >
-                        Feature Index
-                      </ProductSubMenuLink>
-                    </ProductLinkContainer>
-                  </SubMenuItem>
+                      )
+
+                      return isListItem ? (
+                        <SubMenuList key={_id}>
+                          <SubMenuListItem>
+                            <ProductLinkContainer>
+                              <Component />
+                            </ProductLinkContainer>
+                          </SubMenuListItem>
+                        </SubMenuList>
+                      ) : (
+                        <SubMenuItem key={_id}>
+                          <ProductLinkContainer>
+                            <Component />
+                          </ProductLinkContainer>
+                        </SubMenuItem>
+                      )
+                    }
+                  )}
                 </DesktopSubMenuTextContainer>
               </ProductSubMenuContainer>
             </HeaderSubMenu>
@@ -1580,86 +1682,37 @@ class Header extends React.Component {
                 scrolled={isScrolled}
               >
                 <DesktopSubMenuTextContainer>
-                  <SubMenuItem>
-                    <ResourcesLinkContainer>
-                      <StyledLink
-                        condition="internal"
-                        url="/marketing-resources"
-                        alt="Resource Library"
-                        rel="noopener"
-                        data-gtm="desktop-menu-link"
-                        activeClassName="active"
-                      >
-                        Resource Library
-                      </StyledLink>
-                    </ResourcesLinkContainer>
-                  </SubMenuItem>
-                  <SubMenuItem>
-                    <ResourcesLinkContainer>
-                      <OutboundLink
-                        condition="internal"
-                        url="https://www.leadpages.com/blog/"
-                        alt="Leadpages blog"
-                        rel="noopener"
-                        data-gtm="desktop-menu-link"
-                      >
-                        Blog
-                      </OutboundLink>
-                    </ResourcesLinkContainer>
-                  </SubMenuItem>
-                  <SubMenuItem>
-                    <ResourcesLinkContainer>
-                      <OutboundLink
-                        condition="internal"
-                        url="https://lp.leadpages.com/webinars/"
-                        alt="Leadpages Webinar"
-                        rel="noopener"
-                        data-gtm="desktop-menu-link"
-                      >
-                        Webinars
-                      </OutboundLink>
-                    </ResourcesLinkContainer>
-                  </SubMenuItem>
-                  <SubMenuItem>
-                    <ResourcesLinkContainer>
-                      <OutboundLink
-                        condition="internal"
-                        url="https://lp.leadpages.com/podcast/"
-                        alt="Leadpages podcast"
-                        rel="noopener"
-                        data-gtm="desktop-menu-link"
-                      >
-                        Podcast
-                      </OutboundLink>
-                    </ResourcesLinkContainer>
-                  </SubMenuItem>
-                  <SubMenuItem>
-                    <ResourcesLinkContainer>
-                      <StyledLink
-                        condition="internal"
-                        url="/customers"
-                        alt="Customer Stories"
-                        rel="noopener"
-                        data-gtm="desktop-menu-link"
-                        activeClassName="active"
-                      >
-                        Customer Stories
-                      </StyledLink>
-                    </ResourcesLinkContainer>
-                  </SubMenuItem>
-                  <SubMenuItem>
-                    <ResourcesLinkContainer>
-                      <OutboundLink
-                        condition="external"
-                        url="https://support.leadpages.com/hc/en-us"
-                        alt="Leadpages Support"
-                        rel="noopener"
-                        data-gtm="desktop-menu-link"
-                      >
-                        Support
-                      </OutboundLink>
-                    </ResourcesLinkContainer>
-                  </SubMenuItem>
+                  {resourcesSubmenu.map(
+                    ({
+                      _id,
+                      condition,
+                      url,
+                      ariaLabel,
+                      rel,
+                      dataGtm,
+                      label,
+                    }) => {
+                      const Component =
+                        condition === 'internal' ? StyledLink : OutboundLink
+
+                      return (
+                        <SubMenuItem key={_id}>
+                          <ResourcesLinkContainer>
+                            <Component
+                              condition={condition}
+                              url={url}
+                              aria-label={ariaLabel}
+                              rel={rel}
+                              data-gtm={dataGtm}
+                              className={path === url && 'active'}
+                            >
+                              {label}
+                            </Component>
+                          </ResourcesLinkContainer>
+                        </SubMenuItem>
+                      )
+                    }
+                  )}
                 </DesktopSubMenuTextContainer>
               </ResourcesSubMenuContainer>
             </HeaderSubMenu>
@@ -1692,4 +1745,4 @@ Header.propTypes = {
   isPreviewPage: PropTypes.bool,
 }
 
-export default Header
+export default withRouter(Header)

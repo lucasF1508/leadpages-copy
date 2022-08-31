@@ -21,7 +21,9 @@ const FooterContainer = styled('footer', {
   marginLeft: 'auto',
   variants: {
     slimFooter: {
-      pt: '0rem',
+      true: {
+        pt: '0rem',
+      },
     },
   },
 })

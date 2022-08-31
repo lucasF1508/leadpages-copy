@@ -1,11 +1,10 @@
 import React from 'react'
 // components
 import Integrations from '@legacy/components/integrations/Integrations'
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 
 const IntegrationsPage = () => (
-  <Layout hideBar underlaidMenu>
+  <>
     <SEO
       pathname="/integrations"
       title="Leadpages Integrations - Mailchimp, Salesforce, and More!"
@@ -13,7 +12,7 @@ const IntegrationsPage = () => (
       image="https://static.leadpages.com/images/og/og-integrations.jpg"
     />
     <Integrations />
-  </Layout>
+  </>
 )
 
 export default IntegrationsPage

@@ -20,11 +20,14 @@ const getPlanData = async (variant) => {
 
 export async function getStaticProps(context) {
   const { preview = false } = context
-  const slug = '/'
+  const slug = '/pricing'
 
   const rawPlanData = await getPlanData()
-  const planData = getGroupedPlanData(rawPlanData)
-  const data = { planData }
+
+  const data = {
+    planData: getGroupedPlanData(rawPlanData),
+    hideSignUpButton: true,
+  }
 
   return {
     props: {

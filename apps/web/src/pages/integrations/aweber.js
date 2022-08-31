@@ -1,11 +1,11 @@
 import React from 'react'
-import Comparisons from '@layouts/Comparisons'
+import Aweber from '@layouts/Integrations/Aweber'
 
-const ComparisonsPage = (props) => <Comparisons {...props} />
+const AweberPage = (props) => <Aweber {...props} />
 
 export async function getStaticProps(context) {
   const { preview = false } = context
-  const slug = '/comparisons'
+  const slug = '/integrations/aweber'
 
   const data = { headerBkgColor: '$grayAlt' }
 
@@ -18,4 +18,4 @@ export async function getStaticProps(context) {
   }
 }
 
-export default ComparisonsPage
+export default AweberPage

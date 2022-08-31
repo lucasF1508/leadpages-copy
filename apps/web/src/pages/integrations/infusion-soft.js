@@ -1,11 +1,11 @@
 import React from 'react'
-import Comparisons from '@layouts/Comparisons'
+import InfusionSoft from '@layouts/Integrations/InfusionSoft'
 
-const ComparisonsPage = (props) => <Comparisons {...props} />
+const InfusionSoftPage = (props) => <InfusionSoft {...props} />
 
 export async function getStaticProps(context) {
   const { preview = false } = context
-  const slug = '/comparisons'
+  const slug = '/integrations/infusion-soft'
 
   const data = { headerBkgColor: '$grayAlt' }
 
@@ -18,4 +18,4 @@ export async function getStaticProps(context) {
   }
 }
 
-export default ComparisonsPage
+export default InfusionSoftPage

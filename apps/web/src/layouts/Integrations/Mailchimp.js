@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
@@ -8,8 +7,6 @@ import heroImage from '@legacy/assets/images/integrations/subpages/Mailchimp+Lea
 import twoColumnImage from '@legacy/assets/images/integrations/subpages/Mailchimp-connect_730px@2x.png'
 
 const integrationName = 'Mailchimp'
-
-const headerBkgColor = '#f7f7f7'
 
 const testimonial = {
   quote: `“I am sooooo happy. These pages are so easy to put together and publish. Not only that but the integration with my email auto responder is fabulous.”`,
@@ -50,7 +47,7 @@ const integrationInfo = [
   },
 ]
 
-const IntegrationsSubpageMailChimp = () => {
+const Mailchimp = () => {
   const heroData = {
     headlineText: 'Leadpages + Mailchimp',
     tooltipText: '  •  Last Updated August 2020',
@@ -75,7 +72,7 @@ const IntegrationsSubpageMailChimp = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/mailchimp"
         title="Connect your Leadpages to Mailchimp | Get Online & Grow"
@@ -89,8 +86,8 @@ const IntegrationsSubpageMailChimp = () => {
         testimonial={testimonial}
         integrationInfo={integrationInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageMailChimp
+export default Mailchimp

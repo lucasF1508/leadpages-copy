@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
@@ -9,8 +8,6 @@ import twoColumnImage from '@legacy/assets/images/integrations/subpages/ConvertK
 import arinTestimonial from '@legacy/assets/images/testimonials/Arin-Amsler-72px@2x.png'
 
 const integrationName = 'ConvertKit'
-
-const headerBkgColor = '#f7f7f7'
 
 const integrationInfo = [
   {
@@ -35,7 +32,7 @@ const integrationInfo = [
   },
 ]
 
-const IntegrationsSubpageConvertkit = () => {
+const ConvertKit = () => {
   const testimonial = {
     quote: `“I carefully reviewed (and tested) several landing page options before landing on Leadpages. By far the best value of functionality and price. Super simple to use with virtually no learning curve. The tool is great, but I would choose Leadpages all over again just for the customer support!”`,
     clientName: 'Arin Amsler',
@@ -66,7 +63,7 @@ const IntegrationsSubpageConvertkit = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/convertkit"
         title="Connect your Leadpages to ConvertKit| Get Online & Grow"
@@ -80,8 +77,8 @@ const IntegrationsSubpageConvertkit = () => {
         testimonial={testimonial}
         integrationInfo={integrationInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageConvertkit
+export default ConvertKit

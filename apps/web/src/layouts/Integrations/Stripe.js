@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import Layout from '@legacy/components/Layout'
 import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
@@ -10,8 +9,6 @@ import promoImage from '@legacy/assets/images/integrations/subpages/Stripe-promo
 import testimonialImage from '@legacy/assets/images/testimonials/Anil-60px@2x.png'
 
 const integrationName = 'Stripe'
-
-const headerBkgColor = '#f7f7f7'
 
 const integrationInfo = [
   {
@@ -31,7 +28,7 @@ const integrationInfo = [
   },
 ]
 
-const IntegrationsSubpageStripe = () => {
+const Stripe = () => {
   const testimonial = {
     quote: `"Integrating Stripe for the first time was a BREEZE ✅ Adding a SKU on-the-fly in Stripe ✅ #BloodyBrilliant 💥"`,
     clientName: 'Anil Agrawal',
@@ -80,7 +77,7 @@ const IntegrationsSubpageStripe = () => {
   }
 
   return (
-    <Layout headerBkgColor={headerBkgColor}>
+    <>
       <SEO
         pathname="integrations/stripe"
         title="Sell More With Leadpages + Stripe | Get Online & Grow"
@@ -95,8 +92,8 @@ const IntegrationsSubpageStripe = () => {
         integrationInfo={integrationInfo}
         promoInfo={promoInfo}
       />
-    </Layout>
+    </>
   )
 }
 
-export default IntegrationsSubpageStripe
+export default Stripe

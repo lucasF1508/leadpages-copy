@@ -7,7 +7,7 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/conversion-optimization-guide/how-to-calculate-cro'
 
-  const data = {}
+  const data = { underlaidMenu: true }
 
   return {
     props: {
