@@ -3,15 +3,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { styled, keyframes } from '@design'
 // components
-import Wistia_DemoVideo from '../videos/Wistia_DemoVideo'
 // utilities
-import shouldDisplayVideo from '../../utils/should-display-video'
+import shouldDisplayVideo from '@legacy/utils/should-display-video'
 // images
-import playButtonSVG from '../../assets/images/global/play-button_purple.svg'
-import totemLeftSVG from '../../assets/images/totems/homepage-hero-totem-left.svg'
-import totemRightSVG from '../../assets/images/totems/homepage-hero-totem-right.svg'
-import wavyLineVerticalLavenderSVG from '../../assets/images/shapes/wavy-line-vertical-lavender.svg'
-import videoFallbackImage from '../../assets/images/heros/homepage-hero-fallback@2x.jpg'
+import playButtonSVG from '@legacy/assets/images/global/play-button_purple.svg'
+import totemLeftSVG from '@legacy/assets/images/totems/homepage-hero-totem-left.svg'
+import totemRightSVG from '@legacy/assets/images/totems/homepage-hero-totem-right.svg'
+import wavyLineVerticalLavenderSVG from '@legacy/assets/images/shapes/wavy-line-vertical-lavender.svg'
+import videoFallbackImage from '@legacy/assets/images/heros/homepage-hero-fallback@2x.jpg'
+import Wistia_DemoVideo from '../videos/Wistia_DemoVideo'
 // videos
 const videoWebM =
   'https://static.leadpages.com/mktg/videos/homepage-hero-variant-w918.webm'
@@ -160,8 +160,8 @@ const Button = styled('button', {
   cursor: 'pointer',
 
   '&:hover': {
-    bc: '$primary',
-    border: '3px solid $colors$primary',
+    bc: '$indigoDark',
+    border: '3px solid $colors$indigoDark',
   },
 })
 
@@ -303,7 +303,6 @@ const WavyLineVerticalLavender = styled('div', {
   bottom: '0',
   right: '0',
   m: '0 auto',
-  background: `url('${wavyLineVerticalLavenderSVG}') no-repeat`,
   width: '9px',
   height: '66px',
 })
@@ -355,6 +354,7 @@ const VideoButton = styled('button', {
 
 const HomepageHeader = () => {
   const displayVideo = shouldDisplayVideo()
+  const background = `url(${wavyLineVerticalLavenderSVG.src}) no-repeat`
 
   return (
     <OuterContainer>
@@ -377,12 +377,12 @@ const HomepageHeader = () => {
         <VideoBrowserContainer>
           <ShapesLeft>
             <div style={{ width: '70%' }}>
-              <SVG src={totemLeftSVG} alt="shapes" />
+              <SVG src={totemLeftSVG} alt="shapes" priority />
             </div>
           </ShapesLeft>
           <ShapesRight>
             <div style={{ width: '110%' }}>
-              <SVG src={totemRightSVG} alt="shapes" />
+              <SVG src={totemRightSVG} alt="shapes" priority />
             </div>
           </ShapesRight>
           <VideoBrowser>
@@ -406,7 +406,7 @@ const HomepageHeader = () => {
               )}
             </VideoBrowserViewport>
             <VideoButtonContainer>
-              <WavyLineVerticalLavender />
+              <WavyLineVerticalLavender css={{ background }} />
               <Wistia_DemoVideo>
                 <VideoButton>
                   <span>Watch the Full Demo</span>

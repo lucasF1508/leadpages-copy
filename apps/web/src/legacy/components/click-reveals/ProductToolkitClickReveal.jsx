@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import Link from 'next/link'
 import { fadeIn, fadeOut } from 'react-animations'
+import { RPImage } from '@legacy/constants/types'
 // images
 import ArrowDownSVG from '@legacy/assets/images/global/arrow_down_small.svg'
 import ArrowRightSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
@@ -282,7 +283,7 @@ ProductToolkitClickReveal.propTypes = {
       linkText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       linkRoute: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       linkAltText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-      revealImage: Image.isRequired,
+      revealImage: RPImage.isRequired,
       revealImageAltText: PropTypes.string.isRequired,
     })
   ).isRequired,

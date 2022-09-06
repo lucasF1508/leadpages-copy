@@ -2,6 +2,7 @@ import React from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
+import { RPImage } from '@legacy/constants/types'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -217,7 +218,7 @@ FlexSectionReverse.propTypes = {
   title: PropTypes.string,
   headline: PropTypes.string,
   caption: PropTypes.string,
-  image: Image.isRequired,
+  image: RPImage.isRequired,
   imageAlt: PropTypes.string,
   children: PropTypes.node,
 }

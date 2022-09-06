@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Collapse from '@material-ui/core/Collapse';
-import { Toast } from '@lp/ui';
+import React, { useState, useEffect } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import clsx from 'clsx'
+import Collapse from '@material-ui/core/Collapse'
+import { Toast } from '@lp/ui'
 
 const useStyles = makeStyles(
-  theme => ({
+  (theme) => ({
     root: {
       position: 'absolute',
       top: 0,
@@ -17,45 +17,45 @@ const useStyles = makeStyles(
       marginBottom: theme.spacing(3),
     },
   }),
-  { classNamePrefix: 'ToastManager' },
-);
+  { classNamePrefix: 'ToastManager' }
+)
 
-export const ADD_TOAST_MESSAGE = 'ADD_TOAST_MESSAGE';
+export const ADD_TOAST_MESSAGE = 'ADD_TOAST_MESSAGE'
 
 export function addToastMessage(props) {
   if (typeof window !== 'undefined') {
-    window.postMessage({ type: ADD_TOAST_MESSAGE, payload: props }, '*');
+    window.postMessage({ type: ADD_TOAST_MESSAGE, payload: props }, '*')
   }
 }
 
 const ToastManager = () => {
-  const classes = useStyles();
-  const [messages, setMessages] = useState([]);
+  const classes = useStyles()
+  const [messages, setMessages] = useState([])
 
-  const handleClose = idx => {
-    const newMessages = [...messages];
-    newMessages.splice(idx, 1);
-    setMessages(newMessages);
-  };
+  const handleClose = (idx) => {
+    const newMessages = [...messages]
+    newMessages.splice(idx, 1)
+    setMessages(newMessages)
+  }
 
   useEffect(() => {
     function handleAddMessage(evt) {
-      const type = evt?.data?.type;
+      const type = evt?.data?.type
       if (type === ADD_TOAST_MESSAGE) {
-        const { ...props } = evt.data.payload;
-        setMessages([...messages, props]);
+        const { ...props } = evt.data.payload
+        setMessages([...messages, props])
       }
     }
     if (typeof window !== 'undefined') {
-      window.addEventListener('message', handleAddMessage);
+      window.addEventListener('message', handleAddMessage)
     }
 
     return () => {
       if (typeof window !== 'undefined') {
-        window.removeEventListener('message', handleAddMessage);
+        window.removeEventListener('message', handleAddMessage)
       }
-    };
-  }, [messages]);
+    }
+  }, [messages])
 
   return (
     <div className={classes.root}>
@@ -72,17 +72,17 @@ const ToastManager = () => {
             ClickAwayListenerProps={{ mouseEvent: false, touchEvent: false }}
             {...toastProps}
             open
-            onClose={idx => {
+            onClose={(idx) => {
               if (onClose) {
-                onClose();
+                onClose()
               }
-              handleClose(idx);
+              handleClose(idx)
             }}
           />
         </Collapse>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default ToastManager;
+export default ToastManager

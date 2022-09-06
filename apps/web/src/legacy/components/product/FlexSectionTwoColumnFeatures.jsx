@@ -2,6 +2,7 @@ import React from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
+import { RPImage } from '@legacy/constants/types'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -254,7 +255,7 @@ FlexSectionTwoColumnFeatures.propTypes = {
   feature2Caption: PropTypes.string,
   feature3Heading: PropTypes.string,
   feature3Caption: PropTypes.string,
-  image: Image.isRequired,
+  image: RPImage.isRequired,
   imageAlt: PropTypes.string.isRequired,
 }
 

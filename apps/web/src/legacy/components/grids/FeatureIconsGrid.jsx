@@ -27,7 +27,7 @@ const SectionLink = styled('div', {
 
 const StyledLink = styled('a', {
   d: 'inline',
-  c: '#603eff',
+  c: '$primary',
   pb: '3px',
   bb: '2px solid $colors$purpleLight',
 
@@ -67,7 +67,11 @@ FeatureIconsGrid.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
-      icon: Image.isRequired,
+      icon: PropTypes.shape({
+        src: PropTypes.string.isRequired,
+        width: PropTypes.number,
+        height: PropTypes.number,
+      }).isRequired,
       alt: PropTypes.string.isRequired,
       link: PropTypes.shape({
         type: PropTypes.string.isRequired,

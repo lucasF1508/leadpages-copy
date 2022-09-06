@@ -61,7 +61,10 @@ const SpacerRow = ({ id, backgroundColor, size, sizeArray, border }) => {
       'LP Warn: You are attempting to use the <SpacerRow> component without passing a valid size in the form of a string (eg. size="small", "medium", or "large").'
     )
   }
-  if (sizeArray && (!Array.isArray(sizeArray) || sizeArray?.length !== 4)) {
+  if (
+    sizeArray?.length &&
+    (!Array.isArray(sizeArray) || sizeArray?.length !== 4)
+  ) {
     console.warn(
       'LP Warn: You are attempting to use the <SpacerRow> component without passing in a valid sizeArray in the form of an array with one rem value per standard repo breakpoint (>992, >576, >340, <340) (e.g. sizeArray={6, 4, 2, 1}. Note that if both are passed in, the size string option will override the sizeArray.'
     )

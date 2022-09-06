@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { RPImage } from '@legacy/constants/types'
 // Components
 import Image from '@components/Image'
 import IntegrationsSubpageHeader from '@legacy/components/headers/IntegrationsSubpageHeader'
@@ -63,30 +64,30 @@ IntegrationsSubpage.propTypes = {
     tooltipText: PropTypes.string.isRequired,
     tooltipTitle: PropTypes.string.isRequired,
     descriptionText: PropTypes.string.isRequired,
-    heroImage: Image.isRequired,
+    heroImage: RPImage.isRequired,
   }).isRequired,
   twoColumnInfo: PropTypes.shape({
     headline: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    image: Image.isRequired,
+    image: RPImage.isRequired,
     checkboxInfo: PropTypes.string,
   }).isRequired,
   testimonial: PropTypes.shape({
-    image: Image.isRequired,
+    image: RPImage.isRequired,
     quote: PropTypes.string.isRequired,
     clientName: PropTypes.string.isRequired,
     clientTitle: PropTypes.string.isRequired,
   }).isRequired,
   integrationInfo: PropTypes.arrayOf(
     PropTypes.shape({
-      image: Image,
+      image: RPImage,
       headline: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       additionalStyle: PropTypes.shape({ maxWidth: PropTypes.string }),
     })
   ).isRequired,
   promoInfo: PropTypes.shape({
-    image: Image.isRequired,
+    image: RPImage.isRequired,
     imageAlt: PropTypes.string.isRequired,
     headline: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Image from '@components/Image'
 import { styled } from '@design'
-import { GATSBY_IMAGE } from '@legacy/constants/types'
+import { RPImage } from '@legacy/constants/types'
 // images
 import checkInCircleSVG from '@legacy/assets/images/global/check_in-circle.svg'
 import rightArrowSVG from '@legacy/assets/images/global/arrow_right.svg'
@@ -69,7 +69,6 @@ const RowItem = styled('div', {
   textDecoration: 'none',
   width: '100%',
   justifyContent: 'space-between',
-  textAlign: 'left',
 })
 
 const TextContainer = styled(RowItem, {
@@ -413,8 +412,8 @@ const FlexRow = ({
                   </CTA>
                 </OutboundStyledLink>
               ) : (
-                <Link href={link} passHref>
-                  <StyledLink key={index} aria-label={linkAlt || text}>
+                <Link href={link} key={index} passHref>
+                  <StyledLink aria-label={linkAlt || text}>
                     <CTA>
                       {checkmarks && (
                         <CheckInCircle
@@ -485,11 +484,11 @@ FlexRow.propTypes = {
   title: PropTypes.string,
   headline: PropTypes.string,
   caption: PropTypes.string,
-  image: GATSBY_IMAGE.isRequired,
+  image: RPImage.isRequired,
   imageAlt: PropTypes.string,
   imageMaxWidth: PropTypes.string,
   padImage: PropTypes.bool,
-  bgImage: PropTypes.string,
+  bgImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   bgImageAlt: PropTypes.string,
   bgImageMargin: PropTypes.string,
   ctaArray: PropTypes.arrayOf(

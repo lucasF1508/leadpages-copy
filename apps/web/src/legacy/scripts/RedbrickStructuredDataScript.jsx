@@ -1,11 +1,10 @@
 // added at request of Redbrick for their knowledge panel system
-import React from 'react';
-import { Helmet } from 'react-helmet';
+import React from 'react'
+import Script from 'next/script'
 
 const RedbrickStructuredDataScript = () => (
-  <Helmet>
-    <script type="application/ld+json">
-      {`
+  <Script id="redbrick-structured-data-script" type="application/ld+json">
+    {`
           {
             "@context":"https://schema.org",
             "@graph":[
@@ -98,8 +97,7 @@ const RedbrickStructuredDataScript = () => (
             ]
           }
       `}
-    </script>
-  </Helmet>
-);
+  </Script>
+)
 
-export default RedbrickStructuredDataScript;
+export default RedbrickStructuredDataScript

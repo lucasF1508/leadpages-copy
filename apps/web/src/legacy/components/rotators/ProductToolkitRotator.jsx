@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { styled, keyframes } from '@design'
 import PropTypes from 'prop-types'
 import { fadeIn } from 'react-animations'
+import { RPImage } from '@legacy/constants/types'
 // components
 import Image from '@components/Image'
 import Link from 'next/link'
@@ -291,7 +292,7 @@ ProductToolkitRotator.propTypes = {
       linkText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       linkRoute: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       linkAltText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-      revealImage: Image.isRequired,
+      revealImage: RPImage.isRequired,
       revealImageAltText: PropTypes.string.isRequired,
     })
   ).isRequired,

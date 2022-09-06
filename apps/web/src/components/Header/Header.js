@@ -1223,7 +1223,7 @@ class Header extends React.Component {
 
     return (
       <HeaderContainer
-        scrolled={isScrolled}
+        scrolled={isScrolled.toString()}
         className={classScrolled}
         isStartPageHeader={isStartPageHeader}
         underlaidMenu={underlaidMenu}

@@ -10,6 +10,12 @@ import ArrowRightSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 
 const OuterContainer = styled('div', {
   width: '100%',
+
+  variants: {
+    imageSide: {
+      right: { overflow: 'hidden' },
+    },
+  },
 })
 
 const InnerContainer = styled('div', {

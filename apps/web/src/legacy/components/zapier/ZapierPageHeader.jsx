@@ -3,6 +3,7 @@ import { styled } from '@design'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import Link from 'next/link'
+import { RPImage } from '@legacy/constants/types'
 
 const OuterContainer = styled('div', {
   marginTop: '-60px',
@@ -194,7 +195,7 @@ ZapierPageHeader.defaultProps = {
 }
 
 ZapierPageHeader.propTypes = {
-  image: Image.isRequired,
+  image: RPImage.isRequired,
   imageAltText: PropTypes.string,
 }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Image from '@components/Image'
 import { styled } from '@design'
+import { RPImage } from '@legacy/constants/types'
 // images
 import rightArrowPurpleSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 
@@ -191,17 +192,13 @@ const GalleryQuoteLink = styled('div', {
   },
 })
 
-const StyledLink = styled('a', {
-  textDecoration: 'none',
+const StyledLink = styled(Link, {
   color: '$primary',
-  cursor: 'pointer',
   zIndex: 4,
 })
 
 const OutboundLink = styled('a', {
-  textDecoration: 'none',
   color: '$primary',
-  cursor: 'pointer',
   zIndex: 4,
 })
 
@@ -470,7 +467,7 @@ ThreeColumn.defaultProps = {
 }
 
 ThreeColumn.propTypes = {
-  column1image: Image.isRequired,
+  column1image: RPImage.isRequired,
   column1imageAlt: PropTypes.string,
   column1heading: PropTypes.string,
   column1copy: PropTypes.string,
@@ -479,7 +476,7 @@ ThreeColumn.propTypes = {
   column1outboundlink: PropTypes.string,
   column1linkAlt: PropTypes.string,
   column1CTA: PropTypes.string,
-  column2image: Image.isRequired,
+  column2image: RPImage.isRequired,
   column2imageAlt: PropTypes.string,
   column2heading: PropTypes.string,
   column2copy: PropTypes.string,
@@ -488,7 +485,7 @@ ThreeColumn.propTypes = {
   column2outboundlink: PropTypes.string,
   column2linkAlt: PropTypes.string,
   column2CTA: PropTypes.string,
-  column3image: Image.isRequired,
+  column3image: RPImage.isRequired,
   column3imageAlt: PropTypes.string,
   column3heading: PropTypes.string,
   column3copy: PropTypes.string,

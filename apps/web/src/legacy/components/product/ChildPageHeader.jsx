@@ -3,6 +3,7 @@ import { styled } from '@design'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import Link from 'next/link'
+import { RPImage } from '@legacy/constants/types'
 // images
 import rightArrowPurple from '@legacy/assets/images/global/arrow_right_purple.svg'
 
@@ -271,7 +272,7 @@ ChildPageHeader.propTypes = {
   showLB: PropTypes.bool,
   dataleadboxpopup: PropTypes.string,
   dataleadboxdomain: PropTypes.string,
-  image: Image.isRequired,
+  image: RPImage.isRequired,
   imageAltText: PropTypes.string.isRequired,
 }
 

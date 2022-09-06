@@ -3,6 +3,7 @@ import { styled } from '@design'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import Link from 'next/link'
+import { RPImage } from '@legacy/constants/types'
 // Images
 import defaultPromoImage from '@legacy/assets/images/silos/landing-page-examples/Product-Leadpages_Landing-Pages@2x.png'
 import rightArrowSVG from '@legacy/assets/images/global/arrow_right_white.svg'
@@ -176,7 +177,7 @@ SiloPromoBlock.defaultProps = {
 
 SiloPromoBlock.propTypes = {
   overridePromoContent: PropTypes.shape({
-    promoImage: Image.isRequired,
+    promoImage: RPImage.isRequired,
     promoImageAlt: PropTypes.string.isRequired,
     headlineText: PropTypes.string.isRequired,
     mainText: PropTypes.string.isRequired,

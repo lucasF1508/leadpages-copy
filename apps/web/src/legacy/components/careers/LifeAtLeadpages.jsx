@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import { styled } from '@design'
+import { RPImage } from '@legacy/constants/types'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -194,7 +195,7 @@ ChildPageHeader.propTypes = {
   bgImageAltText: PropTypes.string,
   headingText: PropTypes.string,
   subheadingText1: PropTypes.string,
-  image: Image.isRequired,
+  image: RPImage.isRequired,
   imageAltText: PropTypes.string,
   subheadingText2: PropTypes.string,
 }

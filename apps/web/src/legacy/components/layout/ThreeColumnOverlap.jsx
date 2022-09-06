@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import Link from 'next/link'
 import { styled } from '@design'
+import { RPImage } from '@legacy/constants/types'
 // images
 import rightArrowPurpleSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 
@@ -100,16 +101,12 @@ const TextContainer = styled('div', {
 })
 
 const StyledLink = styled('a', {
-  textDecoration: 'none',
   color: '$primary',
-  cursor: 'pointer',
   zIndex: 4,
 })
 
 const OutboundLink = styled('a', {
-  textDecoration: 'none',
   color: '$primary',
-  cursor: 'pointer',
   zIndex: 4,
 })
 
@@ -191,8 +188,8 @@ const ThreeColumnOverlap = ({
         <FlexRow3>
           <FlexRow3Container>
             {column1link && (
-              <StyledLink href={column1link}>
-                <a aria-label={column1linkAlt}>
+              <Link href={column1link} passHref>
+                <StyledLink aria-label={column1linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
                       <ImageContainer
@@ -215,8 +212,8 @@ const ThreeColumnOverlap = ({
                       </CTA>
                     </TextContainer>
                   </GalleryContainer>
-                </a>
-              </StyledLink>
+                </StyledLink>
+              </Link>
             )}
             {column1outboundlink && (
               <OutboundLink href={column1outboundlink} alt={column1linkAlt}>
@@ -248,8 +245,8 @@ const ThreeColumnOverlap = ({
         <FlexRow3>
           <FlexRow3Container>
             {column2link && (
-              <StyledLink href={column2link}>
-                <a aria-label={column2linkAlt}>
+              <Link href={column2link} passHref>
+                <StyledLink aria-label={column2linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
                       <ImageContainer
@@ -272,8 +269,8 @@ const ThreeColumnOverlap = ({
                       </CTA>
                     </TextContainer>
                   </GalleryContainer>
-                </a>
-              </StyledLink>
+                </StyledLink>
+              </Link>
             )}
             {column2outboundlink && (
               <OutboundLink href={column2outboundlink} alt={column2linkAlt}>
@@ -305,8 +302,8 @@ const ThreeColumnOverlap = ({
         <FlexRow3>
           <FlexRow3Container>
             {column3link && (
-              <StyledLink href={column3link}>
-                <a aria-label={column3linkAlt}>
+              <Link href={column3link} passHref>
+                <StyledLink aria-label={column3linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
                       <ImageContainer
@@ -329,8 +326,8 @@ const ThreeColumnOverlap = ({
                       </CTA>
                     </TextContainer>
                   </GalleryContainer>
-                </a>
-              </StyledLink>
+                </StyledLink>
+              </Link>
             )}
             {column3outboundlink && (
               <OutboundLink href={column3outboundlink} alt={column3linkAlt}>
@@ -397,7 +394,7 @@ ThreeColumnOverlap.defaultProps = {
 }
 
 ThreeColumnOverlap.propTypes = {
-  column1image: Image.isRequired,
+  column1image: RPImage.isRequired,
   column1imageAlt: PropTypes.string,
   column1heading: PropTypes.string,
   column1copy: PropTypes.string,
@@ -406,7 +403,7 @@ ThreeColumnOverlap.propTypes = {
   column1outboundlink: PropTypes.string,
   column1linkAlt: PropTypes.string,
   column1CTA: PropTypes.string,
-  column2image: Image.isRequired,
+  column2image: RPImage.isRequired,
   column2imageAlt: PropTypes.string,
   column2heading: PropTypes.string,
   column2copy: PropTypes.string,
@@ -415,7 +412,7 @@ ThreeColumnOverlap.propTypes = {
   column2outboundlink: PropTypes.string,
   column2linkAlt: PropTypes.string,
   column2CTA: PropTypes.string,
-  column3image: Image.isRequired,
+  column3image: RPImage.isRequired,
   column3imageAlt: PropTypes.string,
   column3heading: PropTypes.string,
   column3copy: PropTypes.string,

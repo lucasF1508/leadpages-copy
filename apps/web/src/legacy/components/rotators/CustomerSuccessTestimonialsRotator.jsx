@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import { styled } from '@design'
-import { GATSBY_IMAGE } from '@legacy/constants/types'
+import { RPImage } from '@legacy/constants/types'
 
 // Components
 import PaginationDots from '@legacy/components/rotators/PaginationDots'
@@ -76,7 +76,7 @@ const TotemImageContainer = styled('div', {
   },
 })
 
-const TotemImage = styled(Image, {
+const TotemImage = styled('div', {
   '@media (max-width: 768px)': {
     margin: '0 7rem',
   },
@@ -244,10 +244,12 @@ const CustomerSuccessTestimonialsRotator = (props) => {
               src={backgroundSVG.src}
               alt="background svg"
             />
-            <TotemImage
-              image={totemImage}
-              alt="Real people answering real questions"
-            />
+            <TotemImage>
+              <Image
+                image={totemImage}
+                alt="Real people answering real questions"
+              />
+            </TotemImage>
           </TotemImageContainer>
           <RotatorContainer>
             {typeof window !== 'undefined' && (
@@ -284,13 +286,13 @@ CustomerSuccessTestimonialsRotator.defaultProps = {
 
 CustomerSuccessTestimonialsRotator.propTypes = {
   overrideBackgroundSVG: PropTypes.node,
-  overrideTotemImage: GATSBY_IMAGE,
+  overrideTotemImage: RPImage,
   overrideTestimonialsArray: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
       title: PropTypes.string,
       quote: PropTypes.string,
-      image: GATSBY_IMAGE,
+      image: RPImage,
       imageAltText: PropTypes.string,
     })
   ),

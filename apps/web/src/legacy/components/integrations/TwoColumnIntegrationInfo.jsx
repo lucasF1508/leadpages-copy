@@ -2,6 +2,7 @@ import React from 'react'
 import { styled } from '@design'
 import Image from '@components/Image'
 import PropTypes from 'prop-types'
+import { RPImage } from '@legacy/constants/types'
 // Image
 import checkSVG from '@legacy/assets/images/global/check_in-circle.svg'
 
@@ -136,7 +137,7 @@ TwoColumnIntegrationInfo.defaultProps = {
 TwoColumnIntegrationInfo.propTypes = {
   headline: PropTypes.string.isRequired,
   description: PropTypes.string,
-  image: Image.isRequired,
+  image: RPImage.isRequired,
   imageAlt: PropTypes.string.isRequired,
   checkboxInfo: PropTypes.arrayOf(PropTypes.string),
 }

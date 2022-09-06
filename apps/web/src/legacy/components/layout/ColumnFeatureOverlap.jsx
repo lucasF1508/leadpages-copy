@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { styled } from '@design'
 import Image from '@components/Image'
 import Link from 'next/link'
+import { RPImage } from '@legacy/constants/types'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -84,8 +85,8 @@ const Supertitle = styled('div', {
   letterSpacing: '2px',
   lineHeight: '18px',
   marginBottom: '1.25rem',
-  color: '#0b236d',
-  background: '#8fefef',
+  color: '$darkBlue',
+  background: '$sky',
   textTransform: 'uppercase',
   textAlign: 'center',
   borderRadius: '3px',
@@ -104,17 +105,13 @@ const TextContainer = styled('div', {
   width: '100%',
 })
 
-const StyledLink = styled('a', {
-  textDecoration: 'none',
+const StyledLink = styled(Link, {
   color: '$primary',
-  cursor: 'pointer',
   zIndex: 4,
 })
 
 const OutboundLink = styled('a', {
-  textDecoration: 'none',
   color: '$primary',
-  cursor: 'pointer',
   zIndex: 4,
 })
 
@@ -191,7 +188,7 @@ ColumnFeatureOverlap.defaultProps = {
 }
 
 ColumnFeatureOverlap.propTypes = {
-  image: Image.isRequired,
+  image: RPImage.isRequired,
   imageAlt: PropTypes.string.isRequired,
   supertitle: PropTypes.string,
   title: PropTypes.string.isRequired,

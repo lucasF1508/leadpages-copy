@@ -34,6 +34,7 @@ export const colors = {
   terracottaLight: '#dfae78',
   lightBrown: '#b27e52',
   darkBlue: '#0a236d',
+  sky: '#8fefef',
   brand: '$purple10',
   primary: '$purple',
   secondary: '$purpleLight',

@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import MuiTooltip from '@material-ui/core/Tooltip';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react'
+import PropTypes from 'prop-types'
+import MuiTooltip from '@material-ui/core/Tooltip'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(({ palette, shadows }) => ({
   tooltip: {
@@ -21,24 +21,30 @@ const useStyles = makeStyles(({ palette, shadows }) => ({
     fontSize: 8,
     color: '#0b236d',
   },
-}));
+}))
 
-const Tooltip = props => {
-  const classes = useStyles();
-  const { children, placement, ...other } = props;
+const Tooltip = (props) => {
+  const classes = useStyles()
+  const { children, placement, ...other } = props
   return (
-    <MuiTooltip open arrow classes={{ tooltip: classes.tooltip, arrow: classes.arrow }} placement={placement} {...other}>
+    <MuiTooltip
+      open
+      arrow
+      classes={{ tooltip: classes.tooltip, arrow: classes.arrow }}
+      placement={placement}
+      {...other}
+    >
       {children}
     </MuiTooltip>
-  );
-};
+  )
+}
 
 Tooltip.defaultProps = {
   placement: 'bottom',
-};
+}
 
 Tooltip.propTypes = {
   placement: PropTypes.string,
-};
+}
 
-export default Tooltip;
+export default Tooltip

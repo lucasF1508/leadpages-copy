@@ -2,10 +2,10 @@ import React from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
 import NextLink from 'next/link'
-// import Image from '@components/Image'
 import Image from 'next/image'
+import { RPIcon } from '@legacy/constants/types'
 // images
-import rightArrowPurpleSVG from '../../assets/images/global/arrow_right_purple.svg'
+import rightArrowPurpleSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 
 const IconCardStyle_4Across = styled('div', {
   minHeight: '1px',
@@ -209,7 +209,7 @@ IconCard.defaultProps = {
 IconCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  icon: Image.isRequired,
+  icon: RPIcon.isRequired,
   alt: PropTypes.string,
   link: PropTypes.shape({
     type: PropTypes.string.isRequired,

@@ -1,7 +1,8 @@
-import React from 'react';
+import React from 'react'
+import Script from 'next/script'
 
 const GoogleOptimizeScript = () => (
-  <script src="https://www.googleoptimize.com/optimize.js?id=OPT-55BZQG4"></script>
-);
+  <Script src="https://www.googleoptimize.com/optimize.js?id=OPT-55BZQG4" />
+)
 
-export default GoogleOptimizeScript;
+export default GoogleOptimizeScript

@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import React from 'react'
 
 // Legacy components
@@ -25,8 +24,8 @@ import featureIcon1 from '@legacy/assets/images/icons/featureicons/cyan_monitor.
 import featureIcon2 from '@legacy/assets/images/icons/featureicons/lilac_inbound.png'
 import featureIcon3 from '@legacy/assets/images/icons/featureicons/forest_credit-card.png'
 import featureIcon4 from '@legacy/assets/images/icons/featureicons/coral_chart.png'
-
-const Rack = dynamic(() => import('@components/Rack'))
+// scripts
+import RedbrickStructuredDataScript from '@legacy/scripts/RedbrickStructuredDataScript'
 
 const images = {
   websiteBuilderTotem,
@@ -89,20 +88,20 @@ const twoColumnTextBlockArray = [
   },
 ]
 
-const HomePage = ({ hero, components }) => (
+const HomePage = () => (
   <>
     {/* homepage seo metadata is set in the SEO component */}
     <SEO pathname="/" canonical="/" />
-    {/* <RedbrickStructuredDataScript /> */}
+    <RedbrickStructuredDataScript />
     <HomepageHeader />
-    <SpacerRow size="small" backgroundColor="#f7f7f7" />
+    <SpacerRow size="small" backgroundColor="$grayAlt" />
     <FeatureIconsGrid
       features={productFeaturesArray}
       itemsPerRow={4}
       showSectionLink={false}
-      backgroundColor="#f7f7f7"
+      backgroundColor="$grayAlt"
     />
-    <SpacerRow size="small" backgroundColor="#f7f7f7" />
+    <SpacerRow size="small" backgroundColor="$grayAlt" />
     <SpacerRow size="small" />
     <HeadlineSection
       title="Be inspired by someone like you"

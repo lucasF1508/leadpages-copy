@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import { styled } from '@design'
+import { RPImage } from '@legacy/constants/types'
 // components
 import PaginationDots from './PaginationDots'
 import ReactSlick from './ReactSlick_Base'
@@ -158,7 +159,7 @@ QuoteTestimonialsRotator.propTypes = {
   testimonialsArray: PropTypes.arrayOf(
     PropTypes.shape({
       quote: PropTypes.string.isRequired,
-      image: Image.isRequired,
+      image: RPImage.isRequired,
       clientName: PropTypes.string.isRequired,
       clientTitle: PropTypes.string.isRequired,
     })

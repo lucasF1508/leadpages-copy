@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { styled } from '@design'
 // images
 import bkgSVG from '@legacy/assets/images/shapes/wavy-line-gray_brand.svg'
@@ -133,28 +133,26 @@ const SVGContainer = styled('img', {
   },
 })
 
-const BrandPageHeader = () => {
-  return (
-    <Holder>
-      <OuterContainer>
-        <SVGContainer src={bkgSVG.src} alt="background svg" />
-        <InnerContainer>
-          <HeaderContainer>
-            <Supertitle>Jump on our brand’s bandwagon</Supertitle>
-            <Title>The Leadpages Brand</Title>
-            <Subtitle>
-              Our brand is both our personality and our promise, so consistency
-              is key. Use these guidelines whenever you work with our brand
-              assets, logo, content, and trademark.
-            </Subtitle>
-          </HeaderContainer>
-          <ImageContainer>
-            <HeroImage image={heroImage}></HeroImage>
-          </ImageContainer>
-        </InnerContainer>
-      </OuterContainer>
-    </Holder>
-  )
-}
+const BrandPageHeader = () => (
+  <Holder>
+    <OuterContainer>
+      <SVGContainer src={bkgSVG.src} alt="background svg" />
+      <InnerContainer>
+        <HeaderContainer>
+          <Supertitle>Jump on our brand’s bandwagon</Supertitle>
+          <Title>The Leadpages Brand</Title>
+          <Subtitle>
+            Our brand is both our personality and our promise, so consistency is
+            key. Use these guidelines whenever you work with our brand assets,
+            logo, content, and trademark.
+          </Subtitle>
+        </HeaderContainer>
+        <ImageContainer>
+          <HeroImage image={heroImage}></HeroImage>
+        </ImageContainer>
+      </InnerContainer>
+    </OuterContainer>
+  </Holder>
+)
 
 export default BrandPageHeader

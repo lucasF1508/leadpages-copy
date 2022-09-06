@@ -3,6 +3,7 @@ import { styled } from '@design'
 import Image from '@components/Image'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
+import { RPImage } from '@legacy/constants/types'
 // Image
 import checkSVG from '@legacy/assets/images/global/check_in-circle.svg'
 
@@ -172,7 +173,7 @@ IntegrationsPromoSection.defaultProps = {
 }
 
 IntegrationsPromoSection.propTypes = {
-  image: Image.isRequired,
+  image: RPImage.isRequired,
   imageAlt: PropTypes.string.isRequired,
   headline: PropTypes.string.isRequired,
   description: PropTypes.string,

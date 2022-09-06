@@ -1,14 +1,14 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React from 'react'
+import Script from 'next/script'
 
 const ProfitWellRetain = () => (
-  <>
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `dataLayer.push({ 'event': 'start_pw' });`,
-      }}
-    ></script>
-  </>
-);
+  <Script
+    id="profit-well-retain"
+    dangerouslySetInnerHTML={{
+      __html: `dataLayer.push({ 'event': 'start_pw' });`,
+    }}
+  />
+)
 
-export default ProfitWellRetain;
+export default ProfitWellRetain

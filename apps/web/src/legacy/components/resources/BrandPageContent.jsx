@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 import { styled } from '@design'
 // utilities
@@ -13,8 +13,6 @@ import wordmarkWhite from '@legacy/assets/images/global/leadpages-wordmark_white
 import productScreenshotsImage from '@legacy/assets/images/totems/product-screenshots.jpg'
 import ourPhotographyImage from '@legacy/assets/images/totems/our-photography.jpg'
 import Link from 'next/link'
-import { useState } from 'react'
-import { useEffect } from 'react'
 
 // videos
 const wordmarkLoopWebm =
@@ -65,7 +63,6 @@ const MainContainer = styled('div', {
 })
 
 const Section = styled('div', {
-  paddingTop: '1rem',
   width: '100%',
   paddingTop: '85px',
   marginTop: '-85px',
@@ -139,7 +136,7 @@ const MainMenuContainer = styled('div', {
   position: 'fixed',
   top: '0px',
   width: '100%',
-  zIndex: 100,
+  zIndex: 1501,
   height: '72px',
   background: '$white',
   borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
@@ -708,41 +705,38 @@ const SectionContent_Colors = () => (
   </>
 )
 
-const SectionContent_BrandAssets = () => {
-  return (
-    <>
-      <SubsectionParagraph>
-        Through dynamic graphic shapes and photography, we highlight the people
-        we serve and the things they create on the Leadpages platform.
-      </SubsectionParagraph>
-      <SubsectionBrandAssetsFlexRow>
-        <SubsectionBrandAssetsFlexRowItem>
-          <SubsectionBrandAssetsImage
-            src={productScreenshotsImage.src}
-            alt="Leadpages product screenshots"
-          />
-        </SubsectionBrandAssetsFlexRowItem>
-        <SubsectionBrandAssetsFlexRowItem>
-          <SubsectionBrandAssetsImage
-            src={ourPhotographyImage.src}
-            alt="Leadpages photography"
-          />
-        </SubsectionBrandAssetsFlexRowItem>
-      </SubsectionBrandAssetsFlexRow>
-      <SubsectionParagraph>
-        Here’s all the beauty of our brand boxed up neatly and ready for
-        download.
-      </SubsectionParagraph>
-      <SubsectionDownloadLink
-        href="https://www.dropbox.com/sh/bopv26efyxrvq2l/AADZ4y0MeChxUWFbpkuMTlmVa?dl=1"
-        alt="Download Leadpages multimedia images"
-      >
-        Download Brand Assets{'   '}
-        <RightArrow src={downArrow.src}></RightArrow>
-      </SubsectionDownloadLink>
-    </>
-  )
-}
+const SectionContent_BrandAssets = () => (
+  <>
+    <SubsectionParagraph>
+      Through dynamic graphic shapes and photography, we highlight the people we
+      serve and the things they create on the Leadpages platform.
+    </SubsectionParagraph>
+    <SubsectionBrandAssetsFlexRow>
+      <SubsectionBrandAssetsFlexRowItem>
+        <SubsectionBrandAssetsImage
+          src={productScreenshotsImage.src}
+          alt="Leadpages product screenshots"
+        />
+      </SubsectionBrandAssetsFlexRowItem>
+      <SubsectionBrandAssetsFlexRowItem>
+        <SubsectionBrandAssetsImage
+          src={ourPhotographyImage.src}
+          alt="Leadpages photography"
+        />
+      </SubsectionBrandAssetsFlexRowItem>
+    </SubsectionBrandAssetsFlexRow>
+    <SubsectionParagraph>
+      Here’s all the beauty of our brand boxed up neatly and ready for download.
+    </SubsectionParagraph>
+    <SubsectionDownloadLink
+      href="https://www.dropbox.com/sh/bopv26efyxrvq2l/AADZ4y0MeChxUWFbpkuMTlmVa?dl=1"
+      alt="Download Leadpages multimedia images"
+    >
+      Download Brand Assets{'   '}
+      <RightArrow src={downArrow.src}></RightArrow>
+    </SubsectionDownloadLink>
+  </>
+)
 
 const SectionContent_Legal = () => (
   <>
