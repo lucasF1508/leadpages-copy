@@ -23,7 +23,6 @@ const OuterContainer = styled('div', {
 const InnerContainer = styled('div', {
   display: 'flex',
   position: 'relative',
-  justifyContent: 'space-around',
   flexFlow: 'row wrap',
   marginLeft: '10%',
   width: '100%',

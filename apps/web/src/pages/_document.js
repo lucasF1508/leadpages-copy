@@ -2,6 +2,7 @@ import React from 'react'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { getCssText } from '@design/stitches.config'
 import { ServerStyleSheets } from '@material-ui/core/styles'
+import ProfitWellRetain from '@legacy/scripts/ProfitWellRetain'
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx) {
@@ -50,6 +51,7 @@ export default class Document extends NextDocument {
             dangerouslySetInnerHTML={{ __html: getCssText() }}
           />
           <script>window.dataLayer = window.dataLayer || []</script>
+          <ProfitWellRetain />
           <script
             src="https://static.leadpages.com/leadboxes/current/embed.js"
             async

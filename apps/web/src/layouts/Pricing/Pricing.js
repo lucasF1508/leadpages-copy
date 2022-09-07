@@ -7,7 +7,7 @@ import {
   checkPlanBundleEligibility,
   PlanCompareTable,
 } from '@lp/lib-upgrade-modal'
-import Link from '@components/Link'
+import Link from 'next/link'
 import Accordion from '../../legacy/components/accordions/Accordion'
 import FeatureIconsGrid from '../../legacy/components/grids/FeatureIconsGrid'
 import HeadlineSection, {
@@ -46,9 +46,7 @@ const HeadlineContainer = styled('div', {
   z: -1,
 })
 
-const StyledLink = styled(Link, {
-  textDecoration: 'none',
-  cursor: 'pointer',
+const StyledLink = styled('a', {
   c: '$primary',
   pb: '3px',
   bb: '2px solid $colors$purpleLight',
@@ -258,8 +256,14 @@ const Pricing = (props) => {
           />
           <SectionLink>
             Have more questions? See our{' '}
-            <StyledLink to="/faq">full FAQ page</StyledLink> or{' '}
-            <StyledLink to="/contact">contact us</StyledLink>.
+            <Link href="/faq" passHref>
+              <StyledLink>full FAQ page</StyledLink>
+            </Link>{' '}
+            or{' '}
+            <Link href="/contact" passHref>
+              <StyledLink>contact us</StyledLink>
+            </Link>
+            .
           </SectionLink>
         </AccordionSection>
         <ReadyToGrow headline="Ready to grow?" />

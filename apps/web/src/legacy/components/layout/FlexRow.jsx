@@ -65,7 +65,7 @@ const FlexContainer = styled('div', {
 const RowItem = styled('div', {
   minHeight: '1px',
   position: 'relative',
-  textAlign: 'center',
+  textAlign: 'left',
   textDecoration: 'none',
   width: '100%',
   justifyContent: 'space-between',

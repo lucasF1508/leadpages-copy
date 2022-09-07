@@ -81,6 +81,8 @@ const TakeControlCopyContainer = styled(FlexRowItem6, {
 
   '@>m': {
     marginBottom: 0,
+    flex: '0 0 100%',
+    maxWidth: '100%',
   },
 })
 

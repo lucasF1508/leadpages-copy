@@ -40,7 +40,12 @@ const LogoContainer = styled('div', {
 const RedbrickFooter = () => (
   <RedbrickFooterContainer>
     Leadpages is part of the{' '}
-    <a target="_blank" rel="noreferrer noopener" href="https://rdbrck.com/">
+    <a
+      target="_blank"
+      rel="noreferrer noopener"
+      href="https://rdbrck.com/"
+      style={{ textDecoration: 'underline' }}
+    >
       Redbrick
     </a>{' '}
     family of brands.

@@ -78,7 +78,7 @@ const StyledLink = styled('a', {
   cursor: 'pointer',
 
   [`&:hover ${LinkText}`]: {
-    color: '$primary',
+    color: '$indigoDark',
   },
 
   [`&:hover ${ArrowSVG}`]: {
@@ -104,24 +104,35 @@ const NextLink = styled('a', {
   },
 })
 
-const TwoColumnTextBlock = ({ textBlockArray }) => {
-  return (
-    <OuterContainer>
-      <InnerContainer>
-        {textBlockArray.map((item, index) => {
-          const { heading, text, linkType, linkRoute, linkText, linkAltText } =
-            item
-          return (
-            <TextBlock key={index}>
-              <Heading>{heading}</Heading>
-              <MainText>{text}</MainText>
-              {linkType === 'external' && (
-                <StyledLink
-                  href={linkRoute}
-                  alt={linkAltText}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
+const TwoColumnTextBlock = ({ textBlockArray }) => (
+  <OuterContainer>
+    <InnerContainer>
+      {textBlockArray.map((item, index) => {
+        const { heading, text, linkType, linkRoute, linkText, linkAltText } =
+          item
+        return (
+          <TextBlock key={index}>
+            <Heading>{heading}</Heading>
+            <MainText>{text}</MainText>
+            {linkType === 'external' && (
+              <StyledLink
+                href={linkRoute}
+                alt={linkAltText}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                <LinkText>
+                  {linkText}
+                  <ArrowSVG
+                    src={arrowRightPurpleSVG.src}
+                    alt="purple right arrow"
+                  />
+                </LinkText>
+              </StyledLink>
+            )}
+            {linkType === 'internal' && (
+              <Link href={linkRoute} passHref>
+                <NextLink aria-label={linkAltText} target="_blank">
                   <LinkText>
                     {linkText}
                     <ArrowSVG
@@ -129,28 +140,15 @@ const TwoColumnTextBlock = ({ textBlockArray }) => {
                       alt="purple right arrow"
                     />
                   </LinkText>
-                </StyledLink>
-              )}
-              {linkType === 'internal' && (
-                <Link href={linkRoute} passHref>
-                  <NextLink aria-label={linkAltText} target="_blank">
-                    <LinkText>
-                      {linkText}
-                      <ArrowSVG
-                        src={arrowRightPurpleSVG.src}
-                        alt="purple right arrow"
-                      />
-                    </LinkText>
-                  </NextLink>
-                </Link>
-              )}
-            </TextBlock>
-          )
-        })}
-      </InnerContainer>
-    </OuterContainer>
-  )
-}
+                </NextLink>
+              </Link>
+            )}
+          </TextBlock>
+        )
+      })}
+    </InnerContainer>
+  </OuterContainer>
+)
 
 TwoColumnTextBlock.propTypes = {
   textBlockArray: PropTypes.arrayOf(
