@@ -105,23 +105,25 @@ const TextContainer = styled('div', {
 })
 
 const Headline = styled('div', {
-  fontFamily: 'Value Serif',
-  fontSize: '28px',
-  lineHeight: '34px',
-  letterSpacing: '0',
-  color: '$text',
-  mb: '2rem',
-
-  '@media  (min-width: 577px) and (max-width: 768px)': {
-    fontSize: '40px',
-    lineHeight: '48px',
-    letterSpacing: '-0.5px',
-  },
-
-  '@media  (min-width: 769px)': {
-    fontSize: '56px',
-    lineHeight: '60px',
+  h1: {
+    fontFamily: 'Value Serif',
+    fontSize: '28px',
+    lineHeight: '34px',
     letterSpacing: '0',
+    color: '$text',
+    mb: '2rem',
+
+    '@media  (min-width: 577px) and (max-width: 768px)': {
+      fontSize: '40px',
+      lineHeight: '48px',
+      letterSpacing: '-0.5px',
+    },
+
+    '@media  (min-width: 769px)': {
+      fontSize: '56px',
+      lineHeight: '60px',
+      letterSpacing: '0',
+    },
   },
 })
 

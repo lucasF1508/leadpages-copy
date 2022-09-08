@@ -54,6 +54,7 @@ const IconCardStyle_4Across = styled('div', {
 
   h3: {
     fontSize: '16px',
+    fontFamily: '$fonts$base',
     lineHeight: '24px',
     fontWeight: '500',
     mb: '1rem',

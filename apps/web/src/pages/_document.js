@@ -30,6 +30,14 @@ export default class Document extends NextDocument {
     return (
       <Html lang="en">
         <Head>
+          <style
+            id="stitches"
+            dangerouslySetInnerHTML={{ __html: getCssText() }}
+          />
+          <link
+            rel="dns-prefetch preconnect"
+            href="https://static.leadpages.com"
+          />
           <link
             href="https://static.leadpages.com/fonts/valueserif_typeset.css"
             rel="stylesheet"
@@ -42,20 +50,12 @@ export default class Document extends NextDocument {
             href="https://static.leadpages.com/fonts/spacemono_typeset.css"
             rel="stylesheet"
           />
-          <link
-            rel="dns-prefetch preconnect"
-            href="https://static.leadpages.com"
-          />
-          <style
-            id="stitches"
-            dangerouslySetInnerHTML={{ __html: getCssText() }}
-          />
           <script>window.dataLayer = window.dataLayer || []</script>
           <ProfitWellRetain />
           <script
             src="https://static.leadpages.com/leadboxes/current/embed.js"
             async
-            defer="defer"
+            // defer="defer"
           ></script>
         </Head>
         <body>
