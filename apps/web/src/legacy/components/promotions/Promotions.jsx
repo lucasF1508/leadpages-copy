@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 
@@ -6,6 +6,7 @@ import { BundleInfoSheet, Banner } from '@lp/ui'
 import { FLOWS } from '@lp/lib-upgrade-modal'
 
 // components
+import { AppContext } from '@app'
 import AlertBars from '../conversion-tools/AlertBars'
 import { addToastMessage } from '../toasts/ToastManager'
 // utils & data
@@ -25,7 +26,9 @@ import { getLocalPreviousPlan } from '../../utils/previous-plan'
 
 const PRICING_PATHS = ['/pricing', '/compare-plans']
 
-const Promotions = ({ onPromotionsLoaded }) => {
+const Promotions = ({ onPromotionsLoaded = false }) => {
+  const { setHasLoaded } = useContext(AppContext)
+
   const [showBundle, setShowBundle] = useState(false)
   const [showCoupon, setShowCoupon] = useState(false)
   const [purchaseFlow, setPurchaseFlow] = useState(false)
@@ -75,7 +78,8 @@ const Promotions = ({ onPromotionsLoaded }) => {
       setPurchaseFlow(flow)
       setCoupon(!checkCouponExpired(localCoupon) ? localCoupon : null)
       setBundle(!checkBundleExpired(localBundle) ? localBundle : null)
-      onPromotionsLoaded()
+      if (onPromotionsLoaded) onPromotionsLoaded()
+      setHasLoaded(true)
       setIsLoading(false)
     }
     promotionsInit()

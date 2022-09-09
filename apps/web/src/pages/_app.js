@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import globalStyles from '@design/globalStyles'
 import useGoogleTagManager from '@hooks/useGoogleTagManager'
@@ -55,6 +55,9 @@ export default function App({
   useResizeEnd()
   useFocusOutlineOnTab()
 
+  // Promotions loading
+  const [hasLoaded, setHasLoaded] = useState()
+
   const [pageData] = useSanityPreview({
     query,
     data,
@@ -63,7 +66,7 @@ export default function App({
   })
 
   return (
-    <AppContext.Provider value={siteMeta}>
+    <AppContext.Provider value={{ ...siteMeta, hasLoaded, setHasLoaded }}>
       <MarketingThemeProvider>
         <GlobalStyles />
         <ToastManager />

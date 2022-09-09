@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { styled } from '@design'
 // Components
 import {
@@ -8,34 +8,32 @@ import {
   PlanCompareTable,
 } from '@lp/lib-upgrade-modal'
 import Link from 'next/link'
-import Accordion from '../../legacy/components/accordions/Accordion'
-import FeatureIconsGrid from '../../legacy/components/grids/FeatureIconsGrid'
+import Accordion from '@legacy/components/accordions/Accordion'
+import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
 import HeadlineSection, {
   Caption,
-} from '../../legacy/components/layout/HeadlineSection'
-import Layout from '../../legacy/components/Layout'
-import LoadingState from '../../legacy/components/LoadingState'
-import QuoteTestimonialsRotator from '../../legacy/components/rotators/QuoteTestimonialsRotator'
-import ReadyToGrow from '../../legacy/components/product/ReadyToGrow'
-import SpacerRow from '../../legacy/components/SpacerRow'
-import SingleTestimonialWavesRow from '../../legacy/components/testimonials/SingleTestimonialWavesRow'
+} from '@legacy/components/layout/HeadlineSection'
+import Layout from '@legacy/components/Layout'
+import LoadingState from '@legacy/components/LoadingState'
+import QuoteTestimonialsRotator from '@legacy/components/rotators/QuoteTestimonialsRotator'
+import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
+import SpacerRow from '@legacy/components/SpacerRow'
+import SingleTestimonialWavesRow from '@legacy/components/testimonials/SingleTestimonialWavesRow'
 // Data
-import { pricingFaqData } from '../../legacy/data/faq_data'
-import {
-  testimonialsData,
-  planFeaturesData,
-} from '../../legacy/data/pricing_data'
-import { HEADER_HEIGHT, PRICING_LOAD_TIMEOUT } from '../../legacy/constants'
+import { pricingFaqData } from '@legacy/data/faq_data'
+import { testimonialsData, planFeaturesData } from '@legacy/data/pricing_data'
+import { HEADER_HEIGHT, PRICING_LOAD_TIMEOUT } from '@legacy/constants'
 // Utils
-import { getLocalCoupon } from '../../legacy/utils/coupons'
-import { getLocalBundle } from '../../legacy/utils/bundles'
-import { getLocalPreviousPlan } from '../../legacy/utils/previous-plan'
-import { getUrlParam } from '../../legacy/utils/common'
-import { planRouter } from '../../legacy/utils/plan-router'
-import { getTrialId } from '../../legacy/utils/trials'
+import { getLocalCoupon } from '@legacy/utils/coupons'
+import { getLocalBundle } from '@legacy/utils/bundles'
+import { getLocalPreviousPlan } from '@legacy/utils/previous-plan'
+import { getUrlParam } from '@legacy/utils/common'
+import { planRouter } from '@legacy/utils/plan-router'
+import { getTrialId } from '@legacy/utils/trials'
 // Images
-import backgroundImageSVG from '../../legacy/assets/images/shapes/wavy-line-gray_pricing.svg'
-import testimonialImageRonCollins from '../../legacy/assets/images/testimonials/ron-collins_far.png'
+import backgroundImageSVG from '@legacy/assets/images/shapes/wavy-line-gray_pricing.svg'
+import testimonialImageRonCollins from '@legacy/assets/images/testimonials/ron-collins_far.png'
+import { AppContext } from '@app'
 
 const HeadlineContainer = styled('div', {
   position: 'relative',
@@ -116,6 +114,8 @@ const AccordionSection = styled('div', {
 })
 
 const Pricing = (props) => {
+  const { hasLoaded } = useContext(AppContext)
+
   const { planData: { trialPlans, generalPlans } = {} } = props || {}
   const CONTACT_US_PLAN = {
     contactLink: 'https://lp.leadpages.com/agency/',
@@ -166,6 +166,10 @@ const Pricing = (props) => {
     if (coupon?.canRedeemCoupon) setCouponData(coupon)
     setIsLoading(false)
   }
+
+  useEffect(() => {
+    if (hasLoaded) handlePromotionsLoaded()
+  }, [hasLoaded])
 
   const handleSelectPlan = (planId, planLevel, period) => {
     const routerBundleData = checkPlanBundleEligibility(

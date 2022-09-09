@@ -1,6 +1,6 @@
 import React from 'react'
 import Pricing from '@layouts/Pricing'
-import { getGroupedPlanData } from '../legacy/utils/plans'
+import { getGroupedPlanData } from '@legacy/utils/plans'
 
 const PricingPage = (props) => <Pricing {...props} />
 
