@@ -399,6 +399,7 @@ const HomepageHeader = () => {
                 alt="website template image"
                 height="1080"
                 width="1920"
+                lazyBoundary="9999px"
               />
               {displayVideo && (
                 <Video autoPlay playsinline muted loop>
@@ -413,7 +414,11 @@ const HomepageHeader = () => {
                 <VideoButton>
                   <span>Watch the Full Demo</span>
                   <VideoButtonArrow>
-                    <SVG src={playButtonSVG} alt="purple right arrow" />
+                    <SVG
+                      src={playButtonSVG}
+                      alt="purple right arrow"
+                      lazyBoundary="9999px"
+                    />
                   </VideoButtonArrow>
                 </VideoButton>
               </Wistia_DemoVideo>

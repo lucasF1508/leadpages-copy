@@ -152,7 +152,13 @@ const IconCard = ({ title, icon, alt, description, link, itemsPerRow }) => {
       <IconCardStyle_3Across>
         <div>
           <ImageContainer>
-            <Image src={icon} alt={alt} height={48} width={48} />
+            <Image
+              src={icon}
+              alt={alt}
+              height={48}
+              width={48}
+              lazyBoundary="9999px"
+            />
           </ImageContainer>
           <h3>{title}</h3>
           <div className="details">{description}</div>
@@ -163,7 +169,7 @@ const IconCard = ({ title, icon, alt, description, link, itemsPerRow }) => {
                   {link.label}
                   &nbsp;
                   <ArrowRightPurple>
-                    <Image {...rightArrowPurpleSVG} />
+                    <Image {...rightArrowPurpleSVG} lazyBoundary="9999px" />
                   </ArrowRightPurple>
                 </CTA>
               </IconCardLink>
@@ -178,7 +184,13 @@ const IconCard = ({ title, icon, alt, description, link, itemsPerRow }) => {
     <IconCardStyle_4Across>
       <div>
         <ImageContainer>
-          <Image src={icon} alt={alt} height={48} width={48} />
+          <Image
+            src={icon}
+            alt={alt}
+            height={48}
+            width={48}
+            lazyBoundary="9999px"
+          />
         </ImageContainer>
         <h3>{title}</h3>
         <div className="details">{description}</div>
@@ -189,7 +201,7 @@ const IconCard = ({ title, icon, alt, description, link, itemsPerRow }) => {
                 {link.label}
                 &nbsp;
                 <ArrowRightPurple>
-                  <Image {...rightArrowPurpleSVG} />
+                  <Image {...rightArrowPurpleSVG} lazyBoundary="9999px" />
                 </ArrowRightPurple>
               </CTA>
             </IconCardLink>

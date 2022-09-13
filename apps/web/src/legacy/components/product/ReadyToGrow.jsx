@@ -232,7 +232,11 @@ const ReadyToGrow = ({
               >
                 <RTGVideoButton>
                   <PlayButtonIcon>
-                    <Image src={PlayButtonSVG} alt="play button icon" />
+                    <Image
+                      src={PlayButtonSVG}
+                      alt="play button icon"
+                      lazyBoundary="9999px"
+                    />
                   </PlayButtonIcon>
                   Watch a quick demo
                 </RTGVideoButton>

@@ -126,6 +126,7 @@ const Image = ({
         title={title}
         placeholder={hasPlaceholder ? placeholderType : undefined}
         blurDataURL={hasPlaceholder ? lqip : undefined}
+        lazyBoundary="9999px"
       />
     </$Figure>
   )

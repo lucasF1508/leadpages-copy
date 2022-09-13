@@ -150,6 +150,7 @@ const LPAccordion = ({ sectionHeadline, data }) => {
                     alt="arrow icon"
                     width={18}
                     height={12}
+                    lazyBoundary="9999px"
                   />
                 }
               >
