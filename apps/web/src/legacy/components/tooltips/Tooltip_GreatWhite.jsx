@@ -23,11 +23,17 @@ const $TooltipContent = styled(Content, {
   lineHeight: '18px',
   color: '$grey10',
   animation: `${slideIn} 200ms ease-out`,
+  bt: '1px solid $colors$gray2',
 })
 
 const $TooltipTrigger = styled(Trigger, {
+  cursor: 'help',
   [`&[data-state="closed"] + div > ${$TooltipContent}`]: {
-    animation: `${slideOut} 300ms ease-out`,
+    animation: `${slideOut} 310ms ease-out`,
+  },
+
+  '& + [data-radix-popper-content-wrapper]': {
+    z: '100 !important',
   },
 })
 

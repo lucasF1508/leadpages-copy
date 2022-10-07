@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
-import Link from '@components/Link'
+import Link from 'next/link'
 import { Link as ScrollLink } from 'react-scroll'
 import debounce from 'lodash.debounce'
 import { styled } from '@design'
 import { GATSBY_IMAGE } from '@legacy/constants/types'
 // components
+import closeXSVG from '@legacy/assets/images/global/x_close.svg'
+import downArrowSVG from '@legacy/assets/images/global/arrow_down_large.svg'
 import SearchFilter from '../search/SearchFilter'
 import Tooltip from '../tooltips/Tooltip_GreatWhite'
 // images
-import closeXSVG from '@legacy/assets/images/global/x_close.svg'
-import downArrowSVG from '@legacy/assets/images/global/arrow_down_large.svg'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -109,11 +109,14 @@ const SectionIntegrationCopy = styled('div', {
 })
 
 const SectionIntegrationConnection = styled('div', {
-  color: '$textAlt',
-  fontSize: '12px',
-  lineHeight: '18px',
-  fontFamily: 'Apercu Pro',
   marginBottom: '20px',
+  lineHeight: '18px',
+
+  button: {
+    color: '$textAlt',
+    fontSize: '12px',
+    fontFamily: 'Apercu Pro',
+  },
 })
 
 const SidebarContainer = styled('div', {
@@ -296,7 +299,7 @@ const SubmenuScrollLink = styled(ScrollLink, {
   },
 })
 
-const StyledLink = styled(Link, {
+const StyledLink = styled('a', {
   textDecoration: 'none',
 })
 
@@ -635,45 +638,49 @@ class IntegrationsContent extends React.Component {
                             <>
                               {/* Subpage included here */}
                               {subpage ? (
-                                <StyledLink url={subpage.route}>
-                                  <IntegrationContainer
-                                    key={integration}
-                                    className="hasSubpage"
-                                  >
-                                    <SubpageCardArrow src={downArrowSVG.src} />
-                                    <IntegrationFlexbox>
-                                      <IntegrationImageContainer>
-                                        <IntegrationImage
-                                          image={icon}
-                                          alt={`${integration + ' logo'}`}
-                                        />
-                                      </IntegrationImageContainer>
-                                      <IntegrationTextContainer>
-                                        <SectionIntegrationTitle
-                                          key={integration}
-                                          className="hasSubpage"
-                                        >
-                                          {integration}
-                                        </SectionIntegrationTitle>
-                                        <SectionIntegrationConnection>
-                                          <Tooltip title={tooltip}>
-                                            <span>{connection}</span>
-                                          </Tooltip>
-                                        </SectionIntegrationConnection>
-                                        <SectionIntegrationCopy>
-                                          {description}
-                                        </SectionIntegrationCopy>
-                                      </IntegrationTextContainer>
-                                    </IntegrationFlexbox>
-                                  </IntegrationContainer>
-                                </StyledLink>
+                                <Link href={subpage.route} passHref>
+                                  <StyledLink>
+                                    <IntegrationContainer
+                                      key={integration}
+                                      className="hasSubpage"
+                                    >
+                                      <SubpageCardArrow
+                                        src={downArrowSVG.src}
+                                      />
+                                      <IntegrationFlexbox>
+                                        <IntegrationImageContainer>
+                                          <IntegrationImage
+                                            image={icon}
+                                            alt={`${`${integration} logo`}`}
+                                          />
+                                        </IntegrationImageContainer>
+                                        <IntegrationTextContainer>
+                                          <SectionIntegrationTitle
+                                            key={integration}
+                                            className="hasSubpage"
+                                          >
+                                            {integration}
+                                          </SectionIntegrationTitle>
+                                          <SectionIntegrationConnection>
+                                            <Tooltip title={connection}>
+                                              <span>{tooltip}</span>
+                                            </Tooltip>
+                                          </SectionIntegrationConnection>
+                                          <SectionIntegrationCopy>
+                                            {description}
+                                          </SectionIntegrationCopy>
+                                        </IntegrationTextContainer>
+                                      </IntegrationFlexbox>
+                                    </IntegrationContainer>
+                                  </StyledLink>
+                                </Link>
                               ) : (
                                 <IntegrationContainer key={integration}>
                                   <IntegrationFlexbox>
                                     <IntegrationImageContainer>
                                       <IntegrationImage
                                         image={icon}
-                                        alt={`${integration + ' logo'}`}
+                                        alt={`${`${integration} logo`}`}
                                       />
                                     </IntegrationImageContainer>
                                     <IntegrationTextContainer>
@@ -683,8 +690,8 @@ class IntegrationsContent extends React.Component {
                                         {integration}
                                       </SectionIntegrationTitle>
                                       <SectionIntegrationConnection>
-                                        <Tooltip title={tooltip}>
-                                          <span>{connection}</span>
+                                        <Tooltip title={connection}>
+                                          <span>{tooltip}</span>
                                         </Tooltip>
                                       </SectionIntegrationConnection>
                                       <SectionIntegrationCopy>

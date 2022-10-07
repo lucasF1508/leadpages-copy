@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { RPImage } from '@legacy/constants/types'
 // Components
-import Image from '@components/Image'
 import IntegrationsSubpageHeader from '@legacy/components/headers/IntegrationsSubpageHeader'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SingleTestimonialQuoteRow from '@legacy/components/testimonials/SingleTestimonialQuoteRow'

@@ -1,12 +1,12 @@
 import React from 'react'
 
+// data
+import { integrationsArray } from '@legacy/data/integrations_data'
+
 // components
 import IntegrationsContent from './IntegrationsContent'
 import IntegrationsHeader from './IntegrationsHeader'
 import ReadyToGrow from '../product/ReadyToGrow'
-
-// data
-import { integrationsArray } from '@legacy/data/integrations_data'
 
 const Integrations = () => {
   const categories = [
