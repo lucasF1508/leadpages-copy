@@ -89,6 +89,7 @@ const globalStyles = globalCss({
     b: 0,
     bc: 'unset',
     cursor: 'pointer',
+    fontFamily: '$base',
   },
   h1: {
     type: 'h1',
