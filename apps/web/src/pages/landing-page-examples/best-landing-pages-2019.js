@@ -7,11 +7,8 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/landing-page-examples/best-landing-pages-2019'
 
-  const data = {}
-
   return {
     props: {
-      data,
       slug,
       preview,
     },

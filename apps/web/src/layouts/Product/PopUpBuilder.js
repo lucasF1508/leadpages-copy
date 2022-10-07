@@ -2,12 +2,12 @@ import React from 'react'
 import { styled } from '@design'
 // components
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
-import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
+import CustomerSuccessTestimonialsRotator from '@components/Rotator/CustomerSuccessTestimonialsRotator'
 import FlexSectionTwoColumnFeatures from '@legacy/components/product/FlexSectionTwoColumnFeatures'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import PopUpTogether from '@legacy/components/product/PopUpTogether'
 import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
-import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
+import ProductFeaturesRotator from '@components/Rotator/ProductFeaturesRotator'
 import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
@@ -107,7 +107,6 @@ const PopUpBuilderProductPage = () => {
         caption="Find the right moment for your message by choosing from behavior and time-triggered pop-up
         settings."
       />
-      {/* this section uses a click-reveal on desktop and a rotator on mobile */}
       <ClickRevealSection_Desktop>
         <ProductFeaturesClickReveal
           animations
@@ -142,7 +141,6 @@ const PopUpBuilderProductPage = () => {
         title="Get inspired"
         caption="With Leadpages pop-up builder, the possibilities are endless."
       />
-      {/* this section uses a click-reveal on desktop and a rotator on mobile */}
       <ClickRevealSection_Desktop>
         <ProductFeaturesClickReveal
           animations

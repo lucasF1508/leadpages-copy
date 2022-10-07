@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useId } from 'react'
 import { styled, keyframes } from '@design'
 import * as Primitives from '@radix-ui/react-accordion'
-import { FiChevronDown } from '@react-icons/all-files/fi/FiChevronDown'
+import { CgChevronDown as Icon } from '@react-icons/all-files/cg/CgChevronDown'
 import Text from '@components/Text'
 
 const open = keyframes({
@@ -18,7 +18,6 @@ export const $Accordion = styled(Primitives.Root, {})
 
 export const $AccordionHeader = styled(Primitives.Header, {
   d: 'flex',
-  py: '$2',
   mb: 0,
   box: [{ property: 'px' }, { property: 'mx', multiplier: -1 }],
 
@@ -67,12 +66,21 @@ export const $AccordionItem = styled(Primitives.Item, {
 export const $AccordionTrigger = styled(Primitives.Trigger, {
   position: 'relative',
   pr: '$4',
+  py: '$3',
   w: '100%',
   cursor: 'pointer',
   ta: 'left',
-  type: 'button',
+  typeSizes: 'lg',
   fontWeight: '$medium',
   fontFamily: '$base',
+  transition: 'color 0.3s ease',
+
+  '&:hover': {
+    color: '$primary',
+    svg: {
+      stroke: '$primary',
+    },
+  },
 
   variants: {
     isNav: {
@@ -85,7 +93,7 @@ export const $AccordionTrigger = styled(Primitives.Trigger, {
 
 export const $AccordionContent = styled(Primitives.Content, {
   overflow: 'hidden',
-  box: { property: 'px' },
+  // box: { property: 'px' },
 
   '&[data-state="open"]': {
     animation: `${open} 300ms ease-out`,
@@ -105,25 +113,26 @@ export const $AccordionContent = styled(Primitives.Content, {
   },
 })
 
-export const $AccordionIcon = styled(FiChevronDown, {
+export const $AccordionIcon = styled(Icon, {
   position: 'absolute',
   top: '50%',
   right: 0,
   z: '$base',
-  h: '$space$2',
-  w: '$space$2',
-  mt: '-0.5rem',
+  h: '$space$4',
+  w: '$space$4',
+  mt: '-1rem',
   d: 'flex',
   ff: 'row nowrap',
   jc: 'center',
   ai: 'center',
   stroke: '$text',
+  transition: 'stroke 0.3s ease',
 })
 
 const Accordion = ({ accordionItems }) => (
   <$Accordion type="single" collapsible="true">
     {accordionItems &&
-      accordionItems.map(({ _key, title, content }) => (
+      accordionItems.map(({ _key = useId(), title, content }) => (
         <$AccordionItem key={_key} value={_key}>
           <$AccordionHeader>
             <$AccordionTrigger>
@@ -134,8 +143,27 @@ const Accordion = ({ accordionItems }) => (
           <$AccordionContent>
             <Text
               as="div"
-              tagStyle="baseTypeAlt"
-              css={{ p: '$2 0 $4' }}
+              tagStyle="base"
+              css={{
+                p: '0 0 $4',
+                '& *': {
+                  mb: '$2',
+                  '&:last-child': {
+                    mb: 0,
+                  },
+                },
+                '& a': {
+                  color: 'inherit',
+                  textDecoration: 'none',
+                  borderBottom: `2px solid $colors$secondary`,
+                  paddingBottom: 2,
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    color: '$primary',
+                    borderBottom: `2px solid $colors$primary`,
+                  },
+                },
+              }}
               content={content}
             />
           </$AccordionContent>

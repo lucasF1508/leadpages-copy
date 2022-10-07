@@ -121,34 +121,6 @@ const Headline = styled('h1', {
   },
 })
 
-const TooltipText = styled('p', {
-  display: 'inline',
-  color: '$textAlt',
-  fontSize: '12px',
-  letterSpacing: 0,
-  lineHeight: '18px',
-  marginBottom: '24px',
-})
-
-const IntegrationTipHover = styled('p', {
-  display: 'inline',
-  color: '$textAlt',
-  fontSize: '12px',
-  letterSpacing: 0,
-  lineHeight: '18px',
-  marginBottom: '24px',
-
-  '@media (max-width: 675px)': {
-    textAlign: 'center',
-  },
-
-  '&:hover': {
-    color: '$primary',
-    borderBottom: '3px solid $colors$primary',
-    cursor: 'pointer !important',
-  },
-})
-
 const DescriptionText = styled('p', {
   color: '$textAlt',
   fontSize: '18px',
@@ -215,6 +187,25 @@ const IntegrationsHeroImage = styled(Image, {
 })
 
 const IntegrationToolTextWrapper = styled('div', {
+  [`&, button`]: {
+    display: 'inline',
+    color: '$textAlt',
+    fontFamily: '$base',
+    fontSize: '12px',
+    letterSpacing: 0,
+    lineHeight: '18px',
+  },
+
+  button: {
+    borderBottom: '3px solid transparent',
+
+    '&:hover': {
+      color: '$primary',
+      borderBottom: '3px solid $colors$primary',
+      cursor: 'pointer !important',
+    },
+  },
+
   '@media (max-width: 675px)': {
     textAlign: 'center',
   },
@@ -241,12 +232,8 @@ const IntegrationsSubpageHeader = ({ data }) => {
           <TextContainer>
             <Headline>{headlineText}</Headline>
             <IntegrationToolTextWrapper>
-              <Tooltip title={tooltipTitle}>
-                <IntegrationTipHover tabIndex={0}>
-                  Integrated
-                </IntegrationTipHover>
-              </Tooltip>
-              <TooltipText>{tooltipText}</TooltipText>
+              <Tooltip title="Integrated">{tooltipTitle}</Tooltip>
+              {tooltipText}
             </IntegrationToolTextWrapper>
             <DescriptionText>{descriptionText}</DescriptionText>
           </TextContainer>

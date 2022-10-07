@@ -70,10 +70,23 @@ const formatPlanData = (plans) => {
 }
 
 const getGroupedPlanData = (plans) => {
-  const generalPlans = formatPlanData(plans.filter((plan) => !plan.isTrial))
-  const trialPlans = formatPlanData(plans.filter((plan) => plan.isTrial))
+  const generalPlans = formatPlanData(plans.filter(({ isTrial }) => !isTrial))
+  const trialPlans = formatPlanData(plans.filter(({ isTrial }) => isTrial))
 
-  return { generalPlans, trialPlans }
+  return {
+    generalPlans,
+    // Strip out 'advanced' plan
+    trialPlans: {
+      year: {
+        pro: trialPlans?.year?.pro,
+        standard: trialPlans?.year?.standard,
+      },
+      month: {
+        pro: trialPlans?.month?.pro,
+        standard: trialPlans?.month?.standard,
+      },
+    },
+  }
 }
 
 // This function is used in gatsby-node.js so CommonJS export is needed

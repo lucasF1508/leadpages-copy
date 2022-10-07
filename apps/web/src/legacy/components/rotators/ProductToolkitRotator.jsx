@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { styled, keyframes } from '@design'
 import PropTypes from 'prop-types'
 import { fadeIn } from 'react-animations'
@@ -181,6 +181,10 @@ const CardLink = styled('a', {
 
 const ProductToolkitRotator = ({ itemArray }) => {
   const [activeIndex, setActiveIndex] = useState(0)
+
+  const [loadSlick, setLoadSlick] = useState(false)
+  useEffect(() => setLoadSlick(true), [])
+
   const settings = {
     appendDots: (dots) => <PaginationDots dots={dots} margin="-0.5rem 0 0 0" />,
     arrows: false,
@@ -226,7 +230,7 @@ const ProductToolkitRotator = ({ itemArray }) => {
         </Flexbox>
       </InnerContainer>
       <RotatorContainer>
-        {typeof window !== 'undefined' && (
+        {loadSlick && (
           <SlickRotator {...settings}>
             {itemArray.map(
               (

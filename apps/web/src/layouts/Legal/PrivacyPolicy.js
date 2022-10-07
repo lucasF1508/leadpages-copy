@@ -129,7 +129,7 @@ const BackgroundImage = styled('img', {
   },
 })
 
-const StyledLink = styled(Link, {
+const StyledLink = styled('a', {
   color: '#603eff',
 })
 
@@ -173,8 +173,10 @@ const PrivacyPage = () => (
               pages; and automate marketing activities to send relevant
               communications to subscribers via our website (our “Website”)
               located at&nbsp;
-              <StyledLink href="/">www.leadpages.com</StyledLink> (the
-              “Service”).
+              <Link href="/" passHref>
+                <StyledLink>www.leadpages.com</StyledLink>
+              </Link>{' '}
+              (the “Service”).
             </ParagraphText>
           </ListItemP>
           <ListItemP>

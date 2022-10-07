@@ -1,7 +1,4 @@
-import { getTemplateTypes } from 'part:@gearbox-built/studio/config'
 import * as F from '../../fields'
-
-const pageTemplates = getTemplateTypes()
 
 export const contentGroup = ({
   label = {},
@@ -14,7 +11,7 @@ export const contentGroup = ({
     heading ? F.string({ name: 'heading', ...heading }) : '',
     content ? F.blockContent({ name: 'content', ...content }) : '',
     link
-      ? F.link(pageTemplates, {
+      ? F.link({
           name: 'link',
           ...link,
         })

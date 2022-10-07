@@ -7,11 +7,8 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/product/feature-index'
 
-  const data = {}
-
   return {
     props: {
-      data,
       slug,
       preview,
     },

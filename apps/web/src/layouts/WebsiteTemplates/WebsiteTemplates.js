@@ -1,18 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTemplateState } from '@lp/template-gallery'
 import { useRouter } from 'next/router'
 // Components
 import SEO from '@legacy/components/SEO'
 import Gallery from '@legacy/components/templates/Gallery'
 import Preview from '@legacy/components/templates/Preview'
-import tracker from '@legacy/components/templates/tracker'
 // Utils
-import {
-  baseFilters,
-  templatesBaseUrl,
-  TemplateKind,
-} from '@legacy/constants/templates'
+import { TemplateKind } from '@legacy/constants/templates'
 import usePreviewTemplate from '@legacy/hooks/usePreviewTemplate'
 
 const SEO_DEFAULTS = {
@@ -44,22 +38,13 @@ PreviewSEO.propTypes = {
   pathname: PropTypes.string.isRequired,
 }
 
-const WebsiteTemplates = (props) => {
-  const { planData } = props || {}
+const WebsiteTemplates = ({ planData }) => {
   const router = useRouter()
   const pathname = router.asPath
   const templateId = pathname.split('preview/')[1]
   const isPreviewing = pathname.match(/preview\/(.+)/) || false
   const SEOMatch = isPreviewing ? PreviewSEO : GallerySEO
   const [previewTemplate, handlePreviewTemplate] = usePreviewTemplate()
-
-  const [state, actions] = useTemplateState({
-    kind: TemplateKind.Site,
-    baseUrl: templatesBaseUrl,
-    baseFilters,
-    hideSidebar: false,
-    tracker,
-  })
 
   return isPreviewing ? (
     <Preview
@@ -71,8 +56,6 @@ const WebsiteTemplates = (props) => {
     />
   ) : (
     <Gallery
-      state={state}
-      actions={actions}
       SEO={<SEOMatch pathname={pathname} />}
       kind={TemplateKind.Site}
       handlePreviewTemplate={handlePreviewTemplate}

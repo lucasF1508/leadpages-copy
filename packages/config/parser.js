@@ -1,4 +1,4 @@
-const { image } = require('../query/dist/parser/primitives')
+const { image, link } = require('../query/dist/parser/primitives')
 
 module.exports = {
   components: {
@@ -26,8 +26,23 @@ module.exports = {
           target: true,
           label: true,
         },
+        navigation: {
+          '...': true,
+          'menu[]': { link },
+        },
         form: {
           '...': true,
+        },
+        testimonial: {
+          '...': true,
+          logo: image,
+          image,
+          link,
+        },
+        team: {
+          title: true,
+          jobTitle: true,
+          image,
         },
       },
     },

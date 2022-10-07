@@ -9,11 +9,11 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/conversion-optimization-guide/what-is-conversion-optimization'
 
-  const data = { underlaidMenu: true }
+  const options = { underlaidMenu: true }
 
   return {
     props: {
-      data,
+      options,
       slug,
       preview,
     },

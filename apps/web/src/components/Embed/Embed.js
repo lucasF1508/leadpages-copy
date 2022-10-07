@@ -1,5 +1,6 @@
 import React from 'react'
 import { styled } from '@design'
+import useScriptEmbed from '@hooks/useScriptEmbed'
 
 const $Embed = styled('div', {
   '> *': {
@@ -20,20 +21,30 @@ const $Embed = styled('div', {
   },
 })
 
-const Embed = ({ code, isResponsive, ratio = '16:9', ...props }) => {
+const Embed = ({
+  css: cssOrg = {},
+  code,
+  isResponsive,
+  ratio = '16:9',
+  ...props
+}) => {
   const css = isResponsive
     ? {
         ratio,
+        ...cssOrg,
       }
-    : {}
+    : cssOrg
+
+  const { components } = useScriptEmbed({
+    htmlString: code,
+  })
 
   return (
-    <$Embed
-      isResponsive={isResponsive}
-      css={css}
-      {...props}
-      dangerouslySetInnerHTML={{ __html: code }}
-    />
+    <>
+      <$Embed isResponsive={isResponsive} css={css} {...props}>
+        {components && components}
+      </$Embed>
+    </>
   )
 }
 

@@ -22,13 +22,18 @@ import {
   TemplateThumbnail,
   NoResults,
   ResponsiveSidebar,
+  useTemplateState,
 } from '@lp/template-gallery'
 
 import {
+  baseFilters,
+  templatesBaseUrl,
   TemplateState,
   TemplateActions,
   TemplateKind,
-} from '../../constants/templates'
+} from '@legacy/constants/templates'
+
+import tracker from '@legacy/components/templates/tracker'
 
 const stickyHeaderZIndex = 1501
 const sidebarWidth = 250
@@ -172,13 +177,17 @@ const isAbove1024Breakpoint = () => {
   }
 }
 
-const Templates = ({
-  state,
-  actions,
-  kind,
-  onPreviewTemplate,
-  isPreviewing,
-}) => {
+const Templates = ({ kind, onPreviewTemplate, isPreviewing }) => {
+  // Template state
+  const [state, actions] = useTemplateState({
+    kind,
+    baseUrl: templatesBaseUrl,
+    baseFilters,
+    hideSidebar: false,
+    tracker,
+  })
+  //
+
   const above1024Breakpoint = isAbove1024Breakpoint()
   const containerRef = useRef()
   const drawerPaperRef = useRef()

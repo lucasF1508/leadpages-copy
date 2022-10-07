@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import camelCase from 'lodash/camelCase'
 import { useForm as useReactHookForm, FormProvider } from 'react-hook-form'
@@ -43,7 +43,7 @@ const useForm = ({ form = {}, config = {} }) => {
         value: array[1],
       }
     })
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (data) => {
     setFormError(false)
     setIsLoading(true)
 
@@ -55,6 +55,7 @@ const useForm = ({ form = {}, config = {} }) => {
     })
 
     if (status === 'success') {
+      // eslint-disable-next-line no-console
       console.log('Sending form was successful')
       setIsLoading(false)
       setFormHasSubmitted(true)
@@ -68,7 +69,7 @@ const useForm = ({ form = {}, config = {} }) => {
     }
   }
 
-  const onNewsletterSubmit = async (data, e) => {
+  const onNewsletterSubmit = async (data) => {
     setFormError(false)
     setIsLoading(true)
 
@@ -77,6 +78,7 @@ const useForm = ({ form = {}, config = {} }) => {
     })
 
     if (status === 'subscribed') {
+      // eslint-disable-next-line no-console
       console.log('Subscribed was successful')
       setFormHasSubmitted(true)
     } else if (status === 'error' || message) {
@@ -89,7 +91,7 @@ const useForm = ({ form = {}, config = {} }) => {
     }
   }
 
-  const onError = (errors, e) => {
+  const onError = (errors) => {
     console.error(
       'Form is invalid and failed to submit. The following fields are invalid:'
     )

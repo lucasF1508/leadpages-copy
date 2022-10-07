@@ -1,5 +1,5 @@
 import React, { useRef, useCallback, useEffect, useState } from 'react'
-import { useViewportScroll, useTransform, m } from 'framer-motion'
+import { useScroll, useTransform, m as motion } from 'framer-motion'
 import throttle from 'lodash/throttle'
 import useEventListener from '@hooks/useEventListener'
 
@@ -10,7 +10,7 @@ const ParallaxItem = ({
   config: initialConfig = {},
 }) => {
   const ref = useRef()
-  const { scrollY } = useViewportScroll()
+  const { scrollY } = useScroll()
   const tweens = {}
   const config = Array.isArray(initialConfig) ? initialConfig : [initialConfig]
   const defaults = {
@@ -67,7 +67,7 @@ const ParallaxItem = ({
   )
 
   return (
-    <m.div
+    <motion.div
       className={className}
       ref={ref}
       style={{
@@ -80,7 +80,7 @@ const ParallaxItem = ({
       }}
     >
       {children}
-    </m.div>
+    </motion.div>
   )
 }
 

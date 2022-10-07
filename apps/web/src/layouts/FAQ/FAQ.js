@@ -313,7 +313,7 @@ const FAQPage = () => {
   })
 
   return (
-    <Layout underlaidMenu>
+    <>
       <SEO
         pathname="/faq"
         title="Get Answers to All Your Questions About Leadpages"
@@ -417,7 +417,7 @@ const FAQPage = () => {
         </InnerContainer>
       </OuterContainer>
       <ReadyToGrow />
-    </Layout>
+    </>
   )
 }
 

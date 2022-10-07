@@ -9,7 +9,7 @@ module.exports = {
       console.log('No files found for indices')
       console.log('Files: ', files)
       /* eslint-enable no-console */
-      return null
+      return undefined
     }
     const client = sanityClient || getClient({ preview: false })
 

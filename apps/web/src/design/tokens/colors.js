@@ -8,6 +8,7 @@ import {
   yellow,
   blackA,
   whiteA,
+  gray,
 } from '@radix-ui/colors'
 
 export const colors = {
@@ -20,6 +21,7 @@ export const colors = {
   ...purple,
   ...blackA,
   ...whiteA,
+  ...gray,
   white: '#ffffff',
   gray: '#f9f9f9',
   grayAlt: '#f7f7f7',
@@ -46,7 +48,7 @@ export const colors = {
   background: '$gray',
   backgroundAlt: '$tan',
   backgroundContrast: '$mauve3',
-  border: '$purple10',
+  border: '$gray5',
   link: '$primary',
   hover: '$purple8',
   focus: '$hover',

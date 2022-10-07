@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 const scrollToHash = (hash, offset = 0) => {
   const section = document.getElementById(hash)
 
-  if (!section) return null
+  if (!section) return undefined
 
   const { top } = section.getBoundingClientRect()
 
@@ -12,7 +12,7 @@ const scrollToHash = (hash, offset = 0) => {
     left: 0,
     behavior: 'smooth',
   })
-  return null
+  return undefined
 }
 
 const parseScrollTo = ({ scrollTo = '', offset } = {}) => {
@@ -29,18 +29,20 @@ const parseScrollTo = ({ scrollTo = '', offset } = {}) => {
       } else {
         scrollToHash(hash || base, offset)
       }
-      return null
+      return undefined
     },
   }
 }
 
 const useScrollToHash = (asPath, timeout = 0) => {
   const [, hash] = asPath.split('#')
-  if (!hash) return null
+  if (!hash) return undefined
 
   setTimeout(() => {
     scrollToHash(hash)
   }, timeout)
+
+  return undefined
 }
 
 export default useScrollToHash

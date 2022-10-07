@@ -1,7 +1,0 @@
-.fadeInOutStyle {
-  transition: opacity 0.2s ease-in;
-}
-
-.fadeInOutStyle.animate {
-  opacity: 0.1;
-}

@@ -6,7 +6,7 @@ import CloseSalesCollectPayments from '@legacy/components/product/CloseSalesColl
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
-import ProductFeaturesRotator from '@legacy/components/rotators/ProductFeaturesRotator'
+import ProductFeaturesRotator from '@components/Rotator/ProductFeaturesRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'

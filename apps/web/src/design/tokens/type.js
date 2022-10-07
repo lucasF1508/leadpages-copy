@@ -40,7 +40,7 @@ const typeStyles = {
     fontSize: '1.125rem',
   },
   base: {
-    lineHeight: 20 / 16,
+    lineHeight: 24 / 16,
     fontSize: '1rem',
   },
   sm: {
@@ -60,7 +60,7 @@ export const type = {
     spaceMono: '"Space Mono", monospace',
     base: '$fonts$apercuPro',
     heading: '$fonts$valueSerif',
-    supHeading: '$fonts$spaceMono',
+    overline: '$fonts$spaceMono',
   },
   lineHeights: {
     s: 1,
@@ -186,7 +186,7 @@ export const type = {
       fontFamily: '$heading',
     },
     button: {
-      fontWeight: '$semiBold',
+      fontWeight: '$normal',
       fontFamily: '$base',
     },
     caption: {

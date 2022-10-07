@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { styled } from '@design'
 // images
 import fscThumbnail from '@legacy/assets/images/customers/fsc/FSC_Hero-full-width@2x.jpg'
@@ -191,157 +191,158 @@ const ThumbnailTitle = styled('div', {
   },
 })
 
-const CustomerStoriesThumbnailRotator = () => {
-  const storiesArray = [
-    {
-      id: 'greg',
-      name: 'Greg',
-      title: 'Greg’s Story',
-      overlayText: 'Artists & Educators',
-      link: '/customers/greg',
-      imageSrc: gregThumbnail,
-      imageAltText: 'Greg - Artist & Educator',
-    },
-    {
-      id: 'kate',
-      name: 'Kate',
-      title: 'Kate’s Story',
-      overlayText: 'Consultants',
-      link: '/customers/kate',
-      imageSrc: kateThumbnail,
-      imageAltText: 'Kate - Consultants',
-    },
-    {
-      id: 'fsc',
-      name: 'FSC',
-      title: 'FSC’s Story',
-      overlayText: 'Teams & Non-Profits',
-      link: '/customers/fsc',
-      imageSrc: fscThumbnail,
-      imageAltText: 'FSC - Teams & Non-Profits',
-    },
-    {
-      id: 'kailei',
-      name: 'Kailei',
-      title: 'Kailei’s Story',
-      overlayText: 'Consultants & Coaches',
-      link: '/customers/kailei',
-      imageSrc: kaileiThumbnail,
-      imageAltText: 'Kailei - Consultants & Coaches',
-    },
-    {
-      id: 'sayer',
-      name: 'Sayer',
-      title: 'Sayer’s Story',
-      overlayText: 'Ecommerce',
-      link: '/customers/sayer',
-      imageSrc: sayerThumbnail,
-      imageAltText: 'Sayer - Ecommerce',
-    },
-    {
-      id: 'sally',
-      name: 'Sally',
-      title: 'Sally’s Story',
-      overlayText: 'Speakers & Coaches',
-      link: '/customers/sally',
-      imageSrc: sallyThumbnail,
-      imageAltText: 'Sally - Speakers & Coaches',
-    },
-    {
-      id: 'jody',
-      name: 'Jody',
-      title: 'Jody’s Story',
-      overlayText: 'Health & Fitness',
-      link: '/customers/jody',
-      imageSrc: jodyThumbnail,
-      imageAltText: 'Jody - Health & Fitness',
-    },
-    {
-      id: 'shohawk',
-      name: 'Shohawk',
-      title: 'Shohawk’s Story',
-      overlayText: 'Film',
-      link: '/customers/shohawk',
-      imageSrc: shohawkThumbnail,
-      imageAltText: 'Shohawk - Film',
-    },
-  ]
+const storiesArray = [
+  {
+    id: 'greg',
+    name: 'Greg',
+    title: 'Greg’s Story',
+    overlayText: 'Artists & Educators',
+    link: '/customers/greg',
+    imageSrc: gregThumbnail,
+    imageAltText: 'Greg - Artist & Educator',
+  },
+  {
+    id: 'kate',
+    name: 'Kate',
+    title: 'Kate’s Story',
+    overlayText: 'Consultants',
+    link: '/customers/kate',
+    imageSrc: kateThumbnail,
+    imageAltText: 'Kate - Consultants',
+  },
+  {
+    id: 'fsc',
+    name: 'FSC',
+    title: 'FSC’s Story',
+    overlayText: 'Teams & Non-Profits',
+    link: '/customers/fsc',
+    imageSrc: fscThumbnail,
+    imageAltText: 'FSC - Teams & Non-Profits',
+  },
+  {
+    id: 'kailei',
+    name: 'Kailei',
+    title: 'Kailei’s Story',
+    overlayText: 'Consultants & Coaches',
+    link: '/customers/kailei',
+    imageSrc: kaileiThumbnail,
+    imageAltText: 'Kailei - Consultants & Coaches',
+  },
+  {
+    id: 'sayer',
+    name: 'Sayer',
+    title: 'Sayer’s Story',
+    overlayText: 'Ecommerce',
+    link: '/customers/sayer',
+    imageSrc: sayerThumbnail,
+    imageAltText: 'Sayer - Ecommerce',
+  },
+  {
+    id: 'sally',
+    name: 'Sally',
+    title: 'Sally’s Story',
+    overlayText: 'Speakers & Coaches',
+    link: '/customers/sally',
+    imageSrc: sallyThumbnail,
+    imageAltText: 'Sally - Speakers & Coaches',
+  },
+  {
+    id: 'jody',
+    name: 'Jody',
+    title: 'Jody’s Story',
+    overlayText: 'Health & Fitness',
+    link: '/customers/jody',
+    imageSrc: jodyThumbnail,
+    imageAltText: 'Jody - Health & Fitness',
+  },
+  {
+    id: 'shohawk',
+    name: 'Shohawk',
+    title: 'Shohawk’s Story',
+    overlayText: 'Film',
+    link: '/customers/shohawk',
+    imageSrc: shohawkThumbnail,
+    imageAltText: 'Shohawk - Film',
+  },
+]
 
-  const rotatorSwiped = () => {
+const settings = {
+  autoplay: true,
+  autoplaySpeed: 4000,
+  centerMode: true,
+  centerPadding: '15px',
+  draggable: false,
+  focusOnSelect: true,
+  infinite: true,
+  lazyload: true,
+  nextArrow: (
+    <NavigationArrows
+      variant="arrow-right"
+      rightOffset="-3rem"
+      data-gtm="customer-rotator-nav-arrow"
+    />
+  ),
+  onSwipe: () => {
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({
       event: 'customerRotatorSwiped',
     })
-  }
+  },
+  pauseOnFocus: true,
+  pauseOnHover: true,
+  prevArrow: (
+    <NavigationArrows
+      variant="arrow-left"
+      leftOffset="-3rem"
+      data-gtm="customer-rotator-nav-arrow"
+    />
+  ),
+  slidesToScroll: 1,
+  slidesToShow: 5,
+  speed: 300,
+  swipeToSlide: true,
+  touchThreshold: 50,
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 900,
+      settings: {
+        appendDots: (dots) => (
+          <PaginationDots dots={dots} margin="2rem auto 0" />
+        ),
+        arrows: false,
+        centerPadding: '30px',
+        dots: true,
+        nextArrow: null,
+        prevArrow: null,
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 425,
+      settings: {
+        appendDots: (dots) => (
+          <PaginationDots dots={dots} margin="2rem auto 0" />
+        ),
+        arrows: false,
+        centerPadding: '35px',
+        dots: true,
+        nextArrow: null,
+        prevArrow: null,
+        slidesToShow: 1,
+      },
+    },
+  ],
+}
 
-  const settings = {
-    autoplay: true,
-    autoplaySpeed: 4000,
-    centerMode: true,
-    centerPadding: '15px',
-    draggable: false,
-    focusOnSelect: true,
-    infinite: true,
-    lazyload: true,
-    nextArrow: (
-      <NavigationArrows
-        variant="arrow-right"
-        rightOffset="-3rem"
-        data-gtm="customer-rotator-nav-arrow"
-      />
-    ),
-    onSwipe: rotatorSwiped,
-    pauseOnFocus: true,
-    pauseOnHover: true,
-    prevArrow: (
-      <NavigationArrows
-        variant="arrow-left"
-        leftOffset="-3rem"
-        data-gtm="customer-rotator-nav-arrow"
-      />
-    ),
-    slidesToScroll: 1,
-    slidesToShow: 5,
-    speed: 300,
-    swipeToSlide: true,
-    touchThreshold: 50,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 900,
-        settings: {
-          appendDots: (dots) => (
-            <PaginationDots dots={dots} margin="2rem auto 0" />
-          ),
-          arrows: false,
-          centerPadding: '30px',
-          dots: true,
-          nextArrow: null,
-          prevArrow: null,
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 425,
-        settings: {
-          appendDots: (dots) => (
-            <PaginationDots dots={dots} margin="2rem auto 0" />
-          ),
-          arrows: false,
-          centerPadding: '35px',
-          dots: true,
-          nextArrow: null,
-          prevArrow: null,
-          slidesToShow: 1,
-        },
-      },
-    ],
-  }
+const CustomerStoriesThumbnailRotator = () => {
+  const [loadSlick, setLoadSlick] = useState(false)
+  useEffect(() => setLoadSlick(true), [])
 
   return (
     <OuterContainer>
@@ -349,7 +350,7 @@ const CustomerStoriesThumbnailRotator = () => {
         <Headline>Read more Stories</Headline>
       </HeadlineContainer>
       <RotatorContainer>
-        {typeof window !== 'undefined' && (
+        {loadSlick && (
           <SlickRotator {...settings}>
             {storiesArray.map(
               (
@@ -383,9 +384,7 @@ const CustomerStoriesThumbnailRotator = () => {
       </RotatorContainer>
       <ButtonContainer>
         <StyledLink href="/customers">
-          <a>
-            <Button>Back to all Stories</Button>
-          </a>
+          <Button>Back to all Stories</Button>
         </StyledLink>
       </ButtonContainer>
     </OuterContainer>

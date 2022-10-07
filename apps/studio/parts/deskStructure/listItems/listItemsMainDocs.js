@@ -11,8 +11,9 @@ export const excludeDocs = [
   'navigation',
   'generalSettings',
   'siteRedirects',
+  'feed',
+  'form',
   // 'product', // hide product documents
-  // 'form', // hide form documents
 ]
 
 export const listItemsMainDocs = ({ exclude }) =>

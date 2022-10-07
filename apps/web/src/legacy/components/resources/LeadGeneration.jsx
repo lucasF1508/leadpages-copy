@@ -64,7 +64,7 @@ const HeadingButton = styled('button', {
   border: '3px solid $colors$secondary',
   backgroundColor: '$white',
   color: '$primary',
-  fontFamily: 'Apercu Pro',
+  fontFamily: '$base',
   fontSize: '16px',
   fontWeight: 500,
   lineHeight: '28px',
@@ -119,54 +119,52 @@ const CustomersSubHeading = styled('div', {
   },
 })
 
-const LeadGeneration = () => {
-  return (
-    <LeadGenerationContainer name="podcast">
-      <HeadingFlexbox>
-        <div>
-          <CustomersHeading>The Lead Generation Podcast</CustomersHeading>
-          <CustomersSubHeading>
-            Hear from real-world entrepreneurs who share their most valuable
-            lessons.
-          </CustomersSubHeading>
-        </div>
-        <HeadingButton>
-          <HeadingLink href="/podcast">
-            <a aria-label="podcast">
-              All Episodes&nbsp;
-              <ArrowContainer>
-                <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
-              </ArrowContainer>
-            </a>
+const LeadGeneration = () => (
+  <LeadGenerationContainer name="podcast">
+    <HeadingFlexbox>
+      <div>
+        <CustomersHeading>The Lead Generation Podcast</CustomersHeading>
+        <CustomersSubHeading>
+          Hear from real-world entrepreneurs who share their most valuable
+          lessons.
+        </CustomersSubHeading>
+      </div>
+      <HeadingButton>
+        <Link href="/podcast" passHref>
+          <HeadingLink aria-label="podcast">
+            All Episodes&nbsp;
+            <ArrowContainer>
+              <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
+            </ArrowContainer>
           </HeadingLink>
-        </HeadingButton>
-      </HeadingFlexbox>
-      <ThreeColumnOverlap
-        column1image={podcastImage1}
-        column1imageAlt="Pat Flynn"
-        column1heading="Fired From His Day Job & Free to Create His Dream Business with Pat Flynn"
-        column1copy="Pat shares the entrepreneurial journey he's been on since he was fired from his promising day job, and the frustrations and lessons he's learned along the way."
-        column1outboundlink="https://www.leadpages.com/blog/pat-flynn-lead-generation-podcast/"
-        column1linkAlt="Pat Flynn"
-        column1CTA="Listen in"
-        column2image={podcastImage2}
-        column2imageAlt="ChihYu Smith"
-        column2heading="Delighting a Hungry Audience with Asian Paleo with ChihYu Smith"
-        column2copy="ChihYu Smith shares tips on discovering your niche, how to listen better to your audience, and secrets she’s learned in building up her following."
-        column2outboundlink="https://www.leadpages.com/blog/chihyu-smith-lead-generation-podcast/"
-        column2linkAlt="ChihYu Smith"
-        column2CTA="Listen in"
-        column3image={podcastImage3}
-        column3imageAlt="Talia Wolf"
-        column3heading="Better Practices for Conversion Rate Optimization with Talia Wolf"
-        column3copy="Go beyond landing page “best practices” with a better approach to conversion rate optimization using emotion and psychology."
-        column3outboundlink="https://www.leadpages.com/blog/talia-wolf-lead-generation-podcast/"
-        column3linkAlt="Talia Wolf"
-        column3CTA="Listen in"
-        paddingBottom="0"
-      />
-    </LeadGenerationContainer>
-  )
-}
+        </Link>
+      </HeadingButton>
+    </HeadingFlexbox>
+    <ThreeColumnOverlap
+      column1image={podcastImage1}
+      column1imageAlt="Pat Flynn"
+      column1heading="Fired From His Day Job & Free to Create His Dream Business with Pat Flynn"
+      column1copy="Pat shares the entrepreneurial journey he's been on since he was fired from his promising day job, and the frustrations and lessons he's learned along the way."
+      column1outboundlink="https://www.leadpages.com/blog/pat-flynn-lead-generation-podcast/"
+      column1linkAlt="Pat Flynn"
+      column1CTA="Listen in"
+      column2image={podcastImage2}
+      column2imageAlt="ChihYu Smith"
+      column2heading="Delighting a Hungry Audience with Asian Paleo with ChihYu Smith"
+      column2copy="ChihYu Smith shares tips on discovering your niche, how to listen better to your audience, and secrets she’s learned in building up her following."
+      column2outboundlink="https://www.leadpages.com/blog/chihyu-smith-lead-generation-podcast/"
+      column2linkAlt="ChihYu Smith"
+      column2CTA="Listen in"
+      column3image={podcastImage3}
+      column3imageAlt="Talia Wolf"
+      column3heading="Better Practices for Conversion Rate Optimization with Talia Wolf"
+      column3copy="Go beyond landing page “best practices” with a better approach to conversion rate optimization using emotion and psychology."
+      column3outboundlink="https://www.leadpages.com/blog/talia-wolf-lead-generation-podcast/"
+      column3linkAlt="Talia Wolf"
+      column3CTA="Listen in"
+      paddingBottom="0"
+    />
+  </LeadGenerationContainer>
+)
 
 export default LeadGeneration

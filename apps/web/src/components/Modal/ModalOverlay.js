@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import { m } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { styled } from '@design'
 
-export const $ModalOverlay = styled(m.div, {
+export const $ModalOverlay = styled(motion.div, {
   position: 'absolute',
   top: 0,
   left: 0,

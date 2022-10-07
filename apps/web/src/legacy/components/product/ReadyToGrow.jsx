@@ -207,7 +207,7 @@ const ReadyToGrow = ({
             )}
             {scrollTarget && (
               <ScrollingLink
-                href={scrollTarget}
+                to={scrollTarget}
                 smooth
                 duration={500}
                 offset={-15}
@@ -235,7 +235,7 @@ const ReadyToGrow = ({
                     <Image
                       src={PlayButtonSVG}
                       alt="play button icon"
-                      lazyBoundary="9999px"
+                      lazyBoundary="501px"
                     />
                   </PlayButtonIcon>
                   Watch a quick demo

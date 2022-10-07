@@ -1,15 +1,7 @@
-import React, { useState } from 'react'
-import ReactSelect from 'react-select'
-import { $Input } from '@components/Form/Inputs'
-import {
-  InputSelectStylesOverrides,
-  InputSelectOption,
-  InputSelectIcon,
-} from '@components/Form/Inputs/InputSelect'
+import React from 'react'
 import { styled } from '@design'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
-import Loader from '@components/Loader'
 
 const $Filter = styled('div', {
   position: 'relative',
@@ -22,10 +14,6 @@ const $Filter = styled('div', {
   mb: '$4',
   overflow: 'hidden',
 
-  '@<s': {
-    display: 'none',
-  },
-
   '&::after': {
     position: 'absolute',
     display: 'block',
@@ -33,7 +21,7 @@ const $Filter = styled('div', {
     top: 0,
     right: 0,
     bottom: 0,
-    background: '$colors$gradientBackgroundOpacity',
+    background: 'linear-gradient(to left, $colors$background, transparent)',
     box: [
       {
         property: 'width',
@@ -48,7 +36,7 @@ const $FilterInner = styled('div', {
   d: 'flex',
   box: [
     {
-      property: 'pl',
+      property: 'px',
     },
   ],
   ff: 'row nowrap',
@@ -97,12 +85,12 @@ const $FilterItem = styled('a', {
   '&::before': {
     position: 'absolute',
     z: '$content',
-    bottom: '-1px',
+    bottom: '0px',
     left: 0,
     content: '',
     d: 'block',
     w: '100%',
-    h: 0,
+    h: 1,
     bc: '$brand',
     transition: 'height $duration$fast $easing$base',
   },
@@ -144,77 +132,34 @@ const $FilterItem = styled('a', {
 const Filter = ({ items, ...props }) => {
   const router = useRouter()
   const { asPath } = router
-  const [isLoading, setIsLoading] = useState(false)
   const [baseUrl, type, slug] = asPath
     .split('/')
     .filter((path) => !/.*\[.*\].*/.test(path) && path)
-  const options = [{ title: 'All', path: `/${baseUrl}` }, ...items].map(
-    ({ title, path }) => ({
-      label: title,
-      value: path,
-    })
-  )
-
-  const handleFilterSelect = (value) => {
-    if (value !== asPath) {
-      setIsLoading(true)
-      router.push(value)
-    }
-  }
 
   return (
-    <>
-      <$Filter {...props}>
-        <$FilterInner>
-          <NextLink href={`/${baseUrl}`} passHref>
-            <$FilterItem isActive={asPath === `/${baseUrl}` || type === 'page'}>
-              All
-            </$FilterItem>
-          </NextLink>
-          {items
-            .filter(({ path }) => path)
-            .map(({ title, path, slug: filterSlug }) => (
-              <NextLink key={title} href={path} passHref>
-                <$FilterItem
-                  isActive={
-                    asPath === path ||
-                    (type === 'category' && filterSlug?.current === slug)
-                  }
-                >
-                  {title}
-                </$FilterItem>
-              </NextLink>
-            ))}
-        </$FilterInner>
-      </$Filter>
-
-      <$Input
-        as="div"
-        type="select"
-        css={{
-          p: 0,
-          mb: '$5',
-          '@>s': {
-            display: 'none',
-          },
-        }}
-      >
-        <ReactSelect
-          components={{
-            DropdownIndicator: null,
-            IndicatorSeparator: null,
-            Option: InputSelectOption,
-          }}
-          placeholder="Select Category..."
-          styles={InputSelectStylesOverrides}
-          options={options}
-          onChange={({ value }) => handleFilterSelect(value)}
-          openMenuOnFocus
-        />
-        <InputSelectIcon />
-        {isLoading && <Loader css={{ right: '$6' }} width={24} height={24} />}
-      </$Input>
-    </>
+    <$Filter {...props}>
+      <$FilterInner>
+        <NextLink href={`/${baseUrl}`} passHref>
+          <$FilterItem isActive={asPath === `/${baseUrl}` || type === 'page'}>
+            All
+          </$FilterItem>
+        </NextLink>
+        {items
+          .filter(({ path }) => path)
+          .map(({ title, path, slug: filterSlug }) => (
+            <NextLink key={title} href={path} passHref>
+              <$FilterItem
+                isActive={
+                  asPath === path ||
+                  (type === 'category' && filterSlug?.current === slug)
+                }
+              >
+                {title}
+              </$FilterItem>
+            </NextLink>
+          ))}
+      </$FilterInner>
+    </$Filter>
   )
 }
 

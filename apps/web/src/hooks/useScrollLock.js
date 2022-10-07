@@ -1,5 +1,5 @@
 const getBrowserScrollbarWidth = () => {
-  if (typeof window === 'undefined') return null
+  if (typeof window === 'undefined') return undefined
 
   const cssVariable = window
     .getComputedStyle(document.documentElement)
@@ -9,7 +9,7 @@ const getBrowserScrollbarWidth = () => {
 
   const scrollDiv = document.createElement('div')
   scrollDiv.style.cssText =
-    'width: 100px;height: 100px;overflow: scroll;position: absolute;top: -9999px;'
+    'width: 100px;height: 100px;overflow: scroll;position: absolute;top: -501px;'
   document.body.appendChild(scrollDiv)
   const scrollbarWidth = `${scrollDiv.offsetWidth - scrollDiv.clientWidth}px`
   document.body.removeChild(scrollDiv)
@@ -22,7 +22,7 @@ const getBrowserScrollbarWidth = () => {
 }
 
 const scrollLock = (lock) => {
-  if (!document?.body) return
+  if (!document?.body) return undefined
 
   document.body.parentElement.style.overflow = lock ? 'hidden' : null
   document.body.parentElement.style.paddingRight = lock
@@ -34,6 +34,8 @@ const scrollLock = (lock) => {
   } else {
     document.body.classList.remove('u-lock')
   }
+
+  return undefined
 }
 
 export default scrollLock

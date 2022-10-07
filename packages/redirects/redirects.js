@@ -2,8 +2,6 @@ const sanityClient = require('client')
 const isEmpty = require('lodash/isEmpty')
 
 module.exports = async ({ projectId, dataset }) => {
-  if (!projectId || !dataset) return []
-
   const client = sanityClient({
     preview: false,
     config: {

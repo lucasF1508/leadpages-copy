@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 function useEventListener(eventName, callback, elementSelector = 'window') {
   const savedCallback = useRef()
@@ -8,19 +8,17 @@ function useEventListener(eventName, callback, elementSelector = 'window') {
   }, [callback])
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    if (typeof window === 'undefined') return undefined
 
     const element =
       elementSelector === 'window'
         ? window
         : document.addQuerySelector(elementSelector)
-    const eventListener = event => savedCallback.current(event)
+    const eventListener = (event) => savedCallback.current(event)
 
     element.addEventListener(eventName, eventListener)
 
-    return () => {
-      return element.removeEventListener(eventName, eventListener)
-    }
+    return () => element.removeEventListener(eventName, eventListener)
   }, [eventName])
 }
 

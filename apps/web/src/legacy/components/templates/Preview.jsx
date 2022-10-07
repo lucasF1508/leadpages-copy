@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import MandrelApi from '@lp/template-gallery/dist/mandrel-api'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { TemplateShape, templatesBaseUrl } from '@legacy/constants/templates'
 import Footer from '@components/Footer'
 import { useRouter } from 'next/router'
+import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
 import ReadyToGrow from '../product/ReadyToGrow'
 import TemplatePreview from './TemplatePreview'
 import PreviewBackdrop from './PreviewBackdrop'
@@ -17,7 +17,7 @@ const Preview = ({
   previewTemplate,
   planData,
 }) => {
-  const showFooter = useMediaQuery((theme) => theme.breakpoints.up('sm'))
+  const showFooter = useEvalBreakpoint('>xs')
   const [selectedTemplate, setSelectedTemplate] = useState(previewTemplate)
   const router = useRouter()
 

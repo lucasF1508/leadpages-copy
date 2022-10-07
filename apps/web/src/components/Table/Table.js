@@ -47,10 +47,6 @@ const $Cell = styled('td', {
 })
 
 const $Row = styled('tr', {
-  '&:nth-child(even)': {
-    bc: '$backgroundAlt',
-  },
-
   '@>s': {
     h: '3.75rem',
   },
@@ -68,6 +64,13 @@ const $Row = styled('tr', {
         },
         '@<s': {
           d: 'none',
+        },
+      },
+    },
+    alternate: {
+      true: {
+        '&:nth-child(even)': {
+          bc: '$backgroundAlt',
         },
       },
     },

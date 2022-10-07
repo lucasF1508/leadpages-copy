@@ -1,11 +1,13 @@
 import React, { useCallback, useRef, useEffect, useState } from 'react'
 import { m } from 'framer-motion'
+import isString from 'lodash/isString'
 import Loader from '@components/Loader'
 import { useInView } from 'react-intersection-observer'
 import { styled } from '@design'
 import VideoEmbed from './VideoEmbed'
 
 export const $Video = styled('div', {
+  bc: '$blackA3',
   video: {
     position: 'absolute',
     top: 0,
@@ -49,15 +51,17 @@ const Video = ({
   autoPlay = false,
   ...props
 }) => {
-  if (!video || (!video?.files?.length && !video?.embed)) {
+  if (!video || (!video?.files?.length && !video?.embed && !isString(video))) {
     return null
   }
 
   if (!video?.files?.length) {
-    return <VideoEmbed css={css} {...props} html={video.embed.html} />
+    return <VideoEmbed css={css} {...props} video={video} />
   }
 
-  const { files: sources } = video
+  const { files } = video
+  const sources = files.filter((file) => file?.link.includes('.mp4'))
+
   const controls = {
     loop: true,
     muted: true,
@@ -98,7 +102,7 @@ const Video = ({
     if (!entry || source) return
 
     const { width } = entry.boundingClientRect
-    const bestSource = sources.find((videoSource) => videoSource.size > width)
+    const bestSource = sources.find((videoSource) => videoSource.width > width)
     const foundSource = bestSource || sources.reverse()[0]
 
     setSource(foundSource)
@@ -120,10 +124,17 @@ const Video = ({
     <$Video ref={setRefs} type={type} css={{ ratio, ...css }} {...props}>
       {!isLoaded && (
         <Loader
+          css={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            mt: '-$2',
+            ml: '-$2',
+          }}
           type={type}
           color="var(--colors-brand)"
-          height="var(--space-4)"
-          width="var(--space-4)"
+          height="2rem"
+          width="2rem"
         />
       )}
       <m.video
@@ -146,7 +157,7 @@ const Video = ({
         }}
       >
         {inView && source && (
-          <source data-size={source.size} type={videoType} src={source.url} />
+          <source data-size={source.size} type={videoType} src={source.link} />
         )}
       </m.video>
     </$Video>

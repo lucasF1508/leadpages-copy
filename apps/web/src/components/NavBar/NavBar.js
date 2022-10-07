@@ -134,10 +134,10 @@ const NavBar = ({ menu, translateViewportInitial = '0px' }) => {
   return (
     <$NavBar ref={ref} onValueChange={handleValueChange} value={dropdownSlug}>
       <$NavBarList>
-        {menu.map(({ link, columns = [] }, index) => {
+        {menu.map(({ _key, link, columns = [] }, index) => {
           if (columns && columns.length > 0) {
             return (
-              <$NavBarItem key={link?.label} value={`trigger-${index}`}>
+              <$NavBarItem key={_key} value={`trigger-${index}`}>
                 <NavBarTrigger label={link?.label} columns={columns.length} />
                 <$NavBarDropdown>
                   <$NavBarDropdownInner data-columns={columns.length}>
@@ -160,7 +160,7 @@ const NavBar = ({ menu, translateViewportInitial = '0px' }) => {
           }
 
           return (
-            <$NavBarItem key={link?.label}>
+            <$NavBarItem key={_key}>
               <NavBarLink {...link} />
             </$NavBarItem>
           )

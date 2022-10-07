@@ -1,7 +1,7 @@
 import React from 'react'
 // components
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
-import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
+import CustomerSuccessTestimonialsRotator from '@components/Rotator/CustomerSuccessTestimonialsRotator'
 import EasilyTest from '@legacy/components/product/EasilyTest'
 import GetInspired_LandingPage from '@legacy/components/product/GetInspired_LandingPage'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'

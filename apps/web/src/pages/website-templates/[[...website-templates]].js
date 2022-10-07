@@ -1,21 +1,8 @@
 import React from 'react'
 import WebsiteTemplates from '@layouts/WebsiteTemplates'
-import { getGroupedPlanData } from '@legacy/utils/plans'
+import { getPlanData, getGroupedPlanData } from '@utils/plans'
 
 const WebsiteTemplatesPage = (props) => <WebsiteTemplates {...props} />
-
-const getPlanData = async (variant) => {
-  const result = await fetch(
-    `${process.env.LEADPAGES_API_HOST}/billing/plans${
-      variant ? '?variants=1' : ''
-    }`,
-    {
-      headers: { 'Content-Type': 'application/json' },
-    }
-  )
-  const resultData = await result.json()
-  return resultData._items
-}
 
 export async function getStaticPaths() {
   return {
@@ -33,11 +20,11 @@ export async function getStaticProps(context) {
 
   const rawPlanData = await getPlanData()
   const planData = getGroupedPlanData(rawPlanData)
-  const data = { isPreviewPage, planData }
+  const options = { isPreviewPage, planData }
 
   return {
     props: {
-      data,
+      options,
       slug,
       preview,
     },

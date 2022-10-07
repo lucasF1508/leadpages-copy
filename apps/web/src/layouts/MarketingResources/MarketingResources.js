@@ -5,7 +5,7 @@ import { styled } from '@design'
 // components
 import NeedAccountHelpRow from '@legacy/components/resources/NeedAccountHelpRow'
 import BlogSection from '@legacy/components/resources/BlogSection'
-import CustomerStoriesRotator from '@legacy/components/rotators/CustomerStoriesRotator'
+import CustomerStoriesRotator from '@components/Rotator/CustomerStoriesRotator'
 import DownloadableResources from '@legacy/components/resources/DownloadableResources'
 import LeadGeneration from '@legacy/components/resources/LeadGeneration'
 import MarketingGuides from '@legacy/components/resources/MarketingGuides'
@@ -309,6 +309,7 @@ const HeadingButton = styled('button', {
   border: '3px solid $colors$secondary',
   borderRadius: '48px',
   color: '$primary',
+  fontFamily: '$base',
   fontSize: '16px',
   fontWeight: 500,
   lineHeight: '28px',
@@ -376,7 +377,7 @@ const MarketingResourcesPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (typeof window !== 'undefined') {
+      if (typeof document !== 'undefined') {
         const firstSection = document
           .getElementById('blogsection')
           .getBoundingClientRect()

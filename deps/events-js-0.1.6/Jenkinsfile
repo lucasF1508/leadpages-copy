@@ -1,8 +1,0 @@
-javascriptLibBuild {
-    name = "lib-events-js"
-    nodeVersion = 12
-    lint = true
-    test = true
-    publish = true
-    installCommand = "yarn install && yarn build"
-}

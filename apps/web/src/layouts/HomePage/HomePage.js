@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Legacy components
-import HomepageHeader from '@legacy/components/headers/HomepageHeader'
+import HomepageHeader from '@components/Hero/HeroHome'
 import SpacerRow from '@legacy/components/SpacerRow'
 import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
 import FeaturedTemplates from '@legacy/components/templates/FeaturedTemplates'
@@ -11,8 +11,8 @@ import ConnectedIntegrations from '@legacy/components/integrations/ConnectedInte
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SEO from '@legacy/components/SEO'
 import TwoColumnTextBlock from '@legacy/components/layout/TwoColumnTextBlock'
-import CustomerStoriesRotator from '@legacy/components/rotators/CustomerStoriesRotator'
-import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
+import CustomerStoriesRotator from '@components/Rotator/CustomerStoriesRotator'
+import CustomerSuccessTestimonialsRotator from '@components/Rotator/CustomerSuccessTestimonialsRotator'
 // images
 import ArchForestSVG from '@legacy/assets/images/shapes/arch-forest.svg'
 import RoundedSquareTanSVG from '@legacy/assets/images/shapes/rounded-square-tan.svg'
@@ -69,6 +69,7 @@ const productFeaturesArray = [
     alt: 'optimize & grow icon',
   },
 ]
+
 const twoColumnTextBlockArray = [
   {
     heading: 'Marketing education',

@@ -28,7 +28,6 @@ import {
   getTypeStyles,
   getType,
   getRatioStyles,
-  getSizes,
 } from './utils'
 
 export const {
@@ -69,7 +68,6 @@ export const {
     type: (variant) => getType(variant),
     typeSizes: (variant) => getTypeSizes(variant),
     typeStyles: (variant) => getTypeStyles(variant),
-    sizeArray: (array) => getSizes(array),
   },
   themeMap: {
     ...defaultThemeMap,

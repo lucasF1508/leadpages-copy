@@ -16,13 +16,27 @@ export const hexToRgb = (hex) => {
 }
 
 export const convertToRGB = (colors) => {
+  const colorObj = {}
   Object.keys(colors).forEach((color) => {
     const rgb = {}
     Object.keys(colors[color]).forEach((key) => {
       const { red, green, blue } = hexToRgb(colors[color][key])
       rgb[key] = `${red}, ${green}, ${blue}`
     })
-    colors[color] = rgb
+    colorObj[color] = rgb
   })
-  return colors
+  return colorObj
+}
+
+export const setDarkColorKeys = (darkColor) => {
+  const colorKeys = Object.keys(darkColor)
+  const [testColor] = colorKeys
+  const baseColor = testColor.includes('A')
+    ? testColor.slice(0, testColor.indexOf('A'))
+    : testColor.slice(0, testColor.indexOf('D'))
+  return colorKeys
+    .map((key) => ({
+      [key.replace(baseColor, `${baseColor}Dark`)]: darkColor[key],
+    }))
+    .reduce((obj, field) => ({ ...obj, ...field }), {})
 }

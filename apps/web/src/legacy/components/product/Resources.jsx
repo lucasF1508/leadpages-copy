@@ -209,11 +209,11 @@ const Resources = () => (
                 Level-up your skills with virtual workshops, coaching, and free
                 resources.
               </FlexRowItem6Copy>
-              <Link href="https://www.leadpages.com/marketing-resources">
+              <Link href="/marketing-resources">
                 <a
                   aria-label="resources link"
                   rel="noreferrer noopener"
-                  target="_blank"
+                  // target="_blank"
                 >
                   <FlexRowItem6CTA>
                     Discover Marketing Resources&nbsp;

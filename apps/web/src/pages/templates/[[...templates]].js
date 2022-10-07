@@ -1,5 +1,6 @@
 import React from 'react'
 import Templates from '@layouts/Templates'
+import { getPlanData, getGroupedPlanData } from '@utils/plans'
 
 const TemplatesPage = (props) => <Templates {...props} />
 
@@ -15,11 +16,14 @@ export async function getStaticProps(context) {
   const slug = '/templates'
   const route = params.templates || []
   const isPreviewPage = route?.includes('preview')
-  const data = { isPreviewPage }
+
+  const rawPlanData = await getPlanData()
+  const planData = getGroupedPlanData(rawPlanData)
+  const options = { isPreviewPage, planData }
 
   return {
     props: {
-      data,
+      options,
       slug,
       preview,
     },

@@ -1,11 +1,10 @@
-import React from 'react'
 import { FiFacebook } from '@react-icons/all-files/fi/FiFacebook'
 import { FiTwitter } from '@react-icons/all-files/fi/FiTwitter'
 import { FiMail } from '@react-icons/all-files/fi/FiMail'
 
 const useSocialShare = (mailto = {}) => {
   const getSharingUrl = (platform) => {
-    if (typeof window === 'undefined') return {}
+    if (typeof window === 'undefined') return undefined
     const siteName = document.querySelector(
       'meta[property="og:site_name"]'
     ).content
@@ -23,10 +22,10 @@ const useSocialShare = (mailto = {}) => {
   }
 
   const openWindow = (url) => {
-    if (typeof window === 'undefined') return false
+    if (typeof window === 'undefined') return undefined
     if (url.includes('mailto:')) {
       window.location.href = url
-      return false
+      return undefined
     }
     const size = 570
     const params = [
@@ -39,6 +38,8 @@ const useSocialShare = (mailto = {}) => {
       `left=${(window.width - size) / 2}`,
     ].join(',')
     window.open(url, 'NewWindow', params)
+
+    return undefined
   }
 
   const handleClick = (event, platform) => {

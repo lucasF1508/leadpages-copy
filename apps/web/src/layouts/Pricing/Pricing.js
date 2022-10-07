@@ -13,12 +13,12 @@ import FeatureIconsGrid from '@legacy/components/grids/FeatureIconsGrid'
 import HeadlineSection, {
   Caption,
 } from '@legacy/components/layout/HeadlineSection'
-import Layout from '@legacy/components/Layout'
 import LoadingState from '@legacy/components/LoadingState'
 import QuoteTestimonialsRotator from '@legacy/components/rotators/QuoteTestimonialsRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SpacerRow from '@legacy/components/SpacerRow'
 import SingleTestimonialWavesRow from '@legacy/components/testimonials/SingleTestimonialWavesRow'
+import SEO from '@legacy/components/SEO'
 // Data
 import { pricingFaqData } from '@legacy/data/faq_data'
 import { testimonialsData, planFeaturesData } from '@legacy/data/pricing_data'
@@ -183,95 +183,92 @@ const Pricing = (props) => {
 
   return (
     <>
-      <Layout
-        hideBar
-        hideSignUpFreeButton
-        underlaidMenu
-        onPromotionsLoaded={handlePromotionsLoaded}
-      >
-        {isLoading ? (
-          <LoadingState />
-        ) : (
-          <>
-            <HeadlineContainer>
-              <SVGContainer
-                src={backgroundImageSVG.src}
-                alt="background image"
+      <SEO
+        pathname="/pricing"
+        title="Leadpages Pricing: Generate More Leads and Sales"
+        description="Leadpages offers the best pricing plans for you to grow your business. Get started today with our risk-free 14-day free trial and add more at any time."
+        image="https://static.leadpages.com/images/og/og-pricing.jpg"
+        canonical="/pricing"
+      />
+      {isLoading ? (
+        <LoadingState />
+      ) : (
+        <>
+          <HeadlineContainer>
+            <SVGContainer src={backgroundImageSVG.src} alt="background image" />
+            {couponData?.canRedeemCoupon ? (
+              <HeadlineCaption
+                title={couponData?.headerText || null}
+                caption={couponData?.subHeaderText || null}
+                supertitle="Leadpages Pricing"
               />
-              {couponData?.canRedeemCoupon ? (
-                <HeadlineCaption
-                  title={couponData?.headerText || null}
-                  caption={couponData?.subHeaderText || null}
-                  supertitle="Leadpages Pricing"
-                />
-              ) : (
-                <HeadlineCaption
-                  title="Try Leadpages Risk-Free Today"
-                  caption="Discover why more than 40,000 small business owners choose Leadpages.<br/>Select a plan to get started with your free 14-day trial."
-                  supertitle="Leadpages Pricing"
-                />
-              )}
-            </HeadlineContainer>
-            <PlanCompareWrapper>
-              <PlanCompareTable
-                plans={flow === FLOWS.REACTIVATION ? generalPlans : trialPlans}
-                onSelectPlan={handleSelectPlan}
-                coupon={couponData}
-                bundle={bundleData}
-                headerOffset={HEADER_HEIGHT}
-                flow={flow}
-                defaultBillingFrequency={defaultBillingFrequency}
-                previousPlan={previousPlan}
-                contactUsPlan={
-                  flow === FLOWS.REACTIVATION ? null : CONTACT_US_PLAN
-                }
-                selectPlanButtonText="Start For Free"
+            ) : (
+              <HeadlineCaption
+                title="Try Leadpages Risk-Free Today"
+                caption="Discover why more than 40,000 small business owners choose Leadpages.<br/>Select a plan to get started with your free 14-day trial."
+                supertitle="Leadpages Pricing"
               />
-            </PlanCompareWrapper>{' '}
-            <SpacerRow backgroundColor="$background" size="small" />
-            <QuoteTestimonialsRotator
-              testimonialsArray={testimonialsData}
-              variant="gray"
+            )}
+          </HeadlineContainer>
+          <PlanCompareWrapper>
+            <PlanCompareTable
+              plans={flow === FLOWS.REACTIVATION ? generalPlans : trialPlans}
+              onSelectPlan={handleSelectPlan}
+              coupon={couponData}
+              bundle={bundleData}
+              headerOffset={HEADER_HEIGHT}
+              flow={flow}
+              defaultBillingFrequency={defaultBillingFrequency}
+              previousPlan={previousPlan}
+              contactUsPlan={
+                flow === FLOWS.REACTIVATION ? null : CONTACT_US_PLAN
+              }
+              selectPlanButtonText="Start For Free"
             />
-          </>
-        )}
-        <SpacerRow size="small" />
-        <HeadlineSection
-          title="Outfit your business for today’s needs & tomorrow’s dreams"
-          caption="All Leadpages plans include the following:"
-        />
-        <FeatureIconsGrid
-          features={planFeaturesData}
-          itemsPerRow={4}
-          showSectionLink
-        />
-        <SingleTestimonialWavesRow
-          headline="So much easier than Wix and Squarespace."
-          imageAlt="Ron Collins"
-          image={images.testimonialImageRonCollins}
-          quote="“Leadpages just makes my life so much easier. I used to set all this up on Wix and Squarespace and it was always such a pain. I am building incredible quality landing pages in a matter of minutes, even on a tight budget!”"
-          name="Ron Collins • Marketing Consultant"
-          title="Ron Collins Marketing"
-        />
-        <AccordionSection>
-          <Accordion
-            sectionHeadline="You have questions.<br/>We have answers."
-            data={pricingFaqData}
+          </PlanCompareWrapper>{' '}
+          <SpacerRow backgroundColor="$background" size="small" />
+          <QuoteTestimonialsRotator
+            testimonialsArray={testimonialsData}
+            variant="gray"
           />
-          <SectionLink>
-            Have more questions? See our{' '}
-            <Link href="/faq" passHref>
-              <StyledLink>full FAQ page</StyledLink>
-            </Link>{' '}
-            or{' '}
-            <Link href="/contact" passHref>
-              <StyledLink>contact us</StyledLink>
-            </Link>
-            .
-          </SectionLink>
-        </AccordionSection>
-        <ReadyToGrow headline="Ready to grow?" />
-      </Layout>
+        </>
+      )}
+      <SpacerRow size="small" />
+      <HeadlineSection
+        title="Outfit your business for today’s needs & tomorrow’s dreams"
+        caption="All Leadpages plans include the following:"
+      />
+      <FeatureIconsGrid
+        features={planFeaturesData}
+        itemsPerRow={4}
+        showSectionLink
+      />
+      <SingleTestimonialWavesRow
+        headline="So much easier than Wix and Squarespace."
+        imageAlt="Ron Collins"
+        image={images.testimonialImageRonCollins}
+        quote="“Leadpages just makes my life so much easier. I used to set all this up on Wix and Squarespace and it was always such a pain. I am building incredible quality landing pages in a matter of minutes, even on a tight budget!”"
+        name="Ron Collins • Marketing Consultant"
+        title="Ron Collins Marketing"
+      />
+      <AccordionSection>
+        <Accordion
+          sectionHeadline="You have questions.<br/>We have answers."
+          data={pricingFaqData}
+        />
+        <SectionLink>
+          Have more questions? See our{' '}
+          <Link href="/faq" passHref>
+            <StyledLink>full FAQ page</StyledLink>
+          </Link>{' '}
+          or{' '}
+          <Link href="/contact" passHref>
+            <StyledLink>contact us</StyledLink>
+          </Link>
+          .
+        </SectionLink>
+      </AccordionSection>
+      <ReadyToGrow headline="Ready to grow?" />
     </>
   )
 }

@@ -7,11 +7,11 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/integrations/google-analytics'
 
-  const data = { headerBkgColor: '$grayAlt' }
+  const options = { headerBkgColor: '$grayAlt' }
 
   return {
     props: {
-      data,
+      options,
       slug,
       preview,
     },

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { m } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { styled } from '@design'
 
@@ -70,14 +70,14 @@ export const MagicItem = ({
 
   return (
     <$MagicItem ref={ref} {...props}>
-      <m.div
+      <motion.div
         initial="initial"
         animate={animation}
         variants={variants}
         transition={transition}
       >
         {children}
-      </m.div>
+      </motion.div>
     </$MagicItem>
   )
 }

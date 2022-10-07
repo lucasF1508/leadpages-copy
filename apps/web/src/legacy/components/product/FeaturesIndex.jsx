@@ -23,6 +23,8 @@ const InnerContainer = styled('div', {
   marginRight: 'auto',
   zIndex: '$content',
   background: '$white',
+  display: 'flex',
+  alignItems: 'flex-start',
 })
 
 const BodyContainer = styled('div', {
@@ -42,9 +44,8 @@ const MainContainer = styled('div', {
   },
 
   '@media (min-width: 992px)': {
-    marginLeft: '30%',
-    width: '70%',
-    px: '6rem',
+    pr: '6rem',
+    pl: '3rem',
   },
 })
 
@@ -125,24 +126,20 @@ const SectionFeatureCopy = styled('div', {
 })
 
 const SidebarContainer = styled('div', {
+  position: 'sticky',
+  top: 85,
+
   '@media (max-width: 991px)': {
     display: 'none',
   },
 
   '@>m': {
-    position: 'absolute',
-    top: '48px',
+    mt: '48px',
     paddingRight: '6rem',
     marginLeft: '6rem',
     minWidth: '200px',
     maxWidth: '200px',
     borderRight: '1px solid rgba(15, 12, 9, 0.08)',
-  },
-
-  '&.sidebarScrolled': {
-    position: 'fixed',
-    top: '85px',
-    transition: 'position 0.3s ease',
   },
 })
 
@@ -165,7 +162,7 @@ const MainMenuContainer = styled('div', {
   position: 'fixed',
   top: '0px',
   width: '100%',
-  zIndex: 150,
+  zIndex: 1501,
   height: '72px',
   background: '$white',
   borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
@@ -354,7 +351,6 @@ class FeaturesIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isSidebarScrolled: false,
       isMainMenuScrolled: false,
       showSubMenu: false,
       scrollOffset: 0,
@@ -381,8 +377,6 @@ class FeaturesIndex extends React.Component {
     this.setState({ showSubMenu: !showSubMenu })
   }
 
-  setSidebar = (isSidebarScrolled) => this.setState({ isSidebarScrolled })
-
   setMainMenu = (isMainMenuScrolled) => this.setState({ isMainMenuScrolled })
 
   setSubMenu = (showSubMenu) => this.setState({ showSubMenu })
@@ -403,17 +397,14 @@ class FeaturesIndex extends React.Component {
         window.scrollY > 415 &&
         window.scrollY < scrollOffset
       ) {
-        this.setSidebar(true)
         this.setMainMenu(true)
       } else if (
         window.innerWidth >= 1150 &&
         window.scrollY > 415 &&
         window.scrollY < scrollOffset
       ) {
-        this.setSidebar(true)
         this.setMainMenu(true)
       } else {
-        this.setSidebar(false)
         this.setMainMenu(false)
         this.setSubMenu(false)
       }
@@ -442,7 +433,6 @@ class FeaturesIndex extends React.Component {
 
   render() {
     const {
-      isSidebarScrolled,
       isMainMenuScrolled,
       filteredCategories,
       showSubMenu,
@@ -451,12 +441,11 @@ class FeaturesIndex extends React.Component {
     } = this.state
 
     const { data } = this.props
-    const classSidebarScrolled = isSidebarScrolled ? 'sidebarScrolled' : ''
     const classMainMenuScrolled = isMainMenuScrolled ? 'mainMenuScrolled' : ''
     return (
       <OuterContainer id="container">
         <InnerContainer>
-          <SidebarContainer id="sidebar" className={classSidebarScrolled}>
+          <SidebarContainer id="sidebar">
             <SearchFilter
               handleFilteredData={debounce(this.handleFilteredData, 300)}
               dataSet={data}

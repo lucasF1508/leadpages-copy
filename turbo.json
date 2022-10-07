@@ -51,10 +51,6 @@
       "dependsOn": [],
       "outputs": []
     },
-    "studio#start": {
-      "dependsOn": [],
-      "outputs": []
-    },
     "story#build": {
       "dependsOn": ["indices#build", "sanity-hooks#build"],
       "outputs": ["../web/public/story/**"]

@@ -1,9 +1,0 @@
-@import "../../theme/theme.css";
-
-.title {
-  @apply --bodyDefault;
-}
-
-.subtitle {
-  @apply --supportContent;
-}

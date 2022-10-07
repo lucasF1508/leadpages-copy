@@ -3,6 +3,7 @@ import { styled } from '@design'
 import PropTypes from 'prop-types'
 import NoSsr from '@material-ui/core/NoSsr'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 // Components
 import {
@@ -12,7 +13,6 @@ import {
 } from '@legacy/constants/templates'
 import HeadlineSection from '../layout/HeadlineSection'
 import ReadyToGrow from '../product/ReadyToGrow'
-import Templates from './Templates'
 // Constants
 
 const TabLink = styled('a', {
@@ -72,9 +72,12 @@ const HeadlineContainer = styled('div', {
   },
 })
 
+const Templates = dynamic(() => import('./Templates'), {
+  loading: () => <FallbackDiv />,
+  ssr: false,
+})
+
 const Gallery = ({
-  state,
-  actions,
   SEO,
   kind,
   children,
@@ -113,15 +116,11 @@ const Gallery = ({
           </Link>
         </TabHeadingFlexbox>
       </TabHeadingContainer>
-      <NoSsr fallback={<FallbackDiv />}>
-        <Templates
-          state={state}
-          actions={actions}
-          kind={kind}
-          onPreviewTemplate={handlePreviewTemplate}
-          isPreviewing={isPreviewing}
-        />
-      </NoSsr>
+      <Templates
+        kind={kind}
+        onPreviewTemplate={handlePreviewTemplate}
+        isPreviewing={isPreviewing}
+      />
       <ReadyToGrow zIndex={1200} />
     </>
   )

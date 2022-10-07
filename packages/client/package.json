@@ -9,16 +9,16 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "swc ./src -d dist -w",
-    "build": "yarn build:client",
-    "build:client": "swc ./src -d dist",
+    "build": "yarn build:query",
+    "build:query": "swc ./src -d dist",
     "blast:node": "rm -rf node_modules",
     "blast:dist": "rm -rf dist"
   },
   "dependencies": {
-    "@sanity/client": "^2.21.3",
+    "@sanity/client": "3.3.3",
     "chokidar": "^3.5.3",
     "config": "*",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.1",
     "find-up": "5.0"
   },
   "devDependencies": {

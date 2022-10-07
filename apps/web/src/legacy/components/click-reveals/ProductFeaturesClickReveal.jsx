@@ -249,12 +249,11 @@ const ProductFeaturesClickReveal = ({
   itemArray,
   ...props
 }) => {
-  const [activeIndex, setActiveIndex] = useState(
-    Math.floor(Math.random() * itemArray.length)
-  )
+  const [activeIndex, setActiveIndex] = useState(0)
   const [activeCardHeight, setActiveCardHeight] = useState(0)
   const [cardHolderHeight, setCardHolderHeight] = useState(0)
   const [shouldAutoplay, setShouldAutoplay] = useState(true)
+  const [activeItem, setActiveItem] = useState(itemArray[0])
 
   const handleCardClick = (index) => {
     setShouldAutoplay(false)
@@ -304,7 +303,10 @@ const ProductFeaturesClickReveal = ({
       inactiveCardHeight * (numberOfCards - 1) +
       calculatedActiveCardHeight
     setCardHolderHeight(calculatedCardHolderHeight)
-  })
+  }, [])
+
+  useEffect(() => setActiveItem(itemArray[activeIndex]), [activeIndex])
+
   const innerContainerMinHeightValue = `${innerContainerMinHeight}px`
   const cardHolderHeightValue = `${cardHolderHeight}px`
   const activeCardHeightValue = `${activeCardHeight}px`
@@ -324,13 +326,13 @@ const ProductFeaturesClickReveal = ({
           <ImageContent>
             {!animations ? (
               <RevealImage
-                key={itemArray[activeIndex].title}
-                image={itemArray[activeIndex].image}
-                alt={itemArray[activeIndex].title}
+                key={activeItem.title}
+                image={activeItem.image}
+                alt={activeItem.title}
                 imgStyle={{ objectFit: 'contain' }}
               />
             ) : (
-              <div>{itemArray[activeIndex].animation}</div>
+              <div>{activeItem.animation}</div>
             )}
           </ImageContent>
         </FlexSide_Image>

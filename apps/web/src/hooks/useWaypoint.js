@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useEffect } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 import isNumber from 'lodash/isNumber'
 import { useInView } from 'react-intersection-observer'
 
@@ -8,12 +8,11 @@ const useWaypoint = ({
   threshold = 1,
   onEnter = () => {},
   onLeave = () => {},
-  debug,
   ignoreInitial: orgIgnoreInitial = false,
 } = {}) => {
-  const [rootTop, rootBottom] = [top, bottom].map((num) => {
-    return isNumber(num) ? `${num * -100}%` : `-${num}`
-  })
+  const [rootTop, rootBottom] = [top, bottom].map((num) =>
+    isNumber(num) ? `${num * -100}%` : `-${num}`
+  )
   const ref = useRef()
   const ignoreInitial = useRef(orgIgnoreInitial)
 
@@ -34,8 +33,8 @@ const useWaypoint = ({
     [inViewRef]
   )
 
-  const triggerWaypoint = ({ vertical, inView }) => {
-    if (inView) {
+  const triggerWaypoint = ({ vertical, inView: isInView }) => {
+    if (isInView) {
       onEnter(vertical)
     } else {
       onLeave(vertical)
@@ -44,7 +43,6 @@ const useWaypoint = ({
 
   useEffect(() => {
     if (!entry) return
-    let vertical = ''
 
     if (ignoreInitial.current) {
       ignoreInitial.current = false

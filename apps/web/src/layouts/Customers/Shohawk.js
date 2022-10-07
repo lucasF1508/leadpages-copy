@@ -105,10 +105,6 @@ const CenteredHeading = styled(Heading, {
   textAlign: 'center',
 })
 
-const OrangeCenteredHeading = styled(CenteredHeading, {
-  color: '$textHighlight',
-})
-
 const SubHeading = styled('div', {
   color: '$text',
   fontFamily: 'Apercu Pro',
@@ -334,11 +330,11 @@ const ShohawkCustomerPage = () => (
       </Body>
     </MainTextContainer>
     <OrangeHeadingContainer>
-      <OrangeCenteredHeading>
+      <CenteredHeading css={{ color: '$textHighlight' }}>
         “The people we met and interviewed were inspiring. They completely
         changed the way we saw the world, our time, money, and how you can live
         your life.”
-      </OrangeCenteredHeading>
+      </CenteredHeading>
       <SubHeading>Michael Hall</SubHeading>
     </OrangeHeadingContainer>
     <MainTextContainer>

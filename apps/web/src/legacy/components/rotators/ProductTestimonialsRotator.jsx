@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { styled } from '@design'
 // components
 import Image from '@components/Image'
@@ -9,6 +9,45 @@ import customer1 from '@legacy/assets/images/testimonials/arlin-godwin.png'
 import customer2 from '@legacy/assets/images/testimonials/eddette-steynberg.png'
 import customer3 from '@legacy/assets/images/testimonials/jackie-ellis_bw.png'
 import customer4 from '@legacy/assets/images/testimonials/ron-collins_close.png'
+
+const testimonialData = [
+  {
+    customerImage: customer1,
+    customerImageAltText: 'Arlin Godwin',
+    testimonialHeader: 'From struggle to success',
+    testimonialQuote:
+      '“After struggling with other DIY landing page solutions, I found Leadpages. The best part of all is that these pages really convert, I’m getting an unbelievable conversion rate on one of my pages.”',
+    testimonialName: 'Arlin Godwin',
+    testimonialTitle: 'Artist, Arlin Godwin Music',
+  },
+  {
+    customerImage: customer2,
+    customerImageAltText: 'Eddette Steynberg',
+    testimonialHeader: 'Leadpages is the only tool you need to get started',
+    testimonialQuote:
+      '“Leadpages has completely changed my marketing strategy workflow. No expensive or complicated website, simply a landing page and thank you page to lead clients towards your list.”',
+    testimonialName: 'Eddette Steynberg',
+    testimonialTitle: 'Content Strategist, Online Marketing Consultant',
+  },
+  {
+    customerImage: customer3,
+    customerImageAltText: 'Jackie Ellis',
+    testimonialHeader: 'I tried other platforms, but nothing else compared',
+    testimonialQuote:
+      '“I absolutely LOVE Leadpages. The simplicity and ease of use is why I recommend it to all my clients and use it exclusively for my own business.”',
+    testimonialName: 'Jackie Ellis',
+    testimonialTitle: 'Facebook Ads Strategist',
+  },
+  {
+    customerImage: customer4,
+    customerImageAltText: 'Ron Collins',
+    testimonialHeader: 'Could not be simpler to use',
+    testimonialQuote:
+      '“I am building incredible quality landing pages in a matter of minutes, even on a tight budget! Leadpages could not be simpler to use.”',
+    testimonialName: 'Ron Collins',
+    testimonialTitle: 'Digital Marketer, Ron Collins Marketing',
+  },
+]
 
 const TestimonialsContainer = styled('div', {
   paddingTop: '4rem',
@@ -167,49 +206,13 @@ const SlickRotator = styled(ReactSlick, {
 })
 
 const ProductTestimonialsRotator = ({ overrideTestimonialsArray }) => {
+  const [loadSlick, setLoadSlick] = useState(false)
+  useEffect(() => setLoadSlick(true), [])
+
   const testimonialsArray =
-    overrideTestimonialsArray && overrideTestimonialsArray.length === 1
+    overrideTestimonialsArray?.length === 1
       ? overrideTestimonialsArray
-      : [
-          {
-            customerImage: customer1,
-            customerImageAltText: 'Arlin Godwin',
-            testimonialHeader: 'From struggle to success',
-            testimonialQuote:
-              '“After struggling with other DIY landing page solutions, I found Leadpages. The best part of all is that these pages really convert, I’m getting an unbelievable conversion rate on one of my pages.”',
-            testimonialName: 'Arlin Godwin',
-            testimonialTitle: 'Artist, Arlin Godwin Music',
-          },
-          {
-            customerImage: customer2,
-            customerImageAltText: 'Eddette Steynberg',
-            testimonialHeader:
-              'Leadpages is the only tool you need to get started',
-            testimonialQuote:
-              '“Leadpages has completely changed my marketing strategy workflow. No expensive or complicated website, simply a landing page and thank you page to lead clients towards your list.”',
-            testimonialName: 'Eddette Steynberg',
-            testimonialTitle: 'Content Strategist, Online Marketing Consultant',
-          },
-          {
-            customerImage: customer3,
-            customerImageAltText: 'Jackie Ellis',
-            testimonialHeader:
-              'I tried other platforms, but nothing else compared',
-            testimonialQuote:
-              '“I absolutely LOVE Leadpages. The simplicity and ease of use is why I recommend it to all my clients and use it exclusively for my own business.”',
-            testimonialName: 'Jackie Ellis',
-            testimonialTitle: 'Facebook Ads Strategist',
-          },
-          {
-            customerImage: customer4,
-            customerImageAltText: 'Ron Collins',
-            testimonialHeader: 'Could not be simpler to use',
-            testimonialQuote:
-              '“I am building incredible quality landing pages in a matter of minutes, even on a tight budget! Leadpages could not be simpler to use.”',
-            testimonialName: 'Ron Collins',
-            testimonialTitle: 'Digital Marketer, Ron Collins Marketing',
-          },
-        ]
+      : testimonialData
 
   const settings = {
     appendDots: (dots) => <PaginationDots dots={dots} margin=".5rem 0 0 0" />,
@@ -232,7 +235,7 @@ const ProductTestimonialsRotator = ({ overrideTestimonialsArray }) => {
   return (
     <TestimonialsContainer>
       <RotatorContainer>
-        {typeof window !== 'undefined' && (
+        {loadSlick && (
           <SlickRotator {...settings}>
             {testimonialsArray.map(
               (

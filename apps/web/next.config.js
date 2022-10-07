@@ -1,7 +1,6 @@
 const path = require('path')
 const findUp = require('find-up')
 const adminRedirects = require('redirects')
-const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
@@ -14,8 +13,7 @@ const {
   SANITY_STUDIO_API_DATASET,
   SANITY_STUDIO_API_VERSION,
   SANITY_STUDIO_PREVIEW_SECRET,
-  SANITY_PREVIEW_API_TOKEN,
-  SANITY_BACKUP_API_TOKEN,
+  SANITY_STUDIO_APP_TOKEN,
   NEXT_PUBLIC_URL,
   VERCEL_ENV,
   SENDGRID_API_KEY,
@@ -27,23 +25,19 @@ const {
   MC_AUDIENCE_ID,
   MC_SERVER_PREFIX,
   HCAPTCHA_SITEKEY,
-  LEADPAGES_API_HOST,
   STARGATE_API_HOST,
+  LEADPAGES_API_HOST,
   LEADPAGES_TRIAL_HOST,
   LEADPAGES_REACTIVATION_HOST,
 } = process.env
 
-module.exports = withPlugins([[withBundleAnalyzer]], {
-  compiler: {
-    styledComponents: true,
-  },
+module.exports = withBundleAnalyzer({
   env: {
     SANITY_STUDIO_API_PROJECT_ID,
     SANITY_STUDIO_API_DATASET,
     SANITY_STUDIO_API_VERSION,
     SANITY_STUDIO_PREVIEW_SECRET,
-    SANITY_PREVIEW_API_TOKEN,
-    SANITY_BACKUP_API_TOKEN,
+    SANITY_STUDIO_APP_TOKEN,
     NEXT_PUBLIC_URL,
     SENDGRID_API_KEY,
     SENDGRID_TEMPLATE_ID,
@@ -55,11 +49,12 @@ module.exports = withPlugins([[withBundleAnalyzer]], {
     RECAPTCHA_SITE_KEY,
     VERCEL_ENV,
     HCAPTCHA_SITEKEY,
-    LEADPAGES_API_HOST,
     STARGATE_API_HOST,
+    LEADPAGES_API_HOST,
     LEADPAGES_TRIAL_HOST,
     LEADPAGES_REACTIVATION_HOST,
   },
+  reactStrictMode: false,
   poweredByHeader: false,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   sassOptions: {
@@ -69,20 +64,9 @@ module.exports = withPlugins([[withBundleAnalyzer]], {
     domains: ['cdn.sanity.io', 'assets.vercel.com'],
     deviceSizes: [320, 640, 750, 828, 1080, 1200, 1600, 1920, 2048, 3840],
   },
-  ignoreDuringBuilds: true,
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',
-  },
-  webpack: (config, { isServer }) => {
-    // Fixes npm packages that depend on `fs` module
-    if (!isServer) {
-      config.resolve.fallback.fs = false
-      config.resolve.fallback.net = false
-      config.resolve.fallback.tls = false
-    }
-
-    return config
   },
   redirects: async () => {
     const redirects = await adminRedirects({
@@ -94,6 +78,36 @@ module.exports = withPlugins([[withBundleAnalyzer]], {
       {
         source: '/story',
         destination: '/story/index.html',
+        permanent: true,
+      },
+      {
+        source: '/podcast',
+        destination: 'https://lp.leadpages.com/podcast/',
+        permanent: true,
+      },
+      {
+        source: '/affiliates',
+        destination: 'https://lp.leadpages.com/affiliates/',
+        permanent: true,
+      },
+      {
+        source: '/why-leadpages',
+        destination: 'https://lp.leadpages.com/why-leadpages/',
+        permanent: true,
+      },
+      {
+        source: '/free-trial',
+        destination: 'https://lp.leadpages.com/free-trial/',
+        permanent: true,
+      },
+      {
+        source: '/webinars',
+        destination: 'https://lp.leadpages.com/webinars/',
+        permanent: true,
+      },
+      {
+        source: '/webinars/:slug',
+        destination: 'https://lp.leadpages.com/:slug',
         permanent: true,
       },
       ...redirects,
@@ -112,4 +126,10 @@ module.exports = withPlugins([[withBundleAnalyzer]], {
       destination: '/',
     },
   ],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  experimental: {
+    scrollRestoration: true,
+  },
 })

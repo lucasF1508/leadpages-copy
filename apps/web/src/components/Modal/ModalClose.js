@@ -1,10 +1,10 @@
 import React from 'react'
-import { m } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { styled } from '@design'
 import { FiX as Icon } from '@react-icons/all-files/fi/FiX'
 import { Root as AccessibleIcon } from '@radix-ui/react-accessible-icon'
 
-const $ModalClose = styled(m.div, {
+const $ModalClose = styled(motion.div, {
   top: '$1',
   right: '0.125rem',
   position: 'absolute',

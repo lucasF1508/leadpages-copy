@@ -1,8 +1,8 @@
 import React from 'react'
-import { m } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { styled } from '@design'
 
-export const $ModalContainer = styled(m.div, {
+export const $ModalContainer = styled(motion.div, {
   position: 'fixed',
   top: 0,
   left: 0,

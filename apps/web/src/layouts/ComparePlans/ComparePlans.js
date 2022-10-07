@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { styled } from '@design'
 // Components
 import {
@@ -26,6 +26,7 @@ import { getLocalBundle } from '@legacy/utils/bundles'
 import { getUrlParam } from '@legacy/utils/common'
 import { planRouter } from '@legacy/utils/plan-router'
 import { getTrialId } from '@legacy/utils/trials'
+import { AppContext } from '@app'
 
 const Mobile = styled('div', {
   display: 'none',
@@ -107,6 +108,7 @@ const SectionLink = styled('div', {
 })
 
 const ComparePlans = (props) => {
+  const { hasLoaded } = useContext(AppContext)
   const { planData: { trialPlans } = {} } = props || {}
 
   const [bundleData, setBundleData] = useState(null)
@@ -135,6 +137,10 @@ const ComparePlans = (props) => {
     if (coupon?.canRedeemCoupon) setCouponData(coupon)
     setIsLoading(false)
   }
+
+  useEffect(() => {
+    if (hasLoaded) handlePromotionsLoaded()
+  }, [hasLoaded])
 
   useEffect(() => {
     // Render plan picker if loading takes longer than expected.

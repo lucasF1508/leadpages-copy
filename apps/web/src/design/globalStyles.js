@@ -4,6 +4,10 @@ import { reset, rootBreakpoints } from './tokens'
 const globalStyles = globalCss({
   ...reset,
   ...rootBreakpoints,
+  '*': {
+    margin: 0,
+    padding: 0,
+  },
   html: {
     position: 'relative',
     d: 'flex',

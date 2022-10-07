@@ -13,7 +13,7 @@ export const link = {
       defined(label) => label,
       condition == 'internal' => page->title,
       condition == 'external' => url,
-      condition == 'download' => file.asset.originalFilename
+      condition == 'download' => file.asset->originalFilename
     )
   `,
   target: `

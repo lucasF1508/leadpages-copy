@@ -1,12 +1,8 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useState, useEffect } from 'react'
+import { styled } from '@design'
 // material-ui components
-import Table from '@material-ui/core/Table'
+import Table from '@components/Table'
 import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableCell from '@material-ui/core/TableCell'
-import TableRow from '@material-ui/core/TableRow'
-import TableBody from '@material-ui/core/TableBody'
 // components
 import SEO from '@legacy/components/SEO'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
@@ -102,6 +98,7 @@ import {
   Title,
   UL,
 } from '@legacy/components/silos/SiloGlobalStyles'
+
 // videos
 const builderCreativityWebm =
   'https://static.leadpages.com/mktg/videos/landing-page-builder-creativity.webm'
@@ -226,28 +223,65 @@ const pageRoutes = [
   },
 ]
 
-const useStyles = makeStyles(
-  () => ({
-    root: {
-      maxWidth: 816,
-      border: '1px solid rgba(15,12,9,0.10)',
-    },
-    table: {
-      minWidth: 500,
-    },
-    tableHeadCell: {
-      fontWeight: 500,
-    },
-    tableRowFirstCell: {
-      fontWeight: 500,
-    },
-  }),
-  { classNamePrefix: 'SiloTable' }
-)
+const tableData = [
+  {
+    _key: '',
+    cells: ['Key areas', 'Homepage', 'Landing page'],
+  },
+  {
+    _key: '',
+    cells: [
+      'Objective',
+      'Highlights a broad range of content to offer an overall perspective. Multiple objectives.',
+      'Focuses on one single objective—to deliver specifically requested content.',
+    ],
+  },
+  {
+    _key: '',
+    cells: [
+      'Distractions',
+      'Many. Full range of navigable options. A web design that includes links, images, navigation bars, etc.',
+      'Very few. Clean-cut. Call to action, image, text.',
+    ],
+  },
+  {
+    _key: '',
+    cells: [
+      'Desired action',
+      'Entice visitors to dive deeper into the website.',
+      'One single call to action that captures leads and drives sales.',
+    ],
+  },
+]
+
+// const useStyles = makeStyles(
+//   () => ({
+//     root: {
+//       maxWidth: 816,
+//       border: '1px solid rgba(15,12,9,0.10)',
+//     },
+//     table: {
+//       minWidth: 500,
+//     },
+//     tableHeadCell: {
+//       fontWeight: 500,
+//     },
+//     tableRowFirstCell: {
+//       fontWeight: 500,
+//     },
+//   }),
+//   { classNamePrefix: 'SiloTable' }
+// )
+
+const $TableContainer = styled(TableContainer, {
+  maxWidth: 816,
+  border: '1px solid rgba(15,12,9,0.10)',
+})
 
 const LandingPagesGuide = () => {
-  const classes = useStyles()
-  const displayVideo = shouldDisplayVideo()
+  const [displayVideo, setDisplayVideo] = useState(false)
+  useEffect(() => setDisplayVideo(shouldDisplayVideo()), [])
+
   const overridePromoContent = {
     promoImage: attractPromoImage,
     promoImageAlt:
@@ -288,7 +322,6 @@ const LandingPagesGuide = () => {
           useScrollLink
         />
         <InnerContainer>
-          {/* Main Page Content */}
           <BodyContainer>
             <MainContainer>
               <SectionContainer
@@ -443,62 +476,9 @@ const LandingPagesGuide = () => {
                   Both pages serve different purposes and operate in unique
                   ways. Here are a few of the notable differences:
                 </ParagraphSmall>
-                <TableContainer className={classes.root}>
-                  <Table className={classes.table}>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell className={classes.tableHeadCell}>
-                          Key areas
-                        </TableCell>
-                        <TableCell className={classes.tableHeadCell}>
-                          Homepage
-                        </TableCell>
-                        <TableCell className={classes.tableHeadCell}>
-                          Landing page
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell className={classes.tableRowFirstCell}>
-                          Objective
-                        </TableCell>
-                        <TableCell>
-                          Highlights a broad range of content to offer an
-                          overall perspective. Multiple objectives.
-                        </TableCell>
-                        <TableCell>
-                          Focuses on one single objective—to deliver
-                          specifically requested content.
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className={classes.tableRowFirstCell}>
-                          Distractions
-                        </TableCell>
-                        <TableCell>
-                          Many. Full range of navigable options. A web design
-                          that includes links, images, navigation bars, etc.
-                        </TableCell>
-                        <TableCell>
-                          Very few. Clean-cut. Call to action, image, text.
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className={classes.tableRowFirstCell}>
-                          Desired action
-                        </TableCell>
-                        <TableCell>
-                          Entice visitors to dive deeper into the website.
-                        </TableCell>
-                        <TableCell>
-                          One single call to action that captures leads and
-                          drives sales.
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                <$TableContainer>
+                  <Table rows={tableData} />
+                </$TableContainer>
                 <H2>Landing page and website: what is the difference?</H2>
                 <ParagraphSmall>
                   Landing pages are the lone rangers that do the heavy lifting
@@ -1166,7 +1146,7 @@ const LandingPagesGuide = () => {
                   at scale.
                 </ParagraphSmall>
                 <DesktopVideoHolder>
-                  {!displayVideo && (
+                  {/* {!displayVideo && (
                     <DesktopFallbackImage
                       image={builderCreativityStatic}
                       alt="customize a landing page template"
@@ -1177,7 +1157,7 @@ const LandingPagesGuide = () => {
                       <source src={builderCreativityWebm} type="video/webm" />
                       <source src={builderCreativityMp4} type="video/mp4" />
                     </DesktopOnlyVideo>
-                  )}
+                  )} */}
                 </DesktopVideoHolder>
                 <MobileOnlyImage
                   image={builderCreativityStatic}
@@ -3029,7 +3009,7 @@ const LandingPagesGuide = () => {
                   your call to action.
                 </ParagraphSmall>
                 <DesktopVideoHolder>
-                  {!displayVideo && (
+                  {/* {!displayVideo && (
                     <DesktopFallbackImage
                       image={builderCreativityStatic}
                       alt="customize a landing page template"
@@ -3040,7 +3020,7 @@ const LandingPagesGuide = () => {
                       <source src={builderCreativityWebm} type="video/webm" />
                       <source src={builderCreativityMp4} type="video/mp4" />
                     </DesktopOnlyVideo>
-                  )}
+                  )} */}
                 </DesktopVideoHolder>
                 <MobileOnlyImage
                   image={builderCreativityStatic}

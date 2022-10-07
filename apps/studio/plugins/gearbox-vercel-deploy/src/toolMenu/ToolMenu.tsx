@@ -1,6 +1,5 @@
 import { LegacyLayerProvider } from '@sanity/base/components'
 import StateButton from 'part:@sanity/components/buttons/state'
-import { Tooltip } from 'part:@sanity/components/tooltip'
 import React from 'react'
 import { Router, Tool } from '../../types'
 
@@ -55,36 +54,28 @@ function ToolMenu(props: Props) {
               return (
                 <li key={tool.name}>
                   <LegacyLayerProvider zOffset="navbarPopover">
-                    <Tooltip
-                      content={tooltipContent as any}
-                      disabled={showLabel}
-                      placement="bottom"
-                      title={showLabel ? '' : title}
-                      tone={tone}
-                    >
-                      <div>
-                        <StateButton
-                          icon={tool.icon}
-                          key={tool.name}
-                          kind="simple"
-                          onClick={onSwitchTool}
-                          padding={
-                            direction === 'horizontal' ? 'small' : 'medium'
-                          }
-                          selected={activeToolName === tool.name}
-                          state={{
-                            ...router?.state,
-                            tool: tool.name,
-                            [tool.name]: undefined,
-                          }}
-                          title={title}
-                          tabIndex={isVisible ? 0 : -1}
-                          tone={tone}
-                        >
-                          {tool.title}
-                        </StateButton>
-                      </div>
-                    </Tooltip>
+                    <div>
+                      <StateButton
+                        icon={tool.icon}
+                        key={tool.name}
+                        kind="simple"
+                        onClick={onSwitchTool}
+                        padding={
+                          direction === 'horizontal' ? 'small' : 'medium'
+                        }
+                        selected={activeToolName === tool.name}
+                        state={{
+                          ...router?.state,
+                          tool: tool.name,
+                          [tool.name]: undefined,
+                        }}
+                        title={title}
+                        tabIndex={isVisible ? 0 : -1}
+                        tone={tone}
+                      >
+                        {tool.title}
+                      </StateButton>
+                    </div>
                   </LegacyLayerProvider>
                 </li>
               )

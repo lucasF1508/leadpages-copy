@@ -3,17 +3,16 @@ import dynamic from 'next/dynamic'
 import globalStyles from '@design/globalStyles'
 import useGoogleTagManager from '@hooks/useGoogleTagManager'
 import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
-import useSanityPreview from '@hooks/useSanityPreview'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
 import { MarketingThemeProvider } from '@lp/ui'
 import { LazyMotion } from 'framer-motion'
 
 // Legacy
-import GlobalStyles from '@legacy/components/GlobalStyles'
 import ToastManager from '@legacy/components/toasts/ToastManager'
 import Promotions from '@legacy/components/promotions/Promotions'
 
+const PreviewBadge = dynamic(() => import('@hooks/usePreview'))
 const LayoutContainer = dynamic(() => import('@components/LayoutContainer'))
 const SEO = dynamic(() => import('@components/SEO'))
 const Footer = dynamic(() => import('@components/Footer'))
@@ -29,11 +28,11 @@ export const AppContext = React.createContext()
 export default function App({
   Component: Main,
   pageProps: {
-    data: {
-      data = [{}],
-      query,
-      navigation,
-      siteMeta,
+    data = [{}],
+    queries,
+    global = {},
+    preview,
+    options: {
       slimFooter,
       isPreviewPage,
       onPromotionsLoaded,
@@ -46,8 +45,6 @@ export default function App({
       hideSignUpButton = false,
       ...meta
     } = {},
-    slug,
-    preview,
   } = {},
 }) {
   globalStyles()
@@ -58,17 +55,13 @@ export default function App({
   // Promotions loading
   const [hasLoaded, setHasLoaded] = useState()
 
-  const [pageData] = useSanityPreview({
-    query,
-    data,
-    preview,
-    slug,
-  })
+  const { navigation, footer, siteMeta } = global || {}
+  const [previewData, setPreviewData] = useState(data)
+  const [{ seo, ...pageData }] = preview ? previewData : data
 
   return (
     <AppContext.Provider value={{ ...siteMeta, hasLoaded, setHasLoaded }}>
       <MarketingThemeProvider>
-        <GlobalStyles />
         <ToastManager />
         <Promotions onPromotionsLoaded={onPromotionsLoaded} />
         <SEO seo={pageData?.seo} siteMeta={siteMeta} />
@@ -87,11 +80,19 @@ export default function App({
           <LayoutContainer>
             <Main {...pageData} {...meta} />
           </LayoutContainer>
-          {/* {navigation && <Footer navigation={navigation} />} */}
+          {/* {navigation && <Footer footer={footer} />} */}
           <Footer slimFooter={slimFooter} isPreviewPage={isPreviewPage} />
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>
+      {preview && (
+        <PreviewBadge
+          preview={preview}
+          initialData={data}
+          queries={queries}
+          setPreviewData={setPreviewData}
+        />
+      )}
     </AppContext.Provider>
   )
 }

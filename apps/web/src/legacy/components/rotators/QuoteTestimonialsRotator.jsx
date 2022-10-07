@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import { styled } from '@design'
@@ -105,6 +105,9 @@ const ClientTitle = styled('p', {
 })
 
 const QuoteTestimonialsRotator = ({ testimonialsArray, variant }) => {
+  const [loadSlick, setLoadSlick] = useState(false)
+  useEffect(() => setLoadSlick(true), [])
+
   const settings = {
     appendDots: (dots) => <PaginationDots dots={dots} margin="1rem 0 0 0" />,
     arrows: false,
@@ -130,7 +133,7 @@ const QuoteTestimonialsRotator = ({ testimonialsArray, variant }) => {
           image={variant === 'gray' ? QuotemarkSVG_Gray : QuotemarkSVG_Tan}
         />
         <RotatorContainer>
-          {typeof window !== 'undefined' && (
+          {loadSlick && (
             <SlickRotator {...settings}>
               {testimonialsArray.map((item, index) => {
                 const { quote, image, clientName, clientTitle } = item

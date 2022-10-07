@@ -5,7 +5,12 @@ import { styled } from '@design'
 const Media = dynamic(() => import('@components/Media'))
 
 const $MediaContainer = styled('div', {
-  mb: '$4',
+  position: 'relative',
+  mb: '$5',
+
+  '&:last-child': {
+    mb: '0',
+  },
 })
 
 const ImageRenderer = ({ node: { markDefs, ...media } }) => (

@@ -2,7 +2,7 @@ import React from 'react'
 // components
 import ChildPageHeader from '@legacy/components/product/ChildPageHeader'
 import ConversionFirstBuilder from '@legacy/components/product/ConversionFirstBuilder'
-import CustomerSuccessTestimonialsRotator from '@legacy/components/rotators/CustomerSuccessTestimonialsRotator'
+import CustomerSuccessTestimonialsRotator from '@components/Rotator/CustomerSuccessTestimonialsRotator'
 import FlexSectionReverse from '@legacy/components/product/FlexSectionReverse'
 import FlexSectionTwoColumnFeatures from '@legacy/components/product/FlexSectionTwoColumnFeatures'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
