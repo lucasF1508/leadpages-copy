@@ -11,7 +11,6 @@ import { BsNewspaper } from 'react-icons/bs'
 import { AiOutlineHome, AiOutlineFileText } from 'react-icons/ai'
 import { listItemSiteSettings, listItemsMainDocs } from './listItems'
 
-const pageTemplates = getPageTemplateTypes()
 const allTemplatesTypes = getTemplateSchemas().map(({ name }) => name)
 
 export const deskStructure = () =>
@@ -34,7 +33,15 @@ export const deskStructure = () =>
             ])
         )
         .icon(AiOutlineFileText),
-      ...listItemsMainDocs({ exclude: [...pageTemplates.all] }),
+      S.documentTypeListItem('post'),
+      S.documentTypeListItem('customer').title('Customers'),
+      S.documentTypeListItem('comparison').title('Comparisons'),
+      S.divider(),
+      S.documentTypeListItem('integration').title('Integrations'),
+      S.documentTypeListItem('career').title('Careers'),
+      S.documentTypeListItem('testimonial').title('Testimonials'),
+      S.documentTypeListItem('faq').title('FAQs'),
+      S.documentTypeListItem('press'),
       S.divider(),
       S.documentTypeListItem('navigation').title('Navigation'),
       GB.singletonListItem('footer').icon(RiLayoutBottom2Line),

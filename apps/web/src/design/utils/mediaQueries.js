@@ -20,11 +20,11 @@ export const getRootBreakpoints = (breakpoints) =>
     .map(({ key }, index) =>
       index === 0
         ? {
-            ['--current-breakpoint']: key,
+            '--current-breakpoint': key,
           }
         : {
             [`@>${key}`]: {
-              ['--current-breakpoint']: key,
+              '--current-breakpoint': key,
             },
           }
     )

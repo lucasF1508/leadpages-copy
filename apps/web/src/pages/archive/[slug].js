@@ -1,27 +1,25 @@
 import React from 'react'
-import { getDoc, getDocSlugs } from '@lib'
+import { getDoc, getDocSlugs, runQueries } from '@lib'
 import { ArchiveSingle } from '@layouts/Archive'
 
 const ArchiveSinglePage = (props) => <ArchiveSingle {...props} />
 
 export async function getStaticProps(context) {
-  const {
-    params: { slug },
-    preview = false,
-  } = context
+  const { params, preview = false } = context
 
-  const data = await getDoc('post', {
-    preview,
-    params: {
-      slug,
-    },
-  })
+  const { data, queries, global } = await runQueries(
+    getDoc('post', {
+      preview,
+      params,
+    })
+  )
 
   return {
     props: {
-      preview,
-      slug,
       data,
+      queries,
+      global,
+      preview,
     },
   }
 }

@@ -1,0 +1,449 @@
+import React, { useEffect, useRef, useState } from 'react'
+import { styled } from '@design'
+import PropTypes from 'prop-types'
+import anime from 'animejs'
+import {
+  useAnimationPlayPause,
+  useAnimationCanceled,
+} from '@legacy/components/animations/animationHooks'
+// images
+import headshot from '@legacy/assets/images/animations/guest-bio-popup_headshot.png'
+import plants from '@legacy/assets/images/animations/guest-bio-popup_plants.jpg'
+import backgroundShape from '@legacy/assets/images/animations/guest-bio-popup_background-shape.jpg'
+
+const AnimationTimeline = ({
+  svg,
+  cursorDefault,
+  cursorPointer,
+  popupContainer,
+  popup,
+  duration,
+  transitionTime,
+  cb = () => {},
+}) => {
+  const intro = anime.timeline({
+    complete: cb,
+  })
+
+  return intro
+    .add({
+      targets: [svg],
+      opacity: [0, 1],
+      duration: transitionTime,
+      easing: 'easeInOutSine',
+    })
+    .add({
+      targets: [cursorDefault, cursorPointer],
+      translateX: [111, 360],
+      translateY: [88, 360],
+      duration: 1000,
+      easing: 'easeInOutSine',
+    })
+    .add(
+      {
+        targets: cursorDefault,
+        opacity: [1, 0],
+        duration: 100,
+        easing: 'easeInOutSine',
+      },
+      '-=100'
+    )
+    .add(
+      {
+        targets: cursorPointer,
+        opacity: [0, 1],
+        duration: 100,
+        easing: 'easeInOutSine',
+      },
+      '-=100'
+    ) // relative offset
+    .add(
+      {
+        targets: popupContainer,
+        opacity: [0, 1],
+        duration: 300,
+        easing: 'easeInOutSine',
+      },
+      '+=300'
+    ) // relative offset
+    .add(
+      {
+        targets: [popup],
+        translateX: [148, 148],
+        translateY: [50 + 50, 50],
+        duration: 300,
+        easing: 'easeInOutSine',
+      },
+      '-=300'
+    )
+    .add({
+      targets: [svg],
+      opacity: [1, 1],
+      duration,
+      easing: 'easeInOutSine',
+    })
+    .add({
+      targets: [svg],
+      opacity: [1, 0],
+      duration: transitionTime,
+      easing: 'easeInOutSine',
+    })
+}
+
+const $Animation_GuestBioPopupSvg = styled('svg', {
+  background: '$white',
+  borderRadius: '5px',
+
+  variants: {
+    active: {
+      true: {
+        display: 'block',
+      },
+      false: {
+        display: 'none',
+      },
+    },
+  },
+})
+
+const Animation_GuestBioPopup = ({
+  cb,
+  active = false,
+  canceled = false,
+  duration = 12000,
+  transitionTime = 175,
+}) => {
+  const [animation, setAnimation] = useState(null)
+  const svg = useRef(null)
+  const cursorDefault = useRef(null)
+  const cursorPointer = useRef(null)
+  const popupContainer = useRef(null)
+  const popup = useRef(null)
+
+  useEffect(() => {
+    if (
+      svg.current &&
+      cursorDefault.current &&
+      cursorPointer.current &&
+      popupContainer.current &&
+      popup.current
+    ) {
+      const anim = AnimationTimeline({
+        svg: svg.current,
+        cursorDefault: cursorDefault.current,
+        cursorPointer: cursorPointer.current,
+        popupContainer: popupContainer.current,
+        popup: popup.current,
+        duration,
+        transitionTime,
+        cb,
+      })
+      if (!active) {
+        anim.restart()
+        anim.pause()
+      }
+      setAnimation(anim)
+    }
+  }, [
+    svg.current,
+    cursorDefault.current,
+    cursorPointer.current,
+    popupContainer.current,
+    popup.current,
+  ])
+
+  useAnimationPlayPause({ active, animation })
+  useAnimationCanceled({ active, canceled, animation, transitionTime })
+
+  return (
+    <$Animation_GuestBioPopupSvg
+      ref={svg}
+      xmlns="http://www.w3.org/2000/svg"
+      width="100%"
+      viewBox="0 0 630 455"
+      opacity="0"
+      active={active}
+    >
+      <g transform="translate(3 22)">
+        <defs>
+          <filter
+            id="guest-1-a"
+            width="153.8%"
+            height="133.7%"
+            x="-26.9%"
+            y="-16.8%"
+            filterUnits="objectBoundingBox"
+          >
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1" />
+            <feGaussianBlur
+              in="shadowOffsetOuter1"
+              result="shadowBlurOuter1"
+              stdDeviation="2"
+            />
+            <feColorMatrix
+              in="shadowBlurOuter1"
+              result="shadowMatrixOuter1"
+              values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.65 0"
+            />
+            <feMerge>
+              <feMergeNode in="shadowMatrixOuter1" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <g fill="none" fillRule="evenodd">
+          <image
+            width="468"
+            height="282"
+            x="78"
+            y="164"
+            href={backgroundShape.src}
+          />
+          <g transform="translate(78 211)">
+            <g transform="translate(25 32)">
+              <image
+                width="130"
+                height="211"
+                x="2"
+                y="-43"
+                href={headshot.src}
+              />
+            </g>
+            <g transform="translate(169 32)">
+              <text
+                fill="#575452"
+                fontFamily="SourceSansPro-Regular, Source Sans Pro"
+                fontSize="11"
+              >
+                <tspan x="0" y="50.2">
+                  With her green thumb in a variety of gardening&nbsp;
+                </tspan>
+                &nbsp;
+                <tspan x="0" y="68.2">
+                  ventures across Minnesota, Erna helps her clients
+                  cultivate&nbsp;
+                </tspan>
+                &nbsp;
+                <tspan x="0" y="86.2">
+                  and grow their own personal hanging gardens.
+                </tspan>
+                &nbsp;
+                <tspan
+                  x="0"
+                  y="113.2"
+                  fontFamily="SourceSansPro-Bold, Source Sans Pro"
+                  fontWeight="bold"
+                >
+                  Get her indoor plant guide here&nbsp;
+                </tspan>
+              </text>
+              <text
+                fill="#0F0C09"
+                fontFamily="Baskerville-Bold, Baskerville"
+                fontSize="20"
+                fontWeight="bold"
+                letterSpacing="-.07"
+              >
+                <tspan x="0" y="18">
+                  About Ern
+                </tspan>
+                &nbsp;
+                <tspan x="95.522" y="18">
+                  a
+                </tspan>
+              </text>
+            </g>
+            <path
+              stroke="#575452"
+              strokeLinecap="square"
+              d="M169,155 L323.5,155"
+            />
+          </g>
+          <polygon
+            fill="#E7E6E6"
+            points="297 -71 327 -71 327 397 297 397"
+            transform="rotate(-90 312 163)"
+          />
+          <polygon
+            fill="#E7E6E6"
+            points="297 -121 327 -121 327 347 297 347"
+            transform="rotate(-90 312 113)"
+          />
+          <polygon
+            fill="#E7E6E6"
+            points="297 -171 327 -171 327 297 297 297"
+            transform="rotate(-90 312 63)"
+          />
+          <polygon
+            fill="#E7E6E6"
+            points="297 -221 327 -221 327 247 297 247"
+            transform="rotate(-90 312 13)"
+          />
+        </g>
+
+        <g transform="translate(12 0)">
+          <g
+            id="cursorDefault"
+            ref={cursorDefault}
+            filter="url(#guest-1-a)"
+            transform="translate(511.857 88.5)"
+          >
+            <path
+              fill="#FFF"
+              fillRule="nonzero"
+              d="M33.1428571,58.5576923 C33.7942679,60.1361106 33.1682565,66.1142457 29.7142857,67.5 C26.260315,68.8857543 21.8473023,67.5 21.8473023,67.5 L13.8396088,51.3306189 L-1.31957937e-14,65.3033009 L-1.31957937e-14,2.19669914 L42.3956504,45 L26.599911,45 C27.3751204,46.5006887 32.3152585,56.552357 33.1428571,58.5576923 Z"
+            />
+            <path
+              fill="#000"
+              d="M3.71428571,11.25 L3.71428571,56.25 L14.8571429,45 L24.1428571,63.75 C24.1428571,63.75 26.654854,64.5592329 27.8571429,63.75 C29.0594317,62.9407671 30.2553094,61.310942 29.7142857,60 C27.1600714,53.810942 20.4285714,41.25 20.4285714,41.25 L33.4285714,41.25 L3.71428571,11.25 Z"
+            />
+          </g>
+        </g>
+
+        <g
+          id="cursorPointer"
+          ref={cursorPointer}
+          transform="translate(511.857 88.5)"
+          opacity={0}
+        >
+          <path
+            fill="#000"
+            d="M14.8262838,50.665721 L34.2132568,50.665721 C34.2132568,50.2494746 34.2047432,49.8817717 34.2143919,49.5146268 C34.2620676,47.7564601 34.6497162,46.0691558 35.3989054,44.4761486 C35.9897432,43.2201558 36.6225811,41.9814601 37.2872027,40.7611775 C38.2446892,39.0018949 39.0835541,37.1996486 39.0971757,35.1664022 C39.129527,30.3427428 39.1142027,25.5190833 39.1051216,20.6948659 C39.1039865,19.9187283 38.625527,19.4411051 37.8502297,19.4171123 C37.0425811,19.3920036 36.2326622,19.3897717 35.4250135,19.4176703 C34.6360946,19.4444529 34.1894189,19.9142645 34.1820405,20.6982138 C34.1695541,22.1400109 34.1746622,23.581808 34.1723919,25.0236051 L34.1723919,25.6290036 L31.7806622,25.6290036 L31.7806622,24.9851051 C31.7800946,22.8045543 31.7835,20.6240036 31.7772568,18.4434529 C31.7744189,17.4658877 31.3141216,17.0111413 30.3396081,17.0027717 C29.6437703,16.997192 28.9485,16.9944022 28.2526622,16.9999819 C27.3309324,17.0072355 26.8660946,17.45975 26.8626892,18.3658949 C26.8564459,20.1580978 26.8598514,21.9508587 26.8592838,23.7430616 L26.8592838,24.3099601 L24.4499595,24.3099601 L24.4499595,23.7776558 C24.4493919,21.1909022 24.4533649,18.6041486 24.4465541,16.016837 C24.4437162,15.0805616 23.9720676,14.61075 23.0344459,14.5956848 C22.3204459,14.5845254 21.6058784,14.5822935 20.8924459,14.5940109 C19.977527,14.6085181 19.5285811,15.0716341 19.5274459,15.9878225 C19.5246081,18.1499601 19.5268784,20.3126558 19.5251757,22.4753514 C19.5251757,22.6360471 19.5098514,22.7967428 19.4996351,22.9870109 L17.1476351,22.9870109 C17.1340135,22.8257572 17.1124459,22.6818007 17.1118784,22.5384022 C17.1107432,18.287779 17.1147162,14.0371558 17.1096081,9.78653261 C17.1079054,8.0869529 17.1771486,6.38067754 17.0500135,4.68946739 C16.9177703,2.93297464 14.8767973,2.02125 13.3528784,2.95082971 C12.5333108,3.45132971 12.1870946,4.19789493 12.1882297,5.14588768 C12.1961757,12.9457645 12.1939054,20.7456413 12.1876622,28.5449601 C12.1876622,28.9305181 12.1683649,29.3272355 12.0758514,29.6988442 C11.8147703,30.7467138 10.6699865,31.1222283 9.82317568,30.4431775 C9.58082432,30.2490036 9.37706757,29.9945688 9.19998649,29.7379022 C8.29301351,28.4238804 7.41271622,27.0914457 6.49836486,25.7818877 C5.8047973,24.7875833 4.80758108,24.2630906 3.59412162,24.2307283 C2.72517568,24.2072935 2.30006757,24.9387935 2.67352703,25.6859167 C3.10374324,26.5474239 3.55098649,27.4011196 3.95282432,28.2749022 C4.87341892,30.2746703 5.3637973,32.398308 5.7662027,34.5448225 C6.09312162,36.2890399 6.34568919,38.0711993 7.61704054,39.4599891 C8.73401351,40.6802717 9.88617568,41.8715399 11.0530946,43.0460688 C12.2478243,44.2479384 13.6060135,45.3460254 14.0924189,47.0355616 C14.4250135,48.1933514 14.5776892,49.4008007 14.8262838,50.665721 M26.6799324,14.6966775 C28.0222297,14.668779 29.2561216,14.6062862 30.4888784,14.6269312 C32.1615,14.6548297 33.3272838,15.4605399 33.9567162,16.9949601 C33.9907703,17.0775399 34.0327703,17.1567717 34.0043919,17.0970688 C35.454527,17.07475 36.8206622,16.9893804 38.1799865,17.0496413 C40.0047162,17.1299891 41.5042297,18.6761268 41.5144459,20.4856268 C41.5416892,25.4197645 41.5558784,30.3544601 41.5065,35.2885978 C41.4843649,37.5517283 40.6630946,39.615663 39.5727973,41.5919964 C38.8037432,42.9869239 38.0102838,44.3868732 37.4432838,45.8649384 C37.0073919,47.0015254 36.8155541,48.2536123 36.6844459,49.472221 C36.5607162,50.6221993 36.6577703,51.7956123 36.6577703,53.0069674 L12.2126351,53.0069674 C12.2126351,52.2771413 12.1899324,51.5277862 12.2177432,50.7801051 C12.2648514,49.5068152 12.2080946,48.2430109 11.4816081,47.143808 C11.0672838,46.5172065 10.5320676,45.9603514 10.0070676,45.4129819 C8.71925676,44.0710616 7.35312162,42.7983297 6.11582432,41.4134457 C4.76728378,39.9041341 3.95168919,38.134808 3.60774324,36.1177428 C3.21668919,33.8272717 2.78533784,31.5289891 1.80117568,29.3874964 C1.33747297,28.3786848 0.861283784,27.3715471 0.315851351,26.4045833 C-0.0990405405,25.6686196 -0.0689594595,24.9555326 0.196094595,24.2184529 C0.843689189,22.4156486 2.71495946,21.4732355 4.71109459,21.9536486 C6.38258108,22.3559457 7.74474324,23.2079674 8.67044595,24.6731993 C8.97806757,25.159192 9.31690541,25.6250978 9.76414865,26.0988152 L9.76414865,25.3795906 C9.76358108,18.615308 9.75904054,11.8510254 9.76471622,5.08674275 C9.76698649,2.50277899 11.6189595,0.471764493 14.1571216,0.240206522 C17.0727162,-0.0253876812 19.5149595,2.13340217 19.5308514,5.01364855 C19.5427703,7.21261232 19.5240405,9.41213406 19.5195,11.6116558 C19.5189324,11.8487935 19.5195,12.0859312 19.5195,12.2058949 C20.5337432,12.2058949 21.4815811,12.2399312 22.4265811,12.1991993 C24.4647162,12.1110399 25.983527,12.8218949 26.6799324,14.6966775"
+            mask="url(#trigger-2-b)"
+          />
+          <path
+            fill="#FFF"
+            d="M14.8262838,51.0055254 L34.2132568,51.0055254 C34.2132568,50.589279 34.2047432,50.2215761 34.2143919,49.8544312 C34.2620676,48.0962645 34.6497162,46.4089601 35.3989054,44.8159529 C35.9897432,43.5599601 36.6225811,42.3212645 37.2872027,41.1009819 C38.2446892,39.3416993 39.0835541,37.5394529 39.0971757,35.5062065 C39.129527,30.6825471 39.1142027,25.8588877 39.1051216,21.0346703 C39.1039865,20.2585326 38.625527,19.7809094 37.8502297,19.7569167 C37.0425811,19.731808 36.2326622,19.7295761 35.4250135,19.7574746 C34.6360946,19.7842572 34.1894189,20.2540688 34.1820405,21.0380181 C34.1695541,22.4798152 34.1746622,23.9216123 34.1723919,25.3634094 L34.1723919,25.968808 L31.7806622,25.968808 L31.7806622,25.3249094 C31.7800946,23.1443587 31.7835,20.963808 31.7772568,18.7832572 C31.7744189,17.805692 31.3141216,17.3509457 30.3396081,17.3425761 C29.6437703,17.3369964 28.9485,17.3342065 28.2526622,17.3397862 C27.3309324,17.3470399 26.8660946,17.7995543 26.8626892,18.7056993 C26.8564459,20.4979022 26.8598514,22.290663 26.8592838,24.0828659 L26.8592838,24.6497645 L24.4499595,24.6497645 L24.4499595,24.1174601 C24.4493919,21.5307065 24.4533649,18.9439529 24.4465541,16.3566413 C24.4437162,15.4203659 23.9720676,14.9505543 23.0344459,14.9354891 C22.3204459,14.9243297 21.6058784,14.9220978 20.8924459,14.9338152 C19.977527,14.9483225 19.5285811,15.4114384 19.5274459,16.3276268 C19.5246081,18.4897645 19.5268784,20.6524601 19.5251757,22.8151558 C19.5251757,22.9758514 19.5098514,23.1365471 19.4996351,23.3268152 L17.1476351,23.3268152 C17.1340135,23.1655616 17.1124459,23.0216051 17.1118784,22.8782065 C17.1107432,18.6275833 17.1147162,14.3769601 17.1096081,10.126337 C17.1079054,8.42675725 17.1771486,6.72048188 17.0500135,5.02927174 C16.9177703,3.27277899 14.8767973,2.36105435 13.3528784,3.29063406 C12.5333108,3.79113406 12.1870946,4.53769928 12.1882297,5.48569203 C12.1961757,13.2855688 12.1939054,21.0854457 12.1876622,28.8847645 C12.1876622,29.2703225 12.1683649,29.6670399 12.0758514,30.0386486 C11.8147703,31.0865181 10.6699865,31.4620326 9.82317568,30.7829819 C9.58082432,30.588808 9.37706757,30.3343732 9.19998649,30.0777065 C8.29301351,28.7636848 7.41271622,27.43125 6.49836486,26.121692 C5.8047973,25.1273877 4.80758108,24.6028949 3.59412162,24.5705326 C2.72517568,24.5470978 2.30006757,25.2785978 2.67352703,26.025721 C3.10374324,26.8872283 3.55098649,27.7409239 3.95282432,28.6147065 C4.87341892,30.6144746 5.3637973,32.7381123 5.7662027,34.8846268 C6.09312162,36.6288442 6.34568919,38.4110036 7.61704054,39.7997935 C8.73401351,41.0200761 9.88617568,42.2113442 11.0530946,43.3858732 C12.2478243,44.5877428 13.6060135,45.6858297 14.0924189,47.3753659 C14.4250135,48.5331558 14.5776892,49.7406051 14.8262838,51.0055254"
+          />
+        </g>
+        <g id="pop-up" ref={popupContainer} opacity={0}>
+          <rect width="624" height="431" fill="#0F0C09" fillOpacity=".7" />
+          <g ref={popup} transform="translate(148 50)">
+            <rect width="327" height="332" fill="#FFF" />
+            <g transform="translate(305 4)">
+              <circle cx="9" cy="9" r="9" fill="#F2F4F7" />
+              <polygon
+                fill="#878584"
+                fillRule="nonzero"
+                points="13 5.805 9.805 9 13 12.195 12.195 13 9 9.805 5.805 13 5 12.195 8.195 9 5 5.805 5.805 5 9 8.195 12.195 5"
+              />
+            </g>
+            <g transform="translate(46 32)">
+              <text
+                fill="#575452"
+                fontFamily="SourceSansPro-Regular, Source Sans Pro"
+                fontSize="10"
+                letterSpacing=".89"
+              >
+                <tspan x="62.635" y="10">
+                  INDOOR PLANT GUIDE
+                </tspan>
+              </text>
+              <text
+                fill="#0F0C09"
+                fontFamily="Baskerville-Bold, Baskerville"
+                fontSize="22"
+                fontWeight="bold"
+              >
+                <tspan x="22.163" y="41">
+                  7 tips to spruce up&nbsp;
+                </tspan>
+                &nbsp;
+                <tspan x="17.582" y="69">
+                  your wilted greens!
+                </tspan>
+              </text>
+            </g>
+            <g transform="translate(72 142)">
+              <rect
+                id="bg-b"
+                width="180.317"
+                height="32.93"
+                x=".546"
+                y="45.375"
+                rx="16.465"
+                fill="#FFDCEE"
+              />
+              <rect
+                width="178.819"
+                height="28.744"
+                x="1.591"
+                y=".591"
+                fill="#FFF"
+                stroke="#979797"
+                strokeWidth="1.181"
+                rx="3"
+              />
+              <text
+                fill="#929292"
+                fontFamily="SourceSansPro-Regular, Source Sans Pro"
+                fontSize="12.2"
+              >
+                <tspan x="13" y="18.55">
+                  email
+                </tspan>
+              </text>
+              <text
+                fill="#0F0C09"
+                fontFamily="SourceSansPro-Bold, Source Sans Pro"
+                fontSize="11"
+                fontWeight="bold"
+                letterSpacing=".28"
+              >
+                <tspan x="51.787" y="66.375">
+                  SEND IT TO ME!
+                </tspan>
+              </text>
+            </g>
+            <g transform="translate(0 257)">
+              <image width="328" height="218.667" y="-72" href={plants.src} />
+            </g>
+          </g>
+        </g>
+        <path
+          fill="#FFF"
+          stroke="#575452"
+          strokeWidth="3"
+          d="M630.973684,-42 L630.973684,-1 L-10.622807,-1 L-10.622807,-42 L630.973684,-42 Z"
+        />
+        <rect
+          width="627"
+          height="452"
+          x="-1.5"
+          y="-20.5"
+          stroke="#575452"
+          strokeWidth="3"
+          rx="5.474"
+          fill="rgba(0,0,0,0)"
+        />
+        <g transform="translate(10.947 -16)">
+          <ellipse fill="#C3C2C1" cx="5.474" cy="5.468" rx="5.474" ry="5.468" />
+          <ellipse
+            fill="#C3C2C1"
+            cx="23.719"
+            cy="5.468"
+            rx="5.474"
+            ry="5.468"
+          />
+          <ellipse
+            fill="#C3C2C1"
+            cx="41.965"
+            cy="5.468"
+            rx="5.474"
+            ry="5.468"
+          />
+        </g>
+      </g>
+    </$Animation_GuestBioPopupSvg>
+  )
+}
+
+Animation_GuestBioPopup.propTypes = {
+  cb: PropTypes.func,
+}
+
+Animation_GuestBioPopup.defaultProps = {
+  cb: () => {},
+}
+
+export default Animation_GuestBioPopup

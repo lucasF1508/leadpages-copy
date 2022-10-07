@@ -4,6 +4,7 @@ import { styled } from '@design'
 
 export const $VideoEmbed = styled('figure', {
   position: 'relative',
+  bc: '$black',
 
   '&::before': {
     d: 'block',
@@ -26,14 +27,13 @@ export const $VideoEmbed = styled('figure', {
 
 const getVideoData = (orgUrl) => {
   const parsedUrl = urlParser.parse(orgUrl)
-  const { params } = parsedUrl
   const url = urlParser.create({
     videoInfo: {
       ...parsedUrl,
     },
     params: {
-      ...params,
       playsinline: 0,
+      autoplay: 1,
     },
     format: 'embed',
   })
@@ -41,8 +41,17 @@ const getVideoData = (orgUrl) => {
   return url.includes('https:') ? url : `https:${url}`
 }
 
-const VideoEmbed = ({ url, children, ...props }) => {
-  const parsedUrl = useMemo(() => getVideoData(url), [])
+const VideoEmbed = ({ video, url, children, ...props }) => {
+  if (video?.embed?.html) {
+    return (
+      <$VideoEmbed
+        {...props}
+        dangerouslySetInnerHTML={{ __html: video?.embed?.html }}
+      />
+    )
+  }
+
+  const parsedUrl = useMemo(() => getVideoData(video || url), [])
 
   return (
     <$VideoEmbed {...props}>

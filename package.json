@@ -16,7 +16,7 @@
     "blast:next": "turbo run blast:next",
     "blast:dist": "turbo run blast:dist",
     "blast:turbo": "rm -rf ./node_modules/.cache/turbo",
-    "blast": "yarn blast:node && yarn blast:turbo && yarn blast:next && yarn blast:dist",
+    "blast": "yarn blast:node && yarn blast:turbo && yarn blast:next && yarn blast:dist && rm -rf node_modules",
     "reset": "yarn blast && rm yarn.lock",
     "build:web": "yarn workspace web build",
     "analyze": "turbo run analyze"

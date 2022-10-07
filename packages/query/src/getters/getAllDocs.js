@@ -60,13 +60,17 @@ export const getAllDocs = async (
     })) || {}
 
   return {
-    docs,
-    pagination: {
-      currentPage,
-      found,
-      perPage,
-      totalPages,
+    data: {
+      docs,
+      pagination: {
+        currentPage,
+        found,
+        perPage,
+        totalPages,
+      },
     },
+    query,
+    params,
   }
 }
 

@@ -40,7 +40,7 @@ const typeStyles = {
     fontSize: '1.125rem',
   },
   base: {
-    lineHeight: 20 / 16,
+    lineHeight: 24 / 16,
     fontSize: '1rem',
   },
   sm: {
@@ -55,9 +55,12 @@ const typeStyles = {
 
 export const type = {
   fonts: {
-    inter: '"Inter", sans-serif',
-    base: '$fonts$inter',
-    heading: '$fonts$inter',
+    valueSerif: '"Value Serif", serif',
+    apercuPro: '"Apercu Pro", sans-serif',
+    spaceMono: '"Space Mono", monospace',
+    base: '$fonts$apercuPro',
+    heading: '$fonts$valueSerif',
+    overline: '$fonts$spaceMono',
   },
   lineHeights: {
     s: 1,
@@ -102,11 +105,11 @@ export const type = {
       ...typeStyles.base,
       '@>s': typeStyles.lg,
     },
-    h1: {
-      ...typeStyles['5xl'],
-      '@>s': typeStyles['6xl'],
-      '@>l': typeStyles['7xl'],
-    },
+    // h1: {
+    //   ...typeStyles['5xl'],
+    //   '@>s': typeStyles['6xl'],
+    //   '@>l': typeStyles['7xl'],
+    // },
     h2: {
       ...typeStyles['4xl'],
       '@>s': typeStyles['5xl'],
@@ -183,7 +186,7 @@ export const type = {
       fontFamily: '$heading',
     },
     button: {
-      fontWeight: '$semiBold',
+      fontWeight: '$normal',
       fontFamily: '$base',
     },
     caption: {

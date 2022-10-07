@@ -12,7 +12,6 @@
     "@sanity/production-preview",
     "@sanity/dashboard",
     "media",
-    "tabs",
     "@gearbox-built/studio/config",
     "gearbox-vercel-deploy",
     "gearbox-doc-order-sort",

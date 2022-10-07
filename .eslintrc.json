@@ -27,7 +27,8 @@
     "arrow-body-style": "warn",
     "class-methods-use-this": "off", // _document.tsx use render method without `this` keyword,
     "no-underscore-dangle": "off", //We use Sanity internals for setting react keys
-    "no-console": ["error", { "allow": ["warn", "error"] }]
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-plusplus": "off"
   },
   "settings": {
     "import/core-modules": []

@@ -4,6 +4,10 @@ import { reset, rootBreakpoints } from './tokens'
 const globalStyles = globalCss({
   ...reset,
   ...rootBreakpoints,
+  '*': {
+    margin: 0,
+    padding: 0,
+  },
   html: {
     position: 'relative',
     d: 'flex',
@@ -13,20 +17,13 @@ const globalStyles = globalCss({
     '-webkit-font-smoothing': 'antialiased',
     '-moz-osx-font-smoothing': 'grayscale',
     'font-variant-ligatures': 'no-common-ligatures',
-    bc: '$background',
+    bc: '$white',
     fontSize: '16px',
     lh: 1.5,
     color: '$text',
     '*': {
       outlineColor: '$brand',
       outlineOffset: '$space$1',
-    },
-    [`
-      *,
-      *::before,
-      *::after
-    `]: {
-      boxSizing: 'border-box',
     },
     'body:not(.focus-outline)': {
       '*': {
@@ -36,12 +33,12 @@ const globalStyles = globalCss({
     '@<xs': {
       fontSize: '14px',
     },
-    '@>xxl': {
-      fontSize: '18px',
-    },
-    '@>xxxl': {
-      fontSize: '20px',
-    },
+    // '@>xxl': {
+    //   fontSize: '18px',
+    // },
+    // '@>xxxl': {
+    //   fontSize: '20px',
+    // },
   },
   body: {
     type: 'baseType',
@@ -65,10 +62,9 @@ const globalStyles = globalCss({
     table,
     fieldset
   `]: {
-    mb: '$3',
-    '&:last-child': {
-      mb: 0,
-    },
+    // '&:last-child': {
+    //   mb: 0,
+    // },
     '&::selection': {
       bc: '$grey2',
     },
@@ -81,14 +77,11 @@ const globalStyles = globalCss({
     h5,
     h6
   `]: {
-    mb: '$3',
-    fontFamily: '$heading',
-    '&:last-child': {
-      mb: 0,
-    },
-    '::selection': {
-      bc: '$grey2',
-    },
+    color: 'inherit',
+    fontFamily: 'inherit',
+    fontSize: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
   },
   button: {
     c: 'inherit',
@@ -115,19 +108,25 @@ const globalStyles = globalCss({
   h6: {
     type: 'h6',
   },
-  [`
-    dl,
-    ol,
-    ul
-  `]: {
-    ml: '$3',
-  },
   a: {
     position: 'relative',
     color: 'inherit',
-    display: 'inline-block',
     textDecoration: 'none',
     cursor: 'pointer',
+  },
+
+  '&.lp-bar__iframe-wrapper': {
+    zIndex: 150,
+  },
+
+  '@media (min-width: 768px)': {
+    '&.lp-bar__iframe-wrapper': {
+      position: 'relative',
+    },
+
+    '&.lp-bar__pusher': {
+      height: 0,
+    },
   },
 })
 

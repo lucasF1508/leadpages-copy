@@ -2,11 +2,6 @@ export const utils = {
   d: (value) => ({
     display: value,
   }),
-  b: (value) => ({
-    border: value,
-  }),
-  bt: (value) => ({ borderTop: value }),
-  bb: (value) => ({ borderBottom: value }),
   p: (value) => ({
     padding: value,
   }),
@@ -55,7 +50,6 @@ export const utils = {
   }),
   ta: (value) => ({ textAlign: value }),
   f: (value) => ({ flex: value }),
-  ff: (value) => ({ flexflow: value }),
   fd: (value) => ({ flexDirection: value }),
   fw: (value) => ({ flexWrap: value }),
   ff: (value) => ({ flexFlow: value }),
@@ -93,6 +87,11 @@ export const utils = {
   bc: (value) => ({
     backgroundColor: value,
   }),
+  b: (value) => ({
+    border: value,
+  }),
+  bt: (value) => ({ borderTop: value }),
+  bb: (value) => ({ borderBottom: value }),
   br: (value) => ({
     borderRadius: value,
   }),

@@ -9,7 +9,6 @@ export const schemaPageHome = {
   groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
   fieldsets: [
     FS.fieldset('meta', { collapsed: false }),
-    FS.fieldset('hero', { collapsed: false }),
     FS.fieldset('content', { collapsed: false }),
     FS.seo(),
   ],

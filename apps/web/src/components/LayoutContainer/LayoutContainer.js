@@ -2,13 +2,12 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import { styled } from '@design'
 import useScrollToHash from '@hooks/useScrollToHash'
-import { m, AnimatePresence } from 'framer-motion'
+import { m as motion, AnimatePresence } from 'framer-motion'
 
-const $LayoutContainer = styled(m.div, {
+const $LayoutContainer = styled(motion.div, {
   pt: '$headerHeight$s',
   mt: '-$headerHeight$s',
-  w: '100vw',
-  o: 'hidden',
+  w: '100%',
 })
 
 const LayoutContainer = ({ children, ...props }) => {
@@ -20,7 +19,6 @@ const LayoutContainer = ({ children, ...props }) => {
       initial={false}
       exitBeforeEnter
       onExitComplete={() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
         useScrollToHash(asPath, 500)
       }}
     >

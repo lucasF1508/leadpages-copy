@@ -1,5 +1,7 @@
+export * from './heroes'
 export * from './menuColumns'
 export * from './schemaBlockContent'
+export * from './schemaBlockContentSimple'
 export * from './schemaBlockHeading'
 export * from './schemaComponents'
 export * from './schemaContactInfo'

@@ -1,7 +1,5 @@
 import React from 'react'
-import { getTemplateTypes } from 'part:@gearbox-built/studio/config'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
-const pageTemplates = getTemplateTypes()
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -70,7 +68,7 @@ export const blockContent = {
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
-          F.link(pageTemplates, {
+          F.link({
             name: 'link',
             fields: [],
           }),

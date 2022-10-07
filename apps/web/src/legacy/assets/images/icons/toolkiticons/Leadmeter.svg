@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="60px" viewBox="0 0 48 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Product/Leadmeter-60</title>
+    <g id="Icons/Product/Leadmeter-60" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g>
+            <g id="_icons/Product/alertBar">
+                <rect id="Rectangle" fill="#E7E6E6" x="0" y="0" width="48" height="38"></rect>
+                <rect id="Rectangle" fill="#43E0F0" x="0" y="0" width="14" height="14"></rect>
+                <rect id="Rectangle" fill="#43E0F0" x="17" y="0" width="14" height="14"></rect>
+                <rect id="Rectangle" fill="#43E0F0" x="34" y="0" width="14" height="14"></rect>
+            </g>
+            <path d="M35,60 C35,56.7167548 35,53.0500882 35,49 C35,42.9248678 30.0751322,38 24,38 C17.9248678,38 13,42.9248678 13,49 C13,52.8507417 13,56.5174084 13,60 L35,60 Z" id="_icons/Product/oval" fill="#C3C2C1"></path>
+        </g>
+    </g>
+</svg>

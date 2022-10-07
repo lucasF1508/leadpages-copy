@@ -1,42 +1,98 @@
-import * as F from '../../fields'
+import React from 'react'
 import { BsImages as icon, BsCameraVideo as videoIcon } from 'react-icons/bs'
 import startCase from 'lodash/startCase'
-
-const vimeoToken = process.env.SANITY_STUDIO_VIMEO_TOKEN
+import getConditions from '../../utils/getConditions'
+import * as F from '../../fields'
+import * as G from '../../groups'
 
 export const media = ({
-  fields = [],
-  conditions = {},
-  caption = true,
+  fields: fieldsOrg = [],
+  args: argsOrg = {},
+  preview = {},
+  groups = [],
+  conditions: conditionsOrg = {},
   name = 'media',
   ...props
 } = {}) => {
-  const defaultFields = caption ? [F.string({ name: 'caption' })] : []
+  const args = {
+    image: {},
+    video: {},
+    caption: {},
+    ratio: {},
+    ...argsOrg,
+  }
 
-  return F.conditional('Select Media type', {
+  const [conditions, conditionValues] = getConditions({
+    image: [],
+    video: [],
+    download: [],
+    ...conditionsOrg,
+  })
+
+  const fields = [
+    F.radio(conditions, {
+      name: 'condition',
+      title: 'Type',
+      group: 'content',
+      initialValue: 'image',
+    }),
+    args.image
+      ? F.image({
+          group: 'content',
+          hidden: ({ parent }) => parent.condition !== 'image',
+          ...args.image,
+        })
+      : '',
+    args.video
+      ? F.video({
+          group: 'content',
+          hidden: ({ parent }) => parent.condition !== 'video',
+          ...args.video,
+        })
+      : '',
+    args.caption
+      ? F.string({
+          name: 'caption',
+          group: 'content',
+          hidden: ({ parent }) => parent.condition === 'none',
+          ...args.caption,
+        })
+      : '',
+    args.ratio
+      ? F.string({
+          name: 'ratio',
+          group: 'options',
+          hidden: ({ parent }) =>
+            parent.condition === 'none' || parent.condition === 'lottie',
+          ...args.ratio,
+        })
+      : '',
+    ...conditionValues.flat(),
+    ...fieldsOrg,
+  ].filter(Boolean)
+
+  return F.object({
     icon,
     name,
     ...props,
     parseType: 'media',
-    conditions: {
-      image: [F.image()],
-      video: [
-        vimeoToken ? F.field('vimeo.videoAsset', { name: 'video' }) : F.url(),
-      ],
-      ...conditions,
-    },
-    fields: [...defaultFields, ...fields],
+    groups: [...G.fieldGroupComponentOptions(), ...groups],
+    fields,
     preview: {
       select: {
         condition: 'condition',
         image: 'image',
         video: 'video',
         url: 'url',
+        ratio: 'ratio',
+        caption: 'caption',
       },
-      prepare: ({ condition, image, video, url }) => ({
+      prepare: ({ condition, image, video, url, ratio, caption }) => ({
         title: url || video?.name || startCase(condition) || 'Media (Empty)',
+        subtitle: caption || ratio || '',
         media: condition === 'image' ? image : videoIcon,
       }),
+      ...preview,
     },
   })
 }

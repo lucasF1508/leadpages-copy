@@ -11,7 +11,8 @@ const buildPaginationLinks = ({ currentPage, totalPages, router }) => {
   const isCategory = slug === 'category'
   const baseUrl = isCategory ? [baseName, slug, category].join('/') : baseName
   for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-    const url = `/${baseUrl}${pageNum !== 1 ? `/page/${pageNum}` : ''}`
+    const pageUrl = pageNum !== 1 ? `/page/${pageNum}` : ''
+    const url = `/${baseUrl}${pageUrl}`
 
     pageLinks.push({
       url,

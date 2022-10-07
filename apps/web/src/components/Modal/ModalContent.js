@@ -1,8 +1,8 @@
 import React from 'react'
-import { m } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { styled } from '@design'
 
-const $ModalContent = styled(m.div, {
+const $ModalContent = styled(motion.div, {
   position: 'relative',
   d: 'block',
   w: '100%',

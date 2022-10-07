@@ -1,4 +1,3 @@
-import React from 'react'
 import useEventListener from '@hooks/useEventListener'
 
 const enableOutline = (event) => {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="30px" viewBox="0 0 24 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 58 (101010) - https://sketch.com -->
+    <title>226AE2F3-0B35-47C1-9800-19761B8B3E31</title>
+    <desc>Created with sketchtool.</desc>
+    <g id="/product-v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="/product-overview" transform="translate(-954.000000, -8055.000000)">
+            <g id="All-Products" transform="translate(0.000000, 7796.000000)">
+                <g id="Active" transform="translate(924.000000, 235.000000)">
+                    <g id="Icons/Product/Website-60-Icons/Product/Popup-60" transform="translate(30.000000, 24.000000)">
+                        <g id="Icons/Product/Popup-60">
+                            <g id="_icons/Product/popUp">
+                                <rect id="Rectangle" fill="#E7E6E6" x="0" y="0" width="24" height="19"></rect>
+                                <rect id="Rectangle" fill="#D1C6F9" x="4" y="4" width="16" height="11"></rect>
+                            </g>
+                            <path d="M6.5,30 L17.5,30 C17.5,27.266325 17.5,25.4329917 17.5,24.5 C17.5,21.4624339 15.0375661,19 12,19 C8.96243388,19 6.5,21.4624339 6.5,24.5 C6.5,26.5250441 6.5,28.3583774 6.5,30 Z" id="_icons/Product/oval" fill="#C3C2C1"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

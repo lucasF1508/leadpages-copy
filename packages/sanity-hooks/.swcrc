@@ -21,7 +21,7 @@
       "mangle": true
     },
     "transform": null,
-    "target": "es2015",
+    "target": "es2017",
     "loose": false,
     "externalHelpers": false,
     "keepClassNames": false

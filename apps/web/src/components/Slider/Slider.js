@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { m } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { styled } from '@design'
 import useCarousel from '@hooks/useCarousel'
 import { SliderNav, SliderPagination } from '../Slider'
@@ -12,7 +12,7 @@ export const $Slider = styled('div', {
   ai: 'flex-end',
 })
 
-export const $Slides = styled(m.div, {
+export const $Slides = styled(motion.div, {
   d: 'flex',
   ff: 'row nowrap',
   jc: 'flex-start',
@@ -63,14 +63,15 @@ const Slider = ({
 
   useEffect(() => {
     if (!canScroll) {
-      return null
+      return undefined
     }
     if (canScroll?.allInView && isDraggable) {
       setDraggable(false)
     } else if (!canScroll?.allInView && !isDraggable) {
       setDraggable(true)
     }
-    return null
+
+    return undefined
   }, [canScroll])
 
   return (

@@ -7,7 +7,7 @@ export const schemaFooter = {
   title: 'Footer',
   type: 'document',
   fields: [
-    F.text({ name: 'footerContent', title: 'Content' }),
-    F.multiReference('navigation', { name: 'navigations' }),
+    F.string({ name: 'copyright' }),
+    F.reference('navigation', { name: 'navigation' }),
   ],
 }

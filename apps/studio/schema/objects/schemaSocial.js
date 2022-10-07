@@ -12,9 +12,6 @@ export const schemaSocial = F.array({
   of: [
     F.object({
       name: 'platform',
-      options: {
-        columns: 2,
-      },
       fields: [
         F.string({
           name: 'url',

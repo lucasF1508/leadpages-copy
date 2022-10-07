@@ -20,6 +20,7 @@ export const schemaPost = {
         title: 'Is External Article',
         initialValue: false,
       }),
+      F.field('components', { hidden: ({ parent }) => parent.isExternal }),
       F.checkbox({
         name: 'target',
         title: 'Open in a new tab',

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="705px" height="614px" viewBox="0 0 705 614" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.1 (78136) - https://sketchapp.com -->
+    <title>Product/Leadmeter/Backgrounds/Tan-Arch@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M0,351.987281 L0,615 L705,615 L705,351.987281 C705,157.590096 547.180352,0 352.5,0 C157.821275,0 0,157.590096 0,351.987281 Z" id="path-1"></path>
+    </defs>
+    <g id="Leadmeter-v1.1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="/product/leadmeter" transform="translate(-735.000000, -2315.000000)">
+            <g id="Take-control" transform="translate(1.000000, 2173.000000)">
+                <g id="Image">
+                    <g id="Alert-Bars/simple-setup_customize-416px" transform="translate(695.000000, 142.000000)">
+                        <g id="Product/Leadmeter/Backgrounds/Tan-Arch" transform="translate(39.000000, 0.000000)">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <use id="Mask" fill="#F4E3CC" xlink:href="#path-1"></use>
+                            <path d="M783,643 L234,643 C234,571.220036 241.103659,545.605352 273.109854,516.800447 C315.337689,478.908059 387.528026,498.814417 419.740815,467.376806 C448.772055,439.045788 433.916349,369.830389 465.280513,339.219758 C496.635142,308.621516 572.359827,318.436864 601.378353,290.112041 C633.597499,258.671333 604.114931,207.760987 642.093284,152.594948 C663.690314,121.225478 705.145806,108 783,108 L783,643 Z" id="Fill-18" stroke="#FFFFFF" stroke-width="4" mask="url(#mask-2)"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

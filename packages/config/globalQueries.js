@@ -38,17 +38,15 @@ module.exports = {
               ]`,
           },
         }),
-        legal: getQuery({
-          schemaType: 'page',
-          filters: `(slug.current == 'terms' || slug.current == 'privacy-policy')`,
-          slice: 0,
-          projections: {
-            _key: '_id',
-            condition: 'internal',
-            url: `"/" + slug.current`,
-            label: 'title',
-          },
-        }),
+      },
+    }),
+  ],
+  footer: [
+    getQuery({
+      schemaType: 'footer',
+      slice: 0,
+      projections: {
+        social: '*[_type == "companyInfo"][0].social',
       },
     }),
   ],

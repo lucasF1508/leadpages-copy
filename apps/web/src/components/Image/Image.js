@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import NextImage from 'next/image'
 import useImageParser from '@hooks/useImageParser'
-import { m, useMotionValue } from 'framer-motion'
+import { m as motion, useMotionValue } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { styled } from '@design'
 
-const $Figure = styled(m.figure, {
+const $Figure = styled(motion.figure, {
   position: 'relative',
   w: '100%',
 
@@ -49,6 +49,10 @@ const Image = ({
   priority,
   condition,
   hasPlaceholder = true,
+  objectFit,
+  objectPosition,
+  sizes,
+  lazyBoundary = '501px',
   ...props
 }) => {
   const parsedImage = useImageParser(image)
@@ -126,6 +130,10 @@ const Image = ({
         title={title}
         placeholder={hasPlaceholder ? placeholderType : undefined}
         blurDataURL={hasPlaceholder ? lqip : undefined}
+        objectFit={objectFit}
+        objectPosition={objectPosition}
+        sizes={sizes}
+        lazyBoundary={lazyBoundary}
       />
     </$Figure>
   )

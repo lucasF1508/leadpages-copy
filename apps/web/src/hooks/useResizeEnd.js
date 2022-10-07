@@ -1,7 +1,7 @@
 import useEventListener from '@hooks/useEventListener'
 
 export const useResizeEnd = () => {
-  if (typeof window === 'undefined') return
+  if (typeof window === 'undefined') return undefined
   let resizeTimer
 
   const emitEvent = () => {
@@ -16,7 +16,7 @@ export const useResizeEnd = () => {
 
   const resizeInterval = () => {
     clearTimeout(resizeTimer)
-    resizeTimer = setTimeout(function () {
+    resizeTimer = setTimeout(() => {
       emitEvent()
     }, 150)
   }

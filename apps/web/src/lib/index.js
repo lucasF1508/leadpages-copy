@@ -6,7 +6,9 @@ import {
   getDocPerPage,
   getDocSlice,
   getDocSlug,
+  getGlobalQueries,
   runQuery,
+  runQueries,
 } from 'query/getters'
 
 export {
@@ -17,5 +19,7 @@ export {
   getDocPerPage,
   getDocSlice,
   getDocSlug,
+  getGlobalQueries,
   runQuery,
+  runQueries,
 }

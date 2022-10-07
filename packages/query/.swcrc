@@ -24,11 +24,10 @@
       "compress": {
         "unused": true
       },
-      // Mangle causes compile error
-      "mangle": false
+      "mangle": true
     },
     "transform": null,
-    "target": "es5",
+    "target": "es2017",
     "loose": false,
     "externalHelpers": false,
     "keepClassNames": false

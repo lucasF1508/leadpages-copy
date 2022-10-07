@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useViewportScroll, useMotionValue } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { useScroll, useMotionValue } from 'framer-motion'
 
 const useStickyHeader = ({ offsetTop = 200 } = {}) => {
   const [isSticky, setIsSticky] = useState(false)
   const [showHeader, setShowHeader] = useState(false)
-  const { scrollY } = useViewportScroll()
+  const { scrollY } = useScroll()
   const prevScrollY = useMotionValue(0)
   const hasSticky = useMotionValue(isSticky)
   const direction = useMotionValue('')

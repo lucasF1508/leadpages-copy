@@ -14,8 +14,7 @@ export const listItemSiteSettings = S.listItem()
         GB.singletonListItem('siteRedirects', { title: 'Redirects' }).icon(
           BsArrowLeftRight
         ),
-        GB.singletonListItem('generalSettings').icon(MdSettings),
-        GB.singletonListItem('mockData').icon(BsLightning),
+        // GB.singletonListItem('mockData').icon(BsLightning),
       ])
   )
   .icon(MdSettings)

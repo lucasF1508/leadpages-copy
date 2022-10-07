@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="501px" height="650px" viewBox="0 0 501 650" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>product-overview/support_bkg-l@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="562" height="693"></rect>
+    </defs>
+    <g id="wedge-sand-curve" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="/product-overview" transform="translate(0.000000, -5722.000000)">
+            <g id="Left" transform="translate(0.000000, 5593.000000)">
+                <g id="Group-11" transform="translate(0.000000, 86.000000)">
+                    <g id="product-overview/support_bkg-l">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <g id="Mask"></g>
+                        <circle id="Mask" fill="#FEF9F1" mask="url(#mask-2)" cx="-384" cy="858" r="900"></circle>
+                        <path d="M-2516,-409.103305 C-2516,-231.817017 -2276.1447,-69.0948498 -1885.56844,27.0022135 L-1877.67506,28.9442949 L-1885.56844,30.8863763 C-2276.1447,126.98344 -2516,289.705607 -2516,466.991895 C-2516,644.275899 -2276.15058,806.998479 -1885.56836,903.113643 L-1877.67506,905.056041 L-1885.56852,906.997806 C-2276.12985,1003.07456 -2516,1165.81121 -2516,1343.10331 C-2516,1630.79946 -1890.15713,1865 -1118.00811,1865 C-345.845381,1865 280,1630.80039 280,1343.10331 C280,1165.81121 40.129847,1003.07456 -350.431482,906.997806 L-358.324942,905.056041 L-350.431638,903.113643 C40.1505789,806.998479 280,644.275899 280,466.991895 C280,385.252857 229.381442,306.06287 133.296456,234.295295 C22.9692566,151.889959 -144.38779,81.5812169 -350.43156,30.8863763 L-358.324942,28.9442949 L-350.43156,27.0022135 C40.144699,-69.0948498 280,-231.817017 280,-409.103305 C280,-696.800393 -345.845381,-931 -1118.00811,-931 C-1890.15713,-931 -2516,-696.799459 -2516,-409.103305 Z" id="Path" stroke="#FFFFFF" stroke-width="4" mask="url(#mask-2)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

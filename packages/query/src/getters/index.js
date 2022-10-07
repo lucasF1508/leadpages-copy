@@ -1,4 +1,5 @@
 import runQuery from './runQuery'
+import runQueries from './runQueries'
 import getDocPerPage from './getDocPerPage'
 import getDocSlice from './getDocSlice'
 import getDocPagination from './getDocPagination'
@@ -11,6 +12,7 @@ import getGlobalQueries, { globalQueries } from './getGlobalQueries'
 
 export {
   runQuery,
+  runQueries,
   getDocPerPage,
   getDocSlice,
   getDocPagination,

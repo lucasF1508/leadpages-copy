@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="60px" viewBox="0 0 48 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Icons/Product/Facebook Ad-60</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/Product/Facebook-Ad-60" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons/Product/Popup-60">
+            <g id="_icons/Product/popUp">
+                <rect id="Rectangle" fill="#E7E6E6" x="0" y="0" width="48" height="48"></rect>
+                <path d="M41,12 C41,15.3137333 38.3137333,18 35,18 C31.6862667,18 29,15.3137333 29,12 C29,8.68626667 31.6862667,6 35,6 C38.3137333,6 41,8.68626667 41,12" id="Fill-1" fill="#0B236D"></path>
+                <polygon id="Rectangle" fill="#0B236D" points="5 41 22 19 39 41"></polygon>
+            </g>
+        </g>
+        <circle id="_icons/Product/oval" fill="#C3C2C1" cx="24" cy="54" r="6"></circle>
+    </g>
+</svg>

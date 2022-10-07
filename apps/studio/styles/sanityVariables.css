@@ -20,3 +20,7 @@
 [data-testid='group-tab-all-fields'] {
   display: none !important;
 }
+
+[data-tone='navbar'] a span {
+  color: var(--card-fg-color, rgb(232, 232, 235)) !important;
+}

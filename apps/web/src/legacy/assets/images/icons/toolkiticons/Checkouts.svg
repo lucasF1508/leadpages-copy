@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="25px" viewBox="0 0 24 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 58 (84663) - https://sketch.com -->
+    <title>Icons/Product/Checkouts-60</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Product/Checkouts" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="/product/checkouts" transform="translate(-954.000000, -3948.000000)">
+            <g id="Group-5" transform="translate(-46.000000, 2706.000000)">
+                <g id="All-Products" transform="translate(46.000000, 882.000000)">
+                    <g id="Active" transform="translate(924.000000, 331.000000)">
+                        <g id="Icons/Product/Checkouts2-60" transform="translate(30.000000, 24.000000)">
+                            <g id="_icons/Goal/Make-Sales" transform="translate(0.000000, 5.000000)">
+                                <g id="Group-2" transform="translate(0.000000, 5.000000)" fill="#C3C2C1">
+                                    <polygon id="Rectangle" points="0 -1.36424205e-12 4.5 -9.09494702e-13 4.5 4"></polygon>
+                                </g>
+                                <path d="M4.5,9 L24,9 L24,16 C24,18.209139 22.209139,20 20,20 L8.5,20 C6.290861,20 4.5,18.209139 4.5,16 L4.5,9 L4.5,9 Z" id="Rectangle" fill="#E7E6E6"></path>
+                                <polygon id="Rectangle" fill="#4D7523" points="10 4.5 14.5 0 19 4.5 14.5 9"></polygon>
+                                <circle id="Oval" fill="#C3C2C1" cx="19" cy="22.5" r="2.5"></circle>
+                                <circle id="Oval" fill="#C3C2C1" cx="9.5" cy="22.5" r="2.5"></circle>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

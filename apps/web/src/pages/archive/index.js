@@ -1,38 +1,51 @@
 import React from 'react'
-import { getDoc, getAllDocs } from '@lib'
+import { getDoc, getAllDocs, runQueries } from '@lib'
 import Archive from '@layouts/Archive'
 
 const ArchivePage = (props) => <Archive {...props} />
 
+export const shapeData = ([
+  data,
+  { docs: categories },
+  { docs, pagination },
+]) => [
+  {
+    ...data,
+    categories,
+    docs,
+    pagination,
+  },
+]
+
+export const exporter = (props) => shapeData(props)
+
 export async function getStaticProps(context) {
-  const slug = 'archive'
   const docType = 'post'
   const { preview = false } = context
 
-  const data = await getDoc('pageArchive', {
-    filters: [`archiveOf == "${docType}"`],
-    preview,
-  })
-
-  const { data: categories } = await getDoc('categoryPost', {
-    preview,
-  })
-
-  const docs = await getAllDocs(docType, {
-    order: 'order(publishedDate desc)',
-    preview,
-    asCards: true,
-  })
+  const { data, global, queries } = await runQueries([
+    getDoc('pageArchive', {
+      filters: [`archiveOf == "${docType}"`],
+      preview,
+    }),
+    getAllDocs('categoryPost', {
+      filters: "!(_id in path('drafts.**'))",
+      preview,
+    }),
+    getAllDocs(docType, {
+      filters: "!(_id in path('drafts.**'))",
+      order: 'order(publishedDate desc)',
+      preview,
+      asCards: true,
+    }),
+  ])
 
   return {
     props: {
-      data: {
-        ...data,
-        ...docs,
-        categories,
-      },
+      data: shapeData(data),
+      queries,
+      global,
       preview,
-      slug,
     },
   }
 }

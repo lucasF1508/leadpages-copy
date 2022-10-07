@@ -18,7 +18,7 @@ const SEO = (props) => {
 
   return (
     <>
-      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      {/* Google Tag Manager Init */}
       {GOOGLE_TAG_TRACKING_ID && (
         <Script
           id="GTM"
@@ -60,7 +60,7 @@ const SEO = (props) => {
           <meta property="og:image:width" content={image?.width} />
         )}
         {seoDescription && (
-          <meta name="twitter:card" content={seoDescription} />
+          <meta name="twitter:card" content="summary_large_image" />
         )}
         {twitterUser && (
           <meta name="twitter:creator" content={`@${twitterUser}`} />

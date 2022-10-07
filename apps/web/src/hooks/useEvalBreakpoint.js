@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import useEventListener from '@hooks/useEventListener'
 import evalBreakpoint from '@utils/evalBreakpoint'
 
@@ -14,7 +14,7 @@ const useEvalBreakpoint = (condition) => {
     }
   }
 
-  useEventListener('resizeEnd', (event) => checkBreakpoint())
+  useEventListener('resizeEnd', () => checkBreakpoint())
 
   useEffect(() => {
     checkBreakpoint()

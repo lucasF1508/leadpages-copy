@@ -1,7 +1,8 @@
-import { getDocSlug } from '@lib'
+import getClient from 'client'
 
 const { SANITY_STUDIO_PREVIEW_SECRET } = process.env
 const { NEXT_PUBLIC_URL } = process.env
+const client = getClient({ preview: true })
 
 const preview = async (req, res) => {
   res.clearPreviewData()
@@ -14,12 +15,12 @@ const preview = async (req, res) => {
   // Fetch the headless CMS to check if the provided `slug` exists
   // getPostBySlug would implement the required fetching logic to the headless CMS
   const { slug, url } =
-    (await getDocSlug(req.query.type, {
-      params: {
+    (await client.fetch(
+      `*[slug.current == $slug][0]{"url": path, "slug": slug.current}`,
+      {
         slug: req.query.slug,
-      },
-      preview: false,
-    })) || {}
+      }
+    )) || {}
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!slug) {

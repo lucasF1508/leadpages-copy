@@ -16,7 +16,8 @@
       "@public/*": ["./public/*"],
       "@images/*": ["./public/images/*"],
       "@icons/*": ["./public/icons/*"],
-      "underscore": ["lodash"]
+      "underscore": ["lodash"],
+      "@legacy/*": ["./src/legacy/*"]
     }
   }
 }

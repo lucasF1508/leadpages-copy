@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 833 623" style="enable-background:new 0 0 833 623;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F4E3CC;}
+	.st1{filter:url(#Adobe_OpacityMaskFilter);}
+	.st2{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
+	.st3{mask:url(#mask-2_2_);fill:none;stroke:#FEF9F1;stroke-width:4;}
+</style>
+<title>Global/Backgrounds/Curved-Square_Tan</title>
+<g id="June-2021-">
+	<g id="Global_x2F_Backgrounds_x2F_Curved-Square_x5F_Tan">
+		<g id="Mask">
+			<path id="path-1_1_" class="st0" d="M200,0h633l0,0v623H0V200C0,89.5,89.5,0,200,0z"/>
+		</g>
+		<defs>
+			<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="6" y="45.9" width="449.4" height="573.3">
+				<feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+			</filter>
+		</defs>
+		<mask maskUnits="userSpaceOnUse" x="6" y="45.9" width="449.4" height="573.3" id="mask-2_2_">
+			<g class="st1">
+				<path id="path-1_3_" class="st2" d="M200,0h633l0,0v623H0V200C0,89.5,89.5,0,200,0z"/>
+			</g>
+		</mask>
+		<path id="Path_1_" class="st3" d="M64.1,47.2c72.6,77,211.4,142.4,390.8,186.5C185.7,300,8,414,8,543.5c0,25.6,6.9,50.5,20.1,74.7
+			"/>
+	</g>
+</g>
+</svg>

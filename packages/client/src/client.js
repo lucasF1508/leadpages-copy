@@ -12,7 +12,7 @@ const sanityConfig = {
   dataset: process.env.SANITY_STUDIO_API_DATASET,
   projectId: process.env.SANITY_STUDIO_API_PROJECT_ID,
   apiVersion: process.env.SANITY_STUDIO_API_VERSION,
-  token: process.env.SANITY_PREVIEW_API_TOKEN,
+  token: process.env.SANITY_STUDIO_APP_TOKEN,
 }
 
 module.exports = ({ config = sanityConfig, preview = false } = {}) => {

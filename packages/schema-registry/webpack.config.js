@@ -11,6 +11,7 @@ const options = {
 const { plugins, loaders } = sanityWebpack.getConfig(options)
 
 const dir = __dirname
+const studio_node_modules = path.join(basePath, 'node_modules')
 const node_modules = path.join(dir, '..', '..', 'node_modules')
 const null_modules = path.join(dir, 'null_modules')
 
@@ -63,6 +64,10 @@ const config = {
           path.join(node_modules, '@react-dnd'),
           path.join(node_modules, '@sanity/form-builder'),
           path.join(node_modules, '@sanity/base'),
+          path.join(studio_node_modules, '@sanity/base/lib/preview'),
+          path.join(studio_node_modules, '@sanity/base/lib/presence'),
+          path.join(studio_node_modules, '@sanity/base/lib/components'),
+          path.join(studio_node_modules, '@sanity/base/lib/change-indicators'),
           path.join(node_modules, '@sanity/ui'),
           path.join(node_modules, '@sanity/uuid'),
           path.join(node_modules, 'axios'),

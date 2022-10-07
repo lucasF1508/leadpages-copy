@@ -4,14 +4,8 @@ import PortableText from '@sanity/block-content-to-react'
 import { styled } from '@design'
 import { getTypeUtil } from '@design/utils'
 import { textDefaultTokens } from '@design/tokens/text'
-import {
-  BlockRenderer,
-  MediaRenderer,
-  AnchorRenderer,
-  TableRenderer,
-  EmbedRenderer,
-} from './Renderers'
-import { LinkMarkRender } from './Marks'
+import RendererList from './Renderers/RendererList'
+import MarksList from './Marks/MarksList'
 
 const $Text = styled('article', {
   ...textDefaultTokens,
@@ -28,14 +22,8 @@ const Text = ({
   tagStyle,
   className,
   children,
-  renderers = {
-    media: MediaRenderer,
-    block: BlockRenderer,
-    pageAnchor: AnchorRenderer,
-    table: TableRenderer,
-    embed: EmbedRenderer,
-  },
-  marks = { link: LinkMarkRender },
+  renderers = RendererList,
+  marks = MarksList,
   ...props
 }) => {
   if (!children && !content) return null

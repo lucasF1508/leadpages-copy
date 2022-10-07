@@ -1,10 +1,7 @@
-import { getTemplateTypes } from 'part:@gearbox-built/studio/config'
-import { FiImage as icon } from 'react-icons/fi'
+import startCase from 'lodash/startCase'
 import * as F from '../../fields'
 import * as G from '../../groups'
 import * as P from '../../preview'
-
-const pageTemplates = getTemplateTypes()
 
 export const hero = ({
   fields: fieldsOrg = [],
@@ -33,23 +30,40 @@ export const hero = ({
       ? F.string({ name: 'heading', group: 'content', ...args.heading })
       : '',
     args.content
-      ? F.blockContent({ name: 'content', group: 'content', ...args.content })
+      ? F.field('blockContentSimple', {
+          name: 'content',
+          group: 'content',
+          ...args.content,
+        })
       : '',
     args.link
-      ? F.link(pageTemplates, {
+      ? F.link({
           name: 'link',
           group: 'content',
+          initialValue: {
+            condition: 'none',
+          },
           conditions: {
             none: [],
           },
           ...args.link,
         })
       : '',
-    args.media ? F.media({ conditions: { none: [] }, ...args.media }) : '',
+    args.media
+      ? F.media({
+          group: 'media',
+          conditions: { none: [] },
+          initialValue: {
+            condition: 'none',
+          },
+          args: { caption: false },
+          ...args.media,
+        })
+      : '',
     args.align
-      ? F.radio(['left', 'center'], {
+      ? F.radio(['left', 'center', 'right'], {
           name: 'align',
-          title: 'Hero Alignment',
+          title: 'Content Alignment',
           initialValue: 'left',
           group: 'options',
         })
@@ -58,9 +72,13 @@ export const hero = ({
   ].filter(Boolean)
 
   return F.object({
-    icon,
     name,
-    groups: [...G.fieldGroupComponentOptions(), ...groups],
+    groups: [
+      G.fieldGroup('content', { title: 'Content', default: true }),
+      G.fieldGroup('media', { title: 'Media' }),
+      G.fieldGroup('options', { title: 'Options' }),
+      ...groups,
+    ],
     fields,
     options: {
       collapsible: true,
@@ -71,13 +89,13 @@ export const hero = ({
       select: {
         heading: 'heading',
         content: 'content',
-        image: 'image',
+        media: 'media',
       },
-      prepare({ heading = 'Hero', content, image }) {
+      prepare({ heading = props?.title || startCase(name), content, media }) {
         return {
           title: heading,
           subtitle: content ? P.richText(content) : '',
-          media: image || icon,
+          media: media?.condition === 'image' && media.image,
         }
       },
       ...preview,
