@@ -116,16 +116,16 @@ const globalStyles = globalCss({
     cursor: 'pointer',
   },
 
-  '&.lp-bar__iframe-wrapper': {
+  '.lp-bar__iframe-wrapper': {
     zIndex: 150,
   },
 
   '@media (min-width: 768px)': {
-    '&.lp-bar__iframe-wrapper': {
+    '.lp-bar__iframe-wrapper': {
       position: 'relative',
     },
 
-    '&.lp-bar__pusher': {
+    '.lp-bar__pusher': {
       height: 0,
     },
   },
