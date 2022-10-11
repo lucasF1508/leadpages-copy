@@ -144,7 +144,9 @@ const Promotions = ({ onPromotionsLoaded = false }) => {
           selector=".banner"
           CTA={
             !onPricingPage ? (
-              <Button href="/pricing">Get This Deal</Button>
+              <Button style={{ color: '#4D32CC' }} href="/pricing">
+                Get This Deal
+              </Button>
             ) : null
           }
         />
