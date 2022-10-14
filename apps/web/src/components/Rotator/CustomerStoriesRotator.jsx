@@ -200,7 +200,6 @@ const Supertitle = styled('div', {
 const Title = styled('div', {
   fontFamily: `'Value Serif'`,
   fontSize: '30px',
-  letterSpacing: 0.5,
   lineHeight: '36px',
   marginBottom: '2rem',
   color: '$text',

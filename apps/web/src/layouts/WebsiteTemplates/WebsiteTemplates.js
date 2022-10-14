@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
 // Components
@@ -41,26 +41,37 @@ PreviewSEO.propTypes = {
 const WebsiteTemplates = ({ planData }) => {
   const router = useRouter()
   const pathname = router.asPath
-  const templateId = pathname.split('preview/')[1]
-  const isPreviewing = pathname.match(/preview\/(.+)/) || false
-  const SEOMatch = isPreviewing ? PreviewSEO : GallerySEO
+  const templateIdUrl = pathname.split('preview/')[1]
+
+  const [templateId, setTemplateId] = useState(templateIdUrl)
   const [previewTemplate, handlePreviewTemplate] = usePreviewTemplate()
 
-  return isPreviewing ? (
-    <Preview
-      templateId={templateId}
-      galleryRoot="/website-templates"
-      SEO={<SEOMatch pathname={pathname} />}
-      previewTemplate={previewTemplate}
-      planData={planData}
-    />
-  ) : (
-    <Gallery
-      SEO={<SEOMatch pathname={pathname} />}
-      kind={TemplateKind.Site}
-      handlePreviewTemplate={handlePreviewTemplate}
-      isPreviewing={!!isPreviewing}
-    />
+  useEffect(() => {
+    setTemplateId(previewTemplate?._meta.id || templateIdUrl)
+  }, [previewTemplate])
+
+  return (
+    <>
+      {templateId ? (
+        <>
+          <PreviewSEO pathname={pathname} />
+          <Preview
+            templateId={templateId}
+            galleryRoot="/website-templates"
+            previewTemplate={previewTemplate}
+            planData={planData}
+          />
+        </>
+      ) : (
+        <GallerySEO pathname={pathname} />
+      )}
+
+      <Gallery
+        kind={TemplateKind.Site}
+        handlePreviewTemplate={handlePreviewTemplate}
+        isPreviewing={!!templateId}
+      />
+    </>
   )
 }
 

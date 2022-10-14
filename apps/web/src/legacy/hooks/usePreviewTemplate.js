@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Events } from '@legacy/components/templates/tracker'
 import { useRouter } from 'next/router'
 
@@ -7,14 +7,24 @@ const usePreviewTemplate = () => {
   const [previewTemplate, setPreviewTemplate] = useState(null)
 
   const handlePreviewTemplate = (template) => {
+    const url = `${router.asPath}/preview/${template._meta.id}`
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({
       event: Events.templatePreviewed,
       previewedTemplateName: `${template.template.name} (${template._meta.id})`,
     })
+
     setPreviewTemplate(template)
-    router.push(`preview/${template._meta.id}`)
+
+    // Doesn't trigger a router state
+    window.history.pushState({ ...window.history.state, as: url }, '', url)
   }
+
+  useEffect(() => {
+    if (previewTemplate) {
+      setPreviewTemplate(null)
+    }
+  }, [router])
 
   return [previewTemplate, handlePreviewTemplate]
 }

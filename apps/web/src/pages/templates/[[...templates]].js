@@ -12,14 +12,12 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const { preview = false, params } = context
-  const slug = '/templates'
-  const route = params.templates || []
-  const isPreviewPage = route?.includes('preview')
+  const { preview = false } = context
 
+  const slug = '/templates'
   const rawPlanData = await getPlanData()
   const planData = getGroupedPlanData(rawPlanData)
-  const options = { isPreviewPage, planData }
+  const options = { planData }
 
   return {
     props: {

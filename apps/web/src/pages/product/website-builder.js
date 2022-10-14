@@ -7,10 +7,13 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/product/website-builder'
 
+  const options = { hideBar: true }
+
   return {
     props: {
       slug,
       preview,
+      options,
     },
   }
 }

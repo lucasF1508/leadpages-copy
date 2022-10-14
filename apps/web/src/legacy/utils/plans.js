@@ -86,6 +86,7 @@ const getGroupedPlanData = (plans) => {
         standard: trialPlans?.month?.standard,
       },
     },
+    compareTrialPlans: trialPlans,
   }
 }
 
