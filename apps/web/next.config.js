@@ -106,6 +106,11 @@ module.exports = withBundleAnalyzer({
         permanent: true,
       },
       {
+        source: '/demo',
+        destination: 'https://lp.leadpages.com/demo/',
+        permanent: true,
+      },
+      {
         source: '/webinars/:slug',
         destination: 'https://lp.leadpages.com/:slug',
         permanent: true,

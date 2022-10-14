@@ -146,7 +146,7 @@ const PreviewHeader = ({
       >
         <Grid container className={classes.left} wrap="nowrap">
           <Grid container className={classes.leftLg} wrap="nowrap">
-            <NextLink href={galleryRoot} passHref>
+            <NextLink href={galleryRoot} passHref shallow>
               <IconButton id="gallery-return" aria-label="Back">
                 <ArrowBackIcon color="primary" />
               </IconButton>

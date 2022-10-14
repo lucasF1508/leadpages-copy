@@ -13,6 +13,7 @@ export async function getStaticProps(context) {
   const options = {
     planData: getGroupedPlanData(rawPlanData),
     hideSignUpButton: true,
+    hideBar: true,
   }
 
   return {

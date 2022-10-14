@@ -109,7 +109,7 @@ const SectionLink = styled('div', {
 
 const ComparePlans = (props) => {
   const { hasLoaded } = useContext(AppContext)
-  const { planData: { trialPlans } = {} } = props || {}
+  const { planData: { compareTrialPlans: trialPlans } = {} } = props || {}
 
   const [bundleData, setBundleData] = useState(null)
   const [couponData, setCouponData] = useState(null)
