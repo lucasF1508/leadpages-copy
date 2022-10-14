@@ -8,19 +8,13 @@ const useStyles = makeStyles(
       background: 'rgb(247, 247, 247)',
       display: 'flex',
       flexFlow: 'column',
-
-      [breakpoints.down('sm')]: {
-        zIndex: 1604,
-        background: 'rgb(247, 247, 247)',
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        overflow: 'hidden',
-        display: 'flex',
-        flexFlow: 'column',
-      },
+      zIndex: 1604,
+      position: 'fixed',
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+      overflow: 'hidden',
 
       [breakpoints.up('sm')]: {
         overflow: 'auto',

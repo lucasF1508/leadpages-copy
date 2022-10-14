@@ -1,7 +1,6 @@
 import React from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
-import NoSsr from '@material-ui/core/NoSsr'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -88,7 +87,7 @@ const Gallery = ({
 
   return (
     <>
-      {children && <NoSsr>{children}</NoSsr>}
+      {children && children}
       {SEO}
       <HeadlineContainer>
         <HeadlineSection

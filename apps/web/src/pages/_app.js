@@ -43,6 +43,7 @@ export default function App({
       noLogin = false,
       headerBkgColor = null,
       hideSignUpButton = false,
+      hideBar = false,
       ...meta
     } = {},
   } = {},
@@ -64,11 +65,13 @@ export default function App({
       <MarketingThemeProvider>
         <ToastManager />
         <Promotions onPromotionsLoaded={onPromotionsLoaded} />
+        {hideBar && (
+          <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
+        )}
         <SEO seo={pageData?.seo} siteMeta={siteMeta} />
         <LazyMotion features={loadFeatures} strict>
           {/* {navigation && <Header navigation={navigation} />} */}
           <Header
-            isPreviewPage={isPreviewPage}
             isPricingMenu={isPricingMenu}
             underlaidMenu={underlaidMenu}
             isStartPageHeader={isStartPageHeader}
@@ -81,7 +84,7 @@ export default function App({
             <Main {...pageData} {...meta} />
           </LayoutContainer>
           {/* {navigation && <Footer footer={footer} />} */}
-          <Footer slimFooter={slimFooter} isPreviewPage={isPreviewPage} />
+          <Footer slimFooter={slimFooter} />
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>
