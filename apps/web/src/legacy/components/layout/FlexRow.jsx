@@ -12,10 +12,10 @@ const OuterContainer = styled('div', {
   position: 'relative',
   overflowX: 'hidden',
   overflowY: 'visible !important',
-  paddingTop: '9rem',
+  marginTop: '9rem',
 
   '@media (max-width: 768px)': {
-    paddingTop: '3rem',
+    marginTop: '3rem',
   },
 })
 

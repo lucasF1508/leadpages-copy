@@ -15,6 +15,12 @@ module.exports = {
   reference: {
     conditions: {
       _type: {
+        cta: {
+          title: true,
+          overline: true,
+          content: true,
+          links: true,
+        },
         post: {
           categoryTitle: 'category->title',
           publishedDate: true,

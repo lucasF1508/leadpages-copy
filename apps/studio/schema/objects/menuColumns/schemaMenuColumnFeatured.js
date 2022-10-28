@@ -19,7 +19,7 @@ export const schemaMenuColumnFeatured = F.object({
     },
     prepare: ({ image, label = 'Featured Link', content }) => ({
       title: label,
-      subtitle: content ? P.richText(content) : '',
+      subtitle: P.richText({ content }),
       media: image || icon,
     }),
   },

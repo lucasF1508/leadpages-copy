@@ -50,7 +50,7 @@ export const colors = {
   backgroundContrast: '$mauve3',
   border: '$gray5',
   link: '$primary',
-  hover: '$purple8',
+  hover: '$indigoDark',
   focus: '$hover',
   active: '$hover',
   formFocus: '$brand',

@@ -61,7 +61,7 @@ const DesktopMenuContainer = styled('div', {
   height: '48px',
   paddingTop: '6px',
   position: 'relative',
-  maxWidth: '1200px',
+  maxWidth: '$extended',
   margin: 'auto',
 
   '*': {

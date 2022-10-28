@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { styled, keyframes } from '@design'
+import { blocksToText } from '@utils/blockContent'
+import Link from '@components/Link'
 // components
 // utilities
 import shouldDisplayVideo from '@legacy/utils/should-display-video'
@@ -48,6 +49,13 @@ const InnerContainer = styled('div', {
   '@media (min-width: 769px)': {
     mb: '36px',
   },
+})
+
+const LinksContainer = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '$2',
 })
 
 const ShapesLeft = styled('div', {
@@ -105,66 +113,12 @@ const TextContainer = styled('div', {
 })
 
 const Headline = styled('div', {
-  h1: {
-    fontFamily: 'Value Serif',
-    fontSize: '28px',
-    lineHeight: '34px',
-    letterSpacing: '0',
-    color: '$text',
-    mb: '2rem',
-
-    '@media  (min-width: 577px) and (max-width: 768px)': {
-      fontSize: '40px',
-      lineHeight: '48px',
-      letterSpacing: '-0.5px',
-    },
-
-    '@media  (min-width: 769px)': {
-      fontSize: '56px',
-      lineHeight: '60px',
-      letterSpacing: '0',
-    },
-  },
+  mb: '2rem',
 })
 
 const Caption = styled('div', {
-  fontFamily: 'Apercu Pro',
   c: '$textAlt',
   mb: '2rem',
-  fontSize: '16px',
-  lineHeight: '24px',
-  letterSpacing: '0',
-
-  '@media  (min-width: 577px)': {
-    fontSize: '18px',
-    lineHeight: '28px',
-  },
-})
-
-const StyledLink = styled('a', {
-  textDecoration: 'none',
-  cursor: 'pointer',
-})
-
-const Button = styled('button', {
-  width: '209px',
-  height: '48px',
-  br: '48px',
-  b: '3px solid $colors$primary',
-  bc: '$primary',
-  c: '$white',
-  fontFamily: 'Apercu Pro',
-  fontSize: '16px',
-  fontWeight: 500,
-  lineHeight: '28px',
-  textAlign: 'center',
-  transition: 'all 0.3s ease',
-  cursor: 'pointer',
-
-  '&:hover': {
-    bc: '$indigoDark',
-    border: '3px solid $colors$indigoDark',
-  },
 })
 
 const SVG = styled(Image, {})
@@ -334,9 +288,7 @@ const VideoButton = styled('button', {
   d: 'inline-flex',
   ai: 'center',
   height: '30px',
-  fontFamily: 'Apercu Pro',
-  fontSize: '14px',
-  fontWeight: '500',
+  type: 'buttonSm',
   cursor: 'pointer',
   transition: 'all 0.3s ease',
   color: '$primary',
@@ -354,7 +306,7 @@ const VideoButton = styled('button', {
   },
 })
 
-const HomepageHeader = () => {
+const HomepageHeader = ({ heading, content, links }) => {
   const [displayVideo, setDisplayVideo] = useState(false)
   const background = `url(${wavyLineVerticalLavenderSVG.src}) no-repeat`
 
@@ -364,19 +316,19 @@ const HomepageHeader = () => {
     <OuterContainer>
       <InnerContainer>
         <TextContainer>
-          <Headline>
-            <h1>Turn Clicks into Customers</h1>
-          </Headline>
-          <Caption>
-            Leadpages helps small businesses connect with an audience, collect
-            leads, and close sales. Easily build websites, landing pages,
-            pop-ups, alert bars, and beyond.
-          </Caption>
-          <Link href="/pricing" passHref>
-            <StyledLink data-qa-selector="hero-trial-link">
-              <Button>Start a Free Trial</Button>
-            </StyledLink>
-          </Link>
+          {heading && (
+            <Headline>
+              <h1>{heading}</h1>
+            </Headline>
+          )}
+          {content && <Caption>{blocksToText(content)}</Caption>}
+          {links && (
+            <LinksContainer>
+              {links.map(({ _key, ...link }) => (
+                <Link key={_key} {...link} />
+              ))}
+            </LinksContainer>
+          )}
         </TextContainer>
         <VideoBrowserContainer>
           <ShapesLeft>

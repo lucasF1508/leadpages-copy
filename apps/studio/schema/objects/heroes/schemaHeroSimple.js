@@ -10,7 +10,6 @@ export const schemaHeroSimple = F.hero({
       initialValue: {
         condition: 'none',
         linkStyle: 'button',
-        linkSize: 'large',
       },
     },
     media: false,

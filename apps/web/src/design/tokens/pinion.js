@@ -11,7 +11,7 @@ export const pinionTokens = {
     },
   ],
   '> div': {
-    maxWidth: '$content',
+    maxWidth: '$base',
     align: 'center',
   },
   variants: {
@@ -21,15 +21,33 @@ export const pinionTokens = {
           maxWidth: '$base',
         },
       },
-
       cardsBlock: {
         '> div': {
           maxWidth: '$base',
         },
       },
+      customerRotator: {
+        '@<m': {
+          px: 'unset',
+        },
+      },
       embed: {
         '> div': {
           maxWidth: '$base',
+        },
+      },
+      featureGrid: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
+      featuredTemplates: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
         },
       },
       imageSlider: {
@@ -41,6 +59,11 @@ export const pinionTokens = {
       logoGrid: {
         '> div': {
           maxWidth: '$base',
+        },
+      },
+      mediaWithText: {
+        '> div': {
+          maxWidth: '$extended',
         },
       },
       gallery: {
@@ -55,10 +78,16 @@ export const pinionTokens = {
           align: 'center',
         },
       },
-
       tableBlock: {
         '> div': {
           maxWidth: '$base',
+        },
+      },
+      testimonials: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
         },
       },
       video: {

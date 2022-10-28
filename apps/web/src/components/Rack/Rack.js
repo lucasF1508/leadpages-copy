@@ -4,7 +4,15 @@ import { AnimatePresence } from 'framer-motion'
 import Pinion from '@components/Pinion'
 import { RackComponentList } from '../Rack'
 
-const $Rack = styled('main', {})
+const $Rack = styled('main', {
+  [`
+    > section,
+    > section::before,
+    > section::after
+  `]: {
+    boxSizing: 'border-box',
+  },
+})
 
 const Rack = ({ components, children, ...props }) => {
   if (children) {

@@ -11,7 +11,6 @@ export const schemaHeroHome = F.hero({
       initialValue: {
         condition: 'none',
         linkStyle: 'button',
-        linkSize: 'large',
       },
     },
   },

@@ -37,16 +37,16 @@ export const array = (name, type = { of: [] }) => {
     })
   }
 
-  return (
-    filter(name, type) || {
-      [fieldName]: {
-        '...': true,
-        ...fields,
-        ...parsedFields,
-        ...mapConditions({
-          ...conditions,
-        }),
-      },
-    }
-  )
+  return filter(name, type) || ['string'].includes(field?.jsonType)
+    ? { [fieldName]: true }
+    : {
+        [fieldName]: {
+          '...': true,
+          ...fields,
+          ...parsedFields,
+          ...mapConditions({
+            ...conditions,
+          }),
+        },
+      }
 }

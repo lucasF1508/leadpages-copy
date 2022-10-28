@@ -37,16 +37,9 @@ export const hero = ({
         })
       : '',
     args.link
-      ? F.link({
-          name: 'link',
+      ? F.links({
           group: 'content',
-          initialValue: {
-            condition: 'none',
-          },
-          conditions: {
-            none: [],
-          },
-          ...args.link,
+          link: { ...args.link },
         })
       : '',
     args.media
@@ -75,6 +68,7 @@ export const hero = ({
     name,
     groups: [
       G.fieldGroup('content', { title: 'Content', default: true }),
+      G.fieldGroup('links', { title: 'Links' }),
       G.fieldGroup('media', { title: 'Media' }),
       G.fieldGroup('options', { title: 'Options' }),
       ...groups,
@@ -94,7 +88,7 @@ export const hero = ({
       prepare({ heading = props?.title || startCase(name), content, media }) {
         return {
           title: heading,
-          subtitle: content ? P.richText(content) : '',
+          subtitle: P.richText({ content }),
           media: media?.condition === 'image' && media.image,
         }
       },

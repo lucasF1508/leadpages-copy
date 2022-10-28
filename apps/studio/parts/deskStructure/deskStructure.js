@@ -42,6 +42,8 @@ export const deskStructure = () =>
       S.documentTypeListItem('testimonial').title('Testimonials'),
       S.documentTypeListItem('faq').title('FAQs'),
       S.documentTypeListItem('press'),
+      S.documentTypeListItem('alertBar').title('Alert Bars'),
+      S.documentTypeListItem('cta').title('CTAs'),
       S.divider(),
       S.documentTypeListItem('navigation').title('Navigation'),
       GB.singletonListItem('footer').icon(RiLayoutBottom2Line),

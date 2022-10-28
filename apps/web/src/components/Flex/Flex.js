@@ -6,13 +6,25 @@ import { styled } from '@design'
 
 const $Flex = styled('div', {
   d: 'flex',
-  ff: 'row wrap',
-  jc: 'flex-start',
-  ai: 'center',
   w: '100%',
+
   variants: {
     maxWidth: getMaxWidthUtil(),
     align: getAlignmentUtil(),
+    layout: {
+      horizontal: {
+        ff: 'row wrap',
+        jc: 'flex-start',
+        ai: 'center',
+      },
+      vertical: {
+        ff: 'column wrap',
+        ai: 'flex-start',
+      },
+    },
+  },
+  defaultVariants: {
+    layout: 'vertical',
   },
 })
 

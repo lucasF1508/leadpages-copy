@@ -3,26 +3,30 @@ export const link = {
   ff: 'row nowrap',
   jc: 'center',
   ai: 'center',
-  gap: '$2',
-  type: 'button',
+  gap: '$1',
   transition: '$link',
 
   variants: {
     linkStyle: {
       button: {
-        h: '$space$6',
-        minWidth: '11rem',
+        h: '$space$5',
+        minWidth: '$space$17',
         px: '$4',
         br: '$button',
         bc: '$primary',
         c: '$white',
+        border: '$thickButton',
+        type: 'button',
+        fontWeight: 500,
 
         '&:hover': {
           bc: '$hover',
+          borderColor: '$hover',
         },
 
         '&:active': {
           bc: '$active',
+          borderColor: '$active',
         },
 
         '&[disabled]': {
@@ -33,23 +37,27 @@ export const link = {
           },
         },
       },
-      buttonGhost: {
-        h: '$space$6',
-        minWidth: '11rem',
+      ghost: {
+        h: '$space$5',
+        minWidth: '$space$17',
         px: '$4',
         br: '$button',
         c: '$link',
         bc: 'transparent',
-        border: '$base',
+        border: '$thickGhost',
+        type: 'button',
+        fontWeight: 500,
 
         '&:hover': {
-          c: '$hover',
+          bc: '$hover',
           borderColor: '$hover',
+          c: '$white',
         },
 
         '&:active': {
-          c: '$active',
+          bc: '$active',
           borderColor: '$active',
+          c: '$white',
         },
 
         '&[disabled]': {
@@ -58,8 +66,7 @@ export const link = {
         },
       },
       text: {
-        d: 'flex',
-        gap: '$2',
+        d: 'inline-flex',
         px: 0,
         minWidth: 'unset',
         c: '$link',

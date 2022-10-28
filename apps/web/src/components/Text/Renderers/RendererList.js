@@ -8,6 +8,7 @@ const RendererList = {
   pageAnchor: dynamic(() => import('./AnchorRenderer')),
   socialLinks: dynamic(() => import('./SocialLinksRenderer')),
   table: dynamic(() => import('./TableRenderer')),
+  columns: dynamic(() => import('./ColumnsRenderer')),
 }
 
 export default RendererList

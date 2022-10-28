@@ -109,6 +109,9 @@ const globalStyles = globalCss({
   h6: {
     type: 'h6',
   },
+  p: {
+    c: '$textAlt',
+  },
   a: {
     position: 'relative',
     color: 'inherit',

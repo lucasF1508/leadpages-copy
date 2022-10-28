@@ -72,9 +72,10 @@ const Quote = styled('h4', {
   w: '90%',
   m: '2rem auto',
   c: '$textAlt',
-  fontSize: '22px',
   lineHeight: '36px',
   ta: 'center',
+  fontFamily: '$base',
+  fontWeight: '$normal',
 
   '@<s': {
     w: '100%',
@@ -125,6 +126,7 @@ const QuoteTestimonialsRotator = ({ testimonialsArray, variant }) => {
     speed: 500,
     touchThreshold: 50,
   }
+
   return (
     <OuterContainer variant={variant}>
       <InnerContainer>
@@ -139,7 +141,7 @@ const QuoteTestimonialsRotator = ({ testimonialsArray, variant }) => {
                 const { quote, image, clientName, clientTitle } = item
                 return (
                   <div key={index}>
-                    <Quote>{quote}</Quote>
+                    <Quote as="h6">{quote}</Quote>
                     <StyledImage image={image} />
                     <ClientName>{clientName}</ClientName>
                     <ClientTitle>{clientTitle}</ClientTitle>

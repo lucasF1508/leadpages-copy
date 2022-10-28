@@ -5,7 +5,7 @@ import NextLink from 'next/link'
 import { m as motion } from 'framer-motion'
 import { styled } from '@design'
 import { link as linkTokens } from '@design/tokens/link'
-import { FiArrowRight as InternalIcon } from '@react-icons/all-files/fi/FiArrowRight'
+import { FiChevronRight as InternalIcon } from '@react-icons/all-files/fi/FiChevronRight'
 import { FiDownload as DownloadIcon } from '@react-icons/all-files/fi/FiDownload'
 import { FiExternalLink as ExternalIcon } from '@react-icons/all-files/fi/FiExternalLink'
 import { FiMaximize2 as ModalIcon } from '@react-icons/all-files/fi/FiMaximize2'
@@ -14,11 +14,31 @@ import { MdPlayArrow as VideoIcon } from '@react-icons/all-files/md/MdPlayArrow'
 export const $Link = styled(motion.a, linkTokens)
 
 const Icons = {
-  internal: InternalIcon,
-  external: ExternalIcon,
-  download: DownloadIcon,
-  modal: ModalIcon,
-  video: VideoIcon,
+  internal: styled(InternalIcon, {
+    variants: {
+      linkStyle: {
+        button: {
+          h: 18,
+          w: 18,
+        },
+        ghost: {
+          h: 18,
+          w: 18,
+        },
+        text: {
+          h: 15,
+          w: 15,
+        },
+      },
+    },
+    defaultVariants: {
+      linkStyle: 'text',
+    },
+  }),
+  external: styled(ExternalIcon),
+  download: styled(DownloadIcon),
+  modal: styled(ModalIcon),
+  video: styled(VideoIcon),
 }
 
 const Video = dynamic(() => import('@components/Video'))
@@ -60,7 +80,7 @@ const Link = (
         <NextLink href={`${url}${hasHash && hash ? `#${hash}` : ''}`} passHref>
           <$Link ref={ref} hasIcon={hasIcon} {...props}>
             {children || label}
-            {hasIcon && <Icon />}
+            {hasIcon && <Icon linkStyle={props?.linkStyle} />}
           </$Link>
         </NextLink>
       )

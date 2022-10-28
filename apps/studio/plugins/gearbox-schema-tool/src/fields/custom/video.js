@@ -8,8 +8,14 @@ export const video = (args = {}) =>
         name: 'video',
         ...args,
       })
-    : F.url({
+    : F.array({
         name: 'video',
+        of: [
+          F.url({
+            name: 'url',
+            title: 'URL',
+          }),
+        ],
         ...args,
       })
 

@@ -7,15 +7,12 @@ export const textDefaultTokens = {
     & h5,
     & h6
   `]: {
-    mt: '$6',
+    mt: '$3',
     mb: '$3',
+    c: '$text',
 
     '&:first-child': {
       mt: 0,
-    },
-
-    '@>m': {
-      mt: '$8',
     },
   },
   [`
@@ -62,13 +59,13 @@ export const textDefaultTokens = {
       counterIncrement: 'list',
     },
   },
-  '& a': {
-    c: '$brand',
+  // '& a': {
+  //   c: '$brand',
 
-    '&[href^="tel"]': {
-      c: '$text',
-    },
-  },
+  //   '&[href^="tel"]': {
+  //     c: '$text',
+  //   },
+  // },
 }
 
 export default textDefaultTokens

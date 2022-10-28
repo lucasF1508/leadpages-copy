@@ -13,26 +13,41 @@ export const schemaMediaWithText = F.field('object', {
         title: 'Content Alignment',
         initialValue: 'right',
       }),
+      F.array({
+        name: 'linkDecorators',
+        options: {
+          list: [
+            { title: 'Arrows', value: 'arrows' },
+            { title: 'Checkmarks', value: 'checkmarks' },
+          ],
+        },
+        of: [{ type: 'string' }],
+      }),
     ]),
     ...G.group('content', [
+      F.field('blockContentHeadline', { name: 'content' }),
+      F.array({
+        name: 'links',
+        of: [F.link()],
+      }),
+    ]),
+    ...G.group('media', [
       F.field('media'),
-      F.string({ name: 'heading' }),
-      F.blockContent({ name: 'content', title: 'Content' }),
+      F.image({ name: 'backgroundImage' }),
     ]),
   ],
   preview: {
     select: {
-      heading: 'heading',
       content: 'content',
       media: 'media',
     },
-    prepare: ({ heading, content = [], media = {} }) => {
+    prepare: ({ content = [], media = {} }) => {
       const { condition, image } = media
-      const subtitle = P.richText(content) || ''
+      const [heading, ...subtitle] = content
 
       return {
-        title: heading || subtitle,
-        subtitle: heading ? subtitle : '',
+        title: P.richText({ content: [heading], title: 'Media with Text' }),
+        subtitle: P.richText({ content: subtitle }),
         media: condition === 'image' ? image : videoIcon,
       }
     },

@@ -30,7 +30,7 @@ const InnerContainer = styled('div', {
   },
 })
 
-const Supertitle = styled('div', {
+export const Supertitle = styled('div', {
   fontFamily: 'Space Mono',
   fontSize: '12px',
   letterSpacing: '2px',
@@ -42,7 +42,7 @@ const Supertitle = styled('div', {
   c: '$text',
 })
 
-const AlternateSupertitle = styled('div', {
+export const AlternateSupertitle = styled('div', {
   fontFamily: 'Apercu Pro',
   fontSize: '18px',
   letterSpacing: 0,
@@ -54,7 +54,7 @@ const AlternateSupertitle = styled('div', {
   c: '$textAlt',
 })
 
-const Title = styled('div', {
+export const Title = styled('div', {
   fontFamily: 'Value Serif',
   fontSize: '2.5rem',
   letterSpacing: '-0.03125rem',
@@ -80,12 +80,12 @@ const Title = styled('div', {
   },
 })
 
-const Subtitle = styled(Title, {
+export const Subtitle = styled(Title, {
   fontSize: '2rem',
   c: '$text',
 })
 
-const Caption = styled('div', {
+export const Caption = styled('div', {
   fontFamily: 'Apercu Pro',
   fontSize: '18px',
   lineHeight: '28px',
@@ -250,4 +250,3 @@ HeadlineSection.propTypes = {
 }
 
 export default HeadlineSection
-export { Caption }

@@ -1,6 +1,11 @@
 import MultiReferences from '../components/MultiReferences'
 
-export const multiReferenceSchema = ({ name, title, types: orgTypes }) => {
+export const multiReferenceSchema = ({
+  name,
+  title,
+  types: orgTypes,
+  options = {},
+}) => {
   const types = Array.isArray(orgTypes) ? orgTypes : [orgTypes]
 
   return {
@@ -10,13 +15,12 @@ export const multiReferenceSchema = ({ name, title, types: orgTypes }) => {
     inputComponent: MultiReferences,
     options: {
       referenceTypes: types,
+      ...options,
     },
     of: [
       {
         type: 'reference',
-        to: types.map((type) => {
-          return { type }
-        }),
+        to: types.map((type) => ({ type })),
       },
     ],
   }
