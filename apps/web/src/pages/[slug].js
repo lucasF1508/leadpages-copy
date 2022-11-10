@@ -14,12 +14,24 @@ export async function getStaticProps(context) {
     })
   )
 
+  // TODO: Add this to shape data
+  const [pageData] = (data?.length && data) || []
+  const { hero: heroes, options: pageOptions } = pageData || {}
+  const [hero] = heroes || []
+
+  const options = {
+    ...pageData?.options,
+    underlaidMenu: !!hero?.darkBackground || pageOptions?.underlaidMenu || null,
+    darkHero: !!hero?.darkBackground,
+  }
+
   return {
     props: {
-      data,
+      data: data && !data[0] ? [{}] : data,
       queries,
       global,
       preview,
+      options,
     },
   }
 }

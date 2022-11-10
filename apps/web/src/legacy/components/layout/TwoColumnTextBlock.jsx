@@ -151,12 +151,12 @@ const TwoColumnTextBlock = ({ textBlockArray }) => (
 TwoColumnTextBlock.propTypes = {
   textBlockArray: PropTypes.arrayOf(
     PropTypes.shape({
-      heading: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      linkType: PropTypes.string.isRequired,
-      linkText: PropTypes.string.isRequired,
-      linkRoute: PropTypes.string.isRequired,
-      linkAltText: PropTypes.string.isRequired,
+      heading: PropTypes.string,
+      text: PropTypes.string,
+      linkType: PropTypes.string,
+      linkText: PropTypes.string,
+      linkRoute: PropTypes.string,
+      linkAltText: PropTypes.string,
     })
   ).isRequired,
 }

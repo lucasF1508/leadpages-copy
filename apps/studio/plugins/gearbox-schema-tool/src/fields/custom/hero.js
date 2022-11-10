@@ -26,11 +26,8 @@ export const hero = ({
     args.label
       ? F.string({ name: 'label', group: 'content', ...args.label })
       : '',
-    args.heading
-      ? F.string({ name: 'heading', group: 'content', ...args.heading })
-      : '',
     args.content
-      ? F.field('blockContentSimple', {
+      ? F.field('blockContentHero', {
           name: 'content',
           group: 'content',
           ...args.content,
@@ -54,7 +51,7 @@ export const hero = ({
         })
       : '',
     args.align
-      ? F.radio(['left', 'center', 'right'], {
+      ? F.radio(['left', 'right'], {
           name: 'align',
           title: 'Content Alignment',
           initialValue: 'left',

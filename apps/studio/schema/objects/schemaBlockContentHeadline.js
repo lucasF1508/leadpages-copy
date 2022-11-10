@@ -1,7 +1,7 @@
 import React from 'react'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 
-const TitleStyle = (props) => (
+export const TitleStyle = (props) => (
   <span
     style={{
       fontSize: '2.5rem',
@@ -14,7 +14,7 @@ const TitleStyle = (props) => (
   </span>
 )
 
-const SubtitleStyle = (props) => (
+export const SubtitleStyle = (props) => (
   <span
     style={{
       fontSize: '2rem',
@@ -27,7 +27,7 @@ const SubtitleStyle = (props) => (
   </span>
 )
 
-const NormalStyle = (props) => (
+export const NormalStyle = (props) => (
   <span
     style={{
       fontSize: '18px',
@@ -40,14 +40,14 @@ const NormalStyle = (props) => (
   </span>
 )
 
-const OverlineStyle = (props) => (
+export const OverlineStyle = (props) => (
   <span
     style={{
       fontFamily: 'Space Mono',
       fontSize: '12px',
       letterSpacing: '2px',
       lineHeight: '18px',
-      tt: 'uppercase',
+      textTransform: 'uppercase',
       opacity: 0.7,
       mb: '0.5rem',
       c: '$text',

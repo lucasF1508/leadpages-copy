@@ -68,6 +68,7 @@ export const colors = {
   gradientBrand: 'linear-gradient(12deg, $colors$primary, $colors$secondary)',
   gradientBackgroundOpacity:
     'linear-gradient(to right, $colors$background, transparent)',
+  dropdown: '$white',
 }
 
 export default colors

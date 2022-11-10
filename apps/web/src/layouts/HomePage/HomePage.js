@@ -1,6 +1,4 @@
 import React from 'react'
-
-// Legacy components
 import dynamic from 'next/dynamic'
 import Hero from '@components/Hero'
 import CTA from '@components/Cta'

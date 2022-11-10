@@ -71,30 +71,16 @@ const ArrowSVG = styled(ArrowRight, {
   display: 'block',
 })
 
-const NavigationArrows = ({ onClick, variant, ...props }) => {
-  const [topOffset, setTopOffset] = useState(0)
-
-  useEffect(() => {
-    const slideImageEl = document
-      .getElementById('slide-image')
-      .getBoundingClientRect()
-    const arrowButtonEl = document
-      .getElementById('arrow-button')
-      .getBoundingClientRect()
-    setTopOffset(slideImageEl.height / 2 - arrowButtonEl.height / 2)
-  }, [])
-
-  return (
-    <ArrowButton
-      {...props}
-      id="arrow-button"
-      className={variant}
-      onClick={onClick}
-    >
-      <ArrowSVG />
-    </ArrowButton>
-  )
-}
+const NavigationArrows = ({ onClick, variant, ...props }) => (
+  <ArrowButton
+    {...props}
+    id="arrow-button"
+    className={variant}
+    onClick={onClick}
+  >
+    <ArrowSVG />
+  </ArrowButton>
+)
 
 NavigationArrows.propTypes = {
   variant: PropTypes.string.isRequired,

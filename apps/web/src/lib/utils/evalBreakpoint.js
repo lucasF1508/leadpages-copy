@@ -11,7 +11,7 @@ export const evalBreakpoint = (breakpoint) => {
   const statement = `${currentValue} ${sign} ${value}`
 
   // Only using eval because of sanitization. Don't use eval.
-  return /^\d+\s([<==>])\s\d+$/.test(statement) ? eval(statement) : false // eslint-disable-line no-eval
+  return /^\d+\s(==|>=?|<=?)\s\d+$/.test(statement) ? eval(statement) : false // eslint-disable-line no-eval
 }
 
 export default evalBreakpoint

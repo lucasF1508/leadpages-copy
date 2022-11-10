@@ -18,7 +18,7 @@ export * from './schemaTextColumn'
 export * from './schemaVideo'
 
 // Home components
-export * from './home/schemaFeatureGrid'
-export * from './home/schemaCustomerRotator'
-export * from './home/schemaHeadlineSection'
-export * from './home/schemaFeaturedTemplates'
+export * from './schemaFeatureGrid'
+export * from './schemaCustomerRotator'
+export * from './schemaHeadlineSection'
+export * from './schemaFeaturedTemplates'

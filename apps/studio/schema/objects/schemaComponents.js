@@ -1,9 +1,9 @@
 import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
-import * as allComponentsSchema from '../components'
+import * as pageComponentsSchema from '../components/page'
 
 const componentsSchema = getTemplateSchemas({
-  schema: allComponentsSchema,
+  schema: pageComponentsSchema,
 })
 
 export const schemaComponents = F.components(componentsSchema)

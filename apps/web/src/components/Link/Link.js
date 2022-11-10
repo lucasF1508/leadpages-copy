@@ -78,7 +78,7 @@ const Link = (
     case 'internal':
       return (
         <NextLink href={`${url}${hasHash && hash ? `#${hash}` : ''}`} passHref>
-          <$Link ref={ref} hasIcon={hasIcon} {...props}>
+          <$Link ref={ref} {...props}>
             {children || label}
             {hasIcon && <Icon linkStyle={props?.linkStyle} />}
           </$Link>
@@ -93,7 +93,6 @@ const Link = (
           href={url}
           target={target ? '_blank' : undefined}
           rel={rel}
-          hasIcon={hasIcon}
           {...props}
         >
           {children || label}
@@ -109,7 +108,6 @@ const Link = (
             modalKey={modalKey}
             component={$Link}
             rel={rel}
-            hasIcon={hasIcon}
             {...props}
           >
             {children || label}
@@ -129,7 +127,6 @@ const Link = (
             modalKey={modalKey || 'video'}
             component={$Link}
             rel={rel}
-            hasIcon={hasIcon}
             {...props}
           >
             {children || label}

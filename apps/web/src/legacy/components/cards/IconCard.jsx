@@ -239,18 +239,19 @@ IconCard.defaultProps = {
   description: '',
   itemsPerRow: 4,
   link: null,
+  icon: undefined,
 }
 
 IconCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  icon: RPIcon.isRequired,
+  icon: RPIcon,
   alt: PropTypes.string,
   link: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    route: PropTypes.string.isRequired,
-    altText: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    label: PropTypes.string,
+    route: PropTypes.string,
+    altText: PropTypes.string,
   }),
   itemsPerRow: PropTypes.number,
 }

@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import Image from '@components/Image'
 import { styled } from '@design'
-import { RPImage } from '@legacy/constants/types'
 // components
 import PaginationDots from '@legacy/components/rotators/PaginationDots'
 import ReactSlick from '@legacy/components/rotators/ReactSlick_Base'
 import NavigationArrows from '@components/Rotator/NavigationArrows'
 // images
-import QuotemarkSVG_Gray from '@legacy/assets/images/global/quote-mark_gray_62px@2x.svg'
-import QuotemarkSVG_Tan from '@legacy/assets/images/global/quote-mark_tan_62px@2x.svg'
+import QuotemarkSvgGray from '@legacy/assets/images/global/quote-mark_gray_62px@2x.svg'
+import QuotemarkSvgTan from '@legacy/assets/images/global/quote-mark_tan_62px@2x.svg'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -110,19 +108,18 @@ const ClientTitle = styled('p', {
   ta: 'center',
 })
 
-const TestimonialRotator = ({ testimonials = [], variant, ...props }) => {
+const TestimonialRotator = ({ testimonials = [], variant = 'tan' }) => {
   const [loadSlick, setLoadSlick] = useState(false)
   useEffect(() => setLoadSlick(true), [])
+
+  const hasMultiple = testimonials.length > 1
 
   const settings = {
     appendDots: (dots) => <PaginationDots dots={dots} margin="1rem 0 0 0" />,
     arrows: true,
-    autoplay: testimonials.length > 1,
     autoplaySpeed: 10000,
     className: 'item',
-    draggable: testimonials.length > 1,
     focusOnSelect: true,
-    infinite: testimonials.length > 1,
     lazyload: true,
     pauseOnFocus: true,
     slidesToScroll: 1,
@@ -131,6 +128,9 @@ const TestimonialRotator = ({ testimonials = [], variant, ...props }) => {
     touchThreshold: 50,
     nextArrow: <NavigationArrows color="white" variant="arrow-right" />,
     prevArrow: <NavigationArrows color="white" variant="arrow-left" />,
+    autoplay: hasMultiple,
+    draggable: hasMultiple,
+    infinite: hasMultiple,
   }
 
   return (
@@ -138,7 +138,7 @@ const TestimonialRotator = ({ testimonials = [], variant, ...props }) => {
       <InnerContainer>
         <QuotemarkImage
           variant={variant}
-          image={variant === 'gray' ? QuotemarkSVG_Gray : QuotemarkSVG_Tan}
+          image={variant === 'gray' ? QuotemarkSvgGray : QuotemarkSvgTan}
         />
         <RotatorContainer>
           {loadSlick && (
@@ -160,22 +160,6 @@ const TestimonialRotator = ({ testimonials = [], variant, ...props }) => {
       </InnerContainer>
     </OuterContainer>
   )
-}
-
-TestimonialRotator.defaultProps = {
-  variant: 'tan',
-}
-
-TestimonialRotator.propTypes = {
-  testimonials: PropTypes.arrayOf(
-    PropTypes.shape({
-      quote: PropTypes.string.isRequired,
-      image: RPImage.isRequired,
-      clientName: PropTypes.string.isRequired,
-      clientTitle: PropTypes.string.isRequired,
-    })
-  ),
-  variant: PropTypes.oneOf(['gray', 'tan']),
 }
 
 export default TestimonialRotator

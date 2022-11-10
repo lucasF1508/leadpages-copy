@@ -6,7 +6,11 @@ const Media = dynamic(() => import('@components/Media'))
 
 const $MediaContainer = styled('div', {
   position: 'relative',
-  my: '$5',
+  my: '$2',
+
+  '@>s': {
+    my: '$5',
+  },
 
   '&:first-child': { mt: '0' },
   '&:last-child': { mb: '0' },

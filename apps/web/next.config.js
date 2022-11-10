@@ -1,6 +1,7 @@
 const path = require('path')
 const findUp = require('find-up')
 const adminRedirects = require('redirects')
+const { filterRoutesFromSanity } = require('directoryToRoutes')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
@@ -118,19 +119,35 @@ module.exports = withBundleAnalyzer({
       ...redirects,
     ]
   },
-  rewrites: async () => [
-    {
-      source: '/studio/:path*',
-      destination:
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:3333/studio/:path*'
-          : '/studio/index.html',
-    },
-    {
-      source: '/home',
-      destination: '/',
-    },
-  ],
+  rewrites: async () => {
+    const incrementalPaths = await filterRoutesFromSanity({
+      directory: './src/pages/_legacy',
+      projectId: SANITY_STUDIO_API_PROJECT_ID,
+      dataset: SANITY_STUDIO_API_DATASET,
+    })
+
+    if (incrementalPaths.length) {
+      console.log(`Rewriting ${incrementalPaths.length} incremental paths.`)
+    }
+
+    return [
+      {
+        source: '/studio/:path*',
+        destination:
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3333/studio/:path*'
+            : '/studio/index.html',
+      },
+      {
+        source: '/home',
+        destination: '/',
+      },
+      ...incrementalPaths.map((path) => ({
+        source: path,
+        destination: `/_legacy${path}`,
+      })),
+    ]
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

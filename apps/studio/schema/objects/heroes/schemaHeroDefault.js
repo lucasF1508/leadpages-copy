@@ -15,29 +15,21 @@ export const schemaHeroDefault = F.hero({
     },
   },
   fields: [
-    F.string({
-      name: 'spacing',
-      options: {
-        list: [
-          {
-            title: 'Loose',
-            value: 'loose',
-          },
-          {
-            title: 'Tight',
-            value: 'tight',
-          },
-        ],
-      },
-      initialValue: 'tight',
-      group: 'options',
-    }),
-    F.radio(['top', 'center', 'bottom'], {
+    F.radio(['center', 'bottom', 'right'], {
       name: 'imageAlign',
       group: 'options',
-      initialValue: 'bottom',
-      hidden: ({ parent }) => parent?.spacing !== 'tight',
+      initialValue: 'center',
     }),
-    F.checkbox({ name: 'hasRadialGradients', group: 'options' }),
+    F.radio(['small', 'medium', 'large'], {
+      name: 'size',
+      title: 'Hero Size',
+      group: 'options',
+      initialValue: 'medium',
+    }),
+    F.checkbox({ name: 'darkBackground', group: 'options' }),
+    F.image({
+      group: 'media',
+      name: 'backgroundImage',
+    }),
   ],
 })

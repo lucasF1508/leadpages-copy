@@ -30,7 +30,11 @@ export const schemaPageHome = {
     ...G.group('content', [
       F.field('hero'),
       F.components(componentsSchema),
-      F.reference('cta', { name: 'cta', title: 'Call to Action' }),
+      F.reference('cta', {
+        name: 'cta',
+        title: 'Call to Action',
+        description: 'Leave blank to omit page call to action.',
+      }),
     ]),
     ...G.group('seo', [F.seo()]),
   ],

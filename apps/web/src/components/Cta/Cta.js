@@ -288,7 +288,7 @@ ReadyToGrow.propTypes = {
   headlineFontSize: PropTypes.string,
   mobileHeadlineFontSize: PropTypes.string,
   mobileHeadlineLineHeight: PropTypes.string,
-  content: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   buttonText: PropTypes.string,
   subText: PropTypes.string,
   showCTA: PropTypes.bool,

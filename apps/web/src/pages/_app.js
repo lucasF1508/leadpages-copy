@@ -27,31 +27,28 @@ export const AppContext = React.createContext()
 
 export default function App({
   Component: Main,
-  pageProps: {
-    data = [{}],
-    queries,
-    global = {},
-    preview,
-    options: {
-      slimFooter,
-      isPreviewPage,
-      onPromotionsLoaded,
-      isPricingMenu = false,
-      underlaidMenu = false,
-      isStartPageHeader = false,
-      scrollTarget = '',
-      noLogin = false,
-      headerBkgColor = null,
-      hideSignUpButton = false,
-      hideBar = false,
-      ...meta
-    } = {},
-  } = {},
+  pageProps: { data = [{}], queries, global = {}, preview, options = {} } = {},
 }) {
   globalStyles()
   useGoogleTagManager()
   useResizeEnd()
   useFocusOutlineOnTab()
+
+  const {
+    slimFooter,
+    isPreviewPage,
+    onPromotionsLoaded,
+    isPricingMenu = false,
+    underlaidMenu = false,
+    isStartPageHeader = false,
+    scrollTarget = '',
+    noLogin = false,
+    headerBkgColor = null,
+    hideSignUpButton = false,
+    hideBar = false,
+    darkHero = false,
+    ...meta
+  } = options
 
   // Promotions loading
   const [hasLoaded, setHasLoaded] = useState()
@@ -61,7 +58,9 @@ export default function App({
   const [{ seo, ...pageData }] = preview ? previewData : data
 
   return (
-    <AppContext.Provider value={{ ...siteMeta, hasLoaded, setHasLoaded }}>
+    <AppContext.Provider
+      value={{ ...siteMeta, hasLoaded, setHasLoaded, options }}
+    >
       <MarketingThemeProvider>
         <ToastManager />
         <Promotions onPromotionsLoaded={onPromotionsLoaded} />
@@ -79,6 +78,7 @@ export default function App({
             noLogin={noLogin}
             headerBkgColor={headerBkgColor}
             hideSignUpButton={hideSignUpButton}
+            darkHero={darkHero}
           />
           <LayoutContainer>
             <Main {...pageData} {...meta} />

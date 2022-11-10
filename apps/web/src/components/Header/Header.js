@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from '@components/Link'
 import { Link as ScrollLink } from 'react-scroll'
-import { styled } from '@design'
+import { styled, theme, darkTheme } from '@design'
 import { withRouter } from 'next/router'
 // images
 import fullLogoSVG from '@legacy/assets/images/global/leadpages-wordmark_large.svg'
@@ -19,6 +19,8 @@ const HeaderContainer = styled('header', {
   background: 'transparent',
   z: 1501,
   height: `${HEADER_HEIGHT}px`,
+  box: [{ property: 'px' }],
+  boxSizing: 'border-box',
 
   '&:hover': {
     background: '$white',
@@ -79,7 +81,6 @@ const DesktopMenuContainer = styled('div', {
 
 const MenuContainer = styled('div', {
   position: 'relative',
-  paddingLeft: '1.5rem',
 
   '&.start-page-header': {
     '@media (max-width: 577px)': {
@@ -96,10 +97,6 @@ const LoginSignUpContainer = styled('div', {
   height: '48px',
   display: 'flex',
   alignItems: 'center',
-
-  '@media (max-width: 768px)': {
-    paddingRight: '1.5rem',
-  },
 
   '&.start-page-header': {
     '@media (max-width: 577px)': {
@@ -148,9 +145,8 @@ const LinksContainer = styled('div', {
 const StyledButtonLink = styled(Link, {
   textDecoration: 'none',
   whiteSpace: 'nowrap',
-  color: 'inherit',
+  color: '$text',
   paddingBottom: '0.5rem',
-  marginRight: '16px',
   fontFamily: `'Apercu Pro'`,
   fontSize: '14px',
   letterSpacing: '-0.1px',
@@ -165,7 +161,7 @@ const StyledButtonLink = styled(Link, {
 const OutboundButtonLink = styled('a', {
   textDecoration: 'none',
   whiteSpace: 'nowrap',
-  color: 'inherit',
+  color: '$text',
   paddingBottom: '0.5rem',
   marginRight: '16px',
   fontFamily: `'Apercu Pro'`,
@@ -181,7 +177,7 @@ const OutboundButtonLink = styled('a', {
 const StyledLink = styled(Link, {
   textDecoration: 'none',
   whiteSpace: 'nowrap',
-  color: 'inherit',
+  color: '$text',
   paddingBottom: '0.5rem',
   marginRight: '16px',
   fontFamily: `'Apercu Pro'`,
@@ -211,7 +207,7 @@ const StyledLink = styled(Link, {
 const OutboundLink = styled(Link, {
   textDecoration: 'none',
   whiteSpace: 'nowrap',
-  color: 'inherit',
+  color: '$text',
   paddingBottom: '0.5rem',
   marginRight: '16px',
   fontFamily: `'Apercu Pro'`,
@@ -353,6 +349,11 @@ const FullLogoContainer = styled('img', {
     display: 'none',
   },
 
+  [`.${darkTheme} &`]: {
+    filter: `invert(100%) sepia(98%) saturate(8%) hue-rotate(200deg)
+      brightness(103%) contrast(100%)`,
+  },
+
   '&.start-page-header': {
     filter: `invert(100%) sepia(98%) saturate(8%) hue-rotate(200deg)
       brightness(103%) contrast(100%)`,
@@ -384,6 +385,11 @@ const LogoIconContainer = styled('img', {
     display: 'none',
   },
 
+  [`.${darkTheme} &`]: {
+    filter: `invert(100%) sepia(98%) saturate(8%) hue-rotate(200deg)
+      brightness(103%) contrast(100%)`,
+  },
+
   '&:hover': {
     WebkitFilter: `invert(29%) sepia(83%) saturate(6122%) hue-rotate(247deg)
       brightness(101%) contrast(103%)`,
@@ -410,7 +416,7 @@ const HeaderSubMenu = styled('div', {
 })
 
 const ProductSubMenuContainer = styled('div', {
-  background: '$white',
+  background: '$dropdown',
   marginLeft: '190px',
   maxWidth: '165px',
   boxShadow: `0 6px 12px 0 rgba(15, 12, 9, 0.3),
@@ -427,7 +433,7 @@ const ProductSubMenuContainer = styled('div', {
 })
 
 const ResourcesSubMenuContainer = styled('div', {
-  background: '$white',
+  background: '$dropdown',
   marginLeft: '390px',
   maxWidth: '165px',
   boxShadow: `0 6px 12px 0 rgba(15, 12, 9, 0.3),
@@ -604,11 +610,14 @@ class Header extends React.Component {
       headerBkgColor,
       isPreviewPage,
       router,
+      darkHero,
     } = this.props
 
     if (isPreviewPage) return null
 
     const classScrolled = isScrolled ? 'scrolled' : ''
+    const classDark = darkHero ? darkTheme : ''
+    const classStartPage = isStartPageHeader ? 'start-page-header' : ''
     const productMenuOpen = mouseOverProductLink || mouseOverProductMenu
     const resourcesMenuOpen = mouseOverResourcesLink || mouseOverResourcesMenu
     const path = router.asPath
@@ -767,7 +776,7 @@ class Header extends React.Component {
     return (
       <HeaderContainer
         scrolled={isScrolled.toString()}
-        className={classScrolled}
+        className={`${classScrolled} ${!isScrolled && classDark}`}
         isStartPageHeader={isStartPageHeader}
         underlaidMenu={underlaidMenu}
         id="siteheader"
@@ -781,9 +790,7 @@ class Header extends React.Component {
         }
       >
         <DesktopMenuContainer>
-          <MenuContainer
-            className={isStartPageHeader ? 'start-page-header' : ''}
-          >
+          <MenuContainer className={classStartPage}>
             <Link
               css={{ display: 'inline' }}
               condition="internal"
@@ -932,6 +939,7 @@ class Header extends React.Component {
             </SignUpContainer>
 
             <NavDrawer
+              className={theme}
               scrollTarget={scrollTarget}
               isPricingMenu={isPricingMenu}
               isStartPageHeader={isStartPageHeader}
@@ -957,7 +965,7 @@ class Header extends React.Component {
           )}
 
           {productMenuOpen && (
-            <HeaderSubMenu>
+            <HeaderSubMenu className={theme}>
               <ProductSubMenuContainer
                 onMouseEnter={this.enterProductMenu}
                 onMouseLeave={this.leaveProductMenu}
@@ -1000,7 +1008,7 @@ class Header extends React.Component {
           )}
 
           {resourcesMenuOpen && (
-            <HeaderSubMenu>
+            <HeaderSubMenu className={theme}>
               <ResourcesSubMenuContainer
                 onMouseEnter={this.enterResourcesMenu}
                 onMouseLeave={this.leaveResourcesMenu}

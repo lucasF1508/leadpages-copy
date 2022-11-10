@@ -1,18 +1,18 @@
 const typeSizes = {
   '9xl': {
-    fontSize: '3.75rem', // 60px
+    fontSize: '4rem', // 64px
   },
   '8xl': {
     fontSize: '3.5rem', // 56px
   },
   '7xl': {
-    fontSize: '2.5rem', // 40px
+    fontSize: '2.875rem', // 46px
   },
   '6xl': {
-    fontSize: '2rem', // 32px
+    fontSize: '2.375rem', // 38px
   },
   '5xl': {
-    fontSize: '1.875rem', // 30px
+    fontSize: '2rem', // 32px
   },
   '4xl': {
     fontSize: '1.75rem', // 28px
@@ -50,7 +50,7 @@ export const type = {
     overline: '$fonts$spaceMono',
   },
   lineHeights: {
-    s: 1.07,
+    s: 1.1,
     m: 1.2,
     l: 1.5,
     xl: 2,
@@ -95,19 +95,19 @@ export const type = {
       lh: '$lineHeights$m',
     },
     h1: {
-      ...typeSizes['4xl'],
+      ...typeSizes['5xl'],
       '@>s': typeSizes['7xl'],
       '@>m': typeSizes['8xl'],
       lh: '$lineHeights$m',
     },
     h2: {
-      ...typeSizes['3xl'],
+      ...typeSizes['4xl'],
       '@>s': typeSizes['5xl'],
       '@>m': typeSizes['7xl'],
       lh: '$lineHeights$m',
     },
     h3: {
-      ...typeSizes.xl,
+      ...typeSizes['3xl'],
       '@>s': typeSizes['4xl'],
       '@>m': typeSizes['5xl'],
       lh: '$lineHeights$m',

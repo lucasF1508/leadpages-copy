@@ -7,17 +7,33 @@ import Text from '@components/Text'
 import Link from '@components/Link'
 import Flex from '@components/Flex'
 import Checkmark from '@components/Svgs/Checkmark'
+import isObject from 'lodash/isObject'
 
 export const $MediaWithText = styled('div', {
   d: 'flex',
-  gap: 'calc($sizes$cols1 + $grid$x)',
+  gap: '$5',
 
   variants: {
+    priority: {},
     layout: {
-      horizontal: { ff: 'row nowrap', ai: 'center', jc: 'space-between' },
+      horizontal: {
+        ff: 'row nowrap',
+        ai: 'center',
+        jc: 'space-between',
+        gap: 'calc($sizes$cols1 + $grid$x)',
+      },
       vertical: { ff: 'column nowrap', ai: 'flex-start' },
     },
   },
+  compoundVariants: [
+    {
+      layout: 'vertical',
+      priority: 'content',
+      css: {
+        ai: 'center',
+      },
+    },
+  ],
 })
 
 export const $MediaWithTextContent = styled('div', {
@@ -27,12 +43,54 @@ export const $MediaWithTextContent = styled('div', {
   gap: '$cols1',
 
   variants: {
-    align: { left: { '@>m': { order: -1 } } },
+    priority: {},
+    align: {},
     layout: {
-      horizontal: { f: '1 1 $sizes$cols4' },
+      horizontal: { f: '1 0 $sizes$cols4' },
       vertical: { f: '0 1 auto' },
     },
   },
+  compoundVariants: [
+    {
+      layout: 'horizontal',
+      align: 'left',
+      css: {
+        order: -1,
+      },
+    },
+    {
+      layout: 'horizontal',
+      priority: 'content',
+      css: {
+        f: '1 0 $sizes$cols5',
+        ta: 'left',
+      },
+    },
+    {
+      layout: 'vertical',
+      priority: 'content',
+      css: {
+        ta: 'center',
+        order: -1,
+      },
+    },
+    {
+      layout: 'horizontal',
+      priority: 'content',
+      align: 'right',
+      css: {
+        order: 1,
+      },
+    },
+    {
+      layout: 'vertical',
+      priority: 'content',
+      align: 'right',
+      css: {
+        order: -1,
+      },
+    },
+  ],
   defaultVariants: {
     layout: 'horizontal',
   },
@@ -43,6 +101,7 @@ export const $MediaWithTextMedia = styled('div', {
   position: 'relative',
 
   variants: {
+    priority: {},
     align: { left: { order: -1 } },
     layout: {
       horizontal: { f: '1 1 $sizes$cols7' },
@@ -54,10 +113,21 @@ export const $MediaWithTextMedia = styled('div', {
       },
     },
   },
+  compoundVariants: [
+    {
+      layout: 'horizontal',
+      priority: 'content',
+      css: {
+        f: '1 1 $sizes$cols6',
+      },
+    },
+  ],
   defaultVariants: {
     layout: 'horizontal',
   },
 })
+
+export const $Media = styled(Media, {})
 
 const $BackgroundImage = styled(Image, {
   position: 'absolute',
@@ -67,17 +137,14 @@ const $BackgroundImage = styled(Image, {
   right: 0,
 })
 
-const $LinkTextWrapper = styled('span', {
-  transition: 'all 0.3s ease',
-  borderBottom: '2px solid transparent',
-})
+const $LinkTextWrapper = styled('span', {})
 
 const $Checkmark = styled(Checkmark, {
   color: '$text',
   transition: 'all 0.3s ease',
 })
 
-const $Link = styled(Link, {
+export const $Link = styled(Link, {
   '&[class*="linkStyle-text"]': {
     color: '$textAlt',
     type: 'button',
@@ -85,24 +152,62 @@ const $Link = styled(Link, {
     fontWeight: 500,
     mb: '$2',
 
+    '&:last-child': {
+      mb: 0,
+    },
+
     '> svg': {
       position: 'relative',
       top: -1,
     },
-  },
 
-  '&last-child': {
-    mb: 0,
-  },
+    '> span': {
+      transition: 'all 0.3s ease',
+      borderBottom: '2px solid transparent',
+    },
 
-  [`&:hover ${$LinkTextWrapper}`]: {
-    color: '$primary',
-    borderBottom: '2px solid $colors$primary',
-  },
+    '&:hover > span': {
+      color: '$primary',
+      borderBottom: '2px solid $colors$primary',
+    },
 
-  [`&:hover ${$Checkmark}`]: {
-    color: '$primary',
+    [`&:hover ${$Checkmark}`]: {
+      color: '$primary',
+    },
   },
+})
+
+const $LinkContainer = styled(Flex, {
+  mt: '$3',
+
+  variants: {
+    priority: {
+      content: {
+        gap: '$1_5',
+      },
+    },
+    layout: {},
+  },
+  compoundVariants: [
+    {
+      layout: 'horizontal',
+      priority: 'content',
+      css: {
+        ff: 'row wrap',
+        jc: 'flex-start',
+        ai: 'center',
+      },
+    },
+    {
+      layout: 'vertical',
+      priority: 'content',
+      css: {
+        ff: 'row wrap',
+        jc: 'center',
+        ai: 'center',
+      },
+    },
+  ],
 })
 
 const MediaWithText = ({
@@ -114,41 +219,45 @@ const MediaWithText = ({
   links,
   linkDecorators = [],
   backgroundImage,
+  layout: _layout = 'horizontal',
+  priority = 'media',
   ...props
 }) => {
   const hasArrows = !!linkDecorators.includes('arrows')
   const hasCheckmarks = !!linkDecorators.includes('checkmarks')
   const iconProps = hasArrows ? { hasIcon: true, icon: 'internal' } : {}
+  const layout = isObject(_layout)
+    ? _layout
+    : { '@initial': 'vertical', '@>m': _layout }
 
   return (
-    <$MediaWithText
-      layout={{ '@initial': 'vertical', '@>m': 'horizontal' }}
-      {...props}
-    >
+    <$MediaWithText priority={priority} layout={layout} {...props}>
       <$MediaWithTextMedia
-        layout={{ '@initial': 'vertical', '@>m': 'horizontal' }}
+        priority={priority}
+        layout={layout}
         hasBackground={!!backgroundImage}
       >
         {backgroundImage && (
           <$BackgroundImage objectFit="contain" image={backgroundImage} />
         )}
-        <Media type={type} media={media} ratio={media?.ratio} />
+        <$Media type={type} media={media} ratio={media?.ratio} />
       </$MediaWithTextMedia>
       <$MediaWithTextContent
-        layout={{ '@initial': 'vertical', '@>m': 'horizontal' }}
+        layout={layout}
         align={{ '@initial': 'none', '@>s': align }}
+        priority={priority}
       >
         {heading && <Heading heading={heading} tag="h5" css={{ mb: 0 }} />}
         {content && <Text content={content} />}
         {links && (
-          <Flex css={{ mt: '$3' }}>
-            {links.map(({ _key, ...link }) => (
-              <$Link css={{ gap: '$2' }} {...iconProps} key={_key} {...link}>
+          <$LinkContainer priority={priority} layout={layout}>
+            {links.map(({ _key, _type, ...link }) => (
+              <$Link css={{ gap: '$2' }} key={_key} {...iconProps} {...link}>
                 {hasCheckmarks && <$Checkmark />}
                 <$LinkTextWrapper>{link?.label}</$LinkTextWrapper>
               </$Link>
             ))}
-          </Flex>
+          </$LinkContainer>
         )}
       </$MediaWithTextContent>
     </$MediaWithText>

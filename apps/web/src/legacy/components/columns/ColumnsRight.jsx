@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
@@ -151,7 +151,8 @@ const ArrowRightPurple = styled('img', {
 })
 
 const ColumnsRight = ({ columnItems }) => {
-  const displayVideo = shouldDisplayVideo()
+  const [displayVideo, setDisplayVideo] = useState(false)
+  useEffect(() => setDisplayVideo(shouldDisplayVideo()), [])
 
   return (
     <OuterContainer>

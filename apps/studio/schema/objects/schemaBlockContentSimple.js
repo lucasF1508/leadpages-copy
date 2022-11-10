@@ -1,7 +1,7 @@
 import { F } from 'part:gearbox-schema-tool/schema-builder'
-import { blockContent } from './schemaBlockContent'
+import { blockContentHeadline } from './schemaBlockContentHeadline'
 
-const [toolbar] = blockContent?.of || []
+const [toolbar] = blockContentHeadline?.of || []
 
 export const blockContentSimple = F.array({
   title: 'Block Content Simple',

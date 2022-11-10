@@ -1,6 +1,5 @@
 import React from 'react'
 import { styled } from '@design'
-import PropTypes from 'prop-types'
 import NextLink from 'next/link'
 // components
 import IconCardsGrid from '@legacy/components/grids/IconCardsGrid'
@@ -34,9 +33,9 @@ const StyledLink = styled('a', {
 
 const FeatureIconsGrid = ({
   features,
-  itemsPerRow,
+  itemsPerRow = 4,
   showSectionLink,
-  backgroundColor,
+  backgroundColor = 'transparent',
 }) => (
   <SectionContainer css={backgroundColor ? { backgroundColor } : {}}>
     <IconCardsGrid items={features} itemsPerRow={itemsPerRow} />
@@ -51,35 +50,5 @@ const FeatureIconsGrid = ({
     )}
   </SectionContainer>
 )
-
-FeatureIconsGrid.defaultProps = {
-  itemsPerRow: 4,
-  showSectionLink: true,
-  backgroundColor: 'transparent',
-}
-
-FeatureIconsGrid.propTypes = {
-  features: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      icon: PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        width: PropTypes.number,
-        height: PropTypes.number,
-      }).isRequired,
-      alt: PropTypes.string.isRequired,
-      link: PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired,
-        route: PropTypes.string.isRequired,
-        altText: PropTypes.string.isRequired,
-      }),
-    })
-  ).isRequired,
-  itemsPerRow: PropTypes.number,
-  showSectionLink: PropTypes.bool,
-  backgroundColor: PropTypes.string,
-}
 
 export default FeatureIconsGrid

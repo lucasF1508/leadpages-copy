@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { styled, keyframes } from '@design'
 import { blocksToText } from '@utils/blockContent'
+import Text from '@components/Text'
 import Link from '@components/Link'
-// components
 // utilities
 import shouldDisplayVideo from '@legacy/utils/should-display-video'
 // images
@@ -116,8 +116,7 @@ const Headline = styled('div', {
   mb: '2rem',
 })
 
-const Caption = styled('div', {
-  c: '$textAlt',
+const $Text = styled(Text, {
   mb: '2rem',
 })
 
@@ -306,7 +305,7 @@ const VideoButton = styled('button', {
   },
 })
 
-const HomepageHeader = ({ heading, content, links }) => {
+const HeroHome = ({ content, links }) => {
   const [displayVideo, setDisplayVideo] = useState(false)
   const background = `url(${wavyLineVerticalLavenderSVG.src}) no-repeat`
 
@@ -316,12 +315,7 @@ const HomepageHeader = ({ heading, content, links }) => {
     <OuterContainer>
       <InnerContainer>
         <TextContainer>
-          {heading && (
-            <Headline>
-              <h1>{heading}</h1>
-            </Headline>
-          )}
-          {content && <Caption>{blocksToText(content)}</Caption>}
+          {content && <$Text content={content} />}
           {links && (
             <LinksContainer>
               {links.map(({ _key, ...link }) => (
@@ -384,4 +378,4 @@ const HomepageHeader = ({ heading, content, links }) => {
   )
 }
 
-export default HomepageHeader
+export default HeroHome
