@@ -35,19 +35,6 @@ const $Hero = styled('div', {
   },
 
   variants: {
-    underlaidMenu: {
-      // false: {
-      //   '&::before': {
-      //     content: '',
-      //     position: 'absolute',
-      //     inset: 0,
-      //     height: '$space$7_5',
-      //     background: '$white',
-      //     z: 1030,
-      //     top: 36,
-      //   },
-      // },
-    },
     size: {
       large: {
         minHeight: '47rem',
@@ -158,6 +145,18 @@ const $MediaWithText = styled(MediaWithText, {
 const $BackgroundImage = styled(Image, {
   position: 'absolute',
   inset: 0,
+  mw: '$vast',
+  mx: 'auto',
+
+  '&::after': {
+    content: '',
+    position: 'absolute',
+    left: '100%',
+    ml: -1,
+    top: 0,
+    bottom: 0,
+    width: '100vw',
+  },
 })
 
 const HeroDefault = ({
@@ -167,24 +166,32 @@ const HeroDefault = ({
   align = 'left',
   size = 'medium',
   imageAlign = 'center',
-  darkBackground = false,
+  backgroundOptions = {},
   backgroundImage,
 }) => {
-  const { underlaidMenu = false } = useContext(AppContext)
   const isMobile = useEvalBreakpoint('<=m')
+  const { palette } = backgroundImage?.asset?.metadata || {}
+  const {
+    backgroundOffset = false,
+    darkBackground = false,
+    extendBackgroundColor = false,
+  } = backgroundOptions
+
+  const bc = extendBackgroundColor ? palette?.dominant?.background : null
 
   return (
-    <$Hero
-      className={darkBackground && darkTheme}
-      size={size}
-      underlaidMenu={underlaidMenu}
-    >
+    <$Hero className={darkBackground && darkTheme} size={size}>
       {backgroundImage && (
         <$BackgroundImage
           objectFit={isMobile ? 'cover' : 'contain'}
-          objectPosition="right"
+          objectPosition={
+            isMobile && backgroundOffset ? `${backgroundOffset}%` : 'right'
+          }
           image={backgroundImage}
           priority
+          css={{
+            '&::after': { bc },
+          }}
         />
       )}
       <$MediaWithText

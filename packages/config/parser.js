@@ -1,6 +1,14 @@
 const { image, link } = require('../query/dist/parser/primitives')
 
 module.exports = {
+  custom: {
+    backgroundImage: (name) => ({
+      [name]: {
+        '...': true,
+        asset: '->',
+      },
+    }),
+  },
   components: {
     types: (types) =>
       types.filter(

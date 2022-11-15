@@ -15,6 +15,11 @@ export const schemaHeroDefault = F.hero({
     },
   },
   fields: [
+    F.image({
+      parseType: 'backgroundImage',
+      group: 'media',
+      name: 'backgroundImage',
+    }),
     F.radio(['center', 'bottom', 'right'], {
       name: 'imageAlign',
       group: 'options',
@@ -26,10 +31,19 @@ export const schemaHeroDefault = F.hero({
       group: 'options',
       initialValue: 'medium',
     }),
-    F.checkbox({ name: 'darkBackground', group: 'options' }),
-    F.image({
-      group: 'media',
-      name: 'backgroundImage',
+    F.object({
+      name: 'backgroundOptions',
+      group: 'options',
+      fields: [
+        F.number({
+          name: 'backgroundOffset',
+          title: 'Background Mobile Offset',
+          description: 'Adjust mobile breakpoint offset as a percentage (%).',
+          placeholder: 'ie. -10',
+        }),
+        F.checkbox({ name: 'darkBackground', initialValue: false }),
+        F.checkbox({ name: 'extendBackgroundColor', initialValue: false }),
+      ],
     }),
   ],
 })

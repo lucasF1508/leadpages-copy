@@ -1,8 +1,13 @@
 import * as fieldTypes from './types'
+import { getParserConfig } from './config'
+
+const custom = getParserConfig('custom')
 
 export const parseField = ({ name, type }) => {
   const { name: fieldType, parseType } = type
-  const parserType = fieldTypes[parseType || fieldType] || fieldTypes.jsonType
+  const customParser = custom[parseType || fieldType]
+  const parserType =
+    customParser || fieldTypes[parseType || fieldType] || fieldTypes.jsonType
 
   return parserType(name, type)
 }
