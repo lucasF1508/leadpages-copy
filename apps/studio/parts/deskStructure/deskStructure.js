@@ -8,7 +8,11 @@ import addPreviewPane from 'part:gearbox-live-preview/add-preview-pane'
 import addSEOPane from 'part:gearbox-seo-pane/add-seo-pane'
 import { RiLayoutBottom2Line } from 'react-icons/ri'
 import { BsNewspaper } from 'react-icons/bs'
-import { AiOutlineHome, AiOutlineFileText } from 'react-icons/ai'
+import {
+  AiOutlineHome,
+  AiOutlineFileText,
+  AiOutlineRetweet,
+} from 'react-icons/ai'
 import { listItemSiteSettings, listItemsMainDocs } from './listItems'
 
 const allTemplatesTypes = getTemplateSchemas().map(({ name }) => name)
@@ -30,6 +34,14 @@ export const deskStructure = () =>
                 title: 'Archive',
               }).icon(BsNewspaper),
               S.documentTypeListItem('page').title('Dynamic Pages'),
+              S.listItem()
+                .title('Legacy Pages')
+                .icon(AiOutlineRetweet)
+                .child(
+                  S.documentList()
+                    .title('Legacy Pages')
+                    .filter('_type == "page" && redirectToLegacy == true')
+                ),
             ])
         )
         .icon(AiOutlineFileText),

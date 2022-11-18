@@ -96,22 +96,28 @@ export const $MediaWithTextContent = styled('div', {
   },
 })
 
+export const $Media = styled(Media, {})
+
+const $BackgroundImage = styled(Image, {
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
+})
+
 export const $MediaWithTextMedia = styled('div', {
   w: '100%',
   position: 'relative',
 
   variants: {
-    priority: {},
-    align: { left: { order: -1 } },
     layout: {
       horizontal: { f: '1 1 $sizes$cols7' },
       vertical: { f: '0 1 auto' },
     },
-    hasBackground: {
-      true: {
-        // padding: '$10',
-      },
-    },
+    priority: {},
+    align: {},
+    hasBackground: {},
   },
   compoundVariants: [
     {
@@ -121,20 +127,38 @@ export const $MediaWithTextMedia = styled('div', {
         f: '1 1 $sizes$cols6',
       },
     },
+    {
+      align: 'right',
+      hasBackground: true,
+      css: {
+        pt: '$10',
+        pl: '$10',
+
+        [`${$BackgroundImage}`]: {
+          img: {
+            objectPosition: 'bottom left',
+          },
+        },
+      },
+    },
+    {
+      align: 'left',
+      hasBackground: true,
+      css: {
+        pt: '$10',
+        pr: '$10',
+
+        [`${$BackgroundImage}`]: {
+          img: {
+            objectPosition: 'bottom right',
+          },
+        },
+      },
+    },
   ],
   defaultVariants: {
     layout: 'horizontal',
   },
-})
-
-export const $Media = styled(Media, {})
-
-const $BackgroundImage = styled(Image, {
-  position: 'absolute',
-  top: 0,
-  bottom: 0,
-  left: 0,
-  right: 0,
 })
 
 const $LinkTextWrapper = styled('span', {})
@@ -236,6 +260,7 @@ const MediaWithText = ({
         priority={priority}
         layout={layout}
         hasBackground={!!backgroundImage}
+        align={align}
       >
         {backgroundImage && (
           <$BackgroundImage objectFit="contain" image={backgroundImage} />

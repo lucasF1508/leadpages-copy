@@ -29,6 +29,7 @@ const RackComponentList = {
   featureGrid: dynamic(() => import('@components/FeatureGrid/HomeFeatureGrid')),
   customerRotator: dynamic(() => import('@components/Rotator/CustomerRotator')),
   featuredTemplates: dynamic(() => import('@components/FeaturedTemplates')),
+  tabs: dynamic(() => import('@components/Tabs')),
 }
 
 export default RackComponentList

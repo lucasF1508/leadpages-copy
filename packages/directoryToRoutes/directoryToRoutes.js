@@ -48,7 +48,7 @@ const getSanityPaths = async ({
     },
   })
 
-  const query = `*[_type == "${type}" && !(_id in path('drafts.**'))] | order(order asc, _createdAt desc).${field}`
+  const query = `*[_type == "${type}" && !(_id in path('drafts.**')) && redirectToLegacy != true] | order(order asc, _createdAt desc).${field}`
 
   const data = await client.fetch(query)
 

@@ -83,6 +83,9 @@ export const pinionTokens = {
           maxWidth: '$base',
         },
       },
+      tabs: {
+        overflow: 'hidden',
+      },
       testimonials: {
         px: 'unset',
         my: 'unset',
