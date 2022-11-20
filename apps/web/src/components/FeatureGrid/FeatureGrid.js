@@ -6,10 +6,24 @@ import IconCardsGrid from '@legacy/components/grids/IconCardsGrid'
 
 const SectionContainer = styled('div', {
   position: 'relative',
-  p: '0 3rem',
+  p: '$6',
 
-  '@media (min-width: 577px)': {
-    p: '0 6rem',
+  '@>lp_2': {
+    px: '$12',
+  },
+
+  variants: {
+    backgroundColor: {
+      transparent: {
+        py: 'unset',
+        box: [
+          { property: 'px' },
+          {
+            property: 'my',
+          },
+        ],
+      },
+    },
   },
 })
 
@@ -32,13 +46,16 @@ const StyledLink = styled('a', {
 })
 
 const FeatureIconsGrid = ({
-  features,
+  items,
   itemsPerRow = 4,
   showSectionLink,
   backgroundColor = 'transparent',
 }) => (
-  <SectionContainer css={backgroundColor ? { backgroundColor } : {}}>
-    <IconCardsGrid items={features} itemsPerRow={itemsPerRow} />
+  <SectionContainer
+    backgroundColor={backgroundColor}
+    css={backgroundColor ? { backgroundColor } : {}}
+  >
+    <IconCardsGrid items={items} itemsPerRow={itemsPerRow} />
     {showSectionLink && (
       <SectionLink>
         Visit Leadpages{' '}

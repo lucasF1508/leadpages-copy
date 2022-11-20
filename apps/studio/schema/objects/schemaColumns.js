@@ -25,12 +25,12 @@ export const schemaColumns = F.object({
         }),
       }),
     ]),
-    // ...G.group('options', [
-    //   F.radio(['3', '4'], {
-    //     name: 'itemsPerRow',
-    //     initialValue: '4',
-    //   }),
-    // ]),
+    ...G.group('options', [
+      F.radio(['1', '2'], {
+        name: 'itemsPerRow',
+        initialValue: '2',
+      }),
+    ]),
   ],
   preview: P.arrayTitle(),
 })

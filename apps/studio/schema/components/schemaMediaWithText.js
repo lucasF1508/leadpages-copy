@@ -13,12 +13,32 @@ export const schemaMediaWithText = F.field('object', {
         title: 'Content Alignment',
         initialValue: 'right',
       }),
+      F.radio(['default', 'wide'], {
+        name: 'width',
+        title: 'Component Width',
+        initialValue: 'default',
+      }),
+      F.radio(['media', 'content'], {
+        name: 'priority',
+        title: 'Priority',
+        initialValue: 'media',
+        description: `Media: media on top, wider media container.
+          Content: content on top, wider content container.`,
+      }),
+      F.array({
+        name: 'contentOptions',
+        options: {
+          list: [{ title: 'Remove Gap', value: 'noGap' }],
+        },
+        of: [{ type: 'string' }],
+      }),
       F.array({
         name: 'linkDecorators',
         options: {
           list: [
             { title: 'Arrows', value: 'arrows' },
             { title: 'Checkmarks', value: 'checkmarks' },
+            { title: 'Gray Color', value: 'gray' },
           ],
         },
         of: [{ type: 'string' }],
@@ -33,7 +53,10 @@ export const schemaMediaWithText = F.field('object', {
     ]),
     ...G.group('media', [
       F.field('media'),
-      F.image({ name: 'backgroundImage' }),
+      F.image({
+        name: 'backgroundImage',
+        hidden: ({ parent }) => parent?.media?.condition !== 'image',
+      }),
     ]),
   ],
   preview: {

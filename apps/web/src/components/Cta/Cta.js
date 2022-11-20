@@ -1,7 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { styled } from '@design'
-import Link from 'next/link'
+import Link from '@components/Link'
 import Image from 'next/image'
 import Text from '@components/Text'
 import { Link as ScrollLink } from 'react-scroll'
@@ -65,7 +64,7 @@ const RTGCaption = styled(FlexItem, {
   fontSize: '18px',
   letterSpacing: '-0.1px',
   lineHeight: '28px',
-  mb: '2rem',
+  mb: '1rem',
 })
 
 const MainButtonContainer = styled('div', {
@@ -148,27 +147,29 @@ const SubText = styled(FlexItem, {
   mx: 'auto',
 })
 
-const ReadyToGrow = ({
+const Cta = ({
   bgImage,
   bgColor,
-  paddingScale,
+  paddingScale = 1,
   title,
   overline,
+  headlineType = 'h2',
   headlineFontSize,
   mobileHeadlineFontSize,
   mobileHeadlineLineHeight,
   content,
   buttonText,
   subText,
-  showCTA,
+  showCTA = true,
   showDemoVideo,
   showDownloader,
-  scrollTarget,
+  scrollTarget = false,
+  links,
   zIndex,
 }) => {
   const RTGHeadlineCss = {
     h2: {
-      type: 'h1',
+      type: headlineType,
       fontSize: headlineFontSize,
 
       '@<s': {
@@ -202,13 +203,8 @@ const ReadyToGrow = ({
       <MainButtonContainer>
         {showCTA && (
           <RTGButtonContainer>
-            {!scrollTarget && (
-              <Link href="/pricing">
-                <a>
-                  <RTGButton>{buttonText}</RTGButton>
-                </a>
-              </Link>
-            )}
+            {!scrollTarget &&
+              links.map(({ _key, ...link }) => <Link key={_key} {...link} />)}
             {scrollTarget && (
               <ScrollingLink
                 to={scrollTarget}
@@ -228,33 +224,29 @@ const ReadyToGrow = ({
         )}
         {showDemoVideo && (
           <RTGButtonContainer>
-            <Link href="">
-              <a
-                href=""
-                data-leadbox-popup="nTViYpWLsxbkHpgfxpzrM2"
-                data-leadbox-domain="lps.leadpages.net"
-              >
-                <RTGVideoButton>
-                  <PlayButtonIcon>
-                    <Image
-                      src={PlayButtonSVG}
-                      alt="play button icon"
-                      lazyBoundary="501px"
-                    />
-                  </PlayButtonIcon>
-                  Watch a quick demo
-                </RTGVideoButton>
-              </a>
-            </Link>
+            <a
+              href=""
+              data-leadbox-popup="nTViYpWLsxbkHpgfxpzrM2"
+              data-leadbox-domain="lps.leadpages.net"
+            >
+              <RTGVideoButton>
+                <PlayButtonIcon>
+                  <Image
+                    src={PlayButtonSVG}
+                    alt="play button icon"
+                    lazyBoundary="501px"
+                  />
+                </PlayButtonIcon>
+                Watch a quick demo
+              </RTGVideoButton>
+            </a>
           </RTGButtonContainer>
         )}
         {showDownloader && (
           <RTGButtonContainer>
-            <Link href="https://s3.amazonaws.com/lpmarketinglibrary/Brand+Assets+-+Leadpages/Leadpages+Press+Kit.zip">
-              <a>
-                <RTGButton>Download Brand Assets</RTGButton>
-              </a>
-            </Link>
+            <a href="https://s3.amazonaws.com/lpmarketinglibrary/Brand+Assets+-+Leadpages/Leadpages+Press+Kit.zip">
+              <RTGButton>Download Brand Assets</RTGButton>
+            </a>
           </RTGButtonContainer>
         )}
       </MainButtonContainer>
@@ -262,40 +254,4 @@ const ReadyToGrow = ({
   )
 }
 
-ReadyToGrow.defaultProps = {
-  bgImage: null,
-  bgColor: null,
-  paddingScale: 1,
-  title: "Let's Get Started",
-  headline: 'Ready to grow?',
-  content:
-    '<p>Take Leadpages for a test drive when you start your free 14-day trial.<br />No obligation. No reason not to.</p>',
-  buttonText: 'Start a Leadpages Free Trial',
-  subText: '',
-  showCTA: true,
-  showDemoVideo: false,
-  showDownloader: false,
-  scrollTarget: '',
-  zIndex: 'unset',
-}
-
-ReadyToGrow.propTypes = {
-  bgImage: PropTypes.string,
-  bgColor: PropTypes.string,
-  paddingScale: PropTypes.number,
-  title: PropTypes.string,
-  headline: PropTypes.string,
-  headlineFontSize: PropTypes.string,
-  mobileHeadlineFontSize: PropTypes.string,
-  mobileHeadlineLineHeight: PropTypes.string,
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  buttonText: PropTypes.string,
-  subText: PropTypes.string,
-  showCTA: PropTypes.bool,
-  showDemoVideo: PropTypes.bool,
-  showDownloader: PropTypes.bool,
-  scrollTarget: PropTypes.string,
-  zIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-}
-
-export default ReadyToGrow
+export default Cta

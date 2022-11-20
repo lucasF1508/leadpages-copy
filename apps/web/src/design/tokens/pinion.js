@@ -31,6 +31,13 @@ export const pinionTokens = {
           px: 'unset',
         },
       },
+      ctaInline: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
       embed: {
         '> div': {
           maxWidth: '$base',
@@ -64,6 +71,10 @@ export const pinionTokens = {
       mediaWithText: {
         '> div': {
           maxWidth: '$extended',
+
+          '&[width="default"]': {
+            maxWidth: '$base',
+          },
         },
       },
       gallery: {

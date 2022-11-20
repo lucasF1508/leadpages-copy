@@ -26,10 +26,11 @@ const RackComponentList = {
   video: dynamic(() => import('@components/Video/VideoEmbed')),
 
   // Home components
-  featureGrid: dynamic(() => import('@components/FeatureGrid/HomeFeatureGrid')),
+  featureGrid: dynamic(() => import('@components/FeatureGrid/FeatureGrid')),
   customerRotator: dynamic(() => import('@components/Rotator/CustomerRotator')),
   featuredTemplates: dynamic(() => import('@components/FeaturedTemplates')),
   tabs: dynamic(() => import('@components/Tabs')),
+  ctaInline: dynamic(() => import('@components/Cta/CtaInline')),
 }
 
 export default RackComponentList

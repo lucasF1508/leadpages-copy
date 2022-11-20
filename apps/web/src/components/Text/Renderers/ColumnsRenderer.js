@@ -1,5 +1,5 @@
 import React from 'react'
-import TwoColumnTextBlock from '@legacy/components/layout/TwoColumnTextBlock'
+import TextColumns from '@components/Text/TextColumns'
 import { styled } from '@design'
 
 const $ColumnContainer = styled('div', {
@@ -9,11 +9,15 @@ const $ColumnContainer = styled('div', {
   '&:first-child': {
     mt: 0,
   },
+
+  variants: {
+    itemsPerRow: {},
+  },
 })
 
-const ColumnsRenderer = ({ node: { items } = {} }) => (
+const ColumnsRenderer = ({ node: { items, ...props } = {} }) => (
   <$ColumnContainer>
-    <TwoColumnTextBlock textBlockArray={items} />
+    <TextColumns {...props} items={items} />
   </$ColumnContainer>
 )
 

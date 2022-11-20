@@ -4,6 +4,7 @@ export * from '../schemaMediaWithText'
 
 // Home components
 export * from '../schemaFeatureGrid'
+export * from '../schemaCtaInline'
 export * from '../schemaCustomerRotator'
 export * from '../schemaHeadlineSection'
 export * from '../schemaFeaturedTemplates'

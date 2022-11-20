@@ -8,6 +8,16 @@ module.exports = {
         asset: '->',
       },
     }),
+    media: (name) => ({
+      [name]: {
+        '...': true,
+        image,
+        video: {
+          '...': true,
+          fallbackImage: image,
+        },
+      },
+    }),
   },
   components: {
     types: (types) =>
@@ -27,7 +37,7 @@ module.exports = {
           title: true,
           overline: true,
           content: true,
-          links: true,
+          'links[]': link,
         },
         post: {
           categoryTitle: 'category->title',

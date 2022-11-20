@@ -31,6 +31,8 @@ export const schemaFeatureGrid = F.object({
         name: 'itemsPerRow',
         initialValue: '4',
       }),
+      F.field('backgroundColor'),
+      F.boolean({ name: 'showSectionLink', initialValue: false }),
     ]),
   ],
   preview: P.arrayTitle(),
