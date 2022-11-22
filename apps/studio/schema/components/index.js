@@ -17,6 +17,7 @@ export * from './schemaTestimonials'
 export * from './schemaTextBlock'
 export * from './schemaTextColumn'
 export * from './schemaVideo'
+export * from './schemaInlineCTA'
 
 // Home components
 export * from './schemaFeatureGrid'

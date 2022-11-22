@@ -3,14 +3,17 @@ import isString from 'lodash/isString'
 import PortableText from '@sanity/block-content-to-react'
 import { styled } from '@design'
 import { getTypeUtil } from '@design/utils'
-import { textDefaultTokens } from '@design/tokens/text'
+import { textDefaultTokens, textPostTokens } from '@design/tokens/text'
 import RendererList from './Renderers/RendererList'
 import MarksList from './Marks/MarksList'
 
 const $Text = styled('article', {
-  ...textDefaultTokens,
   variants: {
     tagStyle: getTypeUtil,
+    tokenSet: {
+      default: { ...textDefaultTokens },
+      post: { ...textPostTokens },
+    },
   },
   defaultVariants: {
     tagStyle: 'baseType',
@@ -39,7 +42,12 @@ const Text = ({
     )
 
   return (
-    <$Text tagStyle={tagStyle} className={className} {...props}>
+    <$Text
+      tagStyle={tagStyle}
+      tokenSet={props.isPost ? 'post' : 'default'}
+      className={className}
+      {...props}
+    >
       {children || (
         <PortableText
           blocks={content}

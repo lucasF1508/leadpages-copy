@@ -36,6 +36,7 @@ export async function getServerSideProps(context) {
   const docType = 'post'
   const { preview = false, params, resolvedUrl } = context
   const { category: [category, type, num = 1] = [] } = params
+
   const baseUrl = getBaseUrlFromResolvedUrl({
     resolvedUrl,
     params,

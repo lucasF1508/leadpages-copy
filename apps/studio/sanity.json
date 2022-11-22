@@ -14,6 +14,7 @@
     "media",
     "@gearbox-built/studio/config",
     "gearbox-vercel-deploy",
+    "gearbox-importer",
     "gearbox-doc-order-sort",
     "gearbox-autocomplete-address",
     "gearbox-multi-references",
@@ -70,6 +71,10 @@
     {
       "implements": "part:@sanity/base/brand-logo",
       "path": "./parts/brandingName.js"
+    },
+    {
+      "implements": "part:gearbox-input-components/schema-fields",
+      "path": "./parts/inputComponents/SchemaFields.js"
     }
   ]
 }

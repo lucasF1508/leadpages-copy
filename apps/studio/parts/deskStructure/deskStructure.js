@@ -1,12 +1,9 @@
 import S from '@sanity/desk-tool/structure-builder'
 import GB from 'part:gearbox-desk-tool/structure-builder'
-import {
-  getPageTemplateTypes,
-  getTemplateSchemas,
-} from 'part:gearbox-utils/utils'
+import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import addPreviewPane from 'part:gearbox-live-preview/add-preview-pane'
 import addSEOPane from 'part:gearbox-seo-pane/add-seo-pane'
-import { RiLayoutBottom2Line } from 'react-icons/ri'
+import { RiLayoutBottom2Line, RiNewspaperFill } from 'react-icons/ri'
 import { BsNewspaper } from 'react-icons/bs'
 import {
   AiOutlineHome,
@@ -14,6 +11,8 @@ import {
   AiOutlineRetweet,
 } from 'react-icons/ai'
 import { listItemSiteSettings, listItemsMainDocs } from './listItems'
+
+const isDevelopment = process.env.NODE_ENV === 'development'
 
 const allTemplatesTypes = getTemplateSchemas().map(({ name }) => name)
 
@@ -60,7 +59,11 @@ export const deskStructure = () =>
       S.documentTypeListItem('navigation').title('Navigation'),
       GB.singletonListItem('footer').icon(RiLayoutBottom2Line),
       GB.categoriesListItem('category'),
+      GB.singletonListItem('postSettings').icon(RiNewspaperFill),
       listItemSiteSettings,
+      ...(isDevelopment
+        ? [S.documentTypeListItem('feed').title('Importer')]
+        : []),
     ])
 
 export const getDefaultDocumentNode = ({ schemaType }) => {

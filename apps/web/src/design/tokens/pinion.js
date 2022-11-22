@@ -109,6 +109,23 @@ export const pinionTokens = {
           maxWidth: '$base',
         },
       },
+      archivePage: {
+        px: 'unset',
+        my: '$8',
+
+        '> div': {
+          align: 'none',
+          maxWidth: '$narrow',
+          mx: 'auto',
+          px: '$2_5',
+
+          '@>m': {
+            maxWidth: '$base',
+            px: '$5',
+            pl: '$11',
+          },
+        },
+      },
     },
     align: getAlignmentUtil('> div'),
     maxWidth: getMaxWidthUtil('> div'),

@@ -37,6 +37,35 @@ export const link = {
           },
         },
       },
+      buttonInverse: {
+        h: '$space$5',
+        minWidth: '$space$17',
+        px: '$4',
+        br: '$button',
+        bc: '$white',
+        c: '$primary',
+        border: '$thickButtonInverse',
+        type: 'button',
+        fontWeight: 500,
+
+        '&:hover': {
+          bc: '$hoverInverse',
+          borderColor: 'transparent',
+        },
+
+        '&:active': {
+          bc: '$activeInverse',
+          borderColor: '$activeInverse',
+        },
+
+        '&[disabled]': {
+          bc: '$disabled',
+
+          '&:hover, :active': {
+            bc: '$disabled',
+          },
+        },
+      },
       ghost: {
         h: '$space$5',
         minWidth: '$space$17',

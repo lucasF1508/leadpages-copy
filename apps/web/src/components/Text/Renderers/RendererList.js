@@ -9,6 +9,7 @@ const RendererList = {
   socialLinks: dynamic(() => import('./SocialLinksRenderer')),
   table: dynamic(() => import('./TableRenderer')),
   columns: dynamic(() => import('./ColumnsRenderer')),
+  inlineCTA: dynamic(() => import('@components/Archive/InlineCTA')),
 }
 
 export default RendererList

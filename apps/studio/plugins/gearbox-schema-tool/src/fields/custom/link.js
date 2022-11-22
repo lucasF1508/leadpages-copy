@@ -29,6 +29,7 @@ export const link = ({
     hasHash: {},
     linkStyle: {},
     linkSize: {},
+    condition: {},
     ...argsOrg,
   }
 
@@ -43,6 +44,7 @@ export const link = ({
     F.radio(conditions, {
       name: 'condition',
       group: isGrouped && 'content',
+      ...args.condition,
     }),
     args.linkStyle
       ? F.radio(['text', 'button', 'ghost'], {

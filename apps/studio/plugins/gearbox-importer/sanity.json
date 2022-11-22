@@ -1,0 +1,18 @@
+{
+  "paths": {
+    "source": "./src",
+    "compiled": "./build"
+  },
+  "parts": [
+    {
+      "name": "part:gearbox-importer/gearbox-importer",
+      "description": "Custom Data Importer",
+      "path": "components/GearboxImporter.js"
+    },
+    {
+      "implements": "part:@sanity/base/schema-type",
+      "description": "Adds Feed to base schema types",
+      "path": "schema/schemaFeed.js"
+    }
+  ]
+}

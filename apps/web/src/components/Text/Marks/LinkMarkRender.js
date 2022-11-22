@@ -3,7 +3,7 @@ import Link from '@components/Link'
 
 const LinkMarkRender = (props) => {
   const { mark, children } = props
-  const { linkStyle, condition } = mark
+  const { linkStyle, condition = 'external', href, url } = mark
   const css = {}
   const iconProps =
     condition === 'internal' ? { hasIcon: true, icon: condition } : {}
@@ -13,7 +13,13 @@ const LinkMarkRender = (props) => {
   }
 
   return (
-    <Link {...iconProps} css={css} {...mark}>
+    <Link
+      {...mark}
+      {...iconProps}
+      css={css}
+      url={href || url}
+      condition={condition}
+    >
       {children}
     </Link>
   )

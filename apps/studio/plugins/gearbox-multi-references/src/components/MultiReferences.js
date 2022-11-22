@@ -138,7 +138,6 @@ export const MultiReferences = (props, ref) => {
         styles={{
           multiValue: (provided) => ({
             ...provided,
-            zIndex: 1000,
           }),
           menu: (provided) => ({
             ...provided,

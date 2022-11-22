@@ -9,7 +9,7 @@ const $MediaContainer = styled('div', {
   my: '$2',
 
   '@>s': {
-    my: '$5',
+    my: '$8',
   },
 
   '&:first-child': { mt: '0' },

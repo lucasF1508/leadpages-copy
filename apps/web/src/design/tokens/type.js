@@ -136,6 +136,7 @@ export const type = {
       '@>s': typeSizes.lg,
     },
     buttonSm: typeSizes.sm,
+    captionSm: typeSizes.xs,
     input: {
       fontSize: '1rem',
       '@>s': typeSizes.sm,
@@ -200,6 +201,10 @@ export const type = {
       fontFamily: '$base',
     },
     caption: {
+      fontWeight: '$normal',
+      fontFamily: '$base',
+    },
+    captionSm: {
       fontWeight: '$normal',
       fontFamily: '$base',
     },

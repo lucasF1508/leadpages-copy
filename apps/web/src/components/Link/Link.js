@@ -21,6 +21,11 @@ const Icons = {
           h: 18,
           w: 18,
         },
+        buttonInverse: {
+          h: 18,
+          w: 18,
+          c: '$primary',
+        },
         ghost: {
           h: 18,
           w: 18,

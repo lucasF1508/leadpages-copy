@@ -10,6 +10,9 @@ const ColorMarkRender = (props) => {
     case 'textColorHighlight':
       css = { '&, *': { c: '$primary' } }
       break
+    case 'textColorHighlightAlt':
+      css = { '&, *': { c: '$sky' } }
+      break
     case 'textColorAlt':
       css = { '&, *': { c: '$secondary' } }
       break

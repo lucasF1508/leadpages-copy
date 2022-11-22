@@ -12,6 +12,11 @@ import { F } from 'part:gearbox-schema-tool/schema-builder'
  *  }
  */
 
+const colorText = '#0f0c09'
+const colorTextAlt = '#575452'
+const colorTextHighlight = '#603eff'
+const colorTextHighlightAlt = '#34afbb'
+
 const LargerTextStyle = (props) => (
   <span style={{ fontSize: '1.125em' }}>{props.children}</span>
 )
@@ -37,10 +42,11 @@ export const blockContent = {
             render: LargerTextStyle,
           },
         },
-        { title: 'H1', value: 'h1' },
         { title: 'H2', value: 'h2' },
         { title: 'H3', value: 'h3' },
         { title: 'H4', value: 'h4' },
+        { title: 'H5', value: 'h5' },
+        { title: 'H6', value: 'h6' },
         { title: 'Quote', value: 'blockquote' },
       ],
       lists: [
@@ -65,12 +71,65 @@ export const blockContent = {
               ),
             },
           },
+          ...[
+            {
+              title: 'Default Color',
+              value: 'textColor',
+              color: colorText,
+            },
+            {
+              title: 'Alt Color',
+              value: 'textColorAlt',
+              color: colorTextAlt,
+            },
+            {
+              title: 'Highlight Color',
+              value: 'textColorHighlight',
+              color: colorTextHighlight,
+            },
+            {
+              title: 'Alt Highlight Color',
+              value: 'textColorHighlightAlt',
+              color: colorTextHighlightAlt,
+            },
+          ].map(({ title, value, color }) => ({
+            title,
+            value,
+            blockEditor: {
+              render: (props) => (
+                <span
+                  style={{
+                    color,
+                  }}
+                >
+                  {props.children}
+                </span>
+              ),
+              icon: () => (
+                <span
+                  style={{
+                    display: 'block',
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '4px',
+                    backgroundColor: color,
+                  }}
+                />
+              ),
+            },
+          })),
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
           F.link({
             name: 'link',
-            fields: [],
+            fields: [
+              F.string({
+                name: 'href',
+                hidden: ({ parent }) => !parent.href,
+                group: 'content',
+              }),
+            ],
           }),
         ],
       },
@@ -80,6 +139,9 @@ export const blockContent = {
     // as a block type.
     {
       type: 'media',
+    },
+    {
+      type: 'inlineCTA',
     },
     {
       type: 'table',

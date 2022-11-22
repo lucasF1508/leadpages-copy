@@ -1,11 +1,5 @@
 import { AiOutlineHome as icon } from 'react-icons/ai'
-import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import { F, FS, G, P } from 'part:gearbox-schema-tool/schema-builder'
-import * as homeComponentsSchema from '../../components/home'
-
-const componentsSchema = getTemplateSchemas({
-  schema: homeComponentsSchema,
-})
 
 export const schemaPageHome = {
   icon,
@@ -29,7 +23,7 @@ export const schemaPageHome = {
     }),
     ...G.group('content', [
       F.field('hero'),
-      F.components(componentsSchema),
+      F.field('components'),
       F.reference('cta', {
         name: 'cta',
         title: 'Call to Action',

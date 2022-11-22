@@ -42,12 +42,11 @@ const getVideoData = (orgUrl) => {
 }
 
 const VideoEmbed = ({ video, url, children, ...props }) => {
-  if (video?.embed?.html) {
+  if (video?.embed?.html || video?.embed) {
+    const embed = video?.embed?.html || video?.embed
+
     return (
-      <$VideoEmbed
-        {...props}
-        dangerouslySetInnerHTML={{ __html: video?.embed?.html }}
-      />
+      <$VideoEmbed {...props} dangerouslySetInnerHTML={{ __html: embed }} />
     )
   }
 

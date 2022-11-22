@@ -9,6 +9,7 @@ export const borders = {
   thin: '$borders$base',
   thick: '$borderWidths$thick solid $colors$border',
   thickButton: '$borderWidths$thick solid $colors$primary',
+  thickButtonInverse: '$borderWidths$thick solid $colors$white',
   thickGhost: '$borderWidths$thick solid $colors$secondary',
 }
 

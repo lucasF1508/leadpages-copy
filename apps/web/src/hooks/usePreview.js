@@ -69,10 +69,10 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
     const { shapeData = (data) => data } =
       {
         '/404': await import('@pages/404'),
-        '/archive': await import('@pages/archive'),
-        '/archive/page/[num]': await import('@pages/archive/page/[num]'),
-        '/archive/category/[[...category]]': await import(
-          '@pages//archive/category/[[...category]]'
+        '/blog': await import('@pages/blog'),
+        '/blog/page/[num]': await import('@pages/blog/page/[num]'),
+        '/blog/category/[[...category]]': await import(
+          '@pages/blog/category/[category]'
         ),
       }[pathname] || {}
 
