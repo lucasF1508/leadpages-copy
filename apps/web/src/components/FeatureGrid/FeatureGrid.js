@@ -8,7 +8,7 @@ const SectionContainer = styled('div', {
   position: 'relative',
   p: '$6',
 
-  '@>lp_2': {
+  '@>577': {
     px: '$12',
   },
 
@@ -51,10 +51,7 @@ const FeatureIconsGrid = ({
   showSectionLink,
   backgroundColor = 'transparent',
 }) => (
-  <SectionContainer
-    backgroundColor={backgroundColor}
-    css={backgroundColor ? { backgroundColor } : {}}
-  >
+  <SectionContainer backgroundColor={backgroundColor}>
     <IconCardsGrid items={items} itemsPerRow={itemsPerRow} />
     {showSectionLink && (
       <SectionLink>

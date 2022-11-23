@@ -10,11 +10,14 @@ export const selectors = (schemaType, params, filters) => {
   const slugFilter =
     isObject(params) && 'slug' in params ? 'slug.current == $slug' : ''
 
+  const pathFilter = isObject(params) && 'path' in params ? 'path == $path' : ''
+
   return [
     `[`,
     buildSchemaTypes(schemaType),
     buildFilters(filters, ' && ', !!schemaType),
     buildFilters(slugFilter),
+    buildFilters(pathFilter),
     `]`,
   ].join('')
 }

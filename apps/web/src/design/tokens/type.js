@@ -75,6 +75,10 @@ export const type = {
   },
   fontSizes: {
     ...typeSizes,
+    smallType: {
+      ...typeSizes.sm,
+      '@>s': typeSizes.base,
+    },
     baseType: {
       ...typeSizes.base,
       '@>s': typeSizes.lg,

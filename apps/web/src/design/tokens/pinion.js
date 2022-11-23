@@ -129,5 +129,21 @@ export const pinionTokens = {
     },
     align: getAlignmentUtil('> div'),
     maxWidth: getMaxWidthUtil('> div'),
+    backgroundColor: {
+      gray: {
+        bc: '$grayAlt',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+    },
   },
+  compoundVariants: [
+    {
+      backgroundColor: 'gray',
+      component: 'featureGrid',
+      css: {
+        py: '0',
+      },
+    },
+  ],
 }

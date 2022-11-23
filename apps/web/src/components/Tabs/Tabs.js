@@ -5,7 +5,7 @@ import TabsRotator from './TabsRotator'
 import TabsReveal from './TabsReveal'
 
 const Tabs = (props) => {
-  const isDesktop = useMediaQuery(mediaQueries['>lp_3'])
+  const isDesktop = useMediaQuery(mediaQueries['>769'])
 
   return isDesktop ? <TabsReveal {...props} /> : <TabsRotator {...props} />
 }

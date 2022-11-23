@@ -53,8 +53,10 @@ export const schemaPage = {
   ],
   preview: P.titleImage({
     redirect: 'redirectToLegacy',
-    prepare: ({ title, media, redirect }) => ({
+    subtitle: 'parent.title',
+    prepare: ({ title, subtitle, media, redirect }) => ({
       title,
+      subtitle,
       media: redirect ? redirectIcon : media || icon,
     }),
   }),

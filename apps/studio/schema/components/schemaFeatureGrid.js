@@ -4,7 +4,7 @@ import { F, P, G } from 'part:gearbox-schema-tool/schema-builder'
 export const schemaFeatureGrid = F.object({
   icon,
   name: 'featureGrid',
-  groups: G.fieldGroupComponentOptions(),
+  groups: [...G.fieldGroupComponentOptions(), G.fieldGroup('legacy')],
   fields: [
     ...G.group('content', [
       F.array({
@@ -30,9 +30,29 @@ export const schemaFeatureGrid = F.object({
       F.radio(['3', '4'], {
         name: 'itemsPerRow',
         initialValue: '4',
+        hidden: ({ parent }) =>
+          ['toolkitCards'].includes(parent.legacyComponent),
       }),
-      F.field('backgroundColor'),
-      F.boolean({ name: 'showSectionLink', initialValue: false }),
+      F.field('backgroundColor', {
+        hidden: ({ parent }) =>
+          ['toolkitCards'].includes(parent.legacyComponent),
+      }),
+      F.boolean({
+        name: 'showSectionLink',
+        initialValue: false,
+        hidden: ({ parent }) =>
+          ['toolkitCards'].includes(parent.legacyComponent),
+      }),
+      F.message(
+        'The selected Legacy Component overrides all available options.',
+        {
+          hidden: ({ parent }) =>
+            !['toolkitCards'].includes(parent.legacyComponent),
+        }
+      ),
+    ]),
+    ...G.group('legacy', [
+      F.dropdown(['toolkitCards'], { name: 'legacyComponent' }),
     ]),
   ],
   preview: P.arrayTitle(),

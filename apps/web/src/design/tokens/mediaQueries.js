@@ -18,14 +18,16 @@ export const customBreakpoints = {
   navigationDesktop: 1000,
   sidebarTablet: 1180,
   //
-  lp_1: 360,
-  lp_2: 577,
-  lp_3: 769,
-  lp_4: 993,
-  lp_5: 1025,
-  lp_6: 1200,
-  lp_7: 1600,
-  lp_8: 2000,
+  360: 360,
+  577: 577,
+  600: 600,
+  769: 769,
+  900: 900,
+  993: 993,
+  1025: 1025,
+  1200: 1200,
+  1600: 1600,
+  2000: 2000,
 }
 
 export const mediaQueries = {

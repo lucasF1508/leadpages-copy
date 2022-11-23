@@ -9,10 +9,19 @@ export * from './group'
 export * from './meta'
 export * from './options'
 
-export const fieldGroupDefaults = () => [content(), meta()]
-export const fieldGroupComponentOptions = () => [
-  content(),
-  fieldGroup('media'),
-  fieldGroup('links'),
-  options(),
+export const fieldGroupDefaults = ({ content: _content, meta: _meta } = {}) => [
+  content(_content),
+  meta(_meta),
+]
+
+export const fieldGroupComponentOptions = ({
+  content: _content,
+  media,
+  links,
+  options: _options,
+} = {}) => [
+  content(_content),
+  fieldGroup('media', media),
+  fieldGroup('links', links),
+  options(_options),
 ]

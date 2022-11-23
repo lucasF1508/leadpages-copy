@@ -1,5 +1,6 @@
 import fieldGroup from './fieldGroup'
 
-export const content = () => fieldGroup('content', { default: true })
+export const content = (props) =>
+  fieldGroup('content', { default: true, ...props })
 
 export default content

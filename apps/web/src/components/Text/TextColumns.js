@@ -1,10 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from '@components/Link'
 import { styled } from '@design'
-
-// Images
-import arrowRightPurpleSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -12,19 +8,27 @@ const OuterContainer = styled('div', {
 
 const InnerContainer = styled('div', {
   d: 'grid',
+  jc: 'center',
   maxWidth: '1140px',
   gap: '2rem',
+  mx: 'auto',
 
   variants: {
     itemsPerRow: {
       1: {
-        gtc: '1fr',
+        gtc: '300px',
+        '@<900': { gtc: '250px' },
+        '@<600': { gtc: '1fr' },
       },
       2: {
-        gtc: '1fr 1fr',
+        gtc: 'repeat(2, 300px)',
+        '@<900': { gtc: 'repeat(2, 250px)' },
+        '@<600': { gtc: 'repeat(2, 1fr)' },
       },
       3: {
-        gtc: '1fr 1fr 1fr',
+        gtc: 'repeat(3, 300px)',
+        '@<900': { gtc: 'repeat(3, 250px)' },
+        '@<600': { gtc: 'repeat(3, 1fr)' },
       },
     },
   },
@@ -81,18 +85,5 @@ const TextColumns = ({ items, itemsPerRow = 2 }) => (
     </InnerContainer>
   </OuterContainer>
 )
-
-TextColumns.propTypes = {
-  textBlockArray: PropTypes.arrayOf(
-    PropTypes.shape({
-      heading: PropTypes.string,
-      text: PropTypes.string,
-      linkType: PropTypes.string,
-      linkText: PropTypes.string,
-      linkRoute: PropTypes.string,
-      linkAltText: PropTypes.string,
-    })
-  ).isRequired,
-}
 
 export default TextColumns

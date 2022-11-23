@@ -26,7 +26,7 @@ const RackComponentList = {
   video: dynamic(() => import('@components/Video/VideoEmbed')),
 
   // Home components
-  featureGrid: dynamic(() => import('@components/FeatureGrid/FeatureGrid')),
+  featureGrid: dynamic(() => import('@components/FeatureGrid')),
   customerRotator: dynamic(() => import('@components/Rotator/CustomerRotator')),
   featuredTemplates: dynamic(() => import('@components/FeaturedTemplates')),
   tabs: dynamic(() => import('@components/Tabs')),

@@ -6,11 +6,12 @@ const DynamicPage = (props) => <Page {...props} />
 
 export async function getStaticProps(context) {
   const { params, preview = false } = context
+  const path = `/${params?.slug?.join('/')}`
 
   const { data, queries, global } = await runQueries(
     getDoc('page', {
       preview,
-      params,
+      params: { path },
     })
   )
 
@@ -41,9 +42,9 @@ export async function getStaticPaths() {
     // filters: ['slug.current != "404"'],
   })
 
-  const paths = docPaths.map(({ slug }) => ({
+  const paths = docPaths.map(({ slug, path }) => ({
     params: {
-      slug,
+      slug: path?.split('/').filter(Boolean) || slug,
     },
   }))
 

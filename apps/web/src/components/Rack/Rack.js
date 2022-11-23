@@ -23,29 +23,33 @@ const Rack = ({ components, children, ...props }) => {
     <AnimatePresence initial={true}>
       <$Rack {...props}>
         {!!components?.length &&
-          components.map(
-            ({ _key, _type: component, width, ...componentData }) => {
-              const Component = RackComponentList[component]
+          components.map(({ _key, _type: component, ...componentData }) => {
+            const Component = RackComponentList[component]
+            const { width, backgroundColor } = componentData
 
-              if (!Component) {
-                console.error(
-                  'Provided component was not found in RackComponentList',
-                  component
-                )
-                return null
-              }
-
-              if (['spacer', 'pageAnchor'].includes(component)) {
-                return <Component key={_key} {...componentData} />
-              }
-
-              return (
-                <Pinion key={_key} width={width} component={component}>
-                  <Component {...componentData} />
-                </Pinion>
+            if (!Component) {
+              console.error(
+                'Provided component was not found in RackComponentList',
+                component
               )
+              return null
             }
-          )}
+
+            if (['spacer', 'pageAnchor'].includes(component)) {
+              return <Component key={_key} {...componentData} />
+            }
+
+            return (
+              <Pinion
+                key={_key}
+                width={width}
+                backgroundColor={backgroundColor}
+                component={component}
+              >
+                <Component {...componentData} />
+              </Pinion>
+            )
+          })}
       </$Rack>
     </AnimatePresence>
   )

@@ -6,6 +6,8 @@ import { getTypeUtil } from '@design/utils'
 import { textDefaultTokens, textPostTokens } from '@design/tokens/text'
 import RendererList from './Renderers/RendererList'
 import MarksList from './Marks/MarksList'
+import ListsList from './Lists/ListsList'
+import ListItemsList from './Lists/ListItemsList'
 
 const $Text = styled('article', {
   variants: {
@@ -27,6 +29,8 @@ const Text = ({
   children,
   renderers = RendererList,
   marks = MarksList,
+  list = ListsList,
+  listItem = ListItemsList,
   ...props
 }) => {
   if (!children && !content) return null
@@ -51,7 +55,12 @@ const Text = ({
       {children || (
         <PortableText
           blocks={content}
-          serializers={{ types: renderers, marks }}
+          serializers={{
+            types: renderers,
+            marks,
+            list,
+            listItem,
+          }}
         />
       )}
     </$Text>

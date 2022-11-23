@@ -1,4 +1,5 @@
 import React from 'react'
+import { BsListCheck } from 'react-icons/bs'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 
 export const TitleStyle = (props) => (
@@ -92,6 +93,13 @@ export const blockContentHeadline = F.array({
       lists: [
         { title: 'Bullet', value: 'bullet' },
         { title: 'Numbered', value: 'number' },
+        {
+          title: 'Checkmarks',
+          value: 'checkmarks',
+          blockEditor: {
+            icon: BsListCheck,
+          },
+        },
       ],
       marks: {
         decorators: [

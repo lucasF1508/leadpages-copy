@@ -25,6 +25,7 @@ export const schemaMediaWithText = F.field('object', {
         description: `Media: media on top, wider media container.
           Content: content on top, wider content container.`,
       }),
+      F.field('backgroundColor'),
       F.array({
         name: 'contentOptions',
         options: {
