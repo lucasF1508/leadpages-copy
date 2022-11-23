@@ -130,23 +130,33 @@ module.exports = withBundleAnalyzer({
       console.log(`Rewriting ${incrementalPaths.length} incremental paths.`)
     }
 
-    return [
-      {
-        source: '/studio/:path*',
-        destination:
-          process.env.NODE_ENV === 'development'
-            ? 'http://localhost:3333/studio/:path*'
-            : '/studio/index.html',
-      },
-      {
-        source: '/home',
-        destination: '/',
-      },
-      ...incrementalPaths.map((path) => ({
-        source: path,
-        destination: `/_legacy${path}`,
-      })),
-    ]
+    return {
+      beforeFiles: [
+        {
+          source: '/studio/:path*',
+          destination:
+            process.env.NODE_ENV === 'development'
+              ? 'http://localhost:3333/studio/:path*'
+              : '/studio/index.html',
+        },
+        {
+          source: '/home',
+          destination: '/',
+        },
+      ],
+      afterFiles: [
+        ...incrementalPaths.map((path) => ({
+          source: path,
+          destination: `/_legacy${path}`,
+        })),
+      ],
+      fallback: [
+        {
+          source: '/blog/:path*',
+          destination: 'https://www.leadpages.com/blog/:path*',
+        },
+      ],
+    }
   },
   eslint: {
     ignoreDuringBuilds: true,
