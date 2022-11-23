@@ -143,6 +143,12 @@ export const $MediaWithTextMedia = styled('div', {
     priority: {},
     align: {},
     hasBackground: {},
+    alignImage: {
+      bottom: {
+        alignSelf: 'flex-end',
+        box: { property: 'mb', multiplier: -1 },
+      },
+    },
   },
   compoundVariants: [
     {
@@ -276,6 +282,7 @@ const MediaWithText = ({
   heading,
   content,
   align = 'right',
+  alignImage = 'default',
   links,
   linkDecorators = [],
   contentOptions = [],
@@ -306,6 +313,7 @@ const MediaWithText = ({
         layout={layout}
         hasBackground={!!backgroundImage}
         align={align}
+        alignImage={alignImage}
       >
         {backgroundImage && (
           <$BackgroundImage objectFit="contain" image={backgroundImage} />

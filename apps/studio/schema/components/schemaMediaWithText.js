@@ -13,6 +13,11 @@ export const schemaMediaWithText = F.field('object', {
         title: 'Content Alignment',
         initialValue: 'right',
       }),
+      F.radio(['default', 'bottom'], {
+        name: 'alignImage',
+        title: 'Image Alignment',
+        initialValue: 'default',
+      }),
       F.radio(['default', 'wide'], {
         name: 'width',
         title: 'Component Width',

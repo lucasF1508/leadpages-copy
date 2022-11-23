@@ -36,21 +36,15 @@ const FlexItem = styled('div', {
 })
 
 const RTGTitle = styled(FlexItem, {
-  fontFamily: 'Space Mono',
-  fontWeight: 700,
-  fontSize: '12px',
-  letterSpacing: '2px',
-  lineHeight: '18px',
-  tt: 'uppercase',
-  opacity: 0.5,
-  mb: '0.5rem',
+  opacity: 0.6,
+  mb: '$3',
+  type: 'overline',
 })
 
 const RTGHeadline = styled(FlexItem, {
   mb: '2rem',
   mw: '730px',
-  fontFamily: 'Value Serif',
-  fontWeight: 400,
+  fontFamily: '$heading',
   letterSpacing: '-0.0625rem',
   lineHeight: '3.75rem',
 
@@ -197,7 +191,7 @@ const Cta = ({
       </RTGHeadline>
       {content && (
         <RTGCaption css={{ '& p': { color: '$white' } }}>
-          <Text content={content} />
+          <Text css={{ mb: 0 }} content={content} />
         </RTGCaption>
       )}
       <MainButtonContainer>
