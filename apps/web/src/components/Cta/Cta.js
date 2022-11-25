@@ -68,8 +68,17 @@ const MainButtonContainer = styled('div', {
 })
 
 const RTGButtonContainer = styled('div', {
+  display: 'flex',
+  gap: '$3',
   alignSelf: 'center',
   p: '0.75rem',
+
+  [`
+    a[class*="linkStyle-text"],
+    a[class*="linkStyle-ghost"]
+  `]: {
+    color: '$white',
+  },
 })
 
 const RTGButton = styled('button', {

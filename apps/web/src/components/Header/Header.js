@@ -19,8 +19,12 @@ const HeaderContainer = styled('header', {
   background: 'transparent',
   z: 1501,
   height: `${HEADER_HEIGHT}px`,
-  box: [{ property: 'px' }],
   boxSizing: 'border-box',
+  px: '$3',
+
+  '@>m': {
+    box: [{ property: 'px' }],
+  },
 
   '&:hover': {
     background: '$white',
@@ -728,8 +732,8 @@ class Header extends React.Component {
       },
       {
         _id: 'blog',
-        condition: 'external',
-        url: 'https://www.leadpages.com/blog',
+        condition: 'internal',
+        url: '/blog',
         ariaLabel: 'Leadpages Blog',
         rel: 'noopener',
         dataGtm: 'desktop-menu-link',

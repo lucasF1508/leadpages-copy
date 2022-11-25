@@ -9,7 +9,9 @@ export const schemaPost = {
   groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
   fieldsets: [FS.seo(), FS.fieldset('meta', { collapsed: false })],
   fields: [
-    ...F.fieldDefaults(),
+    ...F.fieldDefaults({
+      parent: { hidden: true },
+    }),
     ...G.group('meta', [
       F.publishedDate({ fieldset: 'meta' }),
       F.multiReference('post', { name: 'relatedArticles' }),

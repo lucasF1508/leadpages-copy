@@ -1,9 +1,9 @@
-import { BsTextareaT as icon } from 'react-icons/bs'
+import { BsTextCenter as icon } from 'react-icons/bs'
 import { F, P, G } from 'part:gearbox-schema-tool/schema-builder'
 
-export const schemaHeadlineSection = F.object({
+export const schemaTextHeadline = F.object({
   icon,
-  title: 'Headline Section',
+  title: 'Text Headline',
   name: 'headlineSection',
   groups: G.fieldGroupComponentOptions(),
   fields: [
@@ -12,5 +12,5 @@ export const schemaHeadlineSection = F.object({
     ]),
     ...G.group('options', [F.field('backgroundColor')]),
   ],
-  preview: P.blockContent(),
+  preview: P.blockContent({ title: 'Text Headline' }),
 })

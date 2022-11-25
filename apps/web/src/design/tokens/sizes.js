@@ -3,7 +3,7 @@ import { colsWidths } from './grid'
 export const sizes = {
   ...colsWidths,
   tiny: '$cols4',
-  content: '$cols6',
+  content: '$cols8',
   small: '$cols8',
   narrow: '$cols10',
   base: '$cols12',

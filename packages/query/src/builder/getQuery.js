@@ -2,7 +2,7 @@ import { getSchemaRegistry } from 'schema-registry'
 import buildQuery from './buildQuery'
 
 export const getQuery = ({
-  schemaType,
+  schemaType: type,
   projections,
   params,
   pipes,
@@ -10,7 +10,8 @@ export const getQuery = ({
   filters,
   order,
 }) => {
-  const registry = getSchemaRegistry(schemaType)
+  const schemaType = Array.isArray(type) ? type : [type]
+  const registry = getSchemaRegistry(schemaType[0])
 
   return buildQuery({
     schemaType,

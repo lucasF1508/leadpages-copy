@@ -12,7 +12,7 @@ export const schemaIntegration = {
   fieldsets: [FS.seo(), FS.fieldset('meta', { collapsed: false })],
   fields: [
     ...F.fieldDefaults(),
-    ...G.group('content', [F.hero(), F.field('components', {})]),
+    ...G.group('content', [F.field('hero'), F.field('components', {})]),
     ...G.group('seo', [F.seo()]),
   ],
   preview: P.titleImage(),

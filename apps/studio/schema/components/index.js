@@ -1,3 +1,4 @@
+export * from './schemaAudio'
 export * from './schemaAccordion'
 export * from './schemaCards'
 export * from './schemaEmbed'
@@ -18,10 +19,9 @@ export * from './schemaTextBlock'
 export * from './schemaTextColumn'
 export * from './schemaVideo'
 export * from './schemaInlineCTA'
-
-// Home components
 export * from './schemaFeatureGrid'
 export * from './schemaCustomerRotator'
-export * from './schemaHeadlineSection'
+export * from './schemaTextHeadline'
 export * from './schemaFeaturedTemplates'
 export * from './schemaCtaInline'
+export * from './schemaQuote'

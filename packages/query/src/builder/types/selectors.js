@@ -14,7 +14,7 @@ export const selectors = (schemaType, params, filters) => {
 
   return [
     `[`,
-    buildSchemaTypes(schemaType),
+    `(${buildSchemaTypes(schemaType)})`,
     buildFilters(filters, ' && ', !!schemaType),
     buildFilters(slugFilter),
     buildFilters(pathFilter),

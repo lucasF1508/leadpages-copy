@@ -152,5 +152,8 @@ export const blockContent = {
     {
       type: 'pageAnchor',
     },
+    {
+      type: 'audio',
+    },
   ],
 }

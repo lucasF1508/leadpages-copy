@@ -71,12 +71,9 @@ export const pinionTokens = {
       mediaWithText: {
         '> div': {
           maxWidth: '$extended',
-
-          '&[width="default"]': {
-            maxWidth: '$base',
-          },
         },
       },
+      // quote: {},
       gallery: {
         '> div': {
           maxWidth: '$wide',
@@ -129,11 +126,32 @@ export const pinionTokens = {
     },
     align: getAlignmentUtil('> div'),
     maxWidth: getMaxWidthUtil('> div'),
+    width: {
+      default: {
+        '> div': {
+          maxWidth: '$base',
+        },
+      },
+    },
     backgroundColor: {
       gray: {
         bc: '$grayAlt',
         my: 'unset',
         box: [{ property: 'py' }],
+      },
+      tan: {
+        bc: '$backgroundAlt',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+    },
+    legacyComponent: {
+      customerQuoteKailei: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
       },
     },
   },

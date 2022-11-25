@@ -1,8 +1,8 @@
-import { BsNewspaper as icon } from 'react-icons/bs'
+import { BsArchive as icon } from 'react-icons/bs'
 import startCase from 'lodash/startCase'
 import { F, FS, G, P } from 'part:gearbox-schema-tool/schema-builder'
 
-const pageTemplates = ['post']
+const pageTemplates = ['post', 'customer', 'integration']
 
 export const schemaPageArchive = {
   icon,
@@ -12,9 +12,11 @@ export const schemaPageArchive = {
   groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
   fieldsets: [FS.seo(), FS.fieldset('meta', { collapsed: false })],
   fields: [
-    ...F.fieldDefaults(),
+    ...F.fieldDefaults({
+      slug: { readOnly: true },
+      parent: { hidden: true },
+    }),
     ...G.group('content', [
-      F.hero(),
       F.string({
         name: 'archiveOf',
         options: {

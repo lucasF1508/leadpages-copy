@@ -1,6 +1,7 @@
 import React from 'react'
 import HeroHome from './HeroHome'
 import HeroDefault from './HeroDefault'
+import HeroCustomer from './HeroCustomer'
 
 const Hero = ({ hero: heroOrg }) => {
   if (!heroOrg) return null
@@ -9,8 +10,8 @@ const Hero = ({ hero: heroOrg }) => {
   switch (hero?._type) {
     case 'heroHome':
       return <HeroHome {...hero} />
-    case 'heroSimple':
-      return <>No Hero</>
+    case 'heroCustomer':
+      return <HeroCustomer {...hero} />
     default:
       return <HeroDefault {...hero} />
   }

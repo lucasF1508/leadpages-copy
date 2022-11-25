@@ -153,7 +153,11 @@ module.exports = withBundleAnalyzer({
       fallback: [
         {
           source: '/blog/:path*',
-          destination: 'https://www.leadpages.com/blog/:path*',
+          destination: 'https://www.leadpages.com/blog/:path*/',
+        },
+        {
+          source: '/blog/:path*/',
+          destination: 'https://www.leadpages.com/blog/:path*/',
         },
       ],
     }

@@ -87,6 +87,12 @@ export const type = {
       ...typeSizes.base,
       '@>s': typeSizes.lg,
     },
+    baseTypeLarge: {
+      ...typeSizes.lg,
+      '@>s': typeSizes.xl,
+      '@>m': typeSizes['3xl'],
+      lh: '$lineHeights$l',
+    },
     subHeading: {
       ...typeSizes.lg,
       '@>s': typeSizes.xl,
@@ -134,6 +140,13 @@ export const type = {
       '@>m': typeSizes['2xl'],
       lh: '$lineHeights$m',
     },
+    heroCustomer: {
+      ...typeSizes['2xl'],
+      '@>s': typeSizes['5xl'],
+      '@>m': typeSizes['6xl'],
+      '@>l': typeSizes['7xl'],
+      lh: '$lineHeights$m',
+    },
     button: typeSizes.base,
     buttonAlt: {
       ...typeSizes.base,
@@ -163,6 +176,9 @@ export const type = {
     baseTypeAlt: {
       fontFamily: '$base',
       fontWeight: '$normal',
+    },
+    baseTypeLarge: {
+      c: '$text',
     },
     subHeading: {
       fontFamily: '$base',
@@ -196,6 +212,7 @@ export const type = {
       fontWeight: '$medium',
       fontFamily: '$heading',
     },
+    heroCustomer: {},
     button: {
       fontWeight: '$normal',
       fontFamily: '$base',

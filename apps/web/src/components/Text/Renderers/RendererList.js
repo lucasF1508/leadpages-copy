@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 
 const RendererList = {
+  audio: dynamic(() => import('./AudioRenderer')),
   block: dynamic(() => import('./BlockRenderer')),
   blockquote: dynamic(() => import('./BlockQuoteRenderer')),
   embed: dynamic(() => import('./EmbedRenderer')),

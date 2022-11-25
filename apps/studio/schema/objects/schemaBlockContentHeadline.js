@@ -41,6 +41,10 @@ export const NormalStyle = (props) => (
   </span>
 )
 
+const LargerTextStyle = (props) => (
+  <span style={{ fontSize: '1.125em' }}>{props.children}</span>
+)
+
 export const OverlineStyle = (props) => (
   <span
     style={{
@@ -72,11 +76,15 @@ export const blockContentHeadline = F.array({
           blockEditor: { render: NormalStyle },
         },
         {
+          title: 'Large',
+          value: 'large',
+          blockEditor: { render: LargerTextStyle },
+        },
+        {
           title: 'Overline',
           value: 'headlineSupertitle',
           blockEditor: { render: OverlineStyle },
         },
-        { title: 'Overline Alt', value: 'headlineAlternateSupertitle' },
         {
           title: 'Title',
           value: 'headlineTitle',

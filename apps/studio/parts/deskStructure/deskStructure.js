@@ -29,9 +29,6 @@ export const deskStructure = () =>
               GB.singletonListItem('pageHome', { title: 'Home' }).icon(
                 AiOutlineHome
               ),
-              GB.singletonListItem('pageArchive', {
-                title: 'Archive',
-              }).icon(BsNewspaper),
               S.documentTypeListItem('page').title('Dynamic Pages'),
               S.listItem()
                 .title('Legacy Pages')
@@ -45,10 +42,11 @@ export const deskStructure = () =>
         )
         .icon(AiOutlineFileText),
       S.documentTypeListItem('post'),
+      S.documentTypeListItem('pageArchive').title('Archives'),
       S.documentTypeListItem('customer').title('Customers'),
       S.documentTypeListItem('comparison').title('Comparisons'),
-      S.divider(),
       S.documentTypeListItem('integration').title('Integrations'),
+      S.divider(),
       S.documentTypeListItem('career').title('Careers'),
       S.documentTypeListItem('testimonial').title('Testimonials'),
       S.documentTypeListItem('faq').title('FAQs'),

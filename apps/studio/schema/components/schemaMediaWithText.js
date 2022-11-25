@@ -7,11 +7,24 @@ export const schemaMediaWithText = F.field('object', {
   name: 'mediaWithText',
   groups: G.fieldGroupComponentOptions(),
   fields: [
+    ...G.group('content', [
+      F.field('blockContentHeadline', { name: 'content' }),
+      F.array({
+        name: 'links',
+        of: [F.link()],
+      }),
+    ]),
+    ...G.group('media', [
+      F.field('media'),
+      F.image({
+        name: 'backgroundImage',
+      }),
+    ]),
     ...G.group('options', [
       F.radio(['left', 'right'], {
         name: 'align',
         title: 'Content Alignment',
-        initialValue: 'right',
+        initialValue: 'left',
       }),
       F.radio(['default', 'bottom'], {
         name: 'alignImage',
@@ -48,20 +61,6 @@ export const schemaMediaWithText = F.field('object', {
           ],
         },
         of: [{ type: 'string' }],
-      }),
-    ]),
-    ...G.group('content', [
-      F.field('blockContentHeadline', { name: 'content' }),
-      F.array({
-        name: 'links',
-        of: [F.link()],
-      }),
-    ]),
-    ...G.group('media', [
-      F.field('media'),
-      F.image({
-        name: 'backgroundImage',
-        hidden: ({ parent }) => parent?.media?.condition !== 'image',
       }),
     ]),
   ],

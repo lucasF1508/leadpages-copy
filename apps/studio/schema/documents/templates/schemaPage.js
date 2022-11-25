@@ -33,7 +33,6 @@ export const schemaPage = {
         title: 'Redirect to legacy page',
         description:
           'Enable to redirect to a legacy Leadpages page, if it exists.',
-        initialValue: true,
       }),
       F.object({
         name: 'options',

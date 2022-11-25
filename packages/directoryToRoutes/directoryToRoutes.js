@@ -34,7 +34,7 @@ const directoryToRoutes = (directory) => {
 }
 
 const getSanityPaths = async ({
-  type = 'page',
+  types = ['page', 'customer'],
   field = 'path',
   projectId,
   dataset,
@@ -48,7 +48,8 @@ const getSanityPaths = async ({
     },
   })
 
-  const query = `*[_type == "${type}" && !(_id in path('drafts.**')) && redirectToLegacy != true] | order(order asc, _createdAt desc).${field}`
+  const typesString = `[${types.map((item) => `'${item}'`).join(',')}]`
+  const query = `*[_type in ${typesString} && !(_id in path('drafts.**')) && redirectToLegacy != true] | order(order asc, _createdAt desc).${field}`
 
   const data = await client.fetch(query)
 

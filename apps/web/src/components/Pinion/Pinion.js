@@ -6,9 +6,9 @@ const $Pinion = styled('section', pinionTokens)
 
 const $Inner = styled('div', {})
 
-const Pinion = ({ component, children, width, ...props }) => (
+const Pinion = ({ component, children, ...props }) => (
   <$Pinion component={component} {...props}>
-    <$Inner width={width}>{children}</$Inner>
+    <$Inner>{children}</$Inner>
   </$Pinion>
 )
 
