@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import usePagination from '@hooks/usePagination'
 import NextLink from 'next/link'
 import { styled } from '@design'
-import { GrFormNextLink as NextIcon } from '@react-icons/all-files/gr/GrFormNextLink'
-import { GrFormPreviousLink as PrevIcon } from '@react-icons/all-files/gr/GrFormPreviousLink'
+import { GrLinkNext as NextIcon } from '@react-icons/all-files/gr/GrLinkNext'
+import { GrLinkPrevious as PrevIcon } from '@react-icons/all-files/gr/GrLinkPrevious'
+import { uniqueId } from 'lodash'
 
 const $Pagination = styled('div', {
   d: 'flex',
@@ -29,10 +30,13 @@ const $PaginationLink = styled('a', {
   ai: 'center',
   w: '$space$4',
   h: '$space$4',
-  fontWeight: '$bold',
-  c: '$text',
-  transition: 'color $base',
+  c: '$textAlt',
+  transition: 'all 300ms',
   type: 'button',
+  border: '1px solid transparent',
+  br: '$round',
+  fontWeight: 500,
+
   '& svg': {
     d: 'block',
 
@@ -44,6 +48,7 @@ const $PaginationLink = styled('a', {
 
   '&:hover': {
     color: '$hover',
+    border: '1px solid $colors$primary',
 
     '& svg path': {
       stroke: '$hover',
@@ -53,7 +58,12 @@ const $PaginationLink = styled('a', {
   variants: {
     isActive: {
       true: {
-        color: '$hover',
+        color: '$white',
+        bc: '$primary',
+
+        '&:hover': {
+          c: '$lightGray',
+        },
       },
     },
     hasIcon: {
@@ -78,6 +88,10 @@ const $PaginationLink = styled('a', {
   },
 })
 
+const $PaginiationElipses = styled('div', {
+  px: '$1',
+})
+
 const Pagination = ({ pagination }) => {
   const { links } = usePagination(pagination)
 
@@ -85,15 +99,20 @@ const Pagination = ({ pagination }) => {
     <$Pagination>
       <$PaginationInner>
         {links &&
-          links.map(({ key, url, isActive, icon, label }) => (
-            <NextLink key={key} href={url} passHref>
-              <$PaginationLink isActive={isActive} hasIcon={!!icon}>
-                {icon === 'next' && <NextIcon />}
-                {icon === 'prev' && <PrevIcon />}
-                <span>{label}</span>
-              </$PaginationLink>
-            </NextLink>
-          ))}
+          links.map(({ key, url, isActive, icon, label }, i) => {
+            if (!url) {
+              return <$PaginiationElipses>{label}</$PaginiationElipses>
+            }
+            return (
+              <NextLink key={key} href={url} passHref>
+                <$PaginationLink isActive={isActive} hasIcon={!!icon}>
+                  {icon === 'next' && <NextIcon />}
+                  {icon === 'prev' && <PrevIcon />}
+                  <span>{label}</span>
+                </$PaginationLink>
+              </NextLink>
+            )
+          })}
       </$PaginationInner>
     </$Pagination>
   )

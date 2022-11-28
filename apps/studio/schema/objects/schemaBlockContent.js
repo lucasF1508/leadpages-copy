@@ -1,4 +1,5 @@
 import React from 'react'
+import { AiOutlineAlignCenter as Icon } from 'react-icons/ai'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 
 /**
@@ -68,6 +69,22 @@ export const blockContent = {
                 <span style={{ textDecoration: 'underline', fontWeight: 700 }}>
                   U
                 </span>
+              ),
+            },
+          },
+          {
+            title: 'Center Text',
+            value: 'align',
+            blockEditor: {
+              icon: () => <Icon />,
+              render: (props) => (
+                <div
+                  style={{
+                    textAlign: 'center',
+                  }}
+                >
+                  {props.children}
+                </div>
               ),
             },
           },

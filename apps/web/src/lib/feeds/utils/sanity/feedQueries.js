@@ -30,6 +30,8 @@ export const feedIdsQuery = /* groq */ `
 
 export const categoryQuery = /* groq */ `*[_type == 'category' && !(_id in path("drafts.**"))]`
 
+export const categoryPostCountQuery = /* groq */ `"postCount": count(*[!(_id in path('drafts.**')) && _type == "post" && (primaryCategory._ref == ^._id || ^._id in secondaryCategories[]._ref)])`
+
 export const postQuery = /* groq */ `*[_type == 'post']`
 
 export const categoryPostQuery = /* groq */ `

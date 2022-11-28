@@ -61,9 +61,29 @@ const $CTAImage = styled('div', {
   maxWidth: '92.5%',
 
   '@>s': {
-    maxWidth: '$cols3',
     py: '$3',
     mx: 0,
+    flex: '0 0 auto',
+  },
+
+  variants: {
+    imageWidth: {
+      half: {
+        '@>s': {
+          maxWidth: '50%',
+        },
+      },
+      third: {
+        '@>s': {
+          maxWidth: '33%',
+        },
+      },
+      quarter: {
+        '@>s': {
+          maxWidth: '25%',
+        },
+      },
+    },
   },
 })
 
@@ -107,13 +127,32 @@ const $InlineCta = styled('div', {
       },
       secondary: { bc: '$ctaPurple' },
       grayAlt: { bc: '$grayAlt' },
+      transparent: {
+        bc: 'transparent',
+        [`${$CTAContent}`]: {
+          p: 0,
+
+          '@>s': {
+            px: '$5',
+            py: '$3',
+          },
+        },
+      },
     },
   },
 })
 
 const InlineCta = ({ node = {}, ...props }) => {
-  const { image, title, content, ctaLink, contentRight, imageBottom, bgColor } =
-    node
+  const {
+    image,
+    title,
+    content,
+    ctaLink,
+    contentRight,
+    imageBottom,
+    bgColor,
+    imageWidth = 'third',
+  } = node
 
   return (
     <$InlineCta
@@ -122,7 +161,7 @@ const InlineCta = ({ node = {}, ...props }) => {
       imageBottom={imageBottom}
       bgColor={bgColor}
     >
-      <$CTAImage>
+      <$CTAImage imageWidth={imageWidth}>
         <Image objectFit="contain" image={image || ImageFallback} />
       </$CTAImage>
       <$CTAContent>

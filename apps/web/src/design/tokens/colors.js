@@ -28,6 +28,8 @@ export const colors = {
   lightGray: '#edecec',
   darkGray: '#bfbebd',
   darkGrayAlt: '#797f89',
+  grayTertiary: '#b1bacc',
+  grayTertiaryAlt: '#e6e9ef',
   tan: '#fef9f1',
   black: '#000000',
   purple: '#603eff',

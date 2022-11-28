@@ -2,7 +2,7 @@ import React from 'react'
 import { getDoc, getAllDocs, runQueries } from '@lib'
 import Archive from '@layouts/Archive'
 
-const ArchivePage = (props) => <Archive {...props} />
+const ArchivePage = (props) => <Archive {...props} hasFeaturedPost={true} />
 
 export const shapeData = ([
   data,
@@ -10,7 +10,7 @@ export const shapeData = ([
   { docs, pagination },
 ]) => [
   {
-    ...data,
+    settings: data,
     categories,
     docs,
     pagination,
@@ -24,19 +24,17 @@ export async function getStaticProps(context) {
   const { preview = false } = context
 
   const { data, global, queries } = await runQueries([
-    getDoc('pageArchive', {
-      filters: [`archiveOf == "${docType}"`],
-      preview,
-    }),
+    getDoc('postSettings', {}),
     getAllDocs('categoryPost', {
       filters: "!(_id in path('drafts.**'))",
+      projections: `"postCount": count(*[!(_id in path('drafts.**')) && _type == "post" && (primaryCategory._ref == ^._id || ^._id in secondaryCategories[]._ref)])`,
       preview,
     }),
     getAllDocs(docType, {
       filters: "!(_id in path('drafts.**'))",
       order: 'order(publishedDate desc)',
       preview,
-      asCards: true,
+      offsetEnd: 1,
     }),
   ])
 

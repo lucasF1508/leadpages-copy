@@ -2,6 +2,7 @@ import React from 'react'
 import getBaseUrlFromResolvedUrl from '@utils/getBaseUrlFromResolvedUrl'
 import { getDoc, getAllDocs, runQueries } from '@lib'
 import Archive from '@layouts/Archive'
+import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
 
 const PaginationPage = (props) => <Archive {...props} />
 
@@ -11,10 +12,10 @@ export const shapeData = ([
   { docs, pagination },
 ]) => [
   {
-    ...data,
+    settings: data,
+    categories,
     docs,
     pagination,
-    categories,
   },
 ]
 
@@ -39,20 +40,18 @@ export async function getServerSideProps(context) {
   }
 
   const { data, queries, global } = await runQueries([
-    getDoc('pageArchive', {
-      filters: [`archiveOf == "${docType}"`],
-      preview,
-    }),
+    getDoc('postSettings', {}),
     getAllDocs('categoryPost', {
       filters: "!(_id in path('drafts.**'))",
+      projections: `${categoryPostCountQuery}`,
       preview,
     }),
     getAllDocs(docType, {
       filters: "!(_id in path('drafts.**'))",
       order: 'order(publishedDate desc)',
-      currentPage: num,
-      asCards: true,
       preview,
+      currentPage: num,
+      offsetStart: 1,
     }),
   ])
 

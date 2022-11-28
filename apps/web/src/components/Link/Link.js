@@ -62,11 +62,14 @@ const Link = (
     hash,
     hasIcon,
     disabled,
+    popUpId,
+    leadpagesDomain,
     ...props
   },
   ref
 ) => {
-  if (!url && !['modal', 'video'].includes(condition)) return null
+  if (!url && !['modal', 'video', 'leadpagesTrigger'].includes(condition))
+    return null
   const { Modal: ModalComponent = () => null, modalKey, modalCss } = props
   const Icon = Icons[icon || condition]
 
@@ -77,6 +80,10 @@ const Link = (
         {hasIcon && <Icon />}
       </$Link>
     )
+  }
+
+  if (condition === 'leadpagesTrigger' && (!popUpId || !leadpagesDomain)) {
+    return null
   }
 
   switch (condition) {
@@ -122,6 +129,19 @@ const Link = (
             <ModalComponent />
           </Modal>
         </ModalProvider>
+      )
+    case 'leadpagesTrigger':
+      return (
+        <$Link
+          ref={ref}
+          rel={rel}
+          data-leadbox-popup={popUpId}
+          data-leadbox-domain={leadpagesDomain}
+          {...props}
+        >
+          {children || label}
+          {hasIcon && <Icon />}
+        </$Link>
       )
     case 'video':
       return (

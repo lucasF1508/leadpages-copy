@@ -67,7 +67,7 @@ export default function App({
         {hideBar && (
           <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
         )}
-        <SEO seo={pageData?.seo} siteMeta={siteMeta} />
+        <SEO seo={seo} siteMeta={siteMeta} />
         <LazyMotion features={loadFeatures} strict>
           {/* {navigation && <Header navigation={navigation} />} */}
           <Header

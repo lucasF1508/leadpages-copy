@@ -2,16 +2,19 @@ import React from 'react'
 import getBaseUrlFromResolvedUrl from '@utils/getBaseUrlFromResolvedUrl'
 import { getDoc, getAllDocs, runQueries } from '@lib'
 import Archive from '@layouts/Archive'
+import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
 
 const PaginationPage = (props) => <Archive {...props} />
 
 export const shapeData = ([
-  data,
+  settings,
+  currentCategory,
   { docs: categories },
   { docs, pagination },
 ]) => [
   {
-    ...data,
+    settings,
+    currentCategory,
     docs,
     pagination,
     categories,
@@ -23,7 +26,7 @@ export const exporter = (props) => shapeData(props)
 export async function getServerSideProps(context) {
   const { preview = false, params, resolvedUrl } = context
   const docType = 'post'
-  const { num: [num] = [] } = params
+  const { num, category } = params
   const baseUrl = getBaseUrlFromResolvedUrl({
     resolvedUrl,
     params,
@@ -38,20 +41,32 @@ export async function getServerSideProps(context) {
     }
   }
 
+  if (!category) {
+    return {
+      redirect: {
+        destination: `/${baseUrl}`,
+        permanent: false,
+      },
+    }
+  }
+
   const { data, queries, global } = await runQueries([
-    getDoc('pageArchive', {
-      filters: [`archiveOf == "${docType}"`],
-      preview,
+    getDoc('postSettings', {}),
+    getDoc('categoryPost', {
+      filters: `slug.current == '${category}'`,
     }),
     getAllDocs('categoryPost', {
       filters: "!(_id in path('drafts.**'))",
+      projections: `${categoryPostCountQuery}`,
       preview,
     }),
     getAllDocs(docType, {
-      filters: "!(_id in path('drafts.**'))",
       order: 'order(publishedDate desc)',
       currentPage: num,
-      asCards: true,
+      filters: [
+        "!(_id in path('drafts.**'))",
+        `(primaryCategory->slug.current == '${category}' || '${category}' in secondaryCategories[]->slug.current)`,
+      ],
       preview,
     }),
   ])

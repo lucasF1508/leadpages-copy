@@ -84,14 +84,14 @@ const $ArchiveLink = styled(Link, {
 
 const $ArchiveSocialIcon = styled('button', {
   c: '$textAlt',
-  border: '1px solid #b1bacc',
+  border: '1px solid $colors$grayTertiary',
   borderRadius: '3px',
   width: 25,
   height: 25,
   transition: 'ease 0.3s all',
 
   svg: {
-    c: '#b1bacc',
+    c: '$grayTertiary',
     transition: 'ease 0.3s all',
     h: '$space$1_5',
     mt: 2,
@@ -100,7 +100,7 @@ const $ArchiveSocialIcon = styled('button', {
   '@>m': {
     width: 40,
     height: 40,
-    border: '2px solid #b1bacc',
+    border: '2px solid $colors$grayTertiary',
 
     svg: {
       h: '$space$2',
@@ -168,6 +168,7 @@ const $ArchiveSocial = styled('div', {
 
 const ArchiveSingle = ({
   _createdAt,
+  publishedDate,
   content,
   image,
   primaryCategory,
@@ -226,14 +227,20 @@ const ArchiveSingle = ({
                 condition="internal"
               />
               <>&nbsp;&nbsp;</>|<>&nbsp;&nbsp;</>
-              {new Date(_createdAt).toLocaleDateString('en-US', {
-                month: 'short',
-                day: '2-digit',
-              })}
+              {new Date(publishedDate || _createdAt).toLocaleDateString(
+                'en-US',
+                {
+                  month: 'short',
+                  day: '2-digit',
+                }
+              )}
               ,{' '}
-              {new Date(_createdAt).toLocaleDateString('en-US', {
-                year: 'numeric',
-              })}
+              {new Date(publishedDate || _createdAt).toLocaleDateString(
+                'en-US',
+                {
+                  year: 'numeric',
+                }
+              )}
             </Heading>
           )}
           <Image image={image} css={{ mb: '$5' }} />

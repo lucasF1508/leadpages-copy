@@ -2,10 +2,6 @@ import { F } from 'part:gearbox-schema-tool/schema-builder'
 
 export const schemaSidebarCta = F.object({
   name: 'sidebarCta',
-  options: {
-    collapsible: true,
-    collapsed: true,
-  },
   fields: [
     F.string({
       name: 'ctaHeading',

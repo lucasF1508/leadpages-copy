@@ -1,6 +1,7 @@
 import React from 'react'
 import { getAllDocs, getDoc, getDocSlugs, runQueries } from '@lib'
 import { ArchiveSingle } from '@layouts/Archive'
+import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
 
 const ArchiveSinglePage = (props) => <ArchiveSingle {...props} />
 
@@ -41,6 +42,7 @@ export async function getStaticProps(context) {
     }),
     getAllDocs('categoryPost', {
       filters: ["!(_id in path('drafts.**'))"],
+      projections: `${categoryPostCountQuery}`,
     }),
   ])
 

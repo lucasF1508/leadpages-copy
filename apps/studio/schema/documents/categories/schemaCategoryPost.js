@@ -8,16 +8,5 @@ export const schemaCategoryPost = {
   type: 'document',
   groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
   fieldsets: [FS.fieldset('meta'), FS.seo()],
-  fields: [
-    ...F.fieldDefaults(),
-    ...G.group('content', [
-      F.hero({
-        options: {
-          collapsible: false,
-          collapsed: false,
-        },
-      }),
-    ]),
-    ...G.group('seo', [F.seo()]),
-  ],
+  fields: [...F.fieldDefaults(), ...G.group('seo', [F.seo()])],
 }

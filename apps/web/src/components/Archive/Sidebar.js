@@ -3,7 +3,7 @@ import { styled } from '@design'
 import Heading from '@components/Heading'
 import Image from '@components/Image'
 import Link from '@components/Link'
-import { MdShowChart } from 'react-icons/md'
+import { IoMdTrendingUp as TrendingUp } from '@react-icons/all-files/io/IoMdTrendingUp'
 import SidebarCTA from '@components/Archive/SidebarCTA'
 
 const $Heading = styled(Heading, {})
@@ -128,8 +128,8 @@ const $TrendingGrid = styled('div', {
   [`${$Heading}`]: $HeadingStyles,
 })
 
-const ArchiveSidebar = ({ categories, settings }) => {
-  const { trendingArticles, sidebarCta } = settings
+const ArchiveSidebar = ({ categories, settings = {} }) => {
+  const { trendingArticles = [], sidebarCta = {} } = settings
 
   return (
     <$ArchiveSidebar>
@@ -138,15 +138,18 @@ const ArchiveSidebar = ({ categories, settings }) => {
       {categories && (
         <$CategoriesGrid>
           <$Heading heading={'Categories'} tag="h4" />
-          {categories.map((category) => (
-            <$CategoryGridItem key={category._id}>
-              <$CategoryLink
-                label={category.title}
-                url={`/blog/category${category.path}`}
-                condition={'internal'}
-              />
-            </$CategoryGridItem>
-          ))}
+          {categories.map(
+            (category) =>
+              category.postCount > 0 && (
+                <$CategoryGridItem key={category._id}>
+                  <$CategoryLink
+                    label={category.title}
+                    url={category.path}
+                    condition={'internal'}
+                  />
+                </$CategoryGridItem>
+              )
+          )}
         </$CategoriesGrid>
       )}
       {trendingArticles && (
@@ -154,15 +157,19 @@ const ArchiveSidebar = ({ categories, settings }) => {
           <$TrendingHeading>
             <$Heading heading={'Popular Posts'} tag="h4" />
             <$Icon>
-              <MdShowChart size={18} />
+              <TrendingUp size={18} />
             </$Icon>
           </$TrendingHeading>
           {trendingArticles.map(
             (article) =>
               article.title &&
               article.slug && (
-                <$TrendingLink url={article.path} condition="internal">
-                  <$TrendingArticle key={article._id}>
+                <$TrendingLink
+                  url={article.path}
+                  condition="internal"
+                  key={article._id}
+                >
+                  <$TrendingArticle>
                     {article.image && (
                       <div style={{ minWidth: '40%' }}>
                         <Image image={article.image} />

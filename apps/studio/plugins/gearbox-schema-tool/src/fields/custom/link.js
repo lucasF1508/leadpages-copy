@@ -26,6 +26,8 @@ export const link = ({
     target: {},
     video: {},
     hash: {},
+    leadpagesDomain: {},
+    popUpId: {},
     hasHash: {},
     linkStyle: {},
     linkSize: {},
@@ -37,6 +39,7 @@ export const link = ({
     internal: [],
     external: [],
     download: [],
+    leadpagesTrigger: [],
     ...conditionsOrg,
   })
 
@@ -64,7 +67,6 @@ export const link = ({
           ...args.url,
         })
       : '',
-
     args.target
       ? F.checkbox({
           name: 'target',
@@ -99,6 +101,22 @@ export const link = ({
           hidden: ({ parent }) =>
             parent.condition !== 'internal' || parent.hasHash !== true,
           ...args.hash,
+        })
+      : '',
+    args.popUpId
+      ? F.string({
+          name: 'popUpId',
+          group: isGrouped && 'content',
+          hidden: ({ parent }) => parent.condition !== 'leadpagesTrigger',
+          ...args.popUpId,
+        })
+      : '',
+    args.leadpagesDomain
+      ? F.string({
+          name: 'leadpagesDomain',
+          group: isGrouped && 'content',
+          hidden: ({ parent }) => parent.condition !== 'leadpagesTrigger',
+          ...args.leadpagesDomain,
         })
       : '',
     args.file

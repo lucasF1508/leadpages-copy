@@ -116,6 +116,20 @@ export const textPostTokens = {
     lh: 1.5,
     listStyle: 'none',
 
+    a: {
+      d: 'inline',
+      bb: '1px solid $colors$primary',
+
+      '&:hover': {
+        bb: '2px solid $colors$primary',
+        c: '$primary',
+      },
+    },
+
+    '& strong': {
+      fontWeight: 500,
+    },
+
     '&:first-child': {
       mt: 0,
     },

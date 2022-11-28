@@ -2,40 +2,31 @@ import React from 'react'
 import getBaseUrlFromResolvedUrl from '@utils/getBaseUrlFromResolvedUrl'
 import { getDoc, getAllDocs, runQueries } from '@lib'
 import Archive from '@layouts/Archive'
+import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
 
 const CategoryPage = (props) => <Archive {...props} />
 
 export const shapeData = ([
-  data,
-  archive,
+  settings,
+  currentCategory,
   { docs: categories },
   { docs, pagination },
-]) => {
-  const hero = {
-    ...(archive?.hero || {}),
-    label: data?.label || data?.title || null,
-    heading: data?.heading || archive?.hero?.heading || null,
-    content: data?.content || archive?.hero?.content || null,
-  }
-
-  return [
-    {
-      ...archive,
-      ...data,
-      docs,
-      pagination,
-      categories,
-      hero,
-    },
-  ]
-}
+]) => [
+  {
+    settings,
+    currentCategory,
+    docs,
+    pagination,
+    categories,
+  },
+]
 
 export const dataShaper = (props) => shapeData(props)
 
 export async function getServerSideProps(context) {
   const docType = 'post'
   const { preview = false, params, resolvedUrl } = context
-  const { category: [category, type, num = 1] = [] } = params
+  const { category } = params
 
   const baseUrl = getBaseUrlFromResolvedUrl({
     resolvedUrl,
@@ -51,38 +42,22 @@ export async function getServerSideProps(context) {
     }
   }
 
-  if (type === 'page' && Number(num) === 1) {
-    return {
-      redirect: {
-        destination: `/${baseUrl}/category/${category}`,
-        permanent: false,
-      },
-    }
-  }
-
   const { data, queries, global } = await runQueries([
+    getDoc('postSettings', {}),
     getDoc('categoryPost', {
-      preview,
-      params: {
-        slug: category,
-      },
-    }),
-    getDoc('pageArchive', {
-      filters: [`archiveOf == "${docType}"`],
-      preview,
+      filters: `slug.current == '${category}'`,
     }),
     getAllDocs('categoryPost', {
       filters: "!(_id in path('drafts.**'))",
+      projections: `${categoryPostCountQuery}`,
       preview,
     }),
     getAllDocs(docType, {
       order: 'order(publishedDate desc)',
       filters: [
-        `category->slug.current == '${category}'`,
+        `(primaryCategory->slug.current == '${category}' || '${category}' in secondaryCategories[]->slug.current)`,
         "!(_id in path('drafts.**'))",
       ],
-      currentPage: parseInt(num, 10),
-      asCards: true,
       preview,
     }),
   ])
