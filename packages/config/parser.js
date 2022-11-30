@@ -25,6 +25,45 @@ module.exports = {
         ({ name }) =>
           !['heading', 'spacer', 'pageAnchor', 'tableBlock'].includes(name)
       ),
+    conditions: {
+      _type: {
+        customerRotator: {
+          '...': true,
+          customers: `select(
+            selection == 'all' => *[_type == 'customer'] | order(orderRank) {
+              path,
+              excerpt {
+                ...,
+                image {
+                  ...,
+                  asset->
+                }
+              }
+            },
+            selection == 'category' => *[_type == 'customer' && ^.category._ref in category[]._ref] | order(orderRank) {
+              path,
+              excerpt {
+                ...,
+                image {
+                  ...,
+                  asset->
+                }
+              }
+            },
+            customers[]->{
+              path,
+              excerpt {
+                ...,
+                image {
+                  ...,
+                  asset->
+                }
+              }
+            },
+          )`,
+        },
+      },
+    },
   },
   blockContent: {
     types: (types) =>

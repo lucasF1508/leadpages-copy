@@ -5,17 +5,26 @@ export const schemaCustomerRotator = F.object({
   icon,
   name: 'customerRotator',
   fields: [
-    F.array({
-      name: 'items',
-      of: F.object({
-        name: 'item',
-        fields: [
-          F.string({ name: 'title' }),
-          F.string({ name: 'content' }),
-          F.image({ name: 'image' }),
-        ],
-      }),
+    F.radio(['all', 'category', 'select'], {
+      name: 'selection',
+      initialValue: 'all',
+    }),
+    F.message('All customers will be displayed.', {
+      hidden: ({ parent }) => parent?.selection !== 'all',
+    }),
+    F.reference('categoryCustomer', {
+      name: 'category',
+      hidden: ({ parent }) => parent?.selection !== 'category',
+    }),
+    F.multiReference('customer', {
+      name: 'customers',
+      hidden: ({ parent }) => parent?.selection !== 'select',
     }),
   ],
-  preview: P.text('Customer Rotator'),
+  preview: P.titleImage({
+    selection: 'selection',
+    prepare: ({ selection }) => ({
+      title: `Customer Rotator${selection && `: ${selection}`}`,
+    }),
+  }),
 })

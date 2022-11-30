@@ -31,6 +31,7 @@ const Text = ({
   marks = MarksList,
   list = ListsList,
   listItem = ListItemsList,
+  styleMap = {},
   ...props
 }) => {
   if (!children && !content) return null
@@ -54,7 +55,7 @@ const Text = ({
     >
       {children || (
         <PortableText
-          blocks={content}
+          blocks={content.map((item) => ({ ...item, styleMap }))}
           serializers={{
             types: renderers,
             marks,

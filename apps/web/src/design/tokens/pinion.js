@@ -73,7 +73,6 @@ export const pinionTokens = {
           maxWidth: '$extended',
         },
       },
-      // quote: {},
       gallery: {
         '> div': {
           maxWidth: '$wide',

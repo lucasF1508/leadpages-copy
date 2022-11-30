@@ -2,107 +2,15 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Image from '@components/Image'
+import Text from '@components/Text'
 import { fadeIn } from 'react-animations'
 import { styled, keyframes } from '@design'
-
-import WavyLineDiagonalGraySVG from '@legacy/assets/images/shapes/wavy-line-diagonal-gray.svg'
-import ArrowRightSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
-
-import gregImage from '@legacy/assets/images/customers/greg/Greg-Benz-Photography_1440px@2x.jpg'
-import jodyImage from '@legacy/assets/images/customers/jody/Jody-Just-be-balanced_yoga@2x.jpg'
-import kaileiImage from '@legacy/assets/images/customers/kailei/Hero-Kailei-Carr_Leadpages_full-width_1440px@2x.jpg'
-import kateImage from '@legacy/assets/images/customers/kate/Hero-Kate-Wilkinson_Leadpages_full-width@2x.jpg'
-import sayerImage from '@legacy/assets/images/customers/sayer/Sayer-Hero-full-width@2x.jpg'
-import shohawkImage from '@legacy/assets/images/customers/shohawk/ShoHawk-Hero@2x.jpg'
 import ReactSlick from '@legacy/components/rotators/ReactSlick_Base'
 import PaginationDots from '@legacy/components/rotators/PaginationDots'
 import NavigationArrows from '@legacy/components/rotators/NavigationArrows'
-
-const customerFeaturettesData = [
-  {
-    name: 'Kailei',
-    image: kaileiImage,
-    quote: {
-      title:
-        'Kailei uses Leadpages to book her clients and sell her consulting services.',
-      supertitle: 'Executive Coach & Consultant',
-    },
-    link: {
-      text: 'Read her story',
-      route: '/customers/kailei',
-    },
-    overlayText: 'Coaches & Consultants',
-  },
-  {
-    name: 'Kate',
-    image: kateImage,
-    quote: {
-      title:
-        'Kate uses Leadpages to pinpoint her audience and sell her marketing services.',
-      supertitle: 'Consultant',
-    },
-    link: {
-      text: 'Read her story',
-      route: '/customers/kate',
-    },
-    overlayText: 'Consultants',
-  },
-  {
-    name: 'Greg',
-    image: gregImage,
-    quote: {
-      title:
-        'Greg uses Leadpages to sell his photography software and educate his audience.',
-      supertitle: 'Photographer & Educator',
-    },
-    link: {
-      text: 'Read his story',
-      route: '/customers/greg',
-    },
-    overlayText: 'Artists & Educators',
-  },
-  {
-    name: 'Shohawk',
-    image: shohawkImage,
-    quote: {
-      title:
-        'Michael and Chris use Leadpages to promote and sell their videos.',
-      supertitle: 'Freelance Filmmakers',
-    },
-    link: {
-      text: 'Read their story',
-      route: '/customers/shohawk',
-    },
-    overlayText: 'Freelancers',
-  },
-  {
-    name: 'Jody',
-    image: jodyImage,
-    quote: {
-      title:
-        'Jody uses Leadpages to sign-up stressed professionals for her yoga sessions.',
-      supertitle: 'Wellness Advisor & Yoga Instructor',
-    },
-    link: {
-      text: 'Read her story',
-      route: '/customers/jody',
-    },
-    overlayText: 'Health & Fitness',
-  },
-  {
-    name: 'Sayer',
-    image: sayerImage,
-    quote: {
-      title: 'Sayer Payne uses Leadpages to connect customers with retailers.',
-      supertitle: 'Ecommerce Entrepreneur',
-    },
-    link: {
-      text: 'Read his story',
-      route: '/customers/sayer',
-    },
-    overlayText: 'Ecommerce',
-  },
-]
+// Images
+import WavyLineDiagonalGraySVG from '@legacy/assets/images/shapes/wavy-line-diagonal-gray.svg'
+import ArrowRightSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -182,26 +90,6 @@ const TextContainer = styled('div', {
   '@media (max-width: 425px)': {
     width: '75%',
     bottom: '-11rem',
-  },
-})
-
-const Supertitle = styled('div', {
-  fontFamily: `'Space Mono'`,
-  fontSize: '12px',
-  letterSpacing: '2px',
-  lineHeight: '18px',
-  textTransform: 'uppercase',
-  opacity: 0.5,
-  color: '$text',
-  marginBottom: '1rem',
-})
-
-const Title = styled('h3', {
-  marginBottom: '2rem',
-  color: '$text',
-
-  '@media (max-width: 1023px)': {
-    marginBottom: '1rem',
   },
 })
 
@@ -310,85 +198,88 @@ const ImageContainer = styled('div', {
   },
 })
 
-const settings = {
-  arrows: true,
-  centerMode: true,
-  centerPadding: '15px',
-  draggable: false,
-  focusOnSelect: true,
-  infinite: true,
-  lazyload: true,
-  nextArrow: (
-    <NavigationArrows
-      variant="arrow-right"
-      rightOffset="-3rem"
-      data-gtm="customer-rotator-nav-arrow"
-    />
-  ),
-  onSwipe: () => {
-    window.dataLayer = window.dataLayer || []
-    window.dataLayer.push({
-      event: 'customerRotatorSwiped',
-    })
-  },
-  pauseOnFocus: true,
-  pauseOnHover: true,
-  prevArrow: (
-    <NavigationArrows
-      variant="arrow-left"
-      leftOffset="-3rem"
-      data-gtm="customer-rotator-nav-arrow"
-    />
-  ),
-  slidesToScroll: 1,
-  slidesToShow: 5,
-  speed: 300,
-  swipeToSlide: true,
-  touchThreshold: 50,
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 5,
-      },
-    },
-    {
-      breakpoint: 900,
-      settings: {
-        appendDots: (dots) => (
-          <PaginationDots dots={dots} margin="2rem auto 0" />
-        ),
-        arrows: false,
-        centerPadding: '35px',
-        dots: true,
-        nextArrow: null,
-        prevArrow: null,
-        slidesToShow: 3,
-      },
-    },
-    {
-      breakpoint: 425,
-      settings: {
-        appendDots: (dots) => (
-          <PaginationDots dots={dots} margin="2rem auto 0" />
-        ),
-        arrows: false,
-        centerPadding: '75px',
-        dots: true,
-        nextArrow: null,
-        prevArrow: null,
-        slidesToShow: 1,
-      },
-    },
-  ],
-}
-
 const RotatorContainer = styled('div', {})
 
-const CustomerRotator = ({ showBackgroundImage }) => {
+const CustomerRotator = ({ showBackgroundImage, customers }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [loadSlick, setLoadSlick] = useState(false)
   useEffect(() => setLoadSlick(true), [])
+
+  const settings = {
+    arrows: true,
+    centerMode: true,
+    centerPadding: '15px',
+    draggable: false,
+    focusOnSelect: true,
+    infinite: customers.length > 4,
+    lazyload: true,
+    nextArrow: (
+      <NavigationArrows
+        variant="arrow-right"
+        rightOffset="-3rem"
+        data-gtm="customer-rotator-nav-arrow"
+      />
+    ),
+    onSwipe: () => {
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({
+        event: 'customerRotatorSwiped',
+      })
+    },
+    pauseOnFocus: true,
+    pauseOnHover: true,
+    prevArrow: (
+      <NavigationArrows
+        variant="arrow-left"
+        leftOffset="-3rem"
+        data-gtm="customer-rotator-nav-arrow"
+      />
+    ),
+    slidesToScroll: 1,
+    slidesToShow: 5,
+    speed: 300,
+    swipeToSlide: true,
+    touchThreshold: 50,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 5,
+          infinite: customers.length > 4,
+        },
+      },
+      {
+        breakpoint: 900,
+        settings: {
+          appendDots: (dots) => (
+            <PaginationDots dots={dots} margin="2rem auto 0" />
+          ),
+          arrows: false,
+          centerPadding: '35px',
+          dots: true,
+          nextArrow: null,
+          prevArrow: null,
+          slidesToShow: 3,
+          infinite: customers.length > 3,
+        },
+      },
+      {
+        breakpoint: 425,
+        settings: {
+          appendDots: (dots) => (
+            <PaginationDots dots={dots} margin="2rem auto 0" />
+          ),
+          arrows: false,
+          centerPadding: '75px',
+          dots: true,
+          nextArrow: null,
+          prevArrow: null,
+          slidesToShow: 1,
+          infinite: customers.length > 2,
+        },
+      },
+    ],
+  }
 
   return (
     <OuterContainer>
@@ -400,40 +291,36 @@ const CustomerRotator = ({ showBackgroundImage }) => {
       )}
       <InnerContainer>
         <DetailContainer>
-          <Link href={customerFeaturettesData[activeIndex].link.route} passHref>
+          <Link href={customers[activeIndex].path} passHref>
             <StyledLink
-              aria-label={customerFeaturettesData[activeIndex].quote.title}
+              // aria-label={customers[activeIndex].quote.title}
               data-gtm="customer-story-link"
-              data-value={customerFeaturettesData[activeIndex].name}
+              data-value={customers[activeIndex].name}
             >
               <MainImage
-                key={customerFeaturettesData[activeIndex].quote.title}
-                image={customerFeaturettesData[activeIndex].image}
-                alt={customerFeaturettesData[activeIndex].quote.title}
+                key={customers[activeIndex].image?.asset?._id}
+                image={customers[activeIndex].excerpt.image}
               />
             </StyledLink>
           </Link>
           <TextContainer>
-            <Link
-              href={customerFeaturettesData[activeIndex].link.route}
-              passHref
-            >
+            <Link href={customers[activeIndex].path} passHref>
               <StyledLink
-                aria-label={customerFeaturettesData[activeIndex].quote.title}
+                // aria-label={customers[activeIndex].quote.title}
                 data-gtm="customer-story-link"
-                data-value={customerFeaturettesData[activeIndex].name}
+                data-value={customers[activeIndex].name}
                 css={{
                   fontSize: '1rem',
                 }}
               >
                 <>
-                  <Supertitle>
-                    {customerFeaturettesData[activeIndex].quote.supertitle}
-                  </Supertitle>
-                  <Title>
-                    {customerFeaturettesData[activeIndex].quote.title}
-                  </Title>
-                  <span>{`${customerFeaturettesData[activeIndex].link.text}  `}</span>
+                  <Text
+                    styleMap={{ h1: 'h3' }}
+                    content={customers[activeIndex].excerpt.content}
+                  />
+                  <span>{`${
+                    customers[activeIndex].excerpt.linkText || 'Read the story'
+                  }  `}</span>
                   <LinkArrowSVG src={ArrowRightSVG.src} alt="arrow icon" />
                 </>
               </StyledLink>
@@ -441,15 +328,18 @@ const CustomerRotator = ({ showBackgroundImage }) => {
           </TextContainer>
         </DetailContainer>
         <RotatorContainer>
-          {loadSlick && (
+          {customers.length > 1 && loadSlick && (
             <SlickRotator
               afterChange={(index) => {
                 setActiveIndex(index)
               }}
               {...settings}
             >
-              {customerFeaturettesData.map((item, index) => {
-                const { image, quote, overlayText } = item
+              {customers.map(({ excerpt }, index) => {
+                const { image, hoverTitle, content } = excerpt
+
+                if (!image || !content) return null
+
                 return (
                   <ThumbnailSection
                     key={index}
@@ -464,11 +354,11 @@ const CustomerRotator = ({ showBackgroundImage }) => {
                     >
                       <ThumbnailOverlayBG>
                         <ThumbnailOverlayText>
-                          {overlayText}
+                          {hoverTitle}
                         </ThumbnailOverlayText>
                       </ThumbnailOverlayBG>
                       <div id="slide-image">
-                        <ThumbnailImage image={image} alt={quote.title} />
+                        <ThumbnailImage image={image} />
                       </div>
                     </ImageContainer>
                   </ThumbnailSection>

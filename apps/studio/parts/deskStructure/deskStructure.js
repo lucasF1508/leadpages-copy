@@ -4,12 +4,13 @@ import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import addPreviewPane from 'part:gearbox-live-preview/add-preview-pane'
 import addSEOPane from 'part:gearbox-seo-pane/add-seo-pane'
 import { RiLayoutBottom2Line, RiNewspaperFill } from 'react-icons/ri'
-import { BsNewspaper } from 'react-icons/bs'
+import { BsFilePerson } from 'react-icons/bs'
 import {
   AiOutlineHome,
   AiOutlineFileText,
   AiOutlineRetweet,
 } from 'react-icons/ai'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import { listItemSiteSettings, listItemsMainDocs } from './listItems'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -42,11 +43,16 @@ export const deskStructure = () =>
         )
         .icon(AiOutlineFileText),
       S.documentTypeListItem('post'),
-      S.documentTypeListItem('pageArchive').title('Archives'),
-      S.documentTypeListItem('customer').title('Customers'),
+      // S.documentTypeListItem('customer').title('Customers'),
+      orderableDocumentListDeskItem({
+        type: 'customer',
+        title: 'Customers',
+        icon: BsFilePerson,
+      }),
       S.documentTypeListItem('comparison').title('Comparisons'),
       S.documentTypeListItem('integration').title('Integrations'),
       S.divider(),
+      S.documentTypeListItem('pageArchive').title('Archives'),
       S.documentTypeListItem('career').title('Careers'),
       S.documentTypeListItem('testimonial').title('Testimonials'),
       S.documentTypeListItem('faq').title('FAQs'),
