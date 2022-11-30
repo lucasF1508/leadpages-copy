@@ -58,8 +58,6 @@ const Image = ({
   const parsedImage = useImageParser(image)
   const { url, width, height, placeholderType, lqip, alt, title } = parsedImage
 
-  console.log('alt', alt)
-
   if (!url) return null
 
   const css = {
