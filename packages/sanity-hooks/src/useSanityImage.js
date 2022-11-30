@@ -22,9 +22,12 @@ const getSizesFromAsset = (asset, crop) => {
   }
 }
 
-const getLabelsFromAsset = ({ alt, title, originalFilename }) => ({
-  alt: alt || title || originalFilename,
-  title: title || alt || originalFilename,
+const getLabelsFromImage = ({
+  asset: { altText, title, originalFilename } = {},
+  altText: alt,
+}) => ({
+  alt: alt || altText || title || originalFilename,
+  title: title || alt || altText || originalFilename,
 })
 
 const getPlaceholderFromAsset = ({
@@ -53,7 +56,7 @@ const useSanityImage = (image) => {
     crop,
     asset,
     ...getSizesFromAsset(asset, crop),
-    ...getLabelsFromAsset(asset),
+    ...getLabelsFromImage(image),
     ...getPlaceholderFromAsset(asset),
     ...getMetaFromAsset(image),
   }
