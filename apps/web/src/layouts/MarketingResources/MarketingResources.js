@@ -5,7 +5,7 @@ import { styled } from '@design'
 // components
 import NeedAccountHelpRow from '@legacy/components/resources/NeedAccountHelpRow'
 import BlogSection from '@legacy/components/resources/BlogSection'
-import CustomerStoriesRotator from '@components/Rotator/CustomerStoriesRotator'
+import CustomerStoriesRotator from '@components/Rotator/CustomerRotator'
 import DownloadableResources from '@legacy/components/resources/DownloadableResources'
 import LeadGeneration from '@legacy/components/resources/LeadGeneration'
 import MarketingGuides from '@legacy/components/resources/MarketingGuides'
@@ -367,7 +367,7 @@ const sectionLinksArray = [
   },
 ]
 
-const MarketingResourcesPage = () => {
+const MarketingResourcesPage = ({ customers }) => {
   const [isMenuScrolled, setIsMenuScrolled] = useState(false)
   const [showMobileSubmenu, setShowMobileSubmenu] = useState(false)
 
@@ -518,7 +518,7 @@ const MarketingResourcesPage = () => {
             </HeadingButton>
           </HeadingFlexbox>
         </SectionHeader>
-        <CustomerStoriesRotator />
+        <CustomerStoriesRotator customers={customers} />
         <SpacerRow id="spacer" size="small" />
         <ReadyToGrow />
       </OuterContainer>
