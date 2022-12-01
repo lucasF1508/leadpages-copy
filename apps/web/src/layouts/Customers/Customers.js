@@ -1,6 +1,6 @@
 import React from 'react'
 // components
-import CustomerStoriesRotator from '@components/Rotator/CustomerRotator'
+import CustomerStoriesRotator from '@components/RotatorCustomer/CustomerRotator'
 import DoYourThing from '@legacy/components/customers/DoYourThing'
 import FlexRow from '@legacy/components/layout/FlexRow'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'

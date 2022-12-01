@@ -32,6 +32,7 @@ module.exports = {
           customers: `select(
             selection == 'all' => *[_type == 'customer'] | order(orderRank) {
               path,
+              title,
               excerpt {
                 ...,
                 image {
@@ -42,6 +43,7 @@ module.exports = {
             },
             selection == 'category' => *[_type == 'customer' && ^.category._ref in category[]._ref] | order(orderRank) {
               path,
+              title,
               excerpt {
                 ...,
                 image {
@@ -52,6 +54,7 @@ module.exports = {
             },
             customers[]->{
               path,
+              title,
               excerpt {
                 ...,
                 image {

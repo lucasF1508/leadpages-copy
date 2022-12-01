@@ -28,7 +28,7 @@ const RackComponentList = {
 
   // Home components
   featureGrid: dynamic(() => import('@components/FeatureGrid')),
-  customerRotator: dynamic(() => import('@components/Rotator/CustomerRotator')),
+  customerRotator: dynamic(() => import('@components/RotatorCustomer')),
   featuredTemplates: dynamic(() => import('@components/FeaturedTemplates')),
   tabs: dynamic(() => import('@components/Tabs')),
   ctaInline: dynamic(() => import('@components/Cta/CtaInline')),

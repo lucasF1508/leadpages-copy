@@ -5,7 +5,7 @@ import { styled } from '@design'
 // components
 import NeedAccountHelpRow from '@legacy/components/resources/NeedAccountHelpRow'
 import BlogSection from '@legacy/components/resources/BlogSection'
-import CustomerStoriesRotator from '@components/Rotator/CustomerRotator'
+import CustomerStoriesRotator from '@components/RotatorCustomer/CustomerRotator'
 import DownloadableResources from '@legacy/components/resources/DownloadableResources'
 import LeadGeneration from '@legacy/components/resources/LeadGeneration'
 import MarketingGuides from '@legacy/components/resources/MarketingGuides'

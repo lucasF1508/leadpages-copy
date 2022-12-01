@@ -152,6 +152,13 @@ export const pinionTokens = {
           maxWidth: 'none',
         },
       },
+      customerStoriesThumbnailRotator: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
     },
   },
   compoundVariants: [

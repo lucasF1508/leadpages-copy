@@ -11,15 +11,15 @@ export async function getStaticProps(context) {
   const { global } = await runQueries()
   const customers = await runQuery(`
     *[_type == 'customer' && 'featured' in category[]->slug.current] | order(orderRank) {
-    path,
-    excerpt {
-      ...,
-      image {
+      path,
+      excerpt {
         ...,
-        asset->
+        image {
+          ...,
+          asset->
+        }
       }
-    }
-  }`)
+    }`)
 
   return {
     props: {
