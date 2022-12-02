@@ -9,7 +9,11 @@ export const schemaPageArchive = {
   name: 'pageArchive',
   title: 'Archive Page',
   type: 'document',
-  groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
+  groups: [
+    ...G.fieldGroupDefaults(),
+    G.fieldGroup('seo', { title: 'SEO' }),
+    G.fieldGroup('options', { title: 'Page Options' }),
+  ],
   fieldsets: [FS.seo(), FS.fieldset('meta', { collapsed: false })],
   fields: [
     ...F.fieldDefaults({
@@ -38,8 +42,37 @@ export const schemaPageArchive = {
           hidden: ({ parent }) => !parent?.archiveOf,
         }
       ),
+      F.docOrder('categoryIntegration', {
+        options: {
+          field: 'categoryOrder',
+        },
+        hidden: ({ parent }) => parent?.slug?.current !== 'integrations',
+      }),
     ]),
     ...G.group('seo', [F.seo()]),
+    ...G.group('options', [
+      F.boolean({
+        name: 'redirectToLegacy',
+        title: 'Redirect to legacy page',
+        description:
+          'Enable to redirect to a legacy Leadpages page, if it exists.',
+        hidden: ({ parent }) => parent?.slug?.current !== 'integrations',
+      }),
+      F.object({
+        name: 'options',
+        fields: [
+          F.boolean({ name: 'slimFooter', initialValue: false }),
+          F.boolean({ name: 'underlaidMenu', initialValue: false }),
+          F.boolean({
+            name: 'noLogin',
+            title: 'Hide Login Button',
+            initialValue: false,
+          }),
+          F.boolean({ name: 'hideSignUpButton', initialValue: false }),
+          F.boolean({ name: 'hideBar', initialValue: false }),
+        ],
+      }),
+    ]),
   ],
   preview: P.titleImage(),
 }

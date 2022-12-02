@@ -10,7 +10,7 @@ export async function getStaticProps(context) {
   const path = `/${params?.slug?.join('/')}`
 
   const { data, queries, global } = await runQueries(
-    getDoc(['page', 'customer'], {
+    getDoc(['page', 'customer', 'integration'], {
       preview,
       params: { path },
       projections: { 'category[]': '->' },
@@ -49,7 +49,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const docPaths = await getDocSlugs(['page', 'customer'], {
+  const docPaths = await getDocSlugs(['page', 'customer', 'integration'], {
     // filters: ['slug.current != "404"'],
   })
 

@@ -118,6 +118,9 @@ module.exports = {
           jobTitle: true,
           image,
         },
+        categoryIntegrationStatus: {
+          '...': true,
+        },
       },
     },
   },

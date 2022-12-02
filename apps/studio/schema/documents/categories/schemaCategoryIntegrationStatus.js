@@ -10,6 +10,6 @@ export const schemaCategoryIntegrationStatus = {
   fieldsets: [FS.fieldset('meta')],
   fields: [...F.fieldDefaults(), ...G.group('content', [F.text()])],
   preview: P.titleImage({
-    prepare: ({ title }) => ({ title, subtitle: 'Category' }),
+    prepare: ({ title }) => ({ title, subtitle: 'Status' }),
   }),
 }

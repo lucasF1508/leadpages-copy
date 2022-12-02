@@ -14,7 +14,11 @@ export const schemaIntegration = {
   title: 'Integration',
   type: 'document',
   orderings: [orderRankOrdering],
-  groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
+  groups: [
+    ...G.fieldGroupDefaults(),
+    G.fieldGroup('seo', { title: 'SEO' }),
+    G.fieldGroup('options', { title: 'Page Options' }),
+  ],
   fieldsets: [FS.seo(), FS.fieldset('meta', { collapsed: false })],
   fields: [
     orderRankField({ type: 'integration' }),
@@ -48,8 +52,25 @@ export const schemaIntegration = {
       }),
     ]),
     ...G.group('seo', [F.seo()]),
+    ...G.group('options', [
+      F.boolean({
+        name: 'hasSubpage',
+        title: 'Link to Subpage?',
+        description:
+          'Enable to link integration listing to the integration subpage.',
+        initialValue: false,
+      }),
+      F.boolean({
+        name: 'redirectToLegacy',
+        title: 'Redirect to legacy page',
+        description:
+          'Enable to redirect to a legacy Leadpages page, if it exists.',
+        initialValue: false,
+      }),
+    ]),
   ],
   preview: P.titleImage({
+    media: 'excerpt.icon',
     subtitle: 'category.title',
   }),
 }

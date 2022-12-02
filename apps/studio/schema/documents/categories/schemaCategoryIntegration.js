@@ -8,7 +8,14 @@ export const schemaCategoryIntegration = {
   type: 'document',
   groups: [...G.fieldGroupDefaults()],
   fieldsets: [FS.fieldset('meta')],
-  fields: [...F.fieldDefaults()],
+  fields: [
+    F.number({
+      name: 'categoryOrder',
+      hidden: true,
+      initialValue: -1,
+    }),
+    ...F.fieldDefaults(),
+  ],
   preview: P.titleImage({
     prepare: ({ title }) => ({ title, subtitle: 'Category' }),
   }),

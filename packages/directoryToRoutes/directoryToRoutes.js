@@ -34,7 +34,7 @@ const directoryToRoutes = (directory) => {
 }
 
 const getSanityPaths = async ({
-  types = ['page', 'customer'],
+  types = ['page', 'customer', 'pageArchive', 'integration'],
   field = 'path',
   projectId,
   dataset,
