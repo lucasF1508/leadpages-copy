@@ -131,7 +131,7 @@ module.exports = withBundleAnalyzer({
     }
 
     return {
-      beforeFiles: [
+      afterFiles: [
         {
           source: '/studio/:path*',
           destination:
@@ -143,8 +143,6 @@ module.exports = withBundleAnalyzer({
           source: '/home',
           destination: '/',
         },
-      ],
-      afterFiles: [
         ...incrementalPaths.map((path) => ({
           source: path,
           destination: `/_legacy${path}`,
