@@ -1,5 +1,5 @@
 import React from 'react'
-import Integrations from '@layouts/Integrations'
+import Integrations from '@layouts/Integrations/IntegrationsLegacy'
 
 const IntegrationsPage = (props) => <Integrations {...props} />
 
