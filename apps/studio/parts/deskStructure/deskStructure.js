@@ -3,15 +3,15 @@ import GB from 'part:gearbox-desk-tool/structure-builder'
 import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import addPreviewPane from 'part:gearbox-live-preview/add-preview-pane'
 import addSEOPane from 'part:gearbox-seo-pane/add-seo-pane'
-import { RiLayoutBottom2Line, RiNewspaperFill } from 'react-icons/ri'
-import { BsFilePerson, BsQuestionCircle } from 'react-icons/bs'
+import { RiNewspaperFill } from 'react-icons/ri'
+import { BsFilePerson, BsQuestionCircle, BsPlug } from 'react-icons/bs'
 import {
   AiOutlineHome,
   AiOutlineFileText,
   AiOutlineRetweet,
 } from 'react-icons/ai'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
-import { listItemSiteSettings, listItemsMainDocs } from './listItems'
+import { listItemSiteSettings } from './listItems'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -49,7 +49,11 @@ export const deskStructure = () =>
         icon: BsFilePerson,
       }),
       S.documentTypeListItem('comparison').title('Comparisons'),
-      S.documentTypeListItem('integration').title('Integrations'),
+      orderableDocumentListDeskItem({
+        type: 'integration',
+        title: 'Integrations',
+        icon: BsPlug,
+      }),
       S.divider(),
       S.documentTypeListItem('pageArchive').title('Archives'),
       // S.documentTypeListItem('career').title('Careers'),
