@@ -3,8 +3,12 @@ import GB from 'part:gearbox-desk-tool/structure-builder'
 import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import addPreviewPane from 'part:gearbox-live-preview/add-preview-pane'
 import addSEOPane from 'part:gearbox-seo-pane/add-seo-pane'
-import { RiNewspaperFill } from 'react-icons/ri'
-import { BsFilePerson, BsQuestionCircle, BsPlug } from 'react-icons/bs'
+import {
+  BsFilePerson,
+  BsQuestionCircle,
+  BsPlug,
+  BsCollection,
+} from 'react-icons/bs'
 import {
   AiOutlineHome,
   AiOutlineFileText,
@@ -48,7 +52,11 @@ export const deskStructure = () =>
         title: 'Customers',
         icon: BsFilePerson,
       }),
-      S.documentTypeListItem('comparison').title('Comparisons'),
+      orderableDocumentListDeskItem({
+        type: 'comparison',
+        title: 'Comparisons',
+        icon: BsCollection,
+      }),
       orderableDocumentListDeskItem({
         type: 'integration',
         title: 'Integrations',
@@ -70,7 +78,6 @@ export const deskStructure = () =>
       // S.documentTypeListItem('navigation').title('Navigation'),
       // GB.singletonListItem('footer').icon(RiLayoutBottom2Line),
       GB.categoriesListItem('category'),
-      GB.singletonListItem('postSettings').icon(RiNewspaperFill),
       listItemSiteSettings,
       ...(isDevelopment
         ? [S.documentTypeListItem('feed').title('Importer')]
