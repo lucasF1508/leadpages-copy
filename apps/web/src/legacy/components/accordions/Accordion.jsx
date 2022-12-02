@@ -120,7 +120,11 @@ const $VSTypography = styled(VSTypography, {
   },
 })
 
-const $AccordionContainer = styled('div')
+const $AccordionContainer = styled('div', {
+  width: '100%',
+  maxWidth: 540,
+  margin: 'auto',
+})
 
 const LPAccordion = ({ sectionHeadline, data }) => (
   <>
@@ -131,13 +135,7 @@ const LPAccordion = ({ sectionHeadline, data }) => (
         dangerouslySetInnerHTML={{ __html: sectionHeadline }}
       />
     )}
-    <$AccordionContainer
-      css={{
-        width: '100%',
-        maxWidth: 540,
-        margin: 'auto',
-      }}
-    >
+    <$AccordionContainer>
       <Accordion accordionItems={data} />
     </$AccordionContainer>
   </>

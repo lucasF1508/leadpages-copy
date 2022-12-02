@@ -33,6 +33,8 @@ const RackComponentList = {
   tabs: dynamic(() => import('@components/Tabs')),
   ctaInline: dynamic(() => import('@components/Cta/CtaInline')),
   quote: dynamic(() => import('@components/Quote')),
+  faqs: dynamic(() => import('@components/Faq')),
+  pricing: dynamic(() => import('@components/Pricing')),
 }
 
 export default RackComponentList

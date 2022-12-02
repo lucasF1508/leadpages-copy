@@ -65,6 +65,14 @@ module.exports = {
             },
           )`,
         },
+        faqs: {
+          '...': true,
+          faqs: `select(
+            selection == 'all' => *[_type == 'faq'] | order(orderRank),
+            selection == 'category' => *[_type == 'faq' && ^.category._ref in category[]._ref] | order(orderRank),
+            faqs[]->,
+          )`,
+        },
       },
     },
   },

@@ -65,7 +65,7 @@ export const $AccordionItem = styled(Primitives.Item, {
 
 export const $AccordionTrigger = styled(Primitives.Trigger, {
   position: 'relative',
-  pr: '$4',
+  pr: '$6',
   py: '$3',
   w: '100%',
   cursor: 'pointer',
@@ -74,6 +74,7 @@ export const $AccordionTrigger = styled(Primitives.Trigger, {
   fontWeight: '$medium',
   fontFamily: '$base',
   transition: 'color 0.3s ease',
+  lh: '1.2',
 
   '&:hover': {
     color: '$primary',
@@ -93,7 +94,6 @@ export const $AccordionTrigger = styled(Primitives.Trigger, {
 
 export const $AccordionContent = styled(Primitives.Content, {
   overflow: 'hidden',
-  // box: { property: 'px' },
 
   '&[data-state="open"]': {
     animation: `${open} 300ms ease-out`,
@@ -145,19 +145,24 @@ const Accordion = ({ accordionItems }) => (
               as="div"
               tagStyle="base"
               css={{
-                p: '0 0 $4',
+                p: '0 0 $2',
                 '& *': {
                   mb: '$2',
                   '&:last-child': {
                     mb: 0,
                   },
                 },
+                '& p': {
+                  c: '$text',
+                },
                 '& a': {
+                  d: 'inline',
                   color: 'inherit',
                   textDecoration: 'none',
                   borderBottom: `2px solid $colors$secondary`,
                   paddingBottom: 2,
                   transition: 'all 0.3s ease',
+
                   '&:hover': {
                     color: '$primary',
                     borderBottom: `2px solid $colors$primary`,

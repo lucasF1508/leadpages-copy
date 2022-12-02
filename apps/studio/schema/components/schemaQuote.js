@@ -1,6 +1,31 @@
 import { FaQuoteRight as icon } from 'react-icons/fa'
 import { F, P, G } from 'part:gearbox-schema-tool/schema-builder'
 
+const customerQuoteKaileiFields = [
+  F.radio(['left', 'right'], {
+    name: 'align',
+    title: 'Content Alignment',
+    initialValue: 'left',
+    hidden: ({ parent }) =>
+      !['customerQuoteKailei'].includes(parent.legacyComponent),
+  }),
+]
+
+const pricingWavesFields = [
+  F.string({
+    name: 'title',
+    hidden: ({ parent }) => !['pricingWaves'].includes(parent.legacyComponent),
+  }),
+  F.string({
+    name: 'authorName',
+    hidden: ({ parent }) => !['pricingWaves'].includes(parent.legacyComponent),
+  }),
+  F.string({
+    name: 'authorTitle',
+    hidden: ({ parent }) => !['pricingWaves'].includes(parent.legacyComponent),
+  }),
+]
+
 export const schemaQuote = F.object({
   icon,
   name: 'quote',
@@ -20,17 +45,16 @@ export const schemaQuote = F.object({
       ),
     ]),
     ...G.group('legacy', [
-      F.dropdown(['customerQuoteKailei'], { name: 'legacyComponent' }),
-      F.radio(['left', 'right'], {
-        name: 'align',
-        title: 'Content Alignment',
-        initialValue: 'left',
-        hidden: ({ parent }) =>
-          !['customerQuoteKailei'].includes(parent.legacyComponent),
+      F.dropdown(['customerQuoteKailei', 'pricingWaves'], {
+        name: 'legacyComponent',
       }),
-      F.field('media', {
+      ...customerQuoteKaileiFields,
+      ...pricingWavesFields,
+      F.field('image', {
         hidden: ({ parent }) =>
-          !['customerQuoteKailei'].includes(parent.legacyComponent),
+          !['customerQuoteKailei', 'pricingWaves'].includes(
+            parent.legacyComponent
+          ),
       }),
     ]),
   ],

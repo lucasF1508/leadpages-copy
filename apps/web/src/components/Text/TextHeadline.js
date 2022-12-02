@@ -9,6 +9,11 @@ const $TextHeadline = styled(Text, {
     mw: '$cols8',
     mx: 'auto',
   },
+
+  h3: {
+    mw: '$cols7',
+    mx: 'auto',
+  },
 })
 
 const TextHeadline = (props) => <$TextHeadline {...props} />

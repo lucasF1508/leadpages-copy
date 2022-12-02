@@ -57,6 +57,11 @@ export const pinionTokens = {
           maxWidth: 'none',
         },
       },
+      gallery: {
+        '> div': {
+          maxWidth: '$wide',
+        },
+      },
       imageSlider: {
         overflow: 'hidden',
         '> div': {
@@ -73,9 +78,11 @@ export const pinionTokens = {
           maxWidth: '$extended',
         },
       },
-      gallery: {
+      pricing: {
+        px: 'unset',
+        my: 'unset',
         '> div': {
-          maxWidth: '$wide',
+          maxWidth: 'none',
         },
       },
       slider: {
@@ -148,6 +155,13 @@ export const pinionTokens = {
       customerQuoteKailei: {
         px: 'unset',
         my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
+      pricingWaves: {
+        p: 'unset',
+        m: 'unset',
         '> div': {
           maxWidth: 'none',
         },

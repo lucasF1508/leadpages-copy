@@ -1,6 +1,7 @@
 import React from 'react'
 import { getDoc, getDocSlugs, runQueries } from '@lib'
 import Page from '@layouts/Page'
+import { getPlanData, getGroupedPlanData } from '@utils/plans'
 
 const DynamicPage = (props) => <Page {...props} />
 
@@ -18,13 +19,22 @@ export async function getStaticProps(context) {
 
   // TODO: Add this to shape data
   const [pageData] = (data?.length && data) || []
-  const { hero: heroes, options: pageOptions } = pageData || {}
+  const { hero: heroes, components, options: pageOptions } = pageData || {}
   const [hero] = heroes || []
 
+  // Only fetch pricing if we need it
+  const hasPricing = components?.some(({ _type }) => _type === 'pricing')
+  const rawPlanData = await getPlanData()
+  const planData = hasPricing
+    ? { planData: getGroupedPlanData(rawPlanData) }
+    : {}
+
+  // Page options
   const options = {
     ...pageData?.options,
     underlaidMenu: !!hero?.darkBackground || pageOptions?.underlaidMenu || null,
     darkHero: !!hero?.darkBackground,
+    ...planData,
   }
 
   return {

@@ -47,6 +47,7 @@ export default function App({
     hideSignUpButton = false,
     hideBar = false,
     darkHero = false,
+    planData,
     ...meta
   } = options
 
@@ -59,7 +60,7 @@ export default function App({
 
   return (
     <AppContext.Provider
-      value={{ ...siteMeta, hasLoaded, setHasLoaded, options }}
+      value={{ ...siteMeta, hasLoaded, setHasLoaded, options, planData }}
     >
       <MarketingThemeProvider>
         <ToastManager />

@@ -4,7 +4,7 @@ import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import addPreviewPane from 'part:gearbox-live-preview/add-preview-pane'
 import addSEOPane from 'part:gearbox-seo-pane/add-seo-pane'
 import { RiLayoutBottom2Line, RiNewspaperFill } from 'react-icons/ri'
-import { BsFilePerson } from 'react-icons/bs'
+import { BsFilePerson, BsQuestionCircle } from 'react-icons/bs'
 import {
   AiOutlineHome,
   AiOutlineFileText,
@@ -43,7 +43,6 @@ export const deskStructure = () =>
         )
         .icon(AiOutlineFileText),
       S.documentTypeListItem('post'),
-      // S.documentTypeListItem('customer').title('Customers'),
       orderableDocumentListDeskItem({
         type: 'customer',
         title: 'Customers',
@@ -55,7 +54,11 @@ export const deskStructure = () =>
       S.documentTypeListItem('pageArchive').title('Archives'),
       S.documentTypeListItem('career').title('Careers'),
       S.documentTypeListItem('testimonial').title('Testimonials'),
-      S.documentTypeListItem('faq').title('FAQs'),
+      orderableDocumentListDeskItem({
+        type: 'faq',
+        title: 'FAQs',
+        icon: BsQuestionCircle,
+      }),
       S.documentTypeListItem('press'),
       S.documentTypeListItem('alertBar').title('Alert Bars'),
       S.documentTypeListItem('cta').title('CTAs'),

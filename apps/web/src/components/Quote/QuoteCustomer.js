@@ -79,10 +79,10 @@ const QuotationAuthor = styled('div', {
   marginBottom: '0.5rem',
 })
 
-const MediaWithTextCustomer = ({ text, underline, media, align }) => (
+const MediaWithTextCustomer = ({ text, underline, image, align }) => (
   <$QuoteCustomer>
     <$ImageContainer>
-      <$Image {...media} />
+      <$Image image={image} />
     </$ImageContainer>
     <$Quote align={align}>
       <Quotation src={quotationImage.src} alt="quotation mark" />

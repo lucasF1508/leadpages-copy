@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { styled, darkTheme } from '@design'
 import MediaWithText, {
   $MediaWithTextContent,
@@ -8,9 +8,8 @@ import MediaWithText, {
 } from '@components/MediaWithText'
 import Image from '@components/Image'
 import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
-import { AppContext } from '@app'
 
-const $Hero = styled('div', {
+export const $Hero = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'stretch',
@@ -65,7 +64,7 @@ const $Hero = styled('div', {
   },
 })
 
-const $MediaWithText = styled(MediaWithText, {
+export const $MediaWithText = styled(MediaWithText, {
   mw: '$extended',
   w: '100%',
   boxSizing: 'border-box',
@@ -142,7 +141,7 @@ const $MediaWithText = styled(MediaWithText, {
   },
 })
 
-const $BackgroundImage = styled(Image, {
+export const $BackgroundImage = styled(Image, {
   position: 'absolute',
   inset: 0,
   mw: '$vast',

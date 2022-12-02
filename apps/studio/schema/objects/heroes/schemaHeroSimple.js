@@ -1,0 +1,56 @@
+import { BsFileEarmarkText as icon } from 'react-icons/bs'
+import { F, G } from 'part:gearbox-schema-tool/schema-builder'
+
+export const schemaHeroSimple = F.hero({
+  name: 'heroSimple',
+  title: 'Hero with Text',
+  icon,
+  args: {
+    media: false,
+    align: false,
+    label: false,
+    link: {
+      initialValue: {
+        condition: 'none',
+        linkStyle: 'button',
+      },
+    },
+  },
+  fields: [
+    ...G.group('media', [
+      F.image({
+        parseType: 'backgroundImage',
+        name: 'backgroundImage',
+      }),
+    ]),
+    ...G.group('options', [
+      F.radio(['left', 'center', 'right'], {
+        name: 'align',
+        title: 'Content Alignment',
+        initialValue: 'center',
+      }),
+      // F.radio(['center', 'bottom', 'right'], {
+      //   name: 'imageAlign',
+      //   initialValue: 'center',
+      // }),
+      // F.radio(['small', 'medium', 'large'], {
+      //   name: 'size',
+      //   title: 'Hero Size',
+      //   initialValue: 'medium',
+      // }),
+      F.object({
+        name: 'backgroundOptions',
+        fields: [
+          F.number({
+            name: 'backgroundOffset',
+            title: 'Background Mobile Offset',
+            description: 'Adjust mobile breakpoint offset as a percentage (%).',
+            placeholder: 'ie. -10',
+          }),
+          F.checkbox({ name: 'darkBackground', initialValue: false }),
+          F.checkbox({ name: 'extendBackgroundColor', initialValue: false }),
+        ],
+      }),
+    ]),
+  ],
+})
