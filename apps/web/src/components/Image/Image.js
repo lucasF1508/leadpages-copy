@@ -53,6 +53,7 @@ const Image = ({
   objectPosition,
   sizes,
   lazyBoundary = '501px',
+  alt: orgAlt,
   ...props
 }) => {
   const parsedImage = useImageParser(image)
@@ -126,8 +127,8 @@ const Image = ({
         src={url}
         layout={layout}
         priority={priority}
-        alt={alt || url}
-        title={title}
+        alt={orgAlt || alt || url}
+        title={orgAlt || title}
         placeholder={hasPlaceholder ? placeholderType : undefined}
         blurDataURL={hasPlaceholder ? lqip : undefined}
         objectFit={objectFit}
