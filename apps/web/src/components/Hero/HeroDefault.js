@@ -167,6 +167,7 @@ const HeroDefault = ({
   imageAlign = 'center',
   backgroundOptions = {},
   backgroundImage,
+  className,
 }) => {
   const isMobile = useEvalBreakpoint('<=m')
   const { palette } = backgroundImage?.asset?.metadata || {}
@@ -179,7 +180,10 @@ const HeroDefault = ({
   const bc = extendBackgroundColor ? palette?.dominant?.background : null
 
   return (
-    <$Hero className={darkBackground && darkTheme} size={size}>
+    <$Hero
+      className={`${className} ${darkBackground && darkTheme}`}
+      size={size}
+    >
       {backgroundImage && (
         <$BackgroundImage
           objectFit={isMobile ? 'cover' : 'contain'}

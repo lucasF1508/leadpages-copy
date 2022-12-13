@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from '@components/Link'
+import NextLink from 'next/link'
 import Image from '@components/Image'
 import Text from '@components/Text'
 import { styled } from '@design'
@@ -280,7 +280,8 @@ const templatesArray = [
   },
 ]
 
-const FeaturedTemplates = ({ content, images: _images }) => {
+const FeaturedTemplates = (props) => {
+  const { content, images: _images } = props
   const sizeMap = { small: 'small', large: 'large', medium: 'large' }
   const images = cloneDeep(_images)
 
@@ -314,13 +315,24 @@ const FeaturedTemplates = ({ content, images: _images }) => {
             >
               {column.templates.map((item, index) => {
                 const image = images[sizeMap[item.type]].shift() || item.image
+                const linkProps = image?.templateUrl
+                  ? { as: 'a', href: image.templateUrl }
+                  : {}
+
                 return (
                   <ImageHolder
                     key={index}
                     className={item.type}
                     style={{ alignSelf: item.alignmentOverride }}
+                    {...linkProps}
                   >
-                    <TemplateImage image={image} alt="template preview" />
+                    {image?.templateUrl ? (
+                      <NextLink href={image.templateUrl}>
+                        <TemplateImage image={image} alt="template preview" />
+                      </NextLink>
+                    ) : (
+                      <TemplateImage image={image} alt="template preview" />
+                    )}
                   </ImageHolder>
                 )
               })}

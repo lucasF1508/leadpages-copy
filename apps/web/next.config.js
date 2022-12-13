@@ -8,6 +8,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 require('dotenv').config({
   path: findUp.sync([`.env.${process.env.NODE_ENV}`, '.env.local', '.env']),
 })
+const { init: buildJSON } = require('indices/buildJSON')
 
 const {
   SANITY_STUDIO_API_PROJECT_ID,
@@ -127,7 +128,20 @@ module.exports = withBundleAnalyzer({
     })
 
     if (incrementalPaths.length) {
-      console.log(`Rewriting ${incrementalPaths.length} incremental paths.`)
+      const builtPaths = await buildJSON({
+        files: [
+          {
+            path: path.join('./public/indices/incrementalPaths.json'),
+            data: incrementalPaths,
+          },
+        ],
+      })
+
+      if (builtPaths.every(({ status }) => status === 'fulfilled')) {
+        console.log(
+          `Built index of ${incrementalPaths.length} incremental paths.`
+        )
+      }
     }
 
     return {
@@ -143,10 +157,6 @@ module.exports = withBundleAnalyzer({
           source: '/home',
           destination: '/',
         },
-        ...incrementalPaths.map((path) => ({
-          source: path,
-          destination: `/_legacy${path}`,
-        })),
       ],
       fallback: [
         {

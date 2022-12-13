@@ -126,9 +126,22 @@ export const blockContentHeadline = F.array({
         ],
       },
     },
-    {
-      type: 'media',
-    },
+    F.media({
+      fields: [
+        F.string({
+          name: 'maxWidth',
+          description: 'eg. auto, 100px, 100%, etc.',
+          group: 'options',
+          hidden: ({ parent }) =>
+            parent.condition === 'none' || parent.condition === 'lottie',
+        }),
+        F.boolean({
+          name: 'removeSpaceAround',
+          group: 'options',
+          initialValue: false,
+        }),
+      ],
+    }),
     {
       type: 'columns',
     },

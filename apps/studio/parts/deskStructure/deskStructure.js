@@ -52,11 +52,11 @@ export const deskStructure = () =>
         title: 'Customers',
         icon: BsFilePerson,
       }),
-      orderableDocumentListDeskItem({
-        type: 'comparison',
-        title: 'Comparisons',
-        icon: BsCollection,
-      }),
+      // orderableDocumentListDeskItem({
+      //   type: 'comparison',
+      //   title: 'Comparisons',
+      //   icon: BsCollection,
+      // }),
       orderableDocumentListDeskItem({
         type: 'integration',
         title: 'Integrations',
@@ -88,9 +88,6 @@ export const getDefaultDocumentNode = ({ schemaType }) => {
   if (allTemplatesTypes.includes(schemaType)) {
     return S.document().views([
       S.view.form(),
-      addPreviewPane({
-        deskStructure: S,
-      }),
       addSEOPane({
         deskStructure: S,
       }),

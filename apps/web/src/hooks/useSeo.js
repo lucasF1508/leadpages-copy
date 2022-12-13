@@ -31,7 +31,10 @@ const useSeo = ({ seo, siteMeta } = {}) => {
     siteMeta || {}
   const { seoImage, seoTitle, seoDescription, hasCustomSeoTitle } = seo || {}
   const image = useSanityImage(seoImage || seoImageDefault)
-  const robots = VERCEL_ENV !== 'production' ? 'noindex,nofollow' : ''
+  const robots =
+    VERCEL_ENV !== 'production' || asPath.includes('_legacy')
+      ? 'noindex,nofollow'
+      : ''
 
   return {
     GOOGLE_TAG_TRACKING_ID,

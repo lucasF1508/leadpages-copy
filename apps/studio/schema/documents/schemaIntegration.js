@@ -1,6 +1,4 @@
-// import { BsDiagram3 as icon } from 'react-icons/bs'
 import { BsPlug as icon } from 'react-icons/bs'
-// import { BsPuzzle as icon } from 'react-icons/bs'
 import { F, FS, G, P } from 'part:gearbox-schema-tool/schema-builder'
 
 import {
@@ -26,12 +24,20 @@ export const schemaIntegration = {
       parent: { hidden: true },
     }),
     ...G.group('content', [
-      F.field('hero'),
-      F.field('components', {}),
+      F.boolean({
+        name: 'hasSubpage',
+        title: 'Link to Subpage?',
+        description:
+          'Enable to link integration listing to the integration subpage.',
+        initialValue: false,
+      }),
+      F.field('hero', { hidden: ({ parent }) => !parent?.hasSubpage }),
+      F.field('components', { hidden: ({ parent }) => !parent?.hasSubpage }),
       F.reference('cta', {
         name: 'cta',
         title: 'Call to Action',
         description: 'Leave blank to omit page call to action.',
+        hidden: ({ parent }) => !parent?.hasSubpage,
       }),
     ]),
     ...G.group('excerpt', [
@@ -53,13 +59,6 @@ export const schemaIntegration = {
     ]),
     ...G.group('seo', [F.seo()]),
     ...G.group('options', [
-      F.boolean({
-        name: 'hasSubpage',
-        title: 'Link to Subpage?',
-        description:
-          'Enable to link integration listing to the integration subpage.',
-        initialValue: false,
-      }),
       F.boolean({
         name: 'redirectToLegacy',
         title: 'Redirect to legacy page',

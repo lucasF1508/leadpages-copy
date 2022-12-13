@@ -79,6 +79,14 @@ module.exports = {
   blockContent: {
     types: (types) =>
       types.filter(({ name }) => !['pageAnchor', 'table'].includes(name)),
+    conditions: {
+      _type: {
+        media: {
+          '...': true,
+          image,
+        },
+      },
+    },
   },
   reference: {
     conditions: {

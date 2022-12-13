@@ -64,6 +64,8 @@ const Link = (
     disabled,
     popUpId,
     leadpagesDomain,
+    dataGtm,
+    ariaLabel: ariaLabelOrg,
     ...props
   },
   ref
@@ -72,10 +74,18 @@ const Link = (
     return null
   const { Modal: ModalComponent = () => null, modalKey, modalCss } = props
   const Icon = Icons[icon || condition]
+  const ariaLabel = ariaLabelOrg || children?.toString() || label
 
   if (disabled) {
     return (
-      <$Link as="span" ref={ref} {...props} disabled>
+      <$Link
+        as="span"
+        ref={ref}
+        data-gtm={dataGtm}
+        aria-label={ariaLabel}
+        {...props}
+        disabled
+      >
         {children || label}
         {hasIcon && <Icon />}
       </$Link>
@@ -90,7 +100,7 @@ const Link = (
     case 'internal':
       return (
         <NextLink href={`${url}${hasHash && hash ? `#${hash}` : ''}`} passHref>
-          <$Link ref={ref} {...props}>
+          <$Link ref={ref} data-gtm={dataGtm} aria-label={ariaLabel} {...props}>
             {children || label}
             {hasIcon && <Icon linkStyle={props?.linkStyle} />}
           </$Link>
@@ -105,6 +115,8 @@ const Link = (
           href={url}
           target={target ? '_blank' : undefined}
           rel={rel}
+          data-gtm={dataGtm}
+          aria-label={ariaLabel}
           {...props}
         >
           {children || label}
@@ -120,6 +132,8 @@ const Link = (
             modalKey={modalKey}
             component={$Link}
             rel={rel}
+            data-gtm={dataGtm}
+            aria-label={ariaLabel}
             {...props}
           >
             {children || label}
@@ -137,6 +151,8 @@ const Link = (
           rel={rel}
           data-leadbox-popup={popUpId}
           data-leadbox-domain={leadpagesDomain}
+          data-gtm={dataGtm}
+          aria-label={ariaLabel}
           {...props}
         >
           {children || label}
@@ -152,6 +168,8 @@ const Link = (
             modalKey={modalKey || 'video'}
             component={$Link}
             rel={rel}
+            data-gtm={dataGtm}
+            aria-label={ariaLabel}
             {...props}
           >
             {children || label}

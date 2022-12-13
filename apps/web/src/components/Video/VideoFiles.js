@@ -56,7 +56,11 @@ const VideoFiles = ({ video }) => {
         {displayVideo ? (
           <DesktopVideo autoPlay playsinline muted loop>
             {files.map((file) => (
-              <source key={file} src={file} type="video/webm" />
+              <source
+                key={file}
+                src={file}
+                type={`video/${file.split('.').pop() || 'webm'}`}
+              />
             ))}
           </DesktopVideo>
         ) : (

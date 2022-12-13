@@ -151,7 +151,13 @@ export const link = ({
     name,
     groups: [...G.fieldGroupComponentOptions(), ...groups],
     parseType: 'link',
-    fields,
+    fields: [
+      ...fields,
+      ...G.group('options', [
+        F.string({ name: 'dataGtm', title: 'data-gtm' }),
+        F.string({ name: 'ariaLabel', title: 'aria-label' }),
+      ]),
+    ],
     preview: {
       ...P.link(),
       ...preview,

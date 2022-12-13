@@ -13,15 +13,17 @@ module.exports = {
     }
     const client = sanityClient || getClient({ preview: false })
 
-    const queryPromises = files.map(async ({ path, query, params }) => {
-      const data = await client.fetch(query, params)
+    const queryPromises = files.map(
+      async ({ path, query, params, data: _data }) => {
+        const data = await (_data || client.fetch(query, params))
 
-      return {
-        path,
-        query,
-        data,
+        return {
+          path,
+          query,
+          data,
+        }
       }
-    })
+    )
 
     const queryResponse = await Promise.allSettled(queryPromises)
     const filesResponse = await buildJSON.init({

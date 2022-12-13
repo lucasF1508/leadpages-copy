@@ -193,7 +193,11 @@ const HeroVideoBrowser = ({ media, link }) => {
             {displayVideo && (
               <Video autoPlay playsinline muted loop>
                 {files.map((file) => (
-                  <source key={file} src={file} type="video/webm" />
+                  <source
+                    key={file}
+                    src={file}
+                    type={`video/${file.split('.').pop() || 'webm'}`}
+                  />
                 ))}
               </Video>
             )}
