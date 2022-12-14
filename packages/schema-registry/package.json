@@ -1,7 +1,7 @@
 {
   "name": "schema-registry",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Runs webpack 3 in order to export the Sanity Schema Registry",
   "main": "./dist/index.js",
   "repository": "https://github.com/gearbox-built",
