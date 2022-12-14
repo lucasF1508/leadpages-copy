@@ -1,17 +1,27 @@
 import { BsQuestionCircle as icon } from 'react-icons/bs'
 import { F, FS, G, P } from 'part:gearbox-schema-tool/schema-builder'
 
+import {
+  orderRankField,
+  orderRankOrdering,
+} from '@sanity/orderable-document-list'
+
 export const schemaFAQ = {
   icon,
   name: 'faq',
   title: 'FAQ',
   type: 'document',
-  groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
+  orderings: [orderRankOrdering],
+  groups: G.fieldGroupDefaults(),
   fieldsets: [FS.seo(), FS.fieldset('meta', { collapsed: false })],
   fields: [
-    ...F.fieldDefaults(),
-    ...G.group('content', [F.hero(), F.field('components', {})]),
-    ...G.group('seo', [F.seo()]),
+    orderRankField({ type: 'faq' }),
+    F.string({ name: 'title' }),
+    F.field('blockContentBare', { name: 'content' }),
+    F.multiReference('categoryFaq', { name: 'category' }),
   ],
-  preview: P.titleImage(),
+  preview: P.titleImage({
+    title: 'title',
+    subtitle: 'category.0.title',
+  }),
 }

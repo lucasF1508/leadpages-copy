@@ -16,9 +16,13 @@ export const getAllDocs = async (
     preview = false,
     currentPage = 1,
     asCards = false,
+    offsetStart = 0,
+    offsetEnd = 0,
   } = {}
 ) => {
-  const slice = orgSlice || (await getDocSlice(currentPage, schemaType))
+  const slice =
+    orgSlice ||
+    (await getDocSlice(currentPage, schemaType, offsetStart, offsetEnd))
   const queryParams = {
     schemaType,
     projections,

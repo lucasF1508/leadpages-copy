@@ -10,7 +10,7 @@ export const spacer = {
     F.number({
       name: 'multiplier',
       initialValue: 1,
-      validation: (Rule) => Rule.precision(3),
+      validation: (Rule) => Rule.precision(1),
       description:
         'This component increases or decrease the vertical space between components at each responsive breakpoint by the multiplier',
     }),

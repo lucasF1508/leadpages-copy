@@ -166,11 +166,14 @@ const ReadyToGrow = ({
   zIndex,
 }) => {
   const RTGHeadlineCss = {
-    fontSize: headlineFontSize || '3.5rem',
+    h2: {
+      type: 'h1',
+      fontSize: headlineFontSize,
 
-    '@<s': {
-      fontSize: mobileHeadlineFontSize || '1.875rem',
-      lh: mobileHeadlineLineHeight || '2.125rem',
+      '@<s': {
+        fontSize: mobileHeadlineFontSize,
+        lh: mobileHeadlineLineHeight,
+      },
     },
   }
   const RTGContainerPadding = paddingScale
@@ -191,7 +194,7 @@ const ReadyToGrow = ({
         <h2>{headline}</h2>
       </RTGHeadline>
       {caption && (
-        <RTGCaption>
+        <RTGCaption css={{ '& p': { color: '$white' } }}>
           <div dangerouslySetInnerHTML={{ __html: caption }} />
         </RTGCaption>
       )}
@@ -264,7 +267,6 @@ ReadyToGrow.defaultProps = {
   paddingScale: 1,
   title: "Let's Get Started",
   headline: 'Ready to grow?',
-  headlineFontSize: '56px',
   caption:
     '<p>Take Leadpages for a test drive when you start your free 14-day trial.<br />No obligation. No reason not to.</p>',
   buttonText: 'Start a Leadpages Free Trial',

@@ -3,6 +3,18 @@ import getClient from 'client'
 
 const builder = imageUrlBuilder(getClient())
 
+const titledFilename = (filename) => {
+  if (!filename) return filename
+
+  return filename
+    .replace(/\.[^/.]+$/, '')
+    .replace(/[-_]/g, ' ')
+    .toLowerCase()
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
+
 const getSizesFromAsset = (asset, crop) => {
   const {
     aspectRatio: assetAspectRatio,
@@ -22,9 +34,12 @@ const getSizesFromAsset = (asset, crop) => {
   }
 }
 
-const getLabelsFromAsset = ({ alt, title, originalFilename }) => ({
-  alt: alt || title || originalFilename,
-  title: title || alt || originalFilename,
+const getLabelsFromImage = ({
+  asset: { altText, title, originalFilename } = {},
+  altText: alt,
+}) => ({
+  alt: alt || altText || title || titledFilename(originalFilename),
+  title: title || alt || altText || titledFilename(originalFilename),
 })
 
 const getPlaceholderFromAsset = ({
@@ -53,7 +68,7 @@ const useSanityImage = (image) => {
     crop,
     asset,
     ...getSizesFromAsset(asset, crop),
-    ...getLabelsFromAsset(asset),
+    ...getLabelsFromImage(image),
     ...getPlaceholderFromAsset(asset),
     ...getMetaFromAsset(image),
   }

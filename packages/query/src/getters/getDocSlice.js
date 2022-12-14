@@ -1,6 +1,6 @@
 import getDocPerPage from './getDocPerPage'
 
-export const getDocSlice = async (page, schemaType) => {
+export const getDocSlice = async (page, schemaType, offsetStart, offestEnd) => {
   const num = parseInt(page, 10)
   const { perPage } = (await getDocPerPage(schemaType)) || {}
 
@@ -8,7 +8,9 @@ export const getDocSlice = async (page, schemaType) => {
     return undefined
   }
 
-  return `${(num - 1) * perPage}...${(num - 1) * perPage + perPage}`
+  return `${(num - 1) * perPage + offsetStart}...${
+    (num - 1) * perPage + (perPage + offestEnd)
+  }`
 }
 
 export default getDocSlice

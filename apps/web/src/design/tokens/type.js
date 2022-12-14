@@ -1,55 +1,42 @@
-const typeStyles = {
+const typeSizes = {
   '9xl': {
-    lineHeight: 1,
-    fontSize: '8rem',
+    fontSize: '4rem', // 64px
   },
   '8xl': {
-    lineHeight: 100 / 96,
-    fontSize: '6rem',
+    fontSize: '3.5rem', // 56px
   },
   '7xl': {
-    lineHeight: 76 / 72,
-    fontSize: '4.5rem',
+    fontSize: '2.875rem', // 46px
   },
   '6xl': {
-    lineHeight: 64 / 60,
-    fontSize: '4rem',
+    fontSize: '2.375rem', // 38px
   },
   '5xl': {
-    lineHeight: 52 / 48,
-    fontSize: '3rem',
+    fontSize: '2rem', // 32px
   },
   '4xl': {
-    lineHeight: 42 / 36,
-    fontSize: '2.25rem',
+    fontSize: '1.75rem', // 28px
   },
   '3xl': {
-    lineHeight: 36 / 30,
-    fontSize: '1.875rem',
+    fontSize: '1.5rem', // 24px
   },
   '2xl': {
-    lineHeight: 30 / 24,
-    fontSize: '1.5rem',
+    fontSize: '1.375rem', // 22px
   },
   xl: {
-    lineHeight: 26 / 20,
-    fontSize: '1.25rem',
+    fontSize: '1.25rem', // 20px
   },
   lg: {
-    lineHeight: 24 / 18,
-    fontSize: '1.125rem',
+    fontSize: '1.125rem', // 18px
   },
   base: {
-    lineHeight: 24 / 16,
-    fontSize: '1rem',
+    fontSize: '1rem', // 16px
   },
   sm: {
-    lineHeight: 18 / 14,
-    fontSize: '0.875rem',
+    fontSize: '0.875rem', // 14px
   },
   xs: {
-    lineHeight: 15 / 12,
-    fontSize: '0.75rem',
+    fontSize: '0.75rem', // 12px
   },
 }
 
@@ -63,9 +50,9 @@ export const type = {
     overline: '$fonts$spaceMono',
   },
   lineHeights: {
-    s: 1,
-    m: 1.5,
-    l: 1.75,
+    s: 1.1,
+    m: 1.2,
+    l: 1.5,
     xl: 2,
     xxl: 3,
   },
@@ -87,61 +74,98 @@ export const type = {
     xl: '0.2em',
   },
   fontSizes: {
-    ...typeStyles,
+    ...typeSizes,
+    smallType: {
+      ...typeSizes.sm,
+      '@>s': typeSizes.base,
+    },
     baseType: {
-      ...typeStyles.base,
-      '@>s': typeStyles.lg,
+      ...typeSizes.base,
+      '@>s': typeSizes.lg,
     },
     baseTypeAlt: {
-      ...typeStyles.sm,
-      '@>s': typeStyles.base,
+      ...typeSizes.base,
+      '@>s': typeSizes.lg,
+    },
+    baseTypeLarge: {
+      ...typeSizes.lg,
+      '@>s': typeSizes.xl,
+      '@>m': typeSizes['3xl'],
+      lh: '$lineHeights$l',
     },
     subHeading: {
-      ...typeStyles.lg,
-      '@>s': typeStyles.xl,
-      '@>l': typeStyles['2xl'],
+      ...typeSizes.lg,
+      '@>s': typeSizes.xl,
+      '@>l': typeSizes['2xl'],
+      lh: '$lineHeights$m',
     },
     subHeadingAlt: {
-      ...typeStyles.base,
-      '@>s': typeStyles.lg,
+      ...typeSizes.base,
+      '@>s': typeSizes.lg,
+      lh: '$lineHeights$m',
     },
-    // h1: {
-    //   ...typeStyles['5xl'],
-    //   '@>s': typeStyles['6xl'],
-    //   '@>l': typeStyles['7xl'],
-    // },
+    h1: {
+      ...typeSizes['5xl'],
+      '@>s': typeSizes['7xl'],
+      '@>m': typeSizes['8xl'],
+      lh: '$lineHeights$m',
+    },
     h2: {
-      ...typeStyles['4xl'],
-      '@>s': typeStyles['5xl'],
-      '@>l': typeStyles['6xl'],
+      ...typeSizes['4xl'],
+      '@>s': typeSizes['5xl'],
+      '@>m': typeSizes['7xl'],
+      lh: '$lineHeights$m',
     },
     h3: {
-      ...typeStyles['3xl'],
-      '@>s': typeStyles['4xl'],
-      '@>l': typeStyles['5xl'],
+      ...typeSizes['3xl'],
+      '@>s': typeSizes['4xl'],
+      '@>m': typeSizes['5xl'],
+      lh: '$lineHeights$m',
     },
     h4: {
-      ...typeStyles['2xl'],
-      '@>s': typeStyles['3xl'],
-      '@>l': typeStyles['4xl'],
+      ...typeSizes['2xl'],
+      '@>s': typeSizes['3xl'],
+      '@>m': typeSizes['4xl'],
+      lh: '$lineHeights$m',
     },
     h5: {
-      ...typeStyles.xl,
-      '@>s': typeStyles['2xl'],
-      '@>l': typeStyles['3xl'],
+      ...typeSizes.xl,
+      '@>s': typeSizes['2xl'],
+      '@>m': typeSizes['3xl'],
+      lh: '$lineHeights$m',
     },
     h6: {
-      ...typeStyles.lg,
-      '@>s': typeStyles.xl,
-      '@>l': typeStyles['2xl'],
+      ...typeSizes.lg,
+      '@>s': typeSizes.xl,
+      '@>m': typeSizes['2xl'],
+      lh: '$lineHeights$m',
     },
-    button: typeStyles.base,
+    heroCustomer: {
+      ...typeSizes['2xl'],
+      '@>s': typeSizes['5xl'],
+      '@>m': typeSizes['6xl'],
+      '@>l': typeSizes['7xl'],
+      lh: '$lineHeights$m',
+    },
+    button: typeSizes.base,
+    buttonAlt: {
+      ...typeSizes.base,
+      '@>s': typeSizes.lg,
+    },
+    buttonSm: typeSizes.sm,
+    captionSm: typeSizes.xs,
     input: {
       fontSize: '1rem',
-      '@>s': typeStyles.sm,
+      '@>s': typeSizes.sm,
     },
     overline: {
-      ...typeStyles.xs,
+      ...typeSizes.xs,
+    },
+    headlineSupertitle: {
+      ...typeSizes.xs,
+    },
+    cardHeading: {
+      ...typeSizes.base,
     },
   },
   fontStyles: {
@@ -152,6 +176,9 @@ export const type = {
     baseTypeAlt: {
       fontFamily: '$base',
       fontWeight: '$normal',
+    },
+    baseTypeLarge: {
+      c: '$text',
     },
     subHeading: {
       fontFamily: '$base',
@@ -185,11 +212,20 @@ export const type = {
       fontWeight: '$medium',
       fontFamily: '$heading',
     },
+    heroCustomer: {},
     button: {
       fontWeight: '$normal',
       fontFamily: '$base',
     },
+    buttonSm: {
+      fontWeight: '$medium',
+      fontFamily: '$base',
+    },
     caption: {
+      fontWeight: '$normal',
+      fontFamily: '$base',
+    },
+    captionSm: {
       fontWeight: '$normal',
       fontFamily: '$base',
     },
@@ -199,9 +235,35 @@ export const type = {
     },
     overline: {
       fontWeight: '$normal',
-      fontFamily: '$base',
+      fontFamily: '$overline',
       letterSpacing: '0.1em',
       textTransform: 'uppercase',
+    },
+    headlineTitle: {
+      fontFamily: '$heading',
+      letterSpacing: '-0.03125rem',
+
+      '@<headlineSection': {
+        letterSpacing: 0,
+      },
+
+      variants: {
+        noPadding: {
+          true: { mb: 0 },
+          false: { mb: '1.5rem' },
+        },
+      },
+    },
+    headlineSubtitle: {
+      fontStyle: 'h3',
+    },
+    headlineSupertitle: {
+      typeStyles: 'overline',
+      c: '$gray10',
+    },
+    cardHeading: {
+      fontWeight: '$medium',
+      fontFamily: '$base',
     },
   },
 }

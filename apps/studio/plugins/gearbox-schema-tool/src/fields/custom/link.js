@@ -15,6 +15,7 @@ export const link = ({
   groups = [],
   preview = {},
   name = 'link',
+  isGrouped = true,
   ...props
 } = {}) => {
   const args = {
@@ -25,9 +26,12 @@ export const link = ({
     target: {},
     video: {},
     hash: {},
+    leadpagesDomain: {},
+    popUpId: {},
     hasHash: {},
     linkStyle: {},
     linkSize: {},
+    condition: {},
     ...argsOrg,
   }
 
@@ -35,29 +39,22 @@ export const link = ({
     internal: [],
     external: [],
     download: [],
+    leadpagesTrigger: [],
     ...conditionsOrg,
   })
 
   const fields = [
-    F.radio(conditions, { name: 'condition', group: 'content' }),
+    F.radio(conditions, {
+      name: 'condition',
+      group: isGrouped && 'content',
+      ...args.condition,
+    }),
     args.linkStyle
       ? F.radio(['text', 'button', 'ghost'], {
           name: 'linkStyle',
           initialValue: 'text',
-          group: 'options',
+          group: isGrouped && 'options',
           hidden: ({ parent }) => parent.condition === 'none',
-          ...args.linkStyle,
-        })
-      : '',
-    args.linkSize
-      ? F.radio(['normal', 'large'], {
-          name: 'linkSize',
-          initialValue: 'normal',
-          group: 'options',
-          hidden: ({ parent }) =>
-            parent.condition === 'none' ||
-            !parent?.linkStyle ||
-            parent.linkStyle === 'text',
           ...args.linkStyle,
         })
       : '',
@@ -65,17 +62,16 @@ export const link = ({
       ? F.string({
           name: 'url',
           description: 'eg. https://google.com',
-          group: 'content',
+          group: isGrouped && 'content',
           hidden: ({ parent }) => parent.condition !== 'external',
           ...args.url,
         })
       : '',
-
     args.target
       ? F.checkbox({
           name: 'target',
           title: 'Open in a New Tab',
-          group: 'options',
+          group: isGrouped && 'options',
           hidden: ({ parent }) => parent.condition !== 'external',
           ...args.target,
         })
@@ -83,7 +79,7 @@ export const link = ({
     args.page
       ? F.reference(types, {
           name: 'page',
-          group: 'content',
+          group: isGrouped && 'content',
           weak: true,
           hidden: ({ parent }) => parent.condition !== 'internal',
           ...args.page,
@@ -92,7 +88,7 @@ export const link = ({
     args.hasHash
       ? F.checkbox({
           name: 'hasHash',
-          group: 'content',
+          group: isGrouped && 'content',
           initialValue: false,
           hidden: ({ parent }) => parent.condition !== 'internal',
           ...args.hasHash,
@@ -101,30 +97,46 @@ export const link = ({
     args.hash
       ? F.string({
           name: 'hash',
-          group: 'content',
+          group: isGrouped && 'content',
           hidden: ({ parent }) =>
             parent.condition !== 'internal' || parent.hasHash !== true,
           ...args.hash,
         })
       : '',
+    args.popUpId
+      ? F.string({
+          name: 'popUpId',
+          group: isGrouped && 'content',
+          hidden: ({ parent }) => parent.condition !== 'leadpagesTrigger',
+          ...args.popUpId,
+        })
+      : '',
+    args.leadpagesDomain
+      ? F.string({
+          name: 'leadpagesDomain',
+          group: isGrouped && 'content',
+          hidden: ({ parent }) => parent.condition !== 'leadpagesTrigger',
+          ...args.leadpagesDomain,
+        })
+      : '',
     args.file
       ? F.file({
-          group: 'content',
+          group: isGrouped && 'content',
           hidden: ({ parent }) => parent.condition !== 'download',
           ...args.file,
         })
       : '',
     args.video
       ? F.video({
-          group: 'content',
+          group: isGrouped && 'content',
           hidden: ({ parent }) => parent.condition !== 'video',
           ...args.video,
         })
       : '',
     args.label
       ? F.string({
-          group: 'content',
           name: 'label',
+          group: isGrouped && 'content',
           hidden: ({ parent }) => parent.condition === 'none',
           ...args.label,
         })
@@ -139,7 +151,13 @@ export const link = ({
     name,
     groups: [...G.fieldGroupComponentOptions(), ...groups],
     parseType: 'link',
-    fields,
+    fields: [
+      ...fields,
+      ...G.group('options', [
+        F.string({ name: 'dataGtm', title: 'data-gtm' }),
+        F.string({ name: 'ariaLabel', title: 'aria-label' }),
+      ]),
+    ],
     preview: {
       ...P.link(),
       ...preview,

@@ -1,5 +1,6 @@
 import { getTemplateTypes } from 'part:@gearbox-built/studio/config'
 import sanityClient from 'part:@sanity/base/client'
+
 const templateTypes = getTemplateTypes()
 
 const client = sanityClient.withConfig({
@@ -15,22 +16,24 @@ export const setPathOnPublish = async (
 ) => {
   const isCategory = typeOrg.includes('category')
   const type = getDoctype(isCategory, typeOrg)
+  const { parent } = draft
 
   if (!templateTypes?.includes(type)) {
     return null
   }
 
   const basePage = await client.fetch(`
-    *[!(_id in path('drafts.**')) && archiveOf == '${type}'][0] {
-      "slug": slug.current
+    *[!(_id in path('drafts.**')) && (archiveOf == '${type}' || _id == '${parent?._ref}')][0] {
+      "slug": slug.current,
+      path,
     }
   `)
   let path = `/${slug || draft?.slug?.current}`
 
   if (basePage) {
     path = isCategory
-      ? `/${basePage?.slug}/category${path}`
-      : `/${basePage?.slug}${path}`
+      ? `${basePage.path || `/${basePage.slug}`}/category${path}`
+      : `${basePage.path || `/${basePage.slug}`}${path}`
   }
 
   patch.execute([{ set: { path } }])

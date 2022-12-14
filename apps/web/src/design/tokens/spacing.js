@@ -9,7 +9,7 @@ export const spacing = {
   },
   spacingY: {
     initial: 4,
-    xs: 6,
+    xs: 8,
     s: 8,
     m: 12,
     l: 15,

@@ -26,7 +26,7 @@ const config = {
   },
   plugins,
   externals: {
-    ['@sanity/client']: '@sanity/client',
+    '@sanity/client': '@sanity/client',
     lodash: 'lodash',
   },
   watchOptions: {
@@ -68,8 +68,19 @@ const config = {
           path.join(studio_node_modules, '@sanity/base/lib/presence'),
           path.join(studio_node_modules, '@sanity/base/lib/components'),
           path.join(studio_node_modules, '@sanity/base/lib/change-indicators'),
+          path.join(
+            studio_node_modules,
+            '@sanity/orderable-document-list/node_modules/framer-motion'
+          ),
+          path.join(
+            studio_node_modules,
+            '@sanity/orderable-document-list/node_modules/@sanity/ui'
+          ),
           path.join(node_modules, '@sanity/ui'),
           path.join(node_modules, '@sanity/uuid'),
+          path.join(node_modules, '@sanity/code-input'),
+          path.join(node_modules, '@sanity/structure'),
+          path.join(node_modules, '@sanity/structure/lib/parts/Client.js'),
           path.join(node_modules, 'axios'),
           path.join(node_modules, 'date-fns'),
           path.join(node_modules, 'dnd-core'),

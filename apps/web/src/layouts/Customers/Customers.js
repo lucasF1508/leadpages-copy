@@ -1,6 +1,6 @@
 import React from 'react'
 // components
-import CustomerStoriesRotator from '@components/Rotator/CustomerStoriesRotator'
+import CustomerStoriesRotator from '@components/RotatorCustomer/CustomerRotator'
 import DoYourThing from '@legacy/components/customers/DoYourThing'
 import FlexRow from '@legacy/components/layout/FlexRow'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
@@ -11,7 +11,7 @@ import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 // images
 import imageOne from '@legacy/assets/images/totems/This-is-the-lead-generation_785px@2x.jpg'
 
-const CustomersPage = () => (
+const CustomersPage = ({ customers }) => (
   <>
     <SEO
       pathname="/customers"
@@ -25,7 +25,7 @@ const CustomersPage = () => (
       title="Be inspired by someone like you"
       caption="Join more than 40,000 small businesses who trust us with their dreams."
     />
-    <CustomerStoriesRotator showBackgroundImage />
+    <CustomerStoriesRotator customers={customers} showBackgroundImage />
     <DoYourThing />
     <FlexRow
       image={imageOne}

@@ -1,7 +1,7 @@
 {
   "name": "studio",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "package.json",
   "author": "Devin Edwards <devin@gearboxbuilt.com>",
@@ -16,7 +16,6 @@
     "sanity"
   ],
   "dependencies": {
-    "config": "*",
     "@sanity/base": "2.27.2",
     "@sanity/components": "2.14.0",
     "@sanity/core": "2.27.0",
@@ -24,11 +23,14 @@
     "@sanity/default-layout": "2.27.2",
     "@sanity/default-login": "2.27.0",
     "@sanity/desk-tool": "2.27.2",
+    "@sanity/orderable-document-list": "^0.0.10",
     "@sanity/production-preview": "2.15.0",
     "@sanity/uuid": "3.0.1",
     "@sanity/vision": "2.27.2",
+    "config": "*",
     "immutability-helper": "3.1.1",
     "lodash": "4.17.21",
+    "nanoid": "^4.0.0",
     "prop-types": "15.7",
     "react": "^17.0",
     "react-barcode": "1.3.2",

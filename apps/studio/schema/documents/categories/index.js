@@ -1,1 +1,6 @@
+export * from './schemaCategoryCustomer'
 export * from './schemaCategoryPost'
+export * from './schemaCategoryTestimonial'
+export * from './schemaCategoryFaq'
+export * from './schemaCategoryIntegration'
+export * from './schemaCategoryIntegrationStatus'

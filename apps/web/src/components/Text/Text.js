@@ -3,14 +3,19 @@ import isString from 'lodash/isString'
 import PortableText from '@sanity/block-content-to-react'
 import { styled } from '@design'
 import { getTypeUtil } from '@design/utils'
-import { textDefaultTokens } from '@design/tokens/text'
+import { textDefaultTokens, textPostTokens } from '@design/tokens/text'
 import RendererList from './Renderers/RendererList'
 import MarksList from './Marks/MarksList'
+import ListsList from './Lists/ListsList'
+import ListItemsList from './Lists/ListItemsList'
 
 const $Text = styled('article', {
-  ...textDefaultTokens,
   variants: {
     tagStyle: getTypeUtil,
+    tokenSet: {
+      default: { ...textDefaultTokens },
+      post: { ...textPostTokens },
+    },
   },
   defaultVariants: {
     tagStyle: 'baseType',
@@ -24,6 +29,9 @@ const Text = ({
   children,
   renderers = RendererList,
   marks = MarksList,
+  list = ListsList,
+  listItem = ListItemsList,
+  styleMap = {},
   ...props
 }) => {
   if (!children && !content) return null
@@ -39,11 +47,21 @@ const Text = ({
     )
 
   return (
-    <$Text tagStyle={tagStyle} className={className} {...props}>
+    <$Text
+      tagStyle={tagStyle}
+      tokenSet={props.isPost ? 'post' : 'default'}
+      className={className}
+      {...props}
+    >
       {children || (
         <PortableText
-          blocks={content}
-          serializers={{ types: renderers, marks }}
+          blocks={content.map((item) => ({ ...item, styleMap }))}
+          serializers={{
+            types: renderers,
+            marks,
+            list,
+            listItem,
+          }}
         />
       )}
     </$Text>

@@ -2,7 +2,8 @@ import React from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
 import NextLink from 'next/link'
-import Image from 'next/image'
+import NextImage from 'next/image'
+import Image from '@components/Image'
 import { RPIcon } from '@legacy/constants/types'
 // images
 import rightArrowPurpleSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
@@ -51,15 +52,11 @@ const IconCardStyle_4Across = styled('div', {
     lineHeight: '20px',
     c: '$textAlt',
   },
+})
 
-  h3: {
-    fontSize: '16px',
-    fontFamily: '$fonts$base',
-    lineHeight: '24px',
-    fontWeight: '500',
-    mb: '1rem',
-    c: '$text',
-  },
+const IconCardHeading = styled('div', {
+  type: 'cardHeading',
+  mb: '$2',
 })
 
 const IconCardStyle_3Across = styled('div', {
@@ -146,24 +143,41 @@ const CTA = styled('span', {
   },
 })
 
-const IconCard = ({ title, icon, alt, description, link, itemsPerRow }) => {
-  if (itemsPerRow === 3) {
+const IconCard = ({
+  title,
+  icon,
+  alt,
+  description,
+  content,
+  link,
+  itemsPerRow,
+  image,
+}) => {
+  if (itemsPerRow == 3) {
     return (
       <IconCardStyle_3Across>
         <div>
-          <ImageContainer>
-            <Image
-              src={icon}
-              alt={alt}
-              height={48}
-              width={48}
-              lazyBoundary="501px"
-            />
-          </ImageContainer>
-          <h3>{title}</h3>
-          <div className="details">{description}</div>
-          {link && (
-            <NextLink href={link.route} passHref>
+          {(icon || image) && (
+            <ImageContainer>
+              {icon ? (
+                <NextImage
+                  src={icon}
+                  alt={alt}
+                  height={48}
+                  width={48}
+                  lazyBoundary="501px"
+                />
+              ) : (
+                <Image image={image} />
+              )}
+            </ImageContainer>
+          )}
+          <IconCardHeading aria-level={3} role="heading">
+            {title}
+          </IconCardHeading>
+          <div className="details">{content || description}</div>
+          {link?.condition && (
+            <NextLink href={link.url || link.route} passHref>
               <IconCardLink alt={link.altText}>
                 <CTA>
                   {link.label}
@@ -183,19 +197,27 @@ const IconCard = ({ title, icon, alt, description, link, itemsPerRow }) => {
   return (
     <IconCardStyle_4Across>
       <div>
-        <ImageContainer>
-          <Image
-            src={icon}
-            alt={alt}
-            height={48}
-            width={48}
-            lazyBoundary="501px"
-          />
-        </ImageContainer>
-        <h3>{title}</h3>
-        <div className="details">{description}</div>
-        {link && (
-          <NextLink href={link.route} passHref>
+        {(icon || image) && (
+          <ImageContainer>
+            {icon ? (
+              <NextImage
+                src={icon}
+                alt={alt}
+                height={48}
+                width={48}
+                lazyBoundary="501px"
+              />
+            ) : (
+              <Image image={image} />
+            )}
+          </ImageContainer>
+        )}
+        <IconCardHeading aria-level={3} role="heading">
+          {title}
+        </IconCardHeading>
+        <div className="details">{content || description}</div>
+        {link?.condition && (
+          <NextLink href={link.url || link.route} passHref>
             <IconCardLink alt={link.altText}>
               <CTA>
                 {link.label}
@@ -217,18 +239,19 @@ IconCard.defaultProps = {
   description: '',
   itemsPerRow: 4,
   link: null,
+  icon: undefined,
 }
 
 IconCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  icon: RPIcon.isRequired,
+  icon: RPIcon,
   alt: PropTypes.string,
   link: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    route: PropTypes.string.isRequired,
-    altText: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    label: PropTypes.string,
+    route: PropTypes.string,
+    altText: PropTypes.string,
   }),
   itemsPerRow: PropTypes.number,
 }

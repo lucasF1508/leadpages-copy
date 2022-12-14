@@ -1,6 +1,6 @@
-export const richText = (content = []) => {
+export const richText = ({ content = [], title: titleOrg = '' }) => {
   if (!content || !Array.isArray(content)) return content
-  let title = ''
+  let title = titleOrg
   const textBlocks = content.filter((blocks) => blocks._type === 'block')
   if (textBlocks.length) {
     title = textBlocks

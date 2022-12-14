@@ -4,9 +4,11 @@ import { pinionTokens } from '@design/tokens/pinion'
 
 const $Pinion = styled('section', pinionTokens)
 
+const $Inner = styled('div', {})
+
 const Pinion = ({ component, children, ...props }) => (
   <$Pinion component={component} {...props}>
-    <div>{children}</div>
+    <$Inner>{children}</$Inner>
   </$Pinion>
 )
 

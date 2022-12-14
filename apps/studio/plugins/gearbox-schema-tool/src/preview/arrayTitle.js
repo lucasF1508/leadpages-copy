@@ -4,7 +4,7 @@ export const arrayTitle = ({
   select = 'items',
   defaultTitle = 'Items (empty)',
   ...props
-}) =>
+} = {}) =>
   preview({
     select,
     prepare: ({ select = [] }) => {

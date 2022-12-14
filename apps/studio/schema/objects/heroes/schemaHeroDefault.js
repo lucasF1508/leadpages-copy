@@ -11,34 +11,39 @@ export const schemaHeroDefault = F.hero({
       initialValue: {
         condition: 'none',
         linkStyle: 'button',
-        linkSize: 'large',
       },
     },
   },
   fields: [
-    F.string({
-      name: 'spacing',
-      options: {
-        list: [
-          {
-            title: 'Loose',
-            value: 'loose',
-          },
-          {
-            title: 'Tight',
-            value: 'tight',
-          },
-        ],
-      },
-      initialValue: 'tight',
-      group: 'options',
+    F.image({
+      parseType: 'backgroundImage',
+      group: 'media',
+      name: 'backgroundImage',
     }),
-    F.radio(['top', 'center', 'bottom'], {
+    F.radio(['center', 'bottom', 'right'], {
       name: 'imageAlign',
       group: 'options',
-      initialValue: 'bottom',
-      hidden: ({ parent }) => parent?.spacing !== 'tight',
+      initialValue: 'center',
     }),
-    F.checkbox({ name: 'hasRadialGradients', group: 'options' }),
+    F.radio(['small', 'medium', 'large'], {
+      name: 'size',
+      title: 'Hero Size',
+      group: 'options',
+      initialValue: 'medium',
+    }),
+    F.object({
+      name: 'backgroundOptions',
+      group: 'options',
+      fields: [
+        F.number({
+          name: 'backgroundOffset',
+          title: 'Background Mobile Offset',
+          description: 'Adjust mobile breakpoint offset as a percentage (%).',
+          placeholder: 'ie. -10',
+        }),
+        F.checkbox({ name: 'darkBackground', initialValue: false }),
+        F.checkbox({ name: 'extendBackgroundColor', initialValue: false }),
+      ],
+    }),
   ],
 })

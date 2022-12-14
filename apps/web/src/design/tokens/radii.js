@@ -5,7 +5,7 @@ export const radii = {
   l: '1rem',
   xl: '1.5rem',
   round: '100%',
-  button: '0.25rem',
+  button: '$space$6',
   pill: '9501px',
 }
 

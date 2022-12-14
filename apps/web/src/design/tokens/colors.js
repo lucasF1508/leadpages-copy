@@ -27,10 +27,14 @@ export const colors = {
   grayAlt: '#f7f7f7',
   lightGray: '#edecec',
   darkGray: '#bfbebd',
+  darkGrayAlt: '#797f89',
+  grayTertiary: '#b1bacc',
+  grayTertiaryAlt: '#e6e9ef',
   tan: '#fef9f1',
   black: '#000000',
   purple: '#603eff',
   purpleLight: '#d1c6f9',
+  ctaPurple: '#E4DEFC',
   indigoDark: '#4d32cc',
   offWhite: 'rgba(255, 255, 255, 0.7)',
   terracottaLight: '#dfae78',
@@ -50,9 +54,12 @@ export const colors = {
   backgroundContrast: '$mauve3',
   border: '$gray5',
   link: '$primary',
-  hover: '$purple8',
+  hover: '$indigoDark',
   focus: '$hover',
   active: '$hover',
+  hoverInverse: '$offWhite',
+  focusInverse: '$indigoDark',
+  activeInverse: '$indigoDark',
   formFocus: '$brand',
   navText: '$text',
   navBackground: '$white',
@@ -68,6 +75,7 @@ export const colors = {
   gradientBrand: 'linear-gradient(12deg, $colors$primary, $colors$secondary)',
   gradientBackgroundOpacity:
     'linear-gradient(to right, $colors$background, transparent)',
+  dropdown: '$white',
 }
 
 export default colors

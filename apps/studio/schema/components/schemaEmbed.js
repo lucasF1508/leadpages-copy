@@ -7,7 +7,13 @@ export const schemaEmbed = F.object({
   icon,
   groups: G.fieldGroupComponentOptions(),
   fields: [
-    ...G.group('content', [F.text({ name: 'code' })]),
+    ...G.group('content', [
+      F.text({
+        name: 'code',
+        description:
+          "When adding podcast iFrames please ensure the url is in the 'src' property and not 'data-src'.",
+      }),
+    ]),
     ...G.group('options', [
       F.checkbox({
         name: 'isResponsive',

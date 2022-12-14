@@ -1,17 +1,56 @@
 import { BsCollection as icon } from 'react-icons/bs'
 import { F, FS, G, P } from 'part:gearbox-schema-tool/schema-builder'
 
+import {
+  orderRankField,
+  orderRankOrdering,
+} from '@sanity/orderable-document-list'
+
 export const schemaComparison = {
   icon,
   name: 'comparison',
   title: 'Comparision',
   type: 'document',
-  groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
+  orderings: [orderRankOrdering],
+  groups: [
+    ...G.fieldGroupDefaults(),
+    G.fieldGroup('excerpt'),
+    G.fieldGroup('seo', { title: 'SEO' }),
+    G.fieldGroup('options', { title: 'Page Options' }),
+  ],
   fieldsets: [FS.seo(), FS.fieldset('meta', { collapsed: false })],
   fields: [
-    ...F.fieldDefaults(),
-    ...G.group('content', [F.hero(), F.field('components', {})]),
+    orderRankField({ type: 'comparison' }),
+    ...F.fieldDefaults({
+      parent: { hidden: true },
+    }),
+    ...G.group('content', [
+      F.blockContent(),
+      F.reference('cta', {
+        name: 'cta',
+        title: 'Call to Action',
+        description: 'Leave blank to omit page call to action.',
+      }),
+    ]),
+    ...G.group('excerpt', [
+      F.object({
+        name: 'excerpt',
+        fields: [
+          F.image({ title: 'Compare Logo' }),
+          F.text({ name: 'content' }),
+        ],
+      }),
+    ]),
     ...G.group('seo', [F.seo()]),
+    ...G.group('options', [
+      F.boolean({
+        name: 'redirectToLegacy',
+        title: 'Redirect to legacy page',
+        description:
+          'Enable to redirect to a legacy Leadpages page, if it exists.',
+        initialValue: false,
+      }),
+    ]),
   ],
   preview: P.titleImage(),
 }

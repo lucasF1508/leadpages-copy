@@ -11,7 +11,7 @@ export const pinionTokens = {
     },
   ],
   '> div': {
-    maxWidth: '$content',
+    maxWidth: '$base',
     align: 'center',
   },
   variants: {
@@ -21,15 +21,45 @@ export const pinionTokens = {
           maxWidth: '$base',
         },
       },
-
       cardsBlock: {
         '> div': {
           maxWidth: '$base',
         },
       },
+      customerRotator: {
+        '@<m': {
+          px: 'unset',
+        },
+      },
+      ctaInline: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
       embed: {
         '> div': {
           maxWidth: '$base',
+        },
+      },
+      featureGrid: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
+      featuredTemplates: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
+      gallery: {
+        '> div': {
+          maxWidth: '$wide',
         },
       },
       imageSlider: {
@@ -43,9 +73,16 @@ export const pinionTokens = {
           maxWidth: '$base',
         },
       },
-      gallery: {
+      mediaWithText: {
         '> div': {
-          maxWidth: '$wide',
+          maxWidth: '$extended',
+        },
+      },
+      pricing: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
         },
       },
       slider: {
@@ -55,10 +92,19 @@ export const pinionTokens = {
           align: 'center',
         },
       },
-
       tableBlock: {
         '> div': {
           maxWidth: '$base',
+        },
+      },
+      tabs: {
+        overflow: 'hidden',
+      },
+      testimonials: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
         },
       },
       video: {
@@ -66,8 +112,76 @@ export const pinionTokens = {
           maxWidth: '$base',
         },
       },
+      archivePage: {
+        px: 'unset',
+        my: '$8',
+
+        '> div': {
+          align: 'none',
+          maxWidth: '$narrow',
+          mx: 'auto',
+          px: '$2_5',
+
+          '@>m': {
+            maxWidth: '$base',
+            px: '$5',
+            pl: '$11',
+          },
+        },
+      },
     },
     align: getAlignmentUtil('> div'),
     maxWidth: getMaxWidthUtil('> div'),
+    width: {
+      default: {
+        '> div': {
+          maxWidth: '$base',
+        },
+      },
+    },
+    backgroundColor: {
+      gray: {
+        bc: '$grayAlt',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+      tan: {
+        bc: '$backgroundAlt',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+    },
+    legacyComponent: {
+      customerQuoteKailei: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
+      pricingWaves: {
+        p: 'unset',
+        m: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
+      customerStoriesThumbnailRotator: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
+    },
   },
+  compoundVariants: [
+    {
+      backgroundColor: 'gray',
+      component: 'featureGrid',
+      css: {
+        py: '0',
+      },
+    },
+  ],
 }

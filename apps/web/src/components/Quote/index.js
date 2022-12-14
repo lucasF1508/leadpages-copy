@@ -1,5 +1,17 @@
 import Quote from './Quote'
-import Testimonial from './Testimonial'
+import QuoteCustomer from './QuoteCustomer'
+import QuotePricing from './QuotePricing'
 
-export default Quote
-export { Testimonial }
+const QuoteComponent = ({ legacyComponent, ...props }) => {
+  switch (legacyComponent) {
+    case 'customerQuoteKailei':
+      return QuoteCustomer(props)
+    case 'pricingWaves':
+      return QuotePricing(props)
+    default:
+      return Quote(props)
+  }
+}
+
+export default QuoteComponent
+export { Quote, QuoteCustomer, QuotePricing }

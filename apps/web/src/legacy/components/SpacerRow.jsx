@@ -72,7 +72,20 @@ const SpacerRow = ({ id, backgroundColor, size, sizeArray, border }) => {
 
   const borderStyle = border ? { b: '3px solid $colors$primary' } : {}
   const backgroundColorStyle = backgroundColor ? { backgroundColor } : {}
-  const sizeArrayStyle = sizeArray ? { sizeArray } : {}
+  const sizeArrayStyle = sizeArray
+    ? {
+        h: `${sizeArray[0]}rem`,
+        '@<m': {
+          h: `${sizeArray[1]}rem`,
+        },
+        '@<s': {
+          h: `${sizeArray[2]}rem`,
+        },
+        '@<xs': {
+          h: `${sizeArray[3]}rem`,
+        },
+      }
+    : {}
 
   return (
     <SpacerContainer

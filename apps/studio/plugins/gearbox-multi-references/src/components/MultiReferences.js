@@ -17,30 +17,30 @@ const createPatchFrom = (value) =>
 
 const SortSelect = SortableContainer(Select)
 
-export const convertOptions = (items = [], to = 'option') => {
+export const convertOptions = ({
+  items = [],
+  to = 'option',
+  titleField = 'title',
+}) => {
   if (!items) return []
 
   switch (to) {
     case 'option':
-      return items.map(({ title, _id }) => {
-        return { label: title, value: _id }
-      })
+      return items.map((item) => ({ label: item[titleField], value: item._id }))
     case 'reference':
-      return items.map(({ value }) => {
-        return {
-          _type: 'reference',
-          _ref: value,
-        }
-      })
+      return items.map(({ value }) => ({
+        _type: 'reference',
+        _ref: value,
+      }))
     default:
       return items
   }
 }
 
-export const MultiReferences = React.forwardRef((props, ref) => {
+export const MultiReferences = (props, ref) => {
   const { onChange, type } = props
   const {
-    options: { referenceTypes },
+    options: { referenceTypes, titleField = 'title' },
   } = type
 
   const [options, setOptions] = useState([])
@@ -53,7 +53,9 @@ export const MultiReferences = React.forwardRef((props, ref) => {
       case 'remove-value':
       case 'clear':
         setSelected(inputData)
-        onChange(createPatchFrom(convertOptions(inputData, 'reference')))
+        onChange(
+          createPatchFrom(convertOptions({ items: inputData, to: 'reference' }))
+        )
         break
       default:
         break
@@ -73,29 +75,31 @@ export const MultiReferences = React.forwardRef((props, ref) => {
 
     const items = await client.fetch(`
       *[(${query}) && !(_id in path('drafts.**'))] {
-        title,
+        ${titleField},
         _type,
         _id
       }
     `)
 
+    const selectOptions = convertOptions({
+      items: items.filter(({ _id }) => !_id.includes('draft')),
+      to: 'option',
+      titleField,
+    })
+
     setIsLoading(false)
-    setOptions(
-      convertOptions(
-        items.filter(({ _id }) => !_id.includes('draft')),
-        'option'
-      )
-    )
+    setOptions(selectOptions)
 
     if (props.value) {
       setSelected(
-        convertOptions(
-          props.value.map(({ _ref }) => {
-            const { title } = items.find(({ _id }) => _id === _ref)
-            return { title, _id: _ref }
+        convertOptions({
+          items: props.value.map(({ _ref }) => {
+            const item = items.find(({ _id }) => _id === _ref) || {}
+            return { [titleField]: item[titleField] || item.title, _id: _ref }
           }),
-          'option'
-        )
+          to: 'option',
+          titleField,
+        })
       )
     }
   }
@@ -132,23 +136,18 @@ export const MultiReferences = React.forwardRef((props, ref) => {
         noOptionsMessage={() => 'No References found. Check your schema config'}
         value={selected}
         styles={{
-          multiValue: (provided) => {
-            return {
-              ...provided,
-              zIndex: 1000,
-            }
-          },
-          menu: (provided) => {
-            return {
-              ...provided,
-              zIndex: 1000,
-            }
-          },
+          multiValue: (provided) => ({
+            ...provided,
+          }),
+          menu: (provided) => ({
+            ...provided,
+            zIndex: 1000,
+          }),
         }}
         blurInputOnSelect
       />
     </FormField>
   )
-})
+}
 
-export default MultiReferences
+export default React.forwardRef(MultiReferences)

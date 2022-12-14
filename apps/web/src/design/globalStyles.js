@@ -65,9 +65,6 @@ const globalStyles = globalCss({
     // '&:last-child': {
     //   mb: 0,
     // },
-    '&::selection': {
-      bc: '$grey2',
-    },
   },
   [`
     h1,
@@ -108,6 +105,9 @@ const globalStyles = globalCss({
   },
   h6: {
     type: 'h6',
+  },
+  p: {
+    c: '$textAlt',
   },
   a: {
     position: 'relative',

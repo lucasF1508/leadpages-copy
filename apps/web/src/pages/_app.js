@@ -27,31 +27,29 @@ export const AppContext = React.createContext()
 
 export default function App({
   Component: Main,
-  pageProps: {
-    data = [{}],
-    queries,
-    global = {},
-    preview,
-    options: {
-      slimFooter,
-      isPreviewPage,
-      onPromotionsLoaded,
-      isPricingMenu = false,
-      underlaidMenu = false,
-      isStartPageHeader = false,
-      scrollTarget = '',
-      noLogin = false,
-      headerBkgColor = null,
-      hideSignUpButton = false,
-      hideBar = false,
-      ...meta
-    } = {},
-  } = {},
+  pageProps: { data = [{}], queries, global = {}, preview, options = {} } = {},
 }) {
   globalStyles()
   useGoogleTagManager()
   useResizeEnd()
   useFocusOutlineOnTab()
+
+  const {
+    slimFooter,
+    isPreviewPage,
+    onPromotionsLoaded,
+    isPricingMenu = false,
+    underlaidMenu = false,
+    isStartPageHeader = false,
+    scrollTarget = '',
+    noLogin = false,
+    headerBkgColor = null,
+    hideSignUpButton = false,
+    hideBar = false,
+    darkHero = false,
+    planData,
+    ...meta
+  } = options
 
   // Promotions loading
   const [hasLoaded, setHasLoaded] = useState()
@@ -61,14 +59,16 @@ export default function App({
   const [{ seo, ...pageData }] = preview ? previewData : data
 
   return (
-    <AppContext.Provider value={{ ...siteMeta, hasLoaded, setHasLoaded }}>
+    <AppContext.Provider
+      value={{ ...siteMeta, hasLoaded, setHasLoaded, options, planData }}
+    >
       <MarketingThemeProvider>
         <ToastManager />
         <Promotions onPromotionsLoaded={onPromotionsLoaded} />
         {hideBar && (
           <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
         )}
-        <SEO seo={pageData?.seo} siteMeta={siteMeta} />
+        <SEO seo={seo} siteMeta={siteMeta} />
         <LazyMotion features={loadFeatures} strict>
           {/* {navigation && <Header navigation={navigation} />} */}
           <Header
@@ -79,6 +79,7 @@ export default function App({
             noLogin={noLogin}
             headerBkgColor={headerBkgColor}
             hideSignUpButton={hideSignUpButton}
+            darkHero={darkHero}
           />
           <LayoutContainer>
             <Main {...pageData} {...meta} />

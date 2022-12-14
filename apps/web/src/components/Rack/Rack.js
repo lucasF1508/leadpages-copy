@@ -4,7 +4,15 @@ import { AnimatePresence } from 'framer-motion'
 import Pinion from '@components/Pinion'
 import { RackComponentList } from '../Rack'
 
-const $Rack = styled('main', {})
+const $Rack = styled('main', {
+  [`
+    > section,
+    > section::before,
+    > section::after
+  `]: {
+    boxSizing: 'border-box',
+  },
+})
 
 const Rack = ({ components, children, ...props }) => {
   if (children) {
@@ -15,27 +23,36 @@ const Rack = ({ components, children, ...props }) => {
     <AnimatePresence initial={true}>
       <$Rack {...props}>
         {!!components?.length &&
-          components.map(({ _key, _type: component, ...componentData }) => {
-            const Component = RackComponentList[component]
+          components.map(
+            ({ _key, _type: component, width, ...componentData }) => {
+              const Component = RackComponentList[component]
+              const { backgroundColor, legacyComponent } = componentData
 
-            if (!Component) {
-              console.error(
-                'Provided component was not found in RackComponentList',
-                component
+              if (!Component) {
+                console.error(
+                  'Provided component was not found in RackComponentList',
+                  component
+                )
+                return null
+              }
+
+              if (['spacer', 'pageAnchor'].includes(component)) {
+                return <Component key={_key} {...componentData} />
+              }
+
+              return (
+                <Pinion
+                  key={_key}
+                  width={width}
+                  backgroundColor={backgroundColor}
+                  legacyComponent={legacyComponent}
+                  component={component}
+                >
+                  <Component {...componentData} />
+                </Pinion>
               )
-              return null
             }
-
-            if (['spacer', 'pageAnchor'].includes(component)) {
-              return <Component key={_key} {...componentData} />
-            }
-
-            return (
-              <Pinion key={_key} component={component}>
-                <Component {...componentData} />
-              </Pinion>
-            )
-          })}
+          )}
       </$Rack>
     </AnimatePresence>
   )

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { styled } from '@design'
+import { styled, darkTheme } from '@design'
 import Link from '@components/Link'
 import { Link as ScrollLink } from 'react-scroll'
 // images
@@ -78,6 +78,7 @@ const BurgerIconContainer = styled('img', {
   position: 'relative',
   right: '3px',
   display: 'none',
+  ml: '16px',
 
   '@media (max-width: 768px)': {
     display: 'block',
@@ -85,6 +86,11 @@ const BurgerIconContainer = styled('img', {
 
   '&:hover': {
     cursor: 'pointer',
+  },
+
+  [`.${darkTheme} &`]: {
+    filter: `invert(100%) sepia(98%) saturate(8%) hue-rotate(200deg)
+      brightness(103%) contrast(100%)`,
   },
 
   '&.start-page-header': {
@@ -459,6 +465,7 @@ const mobileResourcesMenu = [
 ]
 
 export default function NavDrawer({
+  className,
   scrollTarget,
   isPricingMenu,
   isStartPageHeader,
@@ -499,7 +506,7 @@ export default function NavDrawer({
 
   return (
     <>
-      <div>
+      <div className={className}>
         {isNavOpen && (
           <MobileMenuContainer>
             <MobileMenuSeparator />

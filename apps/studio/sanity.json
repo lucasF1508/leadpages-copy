@@ -14,6 +14,7 @@
     "media",
     "@gearbox-built/studio/config",
     "gearbox-vercel-deploy",
+    "gearbox-importer",
     "gearbox-doc-order-sort",
     "gearbox-autocomplete-address",
     "gearbox-multi-references",
@@ -24,14 +25,18 @@
     "gearbox-schema-tool",
     "gearbox-vimeo",
     "seo-pane",
-    "table"
+    "table",
+    "@sanity/orderable-document-list"
   ],
   "env": {
     "development": {
       "api": {
         "dataset": "production"
       },
-      "plugins": ["@sanity/vision", "parts-list"]
+      "plugins": [
+        "@sanity/vision",
+        "parts-list"
+      ]
     }
   },
   "parts": [
@@ -70,6 +75,10 @@
     {
       "implements": "part:@sanity/base/brand-logo",
       "path": "./parts/brandingName.js"
+    },
+    {
+      "implements": "part:gearbox-input-components/schema-fields",
+      "path": "./parts/inputComponents/SchemaFields.js"
     }
   ]
 }

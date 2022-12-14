@@ -580,7 +580,9 @@ const SubsectionBrandAssetsImage = styled('img', {
 })
 
 const SectionContent_Name = () => {
-  const displayVideo = shouldDisplayVideo()
+  const [displayVideo, setDisplayVideo] = useState(false)
+  useEffect(() => setDisplayVideo(shouldDisplayVideo()), [])
+
   return (
     <>
       <SubsectionTitle>What’s in a name?</SubsectionTitle>

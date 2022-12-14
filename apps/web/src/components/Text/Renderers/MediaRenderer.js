@@ -6,15 +6,29 @@ const Media = dynamic(() => import('@components/Media'))
 
 const $MediaContainer = styled('div', {
   position: 'relative',
-  mb: '$5',
+  my: '$2',
 
-  '&:last-child': {
-    mb: '0',
+  '@>s': {
+    my: '$8',
+  },
+
+  '&:first-child': { mt: '0' },
+  '&:last-child': { mb: '0' },
+
+  variants: {
+    removeSpaceAround: {
+      true: {
+        my: 0,
+        mt: '-$2',
+      },
+    },
   },
 })
 
-const ImageRenderer = ({ node: { markDefs, ...media } }) => (
-  <$MediaContainer>
+const ImageRenderer = ({
+  node: { markDefs, maxWidth, removeSpaceAround, ...media },
+}) => (
+  <$MediaContainer removeSpaceAround={removeSpaceAround} css={{ maxWidth }}>
     <Media media={media} type="static" />
   </$MediaContainer>
 )

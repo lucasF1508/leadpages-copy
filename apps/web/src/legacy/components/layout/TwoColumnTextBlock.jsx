@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'next/link'
+import NextLink from 'next/link'
+import Link from '@components/Link'
 import { styled } from '@design'
 
 // Images
@@ -16,7 +17,7 @@ const InnerContainer = styled('div', {
   justifyContent: 'center',
   maxWidth: '1140px',
   margin: '0 auto 3rem',
-  padding: '0 3rem',
+  gap: '2rem',
 
   '@media (max-width: 600px)': {
     flexDirection: 'column',
@@ -24,7 +25,6 @@ const InnerContainer = styled('div', {
 })
 
 const TextBlock = styled('div', {
-  padding: '0 1rem',
   width: '100%',
   maxWidth: '300px',
 
@@ -33,7 +33,6 @@ const TextBlock = styled('div', {
   },
 
   '@media (max-width: 600px)': {
-    padding: '1rem 0',
     maxWidth: '100%',
   },
 })
@@ -87,33 +86,32 @@ const StyledLink = styled('a', {
   },
 })
 
-const NextLink = styled('a', {
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  textDecoration: 'none',
-  cursor: 'pointer',
-
-  [`&:hover ${LinkText}`]: {
-    color: '$indigoDark',
-  },
-
-  [`&:hover ${ArrowSVG}`]: {
-    filter: `invert(18%) sepia(97%) saturate(3719%) hue-rotate(249deg)
-      brightness(81%) contrast(95%)`,
-  },
-})
-
 const TwoColumnTextBlock = ({ textBlockArray }) => (
   <OuterContainer>
     <InnerContainer>
       {textBlockArray.map((item, index) => {
-        const { heading, text, linkType, linkRoute, linkText, linkAltText } =
-          item
+        const {
+          title,
+          heading,
+          content,
+          text,
+          link,
+          linkType,
+          linkRoute,
+          linkText,
+          linkAltText,
+        } = item
         return (
           <TextBlock key={index}>
-            <Heading>{heading}</Heading>
-            <MainText>{text}</MainText>
+            <Heading>{title || heading}</Heading>
+            <MainText>{content || text}</MainText>
+            {link && (
+              <Link
+                css={{ fontSize: '1rem', fontWeight: '$medium' }}
+                hasIcon
+                {...link}
+              />
+            )}
             {linkType === 'external' && (
               <StyledLink
                 href={linkRoute}
@@ -131,8 +129,8 @@ const TwoColumnTextBlock = ({ textBlockArray }) => (
               </StyledLink>
             )}
             {linkType === 'internal' && (
-              <Link href={linkRoute} passHref>
-                <NextLink aria-label={linkAltText} target="_blank">
+              <NextLink href={linkRoute} passHref>
+                <StyledLink aria-label={linkAltText} target="_blank">
                   <LinkText>
                     {linkText}
                     <ArrowSVG
@@ -140,8 +138,8 @@ const TwoColumnTextBlock = ({ textBlockArray }) => (
                       alt="purple right arrow"
                     />
                   </LinkText>
-                </NextLink>
-              </Link>
+                </StyledLink>
+              </NextLink>
             )}
           </TextBlock>
         )
@@ -153,12 +151,12 @@ const TwoColumnTextBlock = ({ textBlockArray }) => (
 TwoColumnTextBlock.propTypes = {
   textBlockArray: PropTypes.arrayOf(
     PropTypes.shape({
-      heading: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      linkType: PropTypes.string.isRequired,
-      linkText: PropTypes.string.isRequired,
-      linkRoute: PropTypes.string.isRequired,
-      linkAltText: PropTypes.string.isRequired,
+      heading: PropTypes.string,
+      text: PropTypes.string,
+      linkType: PropTypes.string,
+      linkText: PropTypes.string,
+      linkRoute: PropTypes.string,
+      linkAltText: PropTypes.string,
     })
   ).isRequired,
 }

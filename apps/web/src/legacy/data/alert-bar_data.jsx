@@ -32,15 +32,15 @@ export const alertBarData = [
     placementRegex:
       'landing-pages-guide/|lead-generation-guide/|conversion-optimization-guide/',
   },
-  {
-    name: 'Global',
-    data: {
-      src: 'https://static.leadpages.com/leadbars/current/embed.js',
-      id: 'LJJyfxPJ6e6fDdXPSLw8N7',
-      domain: 'lps.lpages.co',
-    },
-    placementRegex: '.*',
-  },
+  // {
+  //   name: 'Global',
+  //   data: {
+  //     src: 'https://static.leadpages.com/leadbars/current/embed.js',
+  //     id: 'LJJyfxPJ6e6fDdXPSLw8N7',
+  //     domain: 'lps.lpages.co',
+  //   },
+  //   placementRegex: '.*',
+  // },
   // {
   //   name: 'Global',
   //   data: {

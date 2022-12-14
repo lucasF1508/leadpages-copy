@@ -26,27 +26,17 @@ export const hero = ({
     args.label
       ? F.string({ name: 'label', group: 'content', ...args.label })
       : '',
-    args.heading
-      ? F.string({ name: 'heading', group: 'content', ...args.heading })
-      : '',
     args.content
-      ? F.field('blockContentSimple', {
+      ? F.field('blockContentHero', {
           name: 'content',
           group: 'content',
           ...args.content,
         })
       : '',
     args.link
-      ? F.link({
-          name: 'link',
+      ? F.links({
           group: 'content',
-          initialValue: {
-            condition: 'none',
-          },
-          conditions: {
-            none: [],
-          },
-          ...args.link,
+          link: { ...args.link },
         })
       : '',
     args.media
@@ -61,7 +51,7 @@ export const hero = ({
         })
       : '',
     args.align
-      ? F.radio(['left', 'center', 'right'], {
+      ? F.radio(['left', 'right'], {
           name: 'align',
           title: 'Content Alignment',
           initialValue: 'left',
@@ -75,6 +65,7 @@ export const hero = ({
     name,
     groups: [
       G.fieldGroup('content', { title: 'Content', default: true }),
+      G.fieldGroup('links', { title: 'Links' }),
       G.fieldGroup('media', { title: 'Media' }),
       G.fieldGroup('options', { title: 'Options' }),
       ...groups,
@@ -94,7 +85,7 @@ export const hero = ({
       prepare({ heading = props?.title || startCase(name), content, media }) {
         return {
           title: heading,
-          subtitle: content ? P.richText(content) : '',
+          subtitle: P.richText({ content }),
           media: media?.condition === 'image' && media.image,
         }
       },

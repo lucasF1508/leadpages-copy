@@ -5,7 +5,7 @@ import Loader from '@components/Loader'
 import { styled } from '@design'
 import Text from '@components/Text'
 import { $Link } from '@components/Link'
-import { m as motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const $PreviewNotificationContainer = styled(motion.div, {
   position: 'fixed',
@@ -69,10 +69,11 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
     const { shapeData = (data) => data } =
       {
         '/404': await import('@pages/404'),
-        '/archive': await import('@pages/archive'),
-        '/archive/page/[num]': await import('@pages/archive/page/[num]'),
-        '/archive/category/[[...category]]': await import(
-          '@pages//archive/category/[[...category]]'
+        '/integrations': await import('@pages/integrations'),
+        '/blog': await import('@pages/blog'),
+        '/blog/page/[num]': await import('@pages/blog/page/[num]'),
+        '/blog/category/[[...category]]': await import(
+          '@pages/blog/category/[category]'
         ),
       }[pathname] || {}
 
@@ -164,6 +165,7 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
                       fontSize: '0.75rem',
                       fontWeight: '$bold',
                       letterSpacing: '0.1em',
+                      mb: -1,
                     }}
                   >
                     {loadingText}

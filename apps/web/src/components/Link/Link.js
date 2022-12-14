@@ -5,7 +5,7 @@ import NextLink from 'next/link'
 import { m as motion } from 'framer-motion'
 import { styled } from '@design'
 import { link as linkTokens } from '@design/tokens/link'
-import { FiArrowRight as InternalIcon } from '@react-icons/all-files/fi/FiArrowRight'
+import { FiChevronRight as InternalIcon } from '@react-icons/all-files/fi/FiChevronRight'
 import { FiDownload as DownloadIcon } from '@react-icons/all-files/fi/FiDownload'
 import { FiExternalLink as ExternalIcon } from '@react-icons/all-files/fi/FiExternalLink'
 import { FiMaximize2 as ModalIcon } from '@react-icons/all-files/fi/FiMaximize2'
@@ -14,11 +14,36 @@ import { MdPlayArrow as VideoIcon } from '@react-icons/all-files/md/MdPlayArrow'
 export const $Link = styled(motion.a, linkTokens)
 
 const Icons = {
-  internal: InternalIcon,
-  external: ExternalIcon,
-  download: DownloadIcon,
-  modal: ModalIcon,
-  video: VideoIcon,
+  internal: styled(InternalIcon, {
+    variants: {
+      linkStyle: {
+        button: {
+          h: 18,
+          w: 18,
+        },
+        buttonInverse: {
+          h: 18,
+          w: 18,
+          c: '$primary',
+        },
+        ghost: {
+          h: 18,
+          w: 18,
+        },
+        text: {
+          h: 15,
+          w: 15,
+        },
+      },
+    },
+    defaultVariants: {
+      linkStyle: 'text',
+    },
+  }),
+  external: styled(ExternalIcon),
+  download: styled(DownloadIcon),
+  modal: styled(ModalIcon),
+  video: styled(VideoIcon),
 }
 
 const Video = dynamic(() => import('@components/Video'))
@@ -37,30 +62,47 @@ const Link = (
     hash,
     hasIcon,
     disabled,
+    popUpId,
+    leadpagesDomain,
+    dataGtm,
+    ariaLabel: ariaLabelOrg,
     ...props
   },
   ref
 ) => {
-  if (!url && !['modal', 'video'].includes(condition)) return null
+  if (!url && !['modal', 'video', 'leadpagesTrigger'].includes(condition))
+    return null
   const { Modal: ModalComponent = () => null, modalKey, modalCss } = props
   const Icon = Icons[icon || condition]
+  const ariaLabel = ariaLabelOrg || children?.toString() || label
 
   if (disabled) {
     return (
-      <$Link as="span" ref={ref} {...props} disabled>
+      <$Link
+        as="span"
+        ref={ref}
+        data-gtm={dataGtm}
+        aria-label={ariaLabel}
+        {...props}
+        disabled
+      >
         {children || label}
         {hasIcon && <Icon />}
       </$Link>
     )
   }
 
+  if (condition === 'leadpagesTrigger' && (!popUpId || !leadpagesDomain)) {
+    return null
+  }
+
   switch (condition) {
     case 'internal':
       return (
         <NextLink href={`${url}${hasHash && hash ? `#${hash}` : ''}`} passHref>
-          <$Link ref={ref} hasIcon={hasIcon} {...props}>
+          <$Link ref={ref} data-gtm={dataGtm} aria-label={ariaLabel} {...props}>
             {children || label}
-            {hasIcon && <Icon />}
+            {hasIcon && <Icon linkStyle={props?.linkStyle} />}
           </$Link>
         </NextLink>
       )
@@ -73,7 +115,8 @@ const Link = (
           href={url}
           target={target ? '_blank' : undefined}
           rel={rel}
-          hasIcon={hasIcon}
+          data-gtm={dataGtm}
+          aria-label={ariaLabel}
           {...props}
         >
           {children || label}
@@ -89,7 +132,8 @@ const Link = (
             modalKey={modalKey}
             component={$Link}
             rel={rel}
-            hasIcon={hasIcon}
+            data-gtm={dataGtm}
+            aria-label={ariaLabel}
             {...props}
           >
             {children || label}
@@ -100,6 +144,21 @@ const Link = (
           </Modal>
         </ModalProvider>
       )
+    case 'leadpagesTrigger':
+      return (
+        <$Link
+          ref={ref}
+          rel={rel}
+          data-leadbox-popup={popUpId}
+          data-leadbox-domain={leadpagesDomain}
+          data-gtm={dataGtm}
+          aria-label={ariaLabel}
+          {...props}
+        >
+          {children || label}
+          {hasIcon && <Icon />}
+        </$Link>
+      )
     case 'video':
       return (
         <ModalProvider>
@@ -109,7 +168,8 @@ const Link = (
             modalKey={modalKey || 'video'}
             component={$Link}
             rel={rel}
-            hasIcon={hasIcon}
+            data-gtm={dataGtm}
+            aria-label={ariaLabel}
             {...props}
           >
             {children || label}

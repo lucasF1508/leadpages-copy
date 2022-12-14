@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 
 const RackComponentList = {
   accordion: dynamic(() => import('@components/Accordion')),
+  audio: dynamic(() => import('@components/Audio')),
   border: dynamic(() => import('@components/Border')),
   cards: dynamic(() => import('@components/Cards')),
   cardsBlock: dynamic(() => import('@components/Cards/CardsBlock')),
@@ -17,9 +18,23 @@ const RackComponentList = {
   pageAnchor: dynamic(() => import('@components/PageAnchor')),
   slider: dynamic(() => import('@components/Slider')),
   spacer: dynamic(() => import('@components/Spacer')),
-  textBlock: dynamic(() => import('@components/Text')),
+  headlineSection: dynamic(() => import('@components/Text/TextHeadline')),
+  textBlock: dynamic(() => import('@components/Text/TextStandard')),
+  testimonials: dynamic(() =>
+    import('@components/Testimonial/TestimonialRotator')
+  ),
   tableBlock: dynamic(() => import('@components/Table')),
   video: dynamic(() => import('@components/Video/VideoEmbed')),
+
+  // Home components
+  featureGrid: dynamic(() => import('@components/FeatureGrid')),
+  customerRotator: dynamic(() => import('@components/RotatorCustomer')),
+  featuredTemplates: dynamic(() => import('@components/FeaturedTemplates')),
+  tabs: dynamic(() => import('@components/Tabs')),
+  ctaInline: dynamic(() => import('@components/Cta/CtaInline')),
+  quote: dynamic(() => import('@components/Quote')),
+  faqs: dynamic(() => import('@components/Faq')),
+  pricing: dynamic(() => import('@components/Pricing')),
 }
 
 export default RackComponentList

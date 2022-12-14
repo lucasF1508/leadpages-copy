@@ -1,12 +1,14 @@
 const path = require('path')
 const findUp = require('find-up')
 const adminRedirects = require('redirects')
+const { filterRoutesFromSanity } = require('directoryToRoutes')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 require('dotenv').config({
   path: findUp.sync([`.env.${process.env.NODE_ENV}`, '.env.local', '.env']),
 })
+const { init: buildJSON } = require('indices/buildJSON')
 
 const {
   SANITY_STUDIO_API_PROJECT_ID,
@@ -118,19 +120,56 @@ module.exports = withBundleAnalyzer({
       ...redirects,
     ]
   },
-  rewrites: async () => [
-    {
-      source: '/studio/:path*',
-      destination:
-        process.env.NODE_ENV === 'development'
-          ? 'http://localhost:3333/studio/:path*'
-          : '/studio/index.html',
-    },
-    {
-      source: '/home',
-      destination: '/',
-    },
-  ],
+  rewrites: async () => {
+    const incrementalPaths = await filterRoutesFromSanity({
+      directory: './src/pages/_legacy',
+      projectId: SANITY_STUDIO_API_PROJECT_ID,
+      dataset: SANITY_STUDIO_API_DATASET,
+    })
+
+    if (incrementalPaths.length) {
+      const builtPaths = await buildJSON({
+        files: [
+          {
+            path: path.join('./public/indices/incrementalPaths.json'),
+            data: incrementalPaths,
+          },
+        ],
+      })
+
+      if (builtPaths.every(({ status }) => status === 'fulfilled')) {
+        console.log(
+          `Built index of ${incrementalPaths.length} incremental paths.`
+        )
+      }
+    }
+
+    return {
+      afterFiles: [
+        {
+          source: '/studio/:path*',
+          destination:
+            process.env.NODE_ENV === 'development'
+              ? 'http://localhost:3333/studio/:path*'
+              : '/studio/index.html',
+        },
+        {
+          source: '/home',
+          destination: '/',
+        },
+      ],
+      fallback: [
+        {
+          source: '/blog/:path*',
+          destination: 'https://www.leadpages.com/blog/:path*/',
+        },
+        {
+          source: '/blog/:path*/',
+          destination: 'https://www.leadpages.com/blog/:path*/',
+        },
+      ],
+    }
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

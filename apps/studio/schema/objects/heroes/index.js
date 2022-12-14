@@ -1,3 +1,5 @@
 export * from './schemaHeroDefault'
-export * from './schemaHeroHome'
 export * from './schemaHeroSimple'
+export * from './schemaHeroCustomer'
+export * from './schemaHeroIntegration'
+export * from './schemaHeroHome'

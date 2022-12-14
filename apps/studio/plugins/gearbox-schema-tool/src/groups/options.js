@@ -1,5 +1,5 @@
 import fieldGroup from './fieldGroup'
 
-export const options = () => fieldGroup('options')
+export const options = (props) => fieldGroup('options', props)
 
 export default options

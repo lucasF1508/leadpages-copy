@@ -2,6 +2,7 @@ import S from '@sanity/desk-tool/structure-builder'
 import GB from 'part:gearbox-desk-tool/structure-builder'
 import { MdBusiness, MdSettings } from 'react-icons/md'
 import { BsGraphUp, BsArrowLeftRight, BsLightning } from 'react-icons/bs'
+import { RiNewspaperFill } from 'react-icons/ri'
 
 export const listItemSiteSettings = S.listItem()
   .title('Site Settings')
@@ -14,6 +15,7 @@ export const listItemSiteSettings = S.listItem()
         GB.singletonListItem('siteRedirects', { title: 'Redirects' }).icon(
           BsArrowLeftRight
         ),
+        GB.singletonListItem('postSettings').icon(RiNewspaperFill),
         // GB.singletonListItem('mockData').icon(BsLightning),
       ])
   )

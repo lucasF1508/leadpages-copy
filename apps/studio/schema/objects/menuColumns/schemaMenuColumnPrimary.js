@@ -29,7 +29,7 @@ export const schemaMenuColumnPrimary = F.object({
             },
             prepare: ({ image, label = 'Column Link', content }) => ({
               title: label,
-              subtitle: content ? P.richText(content) : '',
+              subtitle: P.richText({ content }),
               media: image || itemIcon,
             }),
           },
@@ -44,7 +44,7 @@ export const schemaMenuColumnPrimary = F.object({
     },
     prepare: ({ label = 'Primary Column', content }) => ({
       title: label,
-      subtitle: content ? P.richText(content) : '',
+      subtitle: P.richText({ content }),
       media: itemIcon,
     }),
   },

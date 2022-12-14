@@ -4,24 +4,43 @@ import { styled } from '@design'
 
 const $StyledText = styled('p', {})
 
-const BlockRenderer = (props) => {
-  const { style = 'normal' } = props.node
-  const { types } = defaultSerializers
+const defaultRenderer = [
+  'normal',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'blockquote',
+]
 
-  if (['normal', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(style)) {
+const BlockRenderer = (props) => {
+  const { styleMap = {}, style = 'normal' } = props.node
+  const { types } = defaultSerializers
+  const asDefault = typeof props.index !== 'undefined' ? 'span' : 'p'
+
+  if (
+    defaultRenderer.includes(style) &&
+    !Object.keys(styleMap).includes(style)
+  ) {
     return types.block(props)
   }
 
   const type = {
     large: 'baseTypeLarge',
     normal: 'baseType',
+    ...styleMap,
   }[style || 'normal']
 
+  const as = {
+    headlineTitle: 'h2',
+    headlineSubtitle: 'h3',
+    ...styleMap,
+  }[style]
+
   return (
-    <$StyledText
-      as={typeof props.index !== 'undefined' ? 'span' : 'p'}
-      css={{ type }}
-    >
+    <$StyledText as={as || asDefault} css={{ type: type || style }}>
       {props.children}
     </$StyledText>
   )

@@ -1,5 +1,4 @@
 import field from '../field'
-import { autofill } from '../../validation'
 
 export const slug = ({
   required = true,
@@ -12,11 +11,11 @@ export const slug = ({
   ...props
 } = {}) => {
   const name = 'slug'
-  const source = options.source
+  const { source } = options
 
   return field(name, {
     required,
-    validation: autofill({ name, source }),
+    validation: (Rule) => Rule.custom(() => true),
     description,
     options: {
       source,
