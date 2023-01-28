@@ -31,9 +31,7 @@ export const deskStructure = () =>
           S.list()
             .title('Pages')
             .items([
-              GB.singletonListItem('pageHome', { title: 'Home' }).icon(
-                AiOutlineHome
-              ),
+              S.documentTypeListItem('pageHome').title('Home'),
               S.documentTypeListItem('page').title('Dynamic Pages'),
               S.listItem()
                 .title('Legacy Pages')
