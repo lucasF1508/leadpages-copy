@@ -5,6 +5,7 @@ import Image from '@components/Image'
 import Link from '@components/Link'
 import { IoMdTrendingUp as TrendingUp } from '@react-icons/all-files/io/IoMdTrendingUp'
 import SidebarCTA from '@components/Archive/SidebarCTA'
+import { useRouter } from 'next/router'
 
 const $Heading = styled(Heading, {})
 
@@ -13,6 +14,8 @@ const $ArchiveSidebar = styled('div', {
   flexDirection: 'column',
   gap: '$space$5',
 })
+
+const $ArticleSearchForm = styled('form', {})
 
 const $ArticleSearchInput = styled('input', {
   background: '$grayAlt',
@@ -25,6 +28,8 @@ const $ArticleSearchInput = styled('input', {
   height: '46px',
   padding: '0 12px',
   transition: 'ease 0.3s all',
+  width: '100%',
+  boxSizing: 'border-box',
 
   '&:focus': {
     background: '$white',
@@ -129,12 +134,21 @@ const $TrendingGrid = styled('div', {
 })
 
 const ArchiveSidebar = ({ categories, settings = {} }) => {
+  const router = useRouter()
   const { trendingArticles = [], sidebarCta = {} } = settings
 
   return (
     <$ArchiveSidebar>
       <SidebarCTA content={sidebarCta} />
-      <$ArticleSearchInput placeholder="Search..." />
+      <$ArticleSearchForm
+        onSubmit={(event) => {
+          event.preventDefault()
+          const { value } = event.target[0]
+          router.push(`/blog/search?s=${value}`)
+        }}
+      >
+        <$ArticleSearchInput placeholder="Search..." />
+      </$ArticleSearchForm>
       {categories && (
         <$CategoriesGrid>
           <$Heading heading={'Categories'} tag="h4" />
