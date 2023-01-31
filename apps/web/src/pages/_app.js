@@ -45,7 +45,7 @@ export default function App({
   // Promotions loading
   const [hasLoaded, setHasLoaded] = useState()
 
-  const { navigation, footer, globalHeaderFooter, siteMeta } = global || {}
+  const { navigation, footer, globalHeaderFooter = {}, siteMeta } = global || {}
   const [previewData, setPreviewData] = useState(data)
   const [
     { seo, htmlFooter: pageHtmlFooter, options: pageOptions, ...pageData },
