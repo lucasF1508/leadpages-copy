@@ -17,13 +17,14 @@ export async function getStaticProps(context) {
   const slug = '/website-templates'
   const rawPlanData = await getPlanData()
   const planData = getGroupedPlanData(rawPlanData)
-  const options = { hideBar: true, planData }
+  const options = { hideBar: true }
 
   return {
     props: {
       options,
       slug,
       preview,
+      planData,
     },
   }
 }

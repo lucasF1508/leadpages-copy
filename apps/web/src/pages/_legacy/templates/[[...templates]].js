@@ -17,13 +17,12 @@ export async function getStaticProps(context) {
   const slug = '/templates'
   const rawPlanData = await getPlanData()
   const planData = getGroupedPlanData(rawPlanData)
-  const options = { planData }
 
   return {
     props: {
-      options,
       slug,
       preview,
+      planData,
     },
   }
 }

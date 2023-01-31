@@ -9,9 +9,9 @@ export async function getStaticProps(context) {
   const slug = '/pricing'
 
   const rawPlanData = await getPlanData()
+  const planData = getGroupedPlanData(rawPlanData)
 
   const options = {
-    planData: getGroupedPlanData(rawPlanData),
     hideSignUpButton: true,
     hideBar: true,
   }
@@ -21,6 +21,7 @@ export async function getStaticProps(context) {
       options,
       slug,
       preview,
+      planData,
     },
   }
 }

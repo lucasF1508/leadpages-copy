@@ -113,10 +113,10 @@ const AccordionSection = styled('div', {
   },
 })
 
-const Pricing = (props) => {
-  const { hasLoaded } = useContext(AppContext)
+const Pricing = () => {
+  const { planData, hasLoaded } = useContext(AppContext)
+  const { trialPlans, generalPlans } = planData || {}
 
-  const { planData: { trialPlans, generalPlans } = {} } = props || {}
   const CONTACT_US_PLAN = {
     contactLink: 'https://lp.leadpages.com/agency/',
     headline: 'Need even more?',
@@ -190,7 +190,7 @@ const Pricing = (props) => {
         image="https://static.leadpages.com/images/og/og-pricing.jpg"
         canonical="/pricing"
       />
-      {isLoading ? (
+      {isLoading || !planData ? (
         <LoadingState />
       ) : (
         <>

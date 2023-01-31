@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
 // Components
 import Gallery from '@legacy/components/templates/Gallery'
 import Preview from '@legacy/components/templates/Preview'
 import SEO from '@legacy/components/SEO'
+import { AppContext } from '@app'
 // Utils
 import { TemplateKind } from '@legacy/constants/templates'
 import usePreviewTemplate from '@legacy/hooks/usePreviewTemplate'
@@ -43,7 +44,8 @@ PreviewSEO.propTypes = {
   pathname: PropTypes.string.isRequired,
 }
 
-const LandingPageTemplates = ({ planData }) => {
+const LandingPageTemplates = () => {
+  const { planData } = useContext(AppContext)
   const router = useRouter()
   const pathname = router.asPath
   const templateIdUrl = pathname.split('preview/')[1]
