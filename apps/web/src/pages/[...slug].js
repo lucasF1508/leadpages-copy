@@ -5,6 +5,29 @@ import { getPlanData, getGroupedPlanData } from '@utils/plans'
 
 const DynamicPage = (props) => <Page {...props} />
 
+export const shapeData = (data) => {
+  const [pageData] = (data?.length && data) || []
+  const { hero: heroes, options: pageOptions } = pageData || {}
+  const [hero] = heroes || []
+
+  // Page options
+  const darkHero = !!hero?.backgroundOptions?.darkBackground
+  const options = {
+    ...pageData?.options,
+    underlaidMenu: darkHero || pageOptions?.underlaidMenu || null,
+    darkHero,
+  }
+
+  return [
+    {
+      ...pageData,
+      options,
+    },
+  ]
+}
+
+export const exporter = (props) => shapeData(props)
+
 export async function getStaticProps(context) {
   const { params, preview = false } = context
   const path = `/${params?.slug?.join('/')}`
@@ -17,33 +40,24 @@ export async function getStaticProps(context) {
     })
   )
 
-  // TODO: Add this to shape data
-  const [pageData] = (data?.length && data) || []
-  const { hero: heroes, components, options: pageOptions } = pageData || {}
-  const [hero] = heroes || []
-
   // Only fetch pricing if we need it
+  const [pageData] = (data?.length && data) || []
+  const { components } = pageData || {}
   const hasPricing = components?.some(({ _type }) => _type === 'pricing')
-  const rawPlanData = await getPlanData()
-  const planData = hasPricing
-    ? { planData: getGroupedPlanData(rawPlanData) }
-    : {}
+  let planData = null
 
-  // Page options
-  const options = {
-    ...pageData?.options,
-    underlaidMenu: !!hero?.darkBackground || pageOptions?.underlaidMenu || null,
-    darkHero: !!hero?.darkBackground,
-    ...planData,
+  if (hasPricing) {
+    const rawPlanData = await getPlanData()
+    planData = getGroupedPlanData(rawPlanData)
   }
 
   return {
     props: {
-      data: data && !data[0] ? [{}] : data,
+      data: shapeData(data),
       queries,
       global,
       preview,
-      options,
+      planData,
     },
   }
 }

@@ -27,12 +27,31 @@ export const AppContext = React.createContext()
 
 export default function App({
   Component: Main,
-  pageProps: { data = [{}], queries, global = {}, preview, options = {} } = {},
+  pageProps: {
+    data = [{}],
+    queries,
+    global = {},
+    preview,
+    options: legacyOptions = {},
+    planData,
+  } = {},
 }) {
   globalStyles()
   useGoogleTagManager()
   useResizeEnd()
   useFocusOutlineOnTab()
+
+  // Promotions loading
+  const [hasLoaded, setHasLoaded] = useState()
+
+  const { navigation, footer, siteMeta } = global || {}
+  const [previewData, setPreviewData] = useState(data)
+  const [{ seo, options: pageOptions, ...pageData }] = preview
+    ? previewData
+    : data
+
+  // Option
+  const options = { ...legacyOptions, ...pageOptions }
 
   const {
     slimFooter,
@@ -47,16 +66,8 @@ export default function App({
     hideSignUpButton = false,
     hideBar = false,
     darkHero = false,
-    planData,
     ...meta
   } = options
-
-  // Promotions loading
-  const [hasLoaded, setHasLoaded] = useState()
-
-  const { navigation, footer, siteMeta } = global || {}
-  const [previewData, setPreviewData] = useState(data)
-  const [{ seo, ...pageData }] = preview ? previewData : data
 
   return (
     <AppContext.Provider
@@ -82,7 +93,7 @@ export default function App({
             darkHero={darkHero}
           />
           <LayoutContainer>
-            <Main {...pageData} {...meta} />
+            <Main {...pageData} {...meta} /* planData={planData} */ />
           </LayoutContainer>
           {/* {navigation && <Footer footer={footer} />} */}
           <Footer slimFooter={slimFooter} />
