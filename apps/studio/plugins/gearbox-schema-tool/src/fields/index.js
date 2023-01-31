@@ -49,7 +49,8 @@ export const fieldDefaults = ({
     title: 'Footer HTML',
     fieldset,
     group: 'meta',
-    description: 'HTML to be inserted before the closing body tag.',
+    description:
+      'HTML to be inserted before the closing body tag on this page only.',
     ...htmlFooter,
   }),
 ]

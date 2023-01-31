@@ -56,7 +56,7 @@ const useScriptEmbed = ({
       const script = document.createElement('script')
       Object.keys(attrs).forEach((key) => {
         if (key.includes('data-')) {
-          const [data, ...dataValue] = key.split('-')
+          const [, ...dataValue] = key.split('-')
           script.dataset[camelCase(dataValue)] = attrs[key]
         } else {
           script[key] = attrs[key] || true

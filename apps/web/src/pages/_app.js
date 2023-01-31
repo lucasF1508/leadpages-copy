@@ -45,11 +45,15 @@ export default function App({
   // Promotions loading
   const [hasLoaded, setHasLoaded] = useState()
 
-  const { navigation, footer, siteMeta } = global || {}
+  const { navigation, footer, globalHeaderFooter, siteMeta } = global || {}
   const [previewData, setPreviewData] = useState(data)
-  const [{ seo, htmlFooter, options: pageOptions, ...pageData }] = preview
-    ? previewData
-    : data
+  const [
+    { seo, htmlFooter: pageHtmlFooter, options: pageOptions, ...pageData },
+  ] = preview ? previewData : data
+
+  // HTML codes
+  const { globalHtmlHeader: htmlHeader, globalHtmlFooter } = globalHeaderFooter
+  const htmlFooter = [globalHtmlFooter, pageHtmlFooter].join('')
 
   // Option
   const options = { ...legacyOptions, ...pageOptions }
@@ -73,6 +77,7 @@ export default function App({
     <AppContext.Provider
       value={{ ...siteMeta, hasLoaded, setHasLoaded, options, planData }}
     >
+      {htmlHeader && <Embed code={htmlHeader} />}
       <MarketingThemeProvider>
         <ToastManager />
         <Promotions onPromotionsLoaded={onPromotionsLoaded} />

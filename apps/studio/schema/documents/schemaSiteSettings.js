@@ -1,20 +1,23 @@
-import { MdSettings as icon } from 'react-icons/md'
+import { BsCodeSlash as icon } from 'react-icons/bs'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 
-export const schemaSiteSettings = {
+export const schemaGlobalHeaderFooter = {
   icon,
-  name: 'siteSettings',
-  title: 'Site Settings',
+  name: 'globalHeaderFooter',
+  title: 'Global Header/Footer',
   type: 'document',
-  __experimental_actions: ['update', 'publish' /*'create', 'delete' */],
   fields: [
-    F.title(),
-    F.text({ name: 'description' }),
-    F.array({
-      name: 'keywords',
-      of: [{ type: 'string' }],
-      options: { layout: 'tags' },
+    F.text({
+      name: 'globalHtmlHeader',
+      title: 'Global Header HTML',
+      description:
+        'HTML to be inserted before the closing head tag on every page.',
     }),
-    F.string({ name: 'author' }),
+    F.text({
+      name: 'globalHtmlFooter',
+      title: 'Global Footer HTML',
+      description:
+        'HTML to be inserted before the closing body tag on every page.',
+    }),
   ],
 }
