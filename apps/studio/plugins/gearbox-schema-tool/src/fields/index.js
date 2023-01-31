@@ -3,6 +3,7 @@ import message from './custom/message'
 import slug from './types/slug'
 import string from './types/string'
 import reference from './types/reference'
+import text from './types/text'
 
 // Fields
 export * from './field'
@@ -15,6 +16,7 @@ export const fieldDefaults = ({
   slug: _slug = {},
   path = {},
   parent = {},
+  htmlFooter = {},
 } = {}) => [
   message(
     '⚠ ️The current page is set to redirect to a legacy version of the page. To disable this redirect, disable the <b>Redirect to legacy page</b> option in the <b>Page Options</b> tab and redeploy the website.',
@@ -41,5 +43,13 @@ export const fieldDefaults = ({
     group: 'meta',
     description: `Automatically updates on Publish.`,
     ...path,
+  }),
+  text({
+    name: 'htmlFooter',
+    title: 'Footer HTML',
+    fieldset,
+    group: 'meta',
+    description: 'HTML to be inserted before the closing body tag.',
+    ...htmlFooter,
   }),
 ]

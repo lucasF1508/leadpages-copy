@@ -5,6 +5,7 @@ import useGoogleTagManager from '@hooks/useGoogleTagManager'
 import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
+import Embed from '@components/Embed'
 import { MarketingThemeProvider } from '@lp/ui'
 import { LazyMotion } from 'framer-motion'
 
@@ -46,13 +47,12 @@ export default function App({
 
   const { navigation, footer, siteMeta } = global || {}
   const [previewData, setPreviewData] = useState(data)
-  const [{ seo, options: pageOptions, ...pageData }] = preview
+  const [{ seo, htmlFooter, options: pageOptions, ...pageData }] = preview
     ? previewData
     : data
 
   // Option
   const options = { ...legacyOptions, ...pageOptions }
-
   const {
     slimFooter,
     isPreviewPage,
@@ -100,6 +100,7 @@ export default function App({
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>
+      {htmlFooter && <Embed code={htmlFooter} />}
       {preview && (
         <PreviewBadge
           preview={preview}
