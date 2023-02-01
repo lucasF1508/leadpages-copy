@@ -8,7 +8,7 @@ export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/customers'
 
-  const { global } = await runQueries()
+  const { global } = await runQueries([])
   const customers = await runQuery(`
     *[_type == 'customer' && 'featured' in category[]->slug.current] | order(orderRank) {
       path,
