@@ -164,6 +164,9 @@ export const type = {
     headlineSupertitle: {
       ...typeSizes.xs,
     },
+    overlineHighlighted: {
+      ...typeSizes.xs,
+    },
     cardHeading: {
       ...typeSizes.base,
     },
@@ -260,6 +263,14 @@ export const type = {
     headlineSupertitle: {
       typeStyles: 'overline',
       c: '$gray10',
+    },
+    overlineHighlighted: {
+      typeStyles: 'overline',
+      c: '$darkBlue',
+      p: '4px 8px',
+      br: '3px',
+      bc: '$tealLight',
+      display: 'table',
     },
     cardHeading: {
       fontWeight: '$medium',
