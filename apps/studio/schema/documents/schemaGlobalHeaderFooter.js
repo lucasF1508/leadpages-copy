@@ -7,13 +7,13 @@ export const schemaGlobalHeaderFooter = {
   title: 'Global Header/Footer',
   type: 'document',
   fields: [
-    F.text({
-      name: 'globalHtmlHeader',
-      title: 'Global Header HTML',
-      rows: 20,
-      description:
-        'HTML to be inserted before the closing head tag on every page.',
-    }),
+    // F.text({
+    //   name: 'globalHtmlHeader',
+    //   title: 'Global Header HTML',
+    //   rows: 20,
+    //   description:
+    //     'HTML to be inserted before the closing head tag on every page.',
+    // }),
     F.text({
       name: 'globalHtmlFooter',
       title: 'Global Footer HTML',

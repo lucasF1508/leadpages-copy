@@ -52,7 +52,7 @@ export default function App({
   ] = preview ? previewData : data
 
   // HTML codes
-  const { globalHtmlHeader: htmlHeader, globalHtmlFooter } = globalHeaderFooter
+  const { globalHtmlFooter } = globalHeaderFooter
   const htmlFooter = [globalHtmlFooter, pageHtmlFooter].join('')
 
   // Option
