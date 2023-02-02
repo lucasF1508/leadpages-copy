@@ -1,6 +1,7 @@
 import React from 'react'
 import WebsiteTemplates from '@layouts/WebsiteTemplates'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
+import { runQueries } from '@lib'
 
 const WebsiteTemplatesPage = (props) => <WebsiteTemplates {...props} />
 
@@ -13,17 +14,20 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
   const { preview = false } = context
-
   const slug = '/website-templates'
+
+  const { global } = await runQueries([])
   const rawPlanData = await getPlanData()
   const planData = getGroupedPlanData(rawPlanData)
-  const options = { hideBar: true, planData }
+  const options = { hideBar: true }
 
   return {
     props: {
       options,
       slug,
       preview,
+      planData,
+      global,
     },
   }
 }

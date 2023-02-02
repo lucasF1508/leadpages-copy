@@ -8,6 +8,7 @@ import MediaWithText, {
 } from '@components/MediaWithText'
 import Image from '@components/Image'
 import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
+import { features } from 'config'
 
 export const $Hero = styled('div', {
   display: 'flex',
@@ -29,7 +30,6 @@ export const $Hero = styled('div', {
   },
 
   [`&.${darkTheme}`]: {
-    bc: '$purple',
     color: '$white',
   },
 
@@ -55,6 +55,14 @@ export const $Hero = styled('div', {
         h1: {
           type: 'h2',
         },
+      },
+    },
+    backgroundColor: {
+      purple: {
+        bc: '$purple',
+      },
+      navy: {
+        bc: '$darkBlue',
       },
     },
   },
@@ -173,16 +181,18 @@ const HeroDefault = ({
   const { palette } = backgroundImage?.asset?.metadata || {}
   const {
     backgroundOffset = false,
-    darkBackground = false,
+    backgroundColor = false,
     extendBackgroundColor = false,
   } = backgroundOptions
 
+  const darkBackground = features.darkHeros.includes(backgroundColor)
   const bc = extendBackgroundColor ? palette?.dominant?.background : null
 
   return (
     <$Hero
       className={`${className} ${darkBackground && darkTheme}`}
       size={size}
+      backgroundColor={backgroundColor}
     >
       {backgroundImage && (
         <$BackgroundImage

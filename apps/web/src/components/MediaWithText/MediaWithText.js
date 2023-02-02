@@ -186,6 +186,22 @@ export const $MediaWithTextMedia = styled('div', {
         },
       },
     },
+    {
+      alignImage: 'bottom',
+      priority: 'media',
+      layout: 'vertical',
+      css: {
+        mb: 0,
+      },
+    },
+    {
+      alignImage: 'bottom',
+      priority: 'media',
+      layout: 'horizontal',
+      css: {
+        box: { property: 'mb', multiplier: -1 },
+      },
+    },
   ],
   defaultVariants: {
     layout: 'horizontal',

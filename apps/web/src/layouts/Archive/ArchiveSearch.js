@@ -41,10 +41,9 @@ const $CategoryBreadcrumbs = styled('div', {
   },
 })
 
-const Archive = ({
+const ArchiveSearch = ({
   docs = [],
   pagination = {},
-  currentCategory,
   categories,
   settings,
   hasFeaturedPost,
@@ -54,36 +53,21 @@ const Archive = ({
   <Pinion component="archivePage">
     <$ArchiveGrid>
       <div>
-        {currentCategory ? (
-          <$CategoryBreadcrumbs>
-            <$CategoryHeading tag="h1" tagStyle="h5">
-              <Link condition="internal" url={'/blog'}>
-                Blog
-              </Link>
-            </$CategoryHeading>
-            <$CategoryHeading heading=">" tag="h1" tagStyle="h5" />
-            <$CategoryHeading
-              heading={currentCategory.title}
-              tag="h2"
-              tagStyle="h5"
-            />
-          </$CategoryBreadcrumbs>
-        ) : (
-          <Heading
-            heading={'Leadpages Blog'}
-            tag="h1"
-            tagStyle="h2"
-            css={{ pb: '$8' }}
+        <$CategoryBreadcrumbs>
+          <$CategoryHeading tag="h1" tagStyle="h5">
+            <Link condition="internal" url={'/blog'}>
+              Blog
+            </Link>
+          </$CategoryHeading>
+          <$CategoryHeading heading=">" tag="h1" tagStyle="h5" />
+          <$CategoryHeading
+            heading={`<span style="color: black;">${
+              isLoading ? 'Searching...' : 'Search:'
+            }</span> ${!isLoading ? searchQuery : ''}`}
+            tag="h2"
+            tagStyle="h5"
           />
-        )}
-        {searchQuery &&
-          (isLoading ? (
-            <div>Searching...</div>
-          ) : (
-            <div>
-              Found {pagination?.found} results for: {searchQuery}
-            </div>
-          ))}
+        </$CategoryBreadcrumbs>
         <$ArchiveCardGrid>
           {docs.map((doc, i) => (
             <CardPostArchive
@@ -100,4 +84,4 @@ const Archive = ({
   </Pinion>
 )
 
-export default Archive
+export default ArchiveSearch

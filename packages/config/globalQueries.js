@@ -50,4 +50,10 @@ module.exports = {
       },
     }),
   ],
+  globalHeaderFooter: [
+    getQuery({
+      schemaType: 'globalHeaderFooter',
+      slice: 0,
+    }),
+  ],
 }

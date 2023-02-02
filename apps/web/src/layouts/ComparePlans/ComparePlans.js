@@ -107,9 +107,9 @@ const SectionLink = styled('div', {
   paddingTop: '3rem',
 })
 
-const ComparePlans = (props) => {
-  const { hasLoaded } = useContext(AppContext)
-  const { planData: { compareTrialPlans: trialPlans } = {} } = props || {}
+const ComparePlans = () => {
+  const { planData, hasLoaded } = useContext(AppContext)
+  const { compareTrialPlans: trialPlans } = planData || {}
 
   const [bundleData, setBundleData] = useState(null)
   const [couponData, setCouponData] = useState(null)
@@ -190,7 +190,7 @@ const ComparePlans = (props) => {
       <ComparePlansHeader deviceSize={deviceSize} scrollTarget="destination" />
       <div name="destination"></div>
       <SpacerRow size="small" backgroundColor="$gray" />
-      {isLoading ? (
+      {isLoading || !planData ? (
         <LoadingState />
       ) : (
         <>

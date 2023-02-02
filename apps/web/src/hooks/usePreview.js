@@ -68,6 +68,7 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
 
     const { shapeData = (data) => data } =
       {
+        '/[...slug]': await import('@pages/[...slug].js'),
         '/404': await import('@pages/404'),
         '/integrations': await import('@pages/integrations'),
         '/blog': await import('@pages/blog'),
@@ -78,7 +79,6 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
       }[pathname] || {}
 
     const getClient = (await import('client')).default
-
     const client = getClient({ preview: true })
 
     const allData = queries?.length

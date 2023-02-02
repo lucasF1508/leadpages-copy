@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import kebabCase from 'lodash/kebabCase'
+import camelCase from 'lodash/camelCase'
 
 const useScriptEmbed = ({
   htmlString,
@@ -54,7 +55,12 @@ const useScriptEmbed = ({
     scripts.forEach((attrs) => {
       const script = document.createElement('script')
       Object.keys(attrs).forEach((key) => {
-        script[key] = attrs[key]
+        if (key.includes('data-')) {
+          const [, ...dataValue] = key.split('-')
+          script.dataset[camelCase(dataValue)] = attrs[key]
+        } else {
+          script[key] = attrs[key] || true
+        }
       })
       script.id = `embedSrc-${kebabCase(attrs?.src)}`
 

@@ -13,14 +13,7 @@ export const schemaPageHome = {
     FS.seo(),
   ],
   fields: [
-    ...F.fieldDefaults({
-      slug: {
-        readOnly: true,
-        initialValue: {
-          current: 'home',
-        },
-      },
-    }),
+    ...F.fieldDefaults(),
     ...G.group('content', [
       F.field('hero'),
       F.field('components'),

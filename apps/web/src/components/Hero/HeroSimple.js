@@ -2,6 +2,7 @@ import React from 'react'
 import Text from '@components/Text'
 import { styled, darkTheme } from '@design'
 import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
+import { features } from 'config'
 import { $Hero, $BackgroundImage } from './HeroDefault'
 
 const $Text = styled(Text)
@@ -13,6 +14,19 @@ const $HeroSimple = styled($Hero, {
     my: '$5',
     w: '100%',
     boxSizing: 'border-box',
+  },
+
+  [`&.${darkTheme}`]: {
+    color: '$white',
+  },
+
+  backgroundColor: {
+    purple: {
+      bc: '$purple',
+    },
+    navy: {
+      bc: '$darkBlue',
+    },
   },
 })
 
@@ -28,14 +42,19 @@ const HeroSimple = ({
   const { palette } = backgroundImage?.asset?.metadata || {}
   const {
     backgroundOffset = false,
-    darkBackground = false,
+    backgroundColor = false,
     extendBackgroundColor = false,
   } = backgroundOptions
 
+  const darkBackground = features.darkHeros.includes(backgroundColor)
   const bc = extendBackgroundColor ? palette?.dominant?.background : null
 
   return (
-    <$HeroSimple className={darkBackground && darkTheme} size={size}>
+    <$HeroSimple
+      className={darkBackground && darkTheme}
+      size={size}
+      backgroundColor={backgroundColor}
+    >
       {backgroundImage && (
         <$BackgroundImage
           objectFit={isMobile ? 'cover' : 'contain'}
