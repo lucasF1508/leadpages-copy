@@ -1,7 +1,8 @@
 import React, { memo } from 'react'
-import { styled } from '@design'
+import { styled, darkTheme } from '@design'
 import { AnimatePresence } from 'framer-motion'
 import Pinion from '@components/Pinion'
+import { features } from 'config'
 import { RackComponentList } from '../Rack'
 
 const $Rack = styled('main', {
@@ -27,6 +28,8 @@ const Rack = ({ components, children, ...props }) => {
             ({ _key, _type: component, width, ...componentData }) => {
               const Component = RackComponentList[component]
               const { backgroundColor, legacyComponent } = componentData
+              const darkBackground =
+                features.darkHeros.includes(backgroundColor)
 
               if (!Component) {
                 console.error(
@@ -47,6 +50,7 @@ const Rack = ({ components, children, ...props }) => {
                   backgroundColor={backgroundColor}
                   legacyComponent={legacyComponent}
                   component={component}
+                  className={darkBackground && darkTheme}
                 >
                   <Component {...componentData} />
                 </Pinion>

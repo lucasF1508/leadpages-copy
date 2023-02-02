@@ -1,6 +1,7 @@
 export * from './heroes'
 export * from './menuColumns'
 export * from './schemaBackgroundColor'
+export * from './schemaBackgroundColorFull'
 export * from './schemaBlockContent'
 export * from './schemaBlockContentBare'
 export * from './schemaBlockContentSimple'

@@ -145,8 +145,38 @@ export const pinionTokens = {
         my: 'unset',
         box: [{ property: 'py' }],
       },
+      gray4: {
+        bc: '$gray',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
       tan: {
         bc: '$backgroundAlt',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+      white: {
+        bc: '$white',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+      lavender: {
+        bc: '$lavenderLight',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+      teal: {
+        bc: '$tealLight',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+      purple: {
+        bc: '$purple',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+      navy: {
+        bc: '$darkBlue',
         my: 'unset',
         box: [{ property: 'py' }],
       },
