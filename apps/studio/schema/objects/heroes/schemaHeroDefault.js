@@ -1,5 +1,6 @@
 import { BsFileRichtext as icon } from 'react-icons/bs'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
+import { features } from 'config'
 
 export const schemaHeroDefault = F.hero({
   name: 'heroDefault',
@@ -41,7 +42,10 @@ export const schemaHeroDefault = F.hero({
           description: 'Adjust mobile breakpoint offset as a percentage (%).',
           placeholder: 'ie. -10',
         }),
-        F.checkbox({ name: 'darkBackground', initialValue: false }),
+        F.dropdown(['transparent', ...features.darkHeros], {
+          name: 'backgroundColor',
+          description: 'Defaults to transparent.',
+        }),
         F.checkbox({ name: 'extendBackgroundColor', initialValue: false }),
       ],
     }),

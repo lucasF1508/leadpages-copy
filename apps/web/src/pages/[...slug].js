@@ -2,6 +2,7 @@ import React from 'react'
 import { getDoc, getDocSlugs, runQueries } from '@lib'
 import Page from '@layouts/Page'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
+import { features } from 'config'
 
 const DynamicPage = (props) => <Page {...props} />
 
@@ -11,7 +12,9 @@ export const shapeData = (data) => {
   const [hero] = heroes || []
 
   // Page options
-  const darkHero = !!hero?.backgroundOptions?.darkBackground
+  const darkHero = features.darkHeros.includes(
+    hero?.backgroundOptions?.backgroundColor
+  )
   const options = {
     ...pageData?.options,
     underlaidMenu: darkHero || pageOptions?.underlaidMenu || null,
