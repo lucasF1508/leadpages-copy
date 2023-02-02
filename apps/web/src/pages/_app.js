@@ -77,7 +77,6 @@ export default function App({
     <AppContext.Provider
       value={{ ...siteMeta, hasLoaded, setHasLoaded, options, planData }}
     >
-      {htmlHeader && <Embed code={htmlHeader} />}
       <MarketingThemeProvider>
         <ToastManager />
         <Promotions onPromotionsLoaded={onPromotionsLoaded} />
