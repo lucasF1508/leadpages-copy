@@ -10,8 +10,11 @@ export const darkTheme = createTheme('dark', {
     primary: '#ffffff',
     link: '#ffffff',
     white: '$purple',
+    hover: '$text',
+    hoverColor: '$darkBlue',
   },
   borders: {
     thickButton: '$borderWidths$thick solid $colors$primary',
+    thickGhost: '$borderWidths$thick solid $colors$text',
   },
 })

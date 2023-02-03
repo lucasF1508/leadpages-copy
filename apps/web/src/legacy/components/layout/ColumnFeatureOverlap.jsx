@@ -86,7 +86,7 @@ const Supertitle = styled('div', {
   lineHeight: '18px',
   marginBottom: '1.25rem',
   color: '$darkBlue',
-  background: '$sky',
+  background: '$tealLight',
   textTransform: 'uppercase',
   textAlign: 'center',
   borderRadius: '3px',

@@ -54,8 +54,29 @@ export const OverlineStyle = (props) => (
       lineHeight: '18px',
       textTransform: 'uppercase',
       opacity: 0.7,
-      mb: '0.5rem',
-      c: '$text',
+      marginBottom: '0.5rem',
+      color: '#0f0c09',
+    }}
+  >
+    {props.children}
+  </span>
+)
+
+export const OverlineHighlightedStyle = (props) => (
+  <span
+    style={{
+      fontFamily: 'Space Mono',
+      fontSize: '12px',
+      letterSpacing: '2px',
+      lineHeight: '18px',
+      textTransform: 'uppercase',
+      opacity: 0.7,
+      marginBottom: '0.5rem',
+      color: '#0b236d',
+      backgroundColor: '#8FEFEF',
+      padding: '4px 8px',
+      borderRadius: '3px',
+      display: 'inline-block',
     }}
   >
     {props.children}
@@ -84,6 +105,11 @@ export const blockContentHeadline = F.array({
           title: 'Overline',
           value: 'headlineSupertitle',
           blockEditor: { render: OverlineStyle },
+        },
+        {
+          title: 'Overline Highlighted',
+          value: 'overlineHighlighted',
+          blockEditor: { render: OverlineHighlightedStyle },
         },
         {
           title: 'Title',

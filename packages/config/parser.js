@@ -11,6 +11,10 @@ module.exports = {
     media: (name) => ({
       [name]: {
         '...': true,
+        lottie: {
+          '...': true,
+          asset: '->',
+        },
         image,
         video: {
           '...': true,

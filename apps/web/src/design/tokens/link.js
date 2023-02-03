@@ -80,13 +80,13 @@ export const link = {
         '&:hover': {
           bc: '$hover',
           borderColor: '$hover',
-          c: '$white',
+          c: '$hoverColor',
         },
 
         '&:active': {
           bc: '$active',
           borderColor: '$active',
-          c: '$white',
+          c: '$hoverColor',
         },
 
         '&[disabled]': {
