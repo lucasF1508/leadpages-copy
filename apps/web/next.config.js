@@ -31,6 +31,8 @@ const {
   LEADPAGES_API_HOST,
   LEADPAGES_TRIAL_HOST,
   LEADPAGES_REACTIVATION_HOST,
+  LEADPAGES_BLOG_PROXY_HOST,
+  LEADPAGES_BLOG_PROXY_PATH,
 } = process.env
 
 module.exports = withBundleAnalyzer({
@@ -121,6 +123,7 @@ module.exports = withBundleAnalyzer({
     ]
   },
   rewrites: async () => {
+    const fallbackProxy = `${LEADPAGES_BLOG_PROXY_HOST}${LEADPAGES_BLOG_PROXY_PATH}/:path*/`
     const incrementalPaths = await filterRoutesFromSanity({
       directory: './src/pages/_legacy',
       projectId: SANITY_STUDIO_API_PROJECT_ID,
@@ -161,11 +164,11 @@ module.exports = withBundleAnalyzer({
       fallback: [
         {
           source: '/blog/:path*',
-          destination: 'https://www.leadpages.com/blog/:path*/',
+          destination: fallbackProxy,
         },
         {
           source: '/blog/:path*/',
-          destination: 'https://www.leadpages.com/blog/:path*/',
+          destination: fallbackProxy,
         },
       ],
     }

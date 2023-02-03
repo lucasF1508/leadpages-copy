@@ -134,6 +134,7 @@ const $BackgroundImage = styled(Image, {
 export const $MediaWithTextMedia = styled('div', {
   w: '100%',
   position: 'relative',
+  boxSizing: 'border-box',
 
   variants: {
     layout: {
