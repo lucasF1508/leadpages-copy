@@ -34,7 +34,7 @@ const $MediaCaption = styled('div', {
 
 const Media = ({
   className,
-  css,
+  css: cssOrg,
   ratio,
   priority,
   type,
@@ -49,14 +49,28 @@ const Media = ({
     startInView,
     yoyo,
     videoControls,
+    maxWidth,
+    align,
+    video,
     ...media
   } = {},
   ...props
 }) => {
+  const alignMargin = {
+    ml: align === 'left' ? 0 : 'auto',
+    mr: align === 'right' ? 0 : 'auto',
+  }
+
+  const css = {
+    maxWidth,
+    ...alignMargin,
+    ...cssOrg,
+  }
+
   const Element = () => {
     switch (condition) {
       case 'video':
-        return <Video type={type} {...media} {...props} />
+        return <Video type={type} video={video} {...media} {...props} />
       case 'lottie':
         return (
           <Lottie
