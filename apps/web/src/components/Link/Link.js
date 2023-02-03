@@ -74,7 +74,10 @@ const Link = (
     return null
   const { Modal: ModalComponent = () => null, modalKey, modalCss } = props
   const Icon = Icons[icon || condition]
-  const ariaLabel = ariaLabelOrg || children?.toString() || label
+  const ariaLabel =
+    ariaLabelOrg ||
+    (children instanceof String && children?.toString()) ||
+    label
 
   if (disabled) {
     return (

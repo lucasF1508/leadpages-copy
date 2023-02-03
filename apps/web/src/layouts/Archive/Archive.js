@@ -49,7 +49,6 @@ const Archive = ({
   settings,
   hasFeaturedPost,
   isLoading = false,
-  searchQuery,
 }) => (
   <Pinion component="archivePage">
     <$ArchiveGrid>
@@ -76,14 +75,6 @@ const Archive = ({
             css={{ pb: '$8' }}
           />
         )}
-        {searchQuery &&
-          (isLoading ? (
-            <div>Searching...</div>
-          ) : (
-            <div>
-              Found {pagination?.found} results for: {searchQuery}
-            </div>
-          ))}
         <$ArchiveCardGrid>
           {docs.map((doc, i) => (
             <CardPostArchive
