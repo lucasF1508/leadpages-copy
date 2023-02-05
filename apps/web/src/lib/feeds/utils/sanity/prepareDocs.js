@@ -15,7 +15,7 @@ export const prepareCategoryDocs = async (
 export const prepareArticleDocs = async (
   postDocsIn,
   articleData = [],
-  { _type = 'eLearningCourse' } = {}
+  { _type = 'post' } = {}
 ) => {
   const postDocs = postDocsIn || (await fetchPostDocs())
   const postIds = postDocs.map(({ _id }) => _id)

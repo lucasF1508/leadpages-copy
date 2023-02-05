@@ -7,7 +7,7 @@ import {
   categoryQuery,
 } from './feedQueries'
 
-const client = getClient()
+const client = getClient({ preview: true })
 
 export const getFeeds = async ({ id = false }) => {
   const query = feedQuery({ id })

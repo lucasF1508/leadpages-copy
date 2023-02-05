@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import uuid from '@sanity/uuid'
+import { uuid } from '@sanity/uuid'
 import { category as categoryShaper } from '../shapers/category'
 import makeCategoryIndex from './makeCategoryIndex'
 

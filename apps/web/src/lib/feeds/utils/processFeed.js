@@ -51,7 +51,7 @@ export const processFeed = async (
     logPerformance(`${feed.title}: processFeed`, timers.start)
   }
 
-  return [...articleDocs, ...categoryDocs]
+  return [...categoryDocs, ...articleDocs]
 }
 
 export default processFeed
