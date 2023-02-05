@@ -2,7 +2,7 @@ import {
   BsArrowLeftRight as icon,
   BsArrowRight as arrowIcon,
 } from 'react-icons/bs'
-import { F, FS, P } from 'part:gearbox-schema-tool/schema-builder'
+import { F } from 'part:gearbox-schema-tool/schema-builder'
 
 export const schemaSiteRedirects = {
   icon,
@@ -11,7 +11,7 @@ export const schemaSiteRedirects = {
   type: 'document',
   fields: [
     F.message(
-      'These redirects are used within the Next.js redirect config. They can accept Regex, Path matching and wild cards. For more in depth information please see the <a href="https://nextjs.org/docs/api-reference/next.config.js/redirects" target="_blank">Next.js Redirect Docs<a>'
+      'These redirects are used within the Next.js redirect config. They can accept Regex, Path matching and wild cards. For more in depth information please see the <a href="https://nextjs.org/docs/api-reference/next.config.js/redirects" target="_blank">Next.js Redirect Docs<a>. <b>Static redirects have a hard limit of 1024 entries.</b>'
     ),
     F.array({
       name: 'siteRedirects',
@@ -45,12 +45,10 @@ export const schemaSiteRedirects = {
               source: 'source',
               destination: 'destination',
             },
-            prepare: ({ source = '', destination = '' }) => {
-              return {
-                title: `${source}  =>  ${destination}`,
-                media: arrowIcon,
-              }
-            },
+            prepare: ({ source = '', destination = '' }) => ({
+              title: `${source}  →  ${destination}`,
+              media: arrowIcon,
+            }),
           },
         }),
       ],

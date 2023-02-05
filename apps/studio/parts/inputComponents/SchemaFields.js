@@ -6,6 +6,19 @@ import { withDocument } from 'part:@sanity/form-builder'
 import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import PatchEvent, { set, unset } from '@sanity/form-builder/PatchEvent'
 import { useId } from '@reach/auto-id'
+import { schemaPromoCodes, schemaSiteRedirects } from '../../schema/documents'
+
+const schemas = [
+  ...getTemplateSchemas(),
+  {
+    name: schemaPromoCodes.name,
+    fields: schemaPromoCodes.fields[0].of[0].fields,
+  },
+  {
+    name: schemaSiteRedirects.name,
+    fields: schemaSiteRedirects.fields[1].of[0].fields,
+  },
+]
 
 const SchemaFields = React.forwardRef(
   (
@@ -25,9 +38,7 @@ const SchemaFields = React.forwardRef(
   ) => {
     // Get field data
     const { feedDocType } = document?.feedOptions || {}
-    const [schema] = getTemplateSchemas().filter(
-      ({ name }) => name == feedDocType
-    )
+    const [schema] = schemas.filter(({ name }) => name === feedDocType)
     const { fields } = schema || {}
 
     // Form input
