@@ -157,14 +157,6 @@ module.exports = withBundleAnalyzer({
           source: '/blog/',
           destination: `${fallbackProxy}/`,
         },
-        {
-          source: '/blog/:path*',
-          destination: `${fallbackProxy}/:path*/`,
-        },
-        {
-          source: '/blog/:path*/',
-          destination: `${fallbackProxy}/:path*/`,
-        },
       ],
       afterFiles: [
         {
@@ -177,6 +169,14 @@ module.exports = withBundleAnalyzer({
         {
           source: '/home',
           destination: '/',
+        },
+        {
+          source: '/blog/:path*',
+          destination: `${fallbackProxy}/:path*/`,
+        },
+        {
+          source: '/blog/:path*/',
+          destination: `${fallbackProxy}/:path*/`,
         },
       ],
       fallback: [

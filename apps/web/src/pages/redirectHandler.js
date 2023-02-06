@@ -6,7 +6,7 @@ const redirects = { ...blogRedirects, ...legacyRedirects }
 
 const Page = ({ errorCode }) => <div>`${errorCode}`</div>
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async ({ req, res, ...context }) => {
   const { query } = context
   const path = query?.path?.join('/')
 
