@@ -20,7 +20,7 @@
 /public/sitemap*.xml
 /public/robots.txt
 /public/indices/*.json
-/public/favicon/*
+# /public/favicon/*
 !/public/favicon/favicon.svg
 !/public/favicon/favicon.png
 

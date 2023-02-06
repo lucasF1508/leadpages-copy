@@ -78,11 +78,50 @@ const SEO = (props) => {
         {/* // Use SVG for Favicon with dark mode media query */}
         <link
           rel="icon"
-          href="/favicon/favicon.svg"
-          sizes="any"
-          type="image/svg+xml"
+          href="/favicon-32x32.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+          type="image/png"
         />
-        <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+        <meta name="theme-color" content="#603eff" />
+        <link
+          rel="apple-touch-icon"
+          sizes="48x48"
+          href="/favicon/icon-48x48.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="72x72"
+          href="/favicon/icon-72x72.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="96x96"
+          href="/favicon/icon-96x96.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="144x144"
+          href="/favicon/icon-144x144.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="192x192"
+          href="/favicon/icon-192x192.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="256x256"
+          href="/favicon/icon-256x256.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="384x384"
+          href="/favicon/icon-384x384.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+        />
+        <link
+          rel="apple-touch-icon"
+          sizes="512x512"
+          href="/favicon/icon-512x512.png?v=f7c25fceb1ed99a78a0a05b977eb0fa1"
+        />
         <link rel="manifest" href="/favicon/manifest.webmanifest" />
       </Head>
     </>
