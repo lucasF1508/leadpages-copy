@@ -47,6 +47,7 @@
     "@sanity/block-content-to-react": "3.0.0",
     "@sanity/webhook": "^2.0.0",
     "@sendgrid/mail": "7.7.0",
+    "@sentry/nextjs": "^7.36.0",
     "@stitches/react": "1.2.8",
     "animejs": "^3.2.1",
     "axios": "0.27.2",

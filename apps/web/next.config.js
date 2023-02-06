@@ -9,6 +9,7 @@ require('dotenv').config({
   path: findUp.sync([`.env.${process.env.NODE_ENV}`, '.env.local', '.env']),
 })
 const { init: buildJSON } = require('indices/buildJSON')
+const { withSentryConfig } = require('@sentry/nextjs')
 
 const {
   SANITY_STUDIO_API_PROJECT_ID,
@@ -36,9 +37,10 @@ const {
   GTM_CONTAINER_ID,
   GTAG_TRACKING_ID,
   FB_PIXEL_ID,
+  SENTRY_DSN,
 } = process.env
 
-module.exports = withBundleAnalyzer({
+const moduleExports = withBundleAnalyzer({
   env: {
     SANITY_STUDIO_API_PROJECT_ID,
     SANITY_STUDIO_API_DATASET,
@@ -63,6 +65,7 @@ module.exports = withBundleAnalyzer({
     GTM_CONTAINER_ID,
     GTAG_TRACKING_ID,
     FB_PIXEL_ID,
+    SENTRY_DSN,
   },
   reactStrictMode: false,
   poweredByHeader: false,
@@ -153,8 +156,6 @@ module.exports = withBundleAnalyzer({
       }
     }
 
-    console.log('fallbackProxy', fallbackProxy)
-
     return {
       beforeFiles: [
         // {
@@ -197,4 +198,9 @@ module.exports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
+  sentry: {
+    hideSourceMaps: true,
+  },
 })
+
+module.exports = withSentryConfig(moduleExports, {})
