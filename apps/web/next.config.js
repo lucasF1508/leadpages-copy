@@ -166,14 +166,14 @@ const moduleExports = withBundleAnalyzer({
           source: '/blog/',
           destination: `${fallbackProxy}/`,
         },
-        {
-          source: '/blog/:path*',
-          destination: `${fallbackProxy}/:path*/`,
-        },
-        {
-          source: '/blog/:path*/',
-          destination: `${fallbackProxy}/:path*/`,
-        },
+        // {
+        //   source: '/blog/:path*',
+        //   destination: `${fallbackProxy}/:path*/`,
+        // },
+        // {
+        //   source: '/blog/:path*/',
+        //   destination: `${fallbackProxy}/:path*/`,
+        // },
       ],
       afterFiles: [
         {
@@ -188,10 +188,28 @@ const moduleExports = withBundleAnalyzer({
           destination: '/',
         },
       ],
+      // fallback: [
+      //   {
+      //     source: '/:path*',
+      //     destination: `/redirectHandler`,
+      //   },
+      // ],
       fallback: [
+        // {
+        //   source: '/blog',
+        //   destination: `${fallbackProxy}/`,
+        // },
+        // {
+        //   source: '/blog/',
+        //   destination: `${fallbackProxy}/`,
+        // },
         {
-          source: '/:path*',
-          destination: `/redirectHandler`,
+          source: '/blog/:path*',
+          destination: `${fallbackProxy}/:path*/`,
+        },
+        {
+          source: '/blog/:path*/',
+          destination: `${fallbackProxy}/:path*/`,
         },
       ],
     }
@@ -202,10 +220,10 @@ const moduleExports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
-  sentry: {
-    hideSourceMaps: true,
-    org: 'leadpages',
-  },
+  // sentry: {
+  //   hideSourceMaps: true,
+  //   org: 'leadpages',
+  // },
 })
 
 // module.exports = withSentryConfig(moduleExports, {})
