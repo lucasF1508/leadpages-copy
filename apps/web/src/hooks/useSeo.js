@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 /* eslint-disable prefer-destructuring */
 const GTAG_TRACKING_ID = process.env.GTAG_TRACKING_ID
 const GTM_CONTAINER_ID = process.env.GTM_CONTAINER_ID
+const FB_PIXEL_ID = process.env.FB_PIXEL_ID
 const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_URL
 const VERCEL_ENV = process.env.VERCEL_ENV
 /* eslint-enable prefer-destructuring */
@@ -40,6 +41,7 @@ const useSeo = ({ seo, siteMeta } = {}) => {
   return {
     GTM_CONTAINER_ID,
     GTAG_TRACKING_ID,
+    FB_PIXEL_ID,
     seoTitle: hasCustomSeoTitle
       ? seoTitle
       : getSeoSiteTitle({

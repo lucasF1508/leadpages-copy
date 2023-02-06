@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import globalStyles from '@design/globalStyles'
 import useGoogleTagManager from '@hooks/useGoogleTagManager'
+import useFacebookPixel from '@hooks/useFacebookPixel'
 import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
@@ -35,10 +36,12 @@ export default function App({
     preview,
     options: legacyOptions = {},
     planData,
+    err,
   } = {},
 }) {
   globalStyles()
   useGoogleTagManager()
+  useFacebookPixel()
   useResizeEnd()
   useFocusOutlineOnTab()
 
@@ -97,7 +100,7 @@ export default function App({
             darkHero={darkHero}
           />
           <LayoutContainer>
-            <Main {...pageData} {...meta} /* planData={planData} */ />
+            <Main {...pageData} {...meta} err={err} />
           </LayoutContainer>
           {/* {navigation && <Footer footer={footer} />} */}
           <Footer slimFooter={slimFooter} />
