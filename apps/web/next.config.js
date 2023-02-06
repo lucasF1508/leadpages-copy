@@ -35,6 +35,7 @@ const {
   LEADPAGES_BLOG_PROXY_PATH,
   GTM_CONTAINER_ID,
   GTAG_TRACKING_ID,
+  FB_PIXEL_ID,
 } = process.env
 
 module.exports = withBundleAnalyzer({
@@ -61,6 +62,7 @@ module.exports = withBundleAnalyzer({
     LEADPAGES_REACTIVATION_HOST,
     GTM_CONTAINER_ID,
     GTAG_TRACKING_ID,
+    FB_PIXEL_ID,
   },
   reactStrictMode: false,
   poweredByHeader: false,
@@ -165,10 +167,6 @@ module.exports = withBundleAnalyzer({
         // },
         {
           source: '/blog/:path*',
-          destination: `${fallbackProxy}`,
-        },
-        {
-          source: '/blog/:path*/',
           destination: `${fallbackProxy}`,
         },
       ],
