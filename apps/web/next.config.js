@@ -204,7 +204,9 @@ const moduleExports = withBundleAnalyzer({
   },
   sentry: {
     hideSourceMaps: true,
+    org: 'leadpages',
   },
 })
 
-module.exports = withSentryConfig(moduleExports, {})
+// module.exports = withSentryConfig(moduleExports, {})
+module.exports = moduleExports
