@@ -127,7 +127,7 @@ module.exports = withBundleAnalyzer({
     ]
   },
   rewrites: async () => {
-    const fallbackProxy = `${LEADPAGES_BLOG_PROXY_HOST}${LEADPAGES_BLOG_PROXY_PATH}`
+    const fallbackProxy = `${LEADPAGES_BLOG_PROXY_HOST}${LEADPAGES_BLOG_PROXY_PATH}/:path*/`
     const incrementalPaths = await filterRoutesFromSanity({
       directory: './src/pages/_legacy',
       projectId: SANITY_STUDIO_API_PROJECT_ID,
@@ -151,6 +151,8 @@ module.exports = withBundleAnalyzer({
       }
     }
 
+    console.log('fallbackProxy', fallbackProxy)
+
     return {
       beforeFiles: [
         // {
@@ -161,10 +163,14 @@ module.exports = withBundleAnalyzer({
         //   source: '/blog/',
         //   destination: `${fallbackProxy}/`,
         // },
-        // {
-        //   source: '/blog/:path*',
-        //   destination: `${fallbackProxy}/:path*/`,
-        // },
+        {
+          source: '/blog/:path*',
+          destination: `${fallbackProxy}`,
+        },
+        {
+          source: '/blog/:path*/',
+          destination: `${fallbackProxy}`,
+        },
       ],
       afterFiles: [
         {
