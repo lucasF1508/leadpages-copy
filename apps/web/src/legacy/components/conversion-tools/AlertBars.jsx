@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Script from 'next/script'
+import { useRouter } from 'next/router'
 import { alertBarData } from '@legacy/data/alert-bar_data'
 
 const AlertBars = () => {
@@ -7,7 +8,9 @@ const AlertBars = () => {
   /* to the Layout.jsx component, which will override this component */
 
   const [alertBarProps, setAlertBarProps] = useState(null)
-  const currentPath = location?.pathname
+  const router = useRouter()
+
+  const currentPath = router?.asPath
 
   const checkForAlertBar = () => {
     const matchingAlertBar = alertBarData.find((bar) =>
@@ -19,7 +22,7 @@ const AlertBars = () => {
   useEffect(() => {
     const alertBarToDisplay = checkForAlertBar()
     setAlertBarProps(alertBarToDisplay?.data)
-  }, [currentPath])
+  }, [router?.asPath])
 
   return (
     <>

@@ -34,12 +34,12 @@ export const alertBarData = [
     placementRegex:
       'landing-pages-guide|lead-generation-guide|conversion-optimization-guide',
   },
-  // {
-  //   name: 'Global',
-  //   data: {
-  //     id: 'LJJyfxPJ6e6fDdXPSLw8N7',
-  //     ...commonData,
-  //   },
-  //   placementRegex: '.*',
-  // },
+  {
+    name: 'Global',
+    data: {
+      id: 'z2u6wwsu4rgksHVNeCDiaH',
+      ...commonData,
+    },
+    placementRegex: '.*',
+  },
 ]
