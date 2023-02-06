@@ -38,7 +38,7 @@ module.exports = {
     '/templates/preview',
     '/website-templates/preview',
   ],
-  additionalPaths,
+  // additionalPaths,
   robotsTxtOptions: {
     policies: [
       {
