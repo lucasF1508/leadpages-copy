@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
+import { styled } from '@design'
 
 import { BundleInfoSheet, Banner } from '@lp/ui'
 import { FLOWS } from '@lp/lib-upgrade-modal'
@@ -25,6 +26,12 @@ import {
 import { getLocalPreviousPlan } from '../../utils/previous-plan'
 
 const PRICING_PATHS = ['/pricing', '/compare-plans']
+
+const $Banner = styled(Banner, {
+  '& p': {
+    color: 'inherit',
+  },
+})
 
 const Promotions = ({ onPromotionsLoaded = false }) => {
   const { setHasLoaded } = useContext(AppContext)
@@ -139,7 +146,7 @@ const Promotions = ({ onPromotionsLoaded = false }) => {
         />
       )}
       {showCoupon && (
-        <Banner
+        <$Banner
           bannerText={coupon.bannerText}
           selector=".banner"
           CTA={
