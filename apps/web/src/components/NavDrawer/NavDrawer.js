@@ -368,6 +368,14 @@ const mobileProductMenu = [
     label: 'Landing Pages',
   },
   {
+    _id: 'ai-engine',
+    condition: 'internal',
+    url: '/product/ai-engine',
+    dataGtm: 'mobile-menu-link',
+    hasSeparator: true,
+    label: 'AI Engine',
+  },
+  {
     _id: 'pop-up-builder',
     condition: 'internal',
     url: '/product/pop-up-builder',

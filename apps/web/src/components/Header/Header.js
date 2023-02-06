@@ -687,6 +687,14 @@ class Header extends React.Component {
         isListItem: true,
       },
       {
+        _id: 'ai-engine',
+        condition: 'internal',
+        url: '/product/ai-engine',
+        dataGtm: 'desktop-menu-link',
+        label: 'AI Engine',
+        isListItem: true,
+      },
+      {
         _id: 'pop-up-builder',
         condition: 'internal',
         url: '/product/pop-up-builder',
