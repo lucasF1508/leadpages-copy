@@ -11,6 +11,8 @@ require('dotenv').config({
 const { init: buildJSON } = require('indices/buildJSON')
 const { withSentryConfig } = require('@sentry/nextjs')
 
+const legacyRedirects = require('./public/indices/legacyRedirects.json')
+
 const {
   SANITY_STUDIO_API_PROJECT_ID,
   SANITY_STUDIO_API_DATASET,
@@ -128,6 +130,11 @@ const moduleExports = withBundleAnalyzer({
         destination: 'https://lp.leadpages.com/:slug',
         permanent: true,
       },
+      ...legacyRedirects.map(({ source, destination }) => ({
+        source: `/${source}`,
+        destination,
+        permanent: true,
+      })),
       ...redirects,
     ]
   },
