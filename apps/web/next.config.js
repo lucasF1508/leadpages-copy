@@ -178,18 +178,10 @@ module.exports = withBundleAnalyzer({
           source: '/blog/:path*',
           destination: `${fallbackProxy}/:path*/`,
         },
-        {
-          source: '/blog/:path*/',
-          destination: `${fallbackProxy}/:path*/`,
-        },
       ],
       fallback: [
         {
           source: '/:path*',
-          destination: `/redirectHandler`,
-        },
-        {
-          source: '/:path*/',
           destination: `/redirectHandler`,
         },
       ],
