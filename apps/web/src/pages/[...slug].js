@@ -4,29 +4,6 @@ import Page from '@layouts/Page'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
 import { features } from 'config'
 
-// Dynamic redirects test
-const dynamicRedirects = [
-  {
-    path: 'bonus',
-    destination: 'https://try.leadpages.com/5jlgls7dsgc8',
-    statusCode: 301,
-  },
-  {
-    path: 'jeff',
-    destination: 'https://try.leadpages.com/5jlgls7dsgc8',
-  },
-  {
-    path: 'natalie',
-    destination: 'https://try.leadpages.com/sp2izl4yml66',
-  },
-]
-
-const dynamicRedirectsIndex = dynamicRedirects.reduce(
-  (index, { path, ...props }) => ({ ...index, [path]: { ...props } }),
-  {}
-)
-//
-
 const DynamicPage = (props) => <Page {...props} />
 
 export const shapeData = (data) => {
@@ -57,18 +34,6 @@ export const exporter = (props) => shapeData(props)
 export async function getStaticProps(context) {
   const { params, preview = false } = context
   const path = params?.slug?.join('/')
-
-  // Dynamic Redirect
-  if (Object.keys(dynamicRedirectsIndex).includes(path)) {
-    const { destination, statusCode = 308 } = dynamicRedirectsIndex[path]
-
-    return {
-      redirect: {
-        destination,
-        statusCode,
-      },
-    }
-  }
 
   const { data, queries, global } = await runQueries(
     getDoc(['page', 'customer', 'integration'], {
@@ -105,7 +70,7 @@ export async function getStaticPaths() {
     // filters: ['slug.current != "404"'],
   })
 
-  const paths = [...docPaths, ...dynamicRedirects].map(({ slug, path }) => ({
+  const paths = docPaths.map(({ slug, path }) => ({
     params: {
       slug: path?.split('/').filter(Boolean) || slug,
     },
