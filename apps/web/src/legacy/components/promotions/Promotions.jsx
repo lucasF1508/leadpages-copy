@@ -28,6 +28,9 @@ import { getLocalPreviousPlan } from '../../utils/previous-plan'
 const PRICING_PATHS = ['/pricing', '/compare-plans']
 
 const $Banner = styled(Banner, {
+  z: 1,
+  position: 'relative',
+
   '& p': {
     color: 'inherit',
   },
