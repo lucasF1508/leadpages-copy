@@ -33,6 +33,8 @@ const {
   LEADPAGES_REACTIVATION_HOST,
   LEADPAGES_BLOG_PROXY_HOST,
   LEADPAGES_BLOG_PROXY_PATH,
+  GTM_CONTAINER_ID,
+  GTAG_TRACKING_ID,
 } = process.env
 
 module.exports = withBundleAnalyzer({
@@ -57,6 +59,8 @@ module.exports = withBundleAnalyzer({
     LEADPAGES_API_HOST,
     LEADPAGES_TRIAL_HOST,
     LEADPAGES_REACTIVATION_HOST,
+    GTM_CONTAINER_ID,
+    GTAG_TRACKING_ID,
   },
   reactStrictMode: false,
   poweredByHeader: false,

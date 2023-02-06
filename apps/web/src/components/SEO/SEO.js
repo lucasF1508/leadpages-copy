@@ -4,7 +4,8 @@ import useSeo from '@hooks/useSeo'
 
 const SEO = (props) => {
   const {
-    GOOGLE_TAG_TRACKING_ID,
+    GTM_CONTAINER_ID,
+    GTAG_TRACKING_ID,
     seoTitle,
     seoDescription,
     image,
@@ -19,7 +20,7 @@ const SEO = (props) => {
   return (
     <>
       {/* Google Tag Manager Init */}
-      {GOOGLE_TAG_TRACKING_ID && (
+      {GTM_CONTAINER_ID && (
         <Script
           id="GTM"
           strategy="afterInteractive"
@@ -29,10 +30,32 @@ const SEO = (props) => {
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer', '${GOOGLE_TAG_TRACKING_ID}');
+            })(window,document,'script','dataLayer', '${GTM_CONTAINER_ID}');
           `,
           }}
         />
+      )}
+      {/* gtag Init */}
+      {GTAG_TRACKING_ID && (
+        <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_TRACKING_ID}`}
+          />
+          <Script
+            id="GTAG"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${GTAG_TRACKING_ID}', { send_page_view: false });
+            `,
+            }}
+          />
+        </>
       )}
       <Head>
         {seoTitle && <title>{seoTitle}</title>}
