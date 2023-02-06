@@ -130,11 +130,13 @@ const moduleExports = withBundleAnalyzer({
         destination: 'https://lp.leadpages.com/:slug',
         permanent: true,
       },
-      ...legacyRedirects.map(({ source, destination }) => ({
-        source: `/${source}`,
-        destination,
-        permanent: true,
-      })),
+      ...legacyRedirects
+        .filter(({ source }) => source !== 'home')
+        .map(({ source, destination }) => ({
+          source: `/${source}`,
+          destination,
+          permanent: true,
+        })),
       ...redirects,
     ]
   },
@@ -173,14 +175,6 @@ const moduleExports = withBundleAnalyzer({
           source: '/blog/',
           destination: `${fallbackProxy}/`,
         },
-        // {
-        //   source: '/blog/:path*',
-        //   destination: `${fallbackProxy}/:path*/`,
-        // },
-        // {
-        //   source: '/blog/:path*/',
-        //   destination: `${fallbackProxy}/:path*/`,
-        // },
       ],
       afterFiles: [
         {
@@ -202,14 +196,6 @@ const moduleExports = withBundleAnalyzer({
       //   },
       // ],
       fallback: [
-        // {
-        //   source: '/blog',
-        //   destination: `${fallbackProxy}/`,
-        // },
-        // {
-        //   source: '/blog/',
-        //   destination: `${fallbackProxy}/`,
-        // },
         {
           source: '/blog/:path*',
           destination: `${fallbackProxy}/:path*/`,
