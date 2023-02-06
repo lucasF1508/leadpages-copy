@@ -119,14 +119,16 @@ const RightImage = styled(Image, {
 })
 
 const Subtitle = styled('div', {
-  fontFamily: 'Space Mono',
-  fontSize: '12px',
-  letterSpacing: '2px',
-  lineHeight: '18px',
-  textAlign: 'center',
-  textTransform: 'uppercase',
-  opacity: 0.5,
-  marginBottom: '1rem',
+  h1: {
+    fontFamily: 'Space Mono',
+    fontSize: '12px',
+    letterSpacing: '2px',
+    lineHeight: '18px',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    opacity: 0.5,
+    marginBottom: '1rem',
+  },
 })
 
 const Headline = styled('div', {
@@ -247,57 +249,55 @@ const BGRightContainer = styled('div', {
   },
 })
 
-const CareersPage = () => {
-  return (
-    <>
-      <SEO
-        pathname="/careers"
-        title="Leadpages Careers | Website & Landing Page Builder"
-        description="At Leadpages, you're part of a team of builders. No matter what department you work in, you have a pivotal role here."
-        image="https://static.leadpages.com/images/og/og-careers.jpg"
-      />
-      <OuterContainer>
-        <HeroContainer>
-          <TextContainer>
-            <Subtitle>
-              <h1>Careers</h1>
-            </Subtitle>
-            <Headline>Come work with us</Headline>
-            <Caption>Join our team and love what you do even more.</Caption>
-            <ScrollLink to="openpositions" spy smooth duration={500}>
-              <Button>See Open Positions</Button>
-            </ScrollLink>
-          </TextContainer>
-        </HeroContainer>
-        <ImageFlexbox>
-          <LeftImageContainer>
-            <BGLeftContainer>
-              <Image image={bgLeft} alt="background svg" />
-            </BGLeftContainer>
-            <LeftImage image={imageLeft} alt="See Open Positions" />
-          </LeftImageContainer>
-          <RightImageContainer>
-            <BGRightContainer>
-              <Image image={bgRight} alt="background svg" />
-            </BGRightContainer>
-            <RightImage image={imageRight} alt="See Open Positions" />
-          </RightImageContainer>
-        </ImageFlexbox>
-      </OuterContainer>
-      <LifeAtLeadpages
-        headingText="Who we are"
-        subheadingText1="We're passionate about helping entrepreneurs turn their ideas into real businesses, and providing them with the easiest most&mdash;effective tools to do it."
-        subheadingText2="We want to work with people who refuse to check their personality at the door and who strive to bring their enthusiasm and best ideas to the table every day."
-        image={lifeAtLeadpagesImage}
-        imageAltText="life at leadpages"
-        bgImage={lifeAtLeadpagesBGSVG}
-        bgImageAltText="life at leadpages background"
-      />
-      <HardWork />
-      <WorkPerks />
-      <OpenPositions openPositionsArray={openPositionsArray} />
-    </>
-  )
-}
+const CareersPage = () => (
+  <>
+    <SEO
+      pathname="/careers"
+      title="Leadpages Careers | Website & Landing Page Builder"
+      description="At Leadpages, you're part of a team of builders. No matter what department you work in, you have a pivotal role here."
+      image="https://static.leadpages.com/images/og/og-careers.jpg"
+    />
+    <OuterContainer>
+      <HeroContainer>
+        <TextContainer>
+          <Subtitle>
+            <h1>Careers</h1>
+          </Subtitle>
+          <Headline>Come work with us</Headline>
+          <Caption>Join our team and love what you do even more.</Caption>
+          <ScrollLink to="openpositions" spy smooth duration={500}>
+            <Button>See Open Positions</Button>
+          </ScrollLink>
+        </TextContainer>
+      </HeroContainer>
+      <ImageFlexbox>
+        <LeftImageContainer>
+          <BGLeftContainer>
+            <Image image={bgLeft} alt="background svg" />
+          </BGLeftContainer>
+          <LeftImage image={imageLeft} alt="See Open Positions" />
+        </LeftImageContainer>
+        <RightImageContainer>
+          <BGRightContainer>
+            <Image image={bgRight} alt="background svg" />
+          </BGRightContainer>
+          <RightImage image={imageRight} alt="See Open Positions" />
+        </RightImageContainer>
+      </ImageFlexbox>
+    </OuterContainer>
+    <LifeAtLeadpages
+      headingText="Who we are"
+      subheadingText1="We're passionate about helping entrepreneurs turn their ideas into real businesses, and providing them with the easiest most&mdash;effective tools to do it."
+      subheadingText2="We want to work with people who refuse to check their personality at the door and who strive to bring their enthusiasm and best ideas to the table every day."
+      image={lifeAtLeadpagesImage}
+      imageAltText="life at leadpages"
+      bgImage={lifeAtLeadpagesBGSVG}
+      bgImageAltText="life at leadpages background"
+    />
+    <HardWork />
+    <WorkPerks />
+    <OpenPositions openPositionsArray={openPositionsArray} />
+  </>
+)
 
 export default CareersPage
