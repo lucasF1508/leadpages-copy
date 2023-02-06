@@ -767,13 +767,6 @@ const LeadpagesVsKartra = () => (
                 we have exclusive marketing education training so you can
                 maximize the value of your plan.
               </StyledParagraphSmall>
-              <StyledParagraphSmall>
-                Users can also choose from thousands of{' '}
-                <OutboundLink href="  https://www.leadpages.com/blog/leadpages-shutterstock-makeovers">
-                  premium Shutterstock images
-                </OutboundLink>{' '}
-                at a reduced price.
-              </StyledParagraphSmall>
               <StyledH3>Kartra:</StyledH3>
               <StyledParagraphSmall>
                 Kartra adheres to a similar pricing model, where users pay per

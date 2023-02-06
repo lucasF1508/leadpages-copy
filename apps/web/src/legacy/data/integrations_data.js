@@ -6,7 +6,7 @@ import AWeberLogo from '@legacy/assets/images/integrations/aweber.png'
 import BingAdsLogo from '@legacy/assets/images/integrations/bing-ads.jpg'
 import BombBombLogo from '@legacy/assets/images/integrations/bombbomb_400x400.jpg'
 import BrightRollLogo from '@legacy/assets/images/integrations/brightroll-logo.jpg'
-import CalendlyLogo from '@legacy/assets/images/integrations/calendly.jpg'
+import CalendlyLogo from '@legacy/assets/images/integrations/calendly.png'
 import CampaignMonitorLogo from '@legacy/assets/images/integrations/campaignmonitor-100px.jpg'
 import ChatIOLogo from '@legacy/assets/images/integrations/chat-io.jpg'
 import ClickSendSMSLogo from '@legacy/assets/images/integrations/ClickSend-Icon-Only.jpg'
@@ -60,7 +60,6 @@ import SalesforceLogo from '@legacy/assets/images/integrations/salesforce.jpg'
 import SendInBlueLogo from '@legacy/assets/images/integrations/SendInBlue.jpg'
 import SendOwlLogo from '@legacy/assets/images/integrations/SendOwl.png'
 import ShopifyLogo from '@legacy/assets/images/integrations/shopify_50@2x.png'
-import ShutterstockLogo from '@legacy/assets/images/integrations/shutterstock-logo.png'
 import SimpleTextingLogo from '@legacy/assets/images/integrations/SimpleTexting_icon.jpg'
 import SlackLogo from '@legacy/assets/images/integrations/Slack_Mark_Web.jpg'
 import SquarespaceLogo from '@legacy/assets/images/integrations/squarespace.jpg'
@@ -83,7 +82,7 @@ import WixLogo from '@legacy/assets/images/integrations/wix-logo.png'
 import WordPressLogo from '@legacy/assets/images/integrations/wordpress-100px.jpg'
 import WufooLogo from '@legacy/assets/images/integrations/wufoo.png'
 import YouTubeLogo from '@legacy/assets/images/integrations/YouTube_50@2x.png'
-import ZapierLogo from '@legacy/assets/images/integrations/zapier_50@2x.png'
+import ZapierLogo from '@legacy/assets/images/integrations/zapier_60px@2x.png'
 import ZendeskLogo from '@legacy/assets/images/integrations/Zendesk-100px.jpg'
 import ZoHoCRMLogo from '@legacy/assets/images/integrations/zoho-CRM_100px_maz.jpg'
 import ZoomLogo from '@legacy/assets/images/integrations/zoom.jpg'
@@ -689,16 +688,6 @@ export const integrationsArray = [
     tooltip:
       'Compatible applications work with Leadpages but may require you to copy and paste HTML or use a third-party tool to connect them to your Leadpages account. They also are not covered by our customer support team.',
     icon: PoptinLogo,
-  },
-  {
-    integration: 'Shutterstock',
-    category: 'Other',
-    description:
-      'Purchase Shutterstock premium images right inside your Leadpages account. Choose from millions of professional-quality photographs and enjoy unlimited use of your Shutterstock images anywhere within the Drag & Drop Builder.',
-    connection: 'Integrated',
-    tooltip:
-      'Integrated applications have been specifically developed to connect with Leadpages, meaning they are listed within your Leadpages account and backed by our customer support team.',
-    icon: ShutterstockLogo,
   },
   {
     integration: 'SimpleTexting',

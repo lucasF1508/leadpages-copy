@@ -571,10 +571,6 @@ const LeadpagesVsClickfunnels = () => (
                 customers.
               </StyledParagraphSmall>
               <StyledParagraphSmall>
-                For a minimal add-on price, you can also access premium
-                Shutterstock images at a discounted price.
-              </StyledParagraphSmall>
-              <StyledParagraphSmall>
                 Reliability is a key area to consider when comparing the value
                 of your marketing tools. A look through the history of{' '}
                 <OutboundLink href="https://status.leadpages.com/">
