@@ -238,45 +238,43 @@ const Text = styled('div', {
   paddingTop: '3rem',
 })
 
-const OpenPositions = ({ openPositionsArray }) => {
-  return (
-    <OuterContainer name="openpositions">
-      <BGImage src={bgSVG.src} alt="careers page background svg image" />
-      <InnerContainer>
-        <TextContainer>
-          <TitleContainer>
-            <Title>Open Positions</Title>
-          </TitleContainer>
-          {openPositionsArray.length > 0 &&
-            openPositionsArray.map((position) => {
-              const { title, department, postingLink, type } = position
-              return (
-                <OutboundLink
-                  key={postingLink}
-                  href={`${postingLink}${
-                    type === 'internal' ? '&source=lp' : ''
-                  }`}
-                  alt="job description link"
-                  rel="noreferrer noopener"
-                  target="_blank"
-                >
-                  <Card>
-                    <Flexbox>
-                      <JobTextContainer>
-                        <JobPosition>{title}</JobPosition>
-                        <JobDepartment>{department}</JobDepartment>
-                      </JobTextContainer>
-                      <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
-                    </Flexbox>
-                  </Card>
-                </OutboundLink>
-              )
-            })}
-        </TextContainer>
-      </InnerContainer>
-    </OuterContainer>
-  )
-}
+const OpenPositions = ({ openPositionsArray }) => (
+  <OuterContainer name="openpositions">
+    <BGImage src={bgSVG.src} alt="careers page background svg image" />
+    <InnerContainer>
+      <TextContainer>
+        <TitleContainer>
+          <Title>Open Positions</Title>
+        </TitleContainer>
+        {openPositionsArray.length > 0 &&
+          openPositionsArray.map((position) => {
+            const { title, department, postingLink, type } = position
+            return (
+              <OutboundLink
+                key={postingLink}
+                href={`${postingLink}${
+                  type === 'internal' ? '?source=lp' : ''
+                }`}
+                alt="job description link"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                <Card>
+                  <Flexbox>
+                    <JobTextContainer>
+                      <JobPosition>{title}</JobPosition>
+                      <JobDepartment>{department}</JobDepartment>
+                    </JobTextContainer>
+                    <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
+                  </Flexbox>
+                </Card>
+              </OutboundLink>
+            )
+          })}
+      </TextContainer>
+    </InnerContainer>
+  </OuterContainer>
+)
 
 OpenPositions.propTypes = {
   openPositionsArray: PropTypes.arrayOf(
