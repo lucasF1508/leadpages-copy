@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "yarn build:web",
-    "build:web": "yarn build:favicon && next build && yarn build:sitemap",
-    "build:favicon": "run-func ./favicon.js generate",
+    "build:web": "next build && yarn build:sitemap",
     "build:sitemap": "next-sitemap --config next-sitemap.js",
     "start": "yarn blast:next && yarn dev",
     "serve": "next start",
