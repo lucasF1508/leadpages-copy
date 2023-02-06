@@ -233,11 +233,9 @@ const moduleExports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
-  // sentry: {
-  //   hideSourceMaps: true,
-  //   org: 'leadpages',
-  // },
+  sentry: {
+    hideSourceMaps: true,
+  },
 })
 
-// module.exports = withSentryConfig(moduleExports, {})
-module.exports = moduleExports
+module.exports = withSentryConfig(moduleExports, {})
