@@ -4,7 +4,7 @@ import Image from '@components/Image'
 import useImageParser from '@hooks/useImageParser'
 // images
 import LeadpagesIcon from '@legacy/assets/images/integrations/Leadpages-Leadpages-Zapier@2x.jpg'
-import ZapierIcon from '@legacy/assets/images/integrations/zapierlogo_50px@2x.png'
+import ZapierIcon from '@legacy/assets/images/integrations/zapier-100x100.png'
 import IntegrationsIcon from '@legacy/assets/images/integrations/Infinite-Integrations@2x.jpg'
 
 const OuterContainer = styled('div', {

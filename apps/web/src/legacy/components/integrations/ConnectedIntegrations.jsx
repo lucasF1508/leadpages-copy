@@ -11,7 +11,7 @@ import mobileThree from '@legacy/assets/images/integrations/salesforce-68px@2x.j
 import mobileFour from '@legacy/assets/images/integrations/gotowebinar-68px@2x.jpg'
 import mobileFive from '@legacy/assets/images/integrations/Facebook-pixel-ads-68px@2x.jpg'
 import mobileSix from '@legacy/assets/images/integrations/open-table-68px@2x.jpg'
-import mobileSeven from '@legacy/assets/images/integrations/zapier-68px@2x.jpg'
+import mobileSeven from '@legacy/assets/images/integrations/zapier-mobile.png'
 import mobileEight from '@legacy/assets/images/integrations/stripe-68px@2x.jpg'
 import mobileNine from '@legacy/assets/images/integrations/mailchimp_68px@2x.jpg'
 

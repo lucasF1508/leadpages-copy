@@ -33,7 +33,7 @@ import image3 from '@legacy/assets/images/silos/lead-generation-guide/3-1-linked
 import image4 from '@legacy/assets/images/silos/lead-generation-guide/4-1-ga-dashboard.jpg'
 import image5 from '@legacy/assets/images/silos/lead-generation-guide/5-1-chat-services.jpg'
 import image6 from '@legacy/assets/images/silos/lead-generation-guide/6-1-calendly-scheduler.png'
-import image7 from '@legacy/assets/images/silos/lead-generation-guide/7-1-crm-integrations.jpg'
+import image7 from '@legacy/assets/images/silos/lead-generation-guide/7-1-crm-integrations.png'
 
 const LeadGenerationTools = () => (
   <>
