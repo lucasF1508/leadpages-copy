@@ -207,6 +207,26 @@ const moduleExports = withBundleAnalyzer({
       ],
     }
   },
+  headers: async () => [
+    {
+      source: '/blog',
+      headers: [
+        {
+          key: 'X-Forwarded-Host',
+          value: 'leadpages-rack-pinion.vercel.app',
+        },
+      ],
+    },
+    {
+      source: '/blog/:path*',
+      headers: [
+        {
+          key: 'X-Forwarded-Host',
+          value: 'leadpages-rack-pinion.vercel.app',
+        },
+      ],
+    },
+  ],
   eslint: {
     ignoreDuringBuilds: true,
   },
