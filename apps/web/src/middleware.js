@@ -7,11 +7,11 @@ const patterns = incrementalPaths?.map(
 
 export async function middleware(request) {
   const response = NextResponse.next()
+  const url = request.nextUrl.clone()
 
   if (!incrementalPaths.length) return response
 
   if (!request.cookies.get('__next_preview_data')) {
-    const url = request.nextUrl
     const pattern = patterns.find((p) => p.test(url))
     url.pathname = !pattern ? url.pathname : `/_legacy${url.pathname}`
     return NextResponse.rewrite(url)

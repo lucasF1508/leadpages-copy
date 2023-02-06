@@ -53,19 +53,21 @@ const CardPostArchive = ({
     <$ImageLink url={path} condition="internal">
       <Image image={image} css={{ mb: '$2_5' }} />
     </$ImageLink>
-    <Link url={primaryCategory.url} condition="internal">
-      <$CardHeading
-        heading={primaryCategory.title}
-        tag="h5"
-        css={{
-          c: '$primary',
-          type: 'base',
-          fontSize: '15px',
-          mb: '$0_5',
-          fontWeight: '500',
-        }}
-      />
-    </Link>
+    {primaryCategory && (
+      <Link url={primaryCategory.url} condition="internal">
+        <$CardHeading
+          heading={primaryCategory.title}
+          tag="h5"
+          css={{
+            c: '$primary',
+            type: 'base',
+            fontSize: '15px',
+            mb: '$0_5',
+            fontWeight: '500',
+          }}
+        />
+      </Link>
+    )}
     <Link url={path} condition="internal" css={{ d: 'block', mb: '$4' }}>
       <$CardHeading
         heading={title}
@@ -74,34 +76,35 @@ const CardPostArchive = ({
         css={{ d: 'inline' }}
       />
     </Link>
-    {publisher && (
-      <Heading
-        tag="h6"
-        css={{
-          c: '$darkGrayAlt',
-          type: 'base',
-          fontSize: '15px',
-          mb: '$3_5',
-        }}
-      >
-        Posted by{' '}
-        <$ArchiveLink
-          url={'/blog'}
-          label={publisher.title}
-          condition="internal"
-        />
-        <>&nbsp;&nbsp;</>|<>&nbsp;&nbsp;</>
-        {new Date(publishedDate).toLocaleDateString('en-US', {
-          month: 'short',
-          day: '2-digit',
-        })}
-        ,{' '}
-        {new Date(publishedDate).toLocaleDateString('en-US', {
-          year: 'numeric',
-        })}
-      </Heading>
-    )}
+    <Heading
+      tag="h6"
+      css={{
+        c: '$darkGrayAlt',
+        type: 'base',
+        fontSize: '15px',
+        mb: '$3_5',
+      }}
+    >
+      {publisher && (
+        <>
+          Posted by{' '}
+          <$ArchiveLink
+            url={'/blog'}
+            label={publisher.title}
+            condition="internal"
+          />
+          <>&nbsp;&nbsp;</>|<>&nbsp;&nbsp;</>
+        </>
+      )}
+      {new Date(publishedDate).toLocaleDateString('en-US', {
+        month: 'short',
+        day: '2-digit',
+      })}
+      ,{' '}
+      {new Date(publishedDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+      })}
+    </Heading>
   </$Card>
 )
-
 export default CardPostArchive

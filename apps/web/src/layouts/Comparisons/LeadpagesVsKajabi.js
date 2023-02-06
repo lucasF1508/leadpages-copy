@@ -753,10 +753,6 @@ const LeadpagesVsKajabi = () => (
                 on your plan level. The same goes for our exclusive marketing
                 education training.
               </StyledParagraphSmall>
-              <StyledParagraphSmall>
-                All users can also access premium Shutterstock images at a
-                significantly reduced price.
-              </StyledParagraphSmall>
               <StyledH3>Kajabi:</StyledH3>
               <StyledParagraphSmall>
                 Kajabi has a similar pricing model, charging its users per month
@@ -778,17 +774,15 @@ const LeadpagesVsKajabi = () => (
                 allows for up to 50.
               </StyledParagraphSmall>
               <StyledParagraphSmall>
-                Leadpages offers access to Shutterstock images, whereas Kajabi
-                only supports uploading your own media from your computer,
-                dropbox, google drive, a URL, etc. Kajabi has a higher price tag
-                than most of Leadpages plans, which can be justified by their
-                specialization in online course building and marketing pipeline
-                features. They support you through creating your own education
-                software essentially, which is great for educators or experts.
-                Leadpages on the other hand drives home the conversion aspect,
-                as they have a wider variety of built-in integrations, as well
-                as Leadmeter, a built-in conversion optimizer, so you can find
-                what works best for your business.
+                Kajabi has a higher price tag than most of Leadpages plans,
+                which can be justified by their specialization in online course
+                building and marketing pipeline features. They support you
+                through creating your own education software essentially, which
+                is great for educators or experts. Leadpages on the other hand
+                drives home the conversion aspect, as they have a wider variety
+                of built-in integrations, as well as Leadmeter, a built-in
+                conversion optimizer, so you can find what works best for your
+                business.
               </StyledParagraphSmall>
             </SectionWrapper>
             {/* Final verdict */}

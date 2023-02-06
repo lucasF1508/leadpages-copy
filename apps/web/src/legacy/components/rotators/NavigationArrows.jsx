@@ -60,8 +60,6 @@ const NavigationArrows = ({
       id="arrow-button"
       className={variant}
       onClick={onClick}
-      leftOffset={leftOffset}
-      rightOffset={rightOffset}
       css={{
         top: topOffsetStyle,
         ...(rightOffset

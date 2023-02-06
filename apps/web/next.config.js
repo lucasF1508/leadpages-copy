@@ -9,6 +9,7 @@ require('dotenv').config({
   path: findUp.sync([`.env.${process.env.NODE_ENV}`, '.env.local', '.env']),
 })
 const { init: buildJSON } = require('indices/buildJSON')
+const { withSentryConfig } = require('@sentry/nextjs')
 
 const {
   SANITY_STUDIO_API_PROJECT_ID,
@@ -33,9 +34,13 @@ const {
   LEADPAGES_REACTIVATION_HOST,
   LEADPAGES_BLOG_PROXY_HOST,
   LEADPAGES_BLOG_PROXY_PATH,
+  GTM_CONTAINER_ID,
+  GTAG_TRACKING_ID,
+  FB_PIXEL_ID,
+  SENTRY_DSN,
 } = process.env
 
-module.exports = withBundleAnalyzer({
+const moduleExports = withBundleAnalyzer({
   env: {
     SANITY_STUDIO_API_PROJECT_ID,
     SANITY_STUDIO_API_DATASET,
@@ -57,6 +62,10 @@ module.exports = withBundleAnalyzer({
     LEADPAGES_API_HOST,
     LEADPAGES_TRIAL_HOST,
     LEADPAGES_REACTIVATION_HOST,
+    GTM_CONTAINER_ID,
+    GTAG_TRACKING_ID,
+    FB_PIXEL_ID,
+    SENTRY_DSN,
   },
   reactStrictMode: false,
   poweredByHeader: false,
@@ -123,7 +132,7 @@ module.exports = withBundleAnalyzer({
     ]
   },
   rewrites: async () => {
-    const fallbackProxy = `${LEADPAGES_BLOG_PROXY_HOST}${LEADPAGES_BLOG_PROXY_PATH}/:path*/`
+    const fallbackProxy = `${LEADPAGES_BLOG_PROXY_HOST}${LEADPAGES_BLOG_PROXY_PATH}`
     const incrementalPaths = await filterRoutesFromSanity({
       directory: './src/pages/_legacy',
       projectId: SANITY_STUDIO_API_PROJECT_ID,
@@ -148,6 +157,24 @@ module.exports = withBundleAnalyzer({
     }
 
     return {
+      beforeFiles: [
+        {
+          source: '/blog',
+          destination: `${fallbackProxy}/`,
+        },
+        {
+          source: '/blog/',
+          destination: `${fallbackProxy}/`,
+        },
+        {
+          source: '/blog/:path*',
+          destination: `${fallbackProxy}/:path*/`,
+        },
+        {
+          source: '/blog/:path*/',
+          destination: `${fallbackProxy}/:path*/`,
+        },
+      ],
       afterFiles: [
         {
           source: '/studio/:path*',
@@ -163,12 +190,8 @@ module.exports = withBundleAnalyzer({
       ],
       fallback: [
         {
-          source: '/blog/:path*',
-          destination: fallbackProxy,
-        },
-        {
-          source: '/blog/:path*/',
-          destination: fallbackProxy,
+          source: '/:path*',
+          destination: `/redirectHandler`,
         },
       ],
     }
@@ -179,4 +202,9 @@ module.exports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
+  sentry: {
+    hideSourceMaps: true,
+  },
 })
+
+module.exports = withSentryConfig(moduleExports, {})

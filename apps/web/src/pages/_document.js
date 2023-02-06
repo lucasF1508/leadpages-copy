@@ -4,6 +4,8 @@ import { getCssText } from '@design/stitches.config'
 import { ServerStyleSheets } from '@material-ui/core/styles'
 import ProfitWellRetain from '@legacy/scripts/ProfitWellRetain'
 
+const { FB_PIXEL_ID } = process.env
+
 export default class Document extends NextDocument {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheets()
@@ -30,6 +32,16 @@ export default class Document extends NextDocument {
     return (
       <Html lang="en">
         <Head>
+          {FB_PIXEL_ID && (
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: 'none' }}
+                src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
+              />
+            </noscript>
+          )}
           <style
             id="stitches"
             dangerouslySetInnerHTML={{ __html: getCssText() }}

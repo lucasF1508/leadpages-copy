@@ -199,12 +199,6 @@ export const featureIndexPageData = [
   },
   {
     category: 'Design & Templates',
-    feature: 'Shutterstock Premium Images',
-    description:
-      'Purchase Shutterstock premium images right inside your Leadpages account and enjoy unlimited use of your Shutterstock images anywhere within the Drag & Drop Builder.',
-  },
-  {
-    category: 'Design & Templates',
     feature: 'Built-in icon library',
     description:
       'Easily add and customize icons and graphics to your digital content by selecting graphics from the built-in icon Library.',

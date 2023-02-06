@@ -33,12 +33,12 @@ export const exporter = (props) => shapeData(props)
 
 export async function getStaticProps(context) {
   const { params, preview = false } = context
-  const path = `/${params?.slug?.join('/')}`
+  const path = params?.slug?.join('/')
 
   const { data, queries, global } = await runQueries(
     getDoc(['page', 'customer', 'integration'], {
       preview,
-      params: { path },
+      params: { path: `/${path}` },
       projections: { 'category[]': '->' },
     })
   )

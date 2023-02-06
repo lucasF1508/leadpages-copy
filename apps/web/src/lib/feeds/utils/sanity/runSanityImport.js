@@ -8,7 +8,8 @@ export const runSanityImport = async (docs) => {
     docs.filter((doc) => doc?._type),
     {
       client,
-      operation: 'createIfNotExists',
+      operation: 'createOrReplace',
+      allowFailingAssets: true,
     }
   )
     .then(({ numDocs, warnings }) => {

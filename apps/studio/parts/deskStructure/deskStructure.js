@@ -45,6 +45,14 @@ export const deskStructure = () =>
         )
         .icon(AiOutlineFileText),
       S.documentTypeListItem('post'),
+      // S.listItem()
+      //   .title('Posts')
+      //   .child(
+      //     S.documentList()
+      //       .title('Posts')
+      //       .filter('_type == "post"')
+      //       .defaultOrdering([{ field: 'publishedDate', direction: 'desc' }])
+      //   ),
       orderableDocumentListDeskItem({
         type: 'customer',
         title: 'Customers',

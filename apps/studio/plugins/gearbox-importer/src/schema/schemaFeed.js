@@ -7,6 +7,21 @@ import upperCase from 'lodash/upperCase'
 import { getTemplateSchemas } from 'part:gearbox-utils/utils'
 import SchemaFields from 'part:gearbox-input-components/schema-fields'
 
+const feedDocTypeList = [
+  ...getTemplateSchemas().map(({ name, title }) => ({
+    title: `${title} (${name})`,
+    value: name,
+  })),
+  {
+    title: `Site Redirects (siteRedirects)`,
+    value: 'siteRedirects',
+  },
+  {
+    title: `Promo Codes (promoCodes)`,
+    value: 'promoCodes',
+  },
+]
+
 export const schemaFeed = {
   name: 'feed',
   title: 'Feeds',
@@ -44,10 +59,7 @@ export const schemaFeed = {
         F.string({
           name: 'feedDocType',
           options: {
-            list: getTemplateSchemas().map(({ name, title }) => ({
-              title: `${title} (${name})`,
-              value: name,
-            })),
+            list: feedDocTypeList,
           },
           description: 'Defaults to `post`.',
         }),

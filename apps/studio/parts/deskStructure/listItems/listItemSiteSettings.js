@@ -6,6 +6,7 @@ import {
   BsArrowLeftRight,
   BsNewspaper,
   BsCodeSlash,
+  BsSignpost2,
 } from 'react-icons/bs'
 
 export const listItemSiteSettings = S.listItem()
@@ -16,13 +17,16 @@ export const listItemSiteSettings = S.listItem()
       .items([
         GB.singletonListItem('companyInfo').icon(MdBusiness),
         GB.singletonListItem('seoSite', { title: 'SEO' }).icon(BsGraphUp),
-        GB.singletonListItem('siteRedirects', { title: 'Redirects' }).icon(
-          BsArrowLeftRight
-        ),
         GB.singletonListItem('postSettings').icon(BsNewspaper),
         GB.singletonListItem('globalHeaderFooter', {
           title: 'Global Header/Footer',
         }).icon(BsCodeSlash),
+        GB.singletonListItem('siteRedirects', {
+          title: 'Static Redirects',
+        }).icon(BsArrowLeftRight),
+        GB.singletonListItem('promoCodes', {
+          title: 'Promo Code Redirects',
+        }).icon(BsSignpost2),
       ])
   )
   .icon(MdSettings)

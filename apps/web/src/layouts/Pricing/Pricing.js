@@ -163,7 +163,14 @@ const Pricing = () => {
       setFlow(FLOWS.REACTIVATION)
     }
     if (bundle) setBundleData(bundle)
-    if (coupon?.canRedeemCoupon) setCouponData(coupon)
+    if (coupon?.canRedeemCoupon) {
+      setCouponData(coupon)
+      if (
+        ['bfcm22cmonday50', 'bfcm22cmonday50welcomeback'].includes(coupon?.code)
+      ) {
+        setDefaultBillingFrequency(PLAN_PERIODS.MONTHLY)
+      }
+    }
     setIsLoading(false)
   }
 
