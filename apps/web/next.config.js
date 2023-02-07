@@ -183,6 +183,14 @@ const moduleExports = withBundleAnalyzer({
           source: '/blog/:path/',
           destination: `${fallbackProxy}/:path/`,
         },
+        {
+          source: '/blog/category/:path',
+          destination: `${fallbackProxy}/:path/`,
+        },
+        {
+          source: '/blog/category/:path/',
+          destination: `${fallbackProxy}/:path/`,
+        },
       ],
       afterFiles: [
         {
