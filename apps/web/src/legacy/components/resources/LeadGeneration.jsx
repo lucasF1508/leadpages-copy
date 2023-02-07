@@ -130,14 +130,12 @@ const LeadGeneration = () => (
         </CustomersSubHeading>
       </div>
       <HeadingButton>
-        <Link href="/podcast" passHref>
-          <HeadingLink aria-label="podcast">
-            All Episodes&nbsp;
-            <ArrowContainer>
-              <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
-            </ArrowContainer>
-          </HeadingLink>
-        </Link>
+        <HeadingLink href="/podcast" aria-label="podcast">
+          All Episodes&nbsp;
+          <ArrowContainer>
+            <ArrowRight src={rightArrowSVG.src} alt="right arrow" />
+          </ArrowContainer>
+        </HeadingLink>
       </HeadingButton>
     </HeadingFlexbox>
     <ThreeColumnOverlap

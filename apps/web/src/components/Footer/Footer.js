@@ -303,11 +303,9 @@ const Footer = ({ slimFooter, isPreviewPage }) => {
                   </Link>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <Link href="/demo" passHref>
-                    <OutboundFooterLink data-gtm="footer-link">
-                      Watch a Demo
-                    </OutboundFooterLink>
-                  </Link>
+                  <OutboundFooterLink href="/demo" data-gtm="footer-link">
+                    Watch a Demo
+                  </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
                   <Link href="/comparisons" passHref>
@@ -340,14 +338,13 @@ const Footer = ({ slimFooter, isPreviewPage }) => {
                   </Link>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <Link href="/webinars" passHref>
-                    <OutboundFooterLink
-                      alt="Leadpages webinar"
-                      data-gtm="footer-link"
-                    >
-                      Webinar
-                    </OutboundFooterLink>
-                  </Link>
+                  <OutboundFooterLink
+                    href="/webinars"
+                    alt="Leadpages webinar"
+                    data-gtm="footer-link"
+                  >
+                    Webinar
+                  </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
                   <Link href="/landing-pages-guide" passHref>
@@ -357,15 +354,13 @@ const Footer = ({ slimFooter, isPreviewPage }) => {
                   </Link>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <Link href="/why-leadpages" passHref>
-                    <OutboundFooterLink
-                      href="/why-leadpages"
-                      alt="Why Leadpages"
-                      data-gtm="footer-link"
-                    >
-                      Why Leadpages?
-                    </OutboundFooterLink>
-                  </Link>
+                  <OutboundFooterLink
+                    href="/why-leadpages"
+                    alt="Why Leadpages"
+                    data-gtm="footer-link"
+                  >
+                    Why Leadpages?
+                  </OutboundFooterLink>
                 </FlexColumnItem>
               </FlexColumn>
             </Col2>
@@ -402,11 +397,9 @@ const Footer = ({ slimFooter, isPreviewPage }) => {
                   </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <Link href="/affiliates" passHref>
-                    <OutboundFooterLink data-gtm="footer-link">
-                      Affiliate Program
-                    </OutboundFooterLink>
-                  </Link>
+                  <OutboundFooterLink href="/affiliates" data-gtm="footer-link">
+                    Affiliate Program
+                  </OutboundFooterLink>
                 </FlexColumnItem>
               </FlexColumn>
             </Col2>
