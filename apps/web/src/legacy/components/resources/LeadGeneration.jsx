@@ -1,6 +1,5 @@
 import React from 'react'
 import { styled } from '@design'
-import Link from 'next/link'
 // components
 import ThreeColumnOverlap from '@legacy/components/layout/ThreeColumnOverlap'
 // images

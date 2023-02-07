@@ -328,14 +328,13 @@ const Footer = ({ slimFooter, isPreviewPage }) => {
                   </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <Link href="/podcast" passHref>
-                    <OutboundFooterLink
-                      aria-label="Leadpages podcast"
-                      data-gtm="footer-link"
-                    >
-                      Podcast
-                    </OutboundFooterLink>
-                  </Link>
+                  <OutboundFooterLink
+                    href="/podcast"
+                    aria-label="Leadpages podcast"
+                    data-gtm="footer-link"
+                  >
+                    Podcast
+                  </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
                   <OutboundFooterLink
