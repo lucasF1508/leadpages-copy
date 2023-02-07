@@ -48,7 +48,8 @@ const Promotions = ({ onPromotionsLoaded = false }) => {
   const [isLoading, setIsLoading] = useState(true)
 
   const { asPath } = useRouter()
-  const onPricingPage = PRICING_PATHS.includes(asPath)
+  const currentPath = asPath.replace(/\?.*$/, '')
+  const onPricingPage = PRICING_PATHS.includes(currentPath)
 
   useEffect(() => {
     async function promotionsInit() {
