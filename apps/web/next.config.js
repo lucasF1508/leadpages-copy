@@ -166,48 +166,6 @@ const moduleExports = withBundleAnalyzer({
     }
 
     return {
-      beforeFiles: [
-        {
-          source: '/blog/category/:path',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog/category/:path/',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog/author/:path',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog/author/:path/',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog/page/:path',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog/page/:path/',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog/:path',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog/:path/',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog',
-          destination: `${fallbackProxy}/`,
-        },
-        {
-          source: '/blog/',
-          destination: `${fallbackProxy}/`,
-        },
-      ],
       afterFiles: [
         {
           source: '/studio/:path*',
@@ -239,26 +197,6 @@ const moduleExports = withBundleAnalyzer({
       // ],
     }
   },
-  headers: async () => [
-    {
-      source: '/blog',
-      headers: [
-        {
-          key: 'X-Forwarded-Host',
-          value: 'leadpages-rack-pinion.vercel.app',
-        },
-      ],
-    },
-    {
-      source: '/blog/:path*',
-      headers: [
-        {
-          key: 'X-Forwarded-Host',
-          value: 'leadpages-rack-pinion.vercel.app',
-        },
-      ],
-    },
-  ],
   eslint: {
     ignoreDuringBuilds: true,
   },
