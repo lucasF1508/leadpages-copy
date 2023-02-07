@@ -30,6 +30,6 @@ export async function middleware(request) {
 export const config = {
   matcher: [
     '/((?!api|_next/static|favicon).*)',
-    '((?!wp-content|wp-includes).*)',
+    '/((?!blog/wp-content|blog/wp-includes).*)',
   ],
 }
