@@ -16,9 +16,10 @@ const preview = async (req, res) => {
   // getPostBySlug would implement the required fetching logic to the headless CMS
   const { slug, url } =
     (await client.fetch(
-      `*[slug.current == $slug][0]{"url": path, "slug": slug.current}`,
+      `*[_type == $type && slug.current == $slug][0]{"url": path, "slug": slug.current}`,
       {
         slug: req.query.slug,
+        type: req.query.type,
       }
     )) || {}
 
