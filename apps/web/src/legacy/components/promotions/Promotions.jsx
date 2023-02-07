@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import { styled } from '@design'
+import { useRouter } from 'next/router'
 
 import { BundleInfoSheet, Banner } from '@lp/ui'
 import { FLOWS } from '@lp/lib-upgrade-modal'
@@ -46,12 +47,8 @@ const Promotions = ({ onPromotionsLoaded = false }) => {
   const [coupon, setCoupon] = useState()
   const [isLoading, setIsLoading] = useState(true)
 
-  // Remove trailing slash from returned paths
-  const currentPath =
-    typeof window !== 'undefined'
-      ? window.location.pathname.replace(/\/$/, '')
-      : null
-  const onPricingPage = PRICING_PATHS.indexOf(currentPath) !== -1
+  const { asPath } = useRouter()
+  const onPricingPage = PRICING_PATHS.includes(asPath)
 
   useEffect(() => {
     async function promotionsInit() {
@@ -103,7 +100,7 @@ const Promotions = ({ onPromotionsLoaded = false }) => {
       if (coupon?.canRedeemCoupon) setShowBundle(onPricingPage)
       else setShowBundle(true)
     }
-  }, [bundle, coupon])
+  }, [bundle, coupon, asPath])
 
   const handleCollapseChange = (event, expanded) => {
     const {
