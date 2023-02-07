@@ -13,6 +13,13 @@ export async function middleware(request) {
   const url = request.nextUrl.clone()
 
   if (url.pathname.startsWith(proxyPath)) {
+    if (
+      url.pathname.includes('wp-content') ||
+      url.pathname.includes('wp-includes')
+    ) {
+      return NextResponse.rewrite(new URL(url.pathname, proxyHost))
+    }
+
     return NextResponse.rewrite(new URL(`${url.pathname}/`, proxyHost))
   }
 
@@ -28,8 +35,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|favicon).*)',
-    '/((?!blog/wp-content|blog/wp-includes).*)',
-  ],
+  matcher: ['/((?!api|_next/static|favicon).*)'],
 }
