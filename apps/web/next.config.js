@@ -189,12 +189,6 @@ const moduleExports = withBundleAnalyzer({
           destination: '/',
         },
       ],
-      // fallback: [
-      //   {
-      //     source: '/:path*',
-      //     destination: `/redirectHandler`,
-      //   },
-      // ],
       fallback: [
         {
           source: '/blog/:path*',
@@ -205,6 +199,12 @@ const moduleExports = withBundleAnalyzer({
           destination: `${fallbackProxy}/:path*/`,
         },
       ],
+      // fallback: [
+      //   {
+      //     source: '/:path*',
+      //     destination: `/redirectHandler`,
+      //   },
+      // ],
     }
   },
   headers: async () => [
