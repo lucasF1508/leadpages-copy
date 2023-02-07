@@ -168,22 +168,6 @@ const moduleExports = withBundleAnalyzer({
     return {
       beforeFiles: [
         {
-          source: '/blog',
-          destination: `${fallbackProxy}/`,
-        },
-        {
-          source: '/blog/',
-          destination: `${fallbackProxy}/`,
-        },
-        {
-          source: '/blog/:path',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
-          source: '/blog/:path/',
-          destination: `${fallbackProxy}/:path/`,
-        },
-        {
           source: '/blog/category/:path',
           destination: `${fallbackProxy}/:path/`,
         },
@@ -206,6 +190,22 @@ const moduleExports = withBundleAnalyzer({
         {
           source: '/blog/page/:path/',
           destination: `${fallbackProxy}/:path/`,
+        },
+        {
+          source: '/blog/:path',
+          destination: `${fallbackProxy}/:path/`,
+        },
+        {
+          source: '/blog/:path/',
+          destination: `${fallbackProxy}/:path/`,
+        },
+        {
+          source: '/blog',
+          destination: `${fallbackProxy}/`,
+        },
+        {
+          source: '/blog/',
+          destination: `${fallbackProxy}/`,
         },
       ],
       afterFiles: [
