@@ -4,13 +4,27 @@ import HomePage from '@layouts/HomePage'
 
 const IndexPage = (props) => <HomePage {...props} />
 
-export async function getStaticProps(context) {
-  const { preview = false } = context
+export async function getServerSideProps(context) {
+  const { preview = false, req: { headers } = {} } = context
+
+  // TODO
+  // Get slug from `headers` or `?` query params
+  //
+  // const slug = ...
+
+  if (!preview) {
+    return {
+      redirect: {
+        destination: `/`,
+        permanent: false,
+      },
+    }
+  }
 
   const { data, queries, global } = await runQueries(
     getDoc('pageHome', {
       preview,
-      params: { slug: 'home' },
+      params: { slug: 'home-working' },
     })
   )
 
