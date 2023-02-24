@@ -421,7 +421,7 @@ const HeaderSubMenu = styled('div', {
 
 const ProductSubMenuContainer = styled('div', {
   background: '$dropdown',
-  marginLeft: '190px',
+  marginLeft: '170px',
   maxWidth: '165px',
   boxShadow: `0 6px 12px 0 rgba(15, 12, 9, 0.3),
     0 12px 24px 0 rgba(15, 12, 9, 0.15)`,
@@ -430,7 +430,7 @@ const ProductSubMenuContainer = styled('div', {
   variants: {
     scrolled: {
       true: {
-        ml: '75px',
+        ml: '55px',
       },
     },
   },
@@ -438,7 +438,7 @@ const ProductSubMenuContainer = styled('div', {
 
 const ResourcesSubMenuContainer = styled('div', {
   background: '$dropdown',
-  marginLeft: '390px',
+  marginLeft: '370px',
   maxWidth: '165px',
   boxShadow: `0 6px 12px 0 rgba(15, 12, 9, 0.3),
     0 12px 24px 0 rgba(15, 12, 9, 0.15)`,
@@ -447,7 +447,7 @@ const ResourcesSubMenuContainer = styled('div', {
   variants: {
     scrolled: {
       true: {
-        ml: '275px',
+        ml: '255px',
       },
     },
   },
