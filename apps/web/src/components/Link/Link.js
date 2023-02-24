@@ -60,7 +60,7 @@ const Link = (
     icon,
     hasHash,
     hash,
-    hasIcon,
+    hasIcon: hasIconOrg,
     disabled,
     popUpId,
     leadpagesDomain,
@@ -78,6 +78,7 @@ const Link = (
     ariaLabelOrg ||
     (children instanceof String && children?.toString()) ||
     label
+  const hasIcon = hasIconOrg && Icon
 
   if (disabled) {
     return (
