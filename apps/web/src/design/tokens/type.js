@@ -147,6 +147,13 @@ export const type = {
       '@>l': typeSizes['7xl'],
       lh: '$lineHeights$m',
     },
+    heroCareers: {
+      ...typeSizes['2xl'],
+      '@>s': typeSizes['4xl'],
+      '@>m': typeSizes['5xl'],
+      '@>l': typeSizes['6xl'],
+      lh: '$lineHeights$s',
+    },
     button: typeSizes.base,
     buttonAlt: {
       ...typeSizes.base,
@@ -216,6 +223,10 @@ export const type = {
       fontFamily: '$heading',
     },
     heroCustomer: {},
+    heroCareers: {
+      fontWeight: '$normal',
+      fontFamily: '$heading',
+    },
     button: {
       fontWeight: '$normal',
       fontFamily: '$base',

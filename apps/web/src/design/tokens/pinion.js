@@ -78,6 +78,13 @@ export const pinionTokens = {
           maxWidth: '$extended',
         },
       },
+      linkList: {
+        bc: '$gray',
+        mb: 0,
+        '> div': {
+          maxWidth: '$extended',
+        },
+      },
       pricing: {
         px: 'unset',
         my: 'unset',

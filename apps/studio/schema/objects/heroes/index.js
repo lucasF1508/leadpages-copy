@@ -1,5 +1,6 @@
 export * from './schemaHeroDefault'
 export * from './schemaHeroSimple'
+export * from './schemaHeroCareers'
 export * from './schemaHeroCustomer'
 export * from './schemaHeroIntegration'
 export * from './schemaHeroHome'

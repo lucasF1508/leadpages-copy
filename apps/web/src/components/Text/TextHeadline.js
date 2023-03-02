@@ -1,6 +1,9 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import { styled } from '@design'
 import Text from './Text'
+
+const Socialize = dynamic(() => import('@components/Socialize'))
 
 const $TextHeadline = styled(Text, {
   textAlign: 'center',
@@ -16,6 +19,11 @@ const $TextHeadline = styled(Text, {
   },
 })
 
-const TextHeadline = (props) => <$TextHeadline {...props} />
+const TextHeadline = ({ hasSocialize, ...props }) => (
+  <>
+    <$TextHeadline {...props} />
+    {hasSocialize && <Socialize />}
+  </>
+)
 
 export default TextHeadline

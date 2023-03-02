@@ -47,6 +47,10 @@ const $Text = styled(Text, {
   h1: {
     type: 'heroCustomer',
   },
+
+  span: {
+    type: 'baseTypeLarge',
+  },
 })
 
 const StyledImage = styled(Image, {

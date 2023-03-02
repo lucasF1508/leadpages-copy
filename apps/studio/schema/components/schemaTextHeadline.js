@@ -10,7 +10,10 @@ export const schemaTextHeadline = F.object({
     ...G.group('content', [
       F.field('blockContentHeadline', { name: 'content' }),
     ]),
-    ...G.group('options', [F.field('backgroundColor')]),
+    ...G.group('options', [
+      F.field('backgroundColor'),
+      F.field('hasSocialize'),
+    ]),
   ],
   preview: P.blockContent({ title: 'Text Headline' }),
 })

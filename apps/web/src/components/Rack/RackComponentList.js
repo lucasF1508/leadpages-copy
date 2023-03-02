@@ -15,6 +15,7 @@ const RackComponentList = {
   media: dynamic(() => import('@components/MediaBlock')),
   mediaWithText: dynamic(() => import('@components/MediaWithText')),
   logoGrid: dynamic(() => import('@components/LogoGrid')),
+  linkList: dynamic(() => import('@components/LinkList')),
   pageAnchor: dynamic(() => import('@components/PageAnchor')),
   slider: dynamic(() => import('@components/Slider')),
   spacer: dynamic(() => import('@components/Spacer')),

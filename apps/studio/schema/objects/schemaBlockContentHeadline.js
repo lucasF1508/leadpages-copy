@@ -41,7 +41,7 @@ export const NormalStyle = (props) => (
   </span>
 )
 
-const LargerTextStyle = (props) => (
+export const LargerTextStyle = (props) => (
   <span style={{ fontSize: '1.125em' }}>{props.children}</span>
 )
 
