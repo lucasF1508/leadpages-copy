@@ -22,11 +22,13 @@ export const link = {
         '&:hover': {
           bc: '$hover',
           borderColor: '$hover',
+          c: '$hoverColor',
         },
 
         '&:active': {
           bc: '$active',
           borderColor: '$active',
+          c: '$hoverColor',
         },
 
         '&[disabled]': {
@@ -80,13 +82,13 @@ export const link = {
         '&:hover': {
           bc: '$hover',
           borderColor: '$hover',
-          c: '$hoverColor',
+          c: '$hoverColorGhost',
         },
 
         '&:active': {
           bc: '$active',
           borderColor: '$active',
-          c: '$hoverColor',
+          c: '$hoverColorGhost',
         },
 
         '&[disabled]': {

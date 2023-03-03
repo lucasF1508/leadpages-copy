@@ -1,7 +1,7 @@
 export const richText = ({ content = [], title: titleOrg = '' }) => {
-  if (!content || !Array.isArray(content)) return content
+  if (!content?.length || !Array.isArray(content)) return false
   let title = titleOrg
-  const textBlocks = content.filter((blocks) => blocks._type === 'block')
+  const textBlocks = content.filter((blocks) => blocks?._type === 'block')
   if (textBlocks.length) {
     title = textBlocks
       .map(({ children }) => children.map(({ text }) => text))

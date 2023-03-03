@@ -11,7 +11,8 @@ export const darkTheme = createTheme('dark', {
     link: '#ffffff',
     white: '$purple',
     hover: '$text',
-    hoverColor: '$darkBlue',
+    hoverColorGhost: '$darkBlue',
+    hoverColor: '$indigoDark',
   },
   borders: {
     thickButton: '$borderWidths$thick solid $colors$primary',

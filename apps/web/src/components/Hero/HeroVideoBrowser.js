@@ -4,7 +4,7 @@ import Media from '@components/Media'
 import NextImage from 'next/image'
 import { styled, keyframes } from '@design'
 import shouldDisplayVideo from '@legacy/utils/should-display-video'
-import playButtonSVG from '@legacy/assets/images/global/play-button_purple.svg'
+import { IoPlaySharp as PlayButton } from '@react-icons/all-files/io5/IoPlaySharp'
 import wavyLineVerticalLavenderSVG from '@legacy/assets/images/shapes/wavy-line-vertical-lavender.svg'
 import WistiaVideoTracked from '@components/Wistia/WistiaVideoTracked'
 
@@ -25,12 +25,12 @@ const VideoBrowser = styled('div', {
 
 const VideoBrowserChrome = styled('div', {
   width: '100%',
-  height: '11px',
-  bc: '$white',
-  b: '2px solid $colors$textAlt',
+  height: '10px',
+  bc: '$lightGray2',
+  b: '4px solid $colors$lightGray2',
   bb: '0',
-  btlr: '7px',
-  btrr: '7px',
+  btlr: '8px',
+  btrr: '8px',
   mw: '918px',
   m: '0 auto',
   d: 'flex',
@@ -38,19 +38,20 @@ const VideoBrowserChrome = styled('div', {
 
   '& > span': {
     d: 'block',
-    width: '3px',
-    height: '3px',
+    width: '5px',
+    height: '5px',
     br: '3px',
-    bc: '#c3c2c1',
+    bc: '$darkGray2',
     ml: '4px',
 
     '&:nth-child(1)': {
-      ml: '6px',
+      ml: '5px',
     },
   },
 
   '@media  (min-width: 577px) and (max-width: 768px)': {
-    height: '19px',
+    height: '12px',
+    borderWidth: '6px',
 
     '& > span': {
       width: '7px',
@@ -60,8 +61,8 @@ const VideoBrowserChrome = styled('div', {
   },
 
   '@media  (min-width: 769px)': {
-    height: '26px',
-    borderWidth: '3px',
+    height: '19px',
+    borderWidth: '7px',
 
     '& > span': {
       width: '10px',
@@ -69,27 +70,57 @@ const VideoBrowserChrome = styled('div', {
       br: '10px',
       ml: '6px',
 
-      '&: nth-child(1)': {
-        ml: '9px',
+      '&:nth-child(1)': {
+        ml: '8px',
+      },
+    },
+  },
+
+  variants: {
+    backgroundColor: {
+      purple: {
+        bc: '$purple',
+      },
+      navy: {
+        bc: '$darkBlue',
       },
     },
   },
 })
 
 const VideoBrowserViewport = styled('div', {
-  bc: '$white',
   position: 'relative',
   width: '100%',
   height: '100%',
   mw: '918px',
   margin: '0 auto',
   overflow: 'hidden',
-  b: '2px solid $colors$textAlt',
-  bbrr: '7px',
-  bblr: '7px',
 
-  '@media  (min-width: 769px)': {
-    borderWidth: '3px',
+  variants: {
+    backgroundColor: {
+      purple: {
+        bc: '$purple',
+      },
+      navy: {
+        bc: '$darkBlue',
+      },
+    },
+    displayBrowserContainer: {
+      true: {
+        b: '4px solid $colors$lightGray2',
+
+        '@media  (min-width: 577px) and (max-width: 768px)': {
+          borderWidth: '6px',
+        },
+
+        '@media  (min-width: 769px)': {
+          borderWidth: '7px',
+        },
+      },
+      false: {
+        bc: 'transparent',
+      },
+    },
   },
 })
 
@@ -126,24 +157,25 @@ const WavyLineVerticalLavender = styled('div', {
   height: '66px',
 })
 
-const SVG = styled(NextImage, {})
+const $PlayButton = styled(PlayButton, {
+  fill: '$white',
+})
 
 const VideoButtonArrow = styled('span', {
   display: 'flex',
-  width: '30px',
-  height: '30px',
+  width: '15px',
+  height: '15px',
   br: '30px',
   ml: '10px',
   ai: 'center',
   jc: 'center',
-  bc: '$white',
-  bs: '0 0 2px 0 rgba(15, 12, 9, 0.04), 0 2px 4px 0 rgba(15, 12, 9, 0.08)',
+  bc: '$primary',
   transition: 'all 0.3s ease',
 
-  [`& ${SVG}`]: {
+  [`& ${$PlayButton}`]: {
     width: '8px',
-    height: '10px',
-    ml: '2px',
+    height: '8px',
+    ml: '1px',
   },
 })
 
@@ -159,19 +191,24 @@ const VideoButton = styled('button', {
   color: '$primary',
 
   '&:hover': {
-    color: '$primary',
+    color: '$hover',
 
     [`& ${VideoButtonArrow}`]: {
-      bc: '$primary',
+      bc: '$hover',
     },
 
-    [`& ${SVG}`]: {
-      filter: 'brightness(0) invert(1)',
+    [`& ${$PlayButton}`]: {
+      fill: '$hoverColor',
     },
   },
 })
 
-const HeroVideoBrowser = ({ media, link }) => {
+const HeroVideoBrowser = ({
+  media,
+  link,
+  backgroundColor,
+  displayBrowserContainer = false,
+}) => {
   const [displayVideo, setDisplayVideo] = useState(false)
   useEffect(() => setDisplayVideo(shouldDisplayVideo()), [])
 
@@ -181,12 +218,17 @@ const HeroVideoBrowser = ({ media, link }) => {
 
   return (
     <VideoBrowser>
-      <VideoBrowserChrome>
-        <span></span>
-        <span></span>
-        <span></span>
-      </VideoBrowserChrome>
-      <VideoBrowserViewport>
+      {displayBrowserContainer && (
+        <VideoBrowserChrome backgroundColor={backgroundColor}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </VideoBrowserChrome>
+      )}
+      <VideoBrowserViewport
+        backgroundColor={backgroundColor}
+        displayBrowserContainer={displayBrowserContainer}
+      >
         {condition === 'video' ? (
           <>
             {fallbackImage && <Image image={fallbackImage} priority />}
@@ -213,11 +255,7 @@ const HeroVideoBrowser = ({ media, link }) => {
             <VideoButton>
               <span>{link?.label}</span>
               <VideoButtonArrow>
-                <SVG
-                  src={playButtonSVG}
-                  alt="purple right arrow"
-                  lazyBoundary="501px"
-                />
+                <$PlayButton />
               </VideoButtonArrow>
             </VideoButton>
           </WistiaVideoTracked>

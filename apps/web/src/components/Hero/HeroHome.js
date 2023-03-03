@@ -1,20 +1,110 @@
 import React from 'react'
-import Image from 'next/image'
-import { styled } from '@design'
+import Image from '@components/Image'
+import { styled, darkTheme } from '@design'
 import Text from '@components/Text'
 import Link from '@components/Link'
-import totemLeftSVG from '@legacy/assets/images/totems/homepage-hero-totem-left.svg'
-import totemRightSVG from '@legacy/assets/images/totems/homepage-hero-totem-right.svg'
+import { features } from 'config'
 import HeroVideoBrowser from './HeroVideoBrowser'
 
-const OuterContainer = styled('div', {
+const ShapesLeft = styled('div', {
+  position: 'absolute',
+  left: '-69.85%',
+  w: '100%',
+  h: '100%',
+  z: 0,
+
+  img: {
+    width: '70%',
+  },
+
+  '@media (min-width: 1066px)': {
+    left: '-60.35%',
+  },
+})
+
+const ShapesRight = styled('div', {
+  position: 'absolute',
+  right: '-61%',
+  width: '100%',
+  height: '100%',
+  z: 0,
+
+  img: {
+    width: '110%',
+  },
+
+  '@media (min-width: 1066px)': {
+    right: '-51%',
+  },
+})
+
+const $Hero = styled('div', {
   position: 'relative',
-  minHeight: '600px',
   ox: 'hidden',
   o: 'hidden',
+  mt: '-$headerHeight$s',
+  pt: '$headerHeight$s',
+  d: 'flex',
 
   '@media (max-width: 768px)': {
     h: '100%',
+  },
+
+  variants: {
+    size: {
+      large: { '@media (min-width: 769px)': { minHeight: '47rem' } },
+      medium: { '@media (min-width: 769px)': { minHeight: '41rem' } },
+      small: { '@media (min-width: 769px)': { minHeight: '25rem' } },
+      default: { '@media (min-width: 769px)': { minHeight: '58rem' } },
+    },
+    backgroundColor: {
+      gray: { bc: '$grayAlt' },
+      gray4: { bc: '$gray' },
+      tan: { bc: '$backgroundAlt' },
+      white: { bc: '$white' },
+      lavender: { bc: '$lavenderLight' },
+      teal: { bc: '$tealLight' },
+      purple: { bc: '$purple' },
+      navy: { bc: '$darkBlue' },
+    },
+    alignBackgroundImages: {
+      default: {
+        [`& ${ShapesLeft}`]: {
+          top: '-18%',
+
+          '@media (min-width: 1066px)': {
+            top: '-48%',
+          },
+        },
+
+        [`& ${ShapesRight}`]: {
+          top: '-3.75%',
+
+          '@media (min-width: 1066px)': {
+            top: '-27.25%',
+          },
+        },
+      },
+      bottom: {
+        [`& ${ShapesLeft}, & ${ShapesRight}`]: {
+          bottom: -52,
+          d: 'flex',
+          ai: 'flex-end',
+
+          '@media (min-width: 577px) and (max-width: 768px)': {
+            bottom: -44,
+          },
+
+          '@media (min-width: 769px)': {
+            bottom: -36,
+          },
+        },
+      },
+    },
+  },
+  defaultVariants: {
+    size: 'default',
+    alignBackgroundImages: 'default',
   },
 })
 
@@ -24,6 +114,11 @@ const InnerContainer = styled('div', {
   m: '0 auto 52px auto',
   minHeight: '600px',
   position: 'relative',
+  flex: 1,
+  d: 'flex',
+  ai: 'center',
+  jc: 'center',
+  ff: 'column',
 
   '@media (max-width: 768px)': {
     height: '100%',
@@ -46,42 +141,6 @@ const LinksContainer = styled('div', {
   gap: '$2',
 })
 
-const ShapesLeft = styled('div', {
-  position: 'absolute',
-  top: '-18%',
-  left: '-69.85%',
-  w: '100%',
-  h: '100%',
-  z: -1,
-
-  img: {
-    width: '70%',
-  },
-
-  '@media (min-width: 1066px)': {
-    top: '-48%',
-    left: '-60.35%',
-  },
-})
-
-const ShapesRight = styled('div', {
-  position: 'absolute',
-  top: '-3.75%',
-  right: '-61%',
-  width: '100%',
-  height: '100%',
-  z: -1,
-
-  img: {
-    width: '110%',
-  },
-
-  '@media (min-width: 1066px)': {
-    top: '-27.25%',
-    right: '-51%',
-  },
-})
-
 const TextContainer = styled('div', {
   position: 'relative',
   mt: '17px',
@@ -89,6 +148,7 @@ const TextContainer = styled('div', {
   mr: 'auto',
   ta: 'center',
   width: '100%',
+  z: 1,
 
   '@media  (min-width: 577px) and (max-width: 768px)': {
     mt: '55px',
@@ -120,34 +180,85 @@ const VideoBrowserContainer = styled('div', {
   },
 })
 
-const HeroHome = ({ content, links, media, watchVideoLink }) => (
-  <OuterContainer>
-    <InnerContainer>
-      <TextContainer>
-        {content && <$Text content={content} />}
-        {links && (
-          <LinksContainer>
-            {links.map(({ _key, ...link }) => (
-              <Link key={_key} {...link} />
-            ))}
-          </LinksContainer>
+const HeroHome = ({
+  content,
+  links,
+  media,
+  backgroundOptions = {},
+  backgroundImages = {},
+  watchVideoLink,
+  className,
+  size = 'default',
+  alignBackgroundImages = 'default',
+}) => {
+  const { displayBrowserContainer = false, backgroundColor = false } =
+    backgroundOptions || {}
+
+  const darkBackground = features.darkHeros.includes(backgroundColor)
+  const hasMedia = media?.condition !== 'none'
+
+  return (
+    <$Hero
+      className={`${className || ''} ${darkBackground ? darkTheme : ''}`}
+      size={size}
+      backgroundColor={backgroundColor}
+      alignBackgroundImages={alignBackgroundImages}
+    >
+      <InnerContainer>
+        <TextContainer>
+          {content && <$Text content={content} />}
+          {links && (
+            <LinksContainer>
+              {links.map(({ _key, ...link }) => (
+                <Link key={_key} {...link} />
+              ))}
+            </LinksContainer>
+          )}
+        </TextContainer>
+        {hasMedia ? (
+          <VideoBrowserContainer>
+            {backgroundImages?.left && (
+              <ShapesLeft>
+                <div style={{ width: '70%' }}>
+                  <SVG image={backgroundImages?.left} alt="shapes" priority />
+                </div>
+              </ShapesLeft>
+            )}
+            {backgroundImages?.right && (
+              <ShapesRight>
+                <div style={{ width: '110%' }}>
+                  <SVG image={backgroundImages?.right} alt="shapes" priority />
+                </div>
+              </ShapesRight>
+            )}
+            <HeroVideoBrowser
+              media={media}
+              link={watchVideoLink}
+              displayBrowserContainer={displayBrowserContainer}
+              backgroundColor={backgroundColor}
+            />
+          </VideoBrowserContainer>
+        ) : (
+          <>
+            {backgroundImages?.left && (
+              <ShapesLeft>
+                <div style={{ width: '70%' }}>
+                  <SVG image={backgroundImages?.left} alt="shapes" priority />
+                </div>
+              </ShapesLeft>
+            )}
+            {backgroundImages?.right && (
+              <ShapesRight>
+                <div style={{ width: '110%' }}>
+                  <SVG image={backgroundImages?.right} alt="shapes" priority />
+                </div>
+              </ShapesRight>
+            )}
+          </>
         )}
-      </TextContainer>
-      <VideoBrowserContainer>
-        <ShapesLeft>
-          <div style={{ width: '70%' }}>
-            <SVG src={totemLeftSVG} alt="shapes" priority />
-          </div>
-        </ShapesLeft>
-        <ShapesRight>
-          <div style={{ width: '110%' }}>
-            <SVG src={totemRightSVG} alt="shapes" priority />
-          </div>
-        </ShapesRight>
-        <HeroVideoBrowser media={media} link={watchVideoLink} />
-      </VideoBrowserContainer>
-    </InnerContainer>
-  </OuterContainer>
-)
+      </InnerContainer>
+    </$Hero>
+  )
+}
 
 export default HeroHome

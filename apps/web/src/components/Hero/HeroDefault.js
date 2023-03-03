@@ -190,7 +190,7 @@ const HeroDefault = ({
 
   return (
     <$Hero
-      className={`${className} ${darkBackground && darkTheme}`}
+      className={`${className || ''} ${darkBackground ? darkTheme : ''}`}
       size={size}
       backgroundColor={backgroundColor}
     >

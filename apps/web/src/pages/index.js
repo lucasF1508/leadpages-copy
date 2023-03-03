@@ -1,8 +1,33 @@
 import React from 'react'
 import { getDoc, runQueries } from '@lib'
 import HomePage from '@layouts/HomePage'
+import { features } from 'config'
 
 const IndexPage = (props) => <HomePage {...props} />
+
+export const shapeData = (data) => {
+  const [pageData] = (data?.length && data) || []
+  const { hero: heroes } = pageData || {}
+  const [hero] = heroes || []
+
+  // Page options
+  const darkHero = features.darkHeros.includes(
+    hero?.backgroundOptions?.backgroundColor
+  )
+  const options = {
+    ...pageData?.options,
+    darkHero,
+  }
+
+  return [
+    {
+      ...pageData,
+      options,
+    },
+  ]
+}
+
+export const exporter = (props) => shapeData(props)
 
 export async function getStaticProps(context) {
   const { preview = false } = context
@@ -16,7 +41,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      data,
+      data: shapeData(data),
       queries,
       global,
       preview,

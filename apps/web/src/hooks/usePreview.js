@@ -69,6 +69,9 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
     const { shapeData = (data) => data } =
       {
         '/[...slug]': await import('@pages/[...slug].js'),
+        '/': await import('@pages/index'),
+        '/home': await import('@pages/index'),
+        '/home-working': await import('@pages/index'),
         '/404': await import('@pages/404'),
         '/integrations': await import('@pages/integrations'),
         '/blog': await import('@pages/blog'),
