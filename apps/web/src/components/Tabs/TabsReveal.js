@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { styled, keyframes } from '@design'
+import { m } from 'framer-motion'
 import PropTypes from 'prop-types'
 import Image from '@components/Image'
+import Media from '@components/Media'
 import Link from '@components/Link'
 import { fadeIn, fadeOut } from 'react-animations'
 import { RPImage } from '@legacy/constants/types'
@@ -21,28 +23,45 @@ const InnerContainer = styled('div', {
 
 const Flexbox = styled('div', {
   display: 'flex',
-  flexFlow: 'row nowrap',
   justifyContent: 'center',
   width: '100%',
+
+  variants: {
+    align: {
+      left: { flexFlow: 'row nowrap' },
+      right: { flexFlow: 'row-reverse nowrap' },
+    },
+  },
 })
 
 const FlexLeft = styled('div', {
   marginTop: '48px',
-  width: '345px',
+
+  variants: {
+    tabWidth: {
+      narrow: { width: '345px' },
+      wide: { width: '450px' },
+    },
+  },
 })
 
 const FlexRight = styled('div', {
-  width: 'calc(100% - 345px)',
   height: '590px',
   marginLeft: '3rem',
   display: 'flex',
   alignItems: 'center',
+  transition: 'height 0.1s ease',
 
   '&.nullstate': {
     height: '410px',
   },
 
-  transition: 'height 0.1s ease',
+  variants: {
+    tabWidth: {
+      narrow: { width: 'calc(100% - 345px)' },
+      wide: { width: 'calc(100% - 450px)' },
+    },
+  },
 })
 
 const FlexRightContent = styled('div', {
@@ -54,7 +73,19 @@ const CardTitle = styled('div', {
   fontWeight: 500,
   lineHeight: '24px',
   color: '$text',
-  marginLeft: '1rem',
+  transition: 'color 0.3s ease',
+
+  variants: {
+    tabWidth: {
+      wide: {
+        fontSize: '18px',
+
+        '@>m': {
+          fontSize: '16px',
+        },
+      },
+    },
+  },
 })
 
 const CardHeadArrowSVG = styled('img', {
@@ -66,8 +97,7 @@ const CardHeadArrowSVG = styled('img', {
 
 const CardHeadArrowSVGAnimation = keyframes(fadeOut)
 
-const Card = styled('div', {
-  transition: 'all 0.3s ease',
+const Card = styled(m.div, {
   position: 'relative',
   height: '72px',
   maxWidth: '100%',
@@ -89,7 +119,7 @@ const Card = styled('div', {
 
   '&.activecard': {
     zIndex: 1,
-    height: '240px',
+    height: 'auto',
     boxShadow: `0 6px 12px 0 rgba(15, 12, 9, 0.3),
       0 12px 24px 0 rgba(15, 12, 9, 0.15)`,
 
@@ -156,6 +186,7 @@ const CardLinkHolder = styled('div', {
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
+  marginTop: '1.5rem',
 })
 
 const CardLinkArrowSVG = styled('img', {
@@ -185,25 +216,45 @@ const CardLink = styled(Link, {
 
 const RevealImageAnimation = keyframes(fadeIn)
 
-const RevealImage = styled(Image, {
+const RevealImage = styled(Media, {
   width: '100%',
   animation: `0.5s ${RevealImageAnimation}`,
 })
 
-const ProductToolkitClickReveal = ({ items }) => {
+const ProductToolkitClickReveal = ({
+  align = 'left',
+  autoplay = false,
+  tabWidth = 'narrow',
+  items,
+}) => {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [shouldAutoplay, setShouldAutoplay] = useState(autoplay)
 
   const handleCardClick = (index) => {
     if (activeIndex === index) return
-
+    setShouldAutoplay(false)
     setActiveIndex(index)
   }
+
+  useEffect(() => {
+    let rotateCards
+
+    if (!shouldAutoplay) {
+      clearInterval(rotateCards)
+    } else {
+      rotateCards = setInterval(() => {
+        setActiveIndex((index) => (index === items.length - 1 ? 0 : index + 1))
+      }, 5000)
+    }
+
+    return () => clearInterval(rotateCards)
+  }, [shouldAutoplay])
 
   return (
     <OuterContainer>
       <InnerContainer>
-        <Flexbox>
-          <FlexLeft>
+        <Flexbox align={align}>
+          <FlexLeft tabWidth={tabWidth}>
             {items.map(({ title, content, icon, iconAltText, link }, index) => (
               <Card
                 key={title}
@@ -211,11 +262,23 @@ const ProductToolkitClickReveal = ({ items }) => {
                 className={
                   activeIndex === index ? 'activecard' : 'inactivecard'
                 }
+                initial={{
+                  height: activeIndex === index ? 'auto' : '72px',
+                }}
+                animate={{
+                  height: activeIndex !== index ? '72px' : 'auto',
+                  transition: { duration: 0.3 },
+                }}
               >
                 <CardContent>
                   <CardHead>
                     <CardIconSVG image={icon} alt={iconAltText}></CardIconSVG>
-                    <CardTitle>{title}</CardTitle>
+                    <CardTitle
+                      tabWidth={tabWidth}
+                      css={icon ? { ml: '1rem' } : undefined}
+                    >
+                      {title}
+                    </CardTitle>
                     <CardHeadArrowSVG
                       src={ArrowDownSVG.src}
                       alt="arrow icon"
@@ -223,7 +286,7 @@ const ProductToolkitClickReveal = ({ items }) => {
                   </CardHead>
                   <CardBody>
                     <CardText>{content}</CardText>
-                    {link && (
+                    {link?.condition && (
                       <CardLinkHolder>
                         <CardLink {...link} aria-label={''}>
                           {`${link.label}  `}
@@ -239,13 +302,15 @@ const ProductToolkitClickReveal = ({ items }) => {
               </Card>
             ))}
           </FlexLeft>
-          <FlexRight className={activeIndex === null ? 'nullstate' : ''}>
+          <FlexRight
+            className={activeIndex === null ? 'nullstate' : ''}
+            tabWidth={tabWidth}
+          >
             <FlexRightContent>
               <RevealImage
-                key={items[activeIndex].image?.asset?._id}
-                image={items[activeIndex].image}
-                alt={items[activeIndex].revealImageAltText}
-              ></RevealImage>
+                key={items[activeIndex].media?._key}
+                media={{ ...items[activeIndex].media }}
+              />
             </FlexRightContent>
           </FlexRight>
         </Flexbox>

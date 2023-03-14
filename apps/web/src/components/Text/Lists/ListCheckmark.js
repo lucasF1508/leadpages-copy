@@ -10,11 +10,12 @@ const SVG = styled('img', {
 
 const $ListItemCheckmark = styled('li', {
   position: 'relative',
-  typeSizes: 'smallType',
-  color: '$textAlt',
 })
 
 const $ListCheckmark = styled('ul', {
+  mt: '$4',
+  mb: '$2',
+
   [`${$ListItemCheckmark}`]: {
     '&::before': {
       display: 'none',
@@ -22,13 +23,31 @@ const $ListCheckmark = styled('ul', {
   },
 })
 
-const ListCheckmark = (props) => {
-  const { children } = props
-  return <$ListCheckmark>{children}</$ListCheckmark>
+const ListCheckmark = ({ children }) => {
+  const { node } = children[0].props
+  const { styleMap = {}, style = 'normal' } = node
+  const fontStyles = node.children[0].marks
+
+  const fontWeight = fontStyles.includes('strong') ? 500 : 400
+  const color = fontStyles.includes('text') ? '$text' : '$textAlt'
+
+  const type = {
+    normal: 'baseType',
+    small: 'smallType',
+    extraSmall: 'input',
+    ...styleMap,
+  }[style || 'normal']
+
+  return (
+    <$ListCheckmark css={{ typeSizes: type, strong: { fontWeight }, color }}>
+      {children}
+    </$ListCheckmark>
+  )
 }
 
 const ListItemCheckmark = (props) => {
   const { children } = props
+
   return (
     <$ListItemCheckmark>
       <SVG src={checkSVG.src} alt="check mark svg" />

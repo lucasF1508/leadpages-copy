@@ -18,7 +18,7 @@ export const schemaTabs = F.object({
               F.text({ name: 'content' }),
             ]),
             F.image({ name: 'icon', group: 'media' }),
-            F.image({ name: 'image', group: 'media' }),
+            F.media({ group: 'media' }),
             F.link({ group: 'link' }),
           ],
           preview: P.titleImage({
@@ -29,7 +29,31 @@ export const schemaTabs = F.object({
         validation: (Rule) => Rule.max(4),
       }),
     ]),
-    ...G.group('options', []),
+    ...G.group('options', [
+      F.boolean({
+        name: 'autoplay',
+        title: 'Enable Autoplay',
+        description:
+          'When enabled, the tabs will automatically progress to the next tab.',
+        initialValue: false,
+      }),
+      F.boolean({
+        name: 'loop',
+        title: 'Enable Looping',
+        description: 'When enabled, the tabs will cycle continuously.',
+        initialValue: false,
+      }),
+      F.radio(['left', 'right'], {
+        name: 'align',
+        title: 'Tab Alignment',
+        initialValue: 'left',
+      }),
+      F.radio(['narrow', 'wide'], {
+        name: 'tabWidth',
+        title: 'Tab Width',
+        initialValue: 'narrow',
+      }),
+    ]),
   ],
   preview: P.arrayTitle(),
 })

@@ -2,6 +2,8 @@ import React from 'react'
 import { BsListCheck } from 'react-icons/bs'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 
+const colorText = '#0f0c09'
+
 export const TitleStyle = (props) => (
   <span
     style={{
@@ -43,6 +45,14 @@ export const NormalStyle = (props) => (
 
 export const LargerTextStyle = (props) => (
   <span style={{ fontSize: '1.125em' }}>{props.children}</span>
+)
+
+const SmallTextStyle = (props) => (
+  <span style={{ fontSize: '1rem' }}>{props.children}</span>
+)
+
+const ExtraSmallTextStyle = (props) => (
+  <span style={{ fontSize: '0.875rem' }}>{props.children}</span>
 )
 
 export const OverlineStyle = (props) => (
@@ -92,6 +102,16 @@ export const blockContentHeadline = F.array({
       type: 'block',
       styles: [
         {
+          title: 'Extra Small',
+          value: 'extraSmall',
+          blockEditor: { render: ExtraSmallTextStyle },
+        },
+        {
+          title: 'Small',
+          value: 'small',
+          blockEditor: { render: SmallTextStyle },
+        },
+        {
           title: 'Normal',
           value: 'normal',
           blockEditor: { render: NormalStyle },
@@ -139,6 +159,32 @@ export const blockContentHeadline = F.array({
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
+          {
+            title: 'Text',
+            value: 'text',
+            blockEditor: {
+              render: (props) => (
+                <span
+                  style={{
+                    color: colorText,
+                  }}
+                >
+                  {props.children}
+                </span>
+              ),
+              icon: () => (
+                <span
+                  style={{
+                    display: 'block',
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '4px',
+                    backgroundColor: colorText,
+                  }}
+                />
+              ),
+            },
+          },
         ],
         annotations: [
           F.link({

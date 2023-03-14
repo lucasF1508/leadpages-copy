@@ -21,6 +21,7 @@ export const link = ({
   const args = {
     label: {},
     url: {},
+    hasIcon: {},
     file: {},
     page: {},
     target: {},
@@ -74,6 +75,14 @@ export const link = ({
           group: isGrouped && 'options',
           hidden: ({ parent }) => parent.condition !== 'external',
           ...args.target,
+        })
+      : '',
+    args.hasIcon
+      ? F.boolean({
+          name: 'hasIcon',
+          group: isGrouped && 'options',
+          initialValue: false,
+          ...args.hasIcon,
         })
       : '',
     args.page

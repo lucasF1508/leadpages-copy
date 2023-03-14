@@ -33,6 +33,8 @@ const BlockRenderer = (props) => {
   const type = {
     large: 'baseTypeLarge',
     normal: 'baseType',
+    small: 'smallType',
+    extraSmall: 'input',
     ...styleMap,
   }[style || 'normal']
 

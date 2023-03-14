@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { fadeIn } from 'react-animations'
 import { RPImage } from '@legacy/constants/types'
 // components
+import Media from '@components/Media'
 import Image from '@components/Image'
 import Link from '@components/Link'
 import PaginationDots from '@legacy/components/rotators/PaginationDots'
@@ -41,7 +42,7 @@ const FlexTopContent = styled('div', {
 
 const RevealImageAnimation = keyframes(fadeIn)
 
-const RevealImage = styled(Image, {
+const RevealImage = styled(Media, {
   width: '100%',
   animation: `0.5s ${RevealImageAnimation}`,
 })
@@ -57,10 +58,13 @@ const CardTitle = styled('div', {
   fontWeight: 500,
   lineHeight: '24px',
   color: '$text',
-  marginLeft: '1rem',
 })
 
 const SlickRotator = styled(ReactSlick, {
+  '.slick-list': {
+    overflow: 'visible',
+  },
+
   '.slick-slide > div': {
     margin: '1rem 15px 2.5rem',
   },
@@ -74,7 +78,6 @@ const SlickRotator = styled(ReactSlick, {
 
 const Card = styled('div', {
   width: '100%',
-  minHeight: '219px',
   backgroundColor: '$white',
   cursor: 'pointer',
 
@@ -93,26 +96,6 @@ const Card = styled('div', {
       boxShadow: `0 4px 8px 0 rgba(15, 12, 9, 0.04),
         0 10px 20px 0 rgba(15, 12, 9, 0.08)`,
     },
-  },
-
-  '@media (min-width: 521px)': {
-    minHeight: '219px',
-  },
-
-  '@media (max-width: 520px)': {
-    minHeight: '243px',
-  },
-
-  '@media (max-width: 401px)': {
-    minHeight: '267px',
-  },
-
-  '@media (max-width: 355px)': {
-    minHeight: '291px',
-  },
-
-  '@media (max-width: 330px)': {
-    minHeight: '315px',
   },
 })
 
@@ -180,22 +163,34 @@ const CardLink = styled(Link, {
   justifyContent: 'flex-start',
 })
 
-const ProductToolkitRotator = ({ items }) => {
+const ProductToolkitRotator = ({ items, autoplay = false, loop = false }) => {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [cardContentHeight, setCardContentHeight] = useState(0)
 
   const [loadSlick, setLoadSlick] = useState(false)
   useEffect(() => setLoadSlick(true), [])
 
+  useEffect(() => {
+    // get height of largest CardContent element
+    const cardContentElementsHeightArray = [].slice
+      .call(document.getElementsByClassName('cardcontent'))
+      .map((el) => el.getBoundingClientRect().height)
+    const largestCardContentHeight = Math.max(...cardContentElementsHeightArray)
+    setCardContentHeight(largestCardContentHeight)
+  })
+
   const settings = {
     appendDots: (dots) => <PaginationDots dots={dots} margin="-0.5rem 0 0 0" />,
     arrows: false,
+    autoplay: autoplay && true,
+    autoplaySpeed: 5000,
     centerMode: true,
     centerPadding: '24px',
     className: 'center',
     dots: true,
     draggable: true,
     focusOnSelect: true,
-    infinite: false,
+    infinite: loop && true,
     lazyload: true,
     slidesToScroll: 1,
     slidesToShow: 1,
@@ -214,9 +209,8 @@ const ProductToolkitRotator = ({ items }) => {
           <FlexTop className={activeIndex === null ? 'nullstate' : ''}>
             <FlexTopContent>
               <RevealImage
-                key={items[activeIndex].image?.asset?._id}
-                image={items[activeIndex].image}
-                alt={items[activeIndex].revealImageAltText}
+                key={items[activeIndex].media?._key}
+                media={{ ...items[activeIndex].media }}
               />
             </FlexTopContent>
           </FlexTop>
@@ -232,14 +226,19 @@ const ProductToolkitRotator = ({ items }) => {
                   activeIndex === index ? 'activecard' : 'inactivecard'
                 }
               >
-                <CardContent>
+                <CardContent
+                  className="cardcontent"
+                  style={{ minHeight: `${cardContentHeight}px` }}
+                >
                   <CardHead>
                     <CardIconSVG image={icon} alt={iconAltText}></CardIconSVG>
-                    <CardTitle>{title}</CardTitle>
+                    <CardTitle css={icon ? { ml: '1rem' } : undefined}>
+                      {title}
+                    </CardTitle>
                   </CardHead>
                   <CardBody>
                     <CardText>{content}</CardText>
-                    {link && (
+                    {link?.condition && (
                       <CardLinkHolder>
                         <CardLink {...link} aria-label={''}>
                           <span>{`${link.label}  `}</span>

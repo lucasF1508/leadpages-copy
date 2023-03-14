@@ -13,33 +13,36 @@ import { MdPlayArrow as VideoIcon } from '@react-icons/all-files/md/MdPlayArrow'
 
 export const $Link = styled(motion.a, linkTokens)
 
-const Icons = {
-  internal: styled(InternalIcon, {
-    variants: {
-      linkStyle: {
-        button: {
-          h: 18,
-          w: 18,
-        },
-        buttonInverse: {
-          h: 18,
-          w: 18,
-          c: '$primary',
-        },
-        ghost: {
-          h: 18,
-          w: 18,
-        },
-        text: {
-          h: 15,
-          w: 15,
-        },
+const internalIconStyles = {
+  variants: {
+    linkStyle: {
+      button: {
+        h: 18,
+        w: 18,
+      },
+      buttonInverse: {
+        h: 18,
+        w: 18,
+        c: '$primary',
+      },
+      ghost: {
+        h: 18,
+        w: 18,
+      },
+      text: {
+        h: 15,
+        w: 15,
       },
     },
-    defaultVariants: {
-      linkStyle: 'text',
-    },
-  }),
+  },
+  defaultVariants: {
+    linkStyle: 'text',
+  },
+}
+
+const Icons = {
+  internal: styled(InternalIcon, internalIconStyles),
+  leadpagesTrigger: styled(InternalIcon, internalIconStyles),
   external: styled(ExternalIcon),
   download: styled(DownloadIcon),
   modal: styled(ModalIcon),
@@ -160,7 +163,7 @@ const Link = (
           {...props}
         >
           {children || label}
-          {hasIcon && <Icon />}
+          {hasIcon && <Icon linkStyle={props?.linkStyle} />}
         </$Link>
       )
     case 'video':

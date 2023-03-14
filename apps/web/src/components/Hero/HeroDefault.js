@@ -64,6 +64,9 @@ export const $Hero = styled('div', {
       navy: {
         bc: '$darkBlue',
       },
+      gray: {
+        bc: '$gray',
+      },
     },
   },
 
