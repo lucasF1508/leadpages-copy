@@ -154,7 +154,10 @@ export const type = {
       '@>l': typeSizes['6xl'],
       lh: '$lineHeights$s',
     },
-    button: typeSizes.base,
+    button: {
+      ...typeSizes.base,
+      lh: 1,
+    },
     buttonAlt: {
       ...typeSizes.base,
       '@>s': typeSizes.lg,

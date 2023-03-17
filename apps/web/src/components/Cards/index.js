@@ -4,6 +4,18 @@ import CardPost from './CardPost'
 import CardsBlock from './CardsBlock'
 import CardToolkit from './CardToolkit'
 import CardPostArchive from './CardPostArchive'
+import CardsArticle from './CardsArticle'
+import CardIcon from './CardIcon'
+import IconCardsGrid from './IconCardsGrid'
 
 export default Cards
-export { CardsBlock, CardPost, Card, CardToolkit, CardPostArchive }
+export {
+  CardsBlock,
+  CardPost,
+  Card,
+  CardToolkit,
+  CardPostArchive,
+  CardsArticle,
+  CardIcon,
+  IconCardsGrid,
+}

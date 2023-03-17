@@ -5,13 +5,30 @@ import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
 import { features } from 'config'
 import { $Hero, $BackgroundImage } from './HeroDefault'
 
-const $Text = styled(Text)
+const $Text = styled(Text, {
+  variants: {
+    align: {
+      left: { mr: 'auto' },
+      center: { mx: 'auto', ta: 'center' },
+    },
+    maxWidth: {
+      small: {
+        mw: 'calc($cols4 + $space$8)',
+      },
+      medium: {
+        mw: 'calc($cols6 + $space$6)',
+      },
+      large: {
+        mw: 'calc($cols8 + $space$6)',
+      },
+    },
+  },
+})
 
 const $HeroSimple = styled($Hero, {
   ai: 'center',
 
   [`${$Text}`]: {
-    my: '$5',
     w: '100%',
     boxSizing: 'border-box',
   },
@@ -20,14 +37,36 @@ const $HeroSimple = styled($Hero, {
     color: '$white',
   },
 
-  backgroundColor: {
-    purple: {
-      bc: '$purple',
-    },
-    navy: {
-      bc: '$darkBlue',
+  variants: {
+    backgroundColor: {
+      gray: {
+        bc: '$grayAlt',
+      },
+      gray4: {
+        bc: '$gray',
+      },
+      white: {
+        bc: '$white',
+      },
+      lavender: {
+        bc: '$lavenderLight',
+      },
+      teal: {
+        bc: '$tealLight',
+      },
+      purple: {
+        bc: '$purple',
+      },
+      navy: {
+        bc: '$darkBlue',
+      },
     },
   },
+})
+
+const $HeroSimpleInner = styled('div', {
+  w: '100%',
+  mw: '$extended',
 })
 
 const HeroSimple = ({
@@ -35,6 +74,7 @@ const HeroSimple = ({
   links,
   align = 'left',
   size = 'small',
+  maxWidth = 'medium',
   backgroundOptions = {},
   backgroundImage,
 }) => {
@@ -55,20 +95,27 @@ const HeroSimple = ({
       size={size}
       backgroundColor={backgroundColor}
     >
-      {backgroundImage && (
-        <$BackgroundImage
-          objectFit={isMobile ? 'cover' : 'contain'}
-          objectPosition={
-            isMobile && backgroundOffset ? `${backgroundOffset}%` : 'right'
-          }
-          image={backgroundImage}
-          priority
-          css={{
-            '&::after': { bc },
-          }}
+      <$HeroSimpleInner>
+        {backgroundImage && (
+          <$BackgroundImage
+            objectFit={isMobile ? 'cover' : 'contain'}
+            objectPosition={
+              isMobile && backgroundOffset ? `${backgroundOffset}%` : 'right'
+            }
+            image={backgroundImage}
+            priority
+            css={{
+              '&::after': { backgroundColor: bc || `$${backgroundColor}` },
+            }}
+          />
+        )}
+        <$Text
+          content={content}
+          align={align}
+          links={links}
+          maxWidth={maxWidth}
         />
-      )}
-      <$Text content={content} align={align} links={links} />
+      </$HeroSimpleInner>
     </$HeroSimple>
   )
 }

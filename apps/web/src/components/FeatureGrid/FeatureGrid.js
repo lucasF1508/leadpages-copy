@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@design'
 import NextLink from 'next/link'
 // components
-import IconCardsGrid from '@legacy/components/grids/IconCardsGrid'
+import { IconCardsGrid } from '@components/Cards'
 
 const SectionContainer = styled('div', {
   position: 'relative',
@@ -50,9 +50,10 @@ const FeatureIconsGrid = ({
   itemsPerRow = 4,
   showSectionLink,
   backgroundColor = 'transparent',
+  align,
 }) => (
   <SectionContainer backgroundColor={backgroundColor}>
-    <IconCardsGrid items={items} itemsPerRow={itemsPerRow} />
+    <IconCardsGrid items={items} itemsPerRow={itemsPerRow} align={align} />
     {showSectionLink && (
       <SectionLink>
         Visit Leadpages{' '}

@@ -14,6 +14,12 @@ export const schemaCta = {
       F.field('blockContentBare', { name: 'content' }),
       F.links(),
     ]),
+    ...G.group('options', [
+      F.field('backgroundColorFull', {
+        name: 'bgColor',
+        title: 'Background Color',
+      }),
+    ]),
   ],
   preview: P.titleImage({
     subtitle: 'links.0.label',

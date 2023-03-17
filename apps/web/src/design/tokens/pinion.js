@@ -21,6 +21,13 @@ export const pinionTokens = {
           maxWidth: '$base',
         },
       },
+      cardsArticle: {
+        px: 'unset',
+        my: 'unset',
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
       cardsBlock: {
         '> div': {
           maxWidth: '$base',
@@ -97,6 +104,13 @@ export const pinionTokens = {
         '> div': {
           maxWidth: '$base',
           align: 'center',
+        },
+      },
+      stats: {
+        mb: 'unset',
+        px: 'unset',
+        '> div': {
+          mw: 'none',
         },
       },
       tableBlock: {

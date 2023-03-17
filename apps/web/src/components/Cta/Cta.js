@@ -1,9 +1,10 @@
 import React from 'react'
-import { styled } from '@design'
+import { styled, darkTheme } from '@design'
 import Link from '@components/Link'
 import Image from 'next/image'
 import Text from '@components/Text'
 import { Link as ScrollLink } from 'react-scroll'
+import { features } from 'config'
 // images
 import PlayButtonSVG from '@legacy/assets/images/global/play-button_purple.svg'
 
@@ -23,6 +24,32 @@ const RTGContainer = styled('div', {
   '@media (max-width: 360px)': {
     px: '1rem',
   },
+
+  variants: {
+    bgColor: {
+      gray: {
+        bc: '$grayAlt',
+      },
+      gray4: {
+        bc: '$gray',
+      },
+      white: {
+        bc: '$white',
+      },
+      lavender: {
+        bc: '$lavenderLight',
+      },
+      teal: {
+        bc: '$tealLight',
+      },
+      purple: {
+        bc: '$purple',
+      },
+      navy: {
+        bc: '#0a236d',
+      },
+    },
+  },
 })
 
 const ScrollingLink = styled(ScrollLink, {
@@ -32,13 +59,20 @@ const ScrollingLink = styled(ScrollLink, {
 
 const FlexItem = styled('div', {
   alignSelf: 'center',
-  c: '$white',
 })
 
 const RTGTitle = styled(FlexItem, {
-  opacity: 0.6,
   mb: '$3',
   type: 'overline',
+  c: '$textAlt',
+
+  variants: {
+    darkBackground: {
+      true: {
+        opacity: 0.6,
+      },
+    },
+  },
 })
 
 const RTGHeadline = styled(FlexItem, {
@@ -69,15 +103,19 @@ const MainButtonContainer = styled('div', {
 
 const RTGButtonContainer = styled('div', {
   display: 'flex',
+  fd: 'column',
   gap: '$3',
   alignSelf: 'center',
   p: '0.75rem',
 
+  '@>s': {
+    fd: 'row',
+  },
+
   [`
     a[class*="linkStyle-text"],
-    a[class*="linkStyle-ghost"]
   `]: {
-    color: '$white',
+    c: '$white',
   },
 })
 
@@ -152,7 +190,7 @@ const SubText = styled(FlexItem, {
 
 const Cta = ({
   bgImage,
-  bgColor,
+  bgColor = 'navy',
   paddingScale = 1,
   title,
   overline,
@@ -170,7 +208,13 @@ const Cta = ({
   links,
   zIndex,
 }) => {
+  const darkBackground = features.darkHeros.includes(bgColor)
+  const RTGContainerPadding = paddingScale
+    ? { py: `${6 * paddingScale}rem`, '@>s': { py: `${10 * paddingScale}rem` } }
+    : {}
+  const RTGZindex = zIndex ? { zIndex } : {}
   const RTGHeadlineCss = {
+    c: '$text',
     h2: {
       type: headlineType,
       fontSize: headlineFontSize,
@@ -181,25 +225,22 @@ const Cta = ({
       },
     },
   }
-  const RTGContainerPadding = paddingScale
-    ? { py: `${6 * paddingScale}rem`, '@>s': { py: `${10 * paddingScale}rem` } }
-    : {}
-  const RTGBackground = { bc: bgColor || '#0a236d' }
-  const RTGZindex = zIndex ? { zIndex } : {}
 
   return (
     <RTGContainer
-      css={{ ...RTGContainerPadding, ...RTGBackground, ...RTGZindex }}
+      className={darkBackground && darkTheme}
+      bgColor={bgColor}
+      css={{ ...RTGContainerPadding, ...RTGZindex }}
     >
       {bgImage && (
         <BGImage src={bgImage.src} alt="background svg squiggly line" />
       )}
-      <RTGTitle>{overline}</RTGTitle>
+      <RTGTitle darkBackground={darkBackground}>{overline}</RTGTitle>
       <RTGHeadline css={RTGHeadlineCss}>
         <h2>{title}</h2>
       </RTGHeadline>
       {content && (
-        <RTGCaption css={{ '& p': { color: '$white' } }}>
+        <RTGCaption>
           <Text css={{ mb: 0 }} content={content} />
         </RTGCaption>
       )}
@@ -207,7 +248,23 @@ const Cta = ({
         {showCTA && (
           <RTGButtonContainer>
             {!scrollTarget &&
-              links.map(({ _key, ...link }) => <Link key={_key} {...link} />)}
+              links.map(({ _key, ...link }) => {
+                const darkThemeButton =
+                  (darkBackground && link.linkStyle === 'ghost') ||
+                  (bgColor === 'purple' && link.linkStyle === 'button')
+
+                return (
+                  <Link
+                    className={darkThemeButton && darkTheme}
+                    key={_key}
+                    {...link}
+                    css={
+                      darkBackground &&
+                      link.linkStyle === 'ghost' && { borderColor: '$primary' }
+                    }
+                  />
+                )
+              })}
             {scrollTarget && (
               <ScrollingLink
                 to={scrollTarget}

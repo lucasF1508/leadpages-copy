@@ -58,6 +58,7 @@ export const $MediaWithTextContent = styled('div', {
       horizontal: { f: '1 0 $sizes$cols4' },
       vertical: { f: '0 1 auto' },
     },
+    alignText: {},
   },
   compoundVariants: [
     {
@@ -97,6 +98,14 @@ export const $MediaWithTextContent = styled('div', {
       css: {
         ta: 'center',
         order: -1,
+      },
+    },
+    {
+      layout: 'vertical',
+      priority: 'content',
+      alignText: true,
+      css: {
+        ta: 'left',
       },
     },
     {
@@ -300,6 +309,7 @@ const MediaWithText = ({
   content,
   align = 'right',
   alignImage = 'default',
+  alignText = false,
   links,
   linkDecorators = [],
   contentOptions = [],
@@ -342,6 +352,7 @@ const MediaWithText = ({
         align={{ '@initial': 'none', '@>s': align }}
         priority={priority}
         noGap={noGap}
+        alignText={alignText}
       >
         {heading && <Heading heading={heading} tag="h5" css={{ mb: 0 }} />}
         {content && <Text content={content} />}

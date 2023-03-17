@@ -99,6 +99,7 @@ module.exports = {
           title: true,
           overline: true,
           content: true,
+          bgColor: true,
           'links[]': link,
         },
         post: {

@@ -43,6 +43,12 @@ export const schemaMediaWithText = F.field('object', {
         description: `Media: media on top, wider media container.
           Content: content on top, wider content container.`,
       }),
+      F.checkbox({
+        name: 'alignText',
+        title: 'Left align text on mobile',
+        initialValue: false,
+        hidden: ({ parent }) => parent?.priority === 'media',
+      }),
       F.field('backgroundColorFull', {
         title: 'Background Color',
       }),

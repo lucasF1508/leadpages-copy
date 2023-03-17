@@ -18,7 +18,16 @@ export const schemaFeatureGrid = F.object({
               F.text({ name: 'content' }),
             ]),
             F.image({ name: 'image', group: 'image' }),
-            F.link({ group: 'link' }),
+            F.link({
+              group: 'link',
+              fields: [
+                F.boolean({
+                  name: 'hasLinkIcon',
+                  group: 'options',
+                  initialValue: false,
+                }),
+              ],
+            }),
           ],
           preview: P.titleImage({
             subtitle: 'content',
@@ -30,6 +39,12 @@ export const schemaFeatureGrid = F.object({
       F.radio(['3', '4'], {
         name: 'itemsPerRow',
         initialValue: '4',
+        hidden: ({ parent }) =>
+          ['toolkitCards'].includes(parent.legacyComponent),
+      }),
+      F.checkbox({
+        name: 'align',
+        title: 'Align left on mobile',
         hidden: ({ parent }) =>
           ['toolkitCards'].includes(parent.legacyComponent),
       }),

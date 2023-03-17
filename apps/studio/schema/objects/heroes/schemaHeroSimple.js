@@ -24,23 +24,23 @@ export const schemaHeroSimple = F.hero({
       }),
     ]),
     ...G.group('options', [
-      F.radio(['left', 'center', 'right'], {
+      F.radio(['left', 'center'], {
         name: 'align',
         title: 'Content Alignment',
-        initialValue: 'center',
+        initialValue: 'left',
       }),
-      // F.radio(['center', 'bottom', 'right'], {
-      //   name: 'imageAlign',
-      //   initialValue: 'center',
-      // }),
-      // F.radio(['small', 'medium', 'large'], {
-      //   name: 'size',
-      //   title: 'Hero Size',
-      //   initialValue: 'medium',
-      // }),
+      F.radio(['small', 'medium', 'large'], {
+        name: 'maxWidth',
+        title: 'Content Max Width',
+        initialValue: 'medium',
+      }),
       F.object({
         name: 'backgroundOptions',
         fields: [
+          F.field('backgroundColorFull', {
+            name: 'backgroundColor',
+            hidden: ({ parent }) => parent?.extendBackgroundColor === true,
+          }),
           F.number({
             name: 'backgroundOffset',
             title: 'Background Mobile Offset',
@@ -48,7 +48,10 @@ export const schemaHeroSimple = F.hero({
             placeholder: 'ie. -10',
           }),
           F.checkbox({ name: 'darkBackground', initialValue: false }),
-          F.checkbox({ name: 'extendBackgroundColor', initialValue: false }),
+          F.checkbox({
+            name: 'extendBackgroundColor',
+            initialValue: false,
+          }),
         ],
       }),
     ]),
