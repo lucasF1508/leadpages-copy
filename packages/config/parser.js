@@ -69,6 +69,31 @@ module.exports = {
             },
           )`,
         },
+        cardsComparison: {
+          '...': true,
+          comparisons: `select(
+            selection == 'all' => *[_type == 'comparison'] | order(orderRank) {
+              ...,
+              excerpt {
+                ...,
+                compareLogo {
+                  ...,
+                  asset->
+                }
+              }
+            },
+          comparisons[]->{
+             ...,
+              excerpt {
+                ...,
+                compareLogo {
+                  ...,
+                  asset->
+                }
+              }
+            },
+          )`,
+        },
         faqs: {
           '...': true,
           faqs: `select(

@@ -21,7 +21,7 @@ export const setSlugOnPublish = (patch, { id, type, draft }) => {
   const source = draft[slugSchema?.type?.options?.source]
   const current = !isBlank(slug?.current)
     ? slug?.current
-    : slugify(source, { lower: true })
+    : slugify(source, { lower: true, remove: /[*+~.()'"!:@]/g })
 
   if (isBlank(slug?.current)) {
     patch.execute([

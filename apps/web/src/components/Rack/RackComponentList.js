@@ -7,6 +7,7 @@ const RackComponentList = {
   cards: dynamic(() => import('@components/Cards')),
   cardsBlock: dynamic(() => import('@components/Cards/CardsBlock')),
   cardsArticle: dynamic(() => import('@components/Cards/CardsArticle')),
+  cardsComparison: dynamic(() => import('@components/Cards/CardsComparison')),
   embed: dynamic(() => import('@components/Embed')),
   // formComponent: dynamic(() => import('@components/Form')),
   gallery: dynamic(() => import('@components/Gallery')),

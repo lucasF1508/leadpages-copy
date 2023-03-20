@@ -5,6 +5,7 @@ import CardsBlock from './CardsBlock'
 import CardToolkit from './CardToolkit'
 import CardPostArchive from './CardPostArchive'
 import CardsArticle from './CardsArticle'
+import CardsComparison from './CardsComparison'
 import CardIcon from './CardIcon'
 import IconCardsGrid from './IconCardsGrid'
 
@@ -16,6 +17,7 @@ export {
   CardToolkit,
   CardPostArchive,
   CardsArticle,
+  CardsComparison,
   CardIcon,
   IconCardsGrid,
 }

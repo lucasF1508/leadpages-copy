@@ -28,6 +28,15 @@ export const pinionTokens = {
           maxWidth: 'none',
         },
       },
+      cardsComparison: {
+        bc: '$grayAlt',
+        px: 'unset',
+        my: 'unset',
+
+        '> div': {
+          maxWidth: '$extended',
+        },
+      },
       cardsBlock: {
         '> div': {
           maxWidth: '$base',

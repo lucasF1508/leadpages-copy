@@ -1,4 +1,5 @@
 export * from '../schemaCardsArticle'
+export * from '../schemaCardsComparison'
 export * from '../schemaCtaInline'
 export * from '../schemaCustomerRotator'
 export * from '../schemaFAQ'

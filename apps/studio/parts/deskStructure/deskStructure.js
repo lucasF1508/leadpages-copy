@@ -58,11 +58,11 @@ export const deskStructure = () =>
         title: 'Customers',
         icon: BsFilePerson,
       }),
-      // orderableDocumentListDeskItem({
-      //   type: 'comparison',
-      //   title: 'Comparisons',
-      //   icon: BsCollection,
-      // }),
+      orderableDocumentListDeskItem({
+        type: 'comparison',
+        title: 'Comparisons',
+        icon: BsCollection,
+      }),
       orderableDocumentListDeskItem({
         type: 'integration',
         title: 'Integrations',
