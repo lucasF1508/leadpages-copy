@@ -195,7 +195,7 @@ export const Field_MarketingGoals = () => (
       placeholder="Perhaps lead generation, sales, or something else"
       fullWidth
       multiline
-      rows={4}
+      minRows={4}
     />
   </Grid>
 )
@@ -208,7 +208,7 @@ export const Field_MarketingStrategy = () => (
       placeholder="Give us a quick overview"
       fullWidth
       multiline
-      rows={2}
+      minRows={2}
     />
   </Grid>
 )
@@ -221,7 +221,7 @@ export const Field_MarketingTools = () => (
       placeholder="Such as a website or landing page builder, etc."
       fullWidth
       multiline
-      rows={2}
+      minRows={2}
     />
   </Grid>
 )
@@ -238,7 +238,7 @@ export const Field_Message = () => {
         placeholder="How can we help you today?"
         fullWidth
         multiline
-        rows={4}
+        minRows={4}
         inputRef={register({
           required: true,
         })}

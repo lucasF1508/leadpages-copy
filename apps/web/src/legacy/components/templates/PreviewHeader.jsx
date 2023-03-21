@@ -136,11 +136,11 @@ const PreviewHeader = ({
     )
   }
   return (
-    <Grid container justify="center" className={classes.container}>
+    <Grid container justifyContent="center" className={classes.container}>
       <Grid
         container
         alignItems="center"
-        justify="space-between"
+        justifyContent="space-between"
         wrap="nowrap"
         className={clsx(classes.root, className)}
       >

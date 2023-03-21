@@ -41,10 +41,10 @@ const Form_Partnerships = (props) => {
     ]
     const { fields } = methods.getValues({ nest: true })
     if (
-      methods.formState.isValid &&
+      !methods?.errors?.fields &&
       requiredFields
         .map((fieldname) => fields[fieldname])
-        .every((value) => value !== '')
+        .every((value) => value && value !== '')
     ) {
       setFormHasError(false)
       setSubmitDisabled(true)
@@ -79,7 +79,7 @@ const Form_Partnerships = (props) => {
         <Grid
           container
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="flex-start"
           spacing={2}
         >

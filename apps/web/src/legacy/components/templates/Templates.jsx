@@ -396,7 +396,11 @@ const Templates = ({ kind, onPreviewTemplate, isPreviewing }) => {
       <Slide appear={hasCheckedRef.current} direction="down" in={showAppBar}>
         <AppBar color="inherit" classes={{ root: classes.appBar }}>
           <Toolbar classes={{ root: classes.toolbar }}>
-            <Grid className={classes.tabContainer} container justify="center">
+            <Grid
+              className={classes.tabContainer}
+              container
+              justifyContent="center"
+            >
               <Link href="/templates">
                 <a className={`${classes.tabLink}${activeLandingPageLink}`}>
                   Landing Pages

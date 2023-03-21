@@ -37,15 +37,17 @@ const Form_Support = (props) => {
       'open_ticket',
       'contact_message',
     ]
+
     const { fields } = methods.getValues({ nest: true })
     if (fields.open_ticket === 'Yes') {
       requiredFields.push('ticket_number')
     }
+
     if (
-      methods.formState.isValid &&
+      !methods?.errors?.fields &&
       requiredFields
         .map((fieldname) => fields[fieldname])
-        .every((value) => value !== '')
+        .every((value) => value && value !== '')
     ) {
       setFormHasError(false)
       setSubmitDisabled(true)
@@ -64,6 +66,7 @@ const Form_Support = (props) => {
       scrollToFormTop()
     }
   }
+
   return (
     <FormContext {...methods}>
       <form
@@ -75,7 +78,7 @@ const Form_Support = (props) => {
         <Grid
           container
           direction="row"
-          justify="flex-start"
+          justifyContent="flex-start"
           alignItems="flex-start"
           spacing={2}
         >
