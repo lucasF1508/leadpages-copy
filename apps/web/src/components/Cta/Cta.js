@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled, darkTheme } from '@design'
+import { styled, darkTheme, theme } from '@design'
 import Link from '@components/Link'
 import Image from 'next/image'
 import Text from '@components/Text'
@@ -190,7 +190,7 @@ const SubText = styled(FlexItem, {
 
 const Cta = ({
   bgImage,
-  bgColor = 'navy',
+  bgColor: _bgColor,
   paddingScale = 1,
   title,
   overline,
@@ -208,6 +208,7 @@ const Cta = ({
   links,
   zIndex,
 }) => {
+  const bgColor = _bgColor || 'navy'
   const darkBackground = features.darkHeros.includes(bgColor)
   const RTGContainerPadding = paddingScale
     ? { py: `${6 * paddingScale}rem`, '@>s': { py: `${10 * paddingScale}rem` } }
@@ -248,23 +249,15 @@ const Cta = ({
         {showCTA && (
           <RTGButtonContainer>
             {!scrollTarget &&
-              links.map(({ _key, ...link }) => {
-                const darkThemeButton =
-                  (darkBackground && link.linkStyle === 'ghost') ||
-                  (bgColor === 'purple' && link.linkStyle === 'button')
-
-                return (
-                  <Link
-                    className={darkThemeButton && darkTheme}
-                    key={_key}
-                    {...link}
-                    css={
-                      darkBackground &&
-                      link.linkStyle === 'ghost' && { borderColor: '$primary' }
-                    }
-                  />
-                )
-              })}
+              links.map(({ _key, ...link }) => (
+                <Link
+                  className={
+                    bgColor !== 'purple' && link.linkStyle === 'button' && theme
+                  }
+                  key={_key}
+                  {...link}
+                />
+              ))}
             {scrollTarget && (
               <ScrollingLink
                 to={scrollTarget}
