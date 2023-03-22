@@ -25,9 +25,9 @@ export const media = ({
   }
 
   const [conditions, conditionValues] = getConditions({
-    image: [],
-    video: [],
-    lottie: [],
+    image: args?.image ? [] : false,
+    video: args?.video ? [] : false,
+    lottie: args?.lottie ? [] : false,
     ...conditionsOrg,
   })
 

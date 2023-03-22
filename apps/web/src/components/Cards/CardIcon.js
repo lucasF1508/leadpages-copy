@@ -7,6 +7,7 @@ import Image from '@components/Image'
 import { RPIcon } from '@legacy/constants/types'
 // images
 import { FiChevronRight as Icon } from '@react-icons/all-files/fi/FiChevronRight'
+import Media from '@components/Media'
 
 const IconCardStyle_4Across = styled('div', {
   minHeight: '1px',
@@ -168,12 +169,13 @@ const CardIcon = ({
   link,
   itemsPerRow,
   image,
+  media,
 }) => {
   if (itemsPerRow == 3) {
     return (
       <IconCardStyle_3Across align={align}>
         <div>
-          {(icon || image) && (
+          {(icon || image || media) && (
             <ImageContainer>
               {icon ? (
                 <NextImage
@@ -183,8 +185,10 @@ const CardIcon = ({
                   width={48}
                   lazyBoundary="501px"
                 />
-              ) : (
+              ) : image ? (
                 <Image image={image} />
+              ) : (
+                <Media media={media} />
               )}
             </ImageContainer>
           )}

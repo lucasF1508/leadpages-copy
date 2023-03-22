@@ -24,6 +24,10 @@ const CardContainer = styled('div', {
       false: { jc: 'center' },
     },
   },
+
+  defaultVariants: {
+    align: false,
+  },
 })
 
 const IconCardsGrid = ({ items, itemsPerRow, align }) => (

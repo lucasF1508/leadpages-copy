@@ -1,4 +1,5 @@
 import { BsColumnsGap as icon } from 'react-icons/bs'
+import { RiMovieLine } from 'react-icons/ri'
 import { F, P, G } from 'part:gearbox-schema-tool/schema-builder'
 
 export const schemaFeatureGrid = F.object({
@@ -17,7 +18,14 @@ export const schemaFeatureGrid = F.object({
               F.string({ name: 'title' }),
               F.text({ name: 'content' }),
             ]),
-            F.image({ name: 'image', group: 'image' }),
+            F.image({ name: 'image', group: 'image', hidden: true }),
+            F.media({
+              name: 'media',
+              group: 'image',
+              args: {
+                video: false,
+              },
+            }),
             F.link({
               group: 'link',
               fields: [
@@ -31,6 +39,22 @@ export const schemaFeatureGrid = F.object({
           ],
           preview: P.titleImage({
             subtitle: 'content',
+            image: 'image',
+            media: 'media',
+            prepare: ({ title, subtitle, image: _image, media: _media }) => {
+              const { condition, image, lottie } = _media || {}
+              const media =
+                condition === 'image' && !!image
+                  ? image
+                  : condition === 'lottie' && !!lottie
+                  ? RiMovieLine
+                  : _image
+              return {
+                title,
+                subtitle,
+                media,
+              }
+            },
           }),
         }),
       }),
