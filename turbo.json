@@ -12,11 +12,6 @@
       "cache": false,
       "outputs": []
     },
-    "story": {
-      "cache": false,
-      "dependsOn": ["indices#build", "sanity-hooks#build"],
-      "outputs": []
-    },
     "query#start": {
       "dependsOn": ["schema-registry#build", "client#build"],
       "outputs": ["dist/**"]
@@ -50,10 +45,6 @@
     "studio#build": {
       "dependsOn": [],
       "outputs": []
-    },
-    "story#build": {
-      "dependsOn": ["indices#build", "sanity-hooks#build"],
-      "outputs": ["../web/public/story/**"]
     },
     "lint": {
       "outputs": []

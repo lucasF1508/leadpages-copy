@@ -91,11 +91,6 @@ const moduleExports = withBundleAnalyzer({
 
     return [
       {
-        source: '/story',
-        destination: '/story/index.html',
-        permanent: true,
-      },
-      {
         source: '/podcast',
         destination: 'https://lp.leadpages.com/podcast/',
         permanent: true,
