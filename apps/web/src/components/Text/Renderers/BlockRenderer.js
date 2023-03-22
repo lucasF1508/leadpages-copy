@@ -19,9 +19,7 @@ const BlockRenderer = (props) => {
   const { styleMap = {}, style = 'normal' } = props.node
   const { types } = defaultSerializers
   const asDefault = typeof props.index !== 'undefined' ? 'span' : 'p'
-  const color = props.node.children[0].marks.includes('textAlt')
-    ? '$textAlt'
-    : '$text'
+  const color = props.node.children[0].marks.includes('textAlt') && '$textAlt'
 
   if (
     defaultRenderer.includes(style) &&
