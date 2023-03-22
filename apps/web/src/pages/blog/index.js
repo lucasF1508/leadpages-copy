@@ -7,15 +7,30 @@ const ArchivePage = (props) => <Archive {...props} hasFeaturedPost={true} />
 export const shapeData = ([
   data,
   { docs: categories },
-  { docs, pagination },
-]) => [
-  {
-    settings: data,
-    categories,
-    docs,
-    pagination,
-  },
-]
+  { docs: _docs, pagination },
+]) => {
+  // TODO: Audit getAllDocs, getDocPagination, getDocSlice
+  // Trim data
+  const docs = _docs.map(
+    ({ path, publishedDate, publisher, image, primaryCategory, title }) => ({
+      path,
+      publishedDate,
+      publisher,
+      image,
+      primaryCategory,
+      title,
+    })
+  )
+
+  return [
+    {
+      settings: data,
+      categories,
+      docs,
+      pagination,
+    },
+  ]
+}
 
 export const exporter = (props) => shapeData(props)
 

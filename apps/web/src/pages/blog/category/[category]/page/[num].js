@@ -10,16 +10,29 @@ export const shapeData = ([
   settings,
   currentCategory,
   { docs: categories },
-  { docs, pagination },
-]) => [
-  {
-    settings,
-    currentCategory,
-    docs,
-    pagination,
-    categories,
-  },
-]
+  { docs: _docs, pagination },
+]) => {
+  const docs = _docs.map(
+    ({ path, publishedDate, publisher, image, primaryCategory, title }) => ({
+      path,
+      publishedDate,
+      publisher,
+      image,
+      primaryCategory,
+      title,
+    })
+  )
+
+  return [
+    {
+      settings,
+      currentCategory,
+      docs,
+      pagination,
+      categories,
+    },
+  ]
+}
 
 export const exporter = (props) => shapeData(props)
 
