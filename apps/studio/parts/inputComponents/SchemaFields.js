@@ -22,24 +22,14 @@ const schemas = [
 
 const SchemaFields = React.forwardRef(
   (
-    {
-      type,
-      // value,
-      // readOnly,
-      // placeholder,
-      markers,
-      presence,
-      onFocus,
-      onBlur,
-      onChange,
-      document,
-    },
+    { type, value, markers, presence, onFocus, onBlur, onChange, document },
     ref
   ) => {
     // Get field data
     const { feedDocType } = document?.feedOptions || {}
     const [schema] = schemas.filter(({ name }) => name === feedDocType)
     const { fields } = schema || {}
+    const [valueName] = value?.split('::') || []
 
     // Form input
     const inputId = useId()
@@ -69,14 +59,22 @@ const SchemaFields = React.forwardRef(
             onBlur={onBlur}
             ref={ref}
           >
-            <option disabled selected>
+            <option disabled selected={!value}>
               Select field...
             </option>
-            <option key="_id" value="_id::string">
+            <option
+              key="_id"
+              value="_id::string"
+              selected={valueName === '_id'}
+            >
               _id
             </option>
             {fields?.map(({ type: shaper, name }) => (
-              <option key={name} value={`${name}::${shaper}`}>
+              <option
+                key={name}
+                value={`${name}::${shaper}`}
+                selected={valueName === name}
+              >
                 {name}
               </option>
             ))}
