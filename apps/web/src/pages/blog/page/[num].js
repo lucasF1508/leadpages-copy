@@ -10,7 +10,9 @@ export const shapeData = ([
   data,
   { docs: categories },
   { docs: _docs, pagination },
+  blogData,
 ]) => {
+  const { seo } = blogData
   const docs = _docs.map(
     ({ path, publishedDate, publisher, image, primaryCategory, title }) => ({
       path,
@@ -28,6 +30,7 @@ export const shapeData = ([
       categories,
       docs,
       pagination,
+      seo,
     },
   ]
 }
@@ -37,7 +40,7 @@ export const exporter = (props) => shapeData(props)
 export async function getServerSideProps(context) {
   const { preview = false, params, resolvedUrl } = context
   const docType = 'post'
-  const { num: [num] = [] } = params
+  const { num } = params
   const baseUrl = getBaseUrlFromResolvedUrl({
     resolvedUrl,
     params,
@@ -65,6 +68,11 @@ export async function getServerSideProps(context) {
       preview,
       currentPage: num,
       offsetStart: 1,
+      offsetEnd: 1,
+      paginationHasFeatured: true,
+    }),
+    getDoc('pageArchive', {
+      filters: '_id == "pageArchive"',
     }),
   ])
 

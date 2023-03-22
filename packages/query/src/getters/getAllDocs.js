@@ -18,6 +18,7 @@ export const getAllDocs = async (
     asCards = false,
     offsetStart = 0,
     offsetEnd = 0,
+    paginationHasFeatured = false,
   } = {}
 ) => {
   const slice =
@@ -61,6 +62,7 @@ export const getAllDocs = async (
   const { perPage, totalPages } =
     (await getDocPagination(schemaType, {
       found,
+      paginationHasFeatured,
     })) || {}
 
   return {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import usePagination from '@hooks/usePagination'
 import NextLink from 'next/link'
 import { styled } from '@design'
@@ -11,7 +11,11 @@ const $Pagination = styled('div', {
   ff: 'row nowrap',
   jc: 'center',
   ai: 'center',
-  box: { property: 'mt', multiplier: 0.75 },
+  box: { property: 'my', multiplier: 0.75 },
+
+  '@>sidebarTablet': {
+    box: { property: 'mb', multiplier: 0 },
+  },
 })
 
 const $PaginationInner = styled('div', {
@@ -92,16 +96,20 @@ const $PaginiationElipses = styled('div', {
   px: '$1',
 })
 
-const Pagination = ({ pagination }) => {
-  const { links } = usePagination(pagination)
+const Pagination = ({ pagination, isMobile }) => {
+  const { links } = usePagination(pagination, isMobile)
 
   return (
-    <$Pagination>
+    <$Pagination key={`${isMobile}`}>
       <$PaginationInner>
         {links &&
           links.map(({ key, url, isActive, icon, label }, i) => {
             if (!url) {
-              return <$PaginiationElipses>{label}</$PaginiationElipses>
+              return (
+                <$PaginiationElipses key={uniqueId(i)}>
+                  {label}
+                </$PaginiationElipses>
+              )
             }
             return (
               <NextLink key={key} href={url} passHref>

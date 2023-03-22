@@ -8,7 +8,9 @@ export const shapeData = ([
   data,
   { docs: categories },
   { docs: _docs, pagination },
+  blogData,
 ]) => {
+  const { seo } = blogData
   // TODO: Audit getAllDocs, getDocPagination, getDocSlice
   // Trim data
   const docs = _docs.map(
@@ -28,6 +30,7 @@ export const shapeData = ([
       categories,
       docs,
       pagination,
+      seo,
     },
   ]
 }
@@ -50,6 +53,10 @@ export async function getStaticProps(context) {
       order: 'order(publishedDate desc)',
       preview,
       offsetEnd: 1,
+      paginationHasFeatured: true,
+    }),
+    getDoc('pageArchive', {
+      filters: '_id == "pageArchive"',
     }),
   ])
 

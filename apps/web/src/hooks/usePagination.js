@@ -1,7 +1,10 @@
 import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 
-const buildPaginationLinks = ({ currentPage, totalPages, router }) => {
+const buildPaginationLinks = (
+  { currentPage, totalPages, router },
+  isMobile = false
+) => {
   const pageLinks = []
 
   const [baseName, slug, category] = router.asPath
@@ -68,7 +71,7 @@ const buildPaginationLinks = ({ currentPage, totalPages, router }) => {
     return settings
   }
 
-  const paginationConfig = settingsCalculator(currentPage, 5)
+  const paginationConfig = settingsCalculator(currentPage, isMobile ? 1 : 3)
 
   return [
     paginationConfig.prev
@@ -95,15 +98,18 @@ const buildPaginationLinks = ({ currentPage, totalPages, router }) => {
     .map((link, index) => ({ ...link, key: `page-link-${index}` }))
 }
 
-const usePagination = ({ currentPage, totalPages }) => {
+const usePagination = ({ currentPage, totalPages }, isMobile) => {
   const router = useRouter()
   const links = useCallback(
-    buildPaginationLinks({
-      currentPage: Number(currentPage),
-      totalPages,
-      router,
-    }),
-    [currentPage]
+    buildPaginationLinks(
+      {
+        currentPage: Number(currentPage),
+        totalPages,
+        router,
+      },
+      isMobile
+    ),
+    [currentPage, isMobile]
   )
 
   return {
