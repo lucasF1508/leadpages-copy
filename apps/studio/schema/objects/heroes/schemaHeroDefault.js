@@ -42,13 +42,9 @@ export const schemaHeroDefault = F.hero({
           description: 'Adjust mobile breakpoint offset as a percentage (%).',
           placeholder: 'ie. -10',
         }),
-        F.dropdown(
-          ['transparent', ...features.darkHeros, ...features.lightHeros],
-          {
-            name: 'backgroundColor',
-            description: 'Defaults to transparent.',
-          }
-        ),
+        F.field('backgroundColorFull', {
+          name: 'backgroundColor',
+        }),
         F.checkbox({ name: 'extendBackgroundColor', initialValue: false }),
       ],
     }),

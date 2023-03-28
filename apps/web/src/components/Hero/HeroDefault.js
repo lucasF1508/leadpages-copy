@@ -58,15 +58,14 @@ export const $Hero = styled('div', {
       },
     },
     backgroundColor: {
-      purple: {
-        bc: '$purple',
-      },
-      navy: {
-        bc: '$darkBlue',
-      },
-      gray: {
-        bc: '$gray',
-      },
+      gray: { bc: '$grayAlt' },
+      gray4: { bc: '$gray' },
+      tan: { bc: '$backgroundAlt' },
+      white: { bc: '$white' },
+      lavender: { bc: '$lavenderLight' },
+      teal: { bc: '$tealLight' },
+      purple: { bc: '$purple' },
+      navy: { bc: '$darkBlue' },
     },
   },
 
