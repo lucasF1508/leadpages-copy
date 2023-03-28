@@ -7,6 +7,11 @@ import { SidebarContext } from '@components/Sidebar/SidebarProvider'
 
 const Waypoint = dynamic(() => import('@components/Waypoint'))
 
+const $Waypoint = styled(Waypoint, {
+  position: 'absolute',
+  mt: -70,
+})
+
 const $StyledText = styled('p', {})
 const defaultRenderer = ['normal', 'h4', 'h5', 'h6', 'blockquote']
 
@@ -61,11 +66,7 @@ const BlockRenderer = (props) => {
 
   return pushActive && id ? (
     <>
-      <Waypoint
-        css={{
-          position: 'absolute',
-          mt: -70,
-        }}
+      <$Waypoint
         onEnter={(direction) => direction === 'top' && popActive(id)}
         onLeave={(direction) => direction === 'top' && pushActive(id)}
       />

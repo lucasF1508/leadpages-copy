@@ -6,6 +6,11 @@ import { SidebarContext } from '@components/Sidebar/SidebarProvider'
 
 const Waypoint = dynamic(() => import('@components/Waypoint'))
 
+export const $Waypoint = styled(Waypoint, {
+  position: 'absolute',
+  mt: -110,
+})
+
 const $PageAnchor = styled('a', {
   position: 'absolute',
   visibility: 'hidden',
@@ -33,11 +38,7 @@ const PageAnchor = ({ slug, ...props }) => {
 
   return pushActive ? (
     <>
-      <Waypoint
-        css={{
-          position: 'absolute',
-          mt: -110,
-        }}
+      <$Waypoint
         onEnter={(direction) => direction === 'top' && popActive(id)}
         onLeave={(direction) => direction === 'top' && pushActive(id)}
       />
