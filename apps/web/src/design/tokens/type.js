@@ -112,7 +112,7 @@ export const type = {
     },
     h2: {
       ...typeSizes['4xl'],
-      '@>s': typeSizes['5xl'],
+      '@>s': typeSizes['6xl'],
       '@>m': typeSizes['7xl'],
       lh: '$lineHeights$m',
     },
@@ -135,6 +135,42 @@ export const type = {
       lh: '$lineHeights$m',
     },
     h6: {
+      ...typeSizes.lg,
+      '@>s': typeSizes.xl,
+      '@>m': typeSizes['2xl'],
+      lh: '$lineHeights$m',
+    },
+    h1Blog: {
+      ...typeSizes['4xl'],
+      '@>s': typeSizes['6xl'],
+      '@>m': typeSizes['7xl'],
+      lh: '$lineHeights$m',
+    },
+    h2Blog: {
+      ...typeSizes['4xl'],
+      '@>s': typeSizes['5xl'],
+      '@>m': typeSizes['6xl'],
+      lh: '$lineHeights$m',
+    },
+    h3Blog: {
+      ...typeSizes['3xl'],
+      '@>s': typeSizes['4xl'],
+      '@>m': typeSizes['5xl'],
+      lh: '$lineHeights$m',
+    },
+    h4Blog: {
+      ...typeSizes['2xl'],
+      '@>s': typeSizes['3xl'],
+      '@>m': typeSizes['4xl'],
+      lh: '$lineHeights$m',
+    },
+    h5Blog: {
+      ...typeSizes.xl,
+      '@>s': typeSizes['2xl'],
+      '@>m': typeSizes['3xl'],
+      lh: '$lineHeights$m',
+    },
+    h6Blog: {
       ...typeSizes.lg,
       '@>s': typeSizes.xl,
       '@>m': typeSizes['2xl'],
@@ -180,6 +216,12 @@ export const type = {
     cardHeading: {
       ...typeSizes.base,
     },
+    cardPreviousNext: {
+      ...typeSizes.sm,
+      '@>s': typeSizes.base,
+      '@>m': typeSizes.lg,
+      lh: '$lineHeights$m',
+    },
   },
   fontStyles: {
     baseType: {
@@ -224,6 +266,27 @@ export const type = {
     h6: {
       fontWeight: '$medium',
       fontFamily: '$heading',
+    },
+    h1Blog: {
+      fontWeight: '$medium',
+      fontFamily: '$heading',
+    },
+    h2Blog: {
+      fontWeight: '$medium',
+      fontFamily: '$heading',
+    },
+    h3Blog: {
+      fontWeight: '$medium',
+      fontFamily: '$heading',
+    },
+    h4Blog: {
+      fontWeight: '$medium',
+    },
+    h5Blog: {
+      fontWeight: '$medium',
+    },
+    h6Blog: {
+      fontWeight: '$medium',
     },
     heroCustomer: {},
     heroCareers: {
@@ -289,6 +352,10 @@ export const type = {
     cardHeading: {
       fontWeight: '$medium',
       fontFamily: '$base',
+    },
+    cardPreviousNext: {
+      fontFamily: '$base',
+      fontWeight: '$medium',
     },
   },
 }

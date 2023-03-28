@@ -47,7 +47,6 @@ export const schemaHeroSimple = F.hero({
             description: 'Adjust mobile breakpoint offset as a percentage (%).',
             placeholder: 'ie. -10',
           }),
-          F.checkbox({ name: 'darkBackground', initialValue: false }),
           F.checkbox({
             name: 'extendBackgroundColor',
             initialValue: false,

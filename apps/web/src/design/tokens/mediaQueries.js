@@ -19,6 +19,7 @@ export const customBreakpoints = {
   sidebarTablet: 1180,
   //
   360: 360,
+  510: 510,
   577: 577,
   600: 600,
   769: 769,

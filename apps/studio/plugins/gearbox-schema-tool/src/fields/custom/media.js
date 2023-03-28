@@ -19,6 +19,7 @@ export const media = ({
     video: {},
     lottie: {},
     lottieArgs: {},
+    wistia: {},
     caption: {},
     ratio: {},
     ...argsOrg,
@@ -28,6 +29,7 @@ export const media = ({
     image: args?.image ? [] : false,
     video: args?.video ? [] : false,
     lottie: args?.lottie ? [] : false,
+    wistia: args?.wistia ? [] : false,
     ...conditionsOrg,
   })
 
@@ -58,6 +60,16 @@ export const media = ({
           name: 'lottie',
           hidden: ({ parent }) => parent.condition !== 'lottie',
           ...args.lottie,
+        })
+      : '',
+    args.wistia
+      ? F.string({
+          group: 'content',
+          name: 'wistiaId',
+          description:
+            'ID of the Wistia video you wish to load (eg. ago55021i9).',
+          hidden: ({ parent }) => parent.condition !== 'wistia',
+          ...args.wista,
         })
       : '',
     ...(args.lottieArgs
@@ -247,6 +259,7 @@ export const media = ({
         lottieFileName: 'lottie.asset.originalFilename',
         ratio: 'ratio',
         caption: 'caption',
+        wistiaId: 'wistiaId',
       },
       prepare: ({
         condition,
@@ -256,6 +269,7 @@ export const media = ({
         imageFileName,
         ratio,
         caption,
+        wistiaId,
       }) => {
         let title = ''
         switch (condition) {
@@ -267,6 +281,9 @@ export const media = ({
             break
           case 'lottie':
             title = lottieFileName
+            break
+          case 'wistia':
+            title = `Wistia: '${wistiaId || 'Empty'}'`
             break
           default:
             title = condition ? startCase(condition) : ''

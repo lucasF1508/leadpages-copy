@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import kebabCase from 'lodash/kebabCase'
 import { styled } from '@design'
+import dynamic from 'next/dynamic'
+import { SidebarContext } from '@components/Sidebar/SidebarProvider'
+
+const Waypoint = dynamic(() => import('@components/Waypoint'))
 
 const $PageAnchor = styled('a', {
   position: 'absolute',
@@ -8,13 +12,15 @@ const $PageAnchor = styled('a', {
 })
 
 const PageAnchor = ({ slug, ...props }) => {
+  const { pushActive, popActive } = useContext(SidebarContext) || {}
+
   const id = kebabCase(slug || '').replace('#', '')
 
   if (!id) {
     return null
   }
 
-  return (
+  const Component = () => (
     <$PageAnchor
       id={id}
       href={`#${id}`}
@@ -23,6 +29,22 @@ const PageAnchor = ({ slug, ...props }) => {
     >
       {slug}
     </$PageAnchor>
+  )
+
+  return pushActive ? (
+    <>
+      <Waypoint
+        css={{
+          position: 'absolute',
+          mt: -110,
+        }}
+        onEnter={(direction) => direction === 'top' && popActive(id)}
+        onLeave={(direction) => direction === 'top' && pushActive(id)}
+      />
+      <Component />
+    </>
+  ) : (
+    <Component />
   )
 }
 

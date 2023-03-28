@@ -8,6 +8,7 @@ export const studio = {
     'pageArchive',
     'customer',
     'integration',
+    'comparison',
   ],
 }
 

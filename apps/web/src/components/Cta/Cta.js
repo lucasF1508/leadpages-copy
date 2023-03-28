@@ -50,6 +50,10 @@ const RTGContainer = styled('div', {
       },
     },
   },
+
+  defaultVariants: {
+    bgColor: 'navy',
+  },
 })
 
 const ScrollingLink = styled(ScrollLink, {

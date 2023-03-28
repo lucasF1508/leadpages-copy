@@ -3,6 +3,9 @@ import { ListItemCheckmark } from './ListCheckmark'
 
 const ListItemsList = {
   checkmarks: ListItemCheckmark,
+  checkmarksPlain: (props) => ListItemCheckmark({ variant: 'plain', ...props }),
+  checkmarksBranded: (props) =>
+    ListItemCheckmark({ variant: 'branded', ...props }),
 }
 
 const ListItemRenderer = (props) => {

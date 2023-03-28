@@ -1,6 +1,8 @@
 import React from 'react'
 import { AiOutlineAlignCenter as Icon } from 'react-icons/ai'
+import { TbListCheck } from 'react-icons/tb'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
+import styled from 'styled-components'
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -53,6 +55,27 @@ export const blockContent = {
       lists: [
         { title: 'Bullet', value: 'bullet' },
         { title: 'Numbered', value: 'number' },
+        {
+          title: 'Checks (Plain)',
+          value: 'checkmarksPlain',
+          blockEditor: {
+            icon: TbListCheck,
+          },
+        },
+        {
+          title: 'Checks (Branded)',
+          value: 'checkmarksBranded',
+          blockEditor: {
+            icon: () => {
+              const $TbListCheck = styled(TbListCheck)`
+                > path[d^='M3.5'] {
+                  color: #603eff;
+                }
+              `
+              return <$TbListCheck />
+            },
+          },
+        },
       ],
       // Marks let you mark up inline text in the block editor.
       marks: {
@@ -171,6 +194,9 @@ export const blockContent = {
     },
     {
       type: 'audio',
+    },
+    {
+      type: 'cardsPreviousNext',
     },
   ],
 }

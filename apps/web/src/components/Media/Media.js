@@ -5,6 +5,11 @@ import Lottie from '@components/Lottie'
 import RatioContainer from '@components/RatioContainer'
 import Text from '@components/Text'
 import { styled } from '@design'
+import dynamic from 'next/dynamic'
+
+const WistiaEmbed = dynamic(() =>
+  import('@legacy/components/videos/Wistia_CustomerFeatureVideo')
+)
 
 const $Media = styled('div', {
   position: 'relative',
@@ -52,6 +57,7 @@ const Media = ({
     maxWidth,
     align,
     video,
+    wistiaId,
     ...media
   } = {},
   ...props
@@ -86,6 +92,8 @@ const Media = ({
             {...props}
           />
         )
+      case 'wistia':
+        return <WistiaEmbed videoId={wistiaId} />
       default:
         return (
           <Image

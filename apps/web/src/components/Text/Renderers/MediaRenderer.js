@@ -26,7 +26,7 @@ const $MediaContainer = styled('div', {
 })
 
 const ImageRenderer = ({
-  node: { markDefs, maxWidth, removeSpaceAround, ...media },
+  node: { markDefs, maxWidth, removeSpaceAround, styleMap, ...media },
 }) => (
   <$MediaContainer removeSpaceAround={removeSpaceAround} css={{ maxWidth }}>
     <Media media={media} type="static" />

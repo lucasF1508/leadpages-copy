@@ -96,11 +96,11 @@ export const textPostTokens = {
       mt: 0,
     },
   },
-  [`& h2`]: { type: 'h4' },
-  [`& h3`]: { type: 'h5' },
-  [`& h4`]: { type: 'h6' },
-  [`& h5`]: { type: 'button' },
-  [`& h6`]: { type: 'buttonSm' },
+  [`& h2`]: { type: 'h2Blog' },
+  [`& h3`]: { type: 'h3Blog' },
+  [`& h4`]: { type: 'h4Blog' },
+  [`& h5`]: { type: 'h5Blog' },
+  [`& h6`]: { type: 'h6Blog' },
   [`
     & ul,
     & ol
@@ -118,10 +118,10 @@ export const textPostTokens = {
 
     a: {
       d: 'inline',
-      bb: '1px solid $colors$primary',
+      bb: '2px solid $colors$primary',
 
       '&:hover': {
-        bb: '2px solid $colors$primary',
+        bb: '3px solid $colors$primary',
         c: '$primary',
       },
     },
@@ -174,11 +174,11 @@ export const textPostTokens = {
   },
   '& p a, & blockquote a': {
     lineHeight: 1,
-    borderBottom: '1px solid $colors$primary',
+    borderBottom: '2px solid $colors$primary',
     d: 'inline',
 
     '&:hover': {
-      borderBottom: '2px solid $colors$primary',
+      borderBottom: '3px solid $colors$primary',
     },
   },
   [`button > a`]: {

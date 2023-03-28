@@ -1,24 +1,37 @@
 import React from 'react'
 import { getDoc, getDocSlugs, runQueries } from '@lib'
-import Page from '@layouts/Page'
+import Page, { PageSidebar } from '@layouts/Page'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
 import { features } from 'config'
 
-const DynamicPage = (props) => <Page {...props} />
+const DynamicPage = ({ displaySidebar, ...props }) =>
+  displaySidebar ? <PageSidebar {...props} /> : <Page {...props} />
+
+const sidebarTypes = ['comparison']
 
 export const shapeData = (data) => {
   const [pageData] = (data?.length && data) || []
-  const { hero: heroes, options: pageOptions } = pageData || {}
+  const {
+    _type: type,
+    hero: heroes,
+    options: pageOptions,
+    hasSidebar,
+    sidebarLinks,
+  } = pageData || {}
   const [hero] = heroes || []
 
   // Page options
   const darkHero = features.darkHeros.includes(
     hero?.backgroundOptions?.backgroundColor
   )
+  const displaySidebar =
+    sidebarTypes.includes(type) || (hasSidebar && sidebarLinks?.length) || false
+
   const options = {
     ...pageData?.options,
     underlaidMenu: darkHero || pageOptions?.underlaidMenu || null,
     darkHero,
+    displaySidebar,
   }
 
   return [
@@ -66,13 +79,11 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const docPaths = await getDocSlugs(['page', 'customer', 'integration'], {
-    // filters: ['slug.current != "404"'],
-  })
+  const docPaths = await getDocSlugs(['page', 'customer', 'integration'])
 
   const paths = docPaths.map(({ slug, path }) => ({
     params: {
-      slug: path?.split('/').filter(Boolean) || slug,
+      slug: path?.split('/').filter(Boolean) || [slug],
     },
   }))
 

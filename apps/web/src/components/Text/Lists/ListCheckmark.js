@@ -1,11 +1,26 @@
 import React from 'react'
 import { styled } from '@design'
 import checkSVG from '@legacy/assets/images/global/check_in-circle.svg'
+import purpleCheckSVG from '@legacy/assets/images/global/check_purple.svg'
 
 const SVG = styled('img', {
   position: 'absolute',
   top: '2px',
   left: 0,
+
+  variants: {
+    variant: {
+      plain: {
+        pt: '0.3rem',
+        left: '-0.8rem',
+        filter: 'brightness(0)',
+      },
+      branded: {
+        pt: '0.3rem',
+        left: '-0.8rem',
+      },
+    },
+  },
 })
 
 const $ListItemCheckmark = styled('li', {
@@ -23,7 +38,7 @@ const $ListCheckmark = styled('ul', {
   },
 })
 
-const ListCheckmark = ({ children }) => {
+const ListCheckmark = ({ variant = 'circle', children }) => {
   const { node } = children[0].props
   const { styleMap = {}, style = 'normal' } = node
   const fontStyles = node.children[0].marks
@@ -46,11 +61,15 @@ const ListCheckmark = ({ children }) => {
 }
 
 const ListItemCheckmark = (props) => {
-  const { children } = props
+  const { variant = 'circle', children } = props
 
   return (
-    <$ListItemCheckmark>
-      <SVG src={checkSVG.src} alt="check mark svg" />
+    <$ListItemCheckmark variant={variant}>
+      <SVG
+        variant={variant}
+        src={variant === 'circle' ? checkSVG.src : purpleCheckSVG.src}
+        alt="check mark svg"
+      />
       {children}
     </$ListItemCheckmark>
   )

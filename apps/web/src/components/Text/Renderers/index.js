@@ -1,13 +1,15 @@
-import MediaRenderer from './MediaRenderer'
-import BlockRenderer from './BlockRenderer'
 import AnchorRenderer from './AnchorRenderer'
-import TableRenderer from './TableRenderer'
+import BlockRenderer from './BlockRenderer'
+import CardsPreviousNextRenderer from './CardsPreviousNextRenderer'
 import EmbedRenderer from './EmbedRenderer'
+import MediaRenderer from './MediaRenderer'
+import TableRenderer from './TableRenderer'
 
 export {
-  TableRenderer,
   AnchorRenderer,
   BlockRenderer,
-  MediaRenderer,
+  CardsPreviousNextRenderer,
   EmbedRenderer,
+  MediaRenderer,
+  TableRenderer,
 }

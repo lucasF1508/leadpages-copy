@@ -26,13 +26,35 @@ export const $Waypoint = styled('div', {
   },
 })
 
-const Waypoint = ({ className, debug, waypointProps = {} }) => {
+const Waypoint = ({
+  className,
+  debug,
+  top,
+  bottom,
+  threshold,
+  onEnter,
+  onLeave,
+  ignoreInitial,
+  css,
+}) => {
   const { setWaypointRef } = useWaypoint({
-    ...waypointProps,
+    top,
+    bottom,
+    threshold,
+    onEnter,
+    onLeave,
+    ignoreInitial,
     debug,
   })
 
-  return <$Waypoint ref={setWaypointRef} className={className} debug={debug} />
+  return (
+    <$Waypoint
+      css={css}
+      ref={setWaypointRef}
+      className={className}
+      debug={debug}
+    />
+  )
 }
 
 Waypoint.displayName = 'Waypoint'

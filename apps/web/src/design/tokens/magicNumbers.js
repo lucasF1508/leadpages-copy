@@ -1,8 +1,8 @@
 export const magicNumbers = {
   headerHeight: {
-    s: '6rem',
-    m: '6rem',
-    l: '6rem',
+    s: '3.75rem',
+    m: '3.75rem',
+    l: '3.75rem',
   },
   navDrawerWidth: {
     initial: '20rem',
