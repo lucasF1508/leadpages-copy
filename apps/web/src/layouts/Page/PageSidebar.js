@@ -15,33 +15,29 @@ const $SidebarPageContainer = styled('div', {
   },
 })
 
-const PageSidebar = ({
-  hero,
-  content,
-  cta,
-  sidebarLinks,
-  excerpt: { compareLogo } = {},
-  title,
-}) => (
-  <>
-    {hero && <Hero hero={hero} />}
-    <$SidebarPageContainer>
-      {sidebarLinks?.length && (
-        <SidebarPage
-          pageTitle={title}
-          links={sidebarLinks}
-          compareLogo={compareLogo}
-          useScrollLink
-        />
-      )}
-      <Rack>
-        <Pinion maxWidth="content">
-          <Text content={content} isPost={true} displayIds />
-        </Pinion>
-      </Rack>
-    </$SidebarPageContainer>
-    {cta && <CTA {...cta} />}
-  </>
-)
+const PageSidebar = ({ hero, content, cta, sidebarLinks, excerpt, title }) => {
+  const { compareLogo } = excerpt || {}
+  return (
+    <>
+      {hero && <Hero hero={hero} />}
+      <$SidebarPageContainer>
+        {sidebarLinks?.length && (
+          <SidebarPage
+            pageTitle={title}
+            links={sidebarLinks}
+            compareLogo={compareLogo}
+            useScrollLink
+          />
+        )}
+        <Rack>
+          <Pinion maxWidth="content">
+            <Text content={content} isPost={true} displayIds />
+          </Pinion>
+        </Rack>
+      </$SidebarPageContainer>
+      {cta && <CTA {...cta} />}
+    </>
+  )
+}
 
 export default withSidebar(PageSidebar)
