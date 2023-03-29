@@ -51,9 +51,15 @@ const FeatureIconsGrid = ({
   showSectionLink,
   backgroundColor = 'transparent',
   align,
+  asCards = false,
 }) => (
   <SectionContainer backgroundColor={backgroundColor}>
-    <IconCardsGrid items={items} itemsPerRow={itemsPerRow} align={align} />
+    <IconCardsGrid
+      items={items}
+      itemsPerRow={itemsPerRow}
+      align={align}
+      asCards={asCards}
+    />
     {showSectionLink && (
       <SectionLink>
         Visit Leadpages{' '}

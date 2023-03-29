@@ -43,7 +43,7 @@ const internalIconStyles = {
 const Icons = {
   internal: styled(InternalIcon, internalIconStyles),
   leadpagesTrigger: styled(InternalIcon, internalIconStyles),
-  external: styled(ExternalIcon),
+  external: styled(InternalIcon, internalIconStyles),
   download: styled(DownloadIcon),
   modal: styled(ModalIcon),
   video: styled(VideoIcon),

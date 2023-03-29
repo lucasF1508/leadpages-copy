@@ -16,6 +16,12 @@ export const pinionTokens = {
   },
   variants: {
     component: {
+      banner: {
+        px: 'unset',
+        '> div': {
+          maxWidth: '$base',
+        },
+      },
       cards: {
         '> div': {
           maxWidth: '$base',
@@ -90,6 +96,12 @@ export const pinionTokens = {
         },
       },
       mediaWithText: {
+        '> div': {
+          maxWidth: '$extended',
+        },
+      },
+      listingBlock: {
+        box: { property: 'my', multiplier: -0.5 },
         '> div': {
           maxWidth: '$extended',
         },

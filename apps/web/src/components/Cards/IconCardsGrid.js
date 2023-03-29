@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { styled } from '@design'
 // components
 import CardIcon from './CardIcon'
@@ -9,6 +8,16 @@ const GridContainer = styled('div', {
 
   '@media (min-width: 1400px)': {
     mw: '1200px',
+  },
+
+  variants: {
+    asCards: {
+      true: {
+        '@media (min-width: 1400px)': {
+          mw: '1140px',
+        },
+      },
+    },
   },
 })
 
@@ -30,8 +39,8 @@ const CardContainer = styled('div', {
   },
 })
 
-const IconCardsGrid = ({ items, itemsPerRow, align }) => (
-  <GridContainer>
+const IconCardsGrid = ({ items, itemsPerRow, align, asCards }) => (
+  <GridContainer asCards={asCards}>
     <CardContainer align={align}>
       {items.map((item, index) => (
         <CardIcon
@@ -39,19 +48,11 @@ const IconCardsGrid = ({ items, itemsPerRow, align }) => (
           {...item}
           itemsPerRow={itemsPerRow}
           align={align}
+          asCards={asCards}
         />
       ))}
     </CardContainer>
   </GridContainer>
 )
-
-IconCardsGrid.defaultProps = {
-  itemsPerRow: 4,
-}
-
-IconCardsGrid.propTypes = {
-  items: PropTypes.arrayOf(CardIcon).isRequired,
-  itemsPerRow: PropTypes.number,
-}
 
 export default IconCardsGrid

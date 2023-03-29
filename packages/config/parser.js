@@ -1,4 +1,5 @@
 const { image, link } = require('../query/dist/parser/primitives')
+const { fieldsToGroq } = require('../query/dist/parser/utils')
 
 module.exports = {
   custom: {
@@ -91,6 +92,48 @@ module.exports = {
                   asset->
                 }
               }
+            },
+          )`,
+        },
+        listingBlock: {
+          '...': true,
+          link,
+          featuredListingLink: link,
+          listings: `select(
+            postType == 'custom' => customListings[] {
+              ...,
+               link {
+                  ${fieldsToGroq([link])}
+                },
+                image {
+                ...,
+                asset->
+              }
+            },
+            selection == 'all' => *[_type == 'post'] | order(orderRank) {
+              ...,
+            'categoryTitle': primaryCategory->title,
+                image {
+                ...,
+                asset->
+              }
+            },
+            selection == 'category' => *[_type == 'post' && references(^.category._ref)] | order(orderRank) {
+              ...,
+            'categoryTitle': primaryCategory->title,
+               image {
+                ...,
+                asset->
+              }
+            },
+          listings[]->{
+             ...,
+             'categoryTitle': primaryCategory->title,
+             image {
+                ...,
+                asset->
+              }
+
             },
           )`,
         },

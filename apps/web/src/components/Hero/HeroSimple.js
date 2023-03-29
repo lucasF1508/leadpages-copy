@@ -3,6 +3,8 @@ import Text from '@components/Text'
 import { styled, darkTheme } from '@design'
 import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
 import { features } from 'config'
+import Link from '@components/Link'
+import { LinksContainer } from './HeroHome'
 import { $Hero, $BackgroundImage } from './HeroDefault'
 
 const $Text = styled(Text, {
@@ -115,6 +117,13 @@ const HeroSimple = ({
           links={links}
           maxWidth={maxWidth}
         />
+        {links && (
+          <LinksContainer>
+            {links.map(({ _key, ...link }) => (
+              <Link key={_key} {...link} />
+            ))}
+          </LinksContainer>
+        )}
       </$HeroSimpleInner>
     </$HeroSimple>
   )

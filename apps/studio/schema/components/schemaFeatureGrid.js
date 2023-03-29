@@ -60,17 +60,32 @@ export const schemaFeatureGrid = F.object({
       }),
     ]),
     ...G.group('options', [
-      F.radio(['3', '4'], {
+      F.number({
         name: 'itemsPerRow',
-        initialValue: '4',
+        initialValue: 4,
+        options: {
+          list: [3, 4],
+          layout: 'radio',
+          direction: 'horizontal',
+        },
         hidden: ({ parent }) =>
+          ['toolkitCards'].includes(parent.legacyComponent),
+      }),
+      F.boolean({
+        name: 'asCards',
+        description:
+          'When toggled, items will be displayed within a white, square card.',
+        initialValue: false,
+        hidden: ({ parent }) =>
+          parent?.itemsPerRow === 4 ||
           ['toolkitCards'].includes(parent.legacyComponent),
       }),
       F.checkbox({
         name: 'align',
         title: 'Align left on mobile',
         hidden: ({ parent }) =>
-          ['toolkitCards'].includes(parent.legacyComponent),
+          ['toolkitCards'].includes(parent.legacyComponent) ||
+          parent?.asCards === true,
       }),
       F.field('backgroundColor', {
         hidden: ({ parent }) =>

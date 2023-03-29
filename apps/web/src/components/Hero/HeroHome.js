@@ -134,7 +134,7 @@ const InnerContainer = styled('div', {
   },
 })
 
-const LinksContainer = styled('div', {
+export const LinksContainer = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

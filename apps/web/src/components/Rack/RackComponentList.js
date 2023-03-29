@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 const RackComponentList = {
   accordion: dynamic(() => import('@components/Accordion')),
   audio: dynamic(() => import('@components/Audio')),
+  banner: dynamic(() => import('@components/Banner')),
   border: dynamic(() => import('@components/Border')),
   cards: dynamic(() => import('@components/Cards')),
   cardsBlock: dynamic(() => import('@components/Cards/CardsBlock')),
@@ -14,6 +15,7 @@ const RackComponentList = {
   heading: dynamic(() => import('@components/Heading')),
   imageSlider: dynamic(() => import('@components/ImageSlider')),
   link: dynamic(() => import('@components/Link')),
+  listingBlock: dynamic(() => import('@components/ListingBlock')),
   media: dynamic(() => import('@components/MediaBlock')),
   mediaWithText: dynamic(() => import('@components/MediaWithText')),
   logoGrid: dynamic(() => import('@components/LogoGrid')),
