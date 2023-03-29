@@ -102,8 +102,7 @@ export default function App({
           <LayoutContainer>
             <Main {...pageData} {...meta} err={err} />
           </LayoutContainer>
-          {/* {navigation && <Footer footer={footer} />} */}
-          <Footer slimFooter={slimFooter} />
+          <Footer slimFooter={slimFooter} data={footer} />
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>

@@ -15,6 +15,7 @@ import {
   AiOutlineRetweet,
 } from 'react-icons/ai'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
+import { RiLayoutBottom2Fill } from 'react-icons/ri'
 import { listItemSiteSettings } from './listItems'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -82,7 +83,7 @@ export const deskStructure = () =>
       S.documentTypeListItem('cta').title('CTAs'),
       S.divider(),
       // S.documentTypeListItem('navigation').title('Navigation'),
-      // GB.singletonListItem('footer').icon(RiLayoutBottom2Line),
+      GB.singletonListItem('footer').icon(RiLayoutBottom2Fill),
       GB.categoriesListItem('category'),
       listItemSiteSettings,
       ...(isDevelopment

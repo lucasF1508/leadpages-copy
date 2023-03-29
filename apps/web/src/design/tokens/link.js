@@ -115,5 +115,21 @@ export const link = {
         },
       },
     },
+    footer: {
+      true: {
+        display: 'inline',
+        color: 'inherit',
+        textDecoration: 'none',
+        paddingBottom: '0.5rem',
+        borderBottom: '3px solid transparent',
+
+        '&:hover': {
+          cursor: 'pointer',
+          color: '$primary',
+          borderBottom: '3px solid $colors$primary',
+          textDecoration: 'none',
+        },
+      },
+    },
   },
 }
