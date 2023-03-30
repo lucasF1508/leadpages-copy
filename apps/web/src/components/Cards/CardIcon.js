@@ -280,6 +280,11 @@ const $Details = styled('div', {
   fontSize: '14px',
   lineHeight: '20px',
   color: '$textAlt',
+  mb: '$2',
+
+  '&:last-child': {
+    mb: 0,
+  },
 
   defaultVariants: {
     itemsPerRow: 4,
