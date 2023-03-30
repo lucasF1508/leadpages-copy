@@ -47,7 +47,7 @@ const StyledLink = styled('a', {
 
 const FeatureIconsGrid = ({
   items,
-  itemsPerRow = 4,
+  itemsPerRow = '4',
   showSectionLink,
   backgroundColor = 'transparent',
   align,

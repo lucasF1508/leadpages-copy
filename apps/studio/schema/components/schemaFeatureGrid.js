@@ -60,14 +60,9 @@ export const schemaFeatureGrid = F.object({
       }),
     ]),
     ...G.group('options', [
-      F.number({
+      F.radio(['3', '4'], {
         name: 'itemsPerRow',
-        initialValue: 4,
-        options: {
-          list: [3, 4],
-          layout: 'radio',
-          direction: 'horizontal',
-        },
+        initialValue: '4',
         hidden: ({ parent }) =>
           ['toolkitCards'].includes(parent.legacyComponent),
       }),
@@ -77,7 +72,7 @@ export const schemaFeatureGrid = F.object({
           'When toggled, items will be displayed within a white, square card.',
         initialValue: false,
         hidden: ({ parent }) =>
-          parent?.itemsPerRow === 4 ||
+          parent?.itemsPerRow === '4' ||
           ['toolkitCards'].includes(parent.legacyComponent),
       }),
       F.checkbox({
