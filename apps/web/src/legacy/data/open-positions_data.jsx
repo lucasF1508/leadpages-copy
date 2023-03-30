@@ -3,9 +3,9 @@
 /* eslint-disable import/prefer-default-export */
 export const openPositionsArray = [
   {
-    title: 'Senior Software Developer',
-    department: 'Engineering (Victoria, British Columbia)',
-    postingLink: 'https://rdbrck.bamboohr.com/careers/189',
+    title: 'Customer Onboarding Specialist',
+    department: 'Victoria, British Columbia (Remote)',
+    postingLink: 'https://rdbrck.bamboohr.com/careers/199',
     type: 'internal',
   },
   // {

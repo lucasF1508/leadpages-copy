@@ -22,6 +22,13 @@ const setLottieData = async (req, res) => {
     `*[_type == 'sanity.fileAsset' && _id == '${_id}'][0]`
   )
 
+  if (!asset) {
+    return res.status(500).json({
+      success: false,
+      message: `Asset not found. Webhook will retry. Asset: ${asset}`,
+    })
+  }
+
   if (!asset?.url) {
     return res.status(200).json({
       success: true,
