@@ -50,25 +50,8 @@ export default class Document extends NextDocument {
             rel="dns-prefetch preconnect"
             href="https://static.leadpages.com"
           />
-          <link
-            href="https://static.leadpages.com/fonts/valueserif_typeset.css"
-            rel="stylesheet"
-          />
-          <link
-            href="https://static.leadpages.com/fonts/apercu_typeset.css"
-            rel="stylesheet"
-          />
-          <link
-            href="https://static.leadpages.com/fonts/spacemono_typeset.css"
-            rel="stylesheet"
-          />
           <script>window.dataLayer = window.dataLayer || []</script>
           <ProfitWellRetain />
-          <script
-            src="https://static.leadpages.com/leadboxes/current/embed.js"
-            async
-            // defer="defer"
-          ></script>
         </Head>
         <body>
           <Main />

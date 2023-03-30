@@ -1,9 +1,11 @@
 import { globalCss } from './stitches.config'
 import { reset, rootBreakpoints } from './tokens'
+import { fonts } from './tokens/fonts'
 
 const globalStyles = globalCss({
   ...reset,
   ...rootBreakpoints,
+  ...fonts,
   '*': {
     margin: 0,
     padding: 0,

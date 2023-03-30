@@ -31,6 +31,7 @@ const AlertBars = () => {
           src={alertBarProps.src}
           data-bar={alertBarProps.id}
           data-bar-domain={alertBarProps.domain}
+          strategy="lazyOnload"
         />
       )}
     </>

@@ -106,6 +106,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.18.9",
+    "@builder.io/partytown": "^0.7.5",
     "eslint": "8.21.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.0.0",

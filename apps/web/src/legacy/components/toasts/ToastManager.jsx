@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
-import Collapse from '@material-ui/core/Collapse'
-import { Toast } from '@lp/ui'
+import dynamic from 'next/dynamic'
+import { makeStyles } from '@material-ui/core/styles'
+
+const Collapse = dynamic(() => import('@material-ui/core/Collapse'))
+const Toast = dynamic(() => import('@lp/ui').then((mod) => mod.Toast))
 
 const useStyles = makeStyles(
   (theme) => ({

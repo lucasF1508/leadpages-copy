@@ -201,9 +201,11 @@ const moduleExports = withBundleAnalyzer({
   },
   experimental: {
     scrollRestoration: true,
+    nextScriptWorkers: true,
   },
   sentry: {
     hideSourceMaps: true,
+    autoInstrumentMiddleware: false,
   },
 })
 

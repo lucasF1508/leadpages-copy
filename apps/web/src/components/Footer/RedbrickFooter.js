@@ -4,6 +4,7 @@ import DeliveraSVG from '@legacy/assets/images/logos/delivra-logo-black.svg'
 import LeadpagesSVG from '@legacy/assets/images/logos/leadpages-logo-black.svg'
 import RebaseSVG from '@legacy/assets/images/logos/rebase-logo-black.svg'
 import ShiftSVG from '@legacy/assets/images/logos/shift-logo-black.svg'
+import Image from 'next/image'
 
 const RedbrickFooterContainer = styled('div', {
   fontSize: '12px',
@@ -51,24 +52,34 @@ const RedbrickFooter = () => (
     family of brands.
     <LogoContainer>
       <a target="_blank" rel="noreferrer noopener" href="https://tryshift.com/">
-        <img src={ShiftSVG.src} alt="Shift Logo" />
+        <Image src={ShiftSVG.src} alt="Shift Logo" width={80} height={24} />
       </a>
       <a target="_blank" rel="noreferrer noopener" href="https://rebase.io/">
-        <img src={RebaseSVG.src} alt="Rebase Logo" />
+        <Image src={RebaseSVG.src} alt="Rebase Logo" width={74} height={16} />
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
         href="https://leadpages.com/"
       >
-        <img src={LeadpagesSVG.src} alt="Leadpages Logo" />
+        <Image
+          src={LeadpagesSVG.src}
+          alt="Leadpages Logo"
+          width={146}
+          height={24}
+        />
       </a>
       <a
         target="_blank"
         rel="noreferrer noopener"
         href="https://www.delivra.com/"
       >
-        <img src={DeliveraSVG.src} alt="Delivera Logo" />
+        <Image
+          src={DeliveraSVG.src}
+          alt="Delivera Logo"
+          width={77}
+          height={16}
+        />
       </a>
     </LogoContainer>
   </RedbrickFooterContainer>

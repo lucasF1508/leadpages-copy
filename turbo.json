@@ -5,6 +5,7 @@
       "outputs": [".next/**", "dist/**"]
     },
     "analyze": {
+      "cache": false,
       "dependsOn": ["query#build"],
       "outputs": []
     },

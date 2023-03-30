@@ -24,7 +24,6 @@ const SEO = (props) => {
       {GTM_CONTAINER_ID && (
         <Script
           id="GTM"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -40,12 +39,13 @@ const SEO = (props) => {
       {GTAG_TRACKING_ID && (
         <>
           <Script
-            strategy="afterInteractive"
+            id="GTAG"
+            strategy="worker"
             src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_TRACKING_ID}`}
           />
           <Script
-            id="GTAG"
-            strategy="afterInteractive"
+            id="GTAG-config"
+            strategy="worker"
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
@@ -62,7 +62,7 @@ const SEO = (props) => {
       {FB_PIXEL_ID && (
         <Script
           id="fb-pixel"
-          strategy="afterInteractive"
+          strategy="worker"
           dangerouslySetInnerHTML={{
             __html: `
             !function(f,b,e,v,n,t,s)
@@ -78,6 +78,10 @@ const SEO = (props) => {
           }}
         />
       )}
+      <Script
+        id="LP-embed"
+        src="https://static.leadpages.com/leadboxes/current/embed.js"
+      />
       <Head>
         {seoTitle && <title>{seoTitle}</title>}
         {seoDescription && <meta name="description" content={seoDescription} />}

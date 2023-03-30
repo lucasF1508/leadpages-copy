@@ -1,4 +1,3 @@
-import { FLOWS } from '@lp/lib-upgrade-modal'
 import {
   getUrlParam,
   getExpiredAndInvalidate,
@@ -17,6 +16,7 @@ export const OFFER_EXPIRED_MESSAGE = 'Sorry, that special offer has expired.'
 export const OFFER_INVALID_MESSAGE = 'Sorry, that special offer is not valid.'
 
 async function fetchBundle(bundleId, flow) {
+  const { FLOWS } = await import('@lp/lib-upgrade-modal')
   let response
 
   try {

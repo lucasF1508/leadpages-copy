@@ -5,17 +5,21 @@ import useIsMount from '@hooks/useIsMount'
 const { GTAG_TRACKING_ID } = process.env
 
 export const pageview = (url) => {
-  window.gtag('config', GTAG_TRACKING_ID, {
-    page_path: url,
-  })
+  if (typeof window.gtag === 'function') {
+    window.gtag('config', GTAG_TRACKING_ID, {
+      page_path: url,
+    })
+  }
 }
 
 export const event = ({ action, category, label, value }) => {
-  window.gtag('event', action, {
-    event_category: category,
-    event_label: label,
-    value,
-  })
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', action, {
+      event_category: category,
+      event_label: label,
+      value,
+    })
+  }
 }
 
 const useGTag = () => {

@@ -7,7 +7,6 @@ import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
 import Embed from '@components/Embed'
-import { MarketingThemeProvider } from '@lp/ui'
 import { LazyMotion } from 'framer-motion'
 
 // Legacy
@@ -20,6 +19,9 @@ const SEO = dynamic(() => import('@components/SEO'))
 const Footer = dynamic(() => import('@components/Footer'))
 const ModalParent = dynamic(() =>
   import('@components/Modal').then((mod) => mod.ModalParent)
+)
+const MarketingThemeProvider = dynamic(() =>
+  import('@lp/ui').then((mod) => mod.MarketingThemeProvider)
 )
 
 const loadFeatures = () =>

@@ -114,6 +114,31 @@ export const link = {
           c: '$disabled',
         },
       },
+      buttonBanner: {
+        h: '$space$4_5',
+        px: '$3',
+        br: '$button',
+        bc: '$white',
+        c: '$indigoDark',
+        type: 'buttonSm',
+        fontWeight: 500,
+
+        '&:hover': {
+          bc: '$hoverInverse',
+        },
+
+        '&:active': {
+          bc: '$activeInverse',
+        },
+
+        '&[disabled]': {
+          bc: '$disabled',
+
+          '&:hover, :active': {
+            bc: '$disabled',
+          },
+        },
+      },
     },
     footer: {
       true: {

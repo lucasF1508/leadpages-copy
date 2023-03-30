@@ -1,4 +1,3 @@
-import { FLOWS } from '@lp/lib-upgrade-modal'
 import {
   getUrlParam,
   getJSONKey,
@@ -46,7 +45,9 @@ function couponAttempted(coupon) {
 }
 
 export async function setLocalCoupon(flow) {
+  const { FLOWS } = await import('@lp/lib-upgrade-modal')
   const couponParam = getUrlParam(COUPON_KEY)
+
   if (couponParam) {
     const coupon = await fetchCoupon(couponParam, flow)
     if (coupon && coupon.code) {

@@ -1,14 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react'
 import PropTypes from 'prop-types'
-import Button from '@material-ui/core/Button'
+import Link from '@components/Link'
 import { styled } from '@design'
 import { useRouter } from 'next/router'
-
-import { BundleInfoSheet, Banner } from '@lp/ui'
-import { FLOWS } from '@lp/lib-upgrade-modal'
+import dynamic from 'next/dynamic'
 
 // components
 import { AppContext } from '@app'
+
 import AlertBars from '../conversion-tools/AlertBars'
 import { addToastMessage } from '../toasts/ToastManager'
 // utils & data
@@ -25,6 +24,17 @@ import {
   setLocalCoupon,
 } from '../../utils/coupons'
 import { getLocalPreviousPlan } from '../../utils/previous-plan'
+
+const Banner = dynamic(() => import('@lp/ui').then((mod) => mod.Banner))
+const BundleInfoSheet = dynamic(() =>
+  import('@lp/ui').then((mod) => mod.BundleInfoSheet)
+)
+
+const FLOWS = {
+  SIGNUP: 'signup',
+  REACTIVATION: 'reactivation',
+  UPGRADE: 'upgrade',
+}
 
 const PRICING_PATHS = ['/pricing', '/compare-plans']
 
@@ -152,9 +162,13 @@ const Promotions = ({ onPromotionsLoaded = false }) => {
           selector=".banner"
           CTA={
             !onPricingPage ? (
-              <Button style={{ color: '#4D32CC' }} href="/pricing">
+              <Link
+                condition="internal"
+                linkStyle="buttonBanner"
+                url="/pricing"
+              >
                 Get This Deal
-              </Button>
+              </Link>
             ) : null
           }
         />
