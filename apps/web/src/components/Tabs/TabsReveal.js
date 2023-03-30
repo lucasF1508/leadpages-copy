@@ -35,7 +35,7 @@ const Flexbox = styled('div', {
 })
 
 const FlexLeft = styled('div', {
-  marginTop: '48px',
+  my: '48px',
 
   variants: {
     tabWidth: {
@@ -46,20 +46,18 @@ const FlexLeft = styled('div', {
 })
 
 const FlexRight = styled('div', {
-  height: '590px',
-  marginLeft: '3rem',
   display: 'flex',
   alignItems: 'center',
   transition: 'height 0.1s ease',
-
-  '&.nullstate': {
-    height: '410px',
-  },
 
   variants: {
     tabWidth: {
       narrow: { width: 'calc(100% - 345px)' },
       wide: { width: 'calc(100% - 450px)' },
+    },
+    align: {
+      left: { ml: '$6' },
+      right: { mr: '$6' },
     },
   },
 })
@@ -120,7 +118,7 @@ const Card = styled(m.div, {
   '&.activecard': {
     zIndex: 1,
     height: 'auto',
-    boxShadow: `0 6px 12px 0 rgba(15, 12, 9, 0.3),
+    boxShadow: `0 6px 12px 0 rgba(15, 12, 9, 0.1),
       0 12px 24px 0 rgba(15, 12, 9, 0.15)`,
 
     [`${CardHeadArrowSVG}`]: {
@@ -216,7 +214,12 @@ const CardLink = styled(Link, {
 
 const RevealImageAnimation = keyframes(fadeIn)
 
-const RevealImage = styled(Media, {
+const RevealMedia = styled(Media, {
+  width: '100%',
+  animation: `0.5s ${RevealImageAnimation}`,
+})
+
+const RevealImage = styled(Image, {
   width: '100%',
   animation: `0.5s ${RevealImageAnimation}`,
 })
@@ -302,15 +305,19 @@ const ProductToolkitClickReveal = ({
               </Card>
             ))}
           </FlexLeft>
-          <FlexRight
-            className={activeIndex === null ? 'nullstate' : ''}
-            tabWidth={tabWidth}
-          >
+          <FlexRight align={align} tabWidth={tabWidth}>
             <FlexRightContent>
-              <RevealImage
-                key={items[activeIndex].media?._key}
-                media={{ ...items[activeIndex].media }}
-              />
+              {items[activeIndex].media ? (
+                <RevealMedia
+                  key={items[activeIndex].media?._key}
+                  media={{ ...items[activeIndex].media }}
+                />
+              ) : (
+                <RevealImage
+                  key={items[activeIndex].image?.asset?._id}
+                  image={{ ...items[activeIndex].image }}
+                />
+              )}
             </FlexRightContent>
           </FlexRight>
         </Flexbox>
