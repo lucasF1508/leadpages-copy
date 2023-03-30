@@ -17,7 +17,7 @@ const RTGContainer = styled('div', {
   ta: 'center',
   ox: 'hidden',
 
-  '@>s': {
+  '@>m': {
     px: '6rem',
   },
 

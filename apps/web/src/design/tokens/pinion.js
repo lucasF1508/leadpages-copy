@@ -28,11 +28,9 @@ export const pinionTokens = {
         },
       },
       cardsArticle: {
-        px: 'unset',
+        bc: '$grayAlt',
         my: 'unset',
-        '> div': {
-          maxWidth: 'none',
-        },
+        box: [{ property: 'py' }],
       },
       cardsComparison: {
         bc: '$grayAlt',

@@ -43,17 +43,11 @@ const $CardIcon = styled('div', {
   m: '1rem 0',
 
   variants: {
+    align: {},
     asCards: {
       true: {},
       false: {},
     },
-
-    align: {
-      true: {
-        ta: 'left',
-      },
-    },
-
     itemsPerRow: {
       3: {
         w: '100%',
@@ -124,6 +118,16 @@ const $CardIcon = styled('div', {
   },
 
   compoundVariants: [
+    {
+      itemsPerRow: 3,
+      align: true,
+      css: {
+        '@<m': {
+          ta: 'left',
+          jc: 'flex-start',
+        },
+      },
+    },
     {
       itemsPerRow: 3,
       asCards: true,
@@ -248,7 +252,6 @@ const CTA = styled('span', {
   lineHeight: '30px',
   ta: 'left',
   fontWeight: '500',
-  mb: '2rem',
 
   '&:hover': {
     c: '$indigoDark',

@@ -1,5 +1,5 @@
 import { BsNewspaper as icon, BsCardText as cardIcon } from 'react-icons/bs'
-import { F, G } from 'part:gearbox-schema-tool/schema-builder'
+import { F, G, P } from 'part:gearbox-schema-tool/schema-builder'
 
 export const schemaCardsArticle = F.object({
   icon,
@@ -17,25 +17,15 @@ export const schemaCardsArticle = F.object({
             ...G.group('content', [
               F.string({ name: 'heading' }),
               F.text({ name: 'content' }),
-              F.url(),
-              F.image(),
+              F.url({ title: 'URL' }),
             ]),
+            ...G.group('media', [F.image()]),
             ...G.group('options', [
               F.boolean({ name: 'isHighlightedArticle', initialValue: false }),
-              F.string({ name: 'ariaLabel', title: 'Link Alt Text' }),
+              F.string({ name: 'ariaLabel', title: 'aria-label' }),
             ]),
           ],
-          preview: {
-            select: {
-              title: 'heading',
-              subtitle: 'content',
-            },
-            prepare: ({ title = 'Article Card', subtitle = '' }) => ({
-              title,
-              subtitle,
-              media: cardIcon,
-            }),
-          },
+          preview: P.titleImage({ title: 'heading', subtitle: 'content' }),
         }),
       ],
     }),
