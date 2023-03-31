@@ -192,7 +192,6 @@ export const type = {
     },
     button: {
       ...typeSizes.base,
-      lh: 1,
     },
     buttonAlt: {
       ...typeSizes.base,

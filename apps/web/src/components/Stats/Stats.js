@@ -59,7 +59,7 @@ const Caption = styled('div', {
   fontSize: '16px',
   lineHeight: '30px',
   fontWeight: 500,
-  mb: '3rem',
+  mb: '$2',
 })
 
 const Stats = ({ stats, ...props }) => (

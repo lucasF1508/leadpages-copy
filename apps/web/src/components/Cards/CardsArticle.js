@@ -4,21 +4,10 @@ import Image from '@components/Image'
 
 const OuterContainer = styled('div', {
   position: 'relative',
-  bc: '$grayAlt',
 })
 
 const InnerContainer = styled('div', {
-  mw: '1140px',
-  mx: 'auto',
-  pt: '6rem',
-  pb: '3rem',
-  px: '2.5%',
   ta: 'center',
-
-  '@media (min-width: 769px)': {
-    px: '6rem',
-    py: '10rem',
-  },
 })
 
 const HighlightedArticleContainer = styled('div', {
@@ -83,15 +72,14 @@ const HighlightedArticle_ReadMore = styled('span', {
 const $HighlightedArticle = styled('div', {
   position: 'relative',
   bc: '$white',
-  f: '0 0 45%',
-  w: '45%',
+  f: '0 0 calc(50% - $space$2)',
+  w: 'calc(50% - $2)',
   minWidth: '300px',
-  mx: 'auto',
   mb: '5%',
   cursor: 'pointer',
   bs: '0 0 2px 0 rgba(15, 12, 9, 0.1), 0 1px 4px 0 rgba(15, 12, 9, 0.1)',
 
-  '@media (max-width: 870px)': {
+  '@<m': {
     f: '0 0 100%',
     w: '100%',
   },
@@ -193,6 +181,10 @@ const ArticleContainer = styled('div', {
     c: '$primary',
     bb: '3px solid $colors$indigoDark',
   },
+
+  '&:last-child': {
+    mb: 0,
+  },
 })
 
 const Article_ImageContainer = styled('div', {
@@ -240,11 +232,11 @@ const Article_OutboundLink = styled('a', {
   },
 })
 
-const HighlightedArticle = ({ heading, content, url, linkAltText, image }) => (
+const HighlightedArticle = ({ heading, content, url, ariaLabel, image }) => (
   <$HighlightedArticle>
     <a
       href={url}
-      aria-label={linkAltText}
+      aria-label={ariaLabel}
       rel="noreferrer noopener"
       target="_blank"
     >
