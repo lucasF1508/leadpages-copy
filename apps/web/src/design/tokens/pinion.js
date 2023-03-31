@@ -106,9 +106,11 @@ export const pinionTokens = {
       },
       linkList: {
         bc: '$gray',
-        mb: 0,
+        mb: 'unset',
+        px: 'unset',
+
         '> div': {
-          maxWidth: '$extended',
+          maxWidth: 'none',
         },
       },
       pricing: {
