@@ -82,7 +82,9 @@ export const schemaMediaWithText = F.field('object', {
       const [heading, ...subtitle] = content
 
       return {
-        title: P.richText({ content: [heading], title: 'Media with Text' }),
+        title:
+          P.richText({ content: [heading], title: 'Media with Text' }) ||
+          'Media with Text',
         subtitle: P.richText({ content: subtitle }),
         media: condition === 'image' ? image : videoIcon,
       }
