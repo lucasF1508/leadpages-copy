@@ -3,6 +3,10 @@
   "project": {
     "basePath": "/studio"
   },
+  "api": {
+    "projectId": "1ux2e04i",
+    "dataset": "production"
+  },
   "plugins": [
     "@sanity/base",
     "@sanity/components",

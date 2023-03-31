@@ -40,12 +40,10 @@ const SEO = (props) => {
         <>
           <Script
             id="GTAG"
-            strategy="worker"
             src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_TRACKING_ID}`}
           />
           <Script
             id="GTAG-config"
-            strategy="worker"
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
@@ -62,7 +60,6 @@ const SEO = (props) => {
       {FB_PIXEL_ID && (
         <Script
           id="fb-pixel"
-          strategy="worker"
           dangerouslySetInnerHTML={{
             __html: `
             !function(f,b,e,v,n,t,s)
