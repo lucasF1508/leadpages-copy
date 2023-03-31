@@ -28,8 +28,8 @@ export const deserializeImage = {
         condition: 'image',
         image: {
           _type: 'image',
-          _sanityAsset: `image@${img.getAttribute('src')}`,
-          altText: alt,
+          _sanityAsset: `image@${img.getAttribute('src').trim()}`,
+          altText: alt || undefined,
           title: img.getAttribute('title'),
           description: img.getAttribute('description'),
         },
