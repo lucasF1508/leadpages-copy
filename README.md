@@ -1,11 +1,7 @@
 <br>
 <img src="https://user-images.githubusercontent.com/4299551/229001290-f1b4d3f8-5eeb-4941-837d-787a608a548c.svg" width="300">
 
-<<<<<<< HEAD
-# Rack & Pinion - Next-js app
-=======
 # Rack & Pinion - Next.js app
->>>>>>> 667d9d37be15ae5a9d9400f1e51c96ca137e13c3
 
 A custom CMS app built with [Sanity](https://www.sanity.io/), [Next JS](https://nextjs.org/docs/) and [Stitches](https://stitches.dev/)
 
@@ -23,44 +19,49 @@ From the root of the project make sure all dependencies have been installed befo
 
 ## Build commands
 
-| Command | Description |
-| --- | --- |
-| `yarn start` | Starts Next.js and Sanity Studio in development mode |
-| `yarn story` | Starts Storybook in development mode |
-| `yarn build` | Builds the Next.js application and the current Sanity configuration to a static bundle for production usage |
-| `yarn serve` | Starts a Next.js production server and serves the output of `yarn build` or `yarn analyze`. |
-| `yarn link` | Runs the Next.js linter. |
-| `yarn blast` | Blasts all `node_modules` and Next.js cache. |
-| `yarn blast:node` | Blasts all `node_modules`. |
-| `yarn blast:next` | Blasts Next.js cache. |
-| `yarn analyze` | Builds the Next.js application and runs the Webpack budle analyzer. |
-| `yarn reset` | Runs `yarn blast` and removes the `yarn.lock` file. **⚠️ Use with caution ⚠️** |
+| Command           | Description                                                                                                 |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- |
+| `yarn start`      | Starts Next.js and Sanity Studio in development mode                                                        |
+| `yarn story`      | Starts Storybook in development mode                                                                        |
+| `yarn build`      | Builds the Next.js application and the current Sanity configuration to a static bundle for production usage |
+| `yarn serve`      | Starts a Next.js production server and serves the output of `yarn build` or `yarn analyze`.                 |
+| `yarn link`       | Runs the Next.js linter.                                                                                    |
+| `yarn blast`      | Blasts all `node_modules` and Next.js cache.                                                                |
+| `yarn blast:node` | Blasts all `node_modules`.                                                                                  |
+| `yarn blast:next` | Blasts Next.js cache.                                                                                       |
+| `yarn analyze`    | Builds the Next.js application and runs the Webpack budle analyzer.                                         |
+| `yarn reset`      | Runs `yarn blast` and removes the `yarn.lock` file. **⚠️ Use with caution ⚠️**                              |
 
 ## Getting Started
 
 ### From an existing project
 
 #### 1. Clone the repo
+
 ```
 git clone [...]
 ```
 
 #### 2. Install dependencies
+
 ```
 yarn install
 ```
 
 #### 3. Link to Vercel project
+
 ```
 vercel link
 ```
 
 #### 4. Pull environment variables
+
 ```
 vercel env pull
 ```
 
 #### 5. Start development
+
 ```
 yarn start
 ```
