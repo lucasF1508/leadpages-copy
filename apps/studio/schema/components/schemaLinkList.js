@@ -19,7 +19,7 @@ export const schemaLinkList = F.object({
             F.string({
               name: 'subtitle',
             }),
-            F.url(),
+            F.url({ title: 'URL' }),
           ],
         }),
       ],
