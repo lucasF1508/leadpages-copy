@@ -59,6 +59,7 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const docPaths = await getDocSlugs('post', {
     filters: ['isExternal != true', 'redirectToLegacy != true'],
+    slice: '0..20',
   })
 
   const paths = docPaths.map(({ slug }) => ({
@@ -69,7 +70,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   }
 }
 
