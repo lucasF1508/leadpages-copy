@@ -103,7 +103,7 @@ export const pinionTokens = {
       listingBlock: {
         box: { property: 'my', multiplier: -0.5 },
         '> div': {
-          maxWidth: '$extended',
+          maxWidth: '$base',
         },
       },
       linkList: {

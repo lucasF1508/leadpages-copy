@@ -5,14 +5,14 @@ import Link from '@components/Link'
 
 const OuterContainer = styled('div', {
   position: 'relative',
-  maxWidth: '$extended',
-  marginLeft: 'auto',
-  marginRight: 'auto',
   paddingTop: '4rem',
 
-  '@>s': {
-    paddingRight: '6rem',
-    paddingLeft: '6rem',
+  '@>m': {
+    px: '$2',
+  },
+
+  '@>l': {
+    px: '$12',
   },
 })
 

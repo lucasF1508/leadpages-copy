@@ -12,8 +12,11 @@ const HeadingFlexbox = styled('div', {
   borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
 
   '@>m': {
-    paddingRight: '6rem',
-    paddingLeft: '6rem',
+    px: '$2',
+  },
+
+  '@>l': {
+    px: '$12',
   },
 
   '@<m': {
@@ -24,9 +27,6 @@ const HeadingFlexbox = styled('div', {
 
 const ListingBlockContainer = styled('div', {
   paddingTop: '160px',
-  maxWidth: '$extended',
-  marginLeft: 'auto',
-  marginRight: 'auto',
   width: '100%',
 })
 

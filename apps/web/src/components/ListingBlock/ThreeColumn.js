@@ -10,15 +10,15 @@ const OuterContainer = styled('div', {
 })
 
 const LPUContainer = styled('div', {
-  maxWidth: '$extended',
-  marginLeft: 'auto',
-  marginRight: 'auto',
   paddingTop: '3rem',
   paddingBottom: '1rem',
 
   '@>m': {
-    paddingRight: '6rem',
-    paddingLeft: '6rem',
+    px: '$2',
+  },
+
+  '@>l': {
+    px: '$12',
   },
 })
 
