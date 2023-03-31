@@ -1,3 +1,6 @@
+<br>
+<img src="https://user-images.githubusercontent.com/4299551/229001290-f1b4d3f8-5eeb-4941-837d-787a608a548c.svg" width="300">
+
 # Rack & Pinion - Next-js app
 
 A custom CMS app built with [Sanity](https://www.sanity.io/), [Next JS](https://nextjs.org/docs/) and [Stitches](https://stitches.dev/)
