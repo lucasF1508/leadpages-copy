@@ -26,14 +26,14 @@ export const GearboxImporter = React.forwardRef((props, ref) => {
   const inputId = 'akjsfhhfucv81y3bcka'
   // const { type, value, onChange, focusPath, onFocus, onBlur } = props
   // return null
-  //const [value, setValue] = useState('')
+  // const [value, setValue] = useState('')
   // const { onChange, type, value = {} } = props
   // const {
   //   options: { apiKey, ...options },
   // } = type
   // const { title, description } = type
   // const toast = useToast()
-  console.log(inputId)
+
   return (
     <>
       <Stack space={2}>

@@ -1,14 +1,15 @@
 export const author = (value) => {
-  const ref = {
-    'sprice@delivra.com': {
-      _ref: '847f573d-21da-4363-9aa5-78110779e3aa',
-      _type: 'reference',
-    },
-    'bberry@delivra.com': {
-      _ref: 'a5a28a99-ea09-4c7a-a7da-df412ed6e1d4',
-      _type: 'reference',
-    },
-  }[value]
+  const leadpagesTeam = {
+    _ref: '31eeb718-b2e4-4127-8435-cf34b4f8239c',
+    _type: 'reference',
+  }
 
-  return ref
+  switch (value) {
+    case 18:
+      return leadpagesTeam
+    case 104:
+      return leadpagesTeam
+    default:
+      return leadpagesTeam
+  }
 }

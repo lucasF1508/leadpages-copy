@@ -36,6 +36,7 @@ const {
   LEADPAGES_REACTIVATION_HOST,
   LEADPAGES_BLOG_PROXY_HOST,
   LEADPAGES_BLOG_PROXY_PATH,
+  LEADPAGES_BLOG_PROXY_ENABLE,
   GTM_CONTAINER_ID,
   GTAG_TRACKING_ID,
   FB_PIXEL_ID,
@@ -136,7 +137,7 @@ const moduleExports = withBundleAnalyzer({
     ]
   },
   rewrites: async () => {
-    const fallbackProxy = `${LEADPAGES_BLOG_PROXY_HOST}${LEADPAGES_BLOG_PROXY_PATH}`
+    // Incremental path rewrites
     const incrementalPaths = await filterRoutesFromSanity({
       directory: './src/pages/_legacy',
       projectId: SANITY_STUDIO_API_PROJECT_ID,
@@ -160,6 +161,30 @@ const moduleExports = withBundleAnalyzer({
       }
     }
 
+    // Fallback
+    const blogProxyUrl = `${LEADPAGES_BLOG_PROXY_HOST}${LEADPAGES_BLOG_PROXY_PATH}`
+    const blogProxy =
+      LEADPAGES_BLOG_PROXY_ENABLE !== 'false'
+        ? [
+            {
+              source: '/blog/:path*',
+              destination: `${blogProxyUrl}/:path*`,
+            },
+            {
+              source: '/blog/:path*/',
+              destination: `${blogProxyUrl}/:path*/`,
+            },
+          ]
+        : []
+
+    const fallbackRewrites = [
+      ...blogProxy,
+      // {
+      //   source: '/:path*',
+      //   destination: `/redirectHandler`, // Server side redirects
+      // },
+    ]
+
     return {
       afterFiles: [
         {
@@ -178,22 +203,7 @@ const moduleExports = withBundleAnalyzer({
           destination: '/',
         },
       ],
-      fallback: [
-        {
-          source: '/blog/:path*',
-          destination: `${fallbackProxy}/:path*`,
-        },
-        {
-          source: '/blog/:path*/',
-          destination: `${fallbackProxy}/:path*/`,
-        },
-      ],
-      // fallback: [
-      //   {
-      //     source: '/:path*',
-      //     destination: `/redirectHandler`,
-      //   },
-      // ],
+      fallback: [...fallbackRewrites],
     }
   },
   eslint: {

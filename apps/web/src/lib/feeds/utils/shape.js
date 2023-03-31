@@ -6,12 +6,7 @@ const shapeItem = async (value, map) => {
   // eslint-disable-next-line no-unused-vars
   const [to, shaping] = toOrg.split('::')
 
-  // Shape the data as per the expected Sanity format
-  // console.log('shaping:', shaping)
   const shaper = shapers[shaping]
-  // if (shaping === 'blockContent') {
-  //   console.log(shaper)
-  // }
   const shapedValue = shaper ? await shaper(value, map) : value
 
   return shapedValue

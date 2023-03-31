@@ -208,7 +208,7 @@ const ArchiveSingle = ({
             heading={title}
             tag="h1"
             tagStyle="h2"
-            css={{ marginBottom: '$1_5' }}
+            css={{ marginBottom: '$3' }}
           />
           {publisher && (
             <Heading
@@ -218,6 +218,8 @@ const ArchiveSingle = ({
                 type: 'base',
                 fontSize: '15px',
                 mb: '$3_5',
+                fontFamily: '$apercuPro',
+                fontWeight: 400,
               }}
             >
               Posted by{' '}

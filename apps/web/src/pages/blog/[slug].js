@@ -57,9 +57,11 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
+  // Build 20 most recent posts
   const docPaths = await getDocSlugs('post', {
     filters: ['isExternal != true', 'redirectToLegacy != true'],
     slice: '0..20',
+    order: 'order(publishedDate desc, _createdAt desc)',
   })
 
   const paths = docPaths.map(({ slug }) => ({

@@ -71,13 +71,6 @@ export const textDefaultTokens = {
       mb: 0,
     },
   },
-  // '& a': {
-  //   c: '$brand',
-
-  //   '&[href^="tel"]': {
-  //     c: '$text',
-  //   },
-  // },
 }
 
 export const textPostTokens = {
@@ -94,6 +87,15 @@ export const textPostTokens = {
 
     '&:first-child': {
       mt: 0,
+    },
+
+    a: {
+      c: '$purple',
+      bb: '1px solid transparent',
+
+      '&:hover': {
+        bb: '1px solid $colors$primary',
+      },
     },
   },
   [`& h2`]: { type: 'h2Blog' },
@@ -145,18 +147,14 @@ export const textPostTokens = {
     h: '0.25rem',
     mt: '-0.125rem',
     br: '$round',
-    bc: '$brand',
+    bc: '$text',
   },
   '& ol': {
     'counter-reset': 'list',
     '& > li::before': {
-      position: 'absolute',
-      top: 0,
-      left: 0,
       lh: '$m',
-      c: '$brand',
-      content: "counter(list, lower-roman) '. '",
-      fontWeight: '$bold',
+      pr: '$space$2',
+      content: "counter(list) ' .'",
       counterIncrement: 'list',
     },
   },

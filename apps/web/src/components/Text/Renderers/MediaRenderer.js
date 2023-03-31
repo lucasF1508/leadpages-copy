@@ -1,6 +1,7 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 import { styled } from '@design'
+import useImageParser from '@hooks/useImageParser'
 
 const Media = dynamic(() => import('@components/Media'))
 
@@ -9,7 +10,7 @@ const $MediaContainer = styled('div', {
   my: '$2',
 
   '@>s': {
-    my: '$8',
+    my: '$4',
   },
 
   '&:first-child': { mt: '0' },
@@ -27,10 +28,26 @@ const $MediaContainer = styled('div', {
 
 const ImageRenderer = ({
   node: { markDefs, maxWidth, removeSpaceAround, styleMap, ...media },
-}) => (
-  <$MediaContainer removeSpaceAround={removeSpaceAround} css={{ maxWidth }}>
-    <Media media={media} type="static" />
-  </$MediaContainer>
-)
+}) => {
+  const { condition, image } = media
+
+  if (condition === 'image') {
+    const { width } = useImageParser(image)
+    return (
+      <$MediaContainer
+        removeSpaceAround={removeSpaceAround}
+        css={{ maxWidth: maxWidth || width, mx: 'auto' }}
+      >
+        <Media media={media} type="static" />
+      </$MediaContainer>
+    )
+  }
+
+  return (
+    <$MediaContainer removeSpaceAround={removeSpaceAround} css={{ maxWidth }}>
+      <Media media={media} type="static" />
+    </$MediaContainer>
+  )
+}
 
 export default ImageRenderer

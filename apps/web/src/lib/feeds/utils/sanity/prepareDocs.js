@@ -21,7 +21,7 @@ export const prepareArticleDocs = async (
   const postIds = postDocs.map(({ _id }) => _id)
 
   return articleData.map((article) => {
-    const { image, primaryCategory, _id } = article
+    const { image, primaryCategory, _id, secondaryCategories } = article
 
     if ((!primaryCategory || !image) && !postIds.includes(_id)) {
       // eslint-disable-next-line no-param-reassign
@@ -30,6 +30,7 @@ export const prepareArticleDocs = async (
 
     return {
       _type,
+      primaryCategory: secondaryCategories[0],
       ...article,
     }
   })

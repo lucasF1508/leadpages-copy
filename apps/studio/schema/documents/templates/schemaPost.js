@@ -30,8 +30,14 @@ export const schemaPost = {
       F.publishedDate(),
       F.category('publisher', { name: 'publisher', required: true }),
       F.category('categoryPost', { name: 'primaryCategory', required: true }),
-      F.multiReference('post', { name: 'relatedArticles' }),
+      F.multiReference('post', { name: 'relatedArticles', hidden: true }), // TODO: Fix. This currently pulls a different component than the inline version.
       F.multiReference('categoryPost', { name: 'secondaryCategories' }),
+      F.field('tags', {
+        name: 'tags',
+        options: {
+          includeFromRelated: 'tags',
+        },
+      }),
     ]),
     ...G.group('seo', [F.seo()]),
     ...G.group('options', [

@@ -21,6 +21,7 @@ export const multiReferenceSchema = ({
       {
         type: 'reference',
         to: types.map((type) => ({ type })),
+        weak: true,
       },
     ],
   }

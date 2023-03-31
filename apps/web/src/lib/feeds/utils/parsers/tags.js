@@ -11,6 +11,7 @@ export const tags = (item) => {
           : `${string}${index === words.length - 1 ? ' &' : ','} ${word}`,
       ''
     )
+
     return {
       label: value,
       value,

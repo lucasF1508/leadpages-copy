@@ -12,11 +12,6 @@ export const schemaInlineCTA = {
   ],
   fields: [
     ...G.group('content', [
-      F.string({
-        name: 'title',
-        initialValue: 'Try Leadpages free for 14 days',
-        group: 'content',
-      }),
       F.field('blockContentSimple', {
         name: 'content',
         validation: (Rule) => Rule.required(),
@@ -100,7 +95,12 @@ export const schemaInlineCTA = {
             { title: 'Light', value: 'grayAlt' },
             { title: 'Dark', value: 'primary' },
             { title: 'Alternate', value: 'secondary' },
+            { title: 'Tan', value: 'tan' },
+            { title: 'Lavender light', value: 'lavenderLight' },
             { title: 'Transparent', value: 'transparent' },
+            { title: 'Text Highlight', value: 'textHighlight' },
+            { title: 'Champagne', value: 'champagne' },
+            { title: 'Magnolia', value: 'magnolia' },
           ],
           layout: 'radio',
         },

@@ -49,7 +49,6 @@ const Archive = ({
   categories,
   settings,
   hasFeaturedPost,
-  isLoading = false,
 }) => {
   const isMobile = useEvalBreakpoint('<m')
 

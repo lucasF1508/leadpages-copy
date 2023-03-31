@@ -64,6 +64,7 @@ const CardPostArchive = ({
             fontSize: '15px',
             mb: '$0_5',
             fontWeight: '500',
+            fontFamily: '$apercuPro',
           }}
         />
       </Link>
@@ -73,7 +74,7 @@ const CardPostArchive = ({
         heading={title}
         tag="h3"
         tagStyle={isFeatured ? 'h4' : 'h6'}
-        css={{ d: 'inline' }}
+        css={{ d: 'inline', fontSize: !isFeatured && '1.125rem' }}
       />
     </Link>
     <Heading
@@ -83,6 +84,8 @@ const CardPostArchive = ({
         type: 'base',
         fontSize: '15px',
         mb: '$3_5',
+        fontFamily: '$apercuPro',
+        fontWeight: 400,
       }}
     >
       {publisher && (

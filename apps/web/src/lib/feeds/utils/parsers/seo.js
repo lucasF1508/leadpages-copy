@@ -1,7 +1,5 @@
-export const seo = (value) => {
-  if (!value) return value
-
-  const seoObject = value.split('|').reduce((object, field) => {
+const processSeoString = (value) =>
+  value.split('|').reduce((object, field) => {
     const [key, seoValue] = field.split('::').map((string) => string.trim())
 
     const image =
@@ -19,5 +17,25 @@ export const seo = (value) => {
     }
   }, {})
 
-  return Object.values(seoObject).length > 0 ? seoObject : undefined
+export const seo = (value, map) => {
+  if (!value) return value
+  const { seoField } = map
+  let result = {}
+
+  switch (seoField) {
+    case 'seoImage':
+      result[seoField] = {
+        _type: 'image',
+        _sanityAsset: `image@${value}`,
+      }
+      break
+    case null:
+      result = processSeoString(value)
+      break
+    default:
+      result[seoField] = value
+      break
+  }
+
+  return Object.values(result).length > 0 ? result : undefined
 }

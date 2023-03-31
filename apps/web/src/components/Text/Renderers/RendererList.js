@@ -7,11 +7,13 @@ const RendererList = {
   cardsPreviousNext: dynamic(() => import('./CardsPreviousNextRenderer')),
   columns: dynamic(() => import('./ColumnsRenderer')),
   embed: dynamic(() => import('./EmbedRenderer')),
-  inlineCTA: dynamic(() => import('@components/Archive/InlineCTA')),
   media: dynamic(() => import('./MediaRenderer')),
   pageAnchor: dynamic(() => import('./AnchorRenderer')),
   socialLinks: dynamic(() => import('./SocialLinksRenderer')),
   table: dynamic(() => import('./TableRenderer')),
+  inlineCTA: dynamic(() => import('./InlineCTA')),
+  dropShadowBox: dynamic(() => import('./DropShadowBox')),
+  logoGrid: dynamic(() => import('./InlineLogoGrid')),
 }
 
 export default RendererList

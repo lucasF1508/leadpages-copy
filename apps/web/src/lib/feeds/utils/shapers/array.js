@@ -11,6 +11,22 @@ export const array = (parsedValue, map) => {
     labelKey = 'label'
   }
 
+  if (processing === 'tags') {
+    return parsedValue
+  }
+
+  if (processing === 'category') {
+    const arr = values.map((value) => {
+      const { _id } = value
+      return {
+        _ref: _id,
+        _type: 'reference',
+      }
+    })
+
+    return filterDuplicateByKey(arr, '_ref')
+  }
+
   const arr = values.map((value) => {
     if (!isString(value) && !labelKey) return value
     return { label: labelKey ? value[labelKey] : value, value }

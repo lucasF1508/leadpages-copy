@@ -184,6 +184,12 @@ export const blockContent = {
       type: 'inlineCTA',
     },
     {
+      type: 'logoGrid',
+    },
+    {
+      type: 'dropShadowBox',
+    },
+    {
       type: 'table',
     },
     {

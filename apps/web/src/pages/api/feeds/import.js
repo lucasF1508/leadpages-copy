@@ -21,6 +21,8 @@ module.exports = async (req, res) => {
 
   const { id, debug, dryRun } = query
 
+  console.log('Import Started')
+
   if (debug) {
     timers.importStart = now()
     console.log('\n======================')
@@ -75,6 +77,7 @@ module.exports = async (req, res) => {
     console.log('======================')
   }
 
+  console.log('Import Complete')
   return res.status(200).json(
     importedDocs
       ? {

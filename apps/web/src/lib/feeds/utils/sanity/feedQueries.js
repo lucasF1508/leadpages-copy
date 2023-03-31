@@ -11,7 +11,8 @@ export const feedProjection = /* groq */ `
     'processing': processingOptions.condition,
     'category': processingOptions.categoryMapping,
     'prepend': processingOptions.slugifyPrepend,
-    'imageType': processingOptions.imageType
+    'imageType': processingOptions.imageType,
+    'seoField': processingOptions.seoField
   },
 `
 

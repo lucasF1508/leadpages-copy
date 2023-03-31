@@ -173,6 +173,10 @@ export const schemaFeed = {
                         value: 'slugify',
                       },
                       {
+                        title: 'Path',
+                        value: 'path',
+                      },
+                      {
                         title: 'URL',
                         value: 'url',
                       },
@@ -232,6 +236,36 @@ export const schemaFeed = {
                   initialValue: 'media:content',
                 }),
                 F.string({
+                  title: 'SEO Field',
+                  name: 'seoField',
+                  description: 'SEO schema object field to map to.',
+                  hidden: ({ parent }) => parent.condition !== 'seo',
+                  options: {
+                    list: [
+                      {
+                        title: 'seoTitle',
+                        value: 'seoTitle',
+                      },
+                      {
+                        title: 'seoDescription',
+                        value: 'seoDescription',
+                      },
+                      {
+                        title: 'seoImage',
+                        value: 'seoImage',
+                      },
+                      {
+                        title: 'seoKeywords',
+                        value: 'seoKeywords',
+                      },
+                      {
+                        title: 'seoSynonyms',
+                        value: 'seoSynonyms',
+                      },
+                    ],
+                  },
+                }),
+                F.string({
                   title: 'Prepend',
                   name: 'slugifyPrepend',
                   hidden: ({ parent }) => parent.condition !== 'slugify',
@@ -254,6 +288,7 @@ export const schemaFeed = {
               categoryMapping: 'processingOptions.categoryMapping',
               slugifyPrepend: 'processingOptions.slugifyPrepend',
               regex: 'processingRegex',
+              seoField: 'processingOptions.seoField',
             },
             prepare: ({
               from,
@@ -262,20 +297,22 @@ export const schemaFeed = {
               regex,
               categoryMapping,
               slugifyPrepend,
+              seoField,
             }) => {
               const [toStripped] = to.split('::')
               const prepend = slugifyPrepend ? `"${slugifyPrepend}" + ` : ''
+              const seo = seoField ? `: ${seoField}` : ''
               const processingString = categoryMapping
                 ? ` (${startCase(categoryMapping)})`
                 : processing && processing !== 'none'
                 ? processing.length <= 3
-                  ? ` (${upperCase(processing)})`
-                  : ` (${startCase(processing)})`
+                  ? ` (${upperCase(processing)}${seo})`
+                  : ` (${startCase(processing)}${seo})`
                 : ''
               const feedFieldString =
                 processing == 'stringValue' ? `"${from}"` : from
               return {
-                title: `${feedFieldString} → ${prepend}${toStripped}${processingString}${
+                title: `${prepend}${feedFieldString} → ${toStripped}${processingString}${
                   regex ? `, RegExp: ${regex}` : ''
                 }`,
               }

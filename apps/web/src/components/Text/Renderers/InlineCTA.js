@@ -93,6 +93,7 @@ const $InlineCta = styled('div', {
 
   '@>s': {
     d: 'flex',
+    justifyContent: 'space-between',
   },
 
   variants: {
@@ -120,13 +121,19 @@ const $InlineCta = styled('div', {
             c: '$white',
           },
 
-          [`${$Heading}`]: {
+          [`h2, h3, h4`]: {
             c: '$white',
           },
         },
       },
       secondary: { bc: '$ctaPurple' },
       grayAlt: { bc: '$grayAlt' },
+      tan: { bc: '$tan' },
+      lavenderLight: { bc: '$lavenderLight' },
+      textHighlight: { bc: '$textHighlight' },
+      champagne: { bc: '$champagne' },
+      magnolia: { bc: '$magnolia' },
+      lavenderBlush: { bc: '$lavenderBlush' },
       transparent: {
         bc: 'transparent',
         [`${$CTAContent}`]: {
@@ -145,7 +152,6 @@ const $InlineCta = styled('div', {
 const InlineCta = ({ node = {}, ...props }) => {
   const {
     image,
-    title,
     content,
     ctaLink,
     contentRight,
@@ -165,8 +171,7 @@ const InlineCta = ({ node = {}, ...props }) => {
         <Image objectFit="contain" image={image || ImageFallback} />
       </$CTAImage>
       <$CTAContent>
-        {title && <$Heading tag="h2" tagStyle="h3" heading={title} />}
-        {content && <$Text content={content} />}
+        {content && <$Text content={content} isPost={true} />}
         {ctaLink && (
           <$CTAButton isFlex={true}>
             <Link

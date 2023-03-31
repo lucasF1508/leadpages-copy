@@ -101,6 +101,9 @@ export const blockContentHeadline = F.array({
       title: 'Block',
       type: 'block',
       styles: [
+        { title: 'H2', value: 'h2' },
+        { title: 'H3', value: 'h3' },
+        { title: 'H4', value: 'h4' },
         {
           title: 'Extra Small',
           value: 'extraSmall',

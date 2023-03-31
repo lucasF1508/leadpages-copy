@@ -7,68 +7,42 @@ const { JSDOM } = jsdom
 const blockContentSchema = require('./blockContentSchema')
 const blockContentType = blockContentSchema.get('blockContent')
 
+const {
+  parseWpMediaTextComments,
+  parseWpButtonComments,
+  parseWpHtmlComments,
+} = require('./functions/parseWpComments')
+
+// const { parseWpDropShadowBox } = require('./functions/parseWpShortcodes')
+
+const {
+  deserializeButton,
+  deserializeCodeAndPre,
+  deserializeIframe,
+  deserializeImage,
+  deserializeInlineCta,
+  deserializeParagraph,
+  deserializeAudio,
+  deserializeFigure,
+  deserializeWistia,
+  deserializeContentGroup,
+  deserializeDropShadowBox,
+  deserializeSpan,
+} = require('./rules')
+
 const rules = [
-  {
-    deserialize(el, next, block) {
-      if (el.tagName.toLowerCase() !== 'img') {
-        return undefined
-      }
-
-      const img = el
-      const caption = Array.from(img.parentNode.children).find(
-        (child) => child.tagName.toLowerCase() === 'figcaption'
-      )
-
-      const src = img.getAttribute('src')
-
-      return img && src
-        ? block({
-            _type: 'media',
-            condition: 'image',
-            image: {
-              _type: 'image',
-              _sanityAsset: `image@${img.getAttribute('src')}`,
-              altText: img.getAttribute('alt'),
-              title: img.getAttribute('title'),
-              description: img.getAttribute('description'),
-            },
-            caption: caption ? caption?.textContent : undefined,
-          })
-        : undefined
-    },
-  },
-  {
-    // Special case for code blocks (wrapped in pre and code tag)
-    deserialize(el, next, block) {
-      if (!el) {
-        return undefined
-      }
-      if (el.tagName.toLowerCase() !== 'pre') {
-        return undefined
-      }
-      const code = el.children[0]
-
-      const childNodes =
-        code && code.tagName.toLowerCase() === 'code'
-          ? code.childNodes
-          : el.childNodes
-      let text = ''
-      childNodes.forEach((node) => {
-        text += node.textContent
-      })
-
-      /**
-       * use `block()` to add it to the
-       * root array, instead of as
-       * children of a block
-       *  */
-      return block({
-        _type: 'code',
-        language: el.dataset.language,
-        text,
-      })
-    },
-  },
+  deserializeInlineCta,
+  deserializeContentGroup,
+  deserializeWistia,
+  deserializeButton,
+  deserializeAudio,
+  deserializeIframe,
+  deserializeFigure,
+  deserializeCodeAndPre,
+  deserializeImage,
+  deserializeParagraph,
+  deserializeDropShadowBox,
+  deserializeSpan,
 ]
 
 const parseHtmlToBlocks = (html, options) => {
@@ -76,10 +50,47 @@ const parseHtmlToBlocks = (html, options) => {
     return []
   }
 
+  const htmlWithParsedMediaText = parseWpMediaTextComments(html)
+  const htmlWithParsedButtons = parseWpButtonComments(htmlWithParsedMediaText)
+  const htmlWithParsedHtml = parseWpHtmlComments(htmlWithParsedButtons)
+
+  // const htmlWithParsedDropShadowBox = parseWpDropShadowBox(htmlWithParsedHtml)
+
   const avoidOrphan = (textString) =>
     /<[a-z][\s\S]*>/i.test(textString) ? textString : `<p>${textString}</p>`
 
-  const sanitizedHTML = sanitizeHTML(avoidOrphan(html), {
+  const sanitizedHTML = sanitizeHTML(avoidOrphan(htmlWithParsedHtml), {
+    allowVulnerableTags: true,
+    transformTags: {
+      a: (tagName, attribs = {}) => {
+        if (
+          attribs?.href &&
+          (attribs.href.includes('itunes.apple.com/us/podcast') ||
+            attribs.href.includes('www.google.com/podcasts'))
+        ) {
+          return {
+            tagName: 'podcastbadge',
+            attribs,
+          }
+        }
+        return {
+          tagName: 'a',
+          attribs,
+        }
+      },
+      script: (tagName, attribs = {}) => {
+        if (attribs.src?.includes('https://fast.wistia.com/embed/medias/')) {
+          return {
+            tagName: 'wistia',
+            attribs,
+          }
+        }
+        return {
+          tagName: 'script',
+          attribs,
+        }
+      },
+    },
     allowedTags: [
       'h2',
       'h3',
@@ -96,6 +107,7 @@ const parseHtmlToBlocks = (html, options) => {
       'li',
       'b',
       'i',
+      'button',
       'strong',
       'em',
       'strike',
@@ -113,12 +125,59 @@ const parseHtmlToBlocks = (html, options) => {
       'figure',
       'figcaption',
       'img',
+      'iframe',
+      'inlinecta',
+      'audio',
+      'script',
+      'wistia',
+      'contentgroup',
+      'podcastbadge',
+      'dropshadowbox',
+      'span',
+      'video',
     ],
+    allowedAttributes: {
+      iframe: [
+        'title',
+        'src',
+        'height',
+        'width',
+        'scrolling',
+        'allowfullscreen',
+        'webkitallowfullscreen',
+        'mozallowfullscreen',
+        'oallowfullscreen',
+        'msallowfullscreen',
+        'style',
+        'frameborder',
+        'allow',
+      ],
+      audio: ['controls', 'src'],
+      button: [
+        'data-leadbox-popup',
+        'data-leadbox-domain',
+        'style',
+        'data-json',
+      ],
+      img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+      a: ['href', 'name', 'target'],
+      inlinecta: ['data-json'],
+      p: ['class'],
+      figure: ['class'],
+      script: ['src', 'async'],
+      wistia: ['async', 'defer', 'src'],
+      podcastbadge: ['src', 'href'],
+      span: ['class', 'style'],
+      blockquote: ['class', 'data-instgrm-permalink'],
+      video: ['autoplay', 'controls', 'loop', 'muted', 'playsinline', 'src'],
+    },
   })
 
   return blockTools.htmlToBlocks(sanitizedHTML, blockContentType, {
     rules,
-    parseHtml: (htmlContent) => new JSDOM(htmlContent).window.document,
+    parseHtml: (htmlContent) => {
+      return new JSDOM(htmlContent).window.document
+    },
   })
 }
 

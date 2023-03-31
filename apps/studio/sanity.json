@@ -26,17 +26,15 @@
     "gearbox-vimeo",
     "seo-pane",
     "table",
-    "@sanity/orderable-document-list"
+    "@sanity/orderable-document-list",
+    "tags"
   ],
   "env": {
     "development": {
       "api": {
         "dataset": "production"
       },
-      "plugins": [
-        "@sanity/vision",
-        "parts-list"
-      ]
+      "plugins": ["@sanity/vision", "parts-list"]
     }
   },
   "parts": [

@@ -31,7 +31,7 @@ export const processFeed = async (
     categoryPostDocs || (await fetchCategoryPostDocs())
 
   // 1. Map feed data to mapping settings
-  const [articleJson, categoryData] = mapData({ data, mapping })
+  const [articleJson, categoryData] = mapData({ data, mapping, debug })
 
   // 2. Prepare categories
   const categoryDocs = await prepareCategoryDocs(categories, categoryData)

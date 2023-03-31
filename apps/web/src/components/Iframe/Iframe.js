@@ -8,14 +8,12 @@ export const IframeContainer = styled('div', {
   '&::before': {
     content: `''`,
     d: 'block',
-    pb: '56.25%',
     w: '100%',
     bc: '$grey3',
   },
 
   '& iframe': {
     of: 'cover',
-    position: 'absolute',
     top: 0,
     left: 0,
     h: '100%',
