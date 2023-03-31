@@ -3,7 +3,7 @@ import { F } from 'part:gearbox-schema-tool/schema-builder'
 
 export const schemaHeroIntegration = F.hero({
   name: 'heroIntegration',
-  title: 'Integration Hero',
+  title: 'Integration Hero (Legacy)',
   icon,
   args: {
     label: false,

@@ -1,9 +1,9 @@
-import { BsBriefcaseFill as icon } from 'react-icons/bs'
+import { BsBriefcase as icon } from 'react-icons/bs'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 
 export const schemaHeroCareers = F.hero({
   name: 'heroCareers',
-  title: 'Careers Hero',
+  title: 'Careers Hero (Legacy)',
   icon,
   args: {
     label: false,

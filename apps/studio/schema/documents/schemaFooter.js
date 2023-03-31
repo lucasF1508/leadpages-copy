@@ -9,6 +9,8 @@ export const schemaFooter = {
   fields: [
     F.array({
       name: 'menu',
+      description:
+        'Dynamic navigation options for site footer. Leave blank to default to legacy footer.',
       validation: (Rule) => Rule.max(4),
       of: [
         F.object({
