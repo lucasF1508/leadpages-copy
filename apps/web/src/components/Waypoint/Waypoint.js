@@ -3,7 +3,7 @@ import { styled } from '@design'
 import useWaypoint from '@hooks/useWaypoint'
 
 export const $Waypoint = styled('div', {
-  position: 'relative',
+  position: 'absolute',
   z: '$cover',
   d: 'block',
   w: '100%',
