@@ -20,6 +20,9 @@ export async function middleware(request) {
     ) {
       return NextResponse.rewrite(new URL(url.pathname, proxyHost))
     }
+    return NextResponse.rewrite(
+      new URL(`${url.pathname}/${url.search}`, proxyHost)
+    )
   }
 
   if (!incrementalPaths.length) return response
