@@ -54,7 +54,7 @@ const useSeo = ({ seo, siteMeta } = {}) => {
           url: image?.builder?.width(1200).height(630).url(),
         }
       : {},
-    url: `${NEXT_PUBLIC_URL || ''}${asPath}`,
+    url: `${NEXT_PUBLIC_URL || ''}${asPath.replace('/_legacy', '')}`,
     locale: 'en_CA',
     type: 'website',
     robots,
