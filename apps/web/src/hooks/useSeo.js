@@ -33,10 +33,7 @@ const useSeo = ({ seo, siteMeta } = {}) => {
     siteMeta || {}
   const { seoImage, seoTitle, seoDescription, hasCustomSeoTitle } = seo || {}
   const image = useSanityImage(seoImage || seoImageDefault)
-  const robots =
-    VERCEL_ENV !== 'production' || asPath.includes('_legacy')
-      ? 'noindex,nofollow'
-      : ''
+  const robots = VERCEL_ENV !== 'production' ? 'noindex,nofollow' : ''
 
   return {
     GTM_CONTAINER_ID,
