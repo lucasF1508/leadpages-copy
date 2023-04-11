@@ -177,13 +177,17 @@ const moduleExports = withBundleAnalyzer({
           ]
         : []
 
-    const fallbackRewrites = [
-      ...blogProxy,
-      // {
-      //   source: '/:path*',
-      //   destination: `/redirectHandler`, // Server side redirects
-      // },
-    ]
+    const redirectHandler =
+      LEADPAGES_BLOG_PROXY_ENABLE === 'false'
+        ? [
+            {
+              source: '/:path*',
+              destination: `/redirectHandler`, // Server side redirects
+            },
+          ]
+        : []
+
+    const fallbackRewrites = [...blogProxy, ...redirectHandler]
 
     return {
       afterFiles: [
