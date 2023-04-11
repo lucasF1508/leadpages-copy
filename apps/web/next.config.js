@@ -207,7 +207,7 @@ const moduleExports = withBundleAnalyzer({
           destination: '/',
         },
       ],
-      fallback: [...fallbackRewrites],
+      // fallback: [...fallbackRewrites],
     }
   },
   eslint: {
