@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server'
 import incrementalPaths from '@public/indices/incrementalPaths'
 
+// Redirects
+import redirects from '@public/indices/legacyBlogRedirects.json'
+
+// Proxy
 const proxyHost = process.env.LEADPAGES_BLOG_PROXY_HOST
 const proxyPath = process.env.LEADPAGES_BLOG_PROXY_PATH
 const proxyEnabled = process.env.LEADPAGES_BLOG_PROXY_ENABLE !== 'false'
@@ -12,6 +16,7 @@ const patterns = incrementalPaths?.map(
 export async function middleware(request) {
   const response = NextResponse.next()
   const url = request.nextUrl.clone()
+  const path = url.pathname.substring(1)
 
   if (request.cookies.get('__next_preview_data')) {
     return response
@@ -27,6 +32,11 @@ export async function middleware(request) {
     return NextResponse.rewrite(
       new URL(`${url.pathname}/${url.search}`, proxyHost)
     )
+  }
+
+  if (Object.keys(redirects).includes(path)) {
+    const rule = redirects[path]
+    return NextResponse.redirect(new URL(rule?.destination || rule, url))
   }
 
   if (!incrementalPaths.length) return response
