@@ -19,7 +19,15 @@ export const schemaPage = {
     ...F.fieldDefaults(),
     ...G.group('content', [
       F.field('hero'),
-      F.field('components', {}),
+      F.field('components', {
+        hidden: ({ parent }) => parent.hasSidebar === true,
+      }),
+      F.blockContent({
+        hidden: ({ parent }) => parent.hasSidebar !== true,
+      }),
+      F.field('sidebarLinks', {
+        hidden: ({ parent }) => parent.hasSidebar !== true,
+      }),
       F.reference('cta', {
         name: 'cta',
         title: 'Call to Action',
@@ -33,6 +41,12 @@ export const schemaPage = {
         title: 'Redirect to legacy page',
         description:
           'Enable to redirect to a legacy Leadpages page, if it exists.',
+      }),
+      F.boolean({
+        name: 'hasSidebar',
+        title: 'Toggle Sidebar Page',
+        description:
+          'Swaps page components for long-form content editor and displays sidebar links for page sections/links.',
       }),
       F.object({
         name: 'options',

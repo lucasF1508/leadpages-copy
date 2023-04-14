@@ -26,7 +26,7 @@ const $SidebarInner = styled('div', {
   marginLeft: '2rem',
   boxSizing: 'content-box',
   overflow: 'auto',
-  height: 'calc(100vh - $headerHeight$s)',
+  maxHeight: 'calc(100vh - $headerHeight$s)',
 })
 
 const SidebarSection = styled('div', {

@@ -4,34 +4,24 @@ import Page, { PageSidebar } from '@layouts/Page'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
 import { features } from 'config'
 
-const DynamicPage = ({ displaySidebar, ...props }) =>
-  displaySidebar ? <PageSidebar {...props} /> : <Page {...props} />
-
-const sidebarTypes = ['comparison']
+const DynamicPage = ({ hasSidebar, ...props }) =>
+  hasSidebar ? <PageSidebar {...props} /> : <Page {...props} />
 
 export const shapeData = (data) => {
   const [pageData] = (data?.length && data) || []
-  const {
-    _type: type,
-    hero: heroes,
-    options: pageOptions,
-    hasSidebar,
-    sidebarLinks,
-  } = pageData || {}
+  const { hero: heroes, options: pageOptions, hasSidebar } = pageData || {}
   const [hero] = heroes || []
 
   // Page options
   const darkHero = features.darkHeros.includes(
     hero?.backgroundOptions?.backgroundColor
   )
-  const displaySidebar =
-    sidebarTypes.includes(type) || (hasSidebar && sidebarLinks?.length) || false
 
   const options = {
     ...pageData?.options,
     underlaidMenu: darkHero || pageOptions?.underlaidMenu || null,
     darkHero,
-    displaySidebar,
+    hasSidebar,
   }
 
   return [

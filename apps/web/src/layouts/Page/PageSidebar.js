@@ -21,13 +21,15 @@ const PageSidebar = ({ hero, content, cta, sidebarLinks, excerpt, title }) => {
     <>
       {hero && <Hero hero={hero} />}
       <$SidebarPageContainer>
-        {sidebarLinks?.length && (
+        {sidebarLinks?.length ? (
           <SidebarPage
             pageTitle={title}
             links={sidebarLinks}
             compareLogo={compareLogo}
             useScrollLink
           />
+        ) : (
+          <div></div>
         )}
         <Rack>
           <Pinion maxWidth="content">
