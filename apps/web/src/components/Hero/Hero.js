@@ -5,6 +5,7 @@ import HeroCustomer from './HeroCustomer'
 import HeroSimple from './HeroSimple'
 import HeroIntegration from './HeroIntegration'
 import HeroCareers from './HeroCareers'
+import HeroPricing from './HeroPricing'
 
 const Hero = ({ hero: heroOrg }) => {
   if (!heroOrg) return null
@@ -21,6 +22,8 @@ const Hero = ({ hero: heroOrg }) => {
       return <HeroIntegration {...hero} />
     case 'heroCareers':
       return <HeroCareers {...hero} />
+    case 'heroPricing':
+      return <HeroPricing {...hero} />
     default:
       return <HeroDefault {...hero} />
   }
