@@ -2,12 +2,10 @@ import { NextResponse } from 'next/server'
 import incrementalPaths from '@public/indices/incrementalPaths'
 
 // Redirects
-import redirects from '@public/indices/legacyBlogRedirects.json'
+import blogRedirects from '@public/indices/legacyBlogRedirects.json'
+import legacyRedirects from '@public/indices/legacyRedirects.json'
 
-// Proxy
-const proxyHost = process.env.LEADPAGES_BLOG_PROXY_HOST
-const proxyPath = process.env.LEADPAGES_BLOG_PROXY_PATH
-const proxyEnabled = process.env.LEADPAGES_BLOG_PROXY_ENABLE !== 'false'
+const redirects = { ...legacyRedirects, ...blogRedirects }
 
 const patterns = incrementalPaths?.map(
   (pathname) => new URLPattern({ pathname })
@@ -20,18 +18,6 @@ export async function middleware(request) {
 
   if (request.cookies.get('__next_preview_data')) {
     return response
-  }
-
-  if (proxyEnabled && url.pathname.startsWith(proxyPath)) {
-    if (
-      url.pathname.includes('wp-content') ||
-      url.pathname.includes('wp-includes')
-    ) {
-      return NextResponse.rewrite(new URL(url.pathname, proxyHost))
-    }
-    return NextResponse.rewrite(
-      new URL(`${url.pathname}/${url.search}`, proxyHost)
-    )
   }
 
   if (Object.keys(redirects).includes(path)) {
