@@ -11,8 +11,6 @@ require('dotenv').config({
 const { init: buildJSON } = require('indices/buildJSON')
 const { withSentryConfig } = require('@sentry/nextjs')
 
-const legacyRedirects = require('./public/indices/legacyRedirects.json')
-
 const {
   SANITY_STUDIO_API_PROJECT_ID,
   SANITY_STUDIO_API_DATASET,
@@ -34,9 +32,6 @@ const {
   LEADPAGES_API_HOST,
   LEADPAGES_TRIAL_HOST,
   LEADPAGES_REACTIVATION_HOST,
-  LEADPAGES_BLOG_PROXY_HOST,
-  LEADPAGES_BLOG_PROXY_PATH,
-  LEADPAGES_BLOG_PROXY_ENABLE,
   GTM_CONTAINER_ID,
   GTAG_TRACKING_ID,
   FB_PIXEL_ID,
@@ -126,13 +121,6 @@ const moduleExports = withBundleAnalyzer({
         destination: 'https://lp.leadpages.com/:slug',
         permanent: true,
       },
-      ...legacyRedirects
-        .filter(({ source }) => source !== 'home')
-        .map(({ source, destination }) => ({
-          source: `/${source}`,
-          destination,
-          permanent: true,
-        })),
       ...redirects,
     ]
   },
@@ -160,35 +148,6 @@ const moduleExports = withBundleAnalyzer({
         )
       }
     }
-
-    // Fallback
-    const blogProxyUrl = `${LEADPAGES_BLOG_PROXY_HOST}${LEADPAGES_BLOG_PROXY_PATH}`
-    const blogProxy =
-      LEADPAGES_BLOG_PROXY_ENABLE !== 'false'
-        ? [
-            {
-              source: '/blog/:path*',
-              destination: `${blogProxyUrl}/:path*`,
-            },
-            {
-              source: '/blog/:path*/',
-              destination: `${blogProxyUrl}/:path*/`,
-            },
-          ]
-        : []
-
-    const redirectHandler =
-      LEADPAGES_BLOG_PROXY_ENABLE === 'false'
-        ? [
-            {
-              source: '/:path*',
-              destination: `/redirectHandler`, // Server side redirects
-            },
-          ]
-        : []
-
-    const fallbackRewrites = [...blogProxy, ...redirectHandler]
-
     return {
       afterFiles: [
         {
@@ -207,7 +166,6 @@ const moduleExports = withBundleAnalyzer({
           destination: '/',
         },
       ],
-      // fallback: [...fallbackRewrites],
     }
   },
   eslint: {
