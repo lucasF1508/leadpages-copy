@@ -45,15 +45,16 @@ const StyledLink = styled('a', {
   },
 })
 
-const FeatureIconsGrid = ({
+const FeatureGrid = ({
   items,
   itemsPerRow = '4',
   showSectionLink,
   backgroundColor = 'transparent',
   align,
   asCards = false,
+  className,
 }) => (
-  <SectionContainer backgroundColor={backgroundColor}>
+  <SectionContainer className={className} backgroundColor={backgroundColor}>
     <IconCardsGrid
       items={items}
       itemsPerRow={itemsPerRow}
@@ -72,4 +73,4 @@ const FeatureIconsGrid = ({
   </SectionContainer>
 )
 
-export default FeatureIconsGrid
+export default FeatureGrid

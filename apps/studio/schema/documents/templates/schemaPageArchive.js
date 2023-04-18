@@ -2,14 +2,21 @@ import { BsArchive as icon } from 'react-icons/bs'
 import startCase from 'lodash/startCase'
 import { F, FS, G, P } from 'part:gearbox-schema-tool/schema-builder'
 
-const pageTemplates = ['post', 'customer', 'integration', 'comparison']
+const pageTemplates = [
+  'post',
+  'customer',
+  'integration',
+  'comparison',
+  'feature',
+  'faq',
+]
 
 export const schemaPageArchive = {
   icon,
   name: 'pageArchive',
   title: 'Archive Page',
   type: 'document',
-  __experimental_actions: ['update', 'publish' /* 'create', 'delete' */],
+  __experimental_actions: ['update', 'publish' /* , 'create', 'delete' */],
   groups: [
     ...G.fieldGroupDefaults(),
     G.fieldGroup('seo', { title: 'SEO' }),
@@ -19,9 +26,17 @@ export const schemaPageArchive = {
   fields: [
     ...F.fieldDefaults({
       slug: { readOnly: true },
-      parent: { hidden: true },
+      parent: {
+        readOnly: true,
+        hidden: ({ parent }) =>
+          !['feature-index'].includes(parent?.slug?.current),
+      },
     }),
     ...G.group('content', [
+      F.field('hero', {
+        hidden: ({ parent }) =>
+          !['feature-index'].includes(parent?.slug?.current),
+      }),
       F.string({
         name: 'archiveOf',
         options: {
@@ -31,11 +46,13 @@ export const schemaPageArchive = {
           })),
           layout: 'dropdown',
         },
+        readOnly: true,
       }),
       F.number({
         name: 'docsPerPage',
         initialValue: 12,
         validation: (Rule) => Rule.greaterThan(1).integer(),
+        hidden: ({ parent }) => parent.archiveOf !== 'post',
       }),
       F.message(
         'This page is automatically populated with the selected document type',
@@ -47,7 +64,8 @@ export const schemaPageArchive = {
         options: {
           field: 'categoryOrder',
         },
-        hidden: ({ parent }) => parent?.slug?.current !== 'integrations',
+        hidden: ({ parent }) =>
+          !['integrations'].includes(parent?.slug?.current),
       }),
     ]),
     ...G.group('seo', [F.seo()]),
@@ -58,7 +76,9 @@ export const schemaPageArchive = {
         description:
           'Enable to redirect to a legacy Leadpages page, if it exists.',
         hidden: ({ parent }) =>
-          !['integrations', 'comparisons'].includes(parent?.slug?.current),
+          !['integrations', 'comparisons', 'feature-index'].includes(
+            parent?.slug?.current
+          ),
       }),
       F.object({
         name: 'options',

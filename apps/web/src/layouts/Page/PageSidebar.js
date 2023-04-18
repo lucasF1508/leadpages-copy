@@ -9,13 +9,32 @@ import SidebarPage from '@components/Sidebar/SidebarPage'
 import { withSidebar } from '@components/Sidebar/SidebarProvider'
 
 const $SidebarPageContainer = styled('div', {
+  mw: '$extended',
+  mx: 'auto',
+
   '@>m': {
+    box: [{ property: 'px' }],
     d: 'grid',
     gridTemplateColumns: '$cols3 auto',
   },
 })
 
-const PageSidebar = ({ hero, content, cta, sidebarLinks, excerpt, title }) => {
+const $SidebarPinion = styled(Pinion, {
+  '@>m': {
+    pr: 0,
+    pl: '$2',
+  },
+})
+
+const PageSidebar = ({
+  hero,
+  content,
+  cta,
+  children,
+  sidebarLinks,
+  excerpt,
+  title,
+}) => {
   const { compareLogo } = excerpt || {}
   return (
     <>
@@ -32,9 +51,9 @@ const PageSidebar = ({ hero, content, cta, sidebarLinks, excerpt, title }) => {
           <div></div>
         )}
         <Rack>
-          <Pinion maxWidth="content">
-            <Text content={content} isPost={true} displayIds />
-          </Pinion>
+          <$SidebarPinion maxWidth="content">
+            {children || <Text content={content} isPost={true} displayIds />}
+          </$SidebarPinion>
         </Rack>
       </$SidebarPageContainer>
       {cta && <CTA {...cta} />}

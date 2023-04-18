@@ -19,6 +19,7 @@ export const getAllDocs = async (
     offsetStart = 0,
     offsetEnd = 0,
     paginationHasFeatured = false,
+    hasPagination = true,
   } = {}
 ) => {
   const slice =
@@ -52,28 +53,37 @@ export const getAllDocs = async (
     params,
     projections: {
       docs: docsQuery,
-      found: `count(${getQuery(queryParams)})`,
+      ...(hasPagination ? { found: `count(${getQuery(queryParams)})` } : {}),
     },
   })
 
   const { docs = [], found = 0 } =
     (await runQuery(query, params, preview)) || {}
 
-  const { perPage, totalPages } =
-    (await getDocPagination(schemaType, {
+  let pagination = {}
+
+  if (hasPagination) {
+    pagination = await getDocPagination(schemaType, {
       found,
       paginationHasFeatured,
-    })) || {}
+    })
+  }
+
+  const { perPage, totalPages } = pagination
 
   return {
     data: {
       docs,
-      pagination: {
-        currentPage,
-        found,
-        perPage,
-        totalPages,
-      },
+      ...(hasPagination
+        ? {
+            pagination: {
+              currentPage,
+              found,
+              perPage,
+              totalPages,
+            },
+          }
+        : {}),
     },
     query,
     params,

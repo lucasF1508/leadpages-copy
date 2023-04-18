@@ -70,12 +70,20 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   const docPaths = await getDocSlugs(['page', 'customer', 'integration'])
+  const excludedPaths = ['/product/feature-index']
 
-  const paths = docPaths.map(({ slug, path }) => ({
-    params: {
-      slug: path?.split('/').filter(Boolean) || [slug],
-    },
-  }))
+  const paths = docPaths.reduce((acc, { slug, path }) => {
+    if (excludedPaths.includes(path)) return acc
+
+    return [
+      ...acc,
+      {
+        params: {
+          slug: path?.split('/').filter(Boolean) || [slug],
+        },
+      },
+    ]
+  }, [])
 
   return {
     paths,

@@ -29,8 +29,9 @@ const CardContainer = styled('div', {
 
   variants: {
     align: {
-      true: { jc: 'flex-start', '@>769': { jc: 'center' } },
+      true: { jc: 'flex-start', '@>577': { jc: 'center' } },
       false: { jc: 'center' },
+      start: { jc: 'flex-start' },
     },
   },
 
@@ -39,20 +40,24 @@ const CardContainer = styled('div', {
   },
 })
 
-const IconCardsGrid = ({ items, itemsPerRow, align, asCards }) => (
-  <GridContainer asCards={asCards}>
-    <CardContainer align={align}>
-      {items.map((item, index) => (
-        <CardIcon
-          key={index}
-          {...item}
-          itemsPerRow={itemsPerRow}
-          align={align}
-          asCards={asCards}
-        />
-      ))}
-    </CardContainer>
-  </GridContainer>
-)
+const IconCardsGrid = ({ items, itemsPerRow, align, asCards }) => {
+  const cardAlign = ['start'].includes(align) ? true : align
+
+  return (
+    <GridContainer asCards={asCards}>
+      <CardContainer align={align}>
+        {items.map((item, index) => (
+          <CardIcon
+            key={index}
+            {...item}
+            itemsPerRow={itemsPerRow}
+            align={cardAlign}
+            asCards={asCards}
+          />
+        ))}
+      </CardContainer>
+    </GridContainer>
+  )
+}
 
 export default IconCardsGrid

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { Link as ScrollLink } from 'react-scroll'
 import SidebarCompareImage from '@components/Sidebar/SidebarCompareImage'
 import SidebarPageMobile from './SidebarPageMobile'
-import { getHeadingSlug, SidebarContext } from './SidebarProvider'
+import { getSidebarSlug, SidebarContext } from './SidebarProvider'
 
 const SidebarContainer = styled('div', {
   display: 'none',
@@ -23,7 +23,6 @@ const $SidebarInner = styled('div', {
   position: 'sticky',
   top: 'calc($headerHeight$s - 1px)',
   paddingRight: '2rem',
-  marginLeft: '2rem',
   boxSizing: 'content-box',
   overflow: 'auto',
   maxHeight: 'calc(100vh - $headerHeight$s)',
@@ -99,7 +98,7 @@ const SidebarPage = (props) => {
               <SidebarHeading>{sectionTitle}</SidebarHeading>
               {sectionLinks?.map(({ heading, title, link }) => {
                 const sectionHeading = title || heading
-                const sectionSlug = getHeadingSlug(heading)
+                const sectionSlug = getSidebarSlug(heading)
 
                 if (useScrollLink) {
                   return (

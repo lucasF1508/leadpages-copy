@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
 import { Link as ScrollLink } from 'react-scroll'
-import slugify from 'slugify'
 // Assets
 import closeMenuIcon from '@legacy/assets/images/global/x_close.svg'
 import downArrowIcon from '@legacy/assets/images/global/arrow_down_large.svg'
-import { getHeadingSlug, SidebarContext } from './SidebarProvider'
+import { getSidebarSlug, SidebarContext } from './SidebarProvider'
 
 const MobileSubMenuSection = styled('div', {
   paddingBottom: '16px',
@@ -217,7 +216,7 @@ const SiloComparisonMobileMenu = ({ links, verbiage }) => {
               <div key={sectionTitle}>
                 {sectionLinks.map(({ heading, title }) => {
                   const sectionHeading = title || heading
-                  const sectionSlug = getHeadingSlug(heading)
+                  const sectionSlug = getSidebarSlug(heading)
 
                   return (
                     <MenuHeaderLinkWrapper key={sectionSlug}>
@@ -264,7 +263,7 @@ const SiloComparisonMobileMenu = ({ links, verbiage }) => {
                 <MobileSubMenuHeading>{sectionTitle}</MobileSubMenuHeading>
                 {sectionLinks.map(({ heading, title }) => {
                   const sectionHeading = title || heading
-                  const sectionSlug = getHeadingSlug(heading)
+                  const sectionSlug = getSidebarSlug(heading)
 
                   return (
                     <StyledScrollLink

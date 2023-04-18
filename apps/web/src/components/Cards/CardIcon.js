@@ -56,8 +56,8 @@ const $CardIcon = styled('div', {
         ta: 'center',
 
         '@media (min-width: 576px) and (max-width: 768px)': {
-          f: '0 0 48%',
-          mw: '48%',
+          f: '0 0 46%',
+          mw: '46%',
         },
 
         '@media (min-width: 769px) and (max-width: 991px)': {
@@ -122,7 +122,7 @@ const $CardIcon = styled('div', {
       itemsPerRow: 3,
       align: true,
       css: {
-        '@<m': {
+        '@<993': {
           ta: 'left',
           jc: 'flex-start',
         },

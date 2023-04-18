@@ -1,19 +1,15 @@
 import S from '@sanity/desk-tool/structure-builder'
 import GB from 'part:gearbox-desk-tool/structure-builder'
 import { getTemplateSchemas } from 'part:gearbox-utils/utils'
-import addPreviewPane from 'part:gearbox-live-preview/add-preview-pane'
 import addSEOPane from 'part:gearbox-seo-pane/add-seo-pane'
 import {
   BsFilePerson,
   BsQuestionCircle,
   BsPlug,
   BsCollection,
+  BsPatchCheck,
 } from 'react-icons/bs'
-import {
-  AiOutlineHome,
-  AiOutlineFileText,
-  AiOutlineRetweet,
-} from 'react-icons/ai'
+import { AiOutlineFileText, AiOutlineRetweet } from 'react-icons/ai'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import { RiLayoutBottom2Fill } from 'react-icons/ri'
 import { listItemSiteSettings } from './listItems'
@@ -78,6 +74,7 @@ export const deskStructure = () =>
         title: 'FAQs',
         icon: BsQuestionCircle,
       }),
+      S.documentTypeListItem('feature').title('Features'),
       // S.documentTypeListItem('press'),
       // S.documentTypeListItem('alertBar').title('Alert Bars'),
       S.documentTypeListItem('cta').title('CTAs'),
