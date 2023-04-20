@@ -15,6 +15,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `High-Converting Landing Page Examples to Inspire You`,
+            seoDescription: `Need inspiration? Learn from these top-performing landing page examples for any industry and use case.`,
+            seoImage:
+              'https:// static.leadpages.com/images/og/og-best-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

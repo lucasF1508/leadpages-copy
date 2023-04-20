@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import SiloBackAndForthNavCards from '@legacy/components/silos/SiloBackAndForthNavCards'
 import SiloCheckMarkList from '@legacy/components/silos/SiloCheckMarkList'
 import SiloComparisonDesktopMenu from '@legacy/components/silos/SiloComparisonDesktopMenu'
@@ -95,12 +94,6 @@ const checkMarkContent = {
 
 const LeadpagesVsKajabi = () => (
   <>
-    <SEO
-      pathname="/comparisons/leadpages-vs-kajabi"
-      title="Leadpages vs. Kajabi: What's the difference?"
-      description="See why more than 2x more small businesses choose Leadpages over Kajabi and unlock all the features you need with none of the overwhelm."
-      image="https://static.leadpages.com/images/og/og-Leadpages-vs-Kajabi.jpg"
-    />
     <SiloHeader title={verbiage.main.title} breadcrumbs={breadcrumbs} />
     <OuterContainer>
       {/* Desktop Menu Bar */}

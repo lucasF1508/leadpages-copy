@@ -2,7 +2,6 @@ import React from 'react'
 // components
 import BestOfFeature from '@legacy/components/features/BestOfFeature'
 import BestOfHeader from '@legacy/components/headers/BestOfHeader'
-import SEO from '@legacy/components/SEO'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
 import SiloNavigationCards from '@legacy/components/silos/SiloNavigationCards'
@@ -162,12 +161,6 @@ const BestLandingPages2018 = () => {
 
   return (
     <>
-      <SEO
-        pathname="/best-landing-pages-2018"
-        title="Best Landing Pages 2018"
-        description="Explore what the top-performing, best landing pages had in common in 2018 — and what timeless strategies you can repurpose today."
-        image="https://static.leadpages.com/images/og/og-best-landing-pages-2018.jpg"
-      />
       <BestOfHeader
         title={verbiage.main.title}
         supertitle={verbiage.main.supertitle}

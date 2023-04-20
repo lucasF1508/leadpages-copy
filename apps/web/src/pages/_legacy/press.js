@@ -15,6 +15,15 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            seoTitle: `Press & Media Kit | Leadpages`,
+            seoDescription: `Don't want to miss anything at Leadpages? Keep updated with our announcements, press releases, and media coverage right here.`,
+          },
+        },
+      ],
     },
   }
 }

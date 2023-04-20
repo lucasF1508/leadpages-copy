@@ -1,6 +1,5 @@
 import React from 'react'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -30,13 +29,6 @@ import {
 
 const ConversionRateOptimizationGuide = () => (
   <>
-    <SEO
-      pathname="/conversion-optimization-guide"
-      title="Conversion Optimization | CRO Guide | Leadpages"
-      description="This Conversion Optimization Guide is designed to condense decades’ worth of conversion marketing knowledge into no-nonsense steps that you can take today."
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="Get Started with the Conversion Optimization Guide"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

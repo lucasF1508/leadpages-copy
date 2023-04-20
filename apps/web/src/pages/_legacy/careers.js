@@ -15,6 +15,17 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Leadpages Careers | Website & Landing Page Builder`,
+            seoDescription: `At Leadpages, you're part of a team of builders. No matter what department you work in, you have a pivotal role here.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-careers.jpg',
+          },
+        },
+      ],
     },
   }
 }

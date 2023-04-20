@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Lead Generation Strategies | Lead Generation Guide`,
+            seoDescription: `Discover 6 lead generation techniques that will help you turn anonymous web traffic into business-building potential.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

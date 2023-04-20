@@ -19,6 +19,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Website Conversion Optimization | CRO Guide | Leadpages`,
+            seoDescription: `This step by step process for website conversion optimization will transform your page into a marketing machine that churns out leads and customers.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

@@ -7,7 +7,6 @@ import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/Custome
 import FlexRow from '@legacy/components/layout/FlexRow'
 import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
-import SEO from '@legacy/components/SEO'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 import Wistia_CustomerFeatureVideo from '@legacy/components/videos/Wistia_CustomerFeatureVideo'
 // images
@@ -204,12 +203,6 @@ const OutboundLink = styled('a', {
 
 const SallyCustomerPage = () => (
   <>
-    <SEO
-      pathname="/customers/sally"
-      title="Sally | Leadpages Customer | Website & Landing Page Builder"
-      description="Public speaking coach Sally Zimney uses Leadpages to grow her audience. See how Leadpages helps small businesses grow: websites, landing pages, and more!"
-      ogtitle="Meet Sally |Small Business Success Story & Leadpages Customer"
-    />
     <PodcastLeadbox />
     <CustomerFeatureHeader
       image={heroImage}

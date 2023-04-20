@@ -8,7 +8,6 @@ import LeadsLeadYou from '@legacy/components/zapier/LeadsLeadYou'
 import ProductToolkitClickReveal from '@legacy/components/click-reveals/ProductToolkitClickReveal'
 import ProductToolkitRotator from '@legacy/components/rotators/ProductToolkitRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 import ZapierPageHeader from '@legacy/components/zapier/ZapierPageHeader'
 import ZapierZaps from '@legacy/components/zapier/ZapierZaps'
@@ -98,12 +97,6 @@ const ZapierPage = () => {
 
   return (
     <>
-      <SEO
-        pathname="/zapier"
-        title="Leadpages Zapier Integration: Connect Your Marketing Tools"
-        description="Generate leads and increase revenue using the industry-leading landing page
-  creator with accompanying suite of lead generation and opt-in tools."
-      />
       <ZapierPageHeader image={headerImage} />
       <CollectLeads />
       <SpacerRow size="small" />

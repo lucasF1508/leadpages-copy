@@ -15,6 +15,17 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Add Pop-ups to Any Landing Page or Website in Minutes | Leadpages`,
+            seoDescription: `Easily build and add pop-ups to any website or landing page with Leadpages Pop-up Builder. Collect more leads and scale quickly. Try for free for 14 days.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-pop-ups.jpg',
+          },
+        },
+      ],
     },
   }
 }

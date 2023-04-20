@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
 import heroImage from '@legacy/assets/images/integrations/subpages/Infusionsoft+Leadpages_304px@2x.png'
@@ -63,12 +62,6 @@ const InfusionSoft = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/infusion-soft"
-        title="Connect your Leadpages to Infusionsoft | Get Online & Grow"
-        description="Easily integrate Leadpages with Infusionsoft. Connect your Leadpages froms to segment and update subscribers, and trigger automated email campaigns."
-        image="https://static.leadpages.com/images/og/og-Leadpages+Infusionsoft.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

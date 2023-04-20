@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { styled } from '@design'
 // components
 import Layout from '@legacy/components/Layout'
-import SEO from '@legacy/components/SEO'
 // images
 import backgroundSVG from '@legacy/assets/images/shapes/wavy-lines-hourglass-sand.svg'
 
@@ -189,11 +188,6 @@ const StyledExternalLink = styled('a', {
 
 const MarketingResourcePage = () => (
   <Layout>
-    <SEO
-      pathname="/legal"
-      title="Terms and Conditions | Leadpages"
-      description="The Leadpages terms and conditions are the do’s and don’ts of your account. Take a look to see if your business is a fit for our services."
-    />
     <HeaderContainer>
       <SVGContainer
         src={backgroundSVG?.src}

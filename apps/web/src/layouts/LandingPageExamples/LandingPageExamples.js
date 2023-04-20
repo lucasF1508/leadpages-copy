@@ -2,7 +2,6 @@ import React from 'react'
 //  components
 import BestOfFeature from '@legacy/components/features/BestOfFeature'
 import BestOfHeader from '@legacy/components/headers/BestOfHeader'
-import SEO from '@legacy/components/SEO'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
 import SiloNavigationCards from '@legacy/components/silos/SiloNavigationCards'
@@ -287,12 +286,6 @@ const LandingPageExamples = () => {
 
   return (
     <>
-      <SEO
-        pathname="/landing-page-examples"
-        title="High-Converting Landing Page Examples to Inspire You"
-        description="Need inspiration? Learn from these top-performing landing page examples for any industry and use case."
-        image="https:// static.leadpages.com/images/og/og-best-landing-pages.jpg"
-      />
       <BestOfHeader
         title={verbiage.main.title}
         supertitle={verbiage.main.supertitle}

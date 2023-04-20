@@ -6,7 +6,6 @@ import CustomerFeatureHeader from '@legacy/components/headers/CustomerFeatureHea
 import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/CustomerStoriesThumbnailRotator'
 import FlexRow from '@legacy/components/layout/FlexRow'
 import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
-import SEO from '@legacy/components/SEO'
 import SocialPosts from '@legacy/components/customers/SocialPosts'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
@@ -222,12 +221,6 @@ const KateCustomerPage = () => {
 
   return (
     <>
-      <SEO
-        pathname="/customers/kate"
-        title="Kate | Leadpages Customer | Website & Landing Page Builder"
-        description="Kate uses Leadpages to pinpoint her audience and sell her marketing services. Leadpages helps small businesses grow: websites, landing pages, and more!"
-        ogtitle="Meet Kate |Small Business Success Story & Leadpages Customer"
-      />
       <PodcastLeadbox />
       <CustomerFeatureHeader
         image={heroImage}

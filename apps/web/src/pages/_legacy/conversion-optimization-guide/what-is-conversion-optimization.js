@@ -19,6 +19,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `What is Conversion Rate Optimization | CRO Guide | Leadpages`,
+            seoDescription: `Does your web page convert leads to customers with ease? Learn the ins and outs, the benefits, and the how tos of conversion rate optimization.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

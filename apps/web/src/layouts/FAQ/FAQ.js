@@ -6,7 +6,6 @@ import Accordion from '@legacy/components/accordions/Accordion'
 import FAQHeader from '@legacy/components/headers/FAQHeader'
 import Layout from '@legacy/components/Layout'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-import SEO from '@legacy/components/SEO'
 // images
 import downArrow from '@legacy/assets/images/global/arrow_down_large.svg'
 import close from '@legacy/assets/images/global/x_close.svg'
@@ -314,11 +313,6 @@ const FAQPage = () => {
 
   return (
     <>
-      <SEO
-        pathname="/faq"
-        title="Get Answers to All Your Questions About Leadpages"
-        description="Browse all of Leadpages frequently asked questions and get answers to and insight about landing pages, free trials, integrations, billing, and more."
-      />
       <FAQHeader />
       <OuterContainer id="container">
         <InnerContainer>

@@ -15,6 +15,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Create Professional Landing Pages with Leadpages`,
+            seoDescription: `Use Leadpages' drag-n-drop landing page builder to create a professional page for your business. Integrations, templates, etc.—everything you need is here.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-landing-page-builder.jpg',
+          },
+        },
+      ],
     },
   }
 }

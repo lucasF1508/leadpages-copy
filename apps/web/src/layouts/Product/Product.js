@@ -12,7 +12,6 @@ import ProductToolkitClickReveal from '@legacy/components/click-reveals/ProductT
 import ProductToolkitRotator from '@legacy/components/rotators/ProductToolkitRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import Resources from '@legacy/components/product/Resources'
-import SEO from '@legacy/components/SEO'
 import SingleTestimonialQuoteRow from '@legacy/components/testimonials/SingleTestimonialQuoteRow'
 import SpacerRow from '@legacy/components/SpacerRow'
 import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
@@ -228,12 +227,6 @@ const ProductPage = () => {
 
   return (
     <>
-      <SEO
-        pathname="/product"
-        title="Website & Landing Page Builder | Leadpages"
-        description="Discover the tools you need to get online and grow your business: easy-to-make websites, landing pages, & more."
-        image="https://static.leadpages.com/images/og/og-product.jpg"
-      />
       <ProductPageHeader />
       <SpacerRow sizeArray={[3.5, 3.5, 3.5, 3.5]} backgroundColor="$grayAlt" />
       <FeatureIconsGrid

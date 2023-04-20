@@ -31,8 +31,16 @@ const useSeo = ({ seo, siteMeta } = {}) => {
   const { asPath } = useRouter()
   const { seoTitlePattern, seoImageDefault, siteName, twitterUser } =
     siteMeta || {}
-  const { seoImage, seoTitle, seoDescription, hasCustomSeoTitle } = seo || {}
-  const image = useSanityImage(seoImage || seoImageDefault)
+  const {
+    seoImage,
+    seoTitle,
+    seoDescription,
+    hasCustomSeoTitle,
+    hasImageUrl,
+    publishDate,
+    modifyDate,
+  } = seo || {}
+  const image = !hasImageUrl && useSanityImage(seoImage || seoImageDefault)
   const robots = VERCEL_ENV !== 'production' ? 'noindex,nofollow' : ''
 
   return {
@@ -47,19 +55,29 @@ const useSeo = ({ seo, siteMeta } = {}) => {
           siteName,
         }),
     seoDescription,
-    image: image
+    image: hasImageUrl
+      ? { url: seoImage }
+      : image
       ? {
           width: 1200,
           height: 630,
           url: image?.builder?.width(1200).height(630).url(),
         }
       : {},
-    url: `${NEXT_PUBLIC_URL || ''}${asPath.replace('/_legacy', '')}`,
+    url: `${NEXT_PUBLIC_URL || ''}${asPath
+      .replace('/_legacy', '') // Strip out /_legacy
+      .replace(
+        /(\?affiliate=[^&]+&?).*|([&?][^&]+)+/,
+        (match, affiliate) => affiliate || ''
+      ) // Remove params unless if affiliate
+      .replace(/\/$/, '')}`, // Remove trailing slash if exists
     locale: 'en_CA',
     type: 'website',
     robots,
     siteName,
     twitterUser,
+    publishDate,
+    modifyDate,
   }
 }
 

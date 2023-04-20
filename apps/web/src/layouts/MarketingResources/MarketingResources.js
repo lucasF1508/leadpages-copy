@@ -11,7 +11,6 @@ import LeadGeneration from '@legacy/components/resources/LeadGeneration'
 import MarketingGuides from '@legacy/components/resources/MarketingGuides'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import ResourcesHeader from '@legacy/components/headers/ResourcesHeader'
-import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 import WebinarsContainer from '@legacy/components/resources/WebinarsContainer'
 // constants
@@ -405,12 +404,6 @@ const MarketingResourcesPage = ({ customers }) => {
 
   return (
     <>
-      <SEO
-        pathname="/marketing-resources"
-        title="Free Digital Marketing Resources from Leadpages"
-        description="Want to stay in the know on all things about digital marketing? Get full access to free webinars, ebooks, guides, and podcasts brought to you by Leadpages."
-        image="https://static.leadpages.com/images/og/og-customers.jpg"
-      />
       <OuterContainer>
         {/* Desktop & Mobile Menus */}
         <DesktopMenu_Container

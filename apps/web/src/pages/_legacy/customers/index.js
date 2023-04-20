@@ -26,6 +26,13 @@ export async function getStaticProps(context) {
       data: [
         {
           customers,
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Leadpage Examples | Small Business Success Stories`,
+            seoDescription: `Ready to get inspired? Learn how our customers are growing their small businesses every day with these Leadpages examples and case studies.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-customers.jpg',
+          },
         },
       ],
       global,

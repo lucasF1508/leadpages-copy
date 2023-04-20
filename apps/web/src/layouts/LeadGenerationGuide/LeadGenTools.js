@@ -1,6 +1,5 @@
 import React from 'react'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -37,13 +36,6 @@ import image7 from '@legacy/assets/images/silos/lead-generation-guide/7-1-crm-in
 
 const LeadGenerationTools = () => (
   <>
-    <SEO
-      pathname="/lead-generation-guide/lead-gen-tools"
-      title="Lead Generation Tools | Lead Generation Guide | Leadpages"
-      description="Every small business needs a set of reliable lead generation tools that can effectively target an audience and capture opt-in information."
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="The 7 Must-Have Lead Generation Tools"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

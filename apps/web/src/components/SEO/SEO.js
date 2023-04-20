@@ -16,6 +16,8 @@ const SEO = (props) => {
     type,
     siteName,
     twitterUser,
+    publishDate,
+    modifyDate,
   } = useSeo(props)
 
   return (
@@ -95,6 +97,12 @@ const SEO = (props) => {
         {seoTitle && <meta property="og:title" content={seoTitle} />}
         {seoDescription && (
           <meta property="og:description" content={seoDescription} />
+        )}
+        {publishDate && (
+          <meta property="article:published_time" content={publishDate} />
+        )}
+        {modifyDate && (
+          <meta property="article:modified_time" content={modifyDate} />
         )}
         {siteName && <meta property="og:site_name" content={siteName} />}
         {image?.url && <meta property="og:image" content={image?.url} />}

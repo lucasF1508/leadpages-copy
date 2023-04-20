@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
 import heroImage from '@legacy/assets/images/integrations/subpages/Mailchimp+Leadpages_304px@2x.png'
@@ -73,12 +72,6 @@ const Mailchimp = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/mailchimp"
-        title="Connect your Leadpages to Mailchimp | Get Online & Grow"
-        description="Easily integrate Leadpages with Mailchimp. Connect your Leadpages froms to collect, segment, and update subscribers and trigger automated email campaigns."
-        image="https://static.leadpages.com/images/og/og-Leadpages+Mailchimp.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

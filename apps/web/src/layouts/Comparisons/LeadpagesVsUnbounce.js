@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import SiloBackAndForthNavCards from '@legacy/components/silos/SiloBackAndForthNavCards'
 import SiloCheckMarkList from '@legacy/components/silos/SiloCheckMarkList'
 import SiloComparisonDesktopMenu from '@legacy/components/silos/SiloComparisonDesktopMenu'
@@ -90,12 +89,6 @@ const checkMarkContent = {
 
 const LeadpagesVsUnbounce = () => (
   <>
-    <SEO
-      pathname="/comparisons/leadpages-vs-unbounce"
-      title="Leadpages vs. Unbounce | Marketing Platform Comparisons"
-      description="Wonder which platform is a better fit for your business? In this no-nonsense comparison of Leadpages vs. Unbounce, you’ll find out!"
-      image="https://static.leadpages.com/images/og/og-Leadpages-vs-Unbounce.jpg"
-    />
     <SiloHeader title={verbiage.main.title} breadcrumbs={breadcrumbs} />
     <OuterContainer>
       {/* Desktop Menu Bar */}

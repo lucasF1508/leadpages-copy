@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Leadpages Integrations - Mailchimp, Salesforce, and More!`,
+            seoDescription: `With Leadpages integrations⁠—including email, CRM, analytics, payment, social media, and more⁠—you can be sure we fit right in with the tools you already use.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-integrations.jpg',
+          },
+        },
+      ],
     },
   }
 }

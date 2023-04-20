@@ -1,6 +1,5 @@
 import React from 'react'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -36,13 +35,6 @@ import image4 from '@legacy/assets/images/silos/conversion-optimization-guide/05
 
 const ABTesting = () => (
   <>
-    <SEO
-      pathname="/conversion-optimization-guide"
-      title="How to do A/B Testing | CRO Guide | Leadpages"
-      description="A/B testing is the secret to moving towards your ideal conversion rate. Find out what your customers actually want, then deliver massive results!"
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="What is A/B Testing?"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

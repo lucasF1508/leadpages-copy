@@ -7,7 +7,6 @@ import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/Custome
 import FlexRow from '@legacy/components/layout/FlexRow'
 import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
-import SEO from '@legacy/components/SEO'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 import Wistia_CustomerFeatureVideo from '@legacy/components/videos/Wistia_CustomerFeatureVideo'
 // images
@@ -195,12 +194,6 @@ const OutboundLink = styled('a', {
 
 const SayerCustomerPage = () => (
   <>
-    <SEO
-      pathname="/customers/sayer"
-      title="Sayer | Leadpages Customer | Website & Landing Page Builder"
-      description="Sayer Payne uses Leadpages to connect customers with retailers. Leadpages helps small businesses grow: websites, landing pages, and more!"
-      ogtitle="Meet Sayer |Small Business Success Story & Leadpages Customer"
-    />
     <PodcastLeadbox />
     <CustomerFeatureHeader
       image={heroImage}

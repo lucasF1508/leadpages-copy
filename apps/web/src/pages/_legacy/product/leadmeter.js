@@ -17,6 +17,17 @@ export async function getStaticProps(context) {
       preview,
       options,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Leadmeter | Leadpages | Get Online & Grow`,
+            seoDescription: `Get data-powered, real-time conversion tips at your fingertips with Leadpages Leadmeter—helping you guess less and grow more.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-leadmeter.jpg',
+          },
+        },
+      ],
     },
   }
 }

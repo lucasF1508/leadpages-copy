@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
 import heroImage from '@legacy/assets/images/integrations/subpages/Stripe+Leadpages_304px@2x.png'
@@ -78,12 +77,6 @@ const Stripe = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/stripe"
-        title="Sell More With Leadpages + Stripe | Get Online & Grow"
-        description="Easily sell your services online, deliver products, and accept credit cards with Leadpages Checkouts, powered by Stripe."
-        image="https://static.leadpages.com/images/og/og-Leadpages+Stripe.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

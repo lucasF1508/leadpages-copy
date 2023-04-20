@@ -15,6 +15,15 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            seoTitle: `Leadpages Zapier Integration: Connect Your Marketing Tools`,
+            seoDescription: `Generate leads and increase revenue using the industry-leading landing page creator with accompanying suite of lead generation and opt-in tools.`,
+          },
+        },
+      ],
     },
   }
 }

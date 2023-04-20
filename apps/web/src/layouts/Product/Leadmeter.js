@@ -8,7 +8,6 @@ import LeadmeterMakeTheMost from '@legacy/components/product/LeadmeterMakeTheMos
 import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 import ProductFeaturesRotator from '@components/Rotator/ProductFeaturesRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // images
@@ -96,12 +95,6 @@ const LeadmeterProductPage = () => {
 
   return (
     <>
-      <SEO
-        pathname="/product/leadmeter"
-        title="Leadmeter | Leadpages | Get Online & Grow"
-        description="Get data-powered, real-time conversion tips at your fingertips with Leadpages Leadmeter—helping you guess less and grow more."
-        image="https://static.leadpages.com/images/og/og-leadmeter.jpg"
-      />
       <ChildPageHeader
         headingText="Leadmeter"
         subheadingText="Get data-powered, real-time conversion tips at your fingertips, helping you build higher-performing pages so you can guess less and grow more."

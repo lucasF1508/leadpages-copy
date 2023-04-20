@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 import { styled } from '@design'
 import Image from '@components/Image'
 // components
-import SEO from '@legacy/components/SEO'
 import HardWork from '@legacy/components/careers/HardWork'
 import LifeAtLeadpages from '@legacy/components/careers/LifeAtLeadpages'
 import OpenPositions from '@legacy/components/careers/OpenPositions'
@@ -251,12 +250,6 @@ const BGRightContainer = styled('div', {
 
 const CareersPage = () => (
   <>
-    <SEO
-      pathname="/careers"
-      title="Leadpages Careers | Website & Landing Page Builder"
-      description="At Leadpages, you're part of a team of builders. No matter what department you work in, you have a pivotal role here."
-      image="https://static.leadpages.com/images/og/og-careers.jpg"
-    />
     <OuterContainer>
       <HeroContainer>
         <TextContainer>

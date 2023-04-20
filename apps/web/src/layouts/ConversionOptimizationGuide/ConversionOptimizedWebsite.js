@@ -1,7 +1,6 @@
 import React from 'react'
 // components
 import Animation_ExitIntentPopup from '@legacy/components/animations/Animation_ExitIntentPopup'
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -39,13 +38,6 @@ import image2 from '@legacy/assets/images/silos/conversion-optimization-guide/06
 const CreatingConversionOptimizedWebsite = () => (
   <>
     <TemporaryLeadbox_ExitIntent />
-    <SEO
-      pathname="/conversion-optimization-guide"
-      title="Website Conversion Optimization | CRO Guide | Leadpages"
-      description="This step by step process for website conversion optimization will transform your page into a marketing machine that churns out leads and customers."
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="Creating a Conversion-Optimized Website"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

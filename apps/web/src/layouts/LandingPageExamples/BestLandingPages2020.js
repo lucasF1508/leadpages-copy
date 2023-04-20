@@ -2,7 +2,6 @@ import React from 'react'
 // components
 import BestOfFeature from '@legacy/components/features/BestOfFeature'
 import BestOfHeader from '@legacy/components/headers/BestOfHeader'
-import SEO from '@legacy/components/SEO'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
 import SiloNavigationCards from '@legacy/components/silos/SiloNavigationCards'
@@ -215,12 +214,6 @@ const BestLandingPages2020 = () => {
 
   return (
     <>
-      <SEO
-        pathname="/best-landing-pages-2020"
-        title="Best Landing Pages 2020"
-        description="What do the best landing pages in 2020 have in common? Find out what works, what doesn't, and what you can do better in your own conversion marketing."
-        image="https://static.leadpages.com/images/og/og-best-landing-pages-2020.jpg"
-      />
       <BestOfHeader
         title={verbiage.main.title}
         supertitle={verbiage.main.supertitle}

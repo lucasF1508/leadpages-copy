@@ -15,6 +15,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Best Landing Pages 2018`,
+            seoDescription: `Explore what the top-performing, best landing pages had in common in 2018 — and what timeless strategies you can repurpose today.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-best-landing-pages-2018.jpg',
+          },
+        },
+      ],
     },
   }
 }

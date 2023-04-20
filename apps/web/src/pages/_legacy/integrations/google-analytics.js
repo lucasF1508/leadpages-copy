@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Use Leadpages With Google Analytics | Get Online & Grow`,
+            seoDescription: `Easily connect Leadpages with Google Analytics to access even more data on your pages and forms’ performance. Absolutely no coding required!`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-Leadpages+GoogleAnalytics.jpg',
+          },
+        },
+      ],
     },
   }
 }

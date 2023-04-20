@@ -15,6 +15,15 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            seoTitle: `Sayer | Leadpages Customer | Website & Landing Page Builder`,
+            seoDescription: `Sayer Payne uses Leadpages to connect customers with retailers. Leadpages helps small businesses grow: websites, landing pages, and more!`,
+          },
+        },
+      ],
     },
   }
 }

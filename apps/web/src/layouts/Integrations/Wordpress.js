@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
 import heroImage from '@legacy/assets/images/integrations/subpages/WordPress+Leadpages_304px@2x.png'
@@ -61,12 +60,6 @@ const Wordpress = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/wordpress"
-        title="Connect & Publish Leadpages to WordPress | Get Online & Grow"
-        description="Easily publish your landing pages, pop-ups, and alert bars to your WordPress website. Use Leadpages WordPress plugin to publish in just a few clicks. "
-        image="https://static.leadpages.com/images/og/og-Leadpages+WordPress.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

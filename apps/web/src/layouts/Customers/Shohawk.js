@@ -8,7 +8,6 @@ import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/Custome
 import FlexRow from '@legacy/components/layout/FlexRow'
 import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
-import SEO from '@legacy/components/SEO'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 import Wistia_CustomerFeatureVideo from '@legacy/components/videos/Wistia_CustomerFeatureVideo'
 // images
@@ -199,12 +198,6 @@ const OutboundLink = styled('a', {
 
 const ShohawkCustomerPage = () => (
   <>
-    <SEO
-      pathname="/customers/shohawk"
-      title="ShoHawk | Leadpages Customer Website & Landing Page Builder"
-      description="Michael and Chris use Leadpages to promote and sell their videos. Leadpages helps small businesses grow: websites, landing pages, and more!"
-      ogtitle="Meet ShoHawk |Small Business Success Story & Leadpages Customer"
-    />
     <PodcastLeadbox />
     <CustomerFeatureHeader
       image={heroImage}

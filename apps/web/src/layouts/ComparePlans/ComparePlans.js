@@ -13,7 +13,6 @@ import ComparePlansHeader from '@legacy/components/headers/ComparePlansHeader'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import LoadingState from '@legacy/components/LoadingState'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 import Link from 'next/link'
 // Data
@@ -181,12 +180,6 @@ const ComparePlans = () => {
 
   return (
     <>
-      <SEO
-        pathname="/compare-plans"
-        title="Leadpages Pricing: Monthly and Annual Subscription Plans"
-        description="Leadpages offers the best pricing plans for your growing small business. Start with a risk-free 14-day free trial and unlock more features as you grow."
-        image=""
-      />
       <ComparePlansHeader deviceSize={deviceSize} scrollTarget="destination" />
       <div name="destination"></div>
       <SpacerRow size="small" backgroundColor="$gray" />

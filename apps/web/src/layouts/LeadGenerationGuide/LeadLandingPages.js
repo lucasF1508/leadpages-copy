@@ -1,6 +1,5 @@
 import React from 'react'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -41,13 +40,6 @@ import image5 from '@legacy/assets/images/silos/lead-generation-guide/3-1-good-v
 
 const LeadGenerationLandingPages = () => (
   <>
-    <SEO
-      pathname="/lead-generation-guide/lead-landing-pages"
-      title="Lead Generation Landing Page | Lead Generation Guide"
-      description="Learn the essential elements of a high-converting landing page and grow your email list in a fraction of the time! "
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="The Essentials of Lead Generation Landing Pages"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

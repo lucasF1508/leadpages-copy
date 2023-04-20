@@ -9,7 +9,6 @@ import HomePageTraffic from '@legacy/components/product/HomePageTraffic'
 import PowerfulFeatures from '@legacy/components/product/PowerfulFeatures'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SaveTime from '@legacy/components/product/SaveTime'
-import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 import TakeControl from '@legacy/components/product/TakeControl'
 import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
@@ -19,12 +18,6 @@ import semicircleGraySVG from '@legacy/assets/images/shapes/semicircle-gray.svg'
 
 const LandingPageBuilderProductPage = () => (
   <>
-    <SEO
-      pathname="/product/landing-page-builder"
-      title="Create Professional Landing Pages with Leadpages"
-      description="Use Leadpages' drag-n-drop landing page builder to create a professional page for your business. Integrations, templates, etc.—everything you need is here."
-      image="https://static.leadpages.com/images/og/og-landing-page-builder.jpg"
-    />
     <ChildPageHeader
       headingText="Landing Pages"
       subheadingText="Confidently grow your business by turning clicks into customers with high-converting landing pages you can easily DIY."

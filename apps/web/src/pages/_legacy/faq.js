@@ -17,6 +17,15 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            seoTitle: `Get Answers to All Your Questions About Leadpages`,
+            seoDescription: `Browse all of Leadpages frequently asked questions and get answers to and insight about landing pages, free trials, integrations, billing, and more.`,
+          },
+        },
+      ],
     },
   }
 }

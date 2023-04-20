@@ -4,7 +4,6 @@ import { styled } from '@design'
 import Table from '@components/Table'
 import TableContainer from '@material-ui/core/TableContainer'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -296,14 +295,6 @@ const LandingPagesGuide = () => {
   }
   return (
     <>
-      <SEO
-        pathname="/landing-pages-guide"
-        title="Landing Pages: The Ultimate Guide 2021 | Leadpages"
-        description="Ready to level-up your lead generation and sales funnels? Learn landing page best practices, optimization tactics, and more in this landing pages guide."
-        image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-        publishDate="2021-03-30T00:00:00+0000"
-        modifyDate="2021-03-30T00:00:00+0000"
-      />
       <SiloHeader title="Landing Pages: The Ultimate Guide 2021" />
       <OuterContainer>
         {/* Desktop Menu Bar */}

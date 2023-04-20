@@ -18,7 +18,6 @@ import QuoteTestimonialsRotator from '@legacy/components/rotators/QuoteTestimoni
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import SpacerRow from '@legacy/components/SpacerRow'
 import SingleTestimonialWavesRow from '@legacy/components/testimonials/SingleTestimonialWavesRow'
-import SEO from '@legacy/components/SEO'
 // Data
 import { pricingFaqData } from '@legacy/data/faq_data'
 import { testimonialsData, planFeaturesData } from '@legacy/data/pricing_data'
@@ -190,13 +189,6 @@ const Pricing = () => {
 
   return (
     <>
-      <SEO
-        pathname="/pricing"
-        title="Leadpages Pricing: Generate More Leads and Sales"
-        description="Leadpages offers the best pricing plans for you to grow your business. Get started today with our risk-free 14-day free trial and add more at any time."
-        image="https://static.leadpages.com/images/og/og-pricing.jpg"
-        canonical="/pricing"
-      />
       {isLoading || !planData ? (
         <LoadingState />
       ) : (

@@ -15,6 +15,15 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            seoTitle: `Explore All Leadpages Features Built for Conversions`,
+            seoDescription: `Discover the hundreds of features that are built into your Leadpages account: from real-time analytics to integrations with the tools you love, you'll find everything you need to get online and grow.`,
+          },
+        },
+      ],
     },
   }
 }

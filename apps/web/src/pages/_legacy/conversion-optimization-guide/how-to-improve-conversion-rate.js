@@ -19,6 +19,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `How to Improve Conversion Rate | CRO Guide | Leadpages`,
+            seoDescription: `You want more out of your webpages. Improve conversion rate with these tips + tricks to create a page your visitors will be inspired by (and take action!).`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

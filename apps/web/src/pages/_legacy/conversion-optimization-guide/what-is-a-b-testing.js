@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `How to do A/B Testing | CRO Guide | Leadpages`,
+            seoDescription: `A/B testing is the secret to moving towards your ideal conversion rate. Find out what your customers actually want, then deliver massive results!`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

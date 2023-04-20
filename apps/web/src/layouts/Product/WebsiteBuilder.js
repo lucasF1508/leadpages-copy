@@ -8,7 +8,6 @@ import FlexSectionTwoColumnFeatures from '@legacy/components/product/FlexSection
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import PublishingOptionsGrid from '@legacy/components/grids/PublishingOptionsGrid'
-import SEO from '@legacy/components/SEO'
 import SiteTestimonial from '@legacy/components/product/SiteTestimonial'
 import SpacerRow from '@legacy/components/SpacerRow'
 import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
@@ -25,12 +24,6 @@ import wavyLinesHourglassTan from '@legacy/assets/images/shapes/wavy-lines-hourg
 
 const WebsiteBuilderProductPage = () => (
   <>
-    <SEO
-      pathname="/product/website-builder"
-      title="Leadpages Website Builder | Create a Website With Ease"
-      description="Build high-converting websites in minutes⁠—no coding required. Choose from a collection of templates that keep your online presence professional across devices."
-      image="https://static.leadpages.com/images/og/og-sites.jpg"
-    />
     <ChildPageHeader
       headingText="Leadpages Site Builder"
       subheadingText="Experience the only online website builder that lets you easily create a high-converting website with code-free customizations."

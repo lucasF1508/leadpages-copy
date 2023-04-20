@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
 import heroImage from '@legacy/assets/images/integrations/subpages/ConvertKit+Leadpages_304px@2x.png'
@@ -64,12 +63,6 @@ const ConvertKit = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/convertkit"
-        title="Connect your Leadpages to ConvertKit| Get Online & Grow"
-        description="Easily integrate Leadpages with ConvertKit. Connect your Leadpages froms to collect, segment, and update subscribers and trigger automated email campaigns."
-        image="https://static.leadpages.com/images/og/og-Leadpages+ConvertKit.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

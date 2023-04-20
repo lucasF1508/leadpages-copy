@@ -15,6 +15,15 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            seoTitle: `Learn About Leadpages' Privacy Policy`,
+            seoDescription: `We value the privacy of every customer and the trust they instill in us. Dig into the Leadpages Privacy Policy and see how we're keeping data safe.`,
+          },
+        },
+      ],
     },
   }
 }

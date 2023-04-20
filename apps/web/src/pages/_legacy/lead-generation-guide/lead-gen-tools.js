@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Lead Generation Tools | Lead Generation Guide | Leadpages`,
+            seoDescription: `Every small business needs a set of reliable lead generation tools that can effectively target an audience and capture opt-in information.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

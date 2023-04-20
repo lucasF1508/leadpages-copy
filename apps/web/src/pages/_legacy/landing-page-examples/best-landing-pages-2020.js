@@ -15,6 +15,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Best Landing Pages 2020`,
+            seoDescription: `What do the best landing pages in 2020 have in common? Find out what works, what doesn't, and what you can do better in your own conversion marketing.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-best-landing-pages-2020.jpg',
+          },
+        },
+      ],
     },
   }
 }

@@ -15,6 +15,15 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            seoTitle: `Kailei | Leadpages Customer | Website & Landing Page Builder`,
+            seoDescription: `Kailei uses Leadpages to book clients and sell her consulting services. Leadpages helps small businesses grow: websites, landing pages, and more!`,
+          },
+        },
+      ],
     },
   }
 }

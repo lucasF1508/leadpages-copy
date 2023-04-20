@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
 import heroImage from '@legacy/assets/images/integrations/subpages/AWeber+Leadpages_304px@2x.png'
@@ -76,12 +75,6 @@ const Aweber = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/aweber"
-        title="Connect your Leadpages to AWeber| Get Online & Grow"
-        description="Easily integrate Leadpages with AWeber. Connect your Leadpages froms to collect, segment, and update subscribers and trigger automated email campaigns."
-        image="https://static.leadpages.com/images/og/og-Leadpages+AWeber.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
 import heroImage from '@legacy/assets/images/integrations/subpages/ActiveCampaign+Leadpages_304px@2x.png'
@@ -74,12 +73,6 @@ const ActiveCampaign = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/active-campaign"
-        title="Connect your Leadpages to ActiveCampaign | Get Online & Grow"
-        description="Easily integrate Leadpages with ActiveCampaign. Connect your Leadpages froms to segment and update subscribers, and trigger automated email campaigns."
-        image="https://static.leadpages.com/images/og/og-Leadpages+ActiveCampaign.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

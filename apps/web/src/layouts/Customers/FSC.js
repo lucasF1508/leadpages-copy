@@ -6,7 +6,6 @@ import CustomerFeatureHeader from '@legacy/components/headers/CustomerFeatureHea
 import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/CustomerStoriesThumbnailRotator'
 import FlexRow from '@legacy/components/layout/FlexRow'
 import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
-import SEO from '@legacy/components/SEO'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
 // images
@@ -225,12 +224,6 @@ const OutboundLink = styled('a', {
 
 const FSCCustomerPage = () => (
   <>
-    <SEO
-      pathname="/customers/fsc"
-      title="FSC | Leadpages Customer | Website & Landing Page Builder"
-      description="The Forest Stewardship Council uses Leadpages to move audiences to take meaningful action. See how Leadpages helps small businesses grow!"
-      ogtitle="Meet FSC |Small Business Success Story & Leadpages Customer"
-    />
     <PodcastLeadbox />
     <CustomerFeatureHeader
       image={heroImage}

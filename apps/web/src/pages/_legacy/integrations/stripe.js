@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Sell More With Leadpages + Stripe | Get Online & Grow`,
+            seoDescription: `Easily sell your services online, deliver products, and accept credit cards with Leadpages Checkouts, powered by Stripe.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-Leadpages+Stripe.jpg',
+          },
+        },
+      ],
     },
   }
 }

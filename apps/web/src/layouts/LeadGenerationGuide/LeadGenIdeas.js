@@ -1,6 +1,5 @@
 import React from 'react'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -29,13 +28,6 @@ import { pageRoutes, verbiage } from '@legacy/data/lead-generation-guide_data'
 
 const LeadGenerationIdeas = () => (
   <>
-    <SEO
-      pathname="/lead-generation-guide/lead-gen-ideas"
-      title="Lead Generation Ideas | Lead Generation Guide | Leadpages"
-      description="At a loss for how to grow your email list? Tap into these 5 essential lead generation ideas that will strengthen your marketing and fill your upper funnel."
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="Get Started with these 5 Lead Generation Ideas"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

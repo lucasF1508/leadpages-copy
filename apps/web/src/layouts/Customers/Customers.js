@@ -5,7 +5,6 @@ import DoYourThing from '@legacy/components/customers/DoYourThing'
 import FlexRow from '@legacy/components/layout/FlexRow'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
-import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 // images
@@ -13,12 +12,6 @@ import imageOne from '@legacy/assets/images/totems/This-is-the-lead-generation_7
 
 const CustomersPage = ({ customers }) => (
   <>
-    <SEO
-      pathname="/customers"
-      title="Leadpage Examples | Small Business Success Stories"
-      description="Ready to get inspired? Learn how our customers are growing their small businesses every day with these Leadpages examples and case studies."
-      image="https://static.leadpages.com/images/og/og-customers.jpg"
-    />
     <PodcastLeadbox />
     <SpacerRow size="small" />
     <HeadlineSection

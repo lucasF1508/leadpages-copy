@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Best Lead Generation Landing Page Examples | Leadpages`,
+            seoDescription: `Using lead generation landing pages is a good way to grow your email list. We analyzed the top landing page examples to share tactics for high conversion rates.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

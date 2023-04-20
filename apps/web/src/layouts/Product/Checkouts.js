@@ -8,7 +8,6 @@ import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ProductFeaturesClickReveal from '@legacy/components/click-reveals/ProductFeaturesClickReveal'
 import ProductFeaturesRotator from '@components/Rotator/ProductFeaturesRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 import TurnYourExpertiseIntoRevenue from '@legacy/components/product/TurnYourExpertiseIntoRevenue'
@@ -69,12 +68,6 @@ const CheckoutsProductPage = () => {
 
   return (
     <>
-      <SEO
-        pathname="/product/checkouts"
-        title="Leadpages Checkout Widget"
-        description="Create a Leadpages checkout and then embed it on any web page or pop-up you want. Easily sell online services, deliver products, and accept recurring payments."
-        image="https://static.leadpages.com/images/og/og-checkouts.jpg"
-      />
       <ChildPageHeader
         headingText="Leadpages Checkouts"
         subheadingText="Easily sell your services online, deliver products, and accept recurring payments by embedding Leadpages Checkouts, powered by Stripe, on any web page or pop-up."

@@ -15,6 +15,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Alert Bars | Leadpages | Get Online & Grow`,
+            seoDescription: `Capture your audience’s attention & boost conversions with mobile-friendly alert bars! Add alert bars to any landing page, web page, or website.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-alert-bars.jpg',
+          },
+        },
+      ],
     },
   }
 }

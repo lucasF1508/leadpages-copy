@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import { styled } from '@design'
 // components
-import SEO from '@legacy/components/SEO'
 import Layout from '@legacy/components/Layout'
 // images
 import bgImage from '@legacy/assets/images/shapes/wavy-lines-hourglass-sand.svg'
@@ -139,11 +138,6 @@ const OutboundLink = styled('a', {
 
 const PrivacyPage = () => (
   <Layout>
-    <SEO
-      pathname="/privacy"
-      title="Learn About Leadpages' Privacy Policy"
-      description="We value the privacy of every customer and the trust they instill in us. Dig into the Leadpages Privacy Policy and see how we're keeping data safe."
-    />
     <HeaderContainer>
       <BackgroundImage src={bgImage?.src} alt="hourglass background image" />
       <InnerHeaderContainer>

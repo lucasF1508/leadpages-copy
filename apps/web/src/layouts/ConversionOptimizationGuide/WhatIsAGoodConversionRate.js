@@ -1,6 +1,5 @@
 import React from 'react'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -27,14 +26,6 @@ import {
 
 const WhatIsAGoodConversionRate = () => (
   <>
-    <SEO
-      pathname="/conversion-optimization-guide"
-      title="What's a Good Conversion Rate | CRO Guide | Leadpages"
-      description="Grow your online business with The Definitive Conversion Optimization Guide by Leadpages. Learn about CRO, AB testing, & more to up conversions."
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="What’s a Good Conversion Rate?"
-      ogdescription="Is your website booming or tanking? The best way to tell is by looking at your conversion rate metric. But what actually is a good conversion rate?"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

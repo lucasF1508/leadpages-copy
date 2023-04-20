@@ -19,6 +19,17 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `What's a Good Conversion Rate | CRO Guide | Leadpages`,
+            seoDescription: `Grow your online business with The Definitive Conversion Optimization Guide by Leadpages. Learn about CRO, AB testing, & more to up conversions.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-careers.jpg',
+          },
+        },
+      ],
     },
   }
 }

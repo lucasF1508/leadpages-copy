@@ -15,6 +15,17 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Leadpages® Landing Page Builder & Lead Gen Software`,
+            seoDescription: `Generate leads and increase revenue using the industry-leading landing page creator with accompanying suite of lead generation and opt-in tools.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-contact.jpg',
+          },
+        },
+      ],
     },
   }
 }

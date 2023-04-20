@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `What is Lead Generation | Lead Generation Guide | Leadpages`,
+            seoDescription: `Every business requires a steady stream of high-quality leads. We’ve compiled insights from hundreds of thousands of companies into this Guide to Lead Generation.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

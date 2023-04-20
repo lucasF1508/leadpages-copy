@@ -8,7 +8,6 @@ import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/Custome
 import FlexRow from '@legacy/components/layout/FlexRow'
 import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
-import SEO from '@legacy/components/SEO'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 // images
 import heroImage from '@legacy/assets/images/customers/kailei/Hero-Kailei-Carr_Leadpages_full-width_1440px@2x.jpg'
@@ -209,12 +208,6 @@ const QuotationAuthor = styled('div', {
 
 const KaileiCustomerPage = () => (
   <>
-    <SEO
-      pathname="/customers/kailei"
-      title="Kailei | Leadpages Customer | Website & Landing Page Builder"
-      description="Kailei uses Leadpages to book clients and sell her consulting services. Leadpages helps small businesses grow: websites, landing pages, and more!"
-      ogtitle="Meet Kailei |Small Business Success Story & Leadpages Customer"
-    />
     <PodcastLeadbox />
     <CustomerFeatureHeader
       image={heroImage}

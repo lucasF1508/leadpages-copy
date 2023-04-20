@@ -1,7 +1,6 @@
 import React from 'react'
 import { styled } from '@design'
 // Components
-import SEO from '@legacy/components/SEO'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import ComparisonCards from '@legacy/components/cards/ComparisonCards'
@@ -90,12 +89,6 @@ const Comparisons = () => {
 
   return (
     <>
-      <SEO
-        pathname="/comparisons"
-        title="How does your marketing platform compare with Leadpages?"
-        description="See how Leadpage's conversion marketing platform and website builder compare to other software options on the market today."
-        image="https://static.leadpages.com/images/og/og-comparisons.jpg"
-      />
       <CompareHeadline
         supertitle=""
         title="See How Leadpages Stacks Up"

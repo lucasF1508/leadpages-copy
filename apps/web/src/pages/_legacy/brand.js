@@ -15,6 +15,17 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: 'Guide to the Leadpages Brand',
+            seoDescription: `Our brand is both our personality and our promise. Use these guidelines whenever you work with the Leadpages brand, logo, content, and trademark.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-brand.jpg',
+          },
+        },
+      ],
     },
   }
 }

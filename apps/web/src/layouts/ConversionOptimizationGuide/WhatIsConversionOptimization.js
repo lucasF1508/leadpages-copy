@@ -1,6 +1,5 @@
 import React from 'react'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -42,13 +41,6 @@ import image5 from '@legacy/assets/images/silos/conversion-optimization-guide/4-
 
 const WhatIsConversionOptimization = () => (
   <>
-    <SEO
-      pathname="/conversion-optimization-guide"
-      title="What is Conversion Rate Optimization | CRO Guide | Leadpages"
-      description="Does your web page convert leads to customers with ease? Learn the ins and outs, the benefits, and the how tos of conversion rate optimization."
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="What is Conversion Rate Optimization (CRO)?"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

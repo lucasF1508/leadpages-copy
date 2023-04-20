@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 // Images
 import heroImage from '@legacy/assets/images/integrations/subpages/Zapier+Leadpages_464px@2x.png'
@@ -85,12 +84,6 @@ const Zapier = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/zapier"
-        title="Connect Leadpages to 2000+ Apps With Zapier"
-        description="Connect your Leadpages account to more than 2000+ apps via Zapier. Easily set up automation rules to free up your daily tasks. No coding required."
-        image="https://static.leadpages.com/images/og/og-Leadpages+Zapier.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

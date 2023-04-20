@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import IntegrationsSubpage from '@legacy/components/integrations/IntegrationsSubpage'
 
 // Images
@@ -56,12 +55,6 @@ const GoogleAnalytics = () => {
 
   return (
     <>
-      <SEO
-        pathname="integrations/google-analytics"
-        title="Use Leadpages With Google Analytics | Get Online & Grow"
-        description="Easily connect Leadpages with Google Analytics to access even more data on your pages and forms’ performance. Absolutely no coding required! "
-        image="https://static.leadpages.com/images/og/og-Leadpages+GoogleAnalytics.jpg"
-      />
       <IntegrationsSubpage
         heroData={heroData}
         twoColumnInfo={twoColumnInfo}

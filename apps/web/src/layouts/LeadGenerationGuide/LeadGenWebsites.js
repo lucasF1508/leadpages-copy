@@ -2,7 +2,6 @@ import React from 'react'
 // components
 import Animation_ExitIntentPopup from '@legacy/components/animations/Animation_ExitIntentPopup'
 import Animation_SidebarPopup from '@legacy/components/animations/Animation_SidebarPopup'
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -33,17 +32,9 @@ import {
 import { pageRoutes, verbiage } from '@legacy/data/lead-generation-guide_data'
 // images
 import image1 from '@legacy/assets/images/silos/lead-generation-guide/6-1-coupon-pop-up-example.jpg'
-import image2 from '@legacy/assets/images/silos/lead-generation-guide/site-coming-soon.jpg'
 
 const LeadGenerationWebsites = () => (
   <>
-    <SEO
-      pathname="/lead-generation-guide/lead-gen-websites"
-      title="Lead Generation Website | Lead Generation Guide | Leadpages"
-      description="Turn your static site into a lead generation website by optimizing key areas where your traffic is most likely to transform into a qualified lead."
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="The 9 Tactics That Will Transform Your Lead Generation Website"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

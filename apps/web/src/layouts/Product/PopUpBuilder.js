@@ -10,7 +10,6 @@ import ProductFeaturesClickReveal from '@legacy/components/click-reveals/Product
 import ProductFeaturesRotator from '@components/Rotator/ProductFeaturesRotator'
 import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-import SEO from '@legacy/components/SEO'
 import SpacerRow from '@legacy/components/SpacerRow'
 import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
 // animations
@@ -82,12 +81,6 @@ const PopUpBuilderProductPage = () => {
 
   return (
     <>
-      <SEO
-        pathname="/product/pop-up-builder"
-        title="Add Pop-ups to Any Landing Page or Website in Minutes | Leadpages"
-        description="Easily build and add pop-ups to any website or landing page with Leadpages Pop-up Builder. Collect more leads and scale quickly. Try for free for 14 days."
-        image="https://static.leadpages.com/images/og/og-pop-ups.jpg"
-      />
       <ChildPageHeader
         headingText="Pop-Ups"
         subheadingText="Capture your audience at the peak of their interest with the Leadpages pop-up builder.  Easily add pop-ups to any landing page, web page, or website with just a few clicks. "

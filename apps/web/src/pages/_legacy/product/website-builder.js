@@ -17,6 +17,17 @@ export async function getStaticProps(context) {
       preview,
       options,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Leadpages Website Builder | Create a Website With Ease`,
+            seoDescription: `Build high-converting websites in minutes⁠—no coding required. Choose from a collection of templates that keep your online presence professional across devices.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-sites.jpg',
+          },
+        },
+      ],
     },
   }
 }

@@ -25,6 +25,17 @@ export async function getStaticProps(context) {
       preview,
       planData,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Leadpages Pricing: Generate More Leads and Sales`,
+            seoDescription: `Leadpages offers the best pricing plans for you to grow your business. Get started today with our risk-free 14-day free trial and add more at any time.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-pricing.jpg',
+          },
+        },
+      ],
     },
   }
 }

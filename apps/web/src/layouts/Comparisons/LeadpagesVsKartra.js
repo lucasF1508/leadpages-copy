@@ -1,6 +1,5 @@
 import React from 'react'
 // Components
-import SEO from '@legacy/components/SEO'
 import SiloBackAndForthNavCards from '@legacy/components/silos/SiloBackAndForthNavCards'
 import SiloCheckMarkList from '@legacy/components/silos/SiloCheckMarkList'
 import SiloComparisonDesktopMenu from '@legacy/components/silos/SiloComparisonDesktopMenu'
@@ -94,12 +93,6 @@ const checkMarkContent = {
 
 const LeadpagesVsKartra = () => (
   <>
-    <SEO
-      pathname="/comparisons/leadpages-vs-kartra"
-      title="Leadpages vs. Kartra: What's the difference?"
-      description='Discover which platform is "The best investment in my business to date” and why small business owners like you made the switch to Leadpages.'
-      image="https://static.leadpages.com/images/og/og-Leadpages-vs-Kartra.jpg"
-    />
     <SiloHeader title={verbiage.main.title} breadcrumbs={breadcrumbs} />
     <OuterContainer>
       {/* Desktop Menu Bar */}

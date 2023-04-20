@@ -10,7 +10,6 @@ import ProductFeaturesClickReveal from '@legacy/components/click-reveals/Product
 import ProductFeaturesRotator from '@components/Rotator/ProductFeaturesRotator'
 import ProductTestimonialsRotator from '@legacy/components/rotators/ProductTestimonialsRotator'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
-import SEO from '@legacy/components/SEO'
 import SimpleSetup from '@legacy/components/product/SimpleSetup'
 import SpacerRow from '@legacy/components/SpacerRow'
 import ToolkitCardsGrid from '@legacy/components/grids/ToolkitCardsGrid'
@@ -65,12 +64,6 @@ const AlertBarsProductPage = () => {
 
   return (
     <>
-      <SEO
-        pathname="/product/alert-bars"
-        title="Alert Bars | Leadpages | Get Online & Grow"
-        description="Capture your audience’s attention & boost conversions with mobile-friendly alert bars! Add alert bars to any landing page, web page, or website."
-        image="https://static.leadpages.com/images/og/og-alert-bars.jpg"
-      />
       <ChildPageHeader
         headingText="Alert Bars"
         subheadingText="Capture your audience's attention and boost conversions with a non-intrusive, mobile-friendly alert bar."

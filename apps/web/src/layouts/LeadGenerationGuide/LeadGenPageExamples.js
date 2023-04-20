@@ -1,6 +1,5 @@
 import React from 'react'
 // components
-import SEO from '@legacy/components/SEO'
 import SiloHeader from '@legacy/components/headers/SiloHeader'
 import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
@@ -39,13 +38,6 @@ const LeadGenerationLandingPageExamples = () => (
   <>
     <TemporaryLeadbox_Timed />
     <TemporaryLeadbox_ExitIntent />
-    <SEO
-      pathname="/lead-generation-guide/lead-gen-page-examples"
-      title="Best Lead Generation Landing Page Examples | Leadpages"
-      description="Using lead generation landing pages is a good way to grow your email list. We analyzed the top landing page examples to share tactics for high conversion rates."
-      image="https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg"
-      ogtitle="Top 6 Lead Generation Landing Page Examples"
-    />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

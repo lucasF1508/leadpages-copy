@@ -17,6 +17,18 @@ export async function getStaticProps(context) {
       slug,
       preview,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Lead Generation Ideas | Lead Generation Guide | Leadpages`,
+            seoDescription: `At a loss for how to grow your email list? Tap into these 5 essential lead generation ideas that will strengthen your marketing and fill your upper funnel.`,
+            seoImage:
+              'https://static.leadpages.com/images/og/og-ultimate-guide-to-landing-pages.jpg',
+          },
+        },
+      ],
     },
   }
 }

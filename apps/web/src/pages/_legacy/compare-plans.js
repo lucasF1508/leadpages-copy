@@ -29,6 +29,16 @@ export async function getStaticProps(context) {
       preview,
       planData,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            seoTitle:
+              'Leadpages Pricing: Monthly and Annual Subscription Plans',
+            seoDescription: `Leadpages offers the best pricing plans for your growing small business. Start with a risk-free 14-day free trial and unlock more features as you grow.`,
+          },
+        },
+      ],
     },
   }
 }

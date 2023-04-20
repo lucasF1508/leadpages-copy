@@ -17,6 +17,17 @@ export async function getStaticProps(context) {
       preview,
       options,
       global,
+      data: [
+        {
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Leadpages Checkout Widget`,
+            seoDescription: `Create a Leadpages checkout and then embed it on any web page or pop-up you want. Easily sell online services, deliver products, and accept recurring payments.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-checkouts.jpg',
+          },
+        },
+      ],
     },
   }
 }

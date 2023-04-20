@@ -28,6 +28,13 @@ export async function getStaticProps(context) {
       data: [
         {
           customers,
+          seo: {
+            hasCustomSeoTitle: true,
+            hasImageUrl: true,
+            seoTitle: `Free Digital Marketing Resources from Leadpages`,
+            seoDescription: `Want to stay in the know on all things about digital marketing? Get full access to free webinars, ebooks, guides, and podcasts brought to you by Leadpages.`,
+            seoImage: 'https://static.leadpages.com/images/og/og-customers.jpg',
+          },
         },
       ],
       global,
