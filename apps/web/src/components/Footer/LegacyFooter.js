@@ -321,6 +321,14 @@ const LegacyFooter = ({ slimFooter, isPreviewPage }) => {
                     Affiliate Program
                   </OutboundFooterLink>
                 </FlexColumnItem>
+                <FlexColumnItem>
+                  <OutboundFooterLink
+                    href="https://lp.leadpages.com/refer/"
+                    data-gtm="footer-link"
+                  >
+                    Refer a Friend
+                  </OutboundFooterLink>
+                </FlexColumnItem>
               </FlexColumn>
             </Col2>
             <Col2>
