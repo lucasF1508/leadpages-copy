@@ -26,8 +26,8 @@ export const schemaFooter = {
                   args: {
                     linkStyle: false,
                     hasIcon: false,
-                    label: {
-                      validation: (Rule) => Rule.required(),
+                    dataGtm: {
+                      initialValue: 'footer-link',
                     },
                     condition: {
                       validation: (Rule) => Rule.required(),
@@ -36,6 +36,7 @@ export const schemaFooter = {
                 }),
               ],
               name: 'links',
+              validation: (Rule) => Rule.required().min(1),
             }),
           ],
         }),

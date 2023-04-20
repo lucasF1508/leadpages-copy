@@ -33,6 +33,8 @@ export const link = ({
     linkStyle: {},
     linkSize: {},
     condition: {},
+    dataGtm: {},
+    ariaLabel: {},
     ...argsOrg,
   }
 
@@ -150,6 +152,22 @@ export const link = ({
           ...args.label,
         })
       : '',
+    args.dataGtm
+      ? F.string({
+          name: 'dataGtm',
+          title: 'data-gtm',
+          group: isGrouped && 'options',
+          ...args.dataGtm,
+        })
+      : '',
+    args.ariaLabel
+      ? F.string({
+          name: 'ariaLabel',
+          title: 'aria-label',
+          group: isGrouped && 'options',
+          ...args.ariaLabel,
+        })
+      : '',
 
     ...conditionValues.flat(),
     ...fieldsOrg,
@@ -160,13 +178,7 @@ export const link = ({
     name,
     groups: [...G.fieldGroupComponentOptions(), ...groups],
     parseType: 'link',
-    fields: [
-      ...fields,
-      ...G.group('options', [
-        F.string({ name: 'dataGtm', title: 'data-gtm' }),
-        F.string({ name: 'ariaLabel', title: 'aria-label' }),
-      ]),
-    ],
+    fields,
     preview: {
       ...P.link(),
       ...preview,

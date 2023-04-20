@@ -168,7 +168,7 @@ const Footer = ({ slimFooter, isPreviewPage, data = {} }) => {
                 <Col2 key={_key}>
                   <SmallCaps>{heading}</SmallCaps>
                   <FlexColumn>
-                    {links.map(({ _key: _linkKey, ...link }) => (
+                    {links?.map(({ _key: _linkKey, ...link }) => (
                       <FlexColumnItem key={_linkKey}>
                         <Link {...link} footer={true} />
                       </FlexColumnItem>

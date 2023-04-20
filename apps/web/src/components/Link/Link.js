@@ -69,6 +69,7 @@ const Link = (
     leadpagesDomain,
     dataGtm,
     ariaLabel: ariaLabelOrg,
+    video,
     ...props
   },
   ref
@@ -190,7 +191,7 @@ const Link = (
             modalKey={modalKey || 'video'}
           >
             <Video
-              video={props.video}
+              video={video}
               videoControls={{ muted: false, controls: true, loop: false }}
               type="static"
             />
