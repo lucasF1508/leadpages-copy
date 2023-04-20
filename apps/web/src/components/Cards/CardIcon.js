@@ -326,7 +326,7 @@ const CardIcon = ({
   media,
 }) => {
   const CardMedia = () =>
-    image ? <Image image={image} /> : <Media media={media} />
+    media ? <Media media={media} /> : <Image image={image} />
 
   return (
     <$CardIcon align={align} asCards={asCards} itemsPerRow={itemsPerRow}>
