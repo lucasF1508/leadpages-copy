@@ -67,7 +67,7 @@ const useSeo = ({ seo, siteMeta } = {}) => {
     url: `${NEXT_PUBLIC_URL || ''}${asPath
       .replace('/_legacy', '') // Strip out /_legacy
       .replace(
-        /(\?affiliate=[^&]+&?).*|([&?][^&]+)+/,
+        /(\?affiliate=[^&]+).*|([&?][^&]+)+/,
         (match, affiliate) => affiliate || ''
       ) // Remove params unless if affiliate
       .replace(/\/$/, '')}`, // Remove trailing slash if exists
