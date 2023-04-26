@@ -3,9 +3,9 @@
 /* eslint-disable import/prefer-default-export */
 export const openPositionsArray = [
   {
-    title: 'Customer Onboarding Specialist',
+    title: 'Intermediate Software Developer',
     department: 'Victoria, British Columbia (Remote)',
-    postingLink: 'https://rdbrck.bamboohr.com/careers/199',
+    postingLink: 'https://rdbrck.bamboohr.com/careers/202',
     type: 'internal',
   },
   // {
