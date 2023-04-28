@@ -5,7 +5,7 @@ import NextImage from 'next/image'
 import Image from '@components/Image'
 // images
 import { FiChevronRight as Icon } from '@react-icons/all-files/fi/FiChevronRight'
-import Media from '@components/Media'
+import Media, { hasMedia } from '@components/Media'
 
 const CardIconHeading = styled('div', {
   type: 'cardHeading',
@@ -326,12 +326,12 @@ const CardIcon = ({
   media,
 }) => {
   const CardMedia = () =>
-    media ? <Media media={media} /> : <Image image={image} />
+    hasMedia(media) ? <Media media={media} /> : <Image image={image} />
 
   return (
     <$CardIcon align={align} asCards={asCards} itemsPerRow={itemsPerRow}>
       <$CardIconInner asCards={asCards} itemsPerRow={itemsPerRow}>
-        {(icon || image || media) && (
+        {(icon || image || hasMedia(media)) && (
           <ImageContainer asCards={asCards} itemsPerRow={itemsPerRow}>
             {icon ? (
               <NextImage
