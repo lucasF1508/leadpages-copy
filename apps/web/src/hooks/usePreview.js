@@ -75,8 +75,7 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
         '/404': await import('@pages/404'),
         '/integrations': await import('@pages/integrations'),
         '/blog': await import('@pages/blog'),
-        '/blog/page/[num]': await import('@pages/blog/page/[num]'),
-        '/blog/category/[[...category]]': await import(
+        '/blog/category/[category]': await import(
           '@pages/blog/category/[category]'
         ),
       }[pathname] || {}

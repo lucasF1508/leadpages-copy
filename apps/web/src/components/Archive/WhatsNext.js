@@ -50,10 +50,9 @@ const $Text = styled(Text, {
 const $TitleText = styled(Text, {
   d: 'inline',
   c: '$textAlt',
-  borderBottom: '1px solid $colors$primary',
 
   '& :hover': {
-    borderBottom: '2px solid $colors$primary',
+    color: '$hover',
   },
 })
 

@@ -3,13 +3,12 @@ import Image from '@components/Image'
 import Link from '@components/Link'
 import { styled } from '@design'
 
+const $Link = styled(Link)
 const $ArchiveLink = styled(Link, {
   c: '$primary',
-  borderBottom: '1px solid transparent',
 
   '&:hover': {
-    c: '$black',
-    borderBottom: '1px solid $colors$primary',
+    c: '$hover',
   },
 })
 
@@ -22,20 +21,58 @@ const $CardHeading = styled(Heading, {})
 const $Card = styled('div', {
   a: {
     [`${$CardHeading}`]: {
-      borderBottom: '1px solid $colors$white',
-      d: 'inline',
-
       '&:hover': {
-        c: '$black',
-        borderBottom: '1px solid $colors$primary',
+        c: '$hover',
       },
     },
   },
 
   variants: {
     isFeatured: {
-      true: { gc: '1 / span 2' },
+      true: {
+        mb: '$0_5',
+
+        '@>s': {
+          gc: '1 / span 2',
+        },
+      },
       false: {},
+    },
+    isReachingEnd: {
+      false: {
+        '&:nth-last-child(1)': {
+          d: 'none',
+        },
+        '&:nth-last-child(2)': {
+          pointerEvents: 'none',
+
+          [`${$CardHeading},${$Link}`]: {
+            d: 'none',
+          },
+        },
+        '@>s': {
+          '&:nth-last-child(1),&:nth-last-child(2)': {
+            display: 'block',
+            pointerEvents: 'none',
+
+            [`${$CardHeading},${$Link}`]: {
+              d: 'none',
+            },
+          },
+        },
+      },
+    },
+  },
+})
+
+const $AuthorLeadIn = styled('span', {
+  '&::before': {
+    content: 'attr(data-content-short) " "',
+  },
+
+  '@>s': {
+    '&::before': {
+      content: 'attr(data-content-long) " "',
     },
   },
 })
@@ -48,49 +85,58 @@ const CardPostArchive = ({
   publisher,
   primaryCategory,
   isFeatured,
+  className,
+  isReachingEnd,
 }) => (
-  <$Card isFeatured={isFeatured}>
+  <$Card
+    className={className}
+    isFeatured={isFeatured}
+    isReachingEnd={isReachingEnd}
+  >
     <$ImageLink url={path} condition="internal">
-      <Image image={image} css={{ mb: '$2_5' }} />
+      <Image image={image} css={{ mb: isFeatured ? '$2' : '$1_5' }} />
     </$ImageLink>
     {primaryCategory && (
-      <Link url={primaryCategory.url} condition="internal">
+      <$Link url={primaryCategory.url} condition="internal">
         <$CardHeading
           heading={primaryCategory.title}
           tag="h5"
           css={{
             c: '$primary',
-            type: 'base',
-            fontSize: '15px',
-            mb: '$0_5',
-            fontWeight: '500',
+            type: isFeatured ? 'captionFeature' : 'captionSm',
+            mb: '$1',
             fontFamily: '$apercuPro',
           }}
         />
-      </Link>
+      </$Link>
     )}
-    <Link url={path} condition="internal" css={{ d: 'block', mb: '$4' }}>
+    <$Link
+      url={path}
+      condition="internal"
+      css={{ d: 'block', mb: isFeatured ? '$2' : '$1_5' }}
+    >
       <$CardHeading
         heading={title}
         tag="h3"
-        tagStyle={isFeatured ? 'h4' : 'h6'}
-        css={{ d: 'inline', fontSize: !isFeatured && '1.125rem' }}
+        tagStyle={isFeatured ? 'h4' : 'blogCard'}
       />
-    </Link>
+    </$Link>
     <Heading
       tag="h6"
+      tagStyle={isFeatured ? 'blogMetaFeature' : 'blogMeta'}
       css={{
-        c: '$darkGrayAlt',
-        type: 'base',
-        fontSize: '15px',
-        mb: '$3_5',
+        c: '$textAlt',
+        mb: '0',
         fontFamily: '$apercuPro',
         fontWeight: 400,
       }}
     >
       {publisher && (
         <>
-          Posted by{' '}
+          <$AuthorLeadIn
+            data-content-short="By"
+            data-content-long="Posted by"
+          />
           <$ArchiveLink
             url={'/blog'}
             label={publisher.title}
@@ -99,14 +145,16 @@ const CardPostArchive = ({
           <>&nbsp;&nbsp;</>|<>&nbsp;&nbsp;</>
         </>
       )}
-      {new Date(publishedDate).toLocaleDateString('en-US', {
-        month: 'short',
-        day: '2-digit',
-      })}
-      ,{' '}
-      {new Date(publishedDate).toLocaleDateString('en-US', {
-        year: 'numeric',
-      })}
+      <span style={{ whiteSpace: 'nowrap' }}>
+        {new Date(publishedDate).toLocaleDateString('en-US', {
+          month: 'short',
+          day: '2-digit',
+        })}
+        ,{' '}
+        {new Date(publishedDate).toLocaleDateString('en-US', {
+          year: 'numeric',
+        })}
+      </span>
     </Heading>
   </$Card>
 )

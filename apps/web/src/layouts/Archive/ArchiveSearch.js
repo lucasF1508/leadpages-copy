@@ -4,8 +4,15 @@ import Pinion from '@components/Pinion'
 import Heading from '@components/Heading'
 import ArchiveSidebar from '@components/Archive/Sidebar'
 import Link from '@components/Link'
-import Pagination from '@components/Pagination'
+import { useRouter } from 'next/router'
 import { CardPostArchive } from '@components/Cards'
+import fetchInfinite from '@hooks/useFetchInfinite'
+import {
+  LoadMoreContainer,
+  $CategoryBreadcrumbs,
+  $CategoryHeading,
+  $Heading,
+} from './Archive'
 import { $ArchiveGrid } from './ArchiveSingle'
 
 const $ArchiveCardGrid = styled('div', {
@@ -15,73 +22,68 @@ const $ArchiveCardGrid = styled('div', {
   gcg: '$6',
 })
 
-const $CategoryHeading = styled(Heading, {})
+const ArchiveSearch = ({ categories, settings, hasFeaturedPost }) => {
+  const router = useRouter()
+  const { s: searchQuery } = router.query
+  const {
+    docs = [],
+    error,
+    isLoading,
+    isReachingEnd,
+    ...fetchInfiniteProps
+  } = fetchInfinite({
+    searchQuery,
+    hasFeaturedPost,
+    fetch: !!searchQuery,
+  })
 
-const $CategoryBreadcrumbs = styled('div', {
-  pb: '$1',
-  mb: '$3',
-  bb: '2px solid $colors$grayTertiaryAlt',
-  d: 'flex',
-  gap: '$2',
-  c: '$grayTertiary',
+  if (error) {
+    console.error(`Failed to load. Error: ${error}`)
+  }
 
-  a: {
-    bb: '1px solid transparent',
-
-    '&:hover': {
-      c: '$primary',
-      bb: '1px solid $colors$primary',
-    },
-  },
-
-  [`${$CategoryHeading}`]: {
-    '&:last-child': {
-      c: '$primary',
-    },
-  },
-})
-
-const ArchiveSearch = ({
-  docs = [],
-  pagination = {},
-  categories,
-  settings,
-  hasFeaturedPost,
-  isLoading = false,
-  searchQuery,
-}) => (
-  <Pinion component="archivePage">
-    <$ArchiveGrid>
-      <div>
-        <$CategoryBreadcrumbs>
-          <$CategoryHeading tag="h1" tagStyle="h5">
-            <Link condition="internal" url={'/blog'}>
-              Blog
-            </Link>
-          </$CategoryHeading>
-          <$CategoryHeading heading=">" tag="h1" tagStyle="h5" />
-          <$CategoryHeading
-            heading={`<span style="color: black;">${
-              isLoading ? 'Searching...' : 'Search:'
-            }</span> ${!isLoading ? searchQuery : ''}`}
-            tag="h2"
-            tagStyle="h5"
-          />
-        </$CategoryBreadcrumbs>
-        <$ArchiveCardGrid>
-          {docs.map((doc, i) => (
-            <CardPostArchive
-              key={doc._id}
-              isFeatured={i === 0 && hasFeaturedPost}
-              {...doc}
+  return (
+    <Pinion component="archivePage">
+      <$ArchiveGrid>
+        <div>
+          <$CategoryBreadcrumbs>
+            <$CategoryHeading tag="h1" tagStyle="breadcrumbs">
+              <Link condition="internal" url={'/blog'}>
+                Blog
+              </Link>
+            </$CategoryHeading>
+            <$CategoryHeading heading="/" tag="h1" tagStyle="breadcrumbs" />
+            <$CategoryHeading
+              heading={'Search'}
+              tag="h2"
+              tagStyle="breadcrumbs"
             />
-          ))}
-        </$ArchiveCardGrid>
-      </div>
-      <ArchiveSidebar categories={categories} settings={settings} />
-      {pagination?.totalPages > 1 && <Pagination pagination={pagination} />}
-    </$ArchiveGrid>
-  </Pinion>
-)
+          </$CategoryBreadcrumbs>
+          <$Heading
+            category={true}
+            heading={`<span style="color: black;">${
+              !searchQuery || isLoading ? 'Searching...' : 'Search:'
+            }</span> ${!isLoading && searchQuery ? searchQuery : ''}`}
+            tag="h1"
+            tagStyle="h2"
+          />
+          <$ArchiveCardGrid>
+            {docs.map((doc, i) => (
+              <CardPostArchive
+                key={doc._id}
+                isFeatured={i === 0 && hasFeaturedPost}
+                isReachingEnd={isReachingEnd}
+                {...doc}
+              />
+            ))}
+          </$ArchiveCardGrid>
+          {!isLoading && searchQuery && !isReachingEnd && (
+            <LoadMoreContainer {...fetchInfiniteProps} />
+          )}
+        </div>
+        <ArchiveSidebar categories={categories} settings={settings} />
+      </$ArchiveGrid>
+    </Pinion>
+  )
+}
 
 export default ArchiveSearch

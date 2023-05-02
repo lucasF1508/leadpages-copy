@@ -35,7 +35,7 @@ export const $Breadcrumb = styled('li', {
   pr: '0.75rem',
   mr: '0.75rem',
   ls: 'none',
-  c: '$darkGray',
+  c: '$darkGrayAlt',
 
   '&:first-child': {
     ml: 0,
@@ -45,12 +45,12 @@ export const $Breadcrumb = styled('li', {
     position: 'absolute',
     right: 0,
     top: 0,
-    content: '>',
+    content: '/',
     display: 'block',
     height: '0.8em',
     width: '1px',
     transform: 'translate(-2px, 3px)',
-    c: '$black',
+    c: '$darkGrayAlt',
     fontSize: '15px',
   },
 
@@ -60,7 +60,6 @@ export const $Breadcrumb = styled('li', {
 
     '&:hover': {
       color: '$hover',
-      borderBottom: '1px solid $colors$primary',
     },
   },
 
@@ -73,11 +72,10 @@ export const $Breadcrumb = styled('li', {
     },
 
     '& > a': {
-      c: '$darkGray',
+      c: '$darkGrayAlt',
 
       '&:hover': {
         c: '$hover',
-        borderBottom: '1px solid $colors$primary',
       },
     },
   },

@@ -13,14 +13,23 @@ const $ArchiveSidebar = styled('div', {
   d: 'flex',
   flexDirection: 'column',
   gap: '$space$5',
+  mt: '$12',
+
+  '@>sidebarTablet': {
+    mt: 0,
+  },
 })
 
-const $ArticleSearchForm = styled('form', {})
+const $ArticleSearchForm = styled('form', {
+  '@>sidebarTablet': {
+    mt: '$3',
+    mb: 1,
+  },
+})
 
 const $ArticleSearchInput = styled('input', {
   background: '$grayAlt',
   border: '1px solid $colors$lightGray',
-  borderRadius: '3px',
   color: '$textAlt',
   fontFamily: '$apercuPro',
   fontWeight: 500,
@@ -71,9 +80,7 @@ const $CategoryLink = styled(Link, {
   lineHeight: '$2_5',
 
   '&:hover': {
-    color: '$black',
-    textDecoration: 'underline',
-    textDecorationColor: '$colors$primary',
+    color: '$hover',
   },
 })
 
@@ -90,7 +97,7 @@ const $TrendingLink = styled(Link, {
   lineHeight: '$2_5',
 
   '&:hover': {
-    color: '$primary',
+    color: '$hover',
   },
 
   '@>m': {
@@ -139,7 +146,6 @@ const ArchiveSidebar = ({ categories, settings = {} }) => {
 
   return (
     <$ArchiveSidebar>
-      <SidebarCTA content={sidebarCta} />
       <$ArticleSearchForm
         onSubmit={(event) => {
           event.preventDefault()
@@ -147,8 +153,9 @@ const ArchiveSidebar = ({ categories, settings = {} }) => {
           router.push(`/blog/search?s=${value}`)
         }}
       >
-        <$ArticleSearchInput placeholder="Search..." />
+        <$ArticleSearchInput placeholder="Search our blog..." />
       </$ArticleSearchForm>
+      <SidebarCTA content={sidebarCta} />
       {categories && (
         <$CategoriesGrid>
           <$Heading heading={'Categories'} tag="h4" />

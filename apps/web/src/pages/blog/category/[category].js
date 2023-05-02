@@ -1,6 +1,6 @@
 import React from 'react'
 import getBaseUrlFromResolvedUrl from '@utils/getBaseUrlFromResolvedUrl'
-import { getDoc, getAllDocs, runQueries } from '@lib'
+import { getDoc, getAllDocs, runQueries, getDocSlugs } from '@lib'
 import Archive from '@layouts/Archive'
 import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
 
@@ -12,6 +12,7 @@ export const shapeData = ([
   { docs: categories },
   { docs: _docs, pagination },
 ]) => {
+  const { seo } = currentCategory
   const docs = _docs.map(
     ({ path, publishedDate, publisher, image, primaryCategory, title }) => ({
       path,
@@ -30,46 +31,35 @@ export const shapeData = ([
       docs,
       pagination,
       categories,
+      seo,
     },
   ]
 }
 
 export const dataShaper = (props) => shapeData(props)
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const docType = 'post'
-  const { preview = false, params, resolvedUrl } = context
+  const { preview = false, params } = context
   const { category } = params
-
-  const baseUrl = getBaseUrlFromResolvedUrl({
-    resolvedUrl,
-    params,
-  })
-
-  if (!category) {
-    return {
-      redirect: {
-        destination: `/${baseUrl}`,
-        permanent: false,
-      },
-    }
-  }
 
   const { data, queries, global } = await runQueries([
     getDoc('postSettings', {}),
     getDoc('categoryPost', {
       filters: `slug.current == '${category}'`,
+      projections: '"slug": slug.current',
     }),
     getAllDocs('categoryPost', {
       filters: "!(_id in path('drafts.**'))",
       projections: `${categoryPostCountQuery}`,
+      hasPagination: false,
       preview,
     }),
     getAllDocs(docType, {
       order: 'order(publishedDate desc)',
       filters: [
-        `(primaryCategory->slug.current == '${category}' || '${category}' in secondaryCategories[]->slug.current)`,
         "!(_id in path('drafts.**'))",
+        `(primaryCategory->slug.current == '${category}' || '${category}' in secondaryCategories[]->slug.current)`,
       ],
       preview,
     }),
@@ -82,6 +72,21 @@ export async function getServerSideProps(context) {
       global,
       preview,
     },
+  }
+}
+
+export async function getStaticPaths() {
+  const categoryPaths = await getDocSlugs(['categoryPost'], {
+    filters: `count(*[_type == 'post' && references(^._id)]) > 0`,
+  })
+
+  const paths = categoryPaths.map(({ slug: category }) => ({
+    params: { category },
+  }))
+
+  return {
+    paths,
+    fallback: false,
   }
 }
 

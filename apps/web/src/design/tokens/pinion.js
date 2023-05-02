@@ -156,7 +156,15 @@ export const pinionTokens = {
       },
       archivePage: {
         px: 'unset',
-        my: '$8',
+        mt: '$3',
+
+        '@>s': {
+          mt: '$5',
+        },
+
+        '@>m': {
+          my: '$8',
+        },
 
         '> div': {
           align: 'none',

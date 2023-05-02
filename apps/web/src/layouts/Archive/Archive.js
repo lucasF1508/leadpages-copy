@@ -3,93 +3,181 @@ import { styled } from '@design'
 import Pinion from '@components/Pinion'
 import Heading from '@components/Heading'
 import ArchiveSidebar from '@components/Archive/Sidebar'
-import Link from '@components/Link'
-import Pagination from '@components/Pagination'
+import Link, { $Link } from '@components/Link'
 import { CardPostArchive } from '@components/Cards'
-import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
+import useFetchInfinite from '@hooks/useFetchInfinite'
+import { FiChevronDown as Icon } from '@react-icons/all-files/fi/FiChevronDown'
 import { $ArchiveGrid } from './ArchiveSingle'
 
 const $ArchiveCardGrid = styled('div', {
   d: 'grid',
-  gridTemplateColumns: '1fr 1fr',
-  grg: '$5',
-  gcg: '$6',
+  gridTemplateColumns: '1fr',
+  grg: '$3',
+
+  '@>s': {
+    gridTemplateColumns: '1fr 1fr',
+    grg: '$4',
+    gcg: '$3',
+  },
+
+  '@>m': {
+    grg: '$5',
+    gcg: '$6',
+  },
 })
 
-const $CategoryHeading = styled(Heading, {})
+export const $Heading = styled(Heading, {
+  mb: '$4',
 
-const $CategoryBreadcrumbs = styled('div', {
-  pb: '$1',
-  mb: '$3',
-  bb: '2px solid $colors$grayTertiaryAlt',
+  '@>s': {
+    mb: '$5',
+  },
+
+  '@>m': {
+    mb: '$7',
+  },
+
+  variants: {
+    category: {
+      true: {
+        '@>m': {
+          mb: '$6',
+        },
+      },
+    },
+  },
+})
+
+export const $CategoryHeading = styled(Heading, {})
+export const $CategoryBreadcrumbs = styled('div', {
+  mb: '$1_5',
   d: 'flex',
-  gap: '$2',
+  gap: '$1_5',
   c: '$grayTertiary',
+
+  '@>s': {
+    mb: '$2',
+  },
+
+  '@>m': {
+    mb: '$3',
+  },
 
   a: {
     bb: '1px solid transparent',
 
     '&:hover': {
-      c: '$primary',
-      bb: '1px solid $colors$primary',
+      c: '$hover',
     },
   },
 
   [`${$CategoryHeading}`]: {
     '&:last-child': {
-      c: '$primary',
+      c: '$textAlt',
     },
   },
 })
 
+export const $LoadMoreContainer = styled('div', {
+  d: 'flex',
+  jc: 'center',
+  mt: '-45vw',
+  pt: '50vw',
+  position: 'relative',
+  backgroundImage:
+    'linear-gradient(to top, $colors$white, 83%, rgba(255, 0, 0, 0))',
+
+  '@>s': {
+    backgroundImage:
+      'linear-gradient(to top, $colors$white, 90%, rgba(255, 0, 0, 0))',
+    mt: '-22vw',
+    pt: '27vw',
+  },
+
+  '@>sidebarTablet': {
+    mt: '-15vw',
+    pt: '18vw',
+  },
+
+  '@>1345': {
+    mt: '-$25',
+    pt: '$30',
+  },
+})
+
+const $Icon = styled(Icon, {
+  w: '$space$2_5',
+  h: '$space$2_5',
+  ml: '-$0_5',
+})
+
+export const LoadMoreContainer = ({
+  className,
+  size,
+  setSize,
+  isLoadingMore,
+}) => (
+  <$LoadMoreContainer className={className}>
+    <$Link
+      linkStyle="ghost"
+      onClick={() => setSize(size + 1)}
+      disabled={isLoadingMore}
+    >
+      {isLoadingMore ? 'Loading More...' : 'Load More Posts'}
+      {!isLoadingMore && <$Icon />}
+    </$Link>
+  </$LoadMoreContainer>
+)
+
 const Archive = ({
-  docs = [],
-  pagination = {},
-  currentCategory,
+  docs: fallbackData = [],
+  currentCategory: category,
   categories,
   settings,
   hasFeaturedPost,
 }) => {
-  const isMobile = useEvalBreakpoint('<m')
+  const { docs, isReachingEnd, ...fetchInfiniteProps } = useFetchInfinite({
+    fallbackData,
+    category,
+    hasFeaturedPost,
+  })
 
   return (
     <Pinion component="archivePage">
       <$ArchiveGrid>
         <div>
-          {currentCategory ? (
+          {category && (
             <$CategoryBreadcrumbs>
-              <$CategoryHeading tag="h1" tagStyle="h5">
+              <$CategoryHeading tag="h1" tagStyle="breadcrumbs">
                 <Link condition="internal" url={'/blog'}>
                   Blog
                 </Link>
               </$CategoryHeading>
-              <$CategoryHeading heading=">" tag="h1" tagStyle="h5" />
+              <$CategoryHeading heading="/" tag="h1" tagStyle="breadcrumbs" />
               <$CategoryHeading
-                heading={currentCategory.title}
+                heading={category.title}
                 tag="h2"
-                tagStyle="h5"
+                tagStyle="breadcrumbs"
               />
             </$CategoryBreadcrumbs>
-          ) : (
-            <Heading
-              heading={'Leadpages Blog'}
-              tag="h1"
-              tagStyle="h2"
-              css={{ pb: '$8' }}
-            />
           )}
+          <$Heading
+            category={!!category}
+            heading={category ? category?.title : 'Leadpages Blog'}
+            tag="h1"
+            tagStyle="h2"
+          />
           <$ArchiveCardGrid>
             {docs.map((doc, i) => (
               <CardPostArchive
                 key={doc._id}
                 isFeatured={i === 0 && hasFeaturedPost}
+                isReachingEnd={isReachingEnd}
                 {...doc}
               />
             ))}
           </$ArchiveCardGrid>
-          {pagination?.totalPages > 1 && (
-            <Pagination pagination={pagination} isMobile={isMobile} />
-          )}
+          {!isReachingEnd && <LoadMoreContainer {...fetchInfiniteProps} />}
         </div>
         <ArchiveSidebar categories={categories} settings={settings} />
       </$ArchiveGrid>

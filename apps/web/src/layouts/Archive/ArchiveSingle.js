@@ -74,11 +74,9 @@ const $WhatsNextContainer = styled('div', {
 
 const $ArchiveLink = styled(Link, {
   c: '$primary',
-  borderBottom: '1px solid transparent',
 
   '&:hover': {
-    c: '$black',
-    borderBottom: '1px solid $colors$primary',
+    c: '$hover',
   },
 })
 
@@ -154,6 +152,8 @@ const $ArchiveSocial = styled('div', {
   zIndex: '$cover',
   gap: '$1',
   p: '$1',
+  left: 0,
+  boxSizing: 'border-box',
 
   '@>m': {
     p: 0,

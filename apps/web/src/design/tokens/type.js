@@ -198,7 +198,27 @@ export const type = {
       '@>s': typeSizes.lg,
     },
     buttonSm: typeSizes.sm,
-    captionSm: typeSizes.xs,
+    captionFeature: {
+      ...typeSizes.xs,
+      '@>s': typeSizes.base,
+      lh: '$lineHeights$l',
+    },
+    captionSm: {
+      ...typeSizes.xs,
+      lh: '$lineHeights$l',
+    },
+    breadcrumbs: typeSizes.xs,
+    blogMetaFeature: typeSizes.sm,
+    blogMeta: {
+      ...typeSizes.xs,
+      '@>s': typeSizes.sm,
+    },
+    blogCard: {
+      ...typeSizes.sm,
+      '@>s': typeSizes.base,
+      '@>m': typeSizes.lg,
+      lh: '$lineHeights$l',
+    },
     input: {
       fontSize: '1rem',
       '@>s': typeSizes.sm,
@@ -304,8 +324,25 @@ export const type = {
       fontWeight: '$normal',
       fontFamily: '$base',
     },
+    captionFeature: {
+      fontWeight: '$normal',
+      fontFamily: '$base',
+      '@>s': {
+        fontWeight: '$medium',
+      },
+    },
     captionSm: {
       fontWeight: '$normal',
+      fontFamily: '$base',
+    },
+    breadcrumbs: {
+      fontWeight: '$normal',
+      fontFamily: '$base',
+      letterSpacing: '0.2em',
+      textTransform: 'uppercase',
+    },
+    blogCard: {
+      fontWeight: '$medium',
       fontFamily: '$base',
     },
     input: {

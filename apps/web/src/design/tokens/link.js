@@ -33,9 +33,11 @@ export const link = {
 
         '&[disabled]': {
           bc: '$disabled',
+          borderColor: '$disabled',
 
           '&:hover, :active': {
             bc: '$disabled',
+            borderColor: '$disabled',
           },
         },
       },

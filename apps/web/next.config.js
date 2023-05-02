@@ -121,6 +121,16 @@ const moduleExports = withBundleAnalyzer({
         destination: 'https://lp.leadpages.com/:slug',
         permanent: true,
       },
+      {
+        source: '/blog/page/:page*',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/blog/category/:category/page/:page*',
+        destination: '/blog',
+        permanent: true,
+      },
       ...redirects,
     ]
   },

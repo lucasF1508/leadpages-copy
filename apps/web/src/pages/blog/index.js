@@ -1,13 +1,14 @@
 import React from 'react'
 import { getDoc, getAllDocs, runQueries } from '@lib'
 import Archive from '@layouts/Archive'
+import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
 
 const ArchivePage = (props) => <Archive {...props} hasFeaturedPost={true} />
 
 export const shapeData = ([
   data,
   { docs: categories },
-  { docs: _docs, pagination },
+  { docs: _docs },
   blogData,
 ]) => {
   const { seo } = blogData
@@ -29,7 +30,6 @@ export const shapeData = ([
       settings: data,
       categories,
       docs,
-      pagination,
       seo,
     },
   ]
@@ -41,22 +41,27 @@ export async function getStaticProps(context) {
   const docType = 'post'
   const { preview = false } = context
 
+  // TODO: Combine 'postSettings' and 'pageArchive' queries
+  // TODO: Grab 'perPage' from here so that we don't have to get it again later
   const { data, global, queries } = await runQueries([
     getDoc('postSettings', {}),
     getAllDocs('categoryPost', {
       filters: "!(_id in path('drafts.**'))",
-      projections: `"postCount": count(*[!(_id in path('drafts.**')) && _type == "post" && (primaryCategory._ref == ^._id || ^._id in secondaryCategories[]._ref)])`,
+      projections: `${categoryPostCountQuery}`,
+      hasPagination: false,
       preview,
     }),
     getAllDocs(docType, {
       filters: "!(_id in path('drafts.**'))",
       order: 'order(publishedDate desc)',
-      preview,
       offsetEnd: 1,
       paginationHasFeatured: true,
+      hasPagination: false,
+      preview,
     }),
     getDoc('pageArchive', {
-      filters: '_id == "pageArchive"',
+      filters: [`archiveOf == "${docType}"`],
+      preview,
     }),
   ])
 

@@ -43,6 +43,7 @@ export async function getStaticProps(context) {
     getAllDocs('categoryPost', {
       filters: ["!(_id in path('drafts.**'))"],
       projections: `${categoryPostCountQuery}`,
+      hasPagination: false,
     }),
   ])
 
