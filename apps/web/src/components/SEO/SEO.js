@@ -78,6 +78,11 @@ const SEO = (props) => {
         />
       )}
       <Script
+        id="digitalscope"
+        src="https://sdk.digitalscope.com/index.js?app=LEADPAGES"
+        strategy="lazyOnload"
+      />
+      <Script
         id="LP-embed"
         src="https://static.leadpages.com/leadboxes/current/embed.js"
       />
