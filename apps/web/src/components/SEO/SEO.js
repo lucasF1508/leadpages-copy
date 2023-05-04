@@ -94,6 +94,7 @@ const SEO = (props) => {
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
+        <meta name="p:domain_verify" content="11470417057f03716e17affcb71896ef"/>
         {image?.url && <meta name="image" content={image?.url} />}
         {url && <link rel="canonical" href={url} />}
         {url && <meta property="og:url" content={url} />}
