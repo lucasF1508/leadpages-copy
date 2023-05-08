@@ -42,7 +42,12 @@ const FlexTopContent = styled('div', {
 
 const RevealImageAnimation = keyframes(fadeIn)
 
-const RevealImage = styled(Media, {
+const RevealMedia = styled(Media, {
+  width: '100%',
+  animation: `0.5s ${RevealImageAnimation}`,
+})
+
+const RevealImage = styled(Image, {
   width: '100%',
   animation: `0.5s ${RevealImageAnimation}`,
 })
@@ -208,10 +213,17 @@ const ProductToolkitRotator = ({ items, autoplay = false, loop = false }) => {
         <Flexbox>
           <FlexTop className={activeIndex === null ? 'nullstate' : ''}>
             <FlexTopContent>
-              <RevealImage
-                key={items[activeIndex].media?._key}
-                media={{ ...items[activeIndex].media }}
-              />
+              {items[activeIndex].media ? (
+                <RevealMedia
+                  key={items[activeIndex].media?._key}
+                  media={{ ...items[activeIndex].media }}
+                />
+              ) : (
+                <RevealImage
+                  key={items[activeIndex].image?.asset?._id}
+                  image={{ ...items[activeIndex].image }}
+                />
+              )}
             </FlexTopContent>
           </FlexTop>
         </Flexbox>
