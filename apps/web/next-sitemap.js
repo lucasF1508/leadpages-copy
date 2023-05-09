@@ -33,7 +33,6 @@ module.exports = {
     '/_legacy',
     '/_legacy/*',
     '/blog/search',
-    '/redirectHandler',
     '/contact/submission',
     '/templates/preview',
     '/website-templates/preview',
