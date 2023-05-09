@@ -9,8 +9,24 @@ import {
   publishToggle,
   unpublishFeed,
 } from './feedActions'
+import { pageMergeAction } from './pageMerge'
 
 const resolveDocumentActions = (props) => {
+  const maybePageMergeAction = [
+    'page',
+    'pageHome',
+    'post',
+    'customer',
+    'comparison',
+    'integration',
+    'testimonial',
+    'faq',
+    'feature',
+    'cta',
+  ].includes(props.type)
+    ? pageMergeAction
+    : undefined
+
   switch (props.type) {
     case 'feed':
       return [
@@ -24,12 +40,15 @@ const resolveDocumentActions = (props) => {
       ]
 
     default:
-      return defaultResolve(props).map((Action) => {
-        if (Action === PublishAction) {
-          return PublishActionHook
-        }
-        return Action
-      })
+      return [
+        ...defaultResolve(props).map((Action) => {
+          if (Action === PublishAction) {
+            return PublishActionHook
+          }
+          return Action
+        }),
+        maybePageMergeAction,
+      ].filter(Boolean)
   }
 }
 

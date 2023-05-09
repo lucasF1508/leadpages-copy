@@ -210,6 +210,15 @@ export const blockContentHeadline = F.array({
           hidden: ({ parent }) =>
             parent.condition === 'none' || parent.condition === 'lottie',
         }),
+        F.radio(['left', 'center', 'right'], {
+          name: 'align',
+          description:
+            'Takes effect when the size of the image, controlled by Max Width, is smaller than the container.',
+          title: 'Image Alignment',
+          initialValue: 'center',
+          group: 'options',
+          hidden: ({ parent }) => !parent.maxWidth,
+        }),
         F.boolean({
           name: 'removeSpaceAround',
           group: 'options',

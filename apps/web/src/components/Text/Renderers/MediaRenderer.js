@@ -27,16 +27,21 @@ const $MediaContainer = styled('div', {
 })
 
 const ImageRenderer = ({
-  node: { markDefs, maxWidth, removeSpaceAround, styleMap, ...media },
+  node: { markDefs, maxWidth, removeSpaceAround, align, styleMap, ...media },
 }) => {
   const { condition, image } = media
+  const alignMargin = {
+    ml: align === 'left' ? 0 : 'auto',
+    mr: align === 'right' ? 0 : 'auto',
+  }
 
   if (condition === 'image') {
     const { width } = useImageParser(image)
+
     return (
       <$MediaContainer
         removeSpaceAround={removeSpaceAround}
-        css={{ maxWidth: maxWidth || width, mx: 'auto' }}
+        css={{ maxWidth: maxWidth || width, ...alignMargin }}
       >
         <Media media={media} type="static" />
       </$MediaContainer>
@@ -44,7 +49,10 @@ const ImageRenderer = ({
   }
 
   return (
-    <$MediaContainer removeSpaceAround={removeSpaceAround} css={{ maxWidth }}>
+    <$MediaContainer
+      removeSpaceAround={removeSpaceAround}
+      css={{ maxWidth, ...alignMargin }}
+    >
       <Media media={media} type="static" />
     </$MediaContainer>
   )

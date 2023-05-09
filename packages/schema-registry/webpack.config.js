@@ -73,10 +73,15 @@ const config = {
             '@sanity/orderable-document-list/node_modules/framer-motion'
           ),
           path.join(
+            node_modules,
+            '@sanity/orderable-document-list/node_modules/@sanity/ui'
+          ),
+          path.join(
             studio_node_modules,
             '@sanity/orderable-document-list/node_modules/@sanity/ui'
           ),
           path.join(node_modules, '@sanity/ui'),
+          path.join(studio_node_modules, '@sanity/ui'),
           path.join(node_modules, '@sanity/uuid'),
           path.join(node_modules, '@sanity/code-input'),
           path.join(node_modules, '@sanity/structure'),
