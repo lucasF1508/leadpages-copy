@@ -131,6 +131,21 @@ const moduleExports = withBundleAnalyzer({
         destination: '/blog',
         permanent: true,
       },
+      {
+        source: '/blog/(\\d{4})',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/blog/(\\d{4})/(.*)',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/blog/(.*)/feed',
+        destination: '/blog',
+        permanent: true,
+      },
       ...redirects,
     ]
   },
