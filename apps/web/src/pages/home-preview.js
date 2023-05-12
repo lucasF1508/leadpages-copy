@@ -1,8 +1,11 @@
 import React from 'react'
 import { getDoc, runQueries } from '@lib'
 import HomePage from '@layouts/HomePage'
+import { shapeData } from '.'
 
 const IndexPage = (props) => <HomePage {...props} />
+
+export const exporter = (props) => shapeData(props)
 
 export async function getServerSideProps(context) {
   const { preview = false, req: { headers } = {} } = context
@@ -30,7 +33,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      data,
+      data: shapeData(data),
       queries,
       global,
       preview,
@@ -39,3 +42,4 @@ export async function getServerSideProps(context) {
 }
 
 export default IndexPage
+export { shapeData }
