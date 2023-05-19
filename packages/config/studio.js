@@ -9,6 +9,7 @@ export const studio = {
     'customer',
     'integration',
     'comparison',
+    'publisher',
   ],
 }
 

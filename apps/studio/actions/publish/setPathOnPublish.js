@@ -15,6 +15,7 @@ export const setPathOnPublish = async (
   { id, type: typeOrg, draft, slug }
 ) => {
   const isCategory = typeOrg.includes('category')
+  const isPublisher = typeOrg.includes('publisher')
   const type = getDoctype(isCategory, typeOrg)
   const { parent } = draft
 
@@ -34,6 +35,8 @@ export const setPathOnPublish = async (
     path = isCategory
       ? `${basePage.path || `/${basePage.slug}`}/category${path}`
       : `${basePage.path || `/${basePage.slug}`}${path}`
+  } else {
+    path = isPublisher ? `/blog/author${path}` : path
   }
 
   patch.execute([{ set: { path } }])

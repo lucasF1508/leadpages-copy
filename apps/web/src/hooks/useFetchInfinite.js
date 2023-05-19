@@ -9,6 +9,7 @@ const fetchInfinite = ({
   fallbackData,
   perPage = 22,
   category,
+  publisher,
   searchQuery,
   hasFeaturedPost,
   fetch = true,
@@ -17,6 +18,7 @@ const fetchInfinite = ({
     `_type == '${type}'`,
     category &&
       `(primaryCategory->slug.current == '${category.slug}' || '${category.slug}' in secondaryCategories[]->slug.current)`,
+    publisher && `(publisher->slug.current == '${publisher.slug}')`,
     searchQuery &&
       `(pt::text(content) match '${searchQuery}' || title match '${searchQuery}')`,
   ]

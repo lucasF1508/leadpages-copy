@@ -80,7 +80,7 @@ const $ArchiveLink = styled(Link, {
   },
 })
 
-const $ArchiveSocialIcon = styled('button', {
+export const $ArchiveSocialIcon = styled('button', {
   c: '$textAlt',
   border: '1px solid $colors$grayTertiary',
   borderRadius: '3px',
@@ -142,7 +142,7 @@ const $ArchiveSocialIcon = styled('button', {
   },
 })
 
-const $ArchiveSocial = styled('div', {
+export const $ArchiveSocial = styled('div', {
   position: 'fixed',
   d: 'flex',
   bottom: 0,
@@ -224,7 +224,7 @@ const ArchiveSingle = ({
             >
               Posted by{' '}
               <$ArchiveLink
-                url={'/blog'}
+                url={publisher.path || '/blog'}
                 label={publisher.title}
                 condition="internal"
               />

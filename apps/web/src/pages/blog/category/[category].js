@@ -1,5 +1,4 @@
 import React from 'react'
-import getBaseUrlFromResolvedUrl from '@utils/getBaseUrlFromResolvedUrl'
 import { getDoc, getAllDocs, runQueries, getDocSlugs } from '@lib'
 import Archive from '@layouts/Archive'
 import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'

@@ -38,6 +38,10 @@ const $Card = styled('div', {
       },
       false: {},
     },
+    cardsPerRow: {
+      2: {},
+      3: {},
+    },
     isReachingEnd: {
       false: {
         '&:nth-last-child(1)': {
@@ -63,6 +67,24 @@ const $Card = styled('div', {
       },
     },
   },
+  compoundVariants: [
+    {
+      isReachingEnd: false,
+      cardsPerRow: 3,
+      css: {
+        '@>m': {
+          '&:nth-last-child(3)': {
+            display: 'block',
+            pointerEvents: 'none',
+
+            [`${$CardHeading},${$Link}`]: {
+              d: 'none',
+            },
+          },
+        },
+      },
+    },
+  ],
 })
 
 const $AuthorLeadIn = styled('span', {
@@ -87,11 +109,13 @@ const CardPostArchive = ({
   isFeatured,
   className,
   isReachingEnd,
+  cardsPerRow = 2,
 }) => (
   <$Card
     className={className}
     isFeatured={isFeatured}
     isReachingEnd={isReachingEnd}
+    cardsPerRow={cardsPerRow}
   >
     <$ImageLink url={path} condition="internal">
       <Image image={image} css={{ mb: isFeatured ? '$2' : '$1_5' }} />
@@ -138,7 +162,7 @@ const CardPostArchive = ({
             data-content-long="Posted by"
           />
           <$ArchiveLink
-            url={'/blog'}
+            url={publisher.path || '/blog'}
             label={publisher.title}
             condition="internal"
           />

@@ -202,6 +202,10 @@ module.exports = {
         categoryIntegrationStatus: {
           '...': true,
         },
+        publisher: {
+          '...': true,
+          headshot: image,
+        },
       },
     },
   },

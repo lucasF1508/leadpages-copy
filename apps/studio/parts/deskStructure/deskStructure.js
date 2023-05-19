@@ -42,6 +42,7 @@ export const deskStructure = () =>
         )
         .icon(AiOutlineFileText),
       S.documentTypeListItem('post'),
+      S.documentTypeListItem('publisher').title('Authors'),
       // S.listItem()
       //   .title('Posts')
       //   .child(
