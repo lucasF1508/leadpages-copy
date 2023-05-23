@@ -83,15 +83,7 @@ function ToolMenu(props: Props) {
           </ul>
           <div className="ToolMenu_extras">
             {deployConfig.id && (
-              <DeployItem
-                key={deployConfig.id}
-                name={deployConfig.name}
-                url={deployConfig.url}
-                id={deployConfig.id}
-                vercelProject={deployConfig.vercelProject}
-                vercelTeam={deployConfig.vercelTeam}
-                vercelToken={deployConfig.vercelToken}
-              />
+              <DeployItem key={deployConfig.id} {...deployConfig} />
             )}
           </div>
         </div>
