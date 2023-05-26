@@ -64,7 +64,7 @@ const Author = ({
   headshot,
   title: name,
   jobTitle,
-  bio,
+  bioLong,
   email,
   linkedInUrl,
 }) => {
@@ -72,7 +72,7 @@ const Author = ({
     {
       title: 'email',
       icon: AiOutlineMail,
-      url: `mailto:${email}`,
+      url: email && `mailto:${email}`,
     },
     {
       title: 'linkedIn',
@@ -82,27 +82,33 @@ const Author = ({
       target: '_blank',
     },
   ]
+  const hasSocial = !!email || !!linkedInUrl
 
   return (
     <$Author>
       {headshot && <$Headshot image={headshot} />}
       {name && <Heading heading={name} />}
       {jobTitle && <$AuthorJobTitle>{jobTitle}</$AuthorJobTitle>}
-      {bio && (
-        <Text content={bio} css={{ mw: 'calc($cols8 + $space$4)', mb: 0 }} />
+      {bioLong && (
+        <Text
+          content={bioLong}
+          css={{ mw: 'calc($cols8 + $space$4)', mb: 0 }}
+        />
       )}
-      <$AuthorSocial>
-        {socialPlatforms.map(
-          ({ title, url, ...linkProps }) =>
-            title && (
-              <a key={title} href={url} aria-label={title} {...linkProps}>
-                <$AuthorSocialIcon>
-                  <linkProps.icon />
-                </$AuthorSocialIcon>
-              </a>
-            )
-        )}
-      </$AuthorSocial>
+      {hasSocial && (
+        <$AuthorSocial>
+          {socialPlatforms.map(
+            ({ title, url, ...linkProps }) =>
+              url && (
+                <a key={title} href={url} aria-label={title} {...linkProps}>
+                  <$AuthorSocialIcon>
+                    <linkProps.icon />
+                  </$AuthorSocialIcon>
+                </a>
+              )
+          )}
+        </$AuthorSocial>
+      )}
     </$Author>
   )
 }

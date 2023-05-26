@@ -13,11 +13,20 @@ export const schemaPublisher = {
     ...G.group('content', [
       F.image({ name: 'headshot' }),
       F.string({ name: 'jobTitle' }),
-      F.field('blockContentBare', { name: 'bio' }),
+      F.field('blockContentBare', {
+        name: 'bioShort',
+        title: 'Short Bio',
+        description: 'If present, this will appear on the blog posts.',
+      }),
+      F.field('blockContentBare', {
+        name: 'bioLong',
+        title: 'Long Bio',
+        description: 'This will appear on the author page.',
+      }),
       F.string({ name: 'email' }),
       F.string({ name: 'linkedInUrl', title: 'LinkedIn URL' }),
     ]),
     ...G.group('seo', [F.seo()]),
   ],
-  preview: P.titleImage(),
+  preview: P.titleImage({ media: 'headshot' }),
 }
