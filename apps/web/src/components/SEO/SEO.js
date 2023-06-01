@@ -2,6 +2,8 @@ import Head from 'next/head'
 import Script from 'next/script'
 import useSeo from '@hooks/useSeo'
 
+const { NEXT_PUBLIC_HOTJAR_ID } = process.env
+
 const SEO = (props) => {
   const {
     GTM_CONTAINER_ID,
@@ -86,6 +88,17 @@ const SEO = (props) => {
         id="LP-embed"
         src="https://static.leadpages.com/leadboxes/current/embed.js"
       />
+      {NEXT_PUBLIC_HOTJAR_ID && (
+        <Script
+          id="hotjar"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:${NEXT_PUBLIC_HOTJAR_ID},hjsv:6}; a=o.getElementsByTagName('head')[0]; r=o.createElement('script');r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv; a.appendChild(r); })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=')
+        `,
+          }}
+        />
+      )}
       <Head>
         {seoTitle && <title>{seoTitle}</title>}
         {seoDescription && <meta name="description" content={seoDescription} />}
