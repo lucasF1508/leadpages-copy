@@ -31,7 +31,7 @@ export async function getStaticProps(context) {
     }),
     getAllDocs('categoryIntegration', {
       filters: "!(_id in path('drafts.**'))",
-      order: 'order(categoryOrder)',
+      order: 'order(title asc)',
       preview,
     }),
     getAllDocs(docType, {

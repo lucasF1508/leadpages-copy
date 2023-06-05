@@ -60,13 +60,6 @@ export const schemaPageArchive = {
           hidden: ({ parent }) => !parent?.archiveOf,
         }
       ),
-      F.docOrder('categoryIntegration', {
-        options: {
-          field: 'categoryOrder',
-        },
-        hidden: ({ parent }) =>
-          !['integrations'].includes(parent?.slug?.current),
-      }),
     ]),
     ...G.group('seo', [F.seo()]),
     ...G.group('options', [
