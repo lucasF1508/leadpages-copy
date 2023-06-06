@@ -31,12 +31,12 @@ export async function getStaticProps(context) {
     }),
     getAllDocs('categoryIntegration', {
       filters: "!(_id in path('drafts.**'))",
-      order: 'order(title asc)',
+      order: 'order(lower(title) asc)',
       preview,
     }),
     getAllDocs(docType, {
       filters: "!(_id in path('drafts.**'))",
-      order: 'order(orderRank)',
+      order: 'order(lower(title) asc)',
       preview,
     }),
   ])
