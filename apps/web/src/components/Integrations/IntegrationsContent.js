@@ -509,7 +509,7 @@ class IntegrationsContent extends React.Component {
     ]
     distinctCategories = Array.from(distinctCategories)
 
-    this.setFilteredCategories(distinctCategories)
+    this.setFilteredCategories(distinctCategories.sort())
     this.setFilteredIntegrations(filteredData)
 
     if (searchQuery && searchQuery !== '') {
