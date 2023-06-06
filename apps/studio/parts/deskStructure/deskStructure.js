@@ -75,7 +75,6 @@ export const deskStructure = () =>
       // S.documentTypeListItem('alertBar').title('Alert Bars'),
       S.documentTypeListItem('cta').title('CTAs'),
       S.divider(),
-      // S.documentTypeListItem('navigation').title('Navigation'),
       GB.singletonListItem('footer').icon(RiLayoutBottom2Fill),
       GB.categoriesListItem('category'),
       listItemSiteSettings,
