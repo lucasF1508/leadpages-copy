@@ -194,6 +194,7 @@ const MainMenuFlexbox = styled('div', {
   marginRight: '24px',
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'center',
 })
 
 const MainMenuHeading = styled('div', {
@@ -232,6 +233,7 @@ const SubmenuHeaderFlexbox = styled('div', {
   marginRight: '24px',
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'center',
 })
 
 const SubmenuHeaderHeading = styled('div', {
@@ -580,7 +582,7 @@ class IntegrationsContent extends React.Component {
                     </SubmenuScrollLink>
                   ))}
                 </MainMenuHeading>
-                <MainMenuIcon src={downArrowSVG} alt="down arrow" />
+                <MainMenuIcon src={downArrowSVG.src} alt="down arrow" />
               </MainMenuFlexbox>
             </IntegrationsMobileMenuContainer>
             {showIntegrationsSubMenu && (
@@ -591,7 +593,7 @@ class IntegrationsContent extends React.Component {
                       Jump to a Section...
                     </SubmenuHeaderHeading>
                     <SubmenuHeaderIcon
-                      src={closeXSVG}
+                      src={closeXSVG.src}
                       alt="close x"
                       onClick={this.toggleSubMenu}
                     />
@@ -633,6 +635,7 @@ class IntegrationsContent extends React.Component {
                           icon,
                           subpage,
                         } = eachIntegration
+
                         if (category === item) {
                           return (
                             <>
