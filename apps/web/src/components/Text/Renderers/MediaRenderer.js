@@ -27,7 +27,15 @@ const $MediaContainer = styled('div', {
 })
 
 const ImageRenderer = ({
-  node: { markDefs, maxWidth, removeSpaceAround, align, styleMap, ...media },
+  node: {
+    markDefs,
+    maxWidth,
+    removeSpaceAround,
+    styleMap,
+    url,
+    align,
+    ...media
+  },
 }) => {
   const { condition, image } = media
   const alignMargin = {
@@ -37,6 +45,19 @@ const ImageRenderer = ({
 
   if (condition === 'image') {
     const { width } = useImageParser(image)
+
+    if (url) {
+      return (
+        <$MediaContainer
+          removeSpaceAround={removeSpaceAround}
+          css={{ maxWidth: maxWidth || width, ...alignMargin }}
+        >
+          <a href={url} rel="noreferrer">
+            <Media media={media} type="static" />
+          </a>
+        </$MediaContainer>
+      )
+    }
 
     return (
       <$MediaContainer
