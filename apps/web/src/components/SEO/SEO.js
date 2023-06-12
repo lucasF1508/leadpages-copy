@@ -3,11 +3,12 @@ import Script from 'next/script'
 import useSeo from '@hooks/useSeo'
 
 const { NEXT_PUBLIC_HOTJAR_ID } = process.env
+const { UA_TRACKING_ID } = process.env
+const { GA4_TRACKING_ID } = process.env
 
 const SEO = (props) => {
   const {
     GTM_CONTAINER_ID,
-    GTAG_TRACKING_ID,
     FB_PIXEL_ID,
     seoTitle,
     seoDescription,
@@ -39,22 +40,43 @@ const SEO = (props) => {
           }}
         />
       )}
-      {/* gtag Init */}
-      {GTAG_TRACKING_ID && (
+      {/* ua Init */}
+      {UA_TRACKING_ID && (
         <>
           <Script
-            id="GTAG"
-            src={`https://www.googletagmanager.com/gtag/js?id=${GTAG_TRACKING_ID}`}
+            id="UA-gtag"
+            src={`https://www.googletagmanager.com/gtag/js?id=${UA_TRACKING_ID}`}
           />
           <Script
-            id="GTAG-config"
+            id="UA-config"
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
 
-              gtag('config', '${GTAG_TRACKING_ID}', { send_page_view: false });
+              gtag('config', '${UA_TRACKING_ID}', { send_page_view: false });
+            `,
+            }}
+          />
+        </>
+      )}
+      {/* ga4 Init */}
+      {GA4_TRACKING_ID && (
+        <>
+          <Script
+            id="GA4-gtag"
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA4_TRACKING_ID}`}
+          />
+          <Script
+            id="GA4-config"
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${GA4_TRACKING_ID}');
             `,
             }}
           />
