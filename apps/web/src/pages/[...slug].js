@@ -9,13 +9,29 @@ const DynamicPage = ({ hasSidebar, ...props }) =>
 
 export const shapeData = (data) => {
   const [pageData] = (data?.length && data) || []
-  const { hero: heroes, options: pageOptions, hasSidebar } = pageData || {}
+  const {
+    hero: heroes,
+    options: pageOptions,
+    hasSidebar = false,
+    parent,
+    sidebarLinks: links,
+  } = pageData || {}
   const [hero] = heroes || []
 
   // Page options
   const darkHero = features.darkHeros.includes(
     hero?.backgroundOptions?.backgroundColor
   )
+
+  let sidebarLinks = null
+
+  if (hasSidebar && parent?.hasSidebar && parent?.sidebarLinks?.length > 0) {
+    sidebarLinks = parent?.sidebarLinks
+  }
+
+  if (hasSidebar && links?.length > 0) {
+    sidebarLinks = links
+  }
 
   const options = {
     ...pageData?.options,
@@ -28,6 +44,7 @@ export const shapeData = (data) => {
     {
       ...pageData,
       options,
+      sidebarLinks,
     },
   ]
 }
@@ -42,7 +59,7 @@ export async function getStaticProps(context) {
     getDoc(['page', 'customer', 'integration'], {
       preview,
       params: { path: `/${path}` },
-      projections: { 'category[]': '->' },
+      projections: `category[]->`,
     })
   )
 

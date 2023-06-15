@@ -314,6 +314,7 @@ const MediaWithText = ({
   linkDecorators = [],
   contentOptions = [],
   backgroundImage,
+  backgroundColor,
   layout: _layout = 'horizontal',
   priority = 'media',
   ...props

@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import slugify from 'slugify'
 
 const SidebarContext = React.createContext()
 
-export const getSidebarSlug = (heading) =>
-  slugify(heading, {
-    lower: true,
-    remove: /[*+~.()'"!:@]/g,
-  })
+export const getSidebarSlug = (heading = '') =>
+  heading
+    ? slugify(heading, {
+        lower: true,
+        remove: /[*+~.()'"!:@]/g,
+      })
+    : heading
 
 export const flattenSidebarSlugs = (sidebarLinks) =>
   sidebarLinks
-    .map(({ links }) => links.map(({ heading }) => getSidebarSlug(heading)))
+    .map(({ links }) =>
+      links.map(({ heading, link }) => getSidebarSlug(heading || link?.label))
+    )
     .flat()
 
 const SidebarProvider = ({ children, value = {}, sidebarLinks, ...props }) => {

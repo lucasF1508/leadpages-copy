@@ -45,7 +45,7 @@ const PageSidebar = ({
             pageTitle={title}
             links={sidebarLinks}
             compareLogo={compareLogo}
-            useScrollLink
+            // useScrollLink
           />
         ) : (
           <div></div>

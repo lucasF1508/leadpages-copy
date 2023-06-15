@@ -5,7 +5,9 @@ import { Link as ScrollLink } from 'react-scroll'
 // Assets
 import closeMenuIcon from '@legacy/assets/images/global/x_close.svg'
 import downArrowIcon from '@legacy/assets/images/global/arrow_down_large.svg'
+import { useRouter } from 'next/router'
 import { getSidebarSlug, SidebarContext } from './SidebarProvider'
+import { $PageLink } from './SidebarPage'
 
 const MobileSubMenuSection = styled('div', {
   paddingBottom: '16px',
@@ -134,6 +136,7 @@ const SubmenuContent = styled('div', {
   overflowY: 'scroll',
   scrollbarWidth: 'none',
   MsOverflowStyle: 'none',
+  boxSizing: 'border-box',
 
   '&::WebkitScrollbar': {
     display: 'none',
@@ -171,9 +174,11 @@ const MenuHeaderLinkWrapper = styled('div', {
 })
 
 const SiloComparisonMobileMenu = ({ links, verbiage }) => {
-  const { active } = useContext(SidebarContext)
   const [showMobileMenuBar, setShowMobileMenuBar] = useState(false)
   const [showMobileSubMenu, setShowMobileSubMenu] = useState(false)
+  const { active } = useContext(SidebarContext)
+  const { asPath } = useRouter()
+  const url = asPath.replace(/[#|?].*/g, '')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -214,14 +219,18 @@ const SiloComparisonMobileMenu = ({ links, verbiage }) => {
             </MenuHeaderLinkWrapper>
             {links.map(({ title: sectionTitle, links: sectionLinks }) => (
               <div key={sectionTitle}>
-                {sectionLinks.map(({ heading, title }) => {
-                  const sectionHeading = title || heading
-                  const sectionSlug = getSidebarSlug(heading)
+                {sectionLinks.map(({ heading, title, isPageLink, link }) => {
+                  const sectionHeading = isPageLink
+                    ? link?.label
+                    : title || heading
+                  const sectionSlug = getSidebarSlug(sectionHeading)
+
+                  const isActive = active === sectionSlug || url === link?.url
 
                   return (
                     <MenuHeaderLinkWrapper key={sectionSlug}>
                       <MenuHeaderDisplayLink
-                        className={active === sectionSlug && 'activeSection'}
+                        className={isActive && 'activeSection'}
                         onClick={() => handleRouteClick()}
                         to={sectionSlug}
                         aria-label={sectionHeading}
@@ -261,14 +270,18 @@ const SiloComparisonMobileMenu = ({ links, verbiage }) => {
               <MobileSubMenuSection key={sectionTitle}>
                 <SubmenuInnerSeparator />
                 <MobileSubMenuHeading>{sectionTitle}</MobileSubMenuHeading>
-                {sectionLinks.map(({ heading, title }) => {
-                  const sectionHeading = title || heading
-                  const sectionSlug = getSidebarSlug(heading)
+                {sectionLinks.map(({ heading, title, isPageLink, link }) => {
+                  const sectionHeading = isPageLink
+                    ? link?.label
+                    : title || heading
+                  const sectionSlug = getSidebarSlug(sectionHeading)
 
-                  return (
+                  const isActive = active === sectionSlug || url === link?.url
+
+                  return !isPageLink ? (
                     <StyledScrollLink
                       onClick={() => handleRouteClick()}
-                      className={active === sectionSlug && 'active'}
+                      className={isActive && 'active'}
                       to={sectionSlug}
                       alt={sectionHeading}
                       smooth
@@ -281,6 +294,14 @@ const SiloComparisonMobileMenu = ({ links, verbiage }) => {
                         {sectionHeading}
                       </MobileSubMenuSubheading>
                     </StyledScrollLink>
+                  ) : (
+                    <$PageLink
+                      className={isActive && 'active'}
+                      key={sectionSlug}
+                      {...link}
+                      disabled={isActive}
+                      linkStyle="none"
+                    />
                   )
                 })}
               </MobileSubMenuSection>

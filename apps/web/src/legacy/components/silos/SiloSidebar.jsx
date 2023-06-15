@@ -99,9 +99,9 @@ const SiloSidebar = ({
       {competitorImage && (
         <SiloCompareImage competitorImage={competitorImage} />
       )}
-      {pageRoutes.map(({ sectionName, sectionPages }) => (
+      {pageRoutes.map(({ sectionName, sectionPages }, i) => (
         <SidebarSection key={sectionName}>
-          <SidebarInnerSeparator />
+          {i !== 0 && <SidebarInnerSeparator />}
           <SidebarHeading>{sectionName}</SidebarHeading>
           {sectionPages.map(({ pageName, pageUrl }) => {
             if (useScrollLink) {

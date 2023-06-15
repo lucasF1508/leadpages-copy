@@ -206,6 +206,16 @@ module.exports = {
           '...': true,
           headshot: image,
         },
+        page: {
+          '...': true,
+          'sidebarLinks[]': {
+            '...': true,
+            'links[]': {
+              '...': true,
+              link,
+            },
+          },
+        },
       },
     },
   },

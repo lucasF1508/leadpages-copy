@@ -253,7 +253,7 @@ const Cta = ({
         {showCTA && (
           <RTGButtonContainer>
             {!scrollTarget &&
-              links.map(({ _key, ...link }) => (
+              links?.map(({ _key, ...link }) => (
                 <Link
                   className={
                     bgColor !== 'purple' && link.linkStyle === 'button' && theme

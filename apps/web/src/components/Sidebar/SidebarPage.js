@@ -4,6 +4,7 @@ import Link from '@components/Link'
 import PropTypes from 'prop-types'
 import { Link as ScrollLink } from 'react-scroll'
 import SidebarCompareImage from '@components/Sidebar/SidebarCompareImage'
+import { useRouter } from 'next/router'
 import SidebarPageMobile from './SidebarPageMobile'
 import { getSidebarSlug, SidebarContext } from './SidebarProvider'
 
@@ -21,7 +22,7 @@ const SidebarContainer = styled('div', {
 
 const $SidebarInner = styled('div', {
   position: 'sticky',
-  top: 'calc($headerHeight$s - 1px)',
+  top: 'calc($headerHeight$s + 16px)',
   paddingRight: '2rem',
   boxSizing: 'content-box',
   overflow: 'auto',
@@ -75,9 +76,26 @@ const StyledScrollLink = styled(ScrollLink, {
   },
 })
 
+export const $PageLink = styled(Link, {
+  d: 'block',
+  color: 'rgba(15, 12, 9, 0.5)',
+  fontSize: '1rem',
+  fontWeight: '$medium',
+  pb: '$2',
+
+  [`
+    &:hover,
+    &.active
+  `]: {
+    color: '$primary',
+  },
+})
+
 const SidebarPage = (props) => {
   const { active } = useContext(SidebarContext)
-  const { links, compareLogo, className, useScrollLink, pageTitle } = props
+  const { links, compareLogo, className, pageTitle } = props
+  const { asPath } = useRouter()
+  const url = asPath.replace(/[#|?].*/g, '')
 
   const verbiage = {
     main: { title: pageTitle },
@@ -92,32 +110,39 @@ const SidebarPage = (props) => {
       <SidebarContainer id="silo-sidebar" className={className}>
         <$SidebarInner>
           {compareLogo && <SidebarCompareImage compareLogo={compareLogo} />}
-          {links.map(({ title: sectionTitle, links: sectionLinks }) => (
+          {links.map(({ title: sectionTitle, links: sectionLinks }, i) => (
             <SidebarSection key={sectionTitle}>
-              <SidebarInnerSeparator />
+              {i !== 0 && <SidebarInnerSeparator />}
               <SidebarHeading>{sectionTitle}</SidebarHeading>
-              {sectionLinks?.map(({ heading, title, link }) => {
-                const sectionHeading = title || heading
-                const sectionSlug = getSidebarSlug(heading)
+              {sectionLinks?.map(({ heading, title, isPageLink, link }) => {
+                const sectionHeading = isPageLink
+                  ? link?.label
+                  : title || heading
+                const sectionSlug = getSidebarSlug(sectionHeading)
 
-                if (useScrollLink) {
-                  return (
-                    <StyledScrollLink
-                      className={active === sectionSlug && 'active'}
-                      key={sectionSlug}
-                      to={sectionSlug}
-                      alt={sectionHeading}
-                      spy
-                      smooth
-                      duration={300}
-                      offset={-100}
-                    >
-                      <SidebarSubHeading>{sectionHeading}</SidebarSubHeading>
-                    </StyledScrollLink>
-                  )
-                }
+                const isActive = active === sectionSlug || url === link?.url
 
-                return <Link key={sectionSlug} link={link} />
+                return !isPageLink ? (
+                  <StyledScrollLink
+                    className={isActive && 'active'}
+                    key={sectionSlug}
+                    to={sectionSlug}
+                    alt={sectionHeading}
+                    spy
+                    smooth
+                    duration={300}
+                    offset={-100}
+                  >
+                    <SidebarSubHeading>{sectionHeading}</SidebarSubHeading>
+                  </StyledScrollLink>
+                ) : (
+                  <$PageLink
+                    className={isActive && 'active'}
+                    key={sectionSlug}
+                    {...link}
+                    linkStyle="none"
+                  />
+                )
               })}
             </SidebarSection>
           ))}
