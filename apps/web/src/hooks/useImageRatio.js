@@ -6,6 +6,7 @@ const useImageRatio = (image, value = 64, compareProperty = 'height') => {
     compareProperty === 'height' ? aspectRatio * value : value / aspectRatio
 
   return {
+    dimensionAsPx: dimension,
     dimension: `${dimension / 16}rem`,
     aspectRatio,
     ...imageProps,

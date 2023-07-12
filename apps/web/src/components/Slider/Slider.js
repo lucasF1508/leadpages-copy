@@ -52,7 +52,7 @@ const Slider = ({
 
   const { ref, api, height, scrollNext, scrollPrev, canScroll, indices } =
     useCarousel({
-      draggable: isDraggable,
+      active: false,
       speed: 10,
       loop: false,
       align: 'start',

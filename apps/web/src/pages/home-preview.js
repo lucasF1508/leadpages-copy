@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
   const { data, queries, global } = await runQueries(
     getDoc('pageHome', {
       preview,
-      params: { slug: 'home-working' },
+      params: { slug: 'home-hero-updates' },
     })
   )
 

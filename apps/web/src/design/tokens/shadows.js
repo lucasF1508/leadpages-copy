@@ -6,6 +6,14 @@ export const shadows = {
   navArrow:
     '0px 4px 8px rgba(15, 12, 9, 0.04), 0px 10px 20px rgba(15, 12, 9, 0.08)',
   ctaButton: '6px 6px 18px -6px rgba($colors$blackA1)',
+  activeHomeCard:
+    '0px 10px 20px 0px rgba(15, 12, 9, 0.08), 0px 12px 32px 0px rgba(15, 12, 9, 0.12)',
+  homeCard:
+    '0px 2px 4px 0px rgba(15, 12, 9, 0.08), 0px 0px 2px 0px rgba(15, 12, 9, 0.04)',
+  marqueeShadow:
+    '0px 10px 20px 0px rgba(15, 12, 9, 0.08), 0px 4px 8px 0px rgba(15, 12, 9, 0.04)',
+  marqueeShadowHover:
+    '0px 10px 20px 0px rgba(15, 12, 9, 0.08), 0px 12px 40px 0px rgba(15, 12, 9, 0.14)',
 
   xs: '0 2px 2px 0px $colors$blackA5',
   s: '0 4px 6px 0px $colors$blackA5',

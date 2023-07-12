@@ -4,11 +4,7 @@ import * as documentsSchema from './documents'
 import * as objectSchema from './objects'
 
 export const schema = [componentsSchema, documentsSchema, objectSchema]
-  .map((partial) => {
-    return Object.values(partial).map((schema) => {
-      return schema
-    })
-  })
+  .map((partial) => Object.values(partial).map((schema) => schema))
   .flat()
 
 export default schema

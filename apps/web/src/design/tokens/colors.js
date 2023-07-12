@@ -36,6 +36,7 @@ export const colors = {
   black: '#000000',
   purple: '#603eff',
   purpleLight: '#d1c6f9',
+  purpleHighlight: '#7051FF',
   lavenderLight: '#E4DEFC',
   lavenderBlush: '#fcedf5',
   champagne: '#f4e3cc',

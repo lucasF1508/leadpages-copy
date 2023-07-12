@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
 
 export const readSlideHeights = (emblaApi) => {
   const container = window.getComputedStyle(emblaApi.containerNode())
@@ -38,7 +39,11 @@ export const enabledAutoHeight = (emblaApi, setHeight) => {
 }
 
 const useCarousel = (args = { loop: false }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(args)
+  const { autoplay, delay = 3500 } = args
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    args,
+    autoplay && [Autoplay({ delay })]
+  )
   const [height, setHeight] = useState('auto')
   const [canScroll, setCanScroll] = useState(null)
   const [indices, setIndices] = useState({
@@ -60,6 +65,8 @@ const useCarousel = (args = { loop: false }) => {
       setCanScroll({
         next: emblaApi?.canScrollNext(),
         prev: emblaApi?.canScrollPrev(),
+        slidesInView: emblaApi?.slidesInView(),
+        scrollProgress: emblaApi?.scrollProgress(),
       })
     }
   }, [emblaApi])
