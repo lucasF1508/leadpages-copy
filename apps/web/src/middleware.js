@@ -9,6 +9,12 @@ export async function middleware(request) {
   const response = NextResponse.next()
   const url = request.nextUrl.clone()
 
+  if (url.pathName !== '/home' && url.pathname.includes('/home-')) {
+    const path = url.pathname
+    url.pathname = `/home${path}`
+    return NextResponse.rewrite(url)
+  }
+
   if (request.cookies.get('__next_preview_data')) {
     return response
   }

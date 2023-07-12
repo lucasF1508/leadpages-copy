@@ -5,7 +5,7 @@ import { features } from 'config'
 
 const IndexPage = (props) => <HomePage {...props} />
 
-export const shapeData = (data) => {
+export const shapeData = (data, isVariant = false) => {
   const [pageData] = (data?.length && data) || []
   const { hero: heroes } = pageData || {}
   const [hero] = heroes || []
@@ -22,6 +22,7 @@ export const shapeData = (data) => {
   return [
     {
       ...pageData,
+      isVariant,
       options,
     },
   ]
