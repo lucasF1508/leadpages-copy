@@ -8,6 +8,7 @@ import NavigationArrows from '@components/Rotator/NavigationArrows'
 // images
 import QuotemarkSvgGray from '@legacy/assets/images/global/quote-mark_gray_62px@2x.svg'
 import QuotemarkSvgTan from '@legacy/assets/images/global/quote-mark_tan_62px@2x.svg'
+import Ratings from './Ratings'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -16,6 +17,9 @@ const OuterContainer = styled('div', {
 
   variants: {
     variant: {
+      white: {
+        bc: '$white',
+      },
       gray: {
         bc: '$background',
       },
@@ -27,7 +31,6 @@ const OuterContainer = styled('div', {
 })
 
 const InnerContainer = styled('div', {
-  w: '65%',
   ml: 'auto',
   mr: 'auto',
   mw: '1140px',
@@ -37,6 +40,24 @@ const InnerContainer = styled('div', {
 
   '@>s': {
     w: '70%',
+  },
+
+  variants: {
+    includeRating: {
+      true: {
+        mw: '100%',
+        mx: '$4_5',
+
+        '@>s': {
+          w: '70%',
+          mx: 'auto',
+          mw: '1140px',
+        },
+      },
+      false: {
+        w: '65%',
+      },
+    },
   },
 })
 
@@ -108,7 +129,47 @@ const ClientTitle = styled('p', {
   ta: 'center',
 })
 
-const TestimonialRotator = ({ testimonials = [], variant = 'tan' }) => {
+const $SlideContent = styled('div', {
+  variants: {
+    includeRating: {
+      true: {
+        maxWidth: '54.5rem',
+        mx: 'auto',
+
+        [`${Quote}`]: {
+          mx: 0,
+          width: '100%',
+          my: '$3',
+          lineHeight: '1.6',
+        },
+
+        [`${StyledImage}`]: {
+          my: '$3',
+        },
+
+        [`${ClientName}`]: {
+          my: '0.375rem',
+          typeSizes: 'buttonSm',
+          fontWeight: '400',
+          lineHeight: '1.5',
+        },
+
+        [`${ClientTitle}`]: {
+          typeSizes: 'xs',
+          textTransform: 'none',
+          letterSpacing: 'unset',
+          lineHeight: '1.5',
+        },
+      },
+    },
+  },
+})
+
+const TestimonialRotator = ({
+  testimonials = [],
+  variant = 'tan',
+  includeRating = false,
+}) => {
   const [loadSlick, setLoadSlick] = useState(false)
   useEffect(() => setLoadSlick(true), [])
 
@@ -126,8 +187,20 @@ const TestimonialRotator = ({ testimonials = [], variant = 'tan' }) => {
     slidesToShow: 1,
     speed: 500,
     touchThreshold: 50,
-    nextArrow: <NavigationArrows color="white" variant="arrow-right" />,
-    prevArrow: <NavigationArrows color="white" variant="arrow-left" />,
+    nextArrow: (
+      <NavigationArrows
+        color="white"
+        variant="arrow-right"
+        css={includeRating && { mr: '$4', '@>s': { m: 0 } }}
+      />
+    ),
+    prevArrow: (
+      <NavigationArrows
+        color="white"
+        variant="arrow-left"
+        css={includeRating && { ml: '$4', '@>s': { m: 0 } }}
+      />
+    ),
     autoplay: hasMultiple,
     draggable: hasMultiple,
     infinite: hasMultiple,
@@ -135,22 +208,28 @@ const TestimonialRotator = ({ testimonials = [], variant = 'tan' }) => {
 
   return (
     <OuterContainer variant={variant}>
-      <InnerContainer>
-        <QuotemarkImage
-          variant={variant}
-          image={variant === 'gray' ? QuotemarkSvgGray : QuotemarkSvgTan}
-        />
+      <InnerContainer includeRating={includeRating}>
+        {!includeRating && (
+          <QuotemarkImage
+            variant={variant}
+            image={variant === 'gray' ? QuotemarkSvgGray : QuotemarkSvgTan}
+          />
+        )}
         <RotatorContainer>
           {loadSlick && (
             <SlickRotator {...settings}>
               {testimonials.map((item, index) => {
-                const { testimonial, image, authorName, authorTitle } = item
+                const { testimonial, image, authorName, authorTitle, rating } =
+                  item
                 return (
                   <div key={index}>
-                    <Quote as="h6">{testimonial}</Quote>
-                    <StyledImage image={image} />
-                    <ClientName>{authorName}</ClientName>
-                    <ClientTitle>{authorTitle}</ClientTitle>
+                    <$SlideContent includeRating={includeRating}>
+                      {includeRating && rating && <Ratings rating={rating} />}
+                      <Quote as="h6">{testimonial}</Quote>
+                      <StyledImage image={image} />
+                      <ClientName>{authorName}</ClientName>
+                      <ClientTitle>{authorTitle}</ClientTitle>
+                    </$SlideContent>
                   </div>
                 )
               })}

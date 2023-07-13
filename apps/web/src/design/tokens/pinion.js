@@ -16,6 +16,14 @@ export const pinionTokens = {
   },
   variants: {
     component: {
+      animatedCards: {
+        px: 'unset',
+        my: 'unset',
+
+        '> div': {
+          maxWidth: 'none',
+        },
+      },
       banner: {
         px: 'unset',
         '> div': {
@@ -61,6 +69,13 @@ export const pinionTokens = {
       embed: {
         '> div': {
           maxWidth: '$base',
+        },
+      },
+      marquee: {
+        overflow: 'hidden',
+        mb: 'unset',
+        '> div': {
+          maxWidth: '$extended',
         },
       },
       featureGrid: {

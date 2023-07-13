@@ -187,10 +187,6 @@ const moduleExports = withBundleAnalyzer({
               : '/studio/index.html',
         },
         {
-          source: '/home-(.*)',
-          destination: '/home-preview',
-        },
-        {
           source: '/home',
           destination: '/',
         },

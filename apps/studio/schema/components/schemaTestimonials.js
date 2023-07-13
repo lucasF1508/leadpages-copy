@@ -18,7 +18,7 @@ export const schemaTestimonials = F.object({
       F.string({
         name: 'variant',
         options: {
-          list: ['gray', 'tan'],
+          list: ['white', 'gray', 'tan'],
         },
         initialValue: 'gray',
       }),
@@ -26,6 +26,10 @@ export const schemaTestimonials = F.object({
         name: 'limit',
         description:
           'Limit the number of testimonials to be displayed. Leave blank to display all.',
+      }),
+      F.boolean({
+        name: 'includeRating',
+        initialValue: false,
       }),
     ]),
   ],

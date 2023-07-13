@@ -7,6 +7,7 @@ import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
 import Embed from '@components/Embed'
+import Optimize from '@components/Optimize'
 import { LazyMotion } from 'framer-motion'
 
 // Legacy
@@ -53,7 +54,13 @@ export default function App({
   const { navigation, footer, globalHeaderFooter = {}, siteMeta } = global || {}
   const [previewData, setPreviewData] = useState(data)
   const [
-    { seo, htmlFooter: pageHtmlFooter, options: pageOptions, ...pageData },
+    {
+      seo,
+      htmlFooter: pageHtmlFooter,
+      options: pageOptions,
+      isVariant,
+      ...pageData
+    },
   ] = preview ? previewData : data
 
   // HTML codes
@@ -88,7 +95,8 @@ export default function App({
         {hideBar && (
           <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
         )}
-        <SEO seo={seo} siteMeta={siteMeta} />
+        <Optimize />
+        <SEO seo={seo} siteMeta={siteMeta} isVariant={isVariant} />
         <LazyMotion features={loadFeatures} strict>
           {/* {navigation && <Header navigation={navigation} />} */}
           <Header

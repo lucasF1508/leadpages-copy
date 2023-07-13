@@ -7,6 +7,12 @@ export const schemaTabs = F.object({
   groups: G.fieldGroupComponentOptions(),
   fields: [
     ...G.group('content', [
+      ...F.contentGroup({
+        label: false,
+        link: false,
+        heading: { hidden: ({ parent }) => !parent.alternateLayout },
+        content: { hidden: ({ parent }) => !parent.alternateLayout },
+      }),
       F.array({
         name: 'items',
         of: F.object({
@@ -32,6 +38,7 @@ export const schemaTabs = F.object({
         }),
         validation: (Rule) => Rule.max(4),
       }),
+      F.link({ hidden: ({ parent }) => !parent.alternateLayout }),
     ]),
     ...G.group('options', [
       F.boolean({
@@ -45,6 +52,13 @@ export const schemaTabs = F.object({
         name: 'loop',
         title: 'Enable Looping',
         description: 'When enabled, the tabs will cycle continuously.',
+        initialValue: false,
+      }),
+      F.boolean({
+        name: 'alternateLayout',
+        title: 'Use Alternate Sizing',
+        description:
+          'When enabled, this will toggle the sizing and display of the headings, content and links within the component.',
         initialValue: false,
       }),
       F.radio(['left', 'right'], {

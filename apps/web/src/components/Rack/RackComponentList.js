@@ -37,10 +37,12 @@ const RackComponentList = {
   customerRotator: dynamic(() => import('@components/RotatorCustomer')),
   featuredTemplates: dynamic(() => import('@components/FeaturedTemplates')),
   tabs: dynamic(() => import('@components/Tabs')),
+  animatedCards: dynamic(() => import('@components/AnimatedCards')),
   ctaInline: dynamic(() => import('@components/Cta/CtaInline')),
   quote: dynamic(() => import('@components/Quote')),
   faqs: dynamic(() => import('@components/Faq')),
   pricing: dynamic(() => import('@components/Pricing')),
+  marquee: dynamic(() => import('@components/Marquee')),
 }
 
 export default RackComponentList

@@ -9,7 +9,7 @@ Make sure all dependencies have been installed before moving on:
 - [Node.js](http://nodejs.org/) >= 13.0.0
 - [Yarn](https://yarnpkg.com/en/docs/install)
 
-# 🛠 Theme development
+### 🛠 Theme development 🛠
 
 - Run `yarn install` from the theme directory.
 

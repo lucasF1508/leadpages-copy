@@ -27,7 +27,7 @@ const getSeoSiteTitle = ({
     .replace('%PAGE_TITLE%', seoTitle)
     .replace('%SITE_NAME%', siteName)
 
-const useSeo = ({ seo, siteMeta } = {}) => {
+const useSeo = ({ seo, siteMeta, isVariant } = {}) => {
   const { asPath } = useRouter()
   const { seoTitlePattern, seoImageDefault, siteName, twitterUser } =
     siteMeta || {}
@@ -41,7 +41,8 @@ const useSeo = ({ seo, siteMeta } = {}) => {
     modifyDate,
   } = seo || {}
   const image = !hasImageUrl && useSanityImage(seoImage || seoImageDefault)
-  const robots = VERCEL_ENV !== 'production' ? 'noindex,nofollow' : ''
+  const robots =
+    VERCEL_ENV !== 'production' || isVariant ? 'noindex,nofollow' : ''
 
   return {
     GTM_CONTAINER_ID,
@@ -64,9 +65,11 @@ const useSeo = ({ seo, siteMeta } = {}) => {
           url: image?.builder?.width(1200).height(630).url(),
         }
       : {},
-    url: `${NEXT_PUBLIC_URL || ''}${asPath
-      .replace(/(\/_legacy|\?.*)/, '') // Strip out /_legacy and params
-      .replace(/\/$/, '')}`, // Remove trailing slash if exists
+    url: isVariant
+      ? NEXT_PUBLIC_URL
+      : `${NEXT_PUBLIC_URL || ''}${asPath
+          .replace(/(\/_legacy|\?.*)/, '') // Strip out /_legacy and params
+          .replace(/\/$/, '')}`, // Remove trailing slash if exists
     locale: 'en_CA',
     type: 'website',
     robots,
