@@ -853,9 +853,7 @@ class Header extends React.Component {
                       onMouseEnter={onMouseEnter}
                       onMouseLeave={onMouseLeave}
                       data-gtm={dataGtm}
-                      className={
-                        path.includes(_id) && 'active-main-menu active'
-                      }
+                      className={path === url && 'active-main-menu active'}
                     >
                       {label}
                     </StyledLink>
