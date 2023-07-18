@@ -222,6 +222,7 @@ const $AnimatedMedia = styled(m.div, {})
 const TabsRevealAlt = ({
   align = 'left',
   autoplay = false,
+  animate: animateLeadingText = false,
   tabWidth = 'narrow',
   items,
   heading,
@@ -258,6 +259,7 @@ const TabsRevealAlt = ({
           <ContentGroup
             heading={heading}
             content={content}
+            animate={animateLeadingText}
             css={{
               heading: { fontSize: '2.5rem' },
               content: {

@@ -238,7 +238,7 @@ const ReadyToGrow = ({
                     <Image
                       src={PlayButtonSVG}
                       alt="play button icon"
-                      lazyBoundary="501px"
+                      lazyBoundary="1000px"
                     />
                   </PlayButtonIcon>
                   Watch a quick demo

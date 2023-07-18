@@ -5,6 +5,12 @@ import Image from '@components/Image'
 import ContentGroup from '@components/ContentGroup'
 import Link from '@components/Link'
 import useImageRatio from '@hooks/useImageRatio'
+import {
+  viewport,
+  item as framerItem,
+  transition,
+} from '@design/tokens/framerTokens'
+import { m as motion } from 'framer-motion'
 
 const scrollLeft = keyframes({
   '0%': { transform: 'translateX(0%)' },
@@ -55,7 +61,7 @@ const $MarqueeItem = styled('div', {
   },
 })
 
-const $ServicePoints = styled('div', {
+const $ServicePoints = styled(motion.div, {
   d: 'flex',
   mx: 'auto',
   fd: 'column',
@@ -71,7 +77,7 @@ const $ServicePoints = styled('div', {
   },
 })
 
-const $ServicePoint = styled('div', {
+const $ServicePoint = styled(motion.div, {
   textAlign: 'center',
 
   '@>m': {
@@ -138,6 +144,7 @@ const Marquee = ({
   height,
   spaceBetween = 60,
   hasShadow,
+  animate: animateTextContents = false,
   ...props
 }) => {
   if (!images) return null
@@ -231,6 +238,7 @@ const Marquee = ({
         <ContentGroup
           heading={heading}
           content={content}
+          animate={animateTextContents}
           align="center"
           css={{
             mw: 'calc($cols10 + $space$8)',
@@ -261,9 +269,31 @@ const Marquee = ({
         />
       )}
       {servicePoints && (
-        <$ServicePoints>
+        <$ServicePoints
+          variants={
+            animateTextContents && {
+              hidden: {
+                opacity: 0,
+              },
+              visible: {
+                opacity: 1,
+                transition: {
+                  when: 'beforeChildren',
+                  staggerChildren: 0.2,
+                },
+              },
+            }
+          }
+          initial={animateTextContents && 'hidden'}
+          whileInView={animateTextContents && 'visible'}
+          viewport={animateTextContents && viewport}
+        >
           {servicePoints.map(({ _key, heading: _heading, text, image }) => (
-            <$ServicePoint key={_key}>
+            <$ServicePoint
+              key={_key}
+              variants={framerItem}
+              transition={transition}
+            >
               {image && (
                 <$ServicePointImage>
                   <Image image={image} />

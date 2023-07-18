@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Image from '@components/Image'
 import { styled } from '@design'
+import { m as motion } from 'framer-motion'
+import {
+  group,
+  viewport,
+  item as framerItem,
+  transition,
+} from '@design/tokens/framerTokens'
 // components
 import PaginationDots from '@legacy/components/rotators/PaginationDots'
 import ReactSlick from '@legacy/components/rotators/ReactSlick_Base'
@@ -30,7 +37,7 @@ const OuterContainer = styled('div', {
   },
 })
 
-const InnerContainer = styled('div', {
+const InnerContainer = styled(motion.div, {
   ml: 'auto',
   mr: 'auto',
   mw: '1140px',
@@ -89,7 +96,9 @@ const SlickRotator = styled(ReactSlick, {
   },
 })
 
-const RotatorContainer = styled('div', {})
+const RotatorContainer = styled(motion.div, {})
+
+const $Ratings = styled(motion.div, {})
 
 const Quote = styled('h4', {
   w: '90%',
@@ -106,6 +115,8 @@ const Quote = styled('h4', {
   },
 })
 
+const $Quote = styled(motion.div, {})
+
 const StyledImage = styled(Image, {
   maxHeight: '60px',
   mw: '60px',
@@ -113,7 +124,9 @@ const StyledImage = styled(Image, {
   ml: 'calc((100% - 60px) / 2))',
 })
 
-const ClientName = styled('p', {
+const $Image = styled(motion.div, {})
+
+const ClientName = styled(motion.p, {
   c: '$text',
   fontSize: '16px',
   fontWeight: '500',
@@ -122,14 +135,14 @@ const ClientName = styled('p', {
   mb: 0,
 })
 
-const ClientTitle = styled('p', {
+const ClientTitle = styled(motion.p, {
   c: '$textAlt',
   fontSize: '14px',
   lineHeight: '20px',
   ta: 'center',
 })
 
-const $SlideContent = styled('div', {
+const $SlideContent = styled(motion.div, {
   variants: {
     includeRating: {
       true: {
@@ -169,6 +182,7 @@ const TestimonialRotator = ({
   testimonials = [],
   variant = 'tan',
   includeRating = false,
+  animate = false,
 }) => {
   const [loadSlick, setLoadSlick] = useState(false)
   useEffect(() => setLoadSlick(true), [])
@@ -223,12 +237,33 @@ const TestimonialRotator = ({
                   item
                 return (
                   <div key={index}>
-                    <$SlideContent includeRating={includeRating}>
-                      {includeRating && rating && <Ratings rating={rating} />}
-                      <Quote as="h6">{testimonial}</Quote>
-                      <StyledImage image={image} />
-                      <ClientName>{authorName}</ClientName>
-                      <ClientTitle>{authorTitle}</ClientTitle>
+                    <$SlideContent
+                      includeRating={includeRating}
+                      variants={animate && group}
+                      initial={animate && 'hidden'}
+                      whileInView={animate && 'visible'}
+                      viewport={animate && viewport}
+                    >
+                      {includeRating && rating && (
+                        <$Ratings variants={framerItem} transition={transition}>
+                          <Ratings rating={rating} />
+                        </$Ratings>
+                      )}
+                      <$Quote variants={framerItem} transition={transition}>
+                        <Quote as="h6">{testimonial}</Quote>
+                      </$Quote>
+                      <$Image variants={framerItem} transition={transition}>
+                        <StyledImage image={image} />
+                      </$Image>
+                      <ClientName variants={framerItem} transition={transition}>
+                        {authorName}
+                      </ClientName>
+                      <ClientTitle
+                        variants={framerItem}
+                        transition={transition}
+                      >
+                        {authorTitle}
+                      </ClientTitle>
                     </$SlideContent>
                   </div>
                 )

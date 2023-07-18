@@ -191,7 +191,7 @@ export default function VideoHeroFeature({ videos }) {
             alt="website template image"
             height="1080"
             width="1920"
-            lazyBoundary="501px"
+            lazyBoundary="1000px"
           />
           {displayVideo && (
             <Video autoPlay playsinline muted loop>

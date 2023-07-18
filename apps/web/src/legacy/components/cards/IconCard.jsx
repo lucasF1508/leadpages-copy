@@ -165,7 +165,7 @@ const IconCard = ({
                   alt={alt}
                   height={48}
                   width={48}
-                  lazyBoundary="501px"
+                  lazyBoundary="1000px"
                 />
               ) : (
                 <Image image={image} />
@@ -183,7 +183,7 @@ const IconCard = ({
                   {link.label}
                   &nbsp;
                   <ArrowRightPurple>
-                    <Image {...rightArrowPurpleSVG} lazyBoundary="501px" />
+                    <Image {...rightArrowPurpleSVG} lazyBoundary="1000px" />
                   </ArrowRightPurple>
                 </CTA>
               </IconCardLink>
@@ -205,7 +205,7 @@ const IconCard = ({
                 alt={alt}
                 height={48}
                 width={48}
-                lazyBoundary="501px"
+                lazyBoundary="1000px"
               />
             ) : (
               <Image image={image} />
@@ -223,7 +223,7 @@ const IconCard = ({
                 {link.label}
                 &nbsp;
                 <ArrowRightPurple>
-                  <Image {...rightArrowPurpleSVG} lazyBoundary="501px" />
+                  <Image {...rightArrowPurpleSVG} lazyBoundary="1000px" />
                 </ArrowRightPurple>
               </CTA>
             </IconCardLink>

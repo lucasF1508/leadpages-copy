@@ -71,6 +71,7 @@ export const schemaTabs = F.object({
         title: 'Tab Width',
         initialValue: 'narrow',
       }),
+      F.field('animate'),
     ]),
   ],
   preview: P.arrayTitle(),
