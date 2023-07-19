@@ -242,185 +242,238 @@ const RedbrickRow = styled(FlexRow)`
   border-top: 1px solid rgba(15, 12, 9, 0.08);
 `
 
-const Footer = ({ slimFooter }) => {
-  return (
-    <FooterContainer slimFooter={slimFooter}>
-      {!slimFooter && (
-        <InnerContainer>
-          <FlexRow>
-            <Col4>
-              <FlexColumn>
-                <FlexColumnItem>
-                  <StyledLink href="/">
-                    <LogoIconContainer
-                      src={logoIconSVG}
-                      alt="Leadpages SVG logo"
-                    />
-                  </StyledLink>
-                </FlexColumnItem>
-              </FlexColumn>
-            </Col4>
-            <Col2>
-              <SmallCaps>Product</SmallCaps>
-              <FlexColumn>
-                <FlexColumnItem>
-                  <FooterLink
-                    href="/product/feature-index"
-                    data-gtm="footer-link"
-                  >
-                    Features
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink href="/integrations" data-gtm="footer-link">
-                    Integrations
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink href="/templates" data-gtm="footer-link">
-                    Templates
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink href="/pricing" data-gtm="footer-link">
-                    Pricing
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <OutboundFooterLink href="/demo" data-gtm="footer-link">
-                    Watch a Demo
-                  </OutboundFooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink href="/comparisons" data-gtm="footer-link">
-                    Comparisons
-                  </FooterLink>
-                </FlexColumnItem>
-              </FlexColumn>
-            </Col2>
-            <Col2>
-              <SmallCaps>Resources</SmallCaps>
-              <FlexColumn>
-                <FlexColumnItem>
-                  <OutboundFooterLink
-                    href="https://www.leadpages.com/blog/"
-                    alt="Leadpages Blog"
-                    rel="noopener"
-                    data-gtm="footer-link"
-                  >
-                    Blog
-                  </OutboundFooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <OutboundFooterLink
-                    href="/podcast"
-                    alt="Leadpages podcast"
-                    data-gtm="footer-link"
-                  >
-                    Podcast
-                  </OutboundFooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <OutboundFooterLink
-                    href="/webinars"
-                    alt="Leadpages webinar"
-                    data-gtm="footer-link"
-                  >
-                    Webinar
-                  </OutboundFooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink
-                    href="/landing-pages-guide"
-                    data-gtm="footer-link"
-                  >
-                    Landing Pages Guide
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <OutboundFooterLink
-                    href="/why-leadpages"
-                    alt="Why Leadpages"
-                    data-gtm="footer-link"
-                  >
-                    Why Leadpages?
-                  </OutboundFooterLink>
-                </FlexColumnItem>
-              </FlexColumn>
-            </Col2>
-            <Col2>
-              <SmallCaps>Community</SmallCaps>
-              <FlexColumn>
-                <FlexColumnItem>
-                  <OutboundFooterLink
-                    href="https://support.leadpages.com/hc/en-us"
-                    alt="visit the help center"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    data-gtm="footer-link"
-                  >
-                    Help Center
-                  </OutboundFooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink href="/customers" data-gtm="footer-link">
-                    Customer Stories
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <OutboundFooterLink
-                    href="https://www.facebook.com/groups/leadpages/"
-                    alt="Leadpages Facebook"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    data-gtm="footer-link"
-                  >
-                    Facebook Group
-                  </OutboundFooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <OutboundFooterLink href="/affiliates" data-gtm="footer-link">
-                    Affiliate Program
-                  </OutboundFooterLink>
-                </FlexColumnItem>
-              </FlexColumn>
-            </Col2>
-            <Col2>
-              <SmallCaps>Company</SmallCaps>
-              <FlexColumn>
-                <FlexColumnItem>
-                  <FooterLink
-                    href="/contact"
-                    data-gtm="footer-link_contact-us-link"
-                  >
-                    Contact
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink href="/press" data-gtm="footer-link">
-                    Press
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink href="/careers" data-gtm="footer-link">
-                    Careers
-                  </FooterLink>
-                </FlexColumnItem>
-                <FlexColumnItem>
-                  <FooterLink href="/faq" data-gtm="footer-link">
-                    FAQs
-                  </FooterLink>
-                </FlexColumnItem>
-              </FlexColumn>
-            </Col2>
-          </FlexRow>
-        </InnerContainer>
-      )}
-      <FooterRowBottom>
-        <FooterCopyright>
-          ©{new Date().getFullYear()} Leadpages (US), Inc. All Rights Reserved.
-        </FooterCopyright>
-        <FooterIconsMobileContainer>
+const Footer = ({ slimFooter }) => (
+  <FooterContainer slimFooter={slimFooter}>
+    {!slimFooter && (
+      <InnerContainer>
+        <FlexRow>
+          <Col4>
+            <FlexColumn>
+              <FlexColumnItem>
+                <StyledLink href="/">
+                  <LogoIconContainer
+                    src={logoIconSVG}
+                    alt="Leadpages SVG logo"
+                  />
+                </StyledLink>
+              </FlexColumnItem>
+            </FlexColumn>
+          </Col4>
+          <Col2>
+            <SmallCaps>Product</SmallCaps>
+            <FlexColumn>
+              <FlexColumnItem>
+                <FooterLink
+                  href="/product/feature-index"
+                  data-gtm="footer-link"
+                >
+                  Features
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/integrations" data-gtm="footer-link">
+                  Integrations
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/templates" data-gtm="footer-link">
+                  Templates
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/pricing" data-gtm="footer-link">
+                  Pricing
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <OutboundFooterLink href="/demo" data-gtm="footer-link">
+                  Watch a Demo
+                </OutboundFooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/comparisons" data-gtm="footer-link">
+                  Comparisons
+                </FooterLink>
+              </FlexColumnItem>
+            </FlexColumn>
+          </Col2>
+          <Col2>
+            <SmallCaps>Resources</SmallCaps>
+            <FlexColumn>
+              <FlexColumnItem>
+                <OutboundFooterLink
+                  href="https://www.leadpages.com/blog/"
+                  alt="Leadpages Blog"
+                  rel="noopener"
+                  data-gtm="footer-link"
+                >
+                  Blog
+                </OutboundFooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <OutboundFooterLink
+                  href="/podcast"
+                  alt="Leadpages podcast"
+                  data-gtm="footer-link"
+                >
+                  Podcast
+                </OutboundFooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <OutboundFooterLink
+                  href="/webinars"
+                  alt="Leadpages webinar"
+                  data-gtm="footer-link"
+                >
+                  Webinar
+                </OutboundFooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/landing-pages-guide" data-gtm="footer-link">
+                  Landing Pages Guide
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <OutboundFooterLink
+                  href="/why-leadpages"
+                  alt="Why Leadpages"
+                  data-gtm="footer-link"
+                >
+                  Why Leadpages?
+                </OutboundFooterLink>
+              </FlexColumnItem>
+            </FlexColumn>
+          </Col2>
+          <Col2>
+            <SmallCaps>Community</SmallCaps>
+            <FlexColumn>
+              <FlexColumnItem>
+                <OutboundFooterLink
+                  href="https://support.leadpages.com/hc/en-us"
+                  alt="visit the help center"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  data-gtm="footer-link"
+                >
+                  Help Center
+                </OutboundFooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/customers" data-gtm="footer-link">
+                  Customer Stories
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <OutboundFooterLink
+                  href="https://www.facebook.com/groups/leadpages/"
+                  alt="Leadpages Facebook"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  data-gtm="footer-link"
+                >
+                  Facebook Group
+                </OutboundFooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <OutboundFooterLink href="/affiliates" data-gtm="footer-link">
+                  Affiliate Program
+                </OutboundFooterLink>
+              </FlexColumnItem>
+            </FlexColumn>
+          </Col2>
+          <Col2>
+            <SmallCaps>Company</SmallCaps>
+            <FlexColumn>
+              <FlexColumnItem>
+                <FooterLink
+                  href="/contact"
+                  data-gtm="footer-link_contact-us-link"
+                >
+                  Contact
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/press" data-gtm="footer-link">
+                  Press
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/careers" data-gtm="footer-link">
+                  Careers
+                </FooterLink>
+              </FlexColumnItem>
+              <FlexColumnItem>
+                <FooterLink href="/faq" data-gtm="footer-link">
+                  FAQs
+                </FooterLink>
+              </FlexColumnItem>
+            </FlexColumn>
+          </Col2>
+        </FlexRow>
+      </InnerContainer>
+    )}
+    <FooterRowBottom>
+      <FooterCopyright>
+        ©{new Date().getFullYear()} Leadpages (US), Inc. All Rights Reserved.
+      </FooterCopyright>
+      <FooterIconsMobileContainer>
+        <a
+          href="https://www.facebook.com/Leadpages"
+          rel="noreferrer noopener"
+          alt="Leadpages Facebook Page"
+          target="_blank"
+          data-gtm="footer-link"
+        >
+          <SocialIconContainer src={facebookSVG} alt="facebook icon" />
+        </a>
+        <a
+          href="https://www.linkedin.com/company/leadpages"
+          rel="noreferrer noopener"
+          alt="Leadpages LinkedIn Company Page"
+          target="_blank"
+          data-gtm="footer-link"
+        >
+          <SocialIconContainer src={linkedinSVG} alt="linkedin icon" />
+        </a>
+        <a
+          href="https://www.twitter.com/Leadpages"
+          rel="noreferrer noopener"
+          alt="Leadpages Twitter Account"
+          target="_blank"
+          data-gtm="footer-link"
+        >
+          <SocialIconContainer src={twitterSVG} alt="twitter icon" />
+        </a>
+        <a
+          href="https://www.instagram.com/leadpages/"
+          rel="noreferrer noopener"
+          alt="Leadpages Instagram Page"
+          target="_blank"
+          data-gtm="footer-link"
+        >
+          <SocialIconContainer src={instagramSVG} alt="instagram icon" />
+        </a>
+        <a
+          href="https://www.pinterest.com/leadpagesHQ/"
+          rel="noreferrer noopener"
+          alt="Leadpages Pinterest Account"
+          target="_blank"
+          data-gtm="footer-link"
+        >
+          <SocialIconContainer src={pinterestSVG} alt="pinterest icon" />
+        </a>
+      </FooterIconsMobileContainer>
+      <FooterTOS>
+        <FooterTOSText>
+          <StyledLink href="/privacy" data-gtm="footer-link">
+            Privacy Policy
+          </StyledLink>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <StyledLink href="/legal" data-gtm="footer-link">
+            Legal
+          </StyledLink>
+        </FooterTOSText>
+        <FooterIconsDesktopContainer>
           <a
             href="https://www.facebook.com/Leadpages"
             rel="noreferrer noopener"
@@ -466,72 +519,14 @@ const Footer = ({ slimFooter }) => {
           >
             <SocialIconContainer src={pinterestSVG} alt="pinterest icon" />
           </a>
-        </FooterIconsMobileContainer>
-        <FooterTOS>
-          <FooterTOSText>
-            <StyledLink href="/privacy" data-gtm="footer-link">
-              Privacy Policy
-            </StyledLink>
-            &nbsp;&nbsp;|&nbsp;&nbsp;
-            <StyledLink href="/legal" data-gtm="footer-link">
-              Legal
-            </StyledLink>
-          </FooterTOSText>
-          <FooterIconsDesktopContainer>
-            <a
-              href="https://www.facebook.com/Leadpages"
-              rel="noreferrer noopener"
-              alt="Leadpages Facebook Page"
-              target="_blank"
-              data-gtm="footer-link"
-            >
-              <SocialIconContainer src={facebookSVG} alt="facebook icon" />
-            </a>
-            <a
-              href="https://www.linkedin.com/company/leadpages"
-              rel="noreferrer noopener"
-              alt="Leadpages LinkedIn Company Page"
-              target="_blank"
-              data-gtm="footer-link"
-            >
-              <SocialIconContainer src={linkedinSVG} alt="linkedin icon" />
-            </a>
-            <a
-              href="https://www.twitter.com/Leadpages"
-              rel="noreferrer noopener"
-              alt="Leadpages Twitter Account"
-              target="_blank"
-              data-gtm="footer-link"
-            >
-              <SocialIconContainer src={twitterSVG} alt="twitter icon" />
-            </a>
-            <a
-              href="https://www.instagram.com/leadpages/"
-              rel="noreferrer noopener"
-              alt="Leadpages Instagram Page"
-              target="_blank"
-              data-gtm="footer-link"
-            >
-              <SocialIconContainer src={instagramSVG} alt="instagram icon" />
-            </a>
-            <a
-              href="https://www.pinterest.com/leadpagesHQ/"
-              rel="noreferrer noopener"
-              alt="Leadpages Pinterest Account"
-              target="_blank"
-              data-gtm="footer-link"
-            >
-              <SocialIconContainer src={pinterestSVG} alt="pinterest icon" />
-            </a>
-          </FooterIconsDesktopContainer>
-        </FooterTOS>
-      </FooterRowBottom>
-      <RedbrickRow>
-        <RedbrickFooter />
-      </RedbrickRow>
-    </FooterContainer>
-  )
-}
+        </FooterIconsDesktopContainer>
+      </FooterTOS>
+    </FooterRowBottom>
+    <RedbrickRow>
+      <RedbrickFooter />
+    </RedbrickRow>
+  </FooterContainer>
+)
 
 Footer.defaultProps = {
   slimFooter: false,

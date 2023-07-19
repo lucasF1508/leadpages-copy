@@ -3,12 +3,19 @@ import { useRouter } from 'next/router'
 import { styled, darkTheme } from '@design'
 import Link from '@components/Link'
 import { Link as ScrollLink } from 'react-scroll'
+
 // images
 import fullLogoSVG from '@legacy/assets/images/global/leadpages-wordmark_large.svg'
 import burgerSVG from '@legacy/assets/images/global/burger.svg'
 import closeSVG from '@legacy/assets/images/global/x_close.svg'
-import leftArrow from '@legacy/assets/images/global/arrow_left.svg'
 import rightArrow from '@legacy/assets/images/global/arrow_right.svg'
+import {
+  mobileExpertiseMenu,
+  mobilePlatformMenu,
+  mobileTemplatesMenu,
+  mobileUseCasesMenu,
+} from './NavDrawerMenus'
+import NavDrawerSecondaryMenu from './NavDrawerSecondaryMenu'
 
 const MobileMenuContainer = styled('div', {
   position: 'fixed',
@@ -32,7 +39,7 @@ const MobileMenuContainer = styled('div', {
   },
 })
 
-const MobileMenuInnerItem = styled('div', {
+export const MobileMenuInnerItem = styled('div', {
   marginTop: '1rem',
   marginBottom: '1rem',
   color: '$textAlt',
@@ -50,7 +57,7 @@ const TabletFlexbox = styled('div', {
     display: 'inline',
   },
 
-  '@media (max-width: 768px)': {
+  '@<navigationDesktopAlt': {
     display: 'flex',
   },
 
@@ -63,7 +70,7 @@ const TabletMenuContainer = styled('div', {
     display: 'none',
   },
 
-  '@media (max-width: 768px)': {
+  '@<navigationDesktopAlt': {
     position: 'relative',
     height: '100%',
     width: '60%',
@@ -80,7 +87,7 @@ const BurgerIconContainer = styled('img', {
   display: 'none',
   ml: '16px',
 
-  '@media (max-width: 768px)': {
+  '@<navigationDesktopAlt': {
     display: 'block',
   },
 
@@ -99,7 +106,7 @@ const BurgerIconContainer = styled('img', {
   },
 })
 
-const MobileMenuInnerContainer = styled('div', {
+export const MobileMenuInnerContainer = styled('div', {
   position: 'relative',
   height: '100%',
   paddingTop: '5rem',
@@ -112,27 +119,9 @@ const MobileMenuInnerContainer = styled('div', {
     width: '100%',
   },
 
-  '@media (min-width: 577px) and (max-width: 768px)': {
+  '@media (min-width: 577px) and (max-width: 1084px)': {
     width: '40%',
   },
-})
-
-const MobileMenuInnerProductContainer = styled('div', {
-  zIndex: 101,
-  padding: 0,
-  position: 'relative',
-  height: '100%',
-  width: '100%',
-  background: '$white',
-})
-
-const MobileMenuInnerResourcesContainer = styled('div', {
-  zIndex: 60,
-  padding: 0,
-  position: 'relative',
-  height: '100%',
-  width: '100%',
-  background: '$white',
 })
 
 const MobileMenuExpandableContainer = styled('div', {
@@ -142,7 +131,7 @@ const MobileMenuExpandableContainer = styled('div', {
 
 const MobileMenuExpandableItem = styled(MobileMenuInnerItem, {})
 
-const MobileMenuInnerSeparator = styled('hr', {
+export const MobileMenuInnerSeparator = styled('hr', {
   backgroundColor: '#0f0c09',
   opacity: 0.08,
 })
@@ -193,9 +182,9 @@ const MobileMenuSeparator = styled('hr', {
   opacity: 0.08,
 })
 
-const MobileMenuX = styled('div', {
+export const MobileMenuX = styled('div', {
   position: 'fixed',
-  top: '23px',
+  top: '28px',
   right: '26px',
   width: '33px',
   height: '24px',
@@ -210,15 +199,8 @@ const MobileMenuLogoContainer = styled('img', {
   width: '146px',
   height: '24px',
   position: 'relative',
-  top: '-3.65rem',
+  top: '-3.5rem',
   display: 'inline',
-})
-
-const MobileMenuSubmenuHeadingContainer = styled('div', {
-  position: 'relative',
-  top: '-3.65rem',
-  display: 'inline',
-  cursor: 'pointer',
 })
 
 const ScrollingButtonLink = styled(ScrollLink, {
@@ -237,7 +219,7 @@ const ScrollingButtonLink = styled(ScrollLink, {
   },
 })
 
-const MobileMenuLink = styled(Link, {
+export const MobileMenuLink = styled(Link, {
   textDecoration: 'none',
   color: '$textAlt',
   paddingBottom: '0.5rem',
@@ -272,32 +254,12 @@ const MobileMenuLink = styled(Link, {
   },
 })
 
-const MobileOutboundLink = styled(Link, {
-  textDecoration: 'none',
-  color: '$textAlt',
-  paddingBottom: '0.5rem',
-  borderBottom: '3px solid transparent',
-  display: 'inline',
-
-  '&:hover': {
-    cursor: 'pointer',
-    color: '$primary',
-    borderBottom: '3px solid $colors$primary',
-    textDecoration: 'none',
-  },
-})
-
-const CloseIconContainer = styled('img', {
+export const CloseIconContainer = styled('img', {
   width: '16px',
   height: '16px',
   position: 'relative',
   top: '0px',
   right: '-16px',
-})
-
-const ArrowLeft = styled('img', {
-  width: '20px',
-  height: '10px',
 })
 
 const ArrowRight = styled('img', {
@@ -342,168 +304,53 @@ const OutboundLink = styled(Link, {
   },
 })
 
-const mobileProductMenu = [
-  {
-    _id: 'product',
-    condition: 'internal',
-    url: '/product',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Product Overview',
-  },
-  {
-    _id: 'websites',
-    condition: 'internal',
-    url: '/product/website-builder',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Websites',
-  },
-  {
-    _id: 'landing-page-builder',
-    condition: 'internal',
-    url: '/product/landing-page-builder',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Landing Pages',
-  },
-  {
-    _id: 'ai-engine',
-    condition: 'internal',
-    url: '/product/ai-engine',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'AI Engine',
-  },
-  {
-    _id: 'pop-up-builder',
-    condition: 'internal',
-    url: '/product/pop-up-builder',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Pop-up Forms',
-  },
-  {
-    _id: 'alert-bars',
-    condition: 'internal',
-    url: '/product/alert-bars',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Alert Bars',
-  },
-  {
-    _id: 'integrations',
-    condition: 'internal',
-    url: '/integrations',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Integrations',
-  },
-  {
-    _id: 'feature-index',
-    condition: 'internal',
-    url: '/product/feature-index',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: false,
-    label: 'Feature Index',
-  },
-]
-
-const mobileResourcesMenu = [
-  {
-    _id: 'marketing-resources',
-    condition: 'internal',
-    url: '/marketing-resources',
-    ariaLabel: 'marketing resources',
-    rel: 'noopener',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Resource Library',
-  },
-  {
-    _id: 'blog',
-    condition: 'external',
-    url: 'https://www.leadpages.com/blog',
-    ariaLabel: 'Leadpages blog',
-    rel: 'noopener',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Blog',
-  },
-  {
-    _id: 'webinars',
-    condition: 'external',
-    url: '/webinars',
-    ariaLabel: 'Leadpages webinar',
-    rel: 'noopener',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Webinars',
-  },
-
-  {
-    _id: 'podcast',
-    condition: 'external',
-    url: 'https://www.leadpages.com/podcast',
-    ariaLabel: 'Leadpages podcast',
-    rel: 'noopener',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Podcast',
-  },
-  {
-    _id: 'customers',
-    condition: 'internal',
-    url: '/customers',
-    ariaLabel: 'Leadpages customers',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: true,
-    label: 'Customer Stories',
-  },
-  {
-    _id: 'support',
-    condition: 'external',
-    url: 'https://support.leadpages.com/hc/en-us',
-    ariaLabel: 'Leadpages support',
-    rel: 'noopener',
-    dataGtm: 'mobile-menu-link',
-    hasSeparator: false,
-    label: 'Support',
-  },
-]
-
 export default function NavDrawer({
   className,
   scrollTarget,
   isPricingMenu,
   isStartPageHeader,
   hideSignUpButton,
+  isScrolled,
 }) {
   const router = useRouter()
   const path = router.asPath
 
   const [isNavOpen, setNavOpen] = useState(false)
-  const [isProductNavOpen, setProductNavOpen] = useState(false)
-  const [isRousourcesNavOpen, setRousourcesNavOpen] = useState(false)
+  const [isPlatformNavOpen, setPlatformNavOpen] = useState(false)
+  const [isUseCasesNavOpen, setUseCasesNavOpen] = useState(false)
+  const [isTemplatesNavOpen, setTemplatesNavOpen] = useState(false)
+  const [isExpertiseNavOpen, setExpertiseNavOpen] = useState(false)
 
-  const toggleMobileProductMenu = () => {
-    setProductNavOpen(!isProductNavOpen)
+  const toggleMobilePlatformMenu = () => {
+    setPlatformNavOpen(!isPlatformNavOpen)
   }
 
-  const toggleMobileResourcesMenu = () => {
-    setRousourcesNavOpen(!isRousourcesNavOpen)
+  const toggleMobileUseCasesMenu = () => {
+    setUseCasesNavOpen(!isUseCasesNavOpen)
+  }
+
+  const toggleMobileExpertiseMenu = () => {
+    setExpertiseNavOpen(!isExpertiseNavOpen)
+  }
+
+  const toggleMobileTemplatesMenu = () => {
+    setTemplatesNavOpen(!isTemplatesNavOpen)
   }
 
   const showMobileMenu = () => {
     setNavOpen(true)
-    setProductNavOpen(false)
-    setRousourcesNavOpen(false)
+    setPlatformNavOpen(false)
+    setExpertiseNavOpen(false)
+    setUseCasesNavOpen(false)
+    setTemplatesNavOpen(false)
   }
 
   const hideMobileMenu = () => {
     setNavOpen(false)
-    setProductNavOpen(false)
-    setRousourcesNavOpen(false)
+    setPlatformNavOpen(false)
+    setExpertiseNavOpen(false)
+    setUseCasesNavOpen(false)
+    setTemplatesNavOpen(false)
   }
 
   useEffect(() => {
@@ -521,103 +368,44 @@ export default function NavDrawer({
             <TabletFlexbox>
               <TabletMenuContainer />
               <MobileMenuInnerContainer>
-                {isProductNavOpen && (
-                  <MobileMenuInnerProductContainer>
-                    <MobileMenuX onClick={hideMobileMenu}>
-                      <CloseIconContainer
-                        src={closeSVG.src}
-                        alt="close icon svg"
-                      />
-                    </MobileMenuX>
-                    <MobileMenuSubmenuHeadingContainer
-                      onClick={toggleMobileProductMenu}
-                    >
-                      <ArrowLeft src={leftArrow.src} alt="left arrow" />
-                      Product
-                    </MobileMenuSubmenuHeadingContainer>
-                    {mobileProductMenu.map(
-                      ({
-                        _id,
-                        condition,
-                        url,
-                        dataGtm,
-                        hasSeparator,
-                        label,
-                      }) => (
-                        <>
-                          <MobileMenuInnerItem>
-                            <MobileMenuLink
-                              key={_id}
-                              condition={condition}
-                              url={url}
-                              dataGtm={dataGtm}
-                              className={
-                                path === url && 'active active-mobile-menu'
-                              }
-                            >
-                              {label}
-                            </MobileMenuLink>
-                          </MobileMenuInnerItem>
-                          {hasSeparator && <MobileMenuInnerSeparator />}
-                        </>
-                      )
-                    )}
-                  </MobileMenuInnerProductContainer>
+                {isPlatformNavOpen && (
+                  <NavDrawerSecondaryMenu
+                    toggleMenu={toggleMobilePlatformMenu}
+                    title="Platform"
+                    hideMobileMenu={hideMobileMenu}
+                    menuItems={mobilePlatformMenu}
+                    path={path}
+                  />
                 )}
 
-                {isRousourcesNavOpen && (
-                  <MobileMenuInnerResourcesContainer>
-                    <MobileMenuX onClick={hideMobileMenu}>
-                      <CloseIconContainer
-                        src={closeSVG.src}
-                        alt="close icon svg"
-                      />
-                    </MobileMenuX>
+                {isExpertiseNavOpen && (
+                  <NavDrawerSecondaryMenu
+                    toggleMenu={toggleMobileExpertiseMenu}
+                    title="Expertise"
+                    hideMobileMenu={hideMobileMenu}
+                    menuItems={mobileExpertiseMenu}
+                    path={path}
+                  />
+                )}
 
-                    <MobileMenuSubmenuHeadingContainer
-                      onClick={toggleMobileResourcesMenu}
-                    >
-                      <ArrowLeft src={leftArrow.src} alt="left arrow" />
-                      Resources
-                    </MobileMenuSubmenuHeadingContainer>
-                    {mobileResourcesMenu.map(
-                      ({
-                        _id,
-                        condition,
-                        url,
-                        ariaLabel,
-                        rel,
-                        dataGtm,
-                        hasSeparator,
-                        label,
-                      }) => {
-                        const Component =
-                          condition === 'internal'
-                            ? MobileMenuLink
-                            : MobileOutboundLink
+                {isTemplatesNavOpen && (
+                  <NavDrawerSecondaryMenu
+                    toggleMenu={toggleMobileTemplatesMenu}
+                    title="Templates"
+                    hideMobileMenu={hideMobileMenu}
+                    menuItems={mobileTemplatesMenu}
+                    path={path}
+                  />
+                )}
 
-                        return (
-                          <>
-                            <MobileMenuInnerItem key={_id}>
-                              <Component
-                                condition={condition}
-                                url={url}
-                                aria-label={ariaLabel}
-                                rel={rel}
-                                data-gtm={dataGtm}
-                                className={
-                                  path === url && 'active active-mobile-menu'
-                                }
-                              >
-                                {label}
-                              </Component>
-                            </MobileMenuInnerItem>
-                            {hasSeparator && <MobileMenuInnerSeparator />}
-                          </>
-                        )
-                      }
-                    )}
-                  </MobileMenuInnerResourcesContainer>
+                {isUseCasesNavOpen && (
+                  <NavDrawerSecondaryMenu
+                    toggleMenu={toggleMobileUseCasesMenu}
+                    title="Use Cases"
+                    hideMobileMenu={hideMobileMenu}
+                    menuItems={mobileUseCasesMenu}
+                    path={path}
+                  />
                 )}
 
                 <MobileMenuX onClick={hideMobileMenu}>
@@ -630,33 +418,59 @@ export default function NavDrawer({
                 />
 
                 <MobileMenuExpandableContainer
-                  onClick={toggleMobileProductMenu}
+                  onClick={toggleMobilePlatformMenu}
                 >
                   <MobileMenuInnerItem
                     className={
-                      path === '/product' && 'active active-mobile-menu'
+                      path === '/platform' && 'active active-mobile-menu'
                     }
                   >
-                    Product
+                    Platform
                   </MobileMenuInnerItem>
 
                   <MobileMenuExpandableItem>
                     <ArrowRight src={rightArrow.src} alt="right arrow" />
                   </MobileMenuExpandableItem>
                 </MobileMenuExpandableContainer>
+
                 <MobileMenuInnerSeparator />
-                <MobileMenuInnerItem>
-                  <MobileMenuLink
-                    condition="internal"
-                    url="/templates"
+
+                <MobileMenuExpandableContainer
+                  onClick={toggleMobileUseCasesMenu}
+                >
+                  <MobileMenuInnerItem
+                    className={
+                      path === '/use-cases' && 'active active-mobile-menu'
+                    }
+                  >
+                    Use Cases
+                  </MobileMenuInnerItem>
+
+                  <MobileMenuExpandableItem>
+                    <ArrowRight src={rightArrow.src} alt="right arrow" />
+                  </MobileMenuExpandableItem>
+                </MobileMenuExpandableContainer>
+
+                <MobileMenuInnerSeparator />
+
+                <MobileMenuExpandableContainer
+                  onClick={toggleMobileTemplatesMenu}
+                >
+                  <MobileMenuInnerItem
                     className={
                       path === '/templates' && 'active active-mobile-menu'
                     }
                   >
                     Templates
-                  </MobileMenuLink>
-                </MobileMenuInnerItem>
+                  </MobileMenuInnerItem>
+
+                  <MobileMenuExpandableItem>
+                    <ArrowRight src={rightArrow.src} alt="right arrow" />
+                  </MobileMenuExpandableItem>
+                </MobileMenuExpandableContainer>
+
                 <MobileMenuInnerSeparator />
+
                 <MobileMenuInnerItem>
                   <MobileMenuLink
                     condition="internal"
@@ -668,16 +482,28 @@ export default function NavDrawer({
                     Pricing
                   </MobileMenuLink>
                 </MobileMenuInnerItem>
+
                 <MobileMenuInnerSeparator />
+
                 <MobileMenuExpandableContainer
-                  onClick={toggleMobileResourcesMenu}
+                  onClick={toggleMobileExpertiseMenu}
                 >
-                  <MobileMenuInnerItem>Resources</MobileMenuInnerItem>
+                  <MobileMenuInnerItem
+                    className={
+                      path === '/marketing-resources' &&
+                      'active active-mobile-menu'
+                    }
+                  >
+                    Expertise
+                  </MobileMenuInnerItem>
+
                   <MobileMenuExpandableItem>
                     <ArrowRight src={rightArrow.src} alt="right arrow" />
                   </MobileMenuExpandableItem>
                 </MobileMenuExpandableContainer>
+
                 <MobileMenuInnerSeparator />
+
                 <MobileMenuLoginContainer>
                   <MobileMenuLogin>
                     <OutboundLink

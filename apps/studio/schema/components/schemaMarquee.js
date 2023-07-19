@@ -89,6 +89,7 @@ export const schemaMarquee = F.object({
         title: 'Add Shadow to Images',
         initialValue: false,
       }),
+      F.field('animate'),
     ]),
   ],
   preview: {

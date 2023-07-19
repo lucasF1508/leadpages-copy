@@ -52,7 +52,7 @@ const Image = ({
   objectFit,
   objectPosition,
   sizes,
-  lazyBoundary = '501px',
+  lazyBoundary = '1000px',
   alt: orgAlt,
   ...props
 }) => {

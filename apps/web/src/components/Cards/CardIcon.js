@@ -339,7 +339,7 @@ const CardIcon = ({
                 alt={alt}
                 height={48}
                 width={48}
-                lazyBoundary="501px"
+                lazyBoundary="1000px"
               />
             ) : (
               <CardMedia />

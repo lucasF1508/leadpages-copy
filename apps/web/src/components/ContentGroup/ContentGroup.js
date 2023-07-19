@@ -4,8 +4,10 @@ import Label from '@components/Label'
 import Heading from '@components/Heading'
 import Text from '@components/Text'
 import Link from '@components/Link'
+import { m as motion } from 'framer-motion'
+import { group, viewport, item, transition } from '@design/tokens/framerTokens'
 
-const $ContentGroup = styled('div', {
+const $ContentGroup = styled(motion.div, {
   position: 'relative',
   d: 'flex',
   ff: 'column nowrap',
@@ -31,6 +33,11 @@ const $ContentGroup = styled('div', {
   defaultVariants: { align: 'center' },
 })
 
+const $Label = styled(motion.div, {})
+const $Heading = styled(motion.div, {})
+const $Text = styled(motion.div, {})
+const $Link = styled(motion.div, {})
+
 const ContentGroup = ({
   label,
   heading,
@@ -40,6 +47,7 @@ const ContentGroup = ({
   align,
   css: cssOrg = {},
   props: propsOrg = {},
+  animate = false,
 }) => {
   const {
     label: labelCss,
@@ -57,29 +65,45 @@ const ContentGroup = ({
   } = propsOrg
 
   return (
-    <$ContentGroup css={css} align={align} {...props}>
+    <$ContentGroup
+      css={css}
+      align={align}
+      variants={animate && group}
+      initial={animate && 'hidden'}
+      whileInView={animate && 'visible'}
+      viewport={animate && viewport}
+      {...props}
+    >
       {label && (
-        <Label
-          content={label}
-          css={{ c: '$brand', ...labelCss }}
-          {...labelProps}
-        />
+        <$Label variants={item} transition={transition}>
+          <Label
+            content={label}
+            css={{ c: '$brand', ...labelCss }}
+            {...labelProps}
+          />
+        </$Label>
       )}
       {heading && (
-        <Heading
-          heading={heading}
-          css={{
-            mb: 0,
-            ...headingCss,
-          }}
-          {...headingProps}
-        />
+        <$Heading variants={item} transition={transition}>
+          <Heading
+            heading={heading}
+            css={{
+              mb: 0,
+              ...headingCss,
+            }}
+            {...headingProps}
+          />
+        </$Heading>
       )}
       {content && (
-        <Text as="div" content={content} css={contentCss} {...contentProps} />
+        <$Text variants={item} transition={transition}>
+          <Text as="div" content={content} css={contentCss} {...contentProps} />
+        </$Text>
       )}
       {link && (
-        <Link linkStyle={linkStyle} css={linkCss} {...link} {...linkProps} />
+        <$Link variants={item} transition={transition}>
+          <Link linkStyle={linkStyle} css={linkCss} {...link} {...linkProps} />
+        </$Link>
       )}
     </$ContentGroup>
   )

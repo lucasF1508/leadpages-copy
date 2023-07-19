@@ -184,6 +184,7 @@ const TabsRotatorAlt = ({
   loop = false,
   heading,
   content,
+  animate: animateLeadingText = false,
   link,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -231,6 +232,7 @@ const TabsRotatorAlt = ({
           <ContentGroup
             heading={heading}
             content={content}
+            animate={animateLeadingText}
             css={{
               heading: { typeSizes: '4xl' },
               content: {

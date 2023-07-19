@@ -31,6 +31,9 @@ export const schemaTestimonials = F.object({
         name: 'includeRating',
         initialValue: false,
       }),
+      F.field('animate', {
+        description: 'Include fade in-up animation for section contents.',
+      }),
     ]),
   ],
   preview: P.text('Testimonials'),
