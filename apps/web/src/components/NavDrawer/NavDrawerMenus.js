@@ -82,7 +82,7 @@ export const mobileExpertiseMenu = [
   },
   {
     _id: 'podcast',
-    condition: 'internal',
+    condition: 'external',
     url: '/podcast',
     ariaLabel: 'Leadpages Podcast',
     dataGtm: 'mobile-menu-link',
@@ -91,7 +91,7 @@ export const mobileExpertiseMenu = [
   },
   {
     _id: 'webinars',
-    condition: 'internal',
+    condition: 'external',
     url: '/webinars',
     ariaLabel: 'Leadpages Webinars',
     dataGtm: 'mobile-menu-link',
@@ -110,7 +110,7 @@ export const mobileExpertiseMenu = [
   {
     _id: 'hire-a-pro',
     condition: 'external',
-    url: 'https://business.fiverr.com/certified/partners/leadpages?utm_source=fiverr_certified&utm_medium=leadpages&utm_campaign=leadpages',
+    url: '/hire-a-pro',
     ariaLabel: 'Hire a Pro',
     rel: 'noopener',
     dataGtm: 'mobile-menu-link',
