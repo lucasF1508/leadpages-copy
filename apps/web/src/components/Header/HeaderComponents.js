@@ -135,7 +135,7 @@ export const DesktopMenuContainer = styled('div', {
       color: '$primary',
       borderBottom: '3px solid $colors$primary',
       textDecoration: 'none',
-      marginRight: '16px',
+      marginRight: '1.5rem',
       letterSpacing: '-0.1px',
       fontSize: '0.875rem',
     },
