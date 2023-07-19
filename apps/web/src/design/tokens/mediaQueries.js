@@ -16,6 +16,7 @@ export const customBreakpoints = {
   navigationMobile: 500,
   headlineSection: 767,
   navigationDesktop: 1000,
+  navigationDesktopAlt: 1085,
   sidebarTablet: 1180,
   //
   360: 360,

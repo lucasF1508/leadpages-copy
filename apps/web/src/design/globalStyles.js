@@ -122,6 +122,14 @@ const globalStyles = globalCss({
     zIndex: 150,
   },
 
+  '.focus-outline': {
+    '.drop-down-outer': {
+      '&:focus-within': {
+        opacity: '1 !important',
+      },
+    },
+  },
+
   '@media (min-width: 768px)': {
     '.lp-bar__iframe-wrapper': {
       position: 'relative',
