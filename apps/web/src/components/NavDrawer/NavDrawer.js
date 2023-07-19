@@ -507,7 +507,7 @@ export default function NavDrawer({
                 <MobileMenuLoginContainer>
                   <MobileMenuLogin>
                     <OutboundLink
-                      condition="internal"
+                      condition="external"
                       url="https://my.leadpages.com/login/"
                       aria-label="Leadpages login"
                       rel="noopener"
