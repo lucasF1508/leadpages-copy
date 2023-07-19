@@ -12,11 +12,11 @@ export const mobilePlatformMenu = [
   {
     _id: 'builder',
     condition: 'internal',
-    url: '/builder',
+    url: '/platform/landing-page-builder',
     dataGtm: 'mobile-menu-link',
     ariaLabel: 'Builder',
     hasSeparator: true,
-    label: 'Website & Landing Page Builder',
+    label: 'Landing Page Builder',
     isListItem: false,
   },
   {
@@ -32,11 +32,11 @@ export const mobilePlatformMenu = [
   {
     _id: 'leads',
     condition: 'internal',
-    url: '/leads',
+    url: '/lead-management',
     dataGtm: 'mobile-menu-link',
     ariaLabel: 'Leads',
     hasSeparator: true,
-    label: 'Leads',
+    label: 'Lead Management',
     isListItem: false,
   },
   {
@@ -52,11 +52,11 @@ export const mobilePlatformMenu = [
   {
     _id: 'templates',
     condition: 'internal',
-    url: '/platform/templates',
+    url: '/platform/landing-page-templates',
     dataGtm: 'mobile-menu-link',
     ariaLabel: 'Templates',
     hasSeparator: false,
-    label: 'Templates',
+    label: 'Landing Page Templates',
     isListItem: false,
   },
 ]
