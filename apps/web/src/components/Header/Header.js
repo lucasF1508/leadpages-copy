@@ -212,6 +212,7 @@ const Header = ({
                           data-gtm={dataGtm}
                           className={
                             _id === 'templates' &&
+                            !path.startsWith('/platform') &&
                             path.includes(_id) &&
                             'active-main-menu active'
                           }
@@ -245,7 +246,7 @@ const Header = ({
                                     label: _label,
                                   }) => {
                                     const Component =
-                                      condition === 'internal'
+                                      _condition === 'internal'
                                         ? StyledLink
                                         : OutboundLink
 
@@ -254,7 +255,12 @@ const Header = ({
                                         <LinkContainer>
                                           <Component
                                             condition={_condition}
-                                            url={_url}
+                                            url={
+                                              _condition === 'internal' && _url
+                                            }
+                                            href={
+                                              _condition === 'external' && _url
+                                            }
                                             aria-label={ariaLabel}
                                             rel={rel}
                                             data-gtm={_dataGtm}
