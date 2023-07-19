@@ -114,7 +114,7 @@ export const expertiseSubMenu = [
   },
   {
     _id: 'podcast',
-    condition: 'internal',
+    condition: 'external',
     url: '/podcast',
     ariaLabel: 'Podcast',
     dataGtm: 'desktop-menu-link',
@@ -122,7 +122,7 @@ export const expertiseSubMenu = [
   },
   {
     _id: 'webinars',
-    condition: 'internal',
+    condition: 'external',
     url: '/webinars',
     ariaLabel: 'Webinars',
     dataGtm: 'desktop-menu-link',
@@ -138,7 +138,7 @@ export const expertiseSubMenu = [
   },
   {
     _id: 'hire-a-pro',
-    condition: 'internal',
+    condition: 'external',
     url: '/hire-a-pro',
     ariaLabel: 'Hire a Pro',
     dataGtm: 'desktop-menu-link',

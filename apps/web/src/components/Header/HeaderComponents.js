@@ -246,7 +246,7 @@ export const StyledMainNav = styled('span', {
 
 export const StyledLink = styled(Link, mainNavStyles)
 
-export const OutboundLink = styled(Link, {
+export const OutboundLink = styled('a', {
   textDecoration: 'none',
   whiteSpace: 'nowrap',
   color: '$textAlt',
