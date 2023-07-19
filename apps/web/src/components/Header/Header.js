@@ -295,8 +295,7 @@ const Header = ({
               <LinksContainer>
                 {isStartPageHeader ? (
                   <StartPageLoginOutboundLink
-                    condition="external"
-                    url="https://my.leadpages.com/login/"
+                    href="https://my.leadpages.com/login/"
                     aria-label="Leadpages login"
                     rel="noopener"
                     target="_blank"
@@ -309,8 +308,7 @@ const Header = ({
                   </StartPageLoginOutboundLink>
                 ) : (
                   <OutboundLink
-                    condition="external"
-                    url="https://my.leadpages.com/login/"
+                    href="https://my.leadpages.com/login/"
                     aria-label="Leadpages login"
                     rel="noopener"
                     target="_blank"
@@ -346,8 +344,7 @@ const Header = ({
                     </StartPageTrialScrollingLink>
                   ) : (
                     <StartPageTrialOutboundLink
-                      condition="external"
-                      url="https://my.leadpages.com/order-leadpages/12LcHxUf6q14/t/d3yy2ARDnfEVTPU7"
+                      href="https://my.leadpages.com/order-leadpages/12LcHxUf6q14/t/d3yy2ARDnfEVTPU7"
                       aria-label="Try Start Plan Free"
                       data-gtm="mobile-menu-link"
                     >
@@ -388,8 +385,7 @@ const Header = ({
           <PricesWatchDemoContainer>
             <WatchDemoContainer>
               <OutboundButtonLink
-                condition="internal"
-                url="/demo"
+                href="/demo"
                 aria-label="Start Free Trial"
                 data-gtm="desktop-menu-link"
               >
