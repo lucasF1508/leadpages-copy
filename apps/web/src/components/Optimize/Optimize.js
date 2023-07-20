@@ -4,8 +4,8 @@ import Script from 'next/script'
 import OptimizeAntiFlicker from './OptimizeAntiFlicker'
 import OptimizeScript from './OptimizeScript'
 
-const controlSplitTestPaths = []
-const variantSplitTestPaths = []
+const controlSplitTestPaths = ['/', '']
+const variantSplitTestPaths = ['/home-v2']
 export const currentSplitTestPaths = [
   ...controlSplitTestPaths,
   ...variantSplitTestPaths,
@@ -13,8 +13,9 @@ export const currentSplitTestPaths = [
 
 const Optimize = () => {
   const { asPath } = useRouter()
-  const needsAntiFlicker = controlSplitTestPaths.indexOf(asPath) !== -1
-  const needsOptimize = currentSplitTestPaths.indexOf(asPath) !== -1
+  const [value] = asPath.split('?')
+  const needsAntiFlicker = controlSplitTestPaths.indexOf(value) !== -1
+  const needsOptimize = currentSplitTestPaths.indexOf(value) !== -1
 
   return (
     <>

@@ -1,5 +1,6 @@
 import { useSanityImage } from 'sanity-hooks'
 import { useRouter } from 'next/router'
+import { currentSplitTestPaths } from '@components/Optimize/Optimize'
 
 /* eslint-disable prefer-destructuring */
 const GTAG_TRACKING_ID = process.env.GTAG_TRACKING_ID
@@ -41,8 +42,12 @@ const useSeo = ({ seo, siteMeta, isVariant } = {}) => {
     modifyDate,
   } = seo || {}
   const image = !hasImageUrl && useSanityImage(seoImage || seoImageDefault)
+
   const robots =
-    VERCEL_ENV !== 'production' || isVariant ? 'noindex,nofollow' : ''
+    VERCEL_ENV !== 'production' ||
+    (isVariant && !currentSplitTestPaths.includes(asPath))
+      ? 'noindex,nofollow'
+      : ''
 
   return {
     GTM_CONTAINER_ID,
