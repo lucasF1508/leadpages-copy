@@ -1524,10 +1524,10 @@
     react-transition-group "1.x"
     tinycolor2 "^1.4.1"
 
-"@lp/lib-upgrade-modal@^0.8.11":
-  version "0.8.11"
-  resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/lib-upgrade-modal/-/@lp/lib-upgrade-modal-0.8.11.tgz#8860990ff8ce6cf171742a80f9063f953eeb944f"
-  integrity sha512-FNIz1BfSOVMiT2/H6DNE59qGsjTcftBdzfzbgU/Tvi5VjrL59ZfUnfgg9N5IhIDIwRrSvCzA1lDXngHvtTrbLA==
+"@lp/lib-upgrade-modal@^0.9.2":
+  version "0.9.2"
+  resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/lib-upgrade-modal/-/@lp/lib-upgrade-modal-0.9.2.tgz#ca58d99e6d9258dcde6296c91f3a068837a423e2"
+  integrity sha512-z5oOdhseyEjes7rHiHM4UCObqklHty4A2sFVQTIz+ICro3GEDeTSpr7L/JGVmBNn9NLt/z08UaAJSBUcgt/XWg==
 
 "@lp/slugify@^0.1.0":
   version "0.1.0"
@@ -1547,10 +1547,10 @@
     "@babel/runtime" "^7.11.2"
     react-infinite-scroll-hook "^3.0.0"
 
-"@lp/ui@^1.4.31":
-  version "1.5.3"
-  resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/ui/-/@lp/ui-1.5.3.tgz#926ba12ec312a87559cb614be47dfdd06ada33ad"
-  integrity sha512-xy7HgRqI9M1OXrw7NqVgt/KRqMdKffU18yPpGeFYmx8VdM3csvU7LwIvKXi8bryVpKlB6GasObs2ETqAdZIYyQ==
+"@lp/ui@^1.6.6":
+  version "1.6.6"
+  resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/ui/-/@lp/ui-1.6.6.tgz#20ed1b7028cb3d1a0bd7806d118ea37e3a72370f"
+  integrity sha512-VXNYs3rsqXrGh2Hm8QQV7xJBuxsKhoZNey/BQS7nb4OHfKTUJ7Qycn3oJPUNy9q/OCNnXLdkNo2KYRsKttkugA==
   dependencies:
     "@babel/runtime" "^7.10.4"
     "@lp/slugify" "^0.1.0"

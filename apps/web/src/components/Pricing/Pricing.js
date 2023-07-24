@@ -23,19 +23,11 @@ const PlanCompareWrapper = styled('div', {
   pt: '16px',
 })
 
-const Pricing = ({ selectPlanButtonText, planOrder, contactUsPlan }) => {
+const Pricing = ({ selectPlanButtonText, planOrder }) => {
   const { hasLoaded, planData } = useContext(AppContext)
   const { trialPlans, generalPlans } = planData || {}
 
   if (!trialPlans || !generalPlans) return null
-
-  const CONTACT_US_PLAN = {
-    contactLink: 'https://lp.leadpages.com/agency/',
-    headline: 'Need even more?',
-    subheadline:
-      'The Leadpages Advanced Plan helps you stay organized with a master account and 5 client accounts, each loaded with Pro Plan features, advanced integrations, and a 1-on-1 onboarding call.',
-    ...contactUsPlan,
-  }
 
   const [bundleData, setBundleData] = useState(null)
   const [couponData, setCouponData] = useState(null)
@@ -107,10 +99,11 @@ const Pricing = ({ selectPlanButtonText, planOrder, contactUsPlan }) => {
               flow={flow}
               defaultBillingFrequency={defaultBillingFrequency}
               previousPlan={previousPlan}
-              contactUsPlan={
-                flow === FLOWS.REACTIVATION ? null : CONTACT_US_PLAN
+              selectPlanButtonText={
+                flow === FLOWS.REACTIVATION
+                  ? 'Select Plan'
+                  : selectPlanButtonText || 'Start Free Trial'
               }
-              selectPlanButtonText={selectPlanButtonText || 'Start For Free'}
               planOrder={planOrder}
             />
           </PlanCompareWrapper>{' '}
