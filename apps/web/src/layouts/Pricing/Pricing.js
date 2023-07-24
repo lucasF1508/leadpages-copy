@@ -116,12 +116,6 @@ const Pricing = () => {
   const { planData, hasLoaded } = useContext(AppContext)
   const { trialPlans, generalPlans } = planData || {}
 
-  const CONTACT_US_PLAN = {
-    contactLink: 'https://lp.leadpages.com/agency/',
-    headline: 'Need even more?',
-    subheadline:
-      'The Leadpages Advanced Plan helps you stay organized with a master account and 5 client accounts, each loaded with Pro Plan features, advanced integrations, and a 1-on-1 onboarding call.',
-  }
   const images = {
     testimonialImageRonCollins,
   }
@@ -219,10 +213,9 @@ const Pricing = () => {
               flow={flow}
               defaultBillingFrequency={defaultBillingFrequency}
               previousPlan={previousPlan}
-              contactUsPlan={
-                flow === FLOWS.REACTIVATION ? null : CONTACT_US_PLAN
+              selectPlanButtonText={
+                flow === FLOWS.REACTIVATION ? 'Select Plan' : 'Start Free Trial'
               }
-              selectPlanButtonText="Start For Free"
             />
           </PlanCompareWrapper>{' '}
           <SpacerRow backgroundColor="$background" size="small" />

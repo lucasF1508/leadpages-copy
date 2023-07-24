@@ -216,7 +216,7 @@ const ComparePlans = () => {
                 bundle={bundleData}
                 headerOffset={HEADER_HEIGHT}
                 defaultBillingFrequency={defaultBillingFrequency}
-                selectPlanButtonText="Start For Free"
+                selectPlanButtonText="Start Free Trial"
               />
             </PlanCompareWrapper>
             <SpacerRow backgroundColor="$gray" size="small" />

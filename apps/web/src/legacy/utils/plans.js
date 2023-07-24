@@ -75,17 +75,7 @@ const getGroupedPlanData = (plans) => {
 
   return {
     generalPlans,
-    // Strip out 'advanced' plan
-    trialPlans: {
-      year: {
-        pro: trialPlans?.year?.pro,
-        standard: trialPlans?.year?.standard,
-      },
-      month: {
-        pro: trialPlans?.month?.pro,
-        standard: trialPlans?.month?.standard,
-      },
-    },
+    trialPlans,
     compareTrialPlans: trialPlans,
   }
 }

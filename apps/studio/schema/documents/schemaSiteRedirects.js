@@ -24,6 +24,8 @@ export const schemaSiteRedirects = {
               description:
                 'Redirect from this url. Only include the path. (eg: /ideas/name-of-post)',
               required: true,
+              validation: (Rule) =>
+                Rule.regex(/^\//).error("Source path must begin with '/'"),
             }),
             F.string({
               name: 'destination',
