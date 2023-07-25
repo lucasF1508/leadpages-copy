@@ -64,7 +64,6 @@ export const deskStructure = () =>
       S.documentTypeListItem('integration').title('Integrations').icon(BsPlug),
       S.divider(),
       S.documentTypeListItem('pageArchive').title('Archives'),
-      // S.documentTypeListItem('career').title('Careers'),
       S.documentTypeListItem('testimonial').title('Testimonials'),
       orderableDocumentListDeskItem({
         type: 'faq',
@@ -72,7 +71,6 @@ export const deskStructure = () =>
         icon: BsQuestionCircle,
       }),
       S.documentTypeListItem('feature').title('Features'),
-      // S.documentTypeListItem('alertBar').title('Alert Bars'),
       S.documentTypeListItem('cta').title('CTAs'),
       S.divider(),
       GB.singletonListItem('footer').icon(RiLayoutBottom2Fill),

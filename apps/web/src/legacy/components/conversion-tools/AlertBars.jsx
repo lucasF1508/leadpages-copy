@@ -1,40 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
-import { alertBarData } from '@legacy/data/alert-bar_data'
 
-const AlertBars = () => {
-  /* note: any page can disable alert bars by passing the prop `hideBar`
-  /* to the Layout.jsx component, which will override this component */
+const AlertBars = ({ alertBarData }) => {
+  const { asPath } = useRouter()
+  const alertBars =
+    alertBarData?.reduce((acc, curr) => {
+      const { placementRegex } = curr
+      const isMatch = new RegExp(placementRegex, 'i').test(asPath)
+      return isMatch ? [...acc, curr] : acc
+    }, []) || []
 
-  const [alertBarProps, setAlertBarProps] = useState(null)
-  const router = useRouter()
+  const { id } = alertBars[0] || {}
 
-  const currentPath = router?.asPath
-
-  const checkForAlertBar = () => {
-    const matchingAlertBar = alertBarData.find((bar) =>
-      new RegExp(bar?.placementRegex, 'i').test(currentPath)
-    )
-    return matchingAlertBar || undefined
-  }
-
-  useEffect(() => {
-    const alertBarToDisplay = checkForAlertBar()
-    setAlertBarProps(alertBarToDisplay?.data)
-  }, [router?.asPath])
-
-  return (
-    <>
-      {alertBarProps && (
-        <Script
-          src={alertBarProps.src}
-          data-bar={alertBarProps.id}
-          data-bar-domain={alertBarProps.domain}
-          strategy="lazyOnload"
-        />
-      )}
-    </>
+  return id ? (
+    <Script
+      src="https://embed.lpcontent.net/leadbars/current/embed.js"
+      data-bar={id}
+      data-bar-domain="lps.lpages.co"
+      strategy="lazyOnload"
+    />
+  ) : (
+    <></>
   )
 }
 

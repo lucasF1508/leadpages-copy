@@ -41,6 +41,12 @@ module.exports = {
       },
     }),
   ],
+  leadboxes: [
+    getQuery({
+      schemaType: 'leadboxes',
+      slice: 0,
+    }),
+  ],
   footer: [
     getQuery({
       schemaType: 'footer',

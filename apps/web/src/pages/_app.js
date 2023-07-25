@@ -8,6 +8,7 @@ import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
 import Embed from '@components/Embed'
 import Optimize from '@components/Optimize'
+import Leadboxes from '@components/Leadboxes'
 import { LazyMotion } from 'framer-motion'
 
 // Legacy
@@ -51,7 +52,7 @@ export default function App({
   // Promotions loading
   const [hasLoaded, setHasLoaded] = useState()
 
-  const { navigation, footer, globalHeaderFooter = {}, siteMeta } = global || {}
+  const { footer, globalHeaderFooter = {}, siteMeta, leadboxes } = global || {}
   const [previewData, setPreviewData] = useState(data)
   const [
     {
@@ -62,6 +63,8 @@ export default function App({
       ...pageData
     },
   ] = preview ? previewData : data
+
+  const { leadboxData, alertBarData } = leadboxes || {}
 
   // HTML codes
   const { globalHtmlFooter } = globalHeaderFooter
@@ -91,7 +94,11 @@ export default function App({
     >
       <MarketingThemeProvider>
         <ToastManager />
-        <Promotions onPromotionsLoaded={onPromotionsLoaded} />
+        <Promotions
+          onPromotionsLoaded={onPromotionsLoaded}
+          alertBarData={alertBarData}
+        />
+        <Leadboxes data={leadboxData} />
         {hideBar && (
           <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
         )}

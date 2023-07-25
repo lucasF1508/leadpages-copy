@@ -3,7 +3,7 @@ import slugify from 'slugify'
 
 const SidebarContext = React.createContext()
 
-export const getSidebarSlug = (heading = '') =>
+export const getSidebarSlug = (heading) =>
   heading
     ? slugify(heading, {
         lower: true,
