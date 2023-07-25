@@ -1,17 +1,28 @@
 import { BsBell as icon } from 'react-icons/bs'
-import { F, FS, G, P } from 'part:gearbox-schema-tool/schema-builder'
+import { F } from 'part:gearbox-schema-tool/schema-builder'
 
 export const schemaAlertBar = {
   icon,
   name: 'alertBar',
   title: 'Alert Bar',
   type: 'document',
-  groups: [...G.fieldGroupDefaults(), G.fieldGroup('seo', { title: 'SEO' })],
-  fieldsets: [FS.seo(), FS.fieldset('meta', { collapsed: false })],
   fields: [
-    ...F.fieldDefaults(),
-    ...G.group('content', [F.hero(), F.field('components', {})]),
-    ...G.group('seo', [F.seo()]),
+    F.string({ name: 'name', validation: (Rule) => Rule.required() }),
+    F.string({ name: 'id', validation: (Rule) => Rule.required() }),
+    F.string({
+      name: 'placementRegex',
+      description:
+        'This Alert Bar will be included on any paths matching this regex',
+    }),
   ],
-  preview: P.titleImage(),
+  preview: {
+    select: {
+      id: 'id',
+      name: 'name',
+    },
+    prepare: ({ id, name }) => ({
+      title: name,
+      subtitle: `AlertBar: ${id}`,
+    }),
+  },
 }

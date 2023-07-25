@@ -47,7 +47,7 @@ const $Banner = styled(Banner, {
   },
 })
 
-const Promotions = ({ onPromotionsLoaded = false }) => {
+const Promotions = ({ onPromotionsLoaded = false, alertBarData }) => {
   const { setHasLoaded } = useContext(AppContext)
 
   const [showBundle, setShowBundle] = useState(false)
@@ -173,7 +173,9 @@ const Promotions = ({ onPromotionsLoaded = false }) => {
           }
         />
       )}
-      {!(showCoupon || showBundle) && !isLoading && <AlertBars />}
+      {!(showCoupon || showBundle) && !isLoading && (
+        <AlertBars alertBarData={alertBarData} />
+      )}
     </>
   )
 }
