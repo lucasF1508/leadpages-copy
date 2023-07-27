@@ -22,7 +22,7 @@
     "@lp/chevron": "^3.0.3",
     "@lp/events-js": "^0.1.6",
     "@lp/leads": "3.2.21",
-    "@lp/lib-upgrade-modal": "^0.9.2",
+    "@lp/lib-upgrade-modal": "^0.9.3",
     "@lp/template-gallery": "^1.0.8",
     "@lp/ui": "^1.6.6",
     "@mailchimp/mailchimp_marketing": "3.0.78",
