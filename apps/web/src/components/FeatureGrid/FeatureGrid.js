@@ -6,10 +6,10 @@ import { IconCardsGrid } from '@components/Cards'
 
 const SectionContainer = styled('div', {
   position: 'relative',
-  p: '$6',
+  p: '$3',
 
-  '@>577': {
-    px: '$12',
+  '@>s': {
+    p: '$6',
   },
 
   variants: {

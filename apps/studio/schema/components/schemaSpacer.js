@@ -1,4 +1,4 @@
-import { F } from 'part:gearbox-schema-tool/schema-builder'
+import { F, G } from 'part:gearbox-schema-tool/schema-builder'
 import { BiSpaceBar as icon } from 'react-icons/bi'
 
 export const spacer = {
@@ -9,10 +9,22 @@ export const spacer = {
   fields: [
     F.number({
       name: 'multiplier',
+      title: 'Default Multiplier',
       initialValue: 1,
+      validation: (Rule) => Rule.precision(1).required(),
+      description:
+        'This component increases or decreases the vertical space between components at all responsive breakpoints by the multiplier.',
+    }),
+    F.number({
+      name: 'multiplierMedium',
+      validation: (Rule) => Rule.precision(1),
+      description: 'If set this will override the default for screens >= 960px',
+    }),
+    F.number({
+      name: 'multiplierLarge',
       validation: (Rule) => Rule.precision(1),
       description:
-        'This component increases or decrease the vertical space between components at each responsive breakpoint by the multiplier',
+        'If set this will override the default for screens >= 1280px',
     }),
   ],
   preview: {

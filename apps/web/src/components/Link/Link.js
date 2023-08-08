@@ -10,6 +10,8 @@ import { FiDownload as DownloadIcon } from '@react-icons/all-files/fi/FiDownload
 import { FiExternalLink as ExternalIcon } from '@react-icons/all-files/fi/FiExternalLink'
 import { FiMaximize2 as ModalIcon } from '@react-icons/all-files/fi/FiMaximize2'
 import { MdPlayArrow as VideoIcon } from '@react-icons/all-files/md/MdPlayArrow'
+import { useRouter } from 'next/router'
+import { scrollToHash } from '@hooks/useScrollToHash'
 
 export const $Link = styled(motion.a, linkTokens)
 
@@ -83,6 +85,9 @@ const Link = (
     (children instanceof String && children?.toString()) ||
     label
   const hasIcon = hasIconOrg && Icon
+  const { asPath } = useRouter()
+  const [path] = asPath.split(/[?#]/)
+  const _condition = path === url && hasHash ? 'hash' : condition
 
   if (disabled) {
     return (
@@ -104,7 +109,7 @@ const Link = (
     return null
   }
 
-  switch (condition) {
+  switch (_condition) {
     case 'internal':
       return (
         <NextLink href={`${url}${hasHash && hash ? `#${hash}` : ''}`} passHref>
@@ -113,6 +118,21 @@ const Link = (
             {hasIcon && <Icon linkStyle={props?.linkStyle} />}
           </$Link>
         </NextLink>
+      )
+    case 'hash':
+      return (
+        <$Link
+          href={`${hasHash && hash ? `#${hash}` : ''}`}
+          ref={ref}
+          {...props}
+          onClick={(e) => {
+            e.preventDefault()
+            scrollToHash(hash)
+          }}
+        >
+          {children || label}
+          {hasIcon && <Icon />}
+        </$Link>
       )
     case 'external':
     case 'download':

@@ -1,15 +1,16 @@
 import React from 'react'
 import { styled } from '@design'
-import NextLink from 'next/link'
 import NextImage from 'next/image'
 import Image from '@components/Image'
 // images
 import { FiChevronRight as Icon } from '@react-icons/all-files/fi/FiChevronRight'
 import Media, { hasMedia } from '@components/Media'
+import Link from '@components/Link'
 
-const CardIconHeading = styled('div', {
+const $CardIconHeading = styled('div', {
   type: 'cardHeading',
   mb: '$2',
+  color: '$text',
 
   defaultVariants: {
     itemsPerRow: 4,
@@ -21,13 +22,23 @@ const CardIconHeading = styled('div', {
       itemsPerRow: 3,
       asCards: true,
       css: {
-        fontSize: '18px',
+        fontSize: '16px',
         lineHeight: '28px',
-        textAlign: 'center',
         alignSelf: 'center',
         mb: '26px',
+        flex: 1,
+        textAlign: 'left',
 
-        '@<s': {
+        '@>390': {
+          fontSize: '18px',
+        },
+
+        '@>s': {
+          flex: 0,
+          textAlign: 'center',
+        },
+
+        '@<577': {
           marginLeft: '16px',
           mb: 0,
         },
@@ -55,7 +66,7 @@ const $CardIcon = styled('div', {
         jc: 'space-between',
         ta: 'center',
 
-        '@media (min-width: 576px) and (max-width: 768px)': {
+        '@media (min-width: 577px) and (max-width: 768px)': {
           f: '0 0 46%',
           mw: '46%',
         },
@@ -173,7 +184,7 @@ const $CardIcon = styled('div', {
           maxWidth: '23.3333%',
         },
 
-        [`&:hover ${CardIconHeading}`]: {
+        [`&:hover ${$CardIconHeading}`]: {
           color: '$primary',
         },
       },
@@ -182,6 +193,8 @@ const $CardIcon = styled('div', {
 })
 
 const $CardIconInner = styled('div', {
+  w: '100%',
+
   defaultVariants: {
     itemsPerRow: 4,
     asCards: false,
@@ -195,8 +208,11 @@ const $CardIconInner = styled('div', {
         flexDirection: 'row',
         ai: 'center',
 
-        '@>s': {
+        '@>577': {
           flexDirection: 'column',
+        },
+
+        '@>s': {
           marginBottom: '48px',
         },
       },
@@ -204,7 +220,7 @@ const $CardIconInner = styled('div', {
   ],
 })
 
-const ImageContainer = styled('div', {
+const $ImageContainer = styled('div', {
   h: '100%',
   w: '100%',
   maxHeight: '3rem',
@@ -230,7 +246,7 @@ const ImageContainer = styled('div', {
         height: '48px',
         mb: 0,
 
-        '@>s': {
+        '@>577': {
           marginBottom: '26px',
         },
       },
@@ -238,12 +254,7 @@ const ImageContainer = styled('div', {
   ],
 })
 
-const IconCardLink = styled('a', {
-  textDecoration: 'none',
-  c: '$primary',
-})
-
-const CTA = styled('span', {
+const $CTA = styled('span', {
   d: 'inline-flex',
   ai: 'center',
   c: '$primary',
@@ -273,7 +284,23 @@ const CTA = styled('span', {
       asCards: true,
       css: {
         mb: 0,
-        mt: '16px',
+        fontSize: '14px',
+        lineHeight: 1,
+        ai: 'center',
+        ta: 'right',
+
+        '@>390': {
+          fontSize: '16px',
+          ta: 'center',
+        },
+
+        '@>577': {
+          lineHeight: '30px',
+        },
+
+        '@>s': {
+          mt: '16px',
+        },
       },
     },
   ],
@@ -304,7 +331,7 @@ const $Details = styled('div', {
         lineHeight: '24px',
         textAlign: 'center',
 
-        '@>s': {
+        '@>577': {
           display: 'block',
         },
       },
@@ -312,8 +339,10 @@ const $Details = styled('div', {
   ],
 })
 
-const CardIcon = ({
-  align,
+const CardMedia = ({ media, image }) =>
+  hasMedia(media) ? <Media media={media} /> : <Image image={image} />
+
+const CardInner = ({
   asCards,
   title,
   icon,
@@ -324,59 +353,68 @@ const CardIcon = ({
   itemsPerRow,
   image,
   media,
-}) => {
-  const CardMedia = () =>
-    hasMedia(media) ? <Media media={media} /> : <Image image={image} />
+}) => (
+  <$CardIconInner asCards={asCards} itemsPerRow={itemsPerRow}>
+    {(icon || image || hasMedia(media)) && (
+      <$ImageContainer asCards={asCards} itemsPerRow={itemsPerRow}>
+        {icon ? (
+          <NextImage
+            src={icon}
+            alt={alt}
+            height={48}
+            width={48}
+            lazyBoundary="1000px"
+          />
+        ) : (
+          <CardMedia media={media} image={image} />
+        )}
+      </$ImageContainer>
+    )}
+    {title && (
+      <$CardIconHeading
+        aria-level={3}
+        role="heading"
+        asCards={asCards}
+        itemsPerRow={itemsPerRow}
+      >
+        {title}
+      </$CardIconHeading>
+    )}
+    <$Details className="details" asCards={asCards} itemsPerRow={itemsPerRow}>
+      {content || description}
+    </$Details>
+    {link && (
+      <$CTA asCards={asCards} itemsPerRow={itemsPerRow}>
+        {link.label}
+        &nbsp;
+        {link.hasLinkIcon && <Icon />}
+      </$CTA>
+    )}
+  </$CardIconInner>
+)
 
-  return (
-    <$CardIcon align={align} asCards={asCards} itemsPerRow={itemsPerRow}>
-      <$CardIconInner asCards={asCards} itemsPerRow={itemsPerRow}>
-        {(icon || image || hasMedia(media)) && (
-          <ImageContainer asCards={asCards} itemsPerRow={itemsPerRow}>
-            {icon ? (
-              <NextImage
-                src={icon}
-                alt={alt}
-                height={48}
-                width={48}
-                lazyBoundary="1000px"
-              />
-            ) : (
-              <CardMedia />
-            )}
-          </ImageContainer>
-        )}
-        {title && (
-          <CardIconHeading
-            aria-level={3}
-            role="heading"
-            asCards={asCards}
-            itemsPerRow={itemsPerRow}
-          >
-            {title}
-          </CardIconHeading>
-        )}
-        <$Details
-          className="details"
+const CardIcon = ({ align, asCards, link, itemsPerRow, ...props }) => (
+  <$CardIcon align={align} asCards={asCards} itemsPerRow={itemsPerRow}>
+    {link && link.url ? (
+      <Link {...link} css={{ width: '100%' }}>
+        <CardInner
+          align={align}
           asCards={asCards}
+          link={link}
           itemsPerRow={itemsPerRow}
-        >
-          {content || description}
-        </$Details>
-        {link?.condition && (
-          <NextLink href={link.url || link.route} passHref>
-            <IconCardLink alt={link.altText}>
-              <CTA asCards={asCards} itemsPerRow={itemsPerRow}>
-                {link.label}
-                &nbsp;
-                {link.hasLinkIcon && <Icon />}
-              </CTA>
-            </IconCardLink>
-          </NextLink>
-        )}
-      </$CardIconInner>
-    </$CardIcon>
-  )
-}
+          {...props}
+        />
+      </Link>
+    ) : (
+      <CardInner
+        align={align}
+        asCards={asCards}
+        link={link}
+        itemsPerRow={itemsPerRow}
+        {...props}
+      />
+    )}
+  </$CardIcon>
+)
 
 export default CardIcon
