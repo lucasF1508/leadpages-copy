@@ -1,9 +1,9 @@
 import React from 'react'
-import NextLink from 'next/link'
 import Image from '@components/Image'
 import { styled } from '@design'
 // images
 import rightArrowPurpleSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
+import Link from '@components/Link'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -112,7 +112,7 @@ const TextContainer = styled('div', {
   },
 })
 
-const StyledLink = styled(NextLink, {
+const StyledLink = styled(Link, {
   color: '$primary',
   zIndex: 4,
 })
@@ -151,28 +151,30 @@ const ThreeColumn = ({ listings, type, ctaLabel }) => (
           ({ _id, _key, image, title, excerpt, meta, path, link }) => (
             <FlexRow3 key={_id || _key}>
               <FlexRow3Container>
-                <StyledLink href={path || link.url}>
-                  <a aria-label={path || link.url}>
-                    <GalleryContainer>
-                      {image && (
-                        <BigTabImage>
-                          <ImageContainer image={image} alt={image?.altText} />
-                        </BigTabImage>
-                      )}
-                      <TextContainer type={type}>
-                        {title && <FlexRow3Heading>{title}</FlexRow3Heading>}
-                        {excerpt && <FlexRow3Copy>{excerpt}</FlexRow3Copy>}
-                        {meta && <FlexRow3Webinar>{meta}</FlexRow3Webinar>}
-                        <CTA>
-                          {link ? link.label : ctaLabel} &nbsp;
-                          <ArrowRightPurple
-                            src={rightArrowPurpleSVG.src}
-                            alt="purple right arrow"
-                          />{' '}
-                        </CTA>
-                      </TextContainer>
-                    </GalleryContainer>
-                  </a>
+                <StyledLink
+                  {...(path
+                    ? { url: path, condition: 'internal' }
+                    : link || {})}
+                >
+                  <GalleryContainer>
+                    {image && (
+                      <BigTabImage>
+                        <ImageContainer image={image} alt={image?.altText} />
+                      </BigTabImage>
+                    )}
+                    <TextContainer type={type}>
+                      {title && <FlexRow3Heading>{title}</FlexRow3Heading>}
+                      {excerpt && <FlexRow3Copy>{excerpt}</FlexRow3Copy>}
+                      {meta && <FlexRow3Webinar>{meta}</FlexRow3Webinar>}
+                      <CTA>
+                        {link?.label || ctaLabel} &nbsp;
+                        <ArrowRightPurple
+                          src={rightArrowPurpleSVG.src}
+                          alt="purple right arrow"
+                        />{' '}
+                      </CTA>
+                    </TextContainer>
+                  </GalleryContainer>
                 </StyledLink>
               </FlexRow3Container>
             </FlexRow3>
