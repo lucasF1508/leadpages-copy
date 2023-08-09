@@ -36,6 +36,14 @@ export const schemaFeatureGrid = F.object({
                 }),
               ],
             }),
+            F.boolean({
+              title: 'Hide Link label',
+              name: 'hideLabel',
+              group: 'link',
+              initialValue: false,
+              description:
+                'When toggled, the label on the card will be hidden. The card will still leverage the specified link.',
+            }),
           ],
           preview: P.titleImage({
             subtitle: 'content',

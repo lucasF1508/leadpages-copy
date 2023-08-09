@@ -353,6 +353,7 @@ const CardInner = ({
   itemsPerRow,
   image,
   media,
+  hideLabel,
 }) => (
   <$CardIconInner asCards={asCards} itemsPerRow={itemsPerRow}>
     {(icon || image || hasMedia(media)) && (
@@ -383,7 +384,7 @@ const CardInner = ({
     <$Details className="details" asCards={asCards} itemsPerRow={itemsPerRow}>
       {content || description}
     </$Details>
-    {link && (
+    {link && !hideLabel && (
       <$CTA asCards={asCards} itemsPerRow={itemsPerRow}>
         {link.label}
         &nbsp;
