@@ -42,7 +42,7 @@ export const schemaFeatureGrid = F.object({
               group: 'link',
               initialValue: false,
               description:
-                'When toggled, the label on the card will be hidden. The card will still leverage the specified link.',
+                'The label will default to the page name when left blank. \nWhen toggled, the label field contents [if present] or default label on the card will not be shown on the card. The card will still leverage the specified link.',
             }),
           ],
           preview: P.titleImage({
