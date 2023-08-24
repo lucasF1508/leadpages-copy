@@ -245,7 +245,7 @@ const HeroVideoBrowser = ({
             )}
           </>
         ) : (
-          <Media media={media} />
+          <Media media={media} priority />
         )}
       </VideoBrowserViewport>
       {link?.label && (
