@@ -226,7 +226,7 @@ const HeroVideoBrowser = ({
         </VideoBrowserChrome>
       )}
       <VideoBrowserViewport
-        backgroundColor={backgroundColor}
+        backgroundColor={displayBrowserContainer && backgroundColor}
         displayBrowserContainer={displayBrowserContainer}
       >
         {condition === 'video' ? (
