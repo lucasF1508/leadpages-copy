@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { styled } from '@design'
 import slugify from 'slugify'
 import { SidebarContext } from '@components/Sidebar/SidebarProvider'
+import { blocksToText } from '@lib/utils/blockContent'
 
 const Waypoint = dynamic(() => import('@components/Waypoint'))
 
@@ -14,6 +15,7 @@ const $Waypoint = styled(Waypoint, {
 
 const $StyledText = styled('p', {})
 const defaultRenderer = ['normal', 'h4', 'h5', 'h6', 'blockquote']
+const defaultIdStyles = ['headlineTitle', 'headlineSubtitle', 'h1', 'h2']
 
 const BlockRenderer = (props) => {
   const { pushActive, popActive } = useContext(SidebarContext) || {}
@@ -23,12 +25,12 @@ const BlockRenderer = (props) => {
   const { types } = defaultSerializers
   const asDefault = typeof props.index !== 'undefined' ? 'span' : 'p'
   const color = props.node.children[0].marks.includes('textAlt') && '$textAlt'
+  const text = blocksToText([props.node])
+  const displayId = displayIds && defaultIdStyles.includes(style)
 
-  const id =
-    displayIds &&
-    ['headlineTitle', 'headlineSubtitle', 'h1', 'h2'].includes(style)
-      ? slugify(props.children[0], { lower: true, remove: /[*+~.()'"!:@]/g })
-      : undefined
+  const id = displayId
+    ? slugify(text, { lower: true, remove: /[*+~.()'"!:@]/g })
+    : undefined
 
   if (
     defaultRenderer.includes(style) &&
