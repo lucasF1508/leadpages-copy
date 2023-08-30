@@ -6,9 +6,7 @@ import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
 import SiloNavigationCards from '@legacy/components/silos/SiloNavigationCards'
 import SiloSidebar from '@legacy/components/silos/SiloSidebar'
 import Link from 'next/link'
-// conversion tools
-import TemporaryLeadbox_ExitIntent from '@legacy/components/conversion-tools/LB_DownloadUltimateWebsiteWorkbook'
-import TemporaryLeadbox_Timed from '@legacy/components/conversion-tools/LB_GetInspiredWithLandingPageExamples'
+
 // styles
 import {
   ArticleLink,
@@ -36,8 +34,6 @@ import { pageRoutes, verbiage } from '@legacy/data/lead-generation-guide_data'
 
 const LeadGenerationLandingPageExamples = () => (
   <>
-    <TemporaryLeadbox_Timed />
-    <TemporaryLeadbox_ExitIntent />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

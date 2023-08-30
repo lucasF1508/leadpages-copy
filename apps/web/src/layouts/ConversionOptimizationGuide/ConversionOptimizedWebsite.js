@@ -6,8 +6,7 @@ import SiloDesktopMenu from '@legacy/components/silos/SiloDesktopMenu'
 import SiloMobileMenu from '@legacy/components/silos/SiloMobileMenu'
 import SiloNavigationCards from '@legacy/components/silos/SiloNavigationCards'
 import SiloSidebar from '@legacy/components/silos/SiloSidebar'
-// conversion tools
-import TemporaryLeadbox_ExitIntent from '@legacy/components/conversion-tools/LB_DownloadUltimateWebsiteWorkbook'
+
 // styles
 import {
   BodyContainer,
@@ -37,7 +36,6 @@ import image2 from '@legacy/assets/images/silos/conversion-optimization-guide/06
 
 const CreatingConversionOptimizedWebsite = () => (
   <>
-    <TemporaryLeadbox_ExitIntent />
     <SiloHeader
       title={verbiage.main.title}
       supertitle={verbiage.main.supertitle}

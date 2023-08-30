@@ -19,7 +19,7 @@ export const listItemSiteSettings = S.listItem()
         GB.singletonListItem('companyInfo').icon(MdBusiness),
         GB.singletonListItem('seoSite', { title: 'SEO' }).icon(BsGraphUp),
         GB.singletonListItem('leadboxes', {
-          title: 'Leadboxes & Alert Bars',
+          title: "Pop-up's & Alert Bars",
         }).icon(TbAppWindow),
         GB.singletonListItem('postSettings').icon(BsNewspaper),
         GB.singletonListItem('globalHeaderFooter', {
