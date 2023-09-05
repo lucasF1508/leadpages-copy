@@ -5,7 +5,6 @@ import Image from '@components/Image'
 import CustomerFeatureHeader from '@legacy/components/headers/CustomerFeatureHeader'
 import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/CustomerStoriesThumbnailRotator'
 import FlexRow from '@legacy/components/layout/FlexRow'
-import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
 // images
@@ -224,7 +223,6 @@ const OutboundLink = styled('a', {
 
 const FSCCustomerPage = () => (
   <>
-    <PodcastLeadbox />
     <CustomerFeatureHeader
       image={heroImage}
       imageAlt="Forest Stewardship Council"

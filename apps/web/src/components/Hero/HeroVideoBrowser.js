@@ -226,7 +226,7 @@ const HeroVideoBrowser = ({
         </VideoBrowserChrome>
       )}
       <VideoBrowserViewport
-        backgroundColor={backgroundColor}
+        backgroundColor={displayBrowserContainer && backgroundColor}
         displayBrowserContainer={displayBrowserContainer}
       >
         {condition === 'video' ? (
@@ -245,7 +245,7 @@ const HeroVideoBrowser = ({
             )}
           </>
         ) : (
-          <Media media={media} />
+          <Media media={media} priority />
         )}
       </VideoBrowserViewport>
       {link?.label && (

@@ -115,9 +115,7 @@ const SidebarPage = (props) => {
               {i !== 0 && <SidebarInnerSeparator />}
               <SidebarHeading>{sectionTitle}</SidebarHeading>
               {sectionLinks?.map(({ heading, title, isPageLink, link }) => {
-                const sectionHeading = isPageLink
-                  ? link?.label
-                  : title || heading
+                const sectionHeading = isPageLink ? link?.label : heading
                 const sectionSlug = getSidebarSlug(sectionHeading)
 
                 const isActive = active === sectionSlug || url === link?.url
@@ -133,7 +131,9 @@ const SidebarPage = (props) => {
                     duration={300}
                     offset={-100}
                   >
-                    <SidebarSubHeading>{sectionHeading}</SidebarSubHeading>
+                    <SidebarSubHeading>
+                      {title || sectionHeading}
+                    </SidebarSubHeading>
                   </StyledScrollLink>
                 ) : (
                   <$PageLink

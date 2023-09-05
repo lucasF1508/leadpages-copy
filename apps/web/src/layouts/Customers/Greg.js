@@ -5,7 +5,6 @@ import Image from '@components/Image'
 import CustomerFeatureHeader from '@legacy/components/headers/CustomerFeatureHeader'
 import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/CustomerStoriesThumbnailRotator'
 import FlexRow from '@legacy/components/layout/FlexRow'
-import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 import Wistia_CustomerFeatureVideo from '@legacy/components/videos/Wistia_CustomerFeatureVideo'
@@ -200,7 +199,6 @@ const OutboundLink = styled('a', {
 
 const GregCustomerPage = () => (
   <>
-    <PodcastLeadbox />
     <CustomerFeatureHeader
       image={heroImage}
       imageAlt="Leadpages customer case studies - Greg"

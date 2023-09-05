@@ -7,13 +7,18 @@ export const schemaLeadbox = {
   type: 'object',
   fields: [
     F.string({ name: 'name', validation: (Rule) => Rule.required() }),
-    F.string({ name: 'id', validation: (Rule) => Rule.required() }),
+    F.string({
+      name: 'id',
+      validation: (Rule) => Rule.required(),
+      title: 'ID',
+      description: 'Pop-up ID from Leadpages dashboard',
+    }),
     F.string({
       name: 'trigger',
       options: {
         list: [
           { title: 'Exit Intent', value: 'exitIntent' },
-          { title: 'Pop Up', value: 'popUp' },
+          { title: 'Timed', value: 'popUp' },
         ],
         layout: 'radio',
         direction: 'horizontal',
@@ -23,16 +28,18 @@ export const schemaLeadbox = {
     F.string({
       name: 'placementRegex',
       description:
-        'This Leadbox will be included on any paths matching this regex',
+        'This pop-up will be included on any paths matching this regex',
     }),
     F.number({
       name: 'delay',
       description: 'in seconds',
       initialValue: 0,
       validation: (Rule) => Rule.min(0).integer().positive(),
+      hidden: ({ parent }) => parent.trigger === 'exitIntent',
     }),
     F.number({
       name: 'views',
+      description: 'Trigger pop-up after this many page views',
       initialValue: 0,
       validation: (Rule) => Rule.min(0).integer().positive(),
     }),
@@ -50,7 +57,7 @@ export const schemaLeadbox = {
     },
     prepare: ({ id, name }) => ({
       title: name,
-      subtitle: `Leadbox: ${id}`,
+      subtitle: `ID: ${id}`,
     }),
   },
 }

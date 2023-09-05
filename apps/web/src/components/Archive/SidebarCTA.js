@@ -29,7 +29,7 @@ const SidebarCTA = ({ content: ctaContent }) => {
     ctaSubHeading: subHeading,
     ctaContent: content,
     ctaLink: link,
-  } = ctaContent
+  } = ctaContent || {}
 
   return (
     <$CTAContainer>

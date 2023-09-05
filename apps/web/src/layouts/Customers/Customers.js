@@ -4,7 +4,6 @@ import CustomerStoriesRotator from '@components/RotatorCustomer/CustomerRotator'
 import DoYourThing from '@legacy/components/customers/DoYourThing'
 import FlexRow from '@legacy/components/layout/FlexRow'
 import HeadlineSection from '@legacy/components/layout/HeadlineSection'
-import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
 import SpacerRow from '@legacy/components/SpacerRow'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 // images
@@ -12,7 +11,6 @@ import imageOne from '@legacy/assets/images/totems/This-is-the-lead-generation_7
 
 const CustomersPage = ({ customers }) => (
   <>
-    <PodcastLeadbox />
     <SpacerRow size="small" />
     <HeadlineSection
       title="Be inspired by someone like you"

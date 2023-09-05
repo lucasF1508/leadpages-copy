@@ -5,7 +5,6 @@ import Image from '@components/Image'
 import CustomerFeatureHeader from '@legacy/components/headers/CustomerFeatureHeader'
 import CustomerStoriesThumbnailRotator from '@legacy/components/rotators/CustomerStoriesThumbnailRotator'
 import FlexRow from '@legacy/components/layout/FlexRow'
-import PodcastLeadbox from '@legacy/components/conversion-tools/LB_LikeLearningFromRealPeoplePodcast'
 import SocialPosts from '@legacy/components/customers/SocialPosts'
 import TwoButtonCTA from '@legacy/components/customers/TwoButtonCTA'
 import QuoteComponent from '@legacy/components/customers/QuoteComponent'
@@ -221,7 +220,6 @@ const KateCustomerPage = () => {
 
   return (
     <>
-      <PodcastLeadbox />
       <CustomerFeatureHeader
         image={heroImage}
         imageAlt="Leadpages customer case studies - Kate"
