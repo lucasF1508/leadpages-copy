@@ -47,6 +47,14 @@ export const platformSubMenu = [
     label: 'Landing Page Templates',
     isListItem: false,
   },
+  {
+    _id: 'blogs',
+    condition: 'internal',
+    url: '/platform/blogs',
+    dataGtm: 'desktop-menu-link',
+    label: 'Blogs',
+    isListItem: false,
+  },
 ]
 
 export const useCasesSubMenu = [
