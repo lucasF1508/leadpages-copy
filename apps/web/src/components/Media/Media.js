@@ -37,15 +37,8 @@ const $MediaCaption = styled('div', {
   },
 })
 
-const Media = ({
-  className,
-  css: cssOrg,
-  ratio,
-  priority,
-  type,
-  media: {
-    condition,
-    caption,
+const Element = ({ condition, type, media, priority, ratio, ...props }) => {
+  const {
     advancedConfig,
     autoplay,
     loop,
@@ -53,13 +46,49 @@ const Media = ({
     playOnScroll,
     startInView,
     yoyo,
-    videoControls,
-    maxWidth,
-    align,
-    video,
     wistiaId,
-    ...media
-  } = {},
+    video,
+  } = media
+
+  switch (condition) {
+    case 'video':
+      return <Video type={type} video={video} {...media} {...props} />
+    case 'lottie':
+      return (
+        <Lottie
+          type={type}
+          advancedConfig={advancedConfig}
+          autoplay={autoplay}
+          loop={loop}
+          offset={offset}
+          playOnScroll={playOnScroll}
+          startInView={startInView}
+          yoyo={yoyo}
+          {...media}
+          {...props}
+        />
+      )
+    case 'wistia':
+      return <WistiaEmbed videoId={wistiaId} />
+    default:
+      return (
+        <Image
+          priority={priority}
+          type={type || (ratio ? 'fluid' : 'static')}
+          {...media}
+          {...props}
+        />
+      )
+  }
+}
+
+const Media = ({
+  className,
+  css: cssOrg,
+  ratio,
+  priority,
+  type,
+  media: { condition, caption, maxWidth, align, ...media } = {},
   ...props
 }) => {
   const alignMargin = {
@@ -73,47 +102,23 @@ const Media = ({
     ...cssOrg,
   }
 
-  const Element = () => {
-    switch (condition) {
-      case 'video':
-        return <Video type={type} video={video} {...media} {...props} />
-      case 'lottie':
-        return (
-          <Lottie
-            type={type}
-            advancedConfig={advancedConfig}
-            autoplay={autoplay}
-            loop={loop}
-            offset={offset}
-            playOnScroll={playOnScroll}
-            startInView={startInView}
-            yoyo={yoyo}
-            {...media}
-            {...props}
-          />
-        )
-      case 'wistia':
-        return <WistiaEmbed videoId={wistiaId} />
-      default:
-        return (
-          <Image
-            priority={priority}
-            type={type || (ratio ? 'fluid' : 'static')}
-            {...media}
-            {...props}
-          />
-        )
-    }
+  const elementProps = {
+    condition,
+    type,
+    priority,
+    ratio,
+    media,
+    ...props,
   }
 
   return (
     <$Media className={className} type={type} css={css}>
       {ratio ? (
         <RatioContainer ratio={ratio}>
-          <Element />
+          <Element {...elementProps} />
         </RatioContainer>
       ) : (
-        <Element />
+        <Element {...elementProps} />
       )}
 
       {caption && (
