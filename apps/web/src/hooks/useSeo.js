@@ -45,7 +45,9 @@ const useSeo = ({ seo, siteMeta, isVariant } = {}) => {
 
   const robots =
     VERCEL_ENV !== 'production' ||
-    (isVariant && !currentSplitTestPaths.includes(asPath))
+    (isVariant &&
+      !currentSplitTestPaths.includes(asPath) &&
+      asPath !== '/home-v2')
       ? 'noindex,nofollow'
       : ''
 
