@@ -6,8 +6,12 @@ export const $Breadcrumbs = styled('nav', {
   position: 'relative',
   z: '$aboveContent',
   w: '100%',
-  type: 'caption',
-  mb: '$4',
+  type: 'breadcrumbs',
+  mb: '$1_5',
+
+  '@>navigationDesktopAlt': {
+    mb: '$3',
+  },
 
   variants: {
     hidden: {
@@ -49,15 +53,11 @@ export const $Breadcrumb = styled('li', {
     display: 'block',
     height: '0.8em',
     width: '1px',
-    transform: 'translate(-2px, 3px)',
+    transform: 'translate(-3px, 1px)',
     c: '$darkGrayAlt',
-    fontSize: '15px',
   },
 
   '& > a': {
-    fontWeight: '$medium',
-    fontSize: '15px',
-
     '&:hover': {
       color: '$hover',
     },
@@ -72,7 +72,7 @@ export const $Breadcrumb = styled('li', {
     },
 
     '& > a': {
-      c: '$darkGrayAlt',
+      c: '$textAlt',
 
       '&:hover': {
         c: '$hover',

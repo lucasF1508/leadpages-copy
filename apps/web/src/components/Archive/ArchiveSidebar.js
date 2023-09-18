@@ -4,7 +4,7 @@ import Heading from '@components/Heading'
 import Image from '@components/Image'
 import Link from '@components/Link'
 import { IoMdTrendingUp as TrendingUp } from '@react-icons/all-files/io/IoMdTrendingUp'
-import SidebarCTA from '@components/Archive/SidebarCTA'
+import ArchiveSidebarCTA from '@components/Archive/ArchiveSidebarCTA'
 import { useRouter } from 'next/router'
 
 const $Heading = styled(Heading, {})
@@ -142,7 +142,7 @@ const $TrendingGrid = styled('div', {
 
 const ArchiveSidebar = ({ categories, settings = {} }) => {
   const router = useRouter()
-  const { trendingArticles = [], sidebarCta = {} } = settings
+  const { trendingArticles = [], cta = {} } = settings
 
   return (
     <$ArchiveSidebar>
@@ -155,7 +155,7 @@ const ArchiveSidebar = ({ categories, settings = {} }) => {
       >
         <$ArticleSearchInput placeholder="Search our blog..." />
       </$ArticleSearchForm>
-      <SidebarCTA content={sidebarCta} />
+      <ArchiveSidebarCTA content={cta} />
       {categories && (
         <$CategoriesGrid>
           <$Heading heading={'Categories'} tag="h4" />

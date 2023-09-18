@@ -1,6 +1,7 @@
 import React from 'react'
 import { AiOutlineAlignCenter as Icon } from 'react-icons/ai'
 import { TbListCheck } from 'react-icons/tb'
+import { MdFormatListNumbered } from 'react-icons/md'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 import styled from 'styled-components'
 
@@ -54,7 +55,21 @@ export const blockContent = {
       ],
       lists: [
         { title: 'Bullet', value: 'bullet' },
-        { title: 'Numbered', value: 'number' },
+        { title: 'Numbered (Plain)', value: 'number' },
+        {
+          title: 'Numbered (Branded)',
+          value: 'numberBranded',
+          blockEditor: {
+            icon: () => {
+              const $TbListCheck = styled(MdFormatListNumbered)`
+                > path[d^='M2'] {
+                  color: #603eff;
+                }
+              `
+              return <$TbListCheck />
+            },
+          },
+        },
         {
           title: 'Checks (Plain)',
           value: 'checkmarksPlain',

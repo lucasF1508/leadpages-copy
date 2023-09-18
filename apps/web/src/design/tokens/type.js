@@ -190,6 +190,11 @@ export const type = {
       '@>l': typeSizes['6xl'],
       lh: '$lineHeights$s',
     },
+    headingRelated: {
+      ...typeSizes['4xl'],
+      '@>m': typeSizes['5xl'],
+      lh: '$lineHeights$m',
+    },
     button: {
       ...typeSizes.base,
     },

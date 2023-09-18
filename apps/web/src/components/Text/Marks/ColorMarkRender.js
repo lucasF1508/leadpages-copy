@@ -17,6 +17,7 @@ const ColorMarkRender = (props) => {
       css = { '&, *': { c: '$secondary' } }
       break
     default:
+      css = { '&, *': { c: '$text' } }
       break
   }
 
