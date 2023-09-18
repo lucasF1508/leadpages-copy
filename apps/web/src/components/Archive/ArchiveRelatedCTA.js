@@ -22,7 +22,7 @@ const ArchiveRelatedCTA = ({ content: ctaContent }) => {
     ctaSubHeading: subHeading,
     ctaContent: content,
     links = [],
-  } = ctaContent
+  } = ctaContent || {}
 
   return (
     <$CTAContainer>
