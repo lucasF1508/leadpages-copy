@@ -1,8 +1,7 @@
 import React from 'react'
 import { styled } from '@design'
 import Pinion from '@components/Pinion'
-import Heading from '@components/Heading'
-import ArchiveSidebar from '@components/Archive/Sidebar'
+import ArchiveSidebar from '@components/Archive/ArchiveSidebar'
 import Link from '@components/Link'
 import { useRouter } from 'next/router'
 import { CardPostArchive } from '@components/Cards'
@@ -13,7 +12,7 @@ import {
   $CategoryHeading,
   $Heading,
 } from './Archive'
-import { $ArchiveGrid } from './ArchiveSingle'
+import { $ArchiveLayout } from './ArchiveSingle'
 
 const $ArchiveCardGrid = styled('div', {
   d: 'grid',
@@ -43,7 +42,7 @@ const ArchiveSearch = ({ categories, settings, hasFeaturedPost }) => {
 
   return (
     <Pinion component="archivePage">
-      <$ArchiveGrid>
+      <$ArchiveLayout isSidebar>
         <div>
           <$CategoryBreadcrumbs>
             <$CategoryHeading tag="h1" tagStyle="breadcrumbs">
@@ -81,7 +80,7 @@ const ArchiveSearch = ({ categories, settings, hasFeaturedPost }) => {
           )}
         </div>
         <ArchiveSidebar categories={categories} settings={settings} />
-      </$ArchiveGrid>
+      </$ArchiveLayout>
     </Pinion>
   )
 }

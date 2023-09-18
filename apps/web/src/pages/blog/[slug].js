@@ -21,7 +21,17 @@ export async function getStaticProps(context) {
     getDoc('post', {
       preview,
       params,
-      projections: `"settings": *[_type == 'postSettings'][0] {
+      projections: `
+      relatedArticles[]->{
+        ...,
+        image {
+          ...,
+          asset->
+        },
+        primaryCategory->,
+        publisher->
+      },
+      "settings": *[_type == 'postSettings'][0] {
         ...,
         relatedArticlesImage {
           ...,
@@ -31,6 +41,7 @@ export async function getStaticProps(context) {
           ...,
           asset->
         },
+        cta->,
         trendingArticles[]-> {
             ...,
             image {
@@ -43,6 +54,7 @@ export async function getStaticProps(context) {
     getAllDocs('categoryPost', {
       filters: ["!(_id in path('drafts.**'))"],
       projections: `${categoryPostCountQuery}`,
+      order: 'order(lower(title) asc)',
       hasPagination: false,
     }),
   ])

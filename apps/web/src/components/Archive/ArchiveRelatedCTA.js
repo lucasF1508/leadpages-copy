@@ -16,20 +16,13 @@ const $CTAContainer = styled('div', {
   gap: '$3',
 })
 
-const $CTAContent = styled('div', {
-  d: 'flex',
-  fd: ' column',
-  gap: '$1',
-  pb: '$3',
-})
-
-const SidebarCTA = ({ content: ctaContent }) => {
+const ArchiveRelatedCTA = ({ content: ctaContent }) => {
   const {
     ctaHeading: heading,
     ctaSubHeading: subHeading,
     ctaContent: content,
-    ctaLink: link,
-  } = ctaContent || {}
+    links = [],
+  } = ctaContent
 
   return (
     <$CTAContainer>
@@ -40,26 +33,32 @@ const SidebarCTA = ({ content: ctaContent }) => {
         tagStyle="h5"
         css={{ zIndex: '$content' }}
       />
-      <$CTAContent>
-        <Text
-          css={{
-            fontWeight: 600,
-            mb: 0,
-            fontSize: '16px',
-            letterSpacing: '0.65px',
-          }}
-        >
-          {subHeading || 'Try it Risk-Free today'}
-        </Text>
-        <Text css={{ type: 'input', mb: 0 }}>
-          {content ||
-            `Create web pages, explore our integrations, and see if we're the right
+      <Text
+        css={{
+          fontWeight: 600,
+          mb: 0,
+          fontSize: '16px',
+          letterSpacing: '0.65px',
+        }}
+      >
+        {subHeading || 'Try it Risk-Free today'}
+      </Text>
+      <Text css={{ type: 'input', mb: 0, mw: '23.25rem' }}>
+        {content ||
+          `Create web pages, explore our integrations, and see if we're the right
           fit for your business.`}
-        </Text>
-      </$CTAContent>
-      <Link {...link} linkStyle="buttonInverse" />
+      </Text>
+      {links[0] && (
+        <Link
+          {...links[0]}
+          linkStyle="buttonInverse"
+          icon="internal"
+          hasIcon
+          css={{ px: 0, mw: '12rem' }}
+        />
+      )}
     </$CTAContainer>
   )
 }
 
-export default SidebarCTA
+export default ArchiveRelatedCTA

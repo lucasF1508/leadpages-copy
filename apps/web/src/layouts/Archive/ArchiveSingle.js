@@ -1,82 +1,40 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { styled } from '@design'
 import Pinion from '@components/Pinion'
 import ArchiveBreadcrumbs from '@components/Breadcrumbs/ArchiveBreadcrumbs'
 import Heading from '@components/Heading'
 import Image from '@components/Image'
-import ArchiveSidebar from '@components/Archive/Sidebar'
-import Link from '@components/Link'
+import ArchiveRelated from '@components/Archive/ArchiveRelated'
 import Text from '@components/Text'
-import WhatsNext from '@components/Archive/WhatsNext'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import Squiggle from '@legacy/assets/images/global/squiggle.svg'
+import { m as motion, useScroll } from 'framer-motion'
+import CTA from '@components/Cta'
+import ArchiveAuthorBio from './ArchiveAuthorBio'
+import ArchivePublishDate from './ArchivePublishDate'
 
-const socialSharePlatforms = [
-  {
-    title: 'facebook',
-    icon: dynamic(() =>
-      import('@react-icons/all-files/fa/FaFacebookF').then(
-        ({ FaFacebookF }) => FaFacebookF
-      )
-    ),
-    url: (url, title) =>
-      `http://www.facebook.com/sharer.php?u=${url}&t=${encodeURIComponent(
-        title
-      )}`,
-  },
-  {
-    title: 'twitter',
-    icon: dynamic(() =>
-      import('@react-icons/all-files/fa/FaTwitter').then(
-        ({ FaTwitter }) => FaTwitter
-      )
-    ),
-    url: (url, title) =>
-      `https://twitter.com/intent/tweet?text=${title?.replace(
-        /\s/g,
-        '+'
-      )}&url=${url}&via=leadpages`,
-  },
-  {
-    title: 'linkedIn',
-    icon: dynamic(() =>
-      import('@react-icons/all-files/fa/FaLinkedinIn').then(
-        ({ FaLinkedinIn }) => FaLinkedinIn
-      )
-    ),
-    url: (url, title) =>
-      `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-        url
-      )}&title=${title?.replace(
-        /\s/g,
-        '+'
-      )}&source=https://www.leadpages.com/blog/`,
-  },
-]
+export const $ArchiveLayout = styled('div', {
+  d: 'flex',
+  ff: 'column',
 
-export const $ArchiveGrid = styled('div', {
-  d: 'grid',
+  mw: '$contentArchive',
+  mx: 'auto',
 
-  '@>sidebarTablet': {
-    gridTemplateColumns: 'auto $cols3',
-    gridColumnGap: '$4_5',
-  },
+  variants: {
+    isSidebar: {
+      true: {
+        d: 'grid',
+        mw: 'unset',
 
-  '@>l': {
-    gridColumnGap: '$sizes$cols1',
-  },
-})
+        '@>sidebarTablet': {
+          gridTemplateColumns: 'auto $cols3',
+          gridColumnGap: '$4_5',
+        },
 
-const $WhatsNextContainer = styled('div', {
-  paddingTop: '$3',
-  paddingBottom: '$3',
-})
-
-const $ArchiveLink = styled(Link, {
-  c: '$primary',
-
-  '&:hover': {
-    c: '$hover',
+        '@>l': {
+          gridColumnGap: '$sizes$cols1',
+        },
+      },
+    },
   },
 })
 
@@ -166,8 +124,49 @@ export const $ArchiveSocial = styled('div', {
   },
 })
 
+const $SquiggleContainer = styled('div', {
+  display: 'flex',
+  justifyContent: 'center',
+  my: '$9',
+})
+
+const $ScrollProgress = styled(motion.div, {
+  position: 'sticky',
+  w: '100%',
+  h: '0.375rem',
+  mb: '-0.375rem',
+  bc: '$lightGray3',
+  top: '$headerHeight$s',
+  zIndex: '$cover',
+})
+
+const $ScrollProgressInner = styled('div', {
+  position: 'relative',
+  h: '100%',
+  w: '100%',
+})
+
+const $ScrollProgressIndicator = styled(motion.div, {
+  bc: '$primary',
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  h: '100%',
+  transformOrigin: '0%',
+})
+
+const $CTA = styled('div', {
+  d: 'none',
+
+  '@>m': {
+    d: 'block',
+  },
+})
+
 const ArchiveSingle = ({
   _createdAt,
+  _updatedAt,
   publishedDate,
   content,
   image,
@@ -178,87 +177,89 @@ const ArchiveSingle = ({
   relatedArticles,
   settings,
 }) => {
-  const router = useRouter()
+  const [isScrolled, setIsScrolled] = useState(false)
+  const contentRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: contentRef,
+    offset: ['start', 'end end'],
+  })
+  const { cta } = settings || {}
+
+  useEffect(() => {
+    const unsubscribeScrollY = scrollYProgress.onChange((scrollValue) => {
+      setIsScrolled(scrollValue > 0)
+    })
+
+    return () => unsubscribeScrollY()
+  }, [])
 
   return (
-    <Pinion component="archivePage">
-      <$ArchiveSocial>
-        {socialSharePlatforms.map(
-          (platform) =>
-            platform.title && (
-              <Link
-                key={platform.title}
-                condition="external"
-                url={platform.url(
-                  process.env.NEXT_PUBLIC_URL + router.asPath,
-                  title
-                )}
-              >
-                <$ArchiveSocialIcon platform={platform.title}>
-                  <platform.icon />
-                </$ArchiveSocialIcon>
-              </Link>
-            )
-        )}
-      </$ArchiveSocial>
-      <$ArchiveGrid>
-        <div>
-          <ArchiveBreadcrumbs primaryCategory={primaryCategory} />
-          <Heading
-            heading={title}
-            tag="h1"
-            tagStyle="h2"
-            css={{ marginBottom: '$3' }}
-          />
-          {publisher && (
+    <>
+      <$ScrollProgress
+        animate={{ opacity: isScrolled ? 1 : 0, y: isScrolled ? 0 : '-100%' }}
+        transition={{ duration: 0.2 }}
+      >
+        <$ScrollProgressInner>
+          <$ScrollProgressIndicator style={{ scaleX: scrollYProgress }} />
+        </$ScrollProgressInner>
+      </$ScrollProgress>
+      <Pinion component="archivePage">
+        <$ArchiveLayout>
+          <div>
+            <ArchiveBreadcrumbs primaryCategory={primaryCategory} />
             <Heading
-              tag="h6"
+              heading={title}
+              tag="h1"
+              tagStyle="heroCustomer"
               css={{
-                c: '$darkGrayAlt',
-                type: 'base',
-                fontSize: '15px',
-                mb: '$3_5',
-                fontFamily: '$apercuPro',
-                fontWeight: 400,
+                lineHeight: '$lineHeights$m',
+                marginBottom: '$1_5',
+                fontWeight: 700,
+
+                '@>navigationDesktopAlt': { mb: '$3' },
               }}
-            >
-              Posted by{' '}
-              <$ArchiveLink
-                url={publisher.path || '/blog'}
-                label={publisher.title}
-                condition="internal"
+            />
+            <ArchivePublishDate
+              publisher={publisher}
+              updatedAt={_updatedAt}
+              publishedDate={publishedDate || _createdAt}
+            />
+            {publisher && (
+              <ArchiveAuthorBio publisher={publisher} isMobile={true} />
+            )}
+            <div ref={contentRef}>
+              <Image
+                image={image}
+                css={{
+                  mb: '$5',
+                  d: 'none',
+                  '@>navigationDesktopAlt': { d: 'block' },
+                }}
               />
-              <>&nbsp;&nbsp;</>|<>&nbsp;&nbsp;</>
-              {new Date(publishedDate || _createdAt).toLocaleDateString(
-                'en-US',
-                {
-                  month: 'short',
-                  day: '2-digit',
-                }
-              )}
-              ,{' '}
-              {new Date(publishedDate || _createdAt).toLocaleDateString(
-                'en-US',
-                {
-                  year: 'numeric',
-                }
-              )}
-            </Heading>
-          )}
-          <Image image={image} css={{ mb: '$5' }} />
-          <Text content={content} isPost={true} />
-          {relatedArticles && relatedArticles.length > 0 && (
-            <$WhatsNextContainer>
-              <WhatsNext
-                articles={relatedArticles}
-                image={settings.relatedArticlesImage}
-              />
-            </$WhatsNextContainer>
-          )}
-        </div>
-        <ArchiveSidebar categories={categories} settings={settings} />
-      </$ArchiveGrid>
-    </Pinion>
+              <Text content={content} isPost={true} />
+            </div>
+            {publisher && <ArchiveAuthorBio publisher={publisher} />}
+            <Image
+              image={image}
+              css={{ '@>navigationDesktopAlt': { d: 'none' } }}
+            />
+            <$SquiggleContainer>
+              <img src={Squiggle.src} alt="squiggle seperator" />
+            </$SquiggleContainer>
+            <ArchiveRelated
+              categories={categories}
+              settings={settings}
+              relatedArticles={relatedArticles}
+            />
+          </div>
+        </$ArchiveLayout>
+      </Pinion>
+      {cta && (
+        <$CTA>
+          <CTA {...cta} />
+        </$CTA>
+      )}
+    </>
   )
 }
 

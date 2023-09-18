@@ -19,6 +19,12 @@ export const schemaPostSettings = {
           'Adding an image to this field will update the default related articles image for all posts.',
       }),
     ]),
-    ...G.group('cta', [F.field('sidebarCta')]),
+    ...G.group('cta', [
+      F.reference('cta', {
+        name: 'cta',
+        title: 'Call to Action',
+        description: 'Leave blank to omit page call to action.',
+      }),
+    ]),
   ],
 }

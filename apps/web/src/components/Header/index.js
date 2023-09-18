@@ -40,4 +40,34 @@ import HeaderCarat from './HeaderCarat'
 export { HeaderCarat }
 export { platformSubMenu, useCasesSubMenu, templatesSubMenu, expertiseSubMenu }
 
+export {
+  HeaderContainer,
+  DesktopMenuContainer,
+  MenuContainer,
+  LoginSignUpContainer,
+  LoginContainer,
+  SignUpContainer,
+  PricesWatchDemoContainer,
+  WatchDemoContainer,
+  LinksContainer,
+  StyledButtonLink,
+  OutboundButtonLink,
+  StyledMainNav,
+  StyledLink,
+  OutboundLink,
+  StartPageTrialOutboundLink,
+  StartPageTrialScrollingLink,
+  StartPageLoginOutboundLink,
+  SignUpButton,
+  WatchDemoButton,
+  FullLogoContainer,
+  LogoIconContainer,
+  HeaderSubMenu,
+  DesktopSubMenuTextContainer,
+  SubMenuItem,
+  SubMenuList,
+  SubMenuListItem,
+  LinkContainer,
+  PlatformSubMenuLink,
+}
 export default Header

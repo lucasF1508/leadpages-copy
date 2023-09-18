@@ -30,7 +30,10 @@ export const schemaPost = {
       F.publishedDate(),
       F.category('publisher', { name: 'publisher', required: true }),
       F.category('categoryPost', { name: 'primaryCategory', required: true }),
-      F.multiReference('post', { name: 'relatedArticles', hidden: true }), // TODO: Fix. This currently pulls a different component than the inline version.
+      F.multiReference('post', {
+        name: 'relatedArticles',
+        validation: (Rule) => Rule.max(4),
+      }),
       F.multiReference('categoryPost', { name: 'secondaryCategories' }),
       F.field('tags', {
         name: 'tags',

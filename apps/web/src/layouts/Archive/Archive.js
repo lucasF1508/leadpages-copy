@@ -2,12 +2,12 @@ import React from 'react'
 import { styled } from '@design'
 import Pinion from '@components/Pinion'
 import Heading from '@components/Heading'
-import ArchiveSidebar from '@components/Archive/Sidebar'
+import ArchiveSidebar from '@components/Archive/ArchiveSidebar'
 import Link, { $Link } from '@components/Link'
 import { CardPostArchive } from '@components/Cards'
 import useFetchInfinite from '@hooks/useFetchInfinite'
 import { FiChevronDown as Icon } from '@react-icons/all-files/fi/FiChevronDown'
-import { $ArchiveGrid } from './ArchiveSingle'
+import { $ArchiveLayout } from './ArchiveSingle'
 
 const $ArchiveCardGrid = styled('div', {
   d: 'grid',
@@ -111,6 +111,10 @@ const $Icon = styled(Icon, {
   ml: '-$0_5',
 })
 
+const $ArchiveContents = styled('div', {
+  mb: '$4_5',
+})
+
 export const LoadMoreContainer = ({
   className,
   size,
@@ -144,8 +148,8 @@ const Archive = ({
 
   return (
     <Pinion component="archivePage">
-      <$ArchiveGrid>
-        <div>
+      <$ArchiveLayout isSidebar>
+        <$ArchiveContents>
           {category && (
             <$CategoryBreadcrumbs>
               <$CategoryHeading tag="h1" tagStyle="breadcrumbs">
@@ -178,9 +182,9 @@ const Archive = ({
             ))}
           </$ArchiveCardGrid>
           {!isReachingEnd && <LoadMoreContainer {...fetchInfiniteProps} />}
-        </div>
-        <ArchiveSidebar categories={categories} settings={settings} />
-      </$ArchiveGrid>
+        </$ArchiveContents>
+        <ArchiveSidebar categories={categories} settings={settings} isSidebar />
+      </$ArchiveLayout>
     </Pinion>
   )
 }
