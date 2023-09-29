@@ -25,9 +25,9 @@ const $CTAContent = styled('div', {
 
 const ArchiveSidebarCTA = ({ content: ctaContent }) => {
   const {
-    ctaHeading: heading,
-    ctaSubHeading: subHeading,
-    ctaContent: content,
+    title: heading,
+    overline: subHeading,
+    content,
     links = [],
   } = ctaContent || {}
 
@@ -35,7 +35,7 @@ const ArchiveSidebarCTA = ({ content: ctaContent }) => {
     <$CTAContainer>
       <Image image={SidebarCTAImage} type="fluid" />
       <Heading
-        heading={heading || 'Curious about leadpages?'}
+        heading={heading || 'Curious about Leadpages?'}
         tag="h4"
         tagStyle="h5"
         css={{ zIndex: '$content' }}
@@ -51,11 +51,19 @@ const ArchiveSidebarCTA = ({ content: ctaContent }) => {
         >
           {subHeading || 'Try it Risk-Free today'}
         </Text>
-        <Text css={{ type: 'input', mb: 0, mw: '23.25rem' }}>
-          {content ||
+        <Text
+          css={{
+            type: 'input',
+            mb: 0,
+            mw: '23.25rem',
+            '& > p': { c: '$white' },
+          }}
+          content={
+            content ||
             `Create web pages, explore our integrations, and see if we're the right
-          fit for your business.`}
-        </Text>
+          fit for your business.`
+          }
+        />
       </$CTAContent>
       {links[0] && (
         <Link
