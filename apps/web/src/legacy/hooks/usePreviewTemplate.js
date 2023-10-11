@@ -7,7 +7,8 @@ const usePreviewTemplate = () => {
   const [previewTemplate, setPreviewTemplate] = useState(null)
 
   const handlePreviewTemplate = (template) => {
-    const url = `${router.asPath}/preview/${template._meta.id}`
+    const basePath = router.asPath.includes('website-templates') ? '/website-templates' : '/templates';
+    const url = `${basePath}/preview/${template._meta.id}`
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({
       event: Events.templatePreviewed,

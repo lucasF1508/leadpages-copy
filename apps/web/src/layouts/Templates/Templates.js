@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { useRouter } from 'next/router'
 // Components
 import Gallery from '@legacy/components/templates/Gallery'
@@ -12,21 +12,49 @@ const LandingPageTemplates = () => {
   const { planData } = useContext(AppContext)
   const router = useRouter()
   const pathname = router.asPath
-  const templateIdUrl = pathname.split('preview/')[1]
+  const [currentURL, setCurrentURL] = useState(pathname)
+  const [previousURL, setPreviousURL] = useState('')
+  const previousURLRef = useRef(previousURL)
 
+  const templateIdUrl = pathname.split('preview/')[1]
   const [templateId, setTemplateId] = useState(templateIdUrl)
   const [previewTemplate, handlePreviewTemplate] = usePreviewTemplate()
+
+  const handleSetCurrentURL = (url) => setCurrentURL(url)
 
   useEffect(() => {
     setTemplateId(previewTemplate?._meta.id || templateIdUrl)
   }, [previewTemplate])
+
+  useEffect(() => {
+    if (templateId) {
+      setPreviousURL(window.location.pathname)
+    }
+  }, [templateId])
+
+  useEffect(() => {
+    previousURLRef.current = previousURL
+  }, [previousURL]);
+
+  useEffect(() => {
+    function handlePopState(event) {
+      if (previousURLRef.current.includes('preview')) {
+        setTemplateId(false)
+      }
+  }
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+        window.removeEventListener('popstate', handlePopState);
+    };
+  }, [])
 
   return (
     <>
       {templateId && (
         <Preview
           templateId={templateId}
-          galleryRoot="/templates"
+          galleryRoot={currentURL}
           previewTemplate={previewTemplate}
           planData={planData}
         />
@@ -35,6 +63,7 @@ const LandingPageTemplates = () => {
         kind={TemplateKind.LandingPage}
         handlePreviewTemplate={handlePreviewTemplate}
         isPreviewing={!!templateId}
+        handleSetCurrentURL={handleSetCurrentURL}
       />
     </>
   )

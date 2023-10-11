@@ -82,6 +82,7 @@ const Gallery = ({
   children,
   handlePreviewTemplate,
   isPreviewing,
+  handleSetCurrentURL,
 }) => {
   const { asPath } = useRouter()
 
@@ -99,16 +100,14 @@ const Gallery = ({
         <TabHeadingFlexbox>
           <Link href="/templates" passHref>
             <TabLink
-              className={asPath === '/templates' ? 'active-template' : ''}
+              className={asPath.includes('/templates') ? 'active-template' : ''}
             >
               Landing Pages
             </TabLink>
           </Link>
           <Link href="/website-templates" passHref>
             <TabLink
-              className={
-                asPath === '/website-templates' ? 'active-template' : ''
-              }
+              className={asPath.includes('/website-templates') ? 'active-template' : ''}
             >
               Websites
             </TabLink>
@@ -119,6 +118,7 @@ const Gallery = ({
         kind={kind}
         onPreviewTemplate={handlePreviewTemplate}
         isPreviewing={isPreviewing}
+        handleSetCurrentURL={handleSetCurrentURL}
       />
       <ReadyToGrow zIndex={1200} />
     </>
@@ -134,6 +134,7 @@ Gallery.propTypes = {
   handlePreviewTemplate: PropTypes.func.isRequired,
   children: PropTypes.node,
   isPreviewing: PropTypes.bool.isRequired,
+  handleSetCurrentURL: PropTypes.func.isRequired,
 }
 
 Gallery.defaultProps = { hideBar: false, SEO: null, children: null }

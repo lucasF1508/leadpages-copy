@@ -177,16 +177,67 @@ const isAbove1024Breakpoint = () => {
   }
 }
 
-const Templates = ({ kind, onPreviewTemplate, isPreviewing }) => {
+const getQueryStringFromPath = (url) => url.split('?').slice(1).join('')
+
+const Templates = ({
+  kind,
+  onPreviewTemplate,
+  isPreviewing,
+  handleSetCurrentURL,
+}) => {
   // Template state
+  const router = useRouter()
+  const currentPath = router.asPath // browser path plus url params
+  const queryString = useRef(getQueryStringFromPath(currentPath))
+  const isFirstLoad = useRef(true)
+
+  const onUpdateQueryString = (urlParams) => {
+    const prevPath = `${window.location.pathname}?${queryString.current}`
+    const newPath = `${window.location.pathname}?${urlParams}`
+
+    if (isFirstLoad.current && urlParams === 'order_by=-release_date') {
+      return
+    }
+    isFirstLoad.current = false
+
+    if (isPreviewing) return
+
+    if (prevPath !== newPath) {
+      queryString.current = urlParams
+      window.history.pushState(
+        { ...window.history.state, as: newPath },
+        '',
+        newPath
+      )
+      handleSetCurrentURL(newPath)
+    }
+  }
+
   const [state, actions] = useTemplateState({
     kind,
     baseUrl: templatesBaseUrl,
     baseFilters,
     hideSidebar: false,
     tracker,
+    onUpdateQueryString,
+    queryString: queryString.current,
   })
-  //
+
+  const augmentedActions = {
+    ...actions,
+    onUpdateCategory: (input) => {
+      actions.onUpdateCategory(input)
+    },
+    onUpdateSearchInput: (input) => {
+      actions.onUpdateSearchInput(input)
+    },
+    onUpdateTag: (input) => {
+      actions.onUpdateTag(input)
+    },
+    onUpdateOrderBy: (input) => {
+      actions.onUpdateOrderBy(input)
+    },
+  }
 
   const above1024Breakpoint = isAbove1024Breakpoint()
   const containerRef = useRef()
@@ -343,15 +394,15 @@ const Templates = ({ kind, onPreviewTemplate, isPreviewing }) => {
 
   useEffect(() => {
     if (!state.ui.hasLoaded) {
-      actions.init()
+      augmentedActions.init()
     }
-  }, [state.ui.hasLoaded, actions])
+  }, [state.ui.hasLoaded, augmentedActions])
 
   const hasCheckedRef = useRef(false)
   useEffect(() => {
     if (!hasCheckedRef.current) {
       if (window.innerWidth <= 1024 && state.ui.sidebarOpen) {
-        actions.onToggleSidebar()
+        augmentedActions.onToggleSidebar()
 
         // Responsive sidebar is closed by default
         // Allow a moment for state to propagate prior to mounting it
@@ -362,10 +413,10 @@ const Templates = ({ kind, onPreviewTemplate, isPreviewing }) => {
         hasCheckedRef.current = true
       }
     }
-  }, [actions, state.ui.sidebarOpen])
+  }, [augmentedActions, state.ui.sidebarOpen])
 
   // Needs a gigantic scroll threshold to ensure sidebar does not become overlayed onto footer
-  const infiniteRef = useInfiniteScrollRef(state, actions, 4000)
+  const infiniteRef = useInfiniteScrollRef(state, augmentedActions, 4000)
 
   // eslint-disable-next-line no-param-reassign
   state.getScrollTopRef.current = () =>
@@ -381,11 +432,12 @@ const Templates = ({ kind, onPreviewTemplate, isPreviewing }) => {
     })
   }
 
-  const { asPath } = useRouter()
-  const activeWebsiteLink =
-    asPath === '/website-templates' ? ' active-template' : ''
-  const activeLandingPageLink =
-    asPath === '/templates' ? ' active-template' : ''
+  const activeWebsiteLink = currentPath.includes('/website-templates')
+    ? ' active-template'
+    : ''
+  const activeLandingPageLink = currentPath.includes('/templates')
+    ? ' active-template'
+    : ''
 
   return (
     <div ref={containerRef}>
@@ -432,7 +484,7 @@ const Templates = ({ kind, onPreviewTemplate, isPreviewing }) => {
             {(above1024Breakpoint || hasCheckedRef.current) && (
               <ResponsiveSidebar
                 state={state}
-                actions={actions}
+                actions={augmentedActions}
                 kind={kind}
                 drawerPaperRef={drawerPaperRef}
                 sidebarButtonRef={sidebarButtonRef}
@@ -457,18 +509,18 @@ const Templates = ({ kind, onPreviewTemplate, isPreviewing }) => {
               >
                 <SearchAndResults
                   inputRef={state.searchInputRef}
-                  onChange={actions.onUpdateSearchInput}
+                  onChange={augmentedActions.onUpdateSearchInput}
                   numTemplates={state.templates.length}
-                  onClearFilters={actions.onClearFilters}
-                  onClearInput={actions.onClearSearchInput}
+                  onClearFilters={augmentedActions.onClearFilters}
+                  onClearInput={augmentedActions.onClearSearchInput}
                   filter={state.ui.selectedTaxon?.label}
                   disableSearch={!state.ui.hasLoaded}
-                  onToggleSidebar={actions.onToggleSidebar}
+                  onToggleSidebar={augmentedActions.onToggleSidebar}
                 />
               </Box>
               <Gallery infiniteRef={infiniteRef}>
                 {state.ui.hasLoaded && state.templates.length < 1 && (
-                  <NoResults clearSearch={actions.onResetSearch}>
+                  <NoResults clearSearch={augmentedActions.onResetSearch}>
                     <VSTypography variant="h3" component="h2">
                       No results
                     </VSTypography>
@@ -505,6 +557,7 @@ Templates.propTypes = {
     .isRequired,
   onPreviewTemplate: PropTypes.func.isRequired,
   isPreviewing: PropTypes.bool.isRequired,
+  handleSetCurrentURL: PropTypes.func.isRequired,
 }
 
 export default Templates
