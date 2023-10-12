@@ -3,7 +3,7 @@
 
 # Rack & Pinion - Next.js app
 
-A custom CMS app built with [Sanity](https://www.sanity.io/), [Next JS](https://nextjs.org/docs/) and [Stitches](https://stitches.dev/)!!
+A custom CMS app built with [Sanity](https://www.sanity.io/), [Next JS](https://nextjs.org/docs/) and [Stitches](https://stitches.dev/).
 
 ## Requirements
 
