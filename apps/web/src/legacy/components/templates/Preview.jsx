@@ -25,6 +25,9 @@ const Preview = ({
     async function fetchPreviewTemplate(id) {
       try {
         const template = await mandrelApi.getTemplateById(id)
+        // If we could pass the screenshot to the SEO component from here,
+        // we could avoid an extra call to the Mandrel API
+        // const templateScreenshot = template.template.thumbnailUrlWebp
         setSelectedTemplate(template)
       } catch {
         router.push(galleryRoot)
