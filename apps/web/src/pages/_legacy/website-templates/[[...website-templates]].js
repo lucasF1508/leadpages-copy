@@ -2,6 +2,8 @@ import React from 'react'
 import WebsiteTemplates from '@layouts/WebsiteTemplates'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
 import { runQueries } from '@lib'
+import { MandrelApi } from '@lp/template-gallery/dist/mandrel-api'
+import { templatesBaseUrl } from '@legacy/constants/templates'
 
 const WebsiteTemplatesPage = (props) => <WebsiteTemplates {...props} />
 
@@ -21,6 +23,8 @@ const previewSeo = {
   seoImage: 'https://static.leadpages.com/images/og/og-templates.jpg',
 }
 
+const mandrelApi = new MandrelApi({ baseUrl: templatesBaseUrl})
+
 export async function getStaticProps(context) {
   const { preview = false, params } = context
   const { 'website-templates': websiteTemplates = [] } = params
@@ -33,6 +37,14 @@ export async function getStaticProps(context) {
   const rawPlanData = await getPlanData()
   const planData = getGroupedPlanData(rawPlanData)
   const options = { hideBar: true }
+
+  if (isPreview) {
+    const template = await mandrelApi.getTemplateById(templateId);
+    const templateScreenshot = template.template.thumbnailUrlWebp;
+    if (templateScreenshot) {
+      previewSeo.seoImage = templateScreenshot;
+    }
+  }
 
   return {
     props: {
