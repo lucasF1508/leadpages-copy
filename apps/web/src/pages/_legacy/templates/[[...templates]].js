@@ -43,6 +43,12 @@ export async function getStaticProps(context) {
     if (templateScreenshot) {
       previewSeo.seoImage = templateScreenshot;
     }
+    // Build the SEO title from the template name
+    const templateName = template.template.name;
+    previewSeo.seoTitle = `${templateName} | Landing page template by Leadpages`;
+    // Build the SEO description from the template categories
+    let templateCategories = template.template.categories.join(', ');
+    previewSeo.seoDescription = `Get more leads with this ${templateCategories} landing page template. Designed by pros and easy to customize, start for free today.`;
   }
 
   return {

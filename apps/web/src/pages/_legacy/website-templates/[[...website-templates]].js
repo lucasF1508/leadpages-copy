@@ -44,6 +44,12 @@ export async function getStaticProps(context) {
     if (templateScreenshot) {
       previewSeo.seoImage = templateScreenshot;
     }
+    // Build the SEO title from the template name
+    const templateName = template.template.name;
+    previewSeo.seoTitle = `${templateName} | Website template by Leadpages`;
+    // Build the SEO description from the template categories
+    let templateCategories = template.template.categories.join(', ');
+    previewSeo.seoDescription = `Grow your business faster with this ${templateCategories} website template. Use our drag-and-drop builder to customize your own website.`;
   }
 
   return {
