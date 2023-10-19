@@ -46,10 +46,15 @@ export async function getStaticProps(context) {
     }
     // Build the SEO title from the template name
     const templateName = template.template.name;
-    previewSeo.seoTitle = `${templateName} | Website template by Leadpages`;
+    previewSeo.seoTitle = `${templateName}: Conversion-Focused Website Template`;
     // Build the SEO description from the template categories
-    let templateCategories = template.template.categories.join(', ');
-    previewSeo.seoDescription = `Grow your business faster with this ${templateCategories} website template. Use our drag-and-drop builder to customize your own website.`;
+    let templateCategories = template.template.categories;
+    if (templateCategories.length > 1) {
+      // When there are multiple categories, add an "and" before the last one
+      templateCategories[templateCategories.length - 1] = `and ${templateCategories[templateCategories.length - 1]}`;
+    }
+    templateCategories = templateCategories.join(', ');
+    previewSeo.seoDescription = `Grow your business faster with this ${templateCategories} website template. Designed by pros, SEO-optimized, and easy to customize.`;
   }
 
   return {

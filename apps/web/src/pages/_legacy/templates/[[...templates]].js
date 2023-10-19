@@ -45,10 +45,15 @@ export async function getStaticProps(context) {
     }
     // Build the SEO title from the template name
     const templateName = template.template.name;
-    previewSeo.seoTitle = `${templateName} | Landing page template by Leadpages`;
+    previewSeo.seoTitle = `${templateName}: High-Converting Landing Page Template`;
     // Build the SEO description from the template categories
-    let templateCategories = template.template.categories.join(', ');
-    previewSeo.seoDescription = `Get more leads with this ${templateCategories} landing page template. Designed by pros and easy to customize, start for free today.`;
+    let templateCategories = template.template.categories;
+    if (templateCategories.length > 1) {
+      // When there are multiple categories, add an "and" before the last one
+      templateCategories[templateCategories.length - 1] = `and ${templateCategories[templateCategories.length - 1]}`;
+    }
+    templateCategories = templateCategories.join(', ');
+    previewSeo.seoDescription = `3x your leads with this ${templateCategories} landing page template. Designed by pros, SEO-optimized, and easy to customize.`;
   }
 
   return {
