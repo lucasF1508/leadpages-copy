@@ -177,6 +177,7 @@ const moduleExports = withBundleAnalyzer({
         )
       }
     }
+
     return {
       afterFiles: [
         {

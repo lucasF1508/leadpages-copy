@@ -7,8 +7,8 @@ import {
   BsQuestionCircle,
   BsPlug,
   BsCollection,
-  BsPatchCheck,
 } from 'react-icons/bs'
+import { MdCallSplit } from 'react-icons/md'
 import { AiOutlineFileText, AiOutlineRetweet } from 'react-icons/ai'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import { RiLayoutBottom2Fill } from 'react-icons/ri'
@@ -42,15 +42,43 @@ export const deskStructure = () =>
         )
         .icon(AiOutlineFileText),
       S.documentTypeListItem('post'),
+      S.listItem()
+        .title('A/B Tests')
+        .child(
+          S.list()
+            .title('A/B Tests')
+            .items([
+              S.listItem()
+                .title('Draft Tests')
+                .child(
+                  S.documentList()
+                    .title('Draft Tests')
+                    .filter(
+                      '_type == "experiments" && completed == false && (_id in path("drafts.**"))'
+                    )
+                ),
+              S.listItem()
+                .title('Active Tests')
+                .child(
+                  S.documentList()
+                    .title('Active Tests')
+                    .filter(
+                      '_type == "experiments" && completed == false && !(_id in path("drafts.**"))'
+                    )
+                ),
+              S.listItem()
+                .title('Completed Tests')
+                .child(
+                  S.documentList()
+                    .title('Completed Tests')
+                    .filter(
+                      '_type == "experiments" && completed == true && (_id in path("drafts.**"))'
+                    )
+                ),
+            ])
+        )
+        .icon(MdCallSplit),
       S.documentTypeListItem('publisher').title('Authors'),
-      // S.listItem()
-      //   .title('Posts')
-      //   .child(
-      //     S.documentList()
-      //       .title('Posts')
-      //       .filter('_type == "post"')
-      //       .defaultOrdering([{ field: 'publishedDate', direction: 'desc' }])
-      //   ),
       orderableDocumentListDeskItem({
         type: 'customer',
         title: 'Customers',
