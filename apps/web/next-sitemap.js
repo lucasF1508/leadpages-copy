@@ -1,25 +1,17 @@
-const getClient = require('client')
-
-const client = getClient()
 const siteUrl = process.env.NEXT_PUBLIC_URL || 'https://www.leadpages.com'
 
-// Blog paths
-const blogPaths = async () => {
-  const blogPosts = await client.fetch(
-    `*[_type == 'post' && redirectToLegacy == true]`
-  )
+const fs = require('fs')
 
-  return blogPosts.map(({ publishedDate, path }) => ({
-    loc: path,
-    changefreq: 'weekly',
-    priority: 0.7,
-    lastmod: new Date(publishedDate).toISOString(),
-  }))
+let experiments = []
+
+if (fs.existsSync('./public/indices/experiments.json')) {
+  // eslint-disable-next-line global-require
+  experiments = require('./public/indices/experiments.json')
 }
 
-const additionalPaths = [
-  // ...blogPaths()
-]
+const variantPaths = experiments
+  .map(({ variants }) => variants.map(({ path }) => path))
+  .flat()
 
 module.exports = {
   siteUrl,
@@ -38,9 +30,16 @@ module.exports = {
     '/website-templates/preview',
     '/home/*',
     '/home-*',
+    '/blog/*',
+    '/sitemap',
+    '/sitemap/*',
+    ...variantPaths,
   ],
-  // additionalPaths,
   robotsTxtOptions: {
+    additionalSitemaps: [
+      `${siteUrl}/sitemap/blog/index.xml`,
+      `${siteUrl}/sitemap/templates/index.xml`,
+    ],
     policies: [
       {
         userAgent: '*',
