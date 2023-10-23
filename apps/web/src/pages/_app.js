@@ -15,6 +15,7 @@ import { LazyMotion } from 'framer-motion'
 // Legacy
 import ToastManager from '@legacy/components/toasts/ToastManager'
 import Promotions from '@legacy/components/promotions/Promotions'
+import useGTag from '@hooks/useGTag'
 
 const PreviewBadge = dynamic(() => import('@hooks/usePreview'))
 const LayoutContainer = dynamic(() => import('@components/LayoutContainer'))
@@ -46,6 +47,7 @@ export default function App({
 }) {
   globalStyles()
   useGoogleTagManager()
+  useGTag()
   useFacebookPixel()
   useResizeEnd()
   useFocusOutlineOnTab()

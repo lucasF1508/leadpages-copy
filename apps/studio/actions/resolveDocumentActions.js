@@ -1,6 +1,7 @@
 import defaultResolve, {
   PublishAction,
   UnpublishAction,
+  DeleteAction,
 } from 'part:@sanity/base/document-actions'
 import PublishActionHook from './PublishActionHook'
 import {
@@ -10,6 +11,7 @@ import {
   unpublishFeed,
 } from './feedActions'
 import { pageMergeAction } from './pageMerge'
+import { selectWinnerAction } from './selectWinner'
 
 const resolveDocumentActions = (props) => {
   const maybePageMergeAction = [
@@ -27,6 +29,10 @@ const resolveDocumentActions = (props) => {
     ? pageMergeAction
     : undefined
 
+  const maybeWinnerAction = ['experiments'].includes(props.type)
+    ? selectWinnerAction
+    : undefined
+
   switch (props.type) {
     case 'feed':
       return [
@@ -42,12 +48,23 @@ const resolveDocumentActions = (props) => {
     default:
       return [
         ...defaultResolve(props).map((Action) => {
+          const { type, published } = props
+          const isPublishedExperiment = type === 'experiments' && published
+
+          if (Action === DeleteAction && isPublishedExperiment) {
+            return null
+          }
+          if (Action === UnpublishAction && isPublishedExperiment) {
+            return null
+          }
           if (Action === PublishAction) {
             return PublishActionHook
           }
+
           return Action
         }),
         maybePageMergeAction,
+        maybeWinnerAction,
       ].filter(Boolean)
   }
 }

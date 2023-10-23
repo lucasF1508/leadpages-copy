@@ -5,8 +5,9 @@ import { setPathOnPublish, setSlugOnPublish } from './publish'
 const PublishActionHook = (props) => {
   const { onHandle } = PublishAction(props)
   const { patch } = useDocumentOperation(props?.id, props?.type)
+  const { draft, type } = props
 
-  return {
+  const actions = {
     ...PublishAction(props),
     onHandle: async () => {
       const slug = setSlugOnPublish(patch, props)
@@ -14,6 +15,18 @@ const PublishActionHook = (props) => {
       onHandle()
     },
   }
+
+  if (type === 'experiments') {
+    const completedExperiment = draft?.completed
+    if (completedExperiment) actions.disabled = true
+
+    return {
+      ...actions,
+      label: completedExperiment ? 'Completed' : 'Publish',
+    }
+  }
+
+  return actions
 }
 
 export default PublishActionHook
