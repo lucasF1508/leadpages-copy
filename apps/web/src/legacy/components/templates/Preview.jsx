@@ -10,13 +10,7 @@ import TemplatePreview from './TemplatePreview'
 import PreviewBackdrop from './PreviewBackdrop'
 
 const mandrelApi = new MandrelApi({ baseUrl: templatesBaseUrl })
-const Preview = ({
-  templateId,
-  galleryRoot,
-  SEO,
-  previewTemplate,
-  planData,
-}) => {
+const Preview = ({ templateId, galleryRoot, previewTemplate, planData }) => {
   const showFooter = useEvalBreakpoint('>xs')
   const [selectedTemplate, setSelectedTemplate] = useState(previewTemplate)
   const router = useRouter()
@@ -25,6 +19,9 @@ const Preview = ({
     async function fetchPreviewTemplate(id) {
       try {
         const template = await mandrelApi.getTemplateById(id)
+        // If we could pass the screenshot to the SEO component from here,
+        // we could avoid an extra call to the Mandrel API
+        // const templateScreenshot = template.template.thumbnailUrlWebp
         setSelectedTemplate(template)
       } catch {
         router.push(galleryRoot)
@@ -39,26 +36,23 @@ const Preview = ({
   }, [templateId, selectedTemplate])
 
   return (
-    <>
-      {SEO}
-      <PreviewBackdrop>
-        {selectedTemplate && (
-          <>
-            <TemplatePreview
-              template={selectedTemplate}
-              galleryRoot={galleryRoot}
-              planData={planData}
-            />
-            {showFooter && (
-              <div>
-                <ReadyToGrow />
-                <Footer />
-              </div>
-            )}
-          </>
-        )}
-      </PreviewBackdrop>
-    </>
+    <PreviewBackdrop>
+      {selectedTemplate && (
+        <>
+          <TemplatePreview
+            template={selectedTemplate}
+            galleryRoot={galleryRoot}
+            planData={planData}
+          />
+          {showFooter && (
+            <div>
+              <ReadyToGrow />
+              <Footer />
+            </div>
+          )}
+        </>
+      )}
+    </PreviewBackdrop>
   )
 }
 
