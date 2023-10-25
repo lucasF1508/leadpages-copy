@@ -71,6 +71,7 @@ yarn start
 1. Create a local release branch `release/1.27.0` (or whatever the next version is)
    1. ⚠️ Note this branch doesn't need to be pushed back up to GitHub
 2. Bump the version in the root `package.json`
+   1. `yarn version --patch` (or `--minor` / `--major` for larger updates)
 3. Merge the release branch into `master` (commit message `v1.27.0`)
 4. Create a tag `v1.27.0`
 5. Push up `master`, push up tags.
