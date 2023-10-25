@@ -66,6 +66,19 @@ vercel env pull
 yarn start
 ```
 
+## Cutting a Release
+
+1. Create a local release branch `release/1.27.0` (or whatever the next version is)
+   1. ⚠️ Note this branch doesn't need to be pushed back up to GitHub
+2. Bump the version in the root `package.json`
+3. Merge the release branch into `master` (commit message `v1.27.0`)
+4. Create a tag `v1.27.0`
+5. Push up `master`, push up tags.
+6. Create a new release in GitHub for the tag using the `Generate release notes`
+7. Merge `master`  back to `develop`
+8. Push `develop` up.
+9. Celebrate 🎉
+
 ## Documentation Links
 
 - [Next](https://nextjs.org/docs/)
