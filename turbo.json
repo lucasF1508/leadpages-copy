@@ -11,6 +11,7 @@
     },
     "start": {
       "cache": false,
+      "dependsOn": ["indices#build"],
       "outputs": []
     },
     "query#start": {

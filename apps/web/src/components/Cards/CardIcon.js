@@ -397,7 +397,7 @@ const CardInner = ({
 const CardIcon = ({ align, asCards, link, itemsPerRow, ...props }) => (
   <$CardIcon align={align} asCards={asCards} itemsPerRow={itemsPerRow}>
     {link && link.url ? (
-      <Link {...link} css={{ width: '100%' }}>
+      <Link {...link} css={{ width: '100%' }} linkStyle="none">
         <CardInner
           align={align}
           asCards={asCards}

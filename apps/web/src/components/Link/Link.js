@@ -84,14 +84,15 @@ const Link = (
     ariaLabelOrg ||
     (children instanceof String && children?.toString()) ||
     label
-  const hasIcon = hasIconOrg && Icon
+  const hasIcon = hasIconOrg && Icon && props?.linkStyle !== 'none'
   const { asPath } = useRouter()
   const [path] = asPath.split(/[?#]/)
   const _condition = path === url && hasHash ? 'hash' : condition
+  const Element = props?.linkStyle === 'none' ? 'a' : $Link
 
   if (disabled) {
     return (
-      <$Link
+      <Element
         as="span"
         ref={ref}
         data-gtm={dataGtm}
@@ -101,7 +102,7 @@ const Link = (
       >
         {children || label}
         {hasIcon && <Icon />}
-      </$Link>
+      </Element>
     )
   }
 
@@ -113,15 +114,20 @@ const Link = (
     case 'internal':
       return (
         <NextLink href={`${url}${hasHash && hash ? `#${hash}` : ''}`} passHref>
-          <$Link ref={ref} data-gtm={dataGtm} aria-label={ariaLabel} {...props}>
+          <Element
+            ref={ref}
+            data-gtm={dataGtm}
+            aria-label={ariaLabel}
+            {...props}
+          >
             {children || label}
             {hasIcon && <Icon linkStyle={props?.linkStyle} />}
-          </$Link>
+          </Element>
         </NextLink>
       )
     case 'hash':
       return (
-        <$Link
+        <Element
           href={`${hasHash && hash ? `#${hash}` : ''}`}
           ref={ref}
           {...props}
@@ -132,12 +138,12 @@ const Link = (
         >
           {children || label}
           {hasIcon && <Icon />}
-        </$Link>
+        </Element>
       )
     case 'external':
     case 'download':
       return (
-        <$Link
+        <Element
           ref={ref}
           download={condition === 'download'}
           href={url}
@@ -149,7 +155,7 @@ const Link = (
         >
           {children || label}
           {hasIcon && <Icon />}
-        </$Link>
+        </Element>
       )
     case 'modal':
       return (
@@ -174,7 +180,7 @@ const Link = (
       )
     case 'leadpagesTrigger':
       return (
-        <$Link
+        <Element
           ref={ref}
           rel={rel}
           data-leadbox-popup={popUpId}
@@ -185,7 +191,7 @@ const Link = (
         >
           {children || label}
           {hasIcon && <Icon linkStyle={props?.linkStyle} />}
-        </$Link>
+        </Element>
       )
     case 'video':
       return (

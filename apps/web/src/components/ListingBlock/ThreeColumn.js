@@ -155,6 +155,7 @@ const ThreeColumn = ({ listings, type, ctaLabel }) => (
                   {...(path
                     ? { url: path, condition: 'internal' }
                     : link || {})}
+                  linkStyle="none"
                 >
                   <GalleryContainer>
                     {image && (
