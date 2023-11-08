@@ -57,30 +57,46 @@ export const platformSubMenu = [
   },
 ]
 
-export const useCasesSubMenu = [
+export const servicesSubMenu = [
   {
-    _id: 'email-marketing',
+    _id: 'all-services',
     condition: 'internal',
-    url: '/use-cases/email-marketing',
-    ariaLabel: 'Email Marketing',
+    url: '/services',
+    ariaLabel: 'All Services',
     dataGtm: 'desktop-menu-link',
-    label: 'Email Marketing',
+    label: 'All Services',
   },
   {
-    _id: 'paid-ads',
-    condition: 'internal',
-    url: '/use-cases/paid-ads',
-    ariaLabel: 'Paid Ads',
+    _id: '10-leads-60-days',
+    condition: 'external',
+    url: '/10-leads-60-days',
+    ariaLabel: '10 Leads in 60 Days ',
     dataGtm: 'desktop-menu-link',
-    label: 'Paid Ads',
+    label: '10 Leads in 60 Days ',
   },
   {
-    _id: 'small-business-websites',
-    condition: 'internal',
-    url: '/use-cases/small-business-websites',
-    ariaLabel: 'Small Business Websites',
+    _id: 'monthly-coaching',
+    condition: 'external',
+    url: '/monthly-coaching',
+    ariaLabel: 'Monthly Coaching',
     dataGtm: 'desktop-menu-link',
-    label: 'Small Business Websites',
+    label: 'Monthly Coaching',
+  },
+  {
+    _id: 'onboarding-call',
+    condition: 'internal',
+    url: '/onboarding-call ',
+    ariaLabel: 'Onboarding Calls',
+    dataGtm: 'desktop-menu-link',
+    label: 'Onboarding Calls',
+  },
+  {
+    _id: 'hire-a-pro',
+    condition: 'external',
+    url: '/hire-a-pro',
+    ariaLabel: 'Hire a Pro',
+    dataGtm: 'desktop-menu-link',
+    label: 'Hire a Pro',
   },
 ]
 
@@ -143,14 +159,6 @@ export const expertiseSubMenu = [
     ariaLabel: 'Customer Stories',
     dataGtm: 'desktop-menu-link',
     label: 'Customer Stories',
-  },
-  {
-    _id: 'hire-a-pro',
-    condition: 'external',
-    url: '/hire-a-pro',
-    ariaLabel: 'Hire a Pro',
-    dataGtm: 'desktop-menu-link',
-    label: 'Hire a Pro',
   },
   {
     _id: 'support',

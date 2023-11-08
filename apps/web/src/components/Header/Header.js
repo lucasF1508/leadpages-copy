@@ -40,8 +40,8 @@ import {
 import {
   expertiseSubMenu,
   platformSubMenu,
+  servicesSubMenu,
   templatesSubMenu,
-  useCasesSubMenu,
 } from './HeaderDropdownMenus'
 import HeaderCarat from './HeaderCarat'
 
@@ -103,10 +103,10 @@ const Header = ({
       subMenu: platformSubMenu,
     },
     {
-      _id: 'use-cases',
+      _id: 'services',
       dataGtm: 'desktop-menu-link',
-      label: 'Use Cases',
-      subMenu: useCasesSubMenu,
+      label: 'Services',
+      subMenu: servicesSubMenu,
     },
     {
       _id: 'templates',
