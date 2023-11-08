@@ -31,14 +31,14 @@ import {
 } from './HeaderComponents'
 import {
   platformSubMenu,
-  useCasesSubMenu,
+  servicesSubMenu,
   templatesSubMenu,
   expertiseSubMenu,
 } from './HeaderDropdownMenus'
 import HeaderCarat from './HeaderCarat'
 
 export { HeaderCarat }
-export { platformSubMenu, useCasesSubMenu, templatesSubMenu, expertiseSubMenu }
+export { platformSubMenu, servicesSubMenu, templatesSubMenu, expertiseSubMenu }
 
 export {
   HeaderContainer,

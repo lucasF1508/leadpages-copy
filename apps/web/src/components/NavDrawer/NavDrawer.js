@@ -12,8 +12,8 @@ import rightArrow from '@legacy/assets/images/global/arrow_right.svg'
 import {
   mobileExpertiseMenu,
   mobilePlatformMenu,
+  mobileServicesMenu,
   mobileTemplatesMenu,
-  mobileUseCasesMenu,
 } from './NavDrawerMenus'
 import NavDrawerSecondaryMenu from './NavDrawerSecondaryMenu'
 
@@ -317,7 +317,7 @@ export default function NavDrawer({
 
   const [isNavOpen, setNavOpen] = useState(false)
   const [isPlatformNavOpen, setPlatformNavOpen] = useState(false)
-  const [isUseCasesNavOpen, setUseCasesNavOpen] = useState(false)
+  const [isServicesNavOpen, setServicesNavOpen] = useState(false)
   const [isTemplatesNavOpen, setTemplatesNavOpen] = useState(false)
   const [isExpertiseNavOpen, setExpertiseNavOpen] = useState(false)
 
@@ -325,8 +325,8 @@ export default function NavDrawer({
     setPlatformNavOpen(!isPlatformNavOpen)
   }
 
-  const toggleMobileUseCasesMenu = () => {
-    setUseCasesNavOpen(!isUseCasesNavOpen)
+  const toggleMobileServicesMenu = () => {
+    setServicesNavOpen(!isServicesNavOpen)
   }
 
   const toggleMobileExpertiseMenu = () => {
@@ -341,7 +341,7 @@ export default function NavDrawer({
     setNavOpen(true)
     setPlatformNavOpen(false)
     setExpertiseNavOpen(false)
-    setUseCasesNavOpen(false)
+    setServicesNavOpen(false)
     setTemplatesNavOpen(false)
   }
 
@@ -349,7 +349,7 @@ export default function NavDrawer({
     setNavOpen(false)
     setPlatformNavOpen(false)
     setExpertiseNavOpen(false)
-    setUseCasesNavOpen(false)
+    setServicesNavOpen(false)
     setTemplatesNavOpen(false)
   }
 
@@ -398,12 +398,12 @@ export default function NavDrawer({
                   />
                 )}
 
-                {isUseCasesNavOpen && (
+                {isServicesNavOpen && (
                   <NavDrawerSecondaryMenu
-                    toggleMenu={toggleMobileUseCasesMenu}
-                    title="Use Cases"
+                    toggleMenu={toggleMobileServicesMenu}
+                    title="Services"
                     hideMobileMenu={hideMobileMenu}
-                    menuItems={mobileUseCasesMenu}
+                    menuItems={mobileServicesMenu}
                     path={path}
                   />
                 )}
@@ -436,14 +436,14 @@ export default function NavDrawer({
                 <MobileMenuInnerSeparator />
 
                 <MobileMenuExpandableContainer
-                  onClick={toggleMobileUseCasesMenu}
+                  onClick={toggleMobileServicesMenu}
                 >
                   <MobileMenuInnerItem
                     className={
-                      path === '/use-cases' && 'active active-mobile-menu'
+                      path === '/services' && 'active active-mobile-menu'
                     }
                   >
-                    Use Cases
+                    Services
                   </MobileMenuInnerItem>
 
                   <MobileMenuExpandableItem>
