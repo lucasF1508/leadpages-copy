@@ -24,11 +24,55 @@ const useStyles = makeStyles(
         marginBottom: spacing(9),
       },
     },
+    imageContainer: {
+      display: 'flex',
+      position: 'relative',
+      maxWidth: 1298,
+      width: '90%',
+      flexGrow: 1,
+      flexShrink: 1,
+      margin: '0 auto',
+    },
+    fullPageImage: {
+      display: 'none',
+      [breakpoints.up('sm')]: {
+        display: 'flex',
+        width: '100%',
+        boxShadow: '0 14px 28px 0 rgba(0, 0, 0, 0.15)',
+        marginBottom: spacing(9),
+      },
+    },
   }),
   { classNamePrefix: 'Preview' }
 )
 
+function getAltText(template) {
+  let altText = ''
+  let formattedCategories = ''
+  const { categories } = template.template
+
+  if (categories.length > 1) {
+    const categoriesToFormat = [...categories]
+    const lastItem = categoriesToFormat.pop()
+    // When there are multiple categories, add an "and" before the last one
+    formattedCategories = `${categoriesToFormat.join(', ')} and ${lastItem}`
+  } else if (categories.length === 1) {
+    // eslint-disable-next-line prefer-destructuring
+    formattedCategories = categories[0]
+  }
+
+  if (template.kind === 'LeadpageTemplate') {
+    altText = `${template.template.name}: High-converting landing page template for ${formattedCategories}`
+  } else {
+    altText = `${template.template.name}: Conversion-focused website template for ${formattedCategories}`
+  }
+
+  return altText
+}
+
 const Preview = ({ template, galleryRoot, planData }) => {
+  const altText = getAltText(template)
+
   const matchesSmallBreakpoint = useMediaQuery((theme) =>
     theme.breakpoints.up('sm')
   )
@@ -89,6 +133,15 @@ const Preview = ({ template, galleryRoot, planData }) => {
           Back to All Templates
         </Button>
       </Link>
+      {template.template.fullPageScreenshotUrlWebp && device === 'desktop' && (
+        <div className={classes.imageContainer}>
+          <img
+            className={classes.fullPageImage}
+            src={template.template.fullPageScreenshotUrlWebp}
+            alt={altText}
+          />
+        </div>
+      )}
     </>
   )
 }
