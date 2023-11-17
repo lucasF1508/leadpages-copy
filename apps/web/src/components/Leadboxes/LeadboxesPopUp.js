@@ -8,7 +8,7 @@ const LeadboxesPopUp = ({ id, delay, dontShowFor, views }) => (
     async
     defer
     onReady={() =>
-      LPLeadboxes.addDelayedLeadbox(id, {
+      window?.LPLeadboxes?.addDelayedLeadbox(id, {
         delay: `${delay}s`,
         views,
         dontShowFor: `${dontShowFor}d`,

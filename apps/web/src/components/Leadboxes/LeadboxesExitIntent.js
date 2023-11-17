@@ -8,7 +8,7 @@ const LeadboxesExit = ({ id, delay, dontShowFor, views }) => (
     async
     defer
     onReady={() =>
-      LPLeadboxes.setExitIntent(id, {
+      window?.LPLeadboxes?.setExitIntent(id, {
         delay: `${delay}s`,
         views,
         dontShowFor: `${dontShowFor}d`,
