@@ -1,10 +1,13 @@
 import React from 'react'
+import useIsMount from '@hooks/useIsMount'
 import { useRouter } from 'next/router'
 import LeadboxesExitIntent from './LeadboxesExitIntent'
 import LeadboxesPopUp from './LeadboxesPopUp'
 
 const Leadboxes = ({ data }) => {
   const { asPath } = useRouter()
+
+  const isMount = useIsMount()
 
   const leadboxes =
     data?.reduce((acc, curr) => {
@@ -15,16 +18,17 @@ const Leadboxes = ({ data }) => {
 
   return (
     <>
-      {leadboxes?.map(({ trigger, _key, ...props }) => (
-        <React.Fragment key={_key}>
-          {
+      {isMount &&
+        leadboxes?.map(({ trigger, _key, ...props }) => (
+          <React.Fragment key={_key}>
             {
-              popUp: <LeadboxesPopUp {...props} />,
-              exitIntent: <LeadboxesExitIntent {...props} />,
-            }[trigger]
-          }
-        </React.Fragment>
-      ))}
+              {
+                popUp: <LeadboxesPopUp {...props} />,
+                exitIntent: <LeadboxesExitIntent {...props} />,
+              }[trigger]
+            }
+          </React.Fragment>
+        ))}
     </>
   )
 }
