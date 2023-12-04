@@ -64,7 +64,7 @@ const subMenuLinkStyles = {
   },
 }
 
-export const HeaderContainer = styled('header', {
+export const HeaderContainer = styled(motion.header, {
   position: 'sticky',
   top: '0px',
   left: '0px',

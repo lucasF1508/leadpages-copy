@@ -40,6 +40,7 @@ const fetchInfinite = ({
     ${score && `|score(${score})`}
     ${order && `|order(${order})`}
   [$start..$end] {
+    _id,
     path,
     publishedDate,
     title,

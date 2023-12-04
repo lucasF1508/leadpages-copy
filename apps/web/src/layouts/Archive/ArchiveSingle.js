@@ -5,10 +5,16 @@ import ArchiveBreadcrumbs from '@components/Breadcrumbs/ArchiveBreadcrumbs'
 import Heading from '@components/Heading'
 import Image from '@components/Image'
 import ArchiveRelated from '@components/Archive/ArchiveRelated'
+import ArchiveTableOfContents from '@components/Archive/ArchiveTableOfContents'
+import ArchiveSocialShare from '@components/Archive/ArchiveSocialShare'
 import Text from '@components/Text'
 import Squiggle from '@legacy/assets/images/global/squiggle.svg'
+import { withSidebar } from '@components/Sidebar/SidebarProvider'
 import { m as motion, useScroll } from 'framer-motion'
 import CTA from '@components/Cta'
+import { useRouter } from 'next/router'
+import ArchiveTableOfContentsInline from '@components/Archive/ArchiveTableOfContentsInline'
+import Waypoint from '@components/Waypoint'
 import ArchiveAuthorBio from './ArchiveAuthorBio'
 import ArchivePublishDate from './ArchivePublishDate'
 
@@ -131,6 +137,7 @@ const $SquiggleContainer = styled('div', {
 })
 
 const $ScrollProgress = styled(motion.div, {
+  display: 'none',
   position: 'sticky',
   w: '100%',
   h: '0.375rem',
@@ -138,6 +145,10 @@ const $ScrollProgress = styled(motion.div, {
   bc: '$lightGray3',
   top: '$headerHeight$s',
   zIndex: '$cover',
+
+  '@>1400': {
+    display: 'block',
+  },
 })
 
 const $ScrollProgressInner = styled('div', {
@@ -164,6 +175,14 @@ const $CTA = styled('div', {
   },
 })
 
+const $ArchiveSocialShare = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '$2',
+  mb: '$8',
+})
+
 const ArchiveSingle = ({
   _createdAt,
   _updatedAt,
@@ -177,8 +196,12 @@ const ArchiveSingle = ({
   relatedArticles,
   settings,
 }) => {
-  const [isScrolled, setIsScrolled] = useState(false)
   const contentRef = useRef(null)
+  const offsetRef = useRef(null)
+  const { asPath } = useRouter()
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [offset, setOffset] = useState(25)
+  const [showSidebar, setShowSidebar] = useState(true)
   const { scrollYProgress } = useScroll({
     target: contentRef,
     offset: ['start', 'end end'],
@@ -193,8 +216,27 @@ const ArchiveSingle = ({
     return () => unsubscribeScrollY()
   }, [])
 
+  useEffect(() => {
+    if (offsetRef.current) {
+      const rect = offsetRef.current.getBoundingClientRect()
+      const distanceFromTopOfDocument =
+        rect.top + window.pageYOffset + rect.height
+      setOffset(distanceFromTopOfDocument)
+    }
+  }, [offsetRef.current])
+
+  const openingH2 = content.findIndex(({ style }) => style === 'h2')
+  const excerpt = content.slice(0, openingH2)
+  const rest = content.slice(openingH2)
+
   return (
-    <>
+    <div>
+      <ArchiveTableOfContents
+        content={content}
+        ref={contentRef}
+        offset={offset}
+        isVisible={showSidebar}
+      />
       <$ScrollProgress
         animate={{ opacity: isScrolled ? 1 : 0, y: isScrolled ? 0 : '-100%' }}
         transition={{ duration: 0.2 }}
@@ -236,8 +278,33 @@ const ArchiveSingle = ({
                   '@>navigationDesktopAlt': { d: 'block' },
                 }}
               />
-              <Text content={content} isPost={true} />
+              <Text content={excerpt} isPost={true} displayIds />
+              <ArchiveTableOfContentsInline content={content} ref={offsetRef} />
+              {openingH2 && <Text content={rest} isPost={true} displayIds />}
             </div>
+            <Waypoint
+              onEnter={(direction) =>
+                direction === 'bottom' && setShowSidebar(false)
+              }
+              onLeave={(direction) =>
+                direction === 'bottom' && setShowSidebar(true)
+              }
+              css={{ position: 'relative', mb: '-1px' }}
+            />
+            <$ArchiveSocialShare isDesktop>
+              <Heading
+                tag="h6"
+                tagStyle="subHeading"
+                css={{
+                  fontWeight: 500,
+                  typeSizes: 'base',
+                  textAlign: 'center',
+                }}
+              >
+                Share this post:
+              </Heading>
+              <ArchiveSocialShare title={asPath} />
+            </$ArchiveSocialShare>
             {publisher && <ArchiveAuthorBio publisher={publisher} />}
             <Image
               image={image}
@@ -259,8 +326,8 @@ const ArchiveSingle = ({
           <CTA {...cta} />
         </$CTA>
       )}
-    </>
+    </div>
   )
 }
 
-export default ArchiveSingle
+export default withSidebar(ArchiveSingle)

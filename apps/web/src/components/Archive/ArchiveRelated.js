@@ -147,7 +147,12 @@ const $PopularPostGridItem = styled('article', {
   d: 'flex',
   gap: '$1_5',
   py: '$1',
+  bt: '1px solid $colors$lightGray',
   ai: 'center',
+
+  '&:last-child': {
+    bb: '1px solid $colors$lightGray',
+  },
 })
 
 const $PopularPostGridItemImage = styled('div', {

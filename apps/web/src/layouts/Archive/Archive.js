@@ -172,11 +172,12 @@ const Archive = ({
             tagStyle="h2"
           />
           <$ArchiveCardGrid>
-            {docs.map((doc, i) => (
+            {docs.map(({ publishedDate, ...doc }, i) => (
               <CardPostArchive
                 key={doc._id}
                 isFeatured={i === 0 && hasFeaturedPost}
                 isReachingEnd={isReachingEnd}
+                publishedDate={publishedDate}
                 {...doc}
               />
             ))}
