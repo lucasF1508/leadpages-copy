@@ -15,13 +15,22 @@ export const shapeData = ([
   // TODO: Audit getAllDocs, getDocPagination, getDocSlice
   // Trim data
   const docs = _docs.map(
-    ({ path, publishedDate, publisher, image, primaryCategory, title }) => ({
+    ({
       path,
       publishedDate,
       publisher,
       image,
       primaryCategory,
       title,
+      _id,
+    }) => ({
+      path,
+      publishedDate,
+      publisher,
+      image,
+      primaryCategory,
+      title,
+      _id,
     })
   )
 

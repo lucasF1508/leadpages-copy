@@ -21,8 +21,9 @@ export const flattenSidebarSlugs = (sidebarLinks) =>
 const SidebarProvider = ({ children, value = {}, sidebarLinks, ...props }) => {
   const [activeStack, setActiveStack] = useState([])
   const [active, setActive] = useState()
-
-  const sidebarSlugs = sidebarLinks ? flattenSidebarSlugs(sidebarLinks) : []
+  const [sidebarSlugs, setSidebarSlugs] = useState(
+    sidebarLinks ? flattenSidebarSlugs(sidebarLinks) : []
+  )
 
   const pushActive = (id) => {
     if (!activeStack.includes(id) && sidebarSlugs.includes(id)) {
@@ -48,6 +49,7 @@ const SidebarProvider = ({ children, value = {}, sidebarLinks, ...props }) => {
         setActive,
         pushActive,
         popActive,
+        setSidebarSlugs,
         ...value,
       }}
       {...props}

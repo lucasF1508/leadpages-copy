@@ -31,6 +31,8 @@ export const colors = {
   darkGray2: '#c2c1c0',
   darkGray: '#bfbebd',
   darkGrayAlt: '#797f89',
+  socialGray: '#878584',
+  silver: '#C3C2C1',
   grayTertiary: '#b1bacc',
   grayTertiaryAlt: '#e6e9ef',
   tan: '#fef9f1',

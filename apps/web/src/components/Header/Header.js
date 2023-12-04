@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Link from '@components/Link'
 import { theme, darkTheme } from '@design'
-import { withRouter } from 'next/router'
+import { useRouter, withRouter } from 'next/router'
 import { m as motion } from 'framer-motion'
 // images
 import fullLogoSVG from '@legacy/assets/images/global/leadpages-wordmark_large.svg'
 import logoIconSVG from '@legacy/assets/images/global/leadpages-symbol_large.svg'
 // components
 import NavDrawer from '@components/NavDrawer'
+import useStickyHeader from '@hooks/useStickyHeader'
+import useMediaQuery from '@hooks/useMediaQuery'
 import {
   HeaderContainer,
   DesktopMenuContainer,
@@ -67,7 +69,7 @@ const DropdownItem = ({ _id, condition, url, dataGtm, className, label }) => {
   )
 }
 
-const Header = ({
+const HeaderComponent = ({
   hideSignUpButton = false,
   isPricingMenu = false,
   isStartPageHeader = false,
@@ -78,19 +80,13 @@ const Header = ({
   isPreviewPage = false,
   router,
   darkHero,
+  isSticky,
+  showHeader,
+  stickyMotionProps,
 }) => {
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  const handleScroll = () => {
-    if (window.scrollY > 25) {
-      return !isScrolled && setIsScrolled(true)
-    }
-    return isScrolled && setIsScrolled(false)
-  }
-
   if (isPreviewPage) return null
 
-  const classScrolled = isScrolled ? 'scrolled' : ''
+  const classScrolled = isSticky ? 'scrolled' : ''
   const classDark = darkHero ? darkTheme : ''
   const classStartPage = isStartPageHeader ? 'start-page-header' : ''
   const path = router.asPath
@@ -129,22 +125,19 @@ const Header = ({
     },
   ]
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  })
-
   return (
     <HeaderContainer
-      scrolled={isScrolled.toString()}
-      className={`${classScrolled} ${!isScrolled && classDark}`}
+      className={`${classScrolled} ${!isSticky && classDark}`}
       isStartPageHeader={isStartPageHeader}
       darkHero={darkHero}
       underlaidMenu={underlaidMenu}
       id="siteheader"
+      animate={{
+        y: showHeader ? '0' : '-100%',
+      }}
+      transition={stickyMotionProps?.transition}
       css={
-        headerBkgColor && !isScrolled
+        headerBkgColor && !isSticky
           ? {
               background: headerBkgColor,
               '&:hover': { background: headerBkgColor },
@@ -158,10 +151,10 @@ const Header = ({
             <FullLogoContainer
               src={fullLogoSVG.src}
               alt="Leadpages full logo svg"
-              className={`${isScrolled ? 'hide-logo' : 'show-logo'} ${
+              className={`${isSticky ? 'hide-logo' : 'show-logo'} ${
                 isStartPageHeader ? 'start-page-header' : ''
               } ${
-                isStartPageHeader && isScrolled
+                isStartPageHeader && isSticky
                   ? 'start-page-header-scrolled'
                   : ''
               }`}
@@ -170,10 +163,10 @@ const Header = ({
             <LogoIconContainer
               src={logoIconSVG.src}
               alt="leadpages logo icon svg"
-              className={` ${isScrolled ? 'show-logo' : 'hide-logo'} ${
+              className={` ${isSticky ? 'show-logo' : 'hide-logo'} ${
                 isStartPageHeader ? 'start-page-header' : ''
               } ${
-                isStartPageHeader && isScrolled
+                isStartPageHeader && isSticky
                   ? 'start-page-header-scrolled'
                   : ''
               }`}
@@ -184,10 +177,9 @@ const Header = ({
             <LinksContainer>
               {mainNavigation.map(
                 ({ _id, condition, url, dataGtm, label, subMenu }) => (
-                  <>
+                  <React.Fragment key={_id}>
                     {url ? (
                       <StyledLink
-                        key={_id}
                         condition={condition}
                         url={url}
                         data-gtm={dataGtm}
@@ -206,7 +198,6 @@ const Header = ({
                         }}
                       >
                         <DropdownItem
-                          key={_id}
                           condition={condition}
                           url={url}
                           data-gtm={dataGtm}
@@ -233,7 +224,7 @@ const Header = ({
                           className="drop-down-outer"
                         >
                           <HeaderSubMenu className={theme}>
-                            <SubMenuContainer scrolled={isScrolled}>
+                            <SubMenuContainer>
                               <DesktopSubMenuTextContainer>
                                 {subMenu.map(
                                   ({
@@ -256,10 +247,14 @@ const Header = ({
                                           <Component
                                             condition={_condition}
                                             url={
-                                              _condition === 'internal' && _url
+                                              _condition === 'internal'
+                                                ? _url
+                                                : undefined
                                             }
                                             href={
-                                              _condition === 'external' && _url
+                                              _condition === 'external'
+                                                ? _url
+                                                : undefined
                                             }
                                             aria-label={ariaLabel}
                                             rel={rel}
@@ -281,7 +276,7 @@ const Header = ({
                         </DropDownOuter>
                       </motion.div>
                     )}
-                  </>
+                  </React.Fragment>
                 )
               )}
             </LinksContainer>
@@ -299,9 +294,7 @@ const Header = ({
                     aria-label="Leadpages login"
                     rel="noopener"
                     target="_blank"
-                    className={`${
-                      isScrolled && 'button-scrolled'
-                    } 'loginbutton'`}
+                    className={`${isSticky && 'button-scrolled'} 'loginbutton'`}
                     data-gtm="mobile-menu-link_login-button"
                   >
                     Log in
@@ -336,7 +329,7 @@ const Header = ({
                     >
                       <SignUpButton
                         className={
-                          isScrolled ? 'button-scrolled' : 'start-page-header'
+                          isSticky ? 'button-scrolled' : 'start-page-header'
                         }
                       >
                         Try it Free
@@ -350,7 +343,7 @@ const Header = ({
                     >
                       <SignUpButton
                         className={
-                          isScrolled ? 'button-scrolled' : 'start-page-header'
+                          isSticky ? 'button-scrolled' : 'start-page-header'
                         }
                       >
                         Try it Free
@@ -365,7 +358,7 @@ const Header = ({
                   aria-label="Start Free Trial"
                   data-gtm="mobile-menu-link"
                 >
-                  <SignUpButton className={isScrolled && 'button-scrolled'}>
+                  <SignUpButton className={isSticky && 'button-scrolled'}>
                     Start Free Trial
                   </SignUpButton>
                 </StyledButtonLink>
@@ -389,7 +382,7 @@ const Header = ({
                 aria-label="Start Free Trial"
                 data-gtm="desktop-menu-link"
               >
-                <WatchDemoButton className={isScrolled && 'button-scrolled'}>
+                <WatchDemoButton className={isSticky && 'button-scrolled'}>
                   Watch Demo
                 </WatchDemoButton>
               </OutboundButtonLink>
@@ -398,6 +391,33 @@ const Header = ({
         )}
       </DesktopMenuContainer>
     </HeaderContainer>
+  )
+}
+
+const Header = (props) => {
+  const [isDesktop, setIsDesktop] = useState(true)
+  const { isSticky, stickyMotionProps, showHeader } = useStickyHeader({
+    offsetTop: 25,
+  })
+  const { pathname } = useRouter()
+
+  const matches = useMediaQuery('(min-width: 1400px)')
+
+  useEffect(() => {
+    setIsDesktop(matches)
+  }, [matches])
+
+  if (isDesktop || pathname !== '/blog/[slug]') {
+    return <HeaderComponent isSticky={isSticky} showHeader={true} {...props} />
+  }
+
+  return (
+    <HeaderComponent
+      isSticky={isSticky}
+      stickyMotionProps={stickyMotionProps}
+      showHeader={showHeader}
+      {...props}
+    />
   )
 }
 

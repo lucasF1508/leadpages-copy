@@ -15,7 +15,7 @@ const $Waypoint = styled(Waypoint, {
 
 const $StyledText = styled('p', {})
 const defaultRenderer = ['normal', 'h4', 'h5', 'h6', 'blockquote']
-const defaultIdStyles = ['headlineTitle', 'headlineSubtitle', 'h1', 'h2']
+const defaultIdStyles = ['headlineTitle', 'headlineSubtitle', 'h1', 'h2', 'h3']
 
 const BlockRenderer = (props) => {
   const { pushActive, popActive } = useContext(SidebarContext) || {}
