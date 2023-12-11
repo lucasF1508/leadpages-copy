@@ -160,7 +160,7 @@ const HeroCareers = ({
         <$Button
           type="button"
           linkStyle="button"
-          onClick={() => scrollToHash('link-list')}
+          onClick={() => scrollToHash('open-positions')}
         >
           {label}
         </$Button>
