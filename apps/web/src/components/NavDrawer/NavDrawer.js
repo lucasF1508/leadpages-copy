@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { styled, darkTheme } from '@design'
 import Link from '@components/Link'
-import { Link as ScrollLink } from 'react-scroll'
 
 // images
 import fullLogoSVG from '@legacy/assets/images/global/leadpages-wordmark_large.svg'
@@ -16,6 +15,7 @@ import {
   mobileTemplatesMenu,
 } from './NavDrawerMenus'
 import NavDrawerSecondaryMenu from './NavDrawerSecondaryMenu'
+import NavDrawerCTA from './NavDrawerCTA'
 
 const MobileMenuContainer = styled('div', {
   position: 'fixed',
@@ -151,28 +151,6 @@ const MobileMenuLogin = styled('div', {
 
 const MobileMenuSignUp = styled('div', {})
 
-const MobileMenuSignUpButton = styled('button', {
-  height: '48px',
-  width: '144px',
-  color: '$primary',
-  background: 'transparent',
-  border: '3px solid $colors$secondary',
-  borderRadius: '24px',
-  fontFamily: `'Apercu Pro'`,
-  fontSize: '16px',
-  fontWeight: 500,
-  lineHeight: '30px',
-  textAlign: 'center',
-  transition: 'all 0.3s ease',
-
-  '&:hover': {
-    backgroundColor: '$primary',
-    color: '$white',
-    cursor: 'pointer',
-    border: '3px solid $primary',
-  },
-})
-
 const MobileMenuSeparator = styled('hr', {
   position: 'fixed',
   top: '5rem',
@@ -201,22 +179,6 @@ const MobileMenuLogoContainer = styled('img', {
   position: 'relative',
   top: '-3.5rem',
   display: 'inline',
-})
-
-const ScrollingButtonLink = styled(ScrollLink, {
-  textDecoration: 'none',
-  whiteSpace: 'nowrap',
-  color: 'inherit',
-  paddingBottom: '0.5rem',
-  marginRight: '16px',
-  fontFamily: `'Apercu Pro'`,
-  fontSize: '14px',
-  letterSpacing: '-0.1px',
-  lineHeight: '20px',
-
-  '&:hover': {
-    cursor: 'pointer',
-  },
 })
 
 export const MobileMenuLink = styled(Link, {
@@ -267,23 +229,6 @@ const ArrowRight = styled('img', {
   height: '10px',
 })
 
-const StyledButtonLink = styled(Link, {
-  textDecoration: 'none',
-  whiteSpace: 'nowrap',
-  color: 'inherit',
-  paddingBottom: '0.5rem',
-  marginRight: '16px',
-  fontFamily: `'Apercu Pro'`,
-  fontSize: '14px',
-  letterSpacing: '-0.1px',
-  lineHeight: '20px',
-  display: 'inline',
-
-  '&:hover': {
-    cursor: 'pointer',
-  },
-})
-
 const OutboundLink = styled(Link, {
   textDecoration: 'none',
   whiteSpace: 'nowrap',
@@ -311,6 +256,9 @@ export default function NavDrawer({
   isStartPageHeader,
   hideSignUpButton,
   isScrolled,
+  link,
+  hideLoginButton,
+  customCtaLink,
 }) {
   const router = useRouter()
   const path = router.asPath
@@ -506,52 +454,29 @@ export default function NavDrawer({
 
                 <MobileMenuLoginContainer>
                   <MobileMenuLogin>
-                    <OutboundLink
-                      condition="external"
-                      url="https://my.leadpages.com/login/"
-                      aria-label="Leadpages login"
-                      rel="noopener"
-                      target="_blank"
-                      className="loginbutton"
-                      data-gtm="login-button"
-                    >
-                      Log in
-                    </OutboundLink>
+                    {!hideLoginButton && (
+                      <OutboundLink
+                        condition="external"
+                        url="https://my.leadpages.com/login/"
+                        aria-label="Leadpages login"
+                        rel="noopener"
+                        target="_blank"
+                        className="loginbutton"
+                        data-gtm="login-button"
+                      >
+                        Log in
+                      </OutboundLink>
+                    )}
                   </MobileMenuLogin>
-                  {!hideSignUpButton && (
-                    <MobileMenuSignUp>
-                      {!scrollTarget && (
-                        <StyledButtonLink
-                          condition="internal"
-                          url="/pricing"
-                          aria-label="Start Free Trial"
-                          data-gtm="mobile-menu-link"
-                        >
-                          <MobileMenuSignUpButton>
-                            {isStartPageHeader
-                              ? 'Try it Free'
-                              : 'Start Free Trial'}
-                          </MobileMenuSignUpButton>
-                        </StyledButtonLink>
-                      )}
-                      {scrollTarget && (
-                        <ScrollingButtonLink
-                          to={scrollTarget}
-                          smooth
-                          duration={500}
-                          offset={-15}
-                          aria-label="Start Free Trial"
-                          data-gtm="mobile-menu-link"
-                        >
-                          <MobileMenuSignUpButton>
-                            {isStartPageHeader
-                              ? 'Try it Free'
-                              : 'Start Free Trial'}
-                          </MobileMenuSignUpButton>
-                        </ScrollingButtonLink>
-                      )}
-                    </MobileMenuSignUp>
-                  )}
+                  <MobileMenuSignUp>
+                    <NavDrawerCTA
+                      hideSignUpButton={hideSignUpButton}
+                      isStartPageHeader={isStartPageHeader}
+                      scrollTarget={scrollTarget}
+                      link={link}
+                      customCtaLink={customCtaLink}
+                    />
+                  </MobileMenuSignUp>
                 </MobileMenuLoginContainer>
               </MobileMenuInnerContainer>
             </TabletFlexbox>

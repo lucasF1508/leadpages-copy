@@ -77,6 +77,7 @@ export default function App({
   const options = { ...legacyOptions, ...pageOptions }
   const {
     slimFooter,
+    simplifiedHeader,
     isPreviewPage,
     onPromotionsLoaded,
     isPricingMenu = false,
@@ -88,6 +89,8 @@ export default function App({
     hideSignUpButton = false,
     hideBar = false,
     darkHero = false,
+    link,
+    customCtaLink,
     ...meta
   } = options
 
@@ -113,12 +116,15 @@ export default function App({
           <Header
             isPricingMenu={isPricingMenu}
             underlaidMenu={underlaidMenu}
+            simplifiedHeader={simplifiedHeader}
             isStartPageHeader={isStartPageHeader}
             scrollTarget={scrollTarget}
             noLogin={noLogin}
             headerBkgColor={headerBkgColor}
             hideSignUpButton={hideSignUpButton}
             darkHero={darkHero}
+            link={link}
+            customCtaLink={customCtaLink}
           />
           <LayoutContainer>
             <Main {...pageData} {...meta} err={err} />

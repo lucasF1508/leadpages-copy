@@ -299,7 +299,7 @@ export const StartPageLoginOutboundLink = styled(OutboundLink, {
   },
 })
 
-export const SignUpButton = styled('button', {
+export const signUpButtonStyles = {
   height: '48px',
   width: '144px',
   color: '$primary',
@@ -341,7 +341,9 @@ export const SignUpButton = styled('button', {
       height: '48px',
     },
   },
-})
+}
+
+export const SignUpButton = styled('button', signUpButtonStyles)
 
 export const WatchDemoButton = styled('button', {
   height: '48px',

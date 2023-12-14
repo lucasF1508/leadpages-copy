@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiOutlineAlignCenter as Icon } from 'react-icons/ai'
 import { TbListCheck } from 'react-icons/tb'
-import { MdFormatListNumbered } from 'react-icons/md'
+import { MdFormatListNumbered, MdOutlineBackupTable } from 'react-icons/md'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 import styled from 'styled-components'
 
@@ -186,6 +186,35 @@ export const blockContent = {
               }),
             ],
           }),
+          {
+            icon: MdOutlineBackupTable,
+            name: 'sidebarLink',
+            type: 'object',
+            fields: [
+              {
+                name: 'style',
+                type: 'string',
+                initialValue: 'h2',
+                description:
+                  'The style of the link: When h2, no bullet, and when set as h3 a bullet is shown.',
+                options: {
+                  layout: 'radio',
+                  direction: 'horizontal',
+                  list: [
+                    { title: 'Primary', value: 'h2' },
+                    { title: 'Secondary [w/Bullet]', value: 'h3' },
+                  ],
+                },
+              },
+              {
+                name: 'text',
+                title: 'Override Title',
+                description:
+                  'The text that will be visible in the sidebar. If empty, the highlighted text will be used.',
+                type: 'string',
+              },
+            ],
+          },
         ],
       },
     },

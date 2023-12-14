@@ -60,42 +60,50 @@ const $Gradient = styled('div', {
 })
 
 // eslint-disable-next-line react/display-name
-const ArchiveTableOfContentsInline = React.forwardRef(({ content }, ref) => {
-  const filteredSidebarData = shapeSidebarData(content)
-  const visibleItems = filteredSidebarData.slice(0, 5)
-  const extraItems = filteredSidebarData.slice(5)
-  const [expanded, setExpanded] = useState(false)
+const ArchiveTableOfContentsInline = React.forwardRef(
+  ({ content, useCustomSidebarLinks }, ref) => {
+    const filteredSidebarData = shapeSidebarData(content, useCustomSidebarLinks)
+    const visibleItems = filteredSidebarData.slice(0, 5)
+    const extraItems = filteredSidebarData.slice(5)
+    const [expanded, setExpanded] = useState(false)
 
-  const handleClick = () => {
-    setExpanded(!expanded)
-  }
+    const handleClick = () => {
+      setExpanded(!expanded)
+    }
 
-  return (
-    <$ArchiveTableOfContentsInline ref={ref}>
-      <$ArchiveTableOfContentsAnimate>
-        <ArchiveTableOfContentsInner
-          data={expanded ? [...visibleItems, ...extraItems] : [...visibleItems]}
-          isInline
-        />
-      </$ArchiveTableOfContentsAnimate>
-      <$Expand>
-        <$ExpandButton onClick={handleClick} expanded={expanded}>
-          <DownArrow />
-        </$ExpandButton>
-      </$Expand>
-      <AnimatePresence initial={false}>
-        {!expanded && (
-          <$Gradient
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{
-              opacity: 0,
-            }}
+    return (
+      <$ArchiveTableOfContentsInline ref={ref}>
+        <$ArchiveTableOfContentsAnimate>
+          <ArchiveTableOfContentsInner
+            data={
+              expanded ? [...visibleItems, ...extraItems] : [...visibleItems]
+            }
+            isInline
           />
+        </$ArchiveTableOfContentsAnimate>
+        {extraItems && (
+          <>
+            <$Expand>
+              <$ExpandButton onClick={handleClick} expanded={expanded}>
+                <DownArrow />
+              </$ExpandButton>
+            </$Expand>
+            <AnimatePresence initial={false}>
+              {!expanded && (
+                <$Gradient
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{
+                    opacity: 0,
+                  }}
+                />
+              )}
+            </AnimatePresence>
+          </>
         )}
-      </AnimatePresence>
-    </$ArchiveTableOfContentsInline>
-  )
-})
+      </$ArchiveTableOfContentsInline>
+    )
+  }
+)
 
 export default ArchiveTableOfContentsInline

@@ -21,7 +21,10 @@ export const $MediaWithText = styled('div', {
         ff: 'row nowrap',
         ai: 'center',
         jc: 'space-between',
-        gap: 'calc($sizes$cols1 + $grid$x)',
+
+        '@>l': {
+          gap: 'calc($sizes$cols1 + $grid$x)',
+        },
       },
       vertical: { ff: 'column nowrap', ai: 'flex-start' },
     },
