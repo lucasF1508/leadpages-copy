@@ -52,6 +52,11 @@ export const schemaPage = {
         name: 'options',
         fields: [
           F.boolean({ name: 'slimFooter', initialValue: false }),
+          F.boolean({
+            name: 'simplifiedHeader',
+            title: 'Landing Page Header',
+            initialValue: false,
+          }),
           F.boolean({ name: 'underlaidMenu', initialValue: false }),
           F.boolean({
             name: 'noLogin',
@@ -60,6 +65,16 @@ export const schemaPage = {
           }),
           F.boolean({ name: 'hideSignUpButton', initialValue: false }),
           F.boolean({ name: 'hideBar', initialValue: false }),
+          F.boolean({
+            name: 'customCtaLink',
+            title: 'Custom CTA Link',
+            initialValue: false,
+          }),
+          F.link({
+            name: 'link',
+            title: 'CTA Link',
+            hidden: ({ parent }) => !parent?.customCtaLink,
+          }),
         ],
       }),
     ]),

@@ -205,7 +205,7 @@ const ArchiveTableOfContentsInner = ({
                       duration={300}
                       offset={-90}
                       onClick={() => {
-                        handleClick()
+                        if (handleClick) handleClick()
                         setSelected(slug)
                       }}
                       isInline={isInline}

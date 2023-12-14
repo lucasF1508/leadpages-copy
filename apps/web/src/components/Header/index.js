@@ -36,8 +36,10 @@ import {
   expertiseSubMenu,
 } from './HeaderDropdownMenus'
 import HeaderCarat from './HeaderCarat'
+import HeaderCTA from './HeaderCTA'
 
 export { HeaderCarat }
+export { HeaderCTA }
 export { platformSubMenu, servicesSubMenu, templatesSubMenu, expertiseSubMenu }
 
 export {

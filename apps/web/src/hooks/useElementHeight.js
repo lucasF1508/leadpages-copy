@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const useElementHeight = (querySelector) => {
+const useElementHeight = (querySelector, observeSubtree = false) => {
   const [height, setHeight] = useState(0)
   const observeElement = (element) => {
     const resizeObserver = new ResizeObserver((entries) => {
@@ -33,7 +33,7 @@ const useElementHeight = (querySelector) => {
 
     mutationObserver.observe(document.body, {
       childList: true, // Observe direct children additions or removals
-      subtree: false, // Do not observe the descendants of the body
+      subtree: observeSubtree, // Do not observe the descendants of the body
     })
 
     return () => mutationObserver.disconnect()

@@ -195,6 +195,7 @@ const ArchiveSingle = ({
   publisher,
   relatedArticles,
   settings,
+  useCustomSidebarLinks,
 }) => {
   const contentRef = useRef(null)
   const offsetRef = useRef(null)
@@ -236,6 +237,7 @@ const ArchiveSingle = ({
         ref={contentRef}
         offset={offset}
         isVisible={showSidebar}
+        useCustomSidebarLinks={useCustomSidebarLinks}
       />
       <$ScrollProgress
         animate={{ opacity: isScrolled ? 1 : 0, y: isScrolled ? 0 : '-100%' }}
@@ -279,7 +281,11 @@ const ArchiveSingle = ({
                 }}
               />
               <Text content={excerpt} isPost={true} displayIds />
-              <ArchiveTableOfContentsInline content={content} ref={offsetRef} />
+              <ArchiveTableOfContentsInline
+                content={content}
+                ref={offsetRef}
+                useCustomSidebarLinks={useCustomSidebarLinks}
+              />
               {openingH2 && <Text content={rest} isPost={true} displayIds />}
             </div>
             <Waypoint

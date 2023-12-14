@@ -87,13 +87,9 @@ export const $MediaWithText = styled(MediaWithText, {
     mb: '$5',
     boxSizing: 'border-box',
 
-    '@>m': {
-      px: 'calc($sizes$cols1 + $grid$x)',
-    },
-
     '@>l': {
-      my: '$5',
       px: 'unset',
+      my: '$5',
     },
   },
 
@@ -210,7 +206,7 @@ const HeroDefault = ({
         />
       )}
       <$MediaWithText
-        layout={{ '@initial': 'vertical', '@>l': 'horizontal' }}
+        layout={{ '@initial': 'vertical', '@>m': 'horizontal' }}
         priority="content"
         content={content}
         media={media}

@@ -140,28 +140,58 @@ const $ScrollProgressIndicator = styled(motion.div, {
   transformOrigin: '0%',
 })
 
-export const shapeSidebarData = (content) => {
-  const sideBarData = content.reduce((acc, item) => {
-    if (item._type === 'block' && item.style === 'h2') {
-      const childText = item.children?.map((child) => child.text).join(' ')
+export const shapeSidebarData = (content, useCustomSidebarLinks) => {
+  const sideBarData = content.reduce(
+    (acc, { markDefs, children, style: itemStyle, _type }) => {
+      if (useCustomSidebarLinks) {
+        const isCustomSidebarLink = markDefs?.find(
+          (mark) => mark._type === 'sidebarLink'
+        )
+        if (isCustomSidebarLink) {
+          const { _key, style, text } = isCustomSidebarLink
+          const child = children?.find(({ marks }) => marks.includes(_key))
 
-      if (childText && childText.length > 0) {
-        acc.push({
-          component: item.style,
-          slug: getSidebarSlug(childText),
-          label: childText,
-        })
+          const childText = child?.text
+
+          if (childText && childText.length > 0) {
+            return [
+              ...acc,
+              {
+                component: style,
+                slug: getSidebarSlug(childText),
+                label: text || childText,
+              },
+            ]
+          }
+        }
+        return acc
       }
-    }
-    return acc
-  }, [])
+
+      if (_type === 'block' && itemStyle === 'h2') {
+        const childText = children?.map(({ text }) => text).join(' ')
+
+        if (childText && childText.length > 0) {
+          return [
+            ...acc,
+            {
+              component: itemStyle,
+              slug: getSidebarSlug(childText),
+              label: childText,
+            },
+          ]
+        }
+      }
+      return acc
+    },
+    []
+  )
 
   return filterDuplicateByKey(sideBarData, 'slug')
 }
 
 // eslint-disable-next-line react/display-name
 const ArchiveTableOfContents = React.forwardRef(
-  ({ content, offset, isVisible = true }, ref) => {
+  ({ content, offset, isVisible = true, useCustomSidebarLinks }, ref) => {
     const { active, setSidebarSlugs } = useContext(SidebarContext) || {}
     const [open, setOpen] = useState(false)
     const [scrollPosition, setScrollPosition] = useState(0)
@@ -173,11 +203,12 @@ const ArchiveTableOfContents = React.forwardRef(
       offset: ['start', 'end end'],
     })
     const { height: leadbarOffset } = useElementHeight(
-      '.lp-bar__iframe-wrapper'
+      '.lp-bar__iframe-wrapper',
+      true
     )
 
     const filteredSidebarData = useMemo(
-      () => shapeSidebarData(content),
+      () => shapeSidebarData(content, useCustomSidebarLinks),
       [content]
     )
 

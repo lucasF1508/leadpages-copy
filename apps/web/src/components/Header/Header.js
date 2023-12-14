@@ -24,9 +24,6 @@ import {
   StartPageLoginOutboundLink,
   OutboundLink,
   SignUpContainer,
-  SignUpButton,
-  StartPageTrialOutboundLink,
-  StyledButtonLink,
   PricesWatchDemoContainer,
   WatchDemoButton,
   WatchDemoContainer,
@@ -34,7 +31,6 @@ import {
   LinkContainer,
   SubMenuItem,
   DesktopSubMenuTextContainer,
-  StartPageTrialScrollingLink,
   OutboundButtonLink,
   SubMenuContainer,
   DropDownOuter,
@@ -46,6 +42,7 @@ import {
   templatesSubMenu,
 } from './HeaderDropdownMenus'
 import HeaderCarat from './HeaderCarat'
+import HeaderCTA from './HeaderCTA'
 
 const DropdownItem = ({ _id, condition, url, dataGtm, className, label }) => {
   const [active, setActive] = useState(false)
@@ -70,6 +67,8 @@ const DropdownItem = ({ _id, condition, url, dataGtm, className, label }) => {
 }
 
 const HeaderComponent = ({
+  simplifiedHeader = false,
+  link,
   hideSignUpButton = false,
   isPricingMenu = false,
   isStartPageHeader = false,
@@ -83,6 +82,7 @@ const HeaderComponent = ({
   isSticky,
   showHeader,
   stickyMotionProps,
+  customCtaLink,
 }) => {
   if (isPreviewPage) return null
 
@@ -173,7 +173,7 @@ const HeaderComponent = ({
             />
           </Link>
           {/* Links Conditional */}
-          {!isPricingMenu && !isStartPageHeader && (
+          {!isPricingMenu && !isStartPageHeader && !simplifiedHeader && (
             <LinksContainer>
               {mainNavigation.map(
                 ({ _id, condition, url, dataGtm, label, subMenu }) => (
@@ -315,63 +315,29 @@ const HeaderComponent = ({
             </LoginContainer>
           )}
           <SignUpContainer>
-            {!hideSignUpButton &&
-              (isStartPageHeader ? (
-                <>
-                  {scrollTarget ? (
-                    <StartPageTrialScrollingLink
-                      to={scrollTarget}
-                      smooth
-                      duration={500}
-                      offset={-15}
-                      aria-label="Try Start Plan Free"
-                      data-gtm="mobile-menu-link"
-                    >
-                      <SignUpButton
-                        className={
-                          isSticky ? 'button-scrolled' : 'start-page-header'
-                        }
-                      >
-                        Try it Free
-                      </SignUpButton>
-                    </StartPageTrialScrollingLink>
-                  ) : (
-                    <StartPageTrialOutboundLink
-                      href="https://my.leadpages.com/order-leadpages/12LcHxUf6q14/t/d3yy2ARDnfEVTPU7"
-                      aria-label="Try Start Plan Free"
-                      data-gtm="mobile-menu-link"
-                    >
-                      <SignUpButton
-                        className={
-                          isSticky ? 'button-scrolled' : 'start-page-header'
-                        }
-                      >
-                        Try it Free
-                      </SignUpButton>
-                    </StartPageTrialOutboundLink>
-                  )}
-                </>
-              ) : (
-                <StyledButtonLink
-                  condition="internal"
-                  url="/pricing"
-                  aria-label="Start Free Trial"
-                  data-gtm="mobile-menu-link"
-                >
-                  <SignUpButton className={isSticky && 'button-scrolled'}>
-                    Start Free Trial
-                  </SignUpButton>
-                </StyledButtonLink>
-              ))}
+            <HeaderCTA
+              hideSignUpButton={hideSignUpButton}
+              simplifiedHeader={simplifiedHeader}
+              isStartPageHeader={isStartPageHeader}
+              scrollTarget={scrollTarget}
+              isSticky={isSticky}
+              customCtaLink={customCtaLink}
+              link={link}
+            />
           </SignUpContainer>
 
-          <NavDrawer
-            className={theme}
-            scrollTarget={scrollTarget}
-            isPricingMenu={isPricingMenu}
-            isStartPageHeader={isStartPageHeader}
-            hideSignUpButton={hideSignUpButton}
-          />
+          {!simplifiedHeader && (
+            <NavDrawer
+              className={theme}
+              scrollTarget={scrollTarget}
+              isPricingMenu={isPricingMenu}
+              isStartPageHeader={isStartPageHeader}
+              hideSignUpButton={hideSignUpButton}
+              hideLoginButton={noLogin}
+              customCtaLink={customCtaLink}
+              link={link}
+            />
+          )}
         </LoginSignUpContainer>
 
         {isPricingMenu && (

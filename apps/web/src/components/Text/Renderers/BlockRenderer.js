@@ -19,22 +19,34 @@ const defaultIdStyles = ['headlineTitle', 'headlineSubtitle', 'h1', 'h2', 'h3']
 
 const BlockRenderer = (props) => {
   const { pushActive, popActive } = useContext(SidebarContext) || {}
+  const { node } = props
 
   // Renderer settings
-  const { styleMap = {}, style = 'normal', displayIds = false } = props.node
+  const { styleMap = {}, style = 'normal', displayIds = false } = node
+  const isCustomSidebarLink = node.markDefs?.find(
+    ({ _type }) => _type === 'sidebarLink'
+  )
   const { types } = defaultSerializers
   const asDefault = typeof props.index !== 'undefined' ? 'span' : 'p'
-  const color = props.node.children[0].marks.includes('textAlt') && '$textAlt'
-  const text = blocksToText([props.node])
-  const displayId = displayIds && defaultIdStyles.includes(style)
+  const color = node.children[0].marks.includes('textAlt') && '$textAlt'
+  const text = blocksToText([node])
+  const idText = isCustomSidebarLink
+    ? node.children.find(({ marks }) =>
+        marks.includes(isCustomSidebarLink._key)
+      )
+    : undefined
+
+  const displayId =
+    displayIds && (defaultIdStyles.includes(style) || isCustomSidebarLink)
 
   const id = displayId
-    ? slugify(text, { lower: true, remove: /[*+~.()'"!:@]/g })
+    ? slugify(idText?.text || text, { lower: true, remove: /[*+~.()'"!:@]/g })
     : undefined
 
   if (
     defaultRenderer.includes(style) &&
-    !Object.keys(styleMap).includes(style)
+    !Object.keys(styleMap).includes(style) &&
+    !isCustomSidebarLink
   ) {
     return types.block(props)
   }

@@ -1,6 +1,5 @@
 import { BsFileRichtext as icon } from 'react-icons/bs'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
-import { features } from 'config'
 
 export const schemaHeroDefault = F.hero({
   name: 'heroDefault',
