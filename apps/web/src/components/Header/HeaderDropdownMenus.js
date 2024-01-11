@@ -69,15 +69,15 @@ export const servicesSubMenu = [
   {
     _id: '10-leads-60-days',
     condition: 'external',
-    url: '/10-leads-60-days',
-    ariaLabel: '10 Leads in 60 Days ',
+    url: '/services/30-leads-30-days',
+    ariaLabel: '30 Leads in 30 Days ',
     dataGtm: 'desktop-menu-link',
-    label: '10 Leads in 60 Days ',
+    label: '30 Leads in 30 Days ',
   },
   {
     _id: 'monthly-coaching',
     condition: 'external',
-    url: '/monthly-coaching',
+    url: '/services/monthly-coaching',
     ariaLabel: 'Monthly Coaching',
     dataGtm: 'desktop-menu-link',
     label: 'Monthly Coaching',
@@ -85,7 +85,7 @@ export const servicesSubMenu = [
   {
     _id: 'onboarding-call',
     condition: 'internal',
-    url: '/onboarding-call ',
+    url: '/services/onboarding-call ',
     ariaLabel: 'Onboarding Calls',
     dataGtm: 'desktop-menu-link',
     label: 'Onboarding Calls',
