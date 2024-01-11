@@ -100,6 +100,7 @@ export const deskStructure = () =>
       }),
       S.documentTypeListItem('feature').title('Features'),
       S.documentTypeListItem('cta').title('CTAs'),
+      S.documentTypeListItem('templateCategory').title('Template Categories'),
       S.divider(),
       GB.singletonListItem('footer').icon(RiLayoutBottom2Fill),
       GB.categoriesListItem('category'),

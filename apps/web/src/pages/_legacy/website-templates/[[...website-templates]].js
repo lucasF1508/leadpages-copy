@@ -1,11 +1,13 @@
 import React from 'react'
-import WebsiteTemplates from '@layouts/WebsiteTemplates'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
-import { runQueries } from '@lib'
+import { runQueries, getDoc } from '@lib'
 import { MandrelApi } from '@lp/template-gallery/dist/mandrel-api'
 import { templatesBaseUrl } from '@legacy/constants/templates'
+import Templates from '@layouts/Templates'
 
-const WebsiteTemplatesPage = (props) => <WebsiteTemplates {...props} />
+const WebsiteTemplatesPage = (props) => (
+  <Templates {...props} isWebsiteGallery />
+)
 
 const gallerySeo = {
   hasCustomSeoTitle: true,
@@ -23,15 +25,39 @@ const previewSeo = {
   seoImage: 'https://static.leadpages.com/images/og/og-templates.jpg',
 }
 
-const mandrelApi = new MandrelApi({ baseUrl: templatesBaseUrl})
+const mandrelApi = new MandrelApi({ baseUrl: templatesBaseUrl })
 
 export async function getStaticProps(context) {
   const { preview = false, params } = context
   const { 'website-templates': websiteTemplates = [] } = params
   const [route, templateId] = websiteTemplates
 
+  const isCategory = websiteTemplates[0] === 'category'
+  const category = isCategory ? websiteTemplates[1] : null
+
+  const { data: templateCategoryDoc } = isCategory
+    ? await getDoc('templateCategory', {
+        preview,
+        params: { slug: category },
+        filters: [`templateType == "website"`],
+        projections: ``,
+      })
+    : {}
+
+  const { seo: seoData } = templateCategoryDoc || {}
+
   const isPreview = route === 'preview' && templateId
   const slug = '/website-templates'
+
+  const seo = seoData
+    ? {
+        ...seoData,
+        hasImageUrl: !!seoData?.seoImage,
+        seoImage: seoData.seoImage?.asset?.url || null,
+      }
+    : isPreview
+    ? previewSeo
+    : gallerySeo
 
   const { global } = await runQueries([])
   const rawPlanData = await getPlanData()
@@ -39,22 +65,24 @@ export async function getStaticProps(context) {
   const options = { hideBar: true }
 
   if (isPreview) {
-    const template = await mandrelApi.getTemplateById(templateId);
-    const templateScreenshot = template.template.thumbnailUrlWebp;
+    const template = await mandrelApi.getTemplateById(templateId)
+    const templateScreenshot = template.template.thumbnailUrlWebp
     if (templateScreenshot) {
-      previewSeo.seoImage = templateScreenshot;
+      previewSeo.seoImage = templateScreenshot
     }
     // Build the SEO title from the template name
-    const templateName = template.template.name;
-    previewSeo.seoTitle = `${templateName}: Conversion-Focused Website Template`;
+    const templateName = template.template.name
+    previewSeo.seoTitle = `${templateName}: Conversion-Focused Website Template`
     // Build the SEO description from the template categories
-    let templateCategories = template.template.categories;
+    let templateCategories = template.template.categories
     if (templateCategories.length > 1) {
       // When there are multiple categories, add an "and" before the last one
-      templateCategories[templateCategories.length - 1] = `and ${templateCategories[templateCategories.length - 1]}`;
+      templateCategories[templateCategories.length - 1] = `and ${
+        templateCategories[templateCategories.length - 1]
+      }`
     }
-    templateCategories = templateCategories.join(', ');
-    previewSeo.seoDescription = `Grow your business faster with this ${templateCategories} website template. Designed by pros, SEO-optimized, and easy to customize.`;
+    templateCategories = templateCategories.join(', ')
+    previewSeo.seoDescription = `Grow your business faster with this ${templateCategories} website template. Designed by pros, SEO-optimized, and easy to customize.`
   }
 
   return {
@@ -64,7 +92,7 @@ export async function getStaticProps(context) {
       preview,
       planData,
       global,
-      data: [{ seo: isPreview ? previewSeo : gallerySeo }],
+      data: [{ ...templateCategoryDoc, seo }],
     },
   }
 }

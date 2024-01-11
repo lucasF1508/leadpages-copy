@@ -179,38 +179,57 @@ const isAbove1024Breakpoint = () => {
 
 const getQueryStringFromPath = (url) => url.split('?').slice(1).join('')
 
+const getCategoryFromPath = (currentPath) => {
+  const queryStringFromPath = getQueryStringFromPath(currentPath)
+  const category = currentPath?.split('category/')[1]?.split('?')[0]
+
+  const queryString = [
+    category && `categories=${category}`,
+    queryStringFromPath,
+  ]
+    .filter(Boolean)
+    .join('&')
+
+  return queryString
+}
+
 const Templates = ({
   kind,
   onPreviewTemplate,
   isPreviewing,
-  handleSetCurrentURL,
+  setCurrentURL,
+  setPreviousURL,
 }) => {
-  // Template state
   const router = useRouter()
-  const currentPath = router.asPath // browser path plus url params
-  const queryString = useRef(getQueryStringFromPath(currentPath))
-  const isFirstLoad = useRef(true)
+  const currentPath = router.asPath
+  const queryString = useRef(getCategoryFromPath(currentPath))
+  const firstLoad = useRef(true)
 
   const onUpdateQueryString = (urlParams) => {
-    const prevPath = `${window.location.pathname}?${queryString.current}`
-    const newPath = `${window.location.pathname}?${urlParams}`
-
-    if (isFirstLoad.current && urlParams === 'order_by=-release_date') {
+    if (firstLoad.current && urlParams === 'order_by=-release_date') {
       return
     }
-    isFirstLoad.current = false
 
-    if (isPreviewing) return
+    firstLoad.current = false
 
-    if (prevPath !== newPath) {
-      queryString.current = urlParams
-      window.history.pushState(
-        { ...window.history.state, as: newPath },
-        '',
-        newPath
-      )
-      handleSetCurrentURL(newPath)
-    }
+    setPreviousURL(window.location.pathname)
+    const basePath = window.location.pathname.split('/category/')[0]
+    const params = new URLSearchParams(urlParams)
+
+    const category = params.get('categories')
+    params.delete('categories')
+
+    const path = [
+      basePath,
+      category && `/category/${category}`,
+      '?',
+      params.toString(),
+    ]
+      .filter(Boolean)
+      .join('')
+
+    window.history.pushState({ ...window.history.state, as: path }, '', path)
+    setCurrentURL(path)
   }
 
   const [state, actions] = useTemplateState({
@@ -557,7 +576,8 @@ Templates.propTypes = {
     .isRequired,
   onPreviewTemplate: PropTypes.func.isRequired,
   isPreviewing: PropTypes.bool.isRequired,
-  handleSetCurrentURL: PropTypes.func.isRequired,
+  setCurrentURL: PropTypes.func.isRequired,
+  setPreviousURL: PropTypes.func.isRequired,
 }
 
 export default Templates

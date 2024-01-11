@@ -127,7 +127,7 @@ export default function App({
             customCtaLink={customCtaLink}
           />
           <LayoutContainer>
-            <Main {...pageData} {...meta} err={err} />
+            <Main {...pageData} {...meta} err={err} seo={seo} />
           </LayoutContainer>
           <Footer slimFooter={slimFooter} data={footer} />
           <ModalParent />

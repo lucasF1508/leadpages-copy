@@ -7,19 +7,19 @@ const mandrelApi = new MandrelApi({ baseUrl: templatesBaseUrl, baseFilters })
 const { NEXT_PUBLIC_URL } = process.env
 
 export const getServerSideProps = async (context) => {
-  const limit = 300; // Max limit is 300
-  let cursor = "0";
-  let total = 0;
-  let fetchedTemplates = [];
+  const limit = 300 // Max limit is 300
+  let cursor = '0'
+  let total = 0
+  let fetchedTemplates = []
   do {
-    const response = await mandrelApi.getLeadpageTemplates({ 
-      limit: { operator: "", value: limit },
-      cursor: { operator: "", value: cursor }
-    });
-    cursor = response._meta.cursor;
-    total = response._meta.total;
-    fetchedTemplates = [...fetchedTemplates, ...response._items];
-  } while (fetchedTemplates.length < total);
+    const response = await mandrelApi.getLeadpageTemplates({
+      limit: { operator: '', value: limit },
+      cursor: { operator: '', value: cursor },
+    })
+    cursor = response._meta.cursor
+    total = response._meta.total
+    fetchedTemplates = [...fetchedTemplates, ...response._items]
+  } while (fetchedTemplates.length < total)
 
   return getServerSideSitemapLegacy(
     context,
