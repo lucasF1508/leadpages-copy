@@ -20,9 +20,8 @@ From the root of the project make sure all dependencies have been installed befo
 ## Build commands
 
 | Command           | Description                                                                                                 |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- |
-| `yarn start`      | Starts Next.js and Sanity Studio in development mode                                                        |
-| `yarn story`      | Starts Storybook in development mode                                                                        |
+| ----------------- | ----------------------------------------------------------------------------------------------------------- | --- |
+| `yarn start`      | Starts Next.js and Sanity Studio in development mode                                                        |     |
 | `yarn build`      | Builds the Next.js application and the current Sanity configuration to a static bundle for production usage |
 | `yarn serve`      | Starts a Next.js production server and serves the output of `yarn build` or `yarn analyze`.                 |
 | `yarn link`       | Runs the Next.js linter.                                                                                    |
