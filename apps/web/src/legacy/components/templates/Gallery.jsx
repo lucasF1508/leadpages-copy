@@ -10,7 +10,7 @@ import {
   TemplateActions,
   TemplateKind,
 } from '@legacy/constants/templates'
-import HeadlineSection from '../layout/HeadlineSection'
+import HeadlineSection from '@components/HeadlineSection'
 import ReadyToGrow from '../product/ReadyToGrow'
 // Constants
 
@@ -77,23 +77,27 @@ const Templates = dynamic(() => import('./Templates'), {
 })
 
 const Gallery = ({
-  SEO,
   kind,
   children,
   handlePreviewTemplate,
   isPreviewing,
-  handleSetCurrentURL,
+  setCurrentURL,
+  setPreviousURL,
+  title,
+  heroContent,
 }) => {
   const { asPath } = useRouter()
 
   return (
     <>
       {children && children}
-      {SEO}
       <HeadlineContainer>
         <HeadlineSection
-          title="Choose a template you love."
-          caption="Grow your business faster when you start with a high-converting, mobile-responsive template."
+          title={title || 'Choose a template you love.'}
+          caption={
+            heroContent ||
+            'Grow your business faster when you start with a high-converting, mobile-responsive template.'
+          }
         />
       </HeadlineContainer>
       <TabHeadingContainer name="tab-toolbar">
@@ -107,7 +111,9 @@ const Gallery = ({
           </Link>
           <Link href="/website-templates" passHref>
             <TabLink
-              className={asPath.includes('/website-templates') ? 'active-template' : ''}
+              className={
+                asPath.includes('/website-templates') ? 'active-template' : ''
+              }
             >
               Websites
             </TabLink>
@@ -118,7 +124,8 @@ const Gallery = ({
         kind={kind}
         onPreviewTemplate={handlePreviewTemplate}
         isPreviewing={isPreviewing}
-        handleSetCurrentURL={handleSetCurrentURL}
+        setCurrentURL={setCurrentURL}
+        setPreviousURL={setPreviousURL}
       />
       <ReadyToGrow zIndex={1200} />
     </>
