@@ -90,7 +90,6 @@ const SmallCaps = styled('div', {
   color: '$socialGray',
   letterSpacing: '2px',
   lineHeight: '18px',
-  opacity: 0.5,
   textTransform: 'uppercase',
 })
 
