@@ -65,7 +65,7 @@
     "embla-carousel-react": "^8.0.0-rc07",
     "emotion": "10.0.9",
     "find-up": "5.0.0",
-    "framer-motion": "7.1.0",
+    "framer-motion": "10.18.0",
     "google-maps-react": "2.0.6",
     "hamburger-react": "2.5.0",
     "html-react-parser": "^3.0.1",

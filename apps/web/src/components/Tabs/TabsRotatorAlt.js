@@ -248,7 +248,7 @@ const TabsRotatorAlt = ({
         <Flexbox>
           <FlexTop className={activeIndex === null ? 'nullstate' : ''}>
             <FlexTopContent>
-              <AnimatePresence exitBeforeEnter initial={false}>
+              <AnimatePresence mode="wait" initial={false}>
                 {items[activeIndex].media ? (
                   <$AnimatedMedia
                     key={`cardMedia-${activeIndex}`}

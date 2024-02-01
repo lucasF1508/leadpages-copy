@@ -15,6 +15,8 @@ import NavigationArrows from '@components/Rotator/NavigationArrows'
 // images
 import QuotemarkSvgGray from '@legacy/assets/images/global/quote-mark_gray_62px@2x.svg'
 import QuotemarkSvgTan from '@legacy/assets/images/global/quote-mark_tan_62px@2x.svg'
+import QuotemarkLavender from '@legacy/assets/images/global/quote-mark_lavender_light.svg'
+import Quotes from './Quotes'
 import Ratings from './Ratings'
 
 const OuterContainer = styled('div', {
@@ -180,14 +182,24 @@ const $SlideContent = styled(motion.div, {
 
 const TestimonialRotator = ({
   testimonials = [],
-  variant = 'tan',
+  variant: background = 'white',
   includeRating = false,
   animate = false,
+  quoteColor,
 }) => {
   const [loadSlick, setLoadSlick] = useState(false)
   useEffect(() => setLoadSlick(true), [])
 
   const hasMultiple = testimonials.length > 1
+
+  const quote = Quotes[quoteColor]
+  const quoteImage =
+    quote ||
+    {
+      gray: QuotemarkSvgGray,
+      tan: QuotemarkSvgTan,
+      white: QuotemarkLavender,
+    }[background]
 
   const settings = {
     appendDots: (dots) => <PaginationDots dots={dots} margin="1rem 0 0 0" />,
@@ -221,13 +233,10 @@ const TestimonialRotator = ({
   }
 
   return (
-    <OuterContainer variant={variant}>
+    <OuterContainer variant={background}>
       <InnerContainer includeRating={includeRating}>
         {!includeRating && (
-          <QuotemarkImage
-            variant={variant}
-            image={variant === 'gray' ? QuotemarkSvgGray : QuotemarkSvgTan}
-          />
+          <QuotemarkImage variant={quoteImage} image={quoteImage} />
         )}
         <RotatorContainer>
           {loadSlick && (

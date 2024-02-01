@@ -49,6 +49,11 @@ export const pinionTokens = {
           maxWidth: '$extended',
         },
       },
+      mediaTextQuote: {
+        '> div': {
+          maxWidth: '$base',
+        },
+      },
       cardsBlock: {
         '> div': {
           maxWidth: '$base',
@@ -149,6 +154,11 @@ export const pinionTokens = {
           mw: 'none',
         },
       },
+      statsAlternate: {
+        '> div': {
+          mw: '$base',
+        },
+      },
       tableBlock: {
         '> div': {
           maxWidth: '$base',
@@ -237,6 +247,11 @@ export const pinionTokens = {
       },
       purple: {
         bc: '$purple',
+        my: 'unset',
+        box: [{ property: 'py' }],
+      },
+      purpleDark: {
+        bc: '$purpleDark',
         my: 'unset',
         box: [{ property: 'py' }],
       },

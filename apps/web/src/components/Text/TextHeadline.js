@@ -5,7 +5,12 @@ import Text from './Text'
 
 const Socialize = dynamic(() => import('@components/Socialize'))
 
-const $TextHeadline = styled(Text, {
+const $TextHeadline = styled('div', {
+  mw: '$cols8',
+  mx: 'auto',
+})
+
+const $TextHeadlineInner = styled(Text, {
   textAlign: 'center',
 
   h2: {
@@ -17,13 +22,17 @@ const $TextHeadline = styled(Text, {
     mw: '$cols7',
     mx: 'auto',
   },
+
+  '& a': {
+    fontWeight: '$medium',
+  },
 })
 
 const TextHeadline = ({ hasSocialize, ...props }) => (
-  <>
-    <$TextHeadline {...props} />
+  <$TextHeadline>
+    <$TextHeadlineInner {...props} />
     {hasSocialize && <Socialize />}
-  </>
+  </$TextHeadline>
 )
 
 export default TextHeadline

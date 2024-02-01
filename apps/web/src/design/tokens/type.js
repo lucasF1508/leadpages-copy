@@ -47,7 +47,7 @@ export const type = {
     spaceMono: '"Space Mono", monospace',
     base: '$fonts$apercuPro',
     heading: '$fonts$valueSerif',
-    overline: '$fonts$spaceMono',
+    overline: '$fonts$apercuPro',
   },
   lineHeights: {
     s: 1.1,
@@ -102,6 +102,12 @@ export const type = {
     subHeadingAlt: {
       ...typeSizes.base,
       '@>s': typeSizes.lg,
+      lh: '$lineHeights$m',
+    },
+    h1Alt: {
+      ...typeSizes['5xl'],
+      '@>m': typeSizes['6xl'],
+      '@>l': typeSizes['7xl'],
       lh: '$lineHeights$m',
     },
     h1: {
@@ -267,6 +273,10 @@ export const type = {
       fontFamily: '$base',
       fontWeight: '$bold',
     },
+    h1Alt: {
+      fontWeight: '$medium',
+      fontFamily: '$heading',
+    },
     h1: {
       fontWeight: '$medium',
       fontFamily: '$heading',
@@ -355,9 +365,9 @@ export const type = {
       fontFamily: '$base',
     },
     overline: {
-      fontWeight: '$normal',
+      fontWeight: '$medium',
       fontFamily: '$overline',
-      letterSpacing: '0.1em',
+      letterSpacing: '0.2em',
       textTransform: 'uppercase',
     },
     headlineTitle: {

@@ -69,6 +69,7 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
     const { shapeData = (data) => data } =
       {
         '/[...slug]': await import('@pages/[...slug].js'),
+        '/home/[...variant]': await import('@pages/index'),
         '/': await import('@pages/index'),
         '/home': await import('@pages/index'),
         '/home-working': await import('@pages/index'),
@@ -115,7 +116,7 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
   }, [initialData])
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       {preview && (
         <$PreviewNotificationContainer
           initial={{ y: 50, opacity: 0 }}
@@ -144,7 +145,7 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
                 Exit Preview Mode
               </$Link>
             </$PreviewNotificationContent>
-            <AnimatePresence initial={false} exitBeforeEnter>
+            <AnimatePresence initial={false} mode="wait">
               {isLoading && (
                 <$PreviewNotificationLoader
                   initial={{ y: 0 }}

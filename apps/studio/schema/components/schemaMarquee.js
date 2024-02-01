@@ -9,6 +9,7 @@ export const schemaMarquee = F.object({
   groups: G.fieldGroupComponentOptions(),
   fields: [
     ...G.group('content', [
+      F.string({ name: 'overline' }),
       ...F.contentGroup({ label: false, link: false }),
       F.array({
         name: 'servicePoints',
@@ -26,6 +27,39 @@ export const schemaMarquee = F.object({
         ],
         validation: (Rule) => Rule.min(3).max(3),
       }),
+      F.links({
+        validation: (Rule) => Rule.max(1),
+      }),
+    ]),
+    ...G.group('options', [
+      F.number({
+        name: 'duration',
+        initalValue: 60,
+        description: 'Duration of the animation in seconds.',
+        validation: (Rule) => Rule.min(1).max(180).integer(),
+      }),
+      F.number({
+        name: 'height',
+        description:
+          'Max Height of images in pixels. This value may be superceded if the item has a max width set.',
+        validation: (Rule) => Rule.positive().integer(),
+        initialValue: 125,
+      }),
+      F.number({
+        name: 'spaceBetween',
+        description:
+          'Space between images in pixels. This value will be scaled to half on mobile.',
+        validation: (Rule) => Rule.positive().integer(),
+        initialValue: 60,
+      }),
+      F.boolean({
+        name: 'hasShadow',
+        title: 'Add Shadow to Images',
+        initialValue: false,
+      }),
+      F.field('animate'),
+    ]),
+    ...G.group('media', [
       F.array({
         name: 'images',
         of: [
@@ -62,34 +96,6 @@ export const schemaMarquee = F.object({
           layout: 'grid',
         },
       }),
-    ]),
-    ...G.group('options', [
-      F.number({
-        name: 'duration',
-        initalValue: 60,
-        description: 'Duration of the animation in seconds.',
-        validation: (Rule) => Rule.min(1).max(180).integer(),
-      }),
-      F.number({
-        name: 'height',
-        description:
-          'Max Height of images in pixels. This value may be superceded if the item has a max width set.',
-        validation: (Rule) => Rule.positive().integer(),
-        initialValue: 125,
-      }),
-      F.number({
-        name: 'spaceBetween',
-        description:
-          'Space between images in pixels. This value will be scaled to half on mobile.',
-        validation: (Rule) => Rule.positive().integer(),
-        initialValue: 60,
-      }),
-      F.boolean({
-        name: 'hasShadow',
-        title: 'Add Shadow to Images',
-        initialValue: false,
-      }),
-      F.field('animate'),
     ]),
   ],
   preview: {

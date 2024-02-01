@@ -213,17 +213,18 @@ const ProductToolkitRotator = ({ items, autoplay = false, loop = false }) => {
         <Flexbox>
           <FlexTop className={activeIndex === null ? 'nullstate' : ''}>
             <FlexTopContent>
-              {items[activeIndex].media ? (
-                <RevealMedia
-                  key={items[activeIndex].media?._key}
-                  media={{ ...items[activeIndex].media }}
-                />
-              ) : (
-                <RevealImage
-                  key={items[activeIndex].image?.asset?._id}
-                  image={{ ...items[activeIndex].image }}
-                />
-              )}
+              {items &&
+                (items[activeIndex].media ? (
+                  <RevealMedia
+                    key={items[activeIndex].media?._key}
+                    media={{ ...items[activeIndex].media }}
+                  />
+                ) : (
+                  <RevealImage
+                    key={items[activeIndex].image?.asset?._id}
+                    image={{ ...items[activeIndex].image }}
+                  />
+                ))}
             </FlexTopContent>
           </FlexTop>
         </Flexbox>
@@ -231,40 +232,42 @@ const ProductToolkitRotator = ({ items, autoplay = false, loop = false }) => {
       <RotatorContainer>
         {loadSlick && (
           <SlickRotator {...settings}>
-            {items.map(({ title, content, icon, iconAltText, link }, index) => (
-              <Card
-                key={title}
-                className={
-                  activeIndex === index ? 'activecard' : 'inactivecard'
-                }
-              >
-                <CardContent
-                  className="cardcontent"
-                  style={{ minHeight: `${cardContentHeight}px` }}
+            {items?.map(
+              ({ title, content, icon, iconAltText, link }, index) => (
+                <Card
+                  key={title}
+                  className={
+                    activeIndex === index ? 'activecard' : 'inactivecard'
+                  }
                 >
-                  <CardHead>
-                    <CardIconSVG image={icon} alt={iconAltText}></CardIconSVG>
-                    <CardTitle css={icon ? { ml: '1rem' } : undefined}>
-                      {title}
-                    </CardTitle>
-                  </CardHead>
-                  <CardBody>
-                    <CardText>{content}</CardText>
-                    {link?.condition && (
-                      <CardLinkHolder>
-                        <CardLink {...link} aria-label={''}>
-                          <span>{`${link.label}  `}</span>
-                          <CardLinkArrowSVG
-                            src={ArrowRightSVG.src}
-                            alt="arrow icon"
-                          />
-                        </CardLink>
-                      </CardLinkHolder>
-                    )}
-                  </CardBody>
-                </CardContent>
-              </Card>
-            ))}
+                  <CardContent
+                    className="cardcontent"
+                    style={{ minHeight: `${cardContentHeight}px` }}
+                  >
+                    <CardHead>
+                      <CardIconSVG image={icon} alt={iconAltText}></CardIconSVG>
+                      <CardTitle css={icon ? { ml: '1rem' } : undefined}>
+                        {title}
+                      </CardTitle>
+                    </CardHead>
+                    <CardBody>
+                      <CardText>{content}</CardText>
+                      {link?.condition && (
+                        <CardLinkHolder>
+                          <CardLink {...link} aria-label={''}>
+                            <span>{`${link.label}  `}</span>
+                            <CardLinkArrowSVG
+                              src={ArrowRightSVG.src}
+                              alt="arrow icon"
+                            />
+                          </CardLink>
+                        </CardLinkHolder>
+                      )}
+                    </CardBody>
+                  </CardContent>
+                </Card>
+              )
+            )}
           </SlickRotator>
         )}
       </RotatorContainer>

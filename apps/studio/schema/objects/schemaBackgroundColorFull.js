@@ -7,7 +7,8 @@ export const colorOptions = [
   { title: 'Gray 4', value: 'gray4' },
   { title: 'White', value: 'white' },
   { title: 'Light Lavender', value: 'lavender' },
-  { title: 'Light Teal', value: 'teal' },
+  { title: 'Teal', value: 'teal' },
+  { title: 'Light Teal', value: 'tealLight' },
   ...features.darkHeros,
 ]
 

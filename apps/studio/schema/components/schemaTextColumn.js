@@ -10,10 +10,8 @@ export const schemaTextColumn = F.object({
     select: {
       heading: 'heading',
     },
-    prepare: ({ heading }) => {
-      return {
-        title: heading || 'Text Column',
-      }
-    },
+    prepare: ({ heading }) => ({
+      title: heading || 'Text Column',
+    }),
   },
 })

@@ -6,7 +6,7 @@ import { features } from 'config'
 import Link from '@components/Link'
 import HeroVideoBrowser from './HeroVideoBrowser'
 
-const $ShapesRight = styled('div', {
+export const $ShapesRight = styled('div', {
   position: 'absolute',
   width: '100%',
   height: '100%',
@@ -104,9 +104,12 @@ const $Text = styled(Text, {
   mb: '2rem',
 })
 
-const $ShapesRightInner = styled('div', { minWidth: '100%', height: '100%' })
+export const $ShapesRightInner = styled('div', {
+  minWidth: '100%',
+  height: '100%',
+})
 
-const $SVG = styled(Image, {
+export const $SVG = styled(Image, {
   height: '145%',
   width: 'calc(100% + 17rem)',
   right: '17rem',
