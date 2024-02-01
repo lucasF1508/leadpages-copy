@@ -6,6 +6,7 @@ export const radii = {
   xl: '1.5rem',
   round: '100%',
   button: '$space$6',
+  statsCard: '3.125rem',
   pill: '9501px',
 }
 

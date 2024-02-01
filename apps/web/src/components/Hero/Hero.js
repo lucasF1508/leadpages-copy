@@ -1,6 +1,7 @@
 import React from 'react'
 import HeroHome from './HeroHome'
 import HeroHomeAlt from './HeroHomeAlt'
+import HeroHomeStats from './HeroHomeStats'
 import HeroDefault from './HeroDefault'
 import HeroCustomer from './HeroCustomer'
 import HeroSimple from './HeroSimple'
@@ -17,6 +18,8 @@ const Hero = ({ hero: heroOrg }) => {
       return <HeroHome {...hero} />
     case 'heroHomeAlt':
       return <HeroHomeAlt {...hero} />
+    case 'heroHomeStats':
+      return <HeroHomeStats {...hero} />
     case 'heroCustomer':
       return <HeroCustomer {...hero} />
     case 'heroSimple':

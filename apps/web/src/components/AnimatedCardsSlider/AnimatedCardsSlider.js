@@ -156,7 +156,7 @@ const AnimatedCardsSlider = ({
             ))}
         </$Slides>
       </$Slider>
-      <AnimatePresence initial={false} exitBeforeEnter>
+      <AnimatePresence initial={false} mode="wait">
         {media.map(
           (_media, i) =>
             i === activeIndex && (

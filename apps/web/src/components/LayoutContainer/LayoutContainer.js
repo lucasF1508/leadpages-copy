@@ -17,7 +17,7 @@ const LayoutContainer = ({ children, ...props }) => {
   return (
     <AnimatePresence
       initial={false}
-      exitBeforeEnter
+      mode="wait"
       onExitComplete={() => {
         useScrollToHash(asPath, 500)
       }}

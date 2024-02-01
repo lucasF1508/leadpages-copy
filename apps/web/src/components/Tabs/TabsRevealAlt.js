@@ -334,7 +334,7 @@ const TabsRevealAlt = ({
           </FlexLeft>
           <FlexRight align={align} tabWidth={tabWidth}>
             <FlexRightContent>
-              <AnimatePresence initial={false} exitBeforeEnter>
+              <AnimatePresence initial={false} mode="wait">
                 {items[activeIndex].media ? (
                   <$AnimatedMedia
                     key={`cardMedia-${activeIndex}`}

@@ -2,11 +2,13 @@ import { pxToRem, getColumnsWidth } from '@design/utils'
 
 const gridDimensions = {
   cols: 12,
-  width: 1216,
-  gutter: 32,
+  width: 1320,
+  gutter: 24,
   row: 48,
 }
+
 export const colsWidths = getColumnsWidth(gridDimensions)
+
 export const grid = {
   cols: gridDimensions.cols,
   width: pxToRem(gridDimensions.width),

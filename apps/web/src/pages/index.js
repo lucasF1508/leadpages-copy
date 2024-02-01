@@ -16,6 +16,7 @@ export const shapeData = (data, isVariant = false) => {
   )
   const options = {
     ...pageData?.options,
+    underlaidMenu: true,
     darkHero,
   }
 

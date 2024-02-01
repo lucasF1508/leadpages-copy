@@ -2,15 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { styled, keyframes } from '@design'
 import useEventListener from '@hooks/useEventListener'
 import Image from '@components/Image'
+import ServicePoints from '@components/ServicePoints'
 import ContentGroup from '@components/ContentGroup'
 import Link from '@components/Link'
 import useImageRatio from '@hooks/useImageRatio'
-import {
-  viewport,
-  item as framerItem,
-  transition,
-} from '@design/tokens/framerTokens'
-import { m as motion } from 'framer-motion'
+import Text from '@components/Text'
 
 const scrollLeft = keyframes({
   '0%': { transform: 'translateX(0%)' },
@@ -26,6 +22,14 @@ const $MarqueeContainer = styled('div', {
   overflow: 'hidden',
   position: 'relative',
   py: '$12',
+
+  variants: {
+    linkShown: {
+      true: {
+        pb: '$7',
+      },
+    },
+  },
 })
 
 const $Marquee = styled('div', {
@@ -61,31 +65,6 @@ const $MarqueeItem = styled('div', {
   },
 })
 
-const $ServicePoints = styled(motion.div, {
-  d: 'flex',
-  mx: 'auto',
-  fd: 'column',
-  grg: '$9',
-  gcg: '$4_5',
-  mw: '19.5rem',
-  mt: '$4_5',
-
-  '@>m': {
-    fd: 'row',
-    mw: '$cols10',
-    mt: '$9',
-  },
-})
-
-const $ServicePoint = styled(motion.div, {
-  textAlign: 'center',
-
-  '@>m': {
-    textAlign: 'left',
-    flex: '0 1 19.5rem',
-  },
-})
-
 const $Gradient = styled('div', {
   h: 'calc(100% + 4px)',
   w: '$sizes$cols1',
@@ -113,25 +92,13 @@ const $Gradient = styled('div', {
   },
 })
 
-const $ServicePointImage = styled('div', {
-  mb: '$3',
-  mx: 'auto',
-  mw: '$space$6',
+const $Link = styled('div', {
+  textAlign: 'center',
+  pb: '$12',
 
-  '@>m': {
-    mx: 0,
+  '& a': {
+    fontWeight: '$medium',
   },
-})
-
-const $ServicePointHeading = styled('h6', {
-  typeSizes: 'xl',
-  typeStyles: 'buttonSm',
-  mb: '$3',
-})
-
-const $ServicePointContent = styled('p', {
-  typeSizes: 'lg',
-  lineHeight: '1.6em',
 })
 
 const Marquee = ({
@@ -145,6 +112,8 @@ const Marquee = ({
   spaceBetween = 60,
   hasShadow,
   animate: animateTextContents = false,
+  overline,
+  links,
   ...props
 }) => {
   if (!images) return null
@@ -234,6 +203,18 @@ const Marquee = ({
 
   return (
     <>
+      {overline && (
+        <Text
+          content={overline}
+          tagStyle="overline"
+          css={{
+            textAlign: 'center',
+            mb: '$3',
+            fontWeight: 400,
+            c: '$socialGray',
+          }}
+        />
+      )}
       {(heading || content) && (
         <ContentGroup
           heading={heading}
@@ -241,7 +222,7 @@ const Marquee = ({
           animate={animateTextContents}
           align="center"
           css={{
-            mw: 'calc($cols10 + $space$8)',
+            mw: '$cols8',
           }}
           props={{
             heading: {
@@ -256,11 +237,12 @@ const Marquee = ({
             },
             content: {
               css: {
-                typeSizes: 'lg',
+                typeSizes: 'base',
                 lineHeight: '1.6em',
+                fontWeight: 400,
 
                 '@>m': {
-                  typeSizes: 'xl',
+                  typeSizes: 'lg',
                   lineHeight: '1.4em',
                 },
               },
@@ -268,46 +250,11 @@ const Marquee = ({
           }}
         />
       )}
-      {servicePoints && (
-        <$ServicePoints
-          variants={
-            animateTextContents && {
-              hidden: {
-                opacity: 0,
-              },
-              visible: {
-                opacity: 1,
-                transition: {
-                  when: 'beforeChildren',
-                  staggerChildren: 0.2,
-                },
-              },
-            }
-          }
-          initial={animateTextContents && 'hidden'}
-          whileInView={animateTextContents && 'visible'}
-          viewport={animateTextContents && viewport}
-        >
-          {servicePoints.map(({ _key, heading: _heading, text, image }) => (
-            <$ServicePoint
-              key={_key}
-              variants={framerItem}
-              transition={transition}
-            >
-              {image && (
-                <$ServicePointImage>
-                  <Image image={image} />
-                </$ServicePointImage>
-              )}
-              {_heading && (
-                <$ServicePointHeading>{_heading}</$ServicePointHeading>
-              )}
-              {text && <$ServicePointContent>{text}</$ServicePointContent>}
-            </$ServicePoint>
-          ))}
-        </$ServicePoints>
-      )}
-      <$MarqueeContainer {...props}>
+      <ServicePoints
+        servicePoints={servicePoints}
+        animateTextContents={animateTextContents}
+      />
+      <$MarqueeContainer linkShown={!!links?.length} {...props}>
         <$Gradient position="left" />
         <$Gradient position="right" />
         <MarqueeRow ref={ref} />
@@ -318,6 +265,11 @@ const Marquee = ({
           />
         ))}
       </$MarqueeContainer>
+      {!!links?.length && (
+        <$Link>
+          <Link {...links[0]} />
+        </$Link>
+      )}
     </>
   )
 }

@@ -46,7 +46,10 @@ const RTGContainer = styled('div', {
         bc: '$purple',
       },
       navy: {
-        bc: '#0a236d',
+        bc: '$darkBlue',
+      },
+      purpleDark: {
+        bc: '$purpleDark',
       },
     },
   },
@@ -81,7 +84,7 @@ const RTGTitle = styled(FlexItem, {
 
 const RTGHeadline = styled(FlexItem, {
   mb: '2rem',
-  mw: '730px',
+  mw: '$cols8',
   fontFamily: '$heading',
   letterSpacing: '-0.0625rem',
   lineHeight: '3.75rem',

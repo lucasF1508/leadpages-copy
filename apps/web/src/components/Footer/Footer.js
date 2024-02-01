@@ -85,10 +85,9 @@ const Col4 = styled(FlexRowItem, {
 
 const SmallCaps = styled('div', {
   marginBottom: '0.8rem',
-  fontFamily: `'Space Mono'`,
   fontSize: '12px',
   fontStyle: 'normal',
-  color: 'rgba(0, 0, 0, 0.5)',
+  color: '$socialGray',
   letterSpacing: '2px',
   lineHeight: '18px',
   opacity: 0.5,

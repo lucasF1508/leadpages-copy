@@ -16,11 +16,22 @@ export const schemaTestimonials = F.object({
     ]),
     ...G.group('options', [
       F.string({
+        title: 'Background Color',
         name: 'variant',
         options: {
-          list: ['white', 'gray', 'tan'],
+          list: ['white', 'gray'],
         },
         initialValue: 'gray',
+      }),
+      F.string({
+        name: 'quoteColor',
+        options: {
+          list: [
+            { title: 'Gray', value: 'gray' },
+            { title: 'Light Lavender', value: 'lavenderLight' },
+            { title: 'Lightest Teal', value: 'tealLighter' },
+          ],
+        },
       }),
       F.number({
         name: 'limit',

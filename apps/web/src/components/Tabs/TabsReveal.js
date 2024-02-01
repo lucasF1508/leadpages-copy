@@ -258,66 +258,69 @@ const ProductToolkitClickReveal = ({
       <InnerContainer>
         <Flexbox align={align}>
           <FlexLeft tabWidth={tabWidth}>
-            {items.map(({ title, content, icon, iconAltText, link }, index) => (
-              <Card
-                key={title}
-                onClick={() => handleCardClick(index)}
-                className={
-                  activeIndex === index ? 'activecard' : 'inactivecard'
-                }
-                initial={{
-                  height: activeIndex === index ? 'auto' : '72px',
-                }}
-                animate={{
-                  height: activeIndex !== index ? '72px' : 'auto',
-                  transition: { duration: 0.3 },
-                }}
-              >
-                <CardContent>
-                  <CardHead>
-                    <CardIconSVG image={icon} alt={iconAltText}></CardIconSVG>
-                    <CardTitle
-                      tabWidth={tabWidth}
-                      css={icon ? { ml: '1rem' } : undefined}
-                    >
-                      {title}
-                    </CardTitle>
-                    <CardHeadArrowSVG
-                      src={ArrowDownSVG.src}
-                      alt="arrow icon"
-                    ></CardHeadArrowSVG>
-                  </CardHead>
-                  <CardBody>
-                    <CardText>{content}</CardText>
-                    {link?.condition && (
-                      <CardLinkHolder>
-                        <CardLink {...link} aria-label={''}>
-                          {`${link.label}  `}
-                          <CardLinkArrowSVG
-                            src={ArrowRightSVG.src}
-                            alt="arrow icon"
-                          />
-                        </CardLink>
-                      </CardLinkHolder>
-                    )}
-                  </CardBody>
-                </CardContent>
-              </Card>
-            ))}
+            {items?.map(
+              ({ title, content, icon, iconAltText, link }, index) => (
+                <Card
+                  key={title}
+                  onClick={() => handleCardClick(index)}
+                  className={
+                    activeIndex === index ? 'activecard' : 'inactivecard'
+                  }
+                  initial={{
+                    height: activeIndex === index ? 'auto' : '72px',
+                  }}
+                  animate={{
+                    height: activeIndex !== index ? '72px' : 'auto',
+                    transition: { duration: 0.3 },
+                  }}
+                >
+                  <CardContent>
+                    <CardHead>
+                      <CardIconSVG image={icon} alt={iconAltText}></CardIconSVG>
+                      <CardTitle
+                        tabWidth={tabWidth}
+                        css={icon ? { ml: '1rem' } : undefined}
+                      >
+                        {title}
+                      </CardTitle>
+                      <CardHeadArrowSVG
+                        src={ArrowDownSVG.src}
+                        alt="arrow icon"
+                      ></CardHeadArrowSVG>
+                    </CardHead>
+                    <CardBody>
+                      <CardText>{content}</CardText>
+                      {link?.condition && (
+                        <CardLinkHolder>
+                          <CardLink {...link} aria-label={''}>
+                            {`${link.label}  `}
+                            <CardLinkArrowSVG
+                              src={ArrowRightSVG.src}
+                              alt="arrow icon"
+                            />
+                          </CardLink>
+                        </CardLinkHolder>
+                      )}
+                    </CardBody>
+                  </CardContent>
+                </Card>
+              )
+            )}
           </FlexLeft>
           <FlexRight align={align} tabWidth={tabWidth}>
             <FlexRightContent>
-              {items[activeIndex].media ? (
-                <RevealMedia
-                  key={items[activeIndex].media?._key}
-                  media={{ ...items[activeIndex].media }}
-                />
-              ) : (
-                <RevealImage
-                  key={items[activeIndex].image?.asset?._id}
-                  image={{ ...items[activeIndex].image }}
-                />
-              )}
+              {items &&
+                (items[activeIndex].media ? (
+                  <RevealMedia
+                    key={items[activeIndex].media?._key}
+                    media={{ ...items[activeIndex].media }}
+                  />
+                ) : (
+                  <RevealImage
+                    key={items[activeIndex].image?.asset?._id}
+                    image={{ ...items[activeIndex].image }}
+                  />
+                ))}
             </FlexRightContent>
           </FlexRight>
         </Flexbox>
