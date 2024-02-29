@@ -12,6 +12,7 @@ import { FiMaximize2 as ModalIcon } from '@react-icons/all-files/fi/FiMaximize2'
 import { MdPlayArrow as VideoIcon } from '@react-icons/all-files/md/MdPlayArrow'
 import { useRouter } from 'next/router'
 import { scrollToHash } from '@hooks/useScrollToHash'
+import SignUpWithEmailFieldLink from './SignUpWithEmailFieldLink'
 
 export const $Link = styled(motion.a, linkTokens)
 
@@ -72,18 +73,33 @@ const Link = (
     dataGtm,
     ariaLabel: ariaLabelOrg,
     video,
+    _type,
     ...props
   },
   ref
 ) => {
-  if (!url && !['modal', 'video', 'leadpagesTrigger'].includes(condition))
-    return null
-  const { Modal: ModalComponent = () => null, modalKey, modalCss } = props
-  const Icon = Icons[icon || condition]
   const ariaLabel =
     ariaLabelOrg ||
     (children instanceof String && children?.toString()) ||
     label
+
+  if (_type === 'signUp') {
+    return (
+      <SignUpWithEmailFieldLink
+        label={label}
+        ref={ref}
+        data-gtm={dataGtm}
+        aria-label={ariaLabel}
+        hasIcon={hasIconOrg}
+        {...props}
+      />
+    )
+  }
+
+  if (!url && !['modal', 'video', 'leadpagesTrigger'].includes(condition))
+    return null
+  const { Modal: ModalComponent = () => null, modalKey, modalCss } = props
+  const Icon = Icons[icon || condition]
   const hasIcon = hasIconOrg && Icon && props?.linkStyle !== 'none'
   const { asPath } = useRouter()
   const [path] = asPath.split(/[?#]/)

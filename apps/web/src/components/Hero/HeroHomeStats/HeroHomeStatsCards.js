@@ -241,7 +241,7 @@ const HeroHomeStatsCards = ({ cards: allCards, cardAnimationInterval }) => {
     const startInterval = () => {
       interval = setInterval(() => {
         setIntervalsCount((prevCount) =>
-          prevCount === -1 || prevCount + 1 === allCards.length
+          prevCount === -1 || prevCount + 1 === allCards?.length
             ? 0
             : prevCount + 1
         )
@@ -281,9 +281,10 @@ const HeroHomeStatsCards = ({ cards: allCards, cardAnimationInterval }) => {
 
     const cardClone = cards
 
-    if (window.innerWidth < 700) {
+    if (window.innerWidth < 700 && cardClone) {
       setCards([...cardClone.slice(1), cardClone[0]])
     } else {
+      if (!allCards) return
       const order = [0, 3, 1, 2]
       const cardOutIndex = order[intervalCount % (allCards.length / 2)]
       const cardInIndex = cardOutIndex + allCards.length / 2
@@ -299,6 +300,7 @@ const HeroHomeStatsCards = ({ cards: allCards, cardAnimationInterval }) => {
     <$Cards>
       <$CardsInner>
         {!!cards?.length &&
+          !!allCards?.length &&
           cards
             .slice(0, allCards.length / 2)
             .map(({ stat, label, image, name, title }, index) => {

@@ -69,7 +69,7 @@ const $HeroHomeContent = styled('div', {
   ff: 'column',
   jc: 'center',
   ai: 'center',
-  gap: '$4',
+  gap: '$2_5',
   mx: 'auto',
   mw: '22.75rem',
 
@@ -86,6 +86,7 @@ const $HeroHomeContent = styled('div', {
     mw: '$cols5',
     jc: 'flex-start',
     ai: 'flex-start',
+    gap: '$3',
   },
 })
 

@@ -1,6 +1,11 @@
 import * as F from '../../fields'
 
-export const links = ({ name = 'links', link, ...props } = {}) =>
+export const links = ({
+  name = 'links',
+  link,
+  additionalFields = [],
+  ...props
+} = {}) =>
   F.array({
     name,
     of: [
@@ -14,6 +19,7 @@ export const links = ({ name = 'links', link, ...props } = {}) =>
         },
         ...link,
       }),
+      ...additionalFields,
     ],
     ...props,
   })

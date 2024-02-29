@@ -17,6 +17,10 @@ const RTGContainer = styled('div', {
   ta: 'center',
   ox: 'hidden',
 
+  [`&:has(.email-sign-up-input)`]: {
+    px: '$3',
+  },
+
   '@>m': {
     px: '6rem',
   },
@@ -39,8 +43,11 @@ const RTGContainer = styled('div', {
       lavender: {
         bc: '$lavenderLight',
       },
-      teal: {
+      tealLight: {
         bc: '$tealLight',
+      },
+      teal: {
+        bc: '$teal',
       },
       purple: {
         bc: '$purple',
@@ -124,6 +131,16 @@ const RTGButtonContainer = styled('div', {
   `]: {
     c: '$white',
   },
+
+  [`&:has(.email-sign-up-input)`]: {
+    p: 0,
+
+    [`.email-sign-up-input`]: {
+      '&::before': {
+        opacity: `0`,
+      },
+    },
+  },
 })
 
 const RTGButton = styled('button', {
@@ -141,17 +158,14 @@ const RTGButton = styled('button', {
   p: '0 1.5rem',
   transition: 'all 0.3s ease',
   cursor: 'pointer',
-
   '@media (min-width: 341px) and (max-width: 425px)': {
     h: 'auto',
   },
-
   '@media (max-width: 340px)': {
     w: '240px',
     fontSize: '16px',
     alignSelf: 'center',
   },
-
   '&:hover': {
     bc: '$indigoDark',
     b: '3px solid $colors$indigoDark',

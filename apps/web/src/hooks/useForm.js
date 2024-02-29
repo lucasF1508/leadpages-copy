@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import camelCase from 'lodash/camelCase'
-import { useForm as useReactHookForm, FormProvider } from 'react-hook-form'
+import { useForm as useReactHookForm, FormContext } from 'react-hook-form'
 import sendFormData from '@lib/forms/sendFormData'
 import sendMailchimpData from '@lib/forms/sendMailchimpData'
 
@@ -22,14 +22,6 @@ const useForm = ({ form = {}, config = {} }) => {
   const getInputType = (type) => type.split('.')[1]
   const getInput = (type) => {
     switch (type) {
-      case 'radio':
-        return dynamic(() => import('@components/Form/Inputs/InputRadio'))
-      case 'checkbox':
-        return dynamic(() => import('@components/Form/Inputs/InputCheckbox'))
-      case 'select':
-        return dynamic(() => import('@components/Form/Inputs/InputSelect'))
-      case 'file':
-        return dynamic(() => import('@components/Form/Inputs/InputFile'))
       default:
         return dynamic(() => import('@components/Form/Inputs/Input'))
     }
@@ -117,4 +109,4 @@ const useForm = ({ form = {}, config = {} }) => {
 }
 
 export default useForm
-export { FormProvider }
+export { FormContext }

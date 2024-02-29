@@ -97,7 +97,7 @@ const HeroHomeStatsHeadingAnimation = ({ words, heading }) => {
   }
 
   useEffect(() => {
-    if (ref.current) {
+    if (ref.current && !!words?.length) {
       const keyFrames = words
         .map((word, index) => `-${(100 / words.length) * index}%`)
         .slice(1)
@@ -111,9 +111,10 @@ const HeroHomeStatsHeadingAnimation = ({ words, heading }) => {
       <$WordsContainer>
         <$WordsViewport>
           <$Words ref={ref} animate={controls}>
-            {words.map((word, index) => (
-              <$Word key={`${word}-${index}`}>{word}</$Word>
-            ))}
+            {!!words?.length &&
+              words.map((word, index) => (
+                <$Word key={`${word}-${index}`}>{word}</$Word>
+              ))}
           </$Words>
         </$WordsViewport>
       </$WordsContainer>
