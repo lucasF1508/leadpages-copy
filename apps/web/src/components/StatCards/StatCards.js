@@ -53,7 +53,7 @@ const $Stat = styled('div', {
 
 const StatCards = ({ stats }) => (
   <$Stats>
-    {!!stats.length &&
+    {!!stats?.length &&
       stats.map((stat) => (
         <$Stat key={stat.heading}>
           <Heading

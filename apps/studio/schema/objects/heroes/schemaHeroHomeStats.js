@@ -22,6 +22,7 @@ export const schemaHeroHomeStats = F.object({
       F.links({
         group: 'content',
         validation: (Rule) => Rule.max(1),
+        additionalFields: [F.field('signUp')],
       }),
     ]),
     ...G.group('media', [

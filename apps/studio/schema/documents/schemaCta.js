@@ -12,7 +12,15 @@ export const schemaCta = {
       F.string({ name: 'overline' }),
       F.string({ name: 'title' }),
       F.field('blockContentBare', { name: 'content' }),
-      F.links(),
+      F.links({
+        additionalFields: [F.field('signUp')],
+        validation: (Rule) =>
+          Rule.custom((field) =>
+            field.some((link) => link._type === 'signUp') && field.length > 1
+              ? 'When signup link is present, the CTA cannot contaain other links'
+              : true
+          ),
+      }),
     ]),
     ...G.group('options', [
       F.field('backgroundColorFull', {

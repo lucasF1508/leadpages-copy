@@ -73,6 +73,7 @@ export const colors = {
   hover: '$indigoDark',
   hoverColor: '$white',
   hoverColorGhost: '$white',
+  hoverColorAlt: '$purpleDark',
   focus: '$hover',
   active: '$hover',
   hoverInverse: '$offWhite',
@@ -94,6 +95,8 @@ export const colors = {
   gradientBackgroundOpacity:
     'linear-gradient(to right, $colors$background, transparent)',
   dropdown: '$white',
+  placeholder: '$textAlt',
+  input: '$textAlt',
 }
 
 export default colors

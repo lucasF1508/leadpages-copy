@@ -36,4 +36,10 @@ export const reset = {
     border: 0,
     'min-width': 0,
   },
+  input: {
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 0,
+  },
 }
