@@ -29,9 +29,10 @@ const resolveDocumentActions = (props) => {
     ? pageMergeAction
     : undefined
 
-  const maybeWinnerAction = ['experiments'].includes(props.type)
-    ? selectWinnerAction
-    : undefined
+  const maybeWinnerAction =
+    ['experiments'].includes(props.type) && props?.published?.completed !== true
+      ? selectWinnerAction
+      : undefined
 
   switch (props.type) {
     case 'feed':

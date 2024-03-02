@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { useDocumentOperation } from '@sanity/react-hooks'
 import { useToast, Stack, Inline, Button, Text, Card } from '@sanity/ui'
 import isEqual from 'lodash/isEqual'
 import sanityClient from 'part:@sanity/base/client'
@@ -7,6 +6,8 @@ import { IoWarning } from 'react-icons/io5'
 import batchCommit, {
   buildDeletePatches,
   buildDraftPatches,
+  buildPatches,
+  mergePatches,
 } from '../batchCommit'
 
 const client = sanityClient.withConfig({
@@ -21,25 +22,16 @@ const excludedKeys = [
   '_updatedAt',
   'slug',
   'path',
+  'title',
 ]
 
-const SelectWinner = ({
-  onComplete,
-  control = {},
-  variants = [],
-  type,
-  id,
-} = {}) => {
-  const toast = useToast()
-
-  const { patch, publish } = useDocumentOperation(control._ref, 'page')
-  const { unpublish: unpublishExperiment, patch: patchExperiment } =
-    useDocumentOperation(id, type)
-
-  const ref = useRef()
+const SelectWinner = ({ onComplete, control = {}, variants = [], id } = {}) => {
   const [selected, setSelected] = useState(undefined)
   const [allDocuments, setAllDocuments] = useState([])
   const [options, setOptions] = useState([])
+
+  const toast = useToast()
+  const ref = useRef()
 
   const formatOptions = (docs) =>
     docs.map(({ title, _id, path }) => ({ label: title, _id, path }))
@@ -66,18 +58,9 @@ const SelectWinner = ({
     setOptions(formatOptions(pulledDocuments))
   }
 
-  const updateCurrentDoc = async (patches) => {
-    const response = await patch.execute(patches)
-    return response
-  }
-
-  const unpublishExperimentAction = async () => {
-    const response = await unpublishExperiment.execute()
-    return response
-  }
-
-  const unpublishVariantsAction = () => {
+  const completeExperimentAction = async (toReplace, replacement) => {
     const unpublishVariants = async () => {
+      let controlPatches
       const documentsToReplace = allDocuments.reduce((acc, doc) => {
         if (!doc) return acc
 
@@ -88,61 +71,63 @@ const SelectWinner = ({
         return acc
       }, [])
 
+      if (selected !== control._ref) {
+        const currentKeys = Object.keys(toReplace)
+        const replacementKeys = Object.keys(replacement)
+        const filteredKeys = replacementKeys.filter(
+          (key) => !excludedKeys.includes(key)
+        )
+        const unset = isEqual(currentKeys, replacementKeys)
+          ? undefined
+          : currentKeys.filter((key) => !replacementKeys.includes(key))
+        const set = filteredKeys.reduce(
+          (obj, key) => ({ ...obj, [key]: replacement[key] }),
+          {}
+        )
+        controlPatches = mergePatches([
+          {
+            id: control._ref,
+            patch: { set, ...(unset ? { unset } : {}) },
+          },
+        ])
+      }
+
+      const experiment = await client.fetch(
+        `*[_id == '${id}' && !(_id in path("drafts.**"))][0]`
+      )
+
       const deletePatches = buildDeletePatches(documentsToReplace)
       const newDocPatches = buildDraftPatches(documentsToReplace)
+      const experimentPatches = buildPatches([
+        { ...experiment, completed: true },
+      ])
 
       await batchCommit({
-        patches: deletePatches,
-        client,
-      })
-      await batchCommit({
-        patches: newDocPatches,
+        patches: [
+          ...(controlPatches || []),
+          ...newDocPatches,
+          ...experimentPatches,
+          ...deletePatches,
+        ],
         client,
         toast,
       })
     }
 
-    unpublishVariants()
+    await unpublishVariants()
 
     toast.push({
       status: 'success',
-      title: 'Success: Content Pulled & Draft created',
-      description: 'Publish your changes or discard the changes',
+      title: 'Success: Experiment Completed',
+      description:
+        "The variant pages are now unpublished. Don't forget to deploy the site.",
     })
   }
 
   const handleUpdate = async () => {
     const toReplace = allDocuments.find((option) => option._id === control._ref)
     const replacement = allDocuments.find((option) => option._id === selected)
-
-    if (selected !== control._ref) {
-      const currentKeys = Object.keys(toReplace)
-      const replacementKeys = Object.keys(replacement)
-      const filteredKeys = replacementKeys.filter(
-        (key) => !excludedKeys.includes(key)
-      )
-      const unset = isEqual(currentKeys, replacementKeys)
-        ? undefined
-        : currentKeys.filter((key) => !replacementKeys.includes(key))
-      const set = filteredKeys.reduce(
-        (obj, key) => ({ ...obj, [key]: replacement[key] }),
-        {}
-      )
-      await updateCurrentDoc([{ set, ...(unset ? { unset } : {}) }])
-      await publish.execute()
-    }
-
-    patchExperiment.execute([
-      {
-        set: {
-          completed: true,
-        },
-      },
-    ])
-
-    // dup content, unpublish variants,
-    unpublishExperimentAction()
-    unpublishVariantsAction()
+    await completeExperimentAction(toReplace, replacement)
     onComplete()
   }
 

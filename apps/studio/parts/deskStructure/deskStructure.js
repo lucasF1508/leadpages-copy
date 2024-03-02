@@ -71,9 +71,7 @@ export const deskStructure = () =>
                 .child(
                   S.documentList()
                     .title('Completed Tests')
-                    .filter(
-                      '_type == "experiments" && completed == true && (_id in path("drafts.**"))'
-                    )
+                    .filter('_type == "experiments" && completed')
                 ),
             ])
         )

@@ -32,10 +32,11 @@ export const schemaExperiments = {
         const { _id } = document
         return !_id.includes('drafts.')
       },
+      weak: true,
       options: {
         filter: async () => {
           const docsToFilter = await client.fetch(
-            `*[_type == "experiments"].control._ref`
+            `*[_type == "experiments" && !(_id in path('drafts.**')) && !completed].control._ref`
           )
 
           return {

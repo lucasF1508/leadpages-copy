@@ -52,10 +52,10 @@ const getVariant = (url, request) => {
   if (lpstCookie) {
     const exp = lpstCookie[experimentForControl.control]
     const _exp = exp?.split('::')[0]
+    const _expName = exp?.split('::')[2]
 
-    if (_exp !== undefined) {
+    if (_exp !== undefined && _expName === experimentForControl.name) {
       if (_exp === 'basePath') return { rewrite: experimentForControl.control }
-
       const variant = experimentForControl.variants[_exp]
       if (variant) return { rewrite: variant.path }
     }
