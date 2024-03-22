@@ -7,7 +7,6 @@ import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Header from '@components/Header'
 import Embed from '@components/Embed'
-import Optimize from '@components/Optimize'
 import FullStory from '@components/FullStory'
 import Leadboxes from '@components/Leadboxes'
 import { LazyMotion } from 'framer-motion'
@@ -109,7 +108,6 @@ export default function App({
           <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
         )}
         <FullStory />
-        <Optimize />
         <SEO seo={seo} siteMeta={siteMeta} isVariant={isVariant} />
         <LazyMotion features={loadFeatures} strict>
           {/* {navigation && <Header navigation={navigation} />} */}
