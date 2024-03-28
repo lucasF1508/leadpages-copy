@@ -10,9 +10,10 @@ const TemplatesPage = (props) => <Templates {...props} />
 const gallerySeo = {
   hasCustomSeoTitle: true,
   hasImageUrl: true,
-  seoTitle: `Website & Landing Page Template Gallery | Leadpages`,
-  seoDescription: `Grow your leads and conversion with the best website and landing page templates from Leadpages. All templates are fully customizable and user-friendly across devices.`,
-  seoImage: 'https://static.leadpages.com/images/og/og-templates.jpg',
+  seoTitle: `200+ High-Converting Landing Page Templates | Leadpages`,
+  seoDescription: `Boost performance of your marketing campaigns with Leadpages' easy-to-customize landing page templates. The best code-free way to grow leads and sales.`,
+  seoImage:
+    'https://cdn.sanity.io/images/1ux2e04i/production/34c5cb2ddc75e403db8905b94002c0d1844ac54a-2400x1256.webp?fm=jpg&h=630&w=1200',
 }
 
 const previewSeo = {
@@ -91,6 +92,12 @@ export async function getStaticProps(context) {
       data: [
         {
           ...templateCategoryDoc,
+          title:
+            templateCategoryDoc?.heroTitle ||
+            `Choose From 200+ High-Converting Landing Page Templates`,
+          heroContent:
+            templateCategoryDoc?.heroContent ||
+            `Every template is professionally-designed with over a decade of conversion marketing expertise baked in, so you can be confident you'll capture leads and sales. Use our intuitive drag-and-drop builder to quickly make a beautiful mobile-responsive landing page in 30 minutes or less.`,
           seo,
         },
       ],

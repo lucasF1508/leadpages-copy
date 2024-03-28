@@ -55,7 +55,7 @@ export const $AlternateSupertitle = styled('div', {
   c: '$textAlt',
 })
 
-export const $Title = styled('div', {
+export const $Title = styled('h1', {
   fontFamily: 'Value Serif',
   fontSize: '2.5rem',
   letterSpacing: '-0.03125rem',

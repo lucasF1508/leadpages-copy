@@ -51,8 +51,9 @@ const Templates = ({
     )
 
     setPageData({
-      title: templateCategoryDoc?.heroTitle || templateCategoryDoc?.title,
-      heroContent: templateCategoryDoc?.heroContent,
+      title:
+        templateCategoryDoc?.heroTitle || templateCategoryDoc?.title || _title,
+      heroContent: templateCategoryDoc?.heroContent || _heroContent,
       seo: templateCategoryDoc?.seo,
     })
   }
@@ -80,7 +81,10 @@ const Templates = ({
     }
 
     if (!currentCategory) {
-      setPageData({})
+      setPageData({
+        title: heroTitle || _title,
+        heroContent: _heroContent,
+      })
     }
   }, [currentURL])
 
