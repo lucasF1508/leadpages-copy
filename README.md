@@ -17,7 +17,7 @@ Inside .env Sanity Studio Project ID, from the [Sanity dashboard](https://www.sa
 
 From the root of the project make sure all dependencies have been installed before moving on, ensure you have used the preferred package manager [Yarn](https://yarnpkg.com/en/docs/install).
 
-## Build commands
+### Build commands
 
 | Command           | Description                                                                                                 |
 | ----------------- | ----------------------------------------------------------------------------------------------------------- | --- |

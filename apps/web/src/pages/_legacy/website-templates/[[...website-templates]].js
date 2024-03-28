@@ -12,9 +12,10 @@ const WebsiteTemplatesPage = (props) => (
 const gallerySeo = {
   hasCustomSeoTitle: true,
   hasImageUrl: true,
-  seoTitle: `Website Templates by Leadpages`,
-  seoDescription: `Get free, high-converting website and landing page templates with Leadpages. Easily customize with a code-free builder & turn more clicks into customers.`,
-  seoImage: 'https://static.leadpages.com/images/og/og-templates.jpg',
+  seoTitle: `50+ Website Templates for Small Businesses | Leadpagess`,
+  seoDescription: `Grow your business and make your brand stand out with Leadpages' easy-to-customize website templates. No tech skills or code required.`,
+  seoImage:
+    'https://cdn.sanity.io/images/1ux2e04i/production/998f6a6d799976c3e9cd0567c8e822a46b4f6d4c-2400x1256.webp?fm=jpg&h=630&w=1200',
 }
 
 const previewSeo = {
@@ -92,7 +93,18 @@ export async function getStaticProps(context) {
       preview,
       planData,
       global,
-      data: [{ ...templateCategoryDoc, seo }],
+      data: [
+        {
+          ...templateCategoryDoc,
+          title:
+            templateCategoryDoc?.heroTitle ||
+            `Choose From 50+ Conversion-Driven Website Templates`,
+          heroContent:
+            templateCategoryDoc?.heroContent ||
+            `Grow your business faster when you start with a professionally-designed high-converting, mobile-responsive website template. Easily customize your site with our intuitive drag-and-drop builder.`,
+          seo,
+        },
+      ],
     },
   }
 }
