@@ -12,7 +12,7 @@ const WebsiteTemplatesPage = (props) => (
 const gallerySeo = {
   hasCustomSeoTitle: true,
   hasImageUrl: true,
-  seoTitle: `50+ Website Templates for Small Businesses | Leadpagess`,
+  seoTitle: `50+ Website Templates for Small Businesses | Leadpages`,
   seoDescription: `Grow your business and make your brand stand out with Leadpages' easy-to-customize website templates. No tech skills or code required.`,
   seoImage:
     'https://cdn.sanity.io/images/1ux2e04i/production/998f6a6d799976c3e9cd0567c8e822a46b4f6d4c-2400x1256.webp?fm=jpg&h=630&w=1200',
