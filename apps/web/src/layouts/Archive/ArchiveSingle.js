@@ -280,13 +280,17 @@ const ArchiveSingle = ({
                   '@>navigationDesktopAlt': { d: 'block' },
                 }}
               />
-              <Text content={excerpt} isPost={true} displayIds />
+              {!!excerpt?.length && (
+                <Text content={excerpt} isPost={true} displayIds />
+              )}
               <ArchiveTableOfContentsInline
                 content={content}
                 ref={offsetRef}
                 useCustomSidebarLinks={useCustomSidebarLinks}
               />
-              {openingH2 && <Text content={rest} isPost={true} displayIds />}
+              {!!rest?.length && (
+                <Text content={rest} isPost={true} displayIds />
+              )}
             </div>
             <Waypoint
               onEnter={(direction) =>
