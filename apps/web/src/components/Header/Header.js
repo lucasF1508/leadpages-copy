@@ -102,7 +102,8 @@ const HeaderComponent = ({
       _id: 'services',
       dataGtm: 'desktop-menu-link',
       label: 'Services',
-      subMenu: servicesSubMenu,
+      condition: 'internal',
+      url: '/services',
     },
     {
       _id: 'templates',

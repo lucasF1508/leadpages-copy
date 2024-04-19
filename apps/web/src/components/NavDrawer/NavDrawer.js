@@ -383,21 +383,17 @@ export default function NavDrawer({
 
                 <MobileMenuInnerSeparator />
 
-                <MobileMenuExpandableContainer
-                  onClick={toggleMobileServicesMenu}
-                >
-                  <MobileMenuInnerItem
+                <MobileMenuInnerItem>
+                  <MobileMenuLink
+                    condition="internal"
+                    url="/services"
                     className={
                       path === '/services' && 'active active-mobile-menu'
                     }
                   >
                     Services
-                  </MobileMenuInnerItem>
-
-                  <MobileMenuExpandableItem>
-                    <ArrowRight src={rightArrow.src} alt="right arrow" />
-                  </MobileMenuExpandableItem>
-                </MobileMenuExpandableContainer>
+                  </MobileMenuLink>
+                </MobileMenuInnerItem>
 
                 <MobileMenuInnerSeparator />
 
