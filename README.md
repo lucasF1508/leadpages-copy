@@ -79,7 +79,7 @@ yarn start
 7. Push `develop` up.
 8. Celebrate 🎉
 
-## Documentation Links
+### Documentation Links
 
 - [Next](https://nextjs.org/docs/)
 - [Sanity](https://www.sanity.io/)
