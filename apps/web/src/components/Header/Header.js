@@ -187,6 +187,7 @@ const HeaderComponent = ({
                         className={
                           path.includes(_id) && 'active-main-menu active'
                         }
+                        css={{ transition: 'none' }}
                       >
                         {label}
                       </StyledLink>
