@@ -90,6 +90,11 @@ const useStyles = makeStyles(
         paddingTop: '8px !important',
         paddingBottom: '8px !important',
       },
+
+      '& .search-and-results .MuiButton-root > .MuiButton-label > .MuiTypography-root':
+        {
+          color: '#fff',
+        },
     },
     noResultSubtitle: {
       marginTop: spacing(1),
@@ -535,6 +540,7 @@ const Templates = ({
                   filter={state.ui.selectedTaxon?.label}
                   disableSearch={!state.ui.hasLoaded}
                   onToggleSidebar={augmentedActions.onToggleSidebar}
+                  className="search-and-results"
                 />
               </Box>
               <Gallery infiniteRef={infiniteRef}>

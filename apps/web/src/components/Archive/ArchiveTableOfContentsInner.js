@@ -21,8 +21,12 @@ const $StyledScrollLink = styled(ScrollLink, {
     &:hover,
     &.active
   `]: {
-    color: '$text',
+    color: '$purple',
     borderLeft: '$space$0_5 solid $colors$primary',
+
+    '@media (min-width: 1400px)': {
+      color: '$text',
+    },
   },
 
   variants: {
@@ -42,6 +46,29 @@ const $StyledScrollLink = styled(ScrollLink, {
   },
 })
 
+const $StyledScrollLinkInnerSpan = styled('span', {
+  position: 'relative',
+
+  [`&:after`]: {
+    content: '""',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: 2,
+    backgroundColor: '$purpleLight',
+
+    '@media (min-width: 1400px)': {
+      backgroundColor: 'transparent',
+      height: 0,
+    },
+  },
+
+  [`&:hover:after`]: {
+    backgroundColor: '$purple',
+  },
+})
+
 const $StyledScrollLinkInner = styled(Heading, {
   px: '$2',
   py: '$1',
@@ -53,7 +80,9 @@ const $StyledScrollLinkInner = styled(Heading, {
   gap: '$1',
 
   [`&:hover`]: {
-    backgroundColor: '$gray',
+    '@media (min-width: 1400px)': {
+      backgroundColor: '$gray',
+    },
   },
 
   '> svg': {
@@ -65,7 +94,7 @@ const $StyledScrollLinkInner = styled(Heading, {
     &.active
   `]: {
     '> svg': {
-      fill: '#878584',
+      fill: '$purple',
     },
   },
 
@@ -166,13 +195,16 @@ const ArchiveTableOfContentsInner = ({
                         setSelected(slug)
                       }}
                       isInline={isInline}
+                      href={`#${slug}`}
                     >
-                      <$StyledScrollLinkInner
-                        tag="h5"
-                        tagStyle="sm"
-                        heading={label}
-                        primary={true}
-                      />
+                      <$StyledScrollLinkInnerSpan>
+                        <$StyledScrollLinkInner
+                          tag="h5"
+                          tagStyle="sm"
+                          heading={label}
+                          primary={true}
+                        />
+                      </$StyledScrollLinkInnerSpan>
                     </$StyledScrollLink>
                   </MotionComponent>
                 )
@@ -209,6 +241,7 @@ const ArchiveTableOfContentsInner = ({
                         setSelected(slug)
                       }}
                       isInline={isInline}
+                      href={`#${slug}`}
                     >
                       <$StyledScrollLinkInner tag="h6" tagStyle="captionSm">
                         <svg
