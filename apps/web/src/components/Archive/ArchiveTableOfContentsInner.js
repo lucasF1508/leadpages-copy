@@ -125,6 +125,8 @@ const ArchiveTableOfContentsInner = ({
   open = true,
   visible,
 }) => {
+  if (!data || data.length === 0) return null
+
   const refs = useRef({})
   const [selected, setSelected] = useState(null)
 
