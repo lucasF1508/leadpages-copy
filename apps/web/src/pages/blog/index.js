@@ -4,7 +4,9 @@ import Archive from '@layouts/Archive'
 import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
 
 const ArchivePage = ({ filterTags, ...props }) => {
-  const filters = filterTags.map(({ value }) => `!('${value}' in tags[].value)`)
+  const filters = filterTags?.map(
+    ({ value }) => `!('${value}' in tags[].value)`
+  )
   return <Archive {...props} hasFeaturedPost={true} filters={filters} />
 }
 
