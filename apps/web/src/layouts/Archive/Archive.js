@@ -139,11 +139,13 @@ const Archive = ({
   categories,
   settings,
   hasFeaturedPost,
+  filters,
 }) => {
   const { docs, isReachingEnd, ...fetchInfiniteProps } = useFetchInfinite({
     fallbackData,
     category,
     hasFeaturedPost,
+    filters,
   })
 
   return (

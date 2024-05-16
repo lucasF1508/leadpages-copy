@@ -54,6 +54,14 @@ export const schemaPageArchive = {
         validation: (Rule) => Rule.greaterThan(1).integer(),
         hidden: ({ parent }) => parent.archiveOf !== 'post',
       }),
+      F.field('tags', {
+        name: 'tags',
+        description:
+          'Articles using these tags will be excluded from the main roll. They will still appear in search results and categories.',
+        options: {
+          includeFromRelated: 'tags',
+        },
+      }),
       F.message(
         'This page is automatically populated with the selected document type',
         {
