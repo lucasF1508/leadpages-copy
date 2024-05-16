@@ -13,7 +13,10 @@ const fetchInfinite = ({
   searchQuery,
   hasFeaturedPost,
   fetch = true,
+  filters: _filters = [],
 }) => {
+  const filtersArray = typeof _filters === 'string' ? [_filters] : _filters
+
   const filters = [
     `_type == '${type}'`,
     category &&
@@ -21,6 +24,7 @@ const fetchInfinite = ({
     publisher && `(publisher->slug.current == '${publisher.slug}')`,
     searchQuery &&
       `(pt::text(content) match '${searchQuery}' || title match '${searchQuery}')`,
+    ...filtersArray,
   ]
     .filter(Boolean)
     .join(' && ')
