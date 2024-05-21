@@ -8,6 +8,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "bash start.sh",
+    "build:studio": "sanity build ../web/public/studio -y",
     "build": "yarn build:studio",
     "blast:node": "rm -rf node_modules"
   },
