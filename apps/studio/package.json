@@ -7,8 +7,7 @@
   "author": "Devin Edwards <devin@gearboxbuilt.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "bash -c 'echo \"\\n\u001b[38;5;93mInjecting .env variables into studio:\u001b[38;5;219m\"; while read line; do if [[ $line == SANITY_* ]]; then echo \"${line//\\\"/}\" && export \"${line//\\\"/}\"; fi; done < <(for envFile in ../../.env.development ../../.env.local ../../.env; do [[ -f $envFile ]] && echo $envFile && break; done) && echo \"\u001b[0m\" && sanity start'",
-    "build:studio": "sanity build ../web/public/studio -y",
+    "start": "bash start.sh",
     "build": "yarn build:studio",
     "blast:node": "rm -rf node_modules"
   },
