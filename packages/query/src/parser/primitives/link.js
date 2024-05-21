@@ -5,7 +5,8 @@ export const link = {
       condition == 'internal' && page->_type == 'pageHome' => "/",
       condition == 'internal' => page->path,
       condition == 'external' => url,
-      condition == 'download' => file.asset->url
+      condition == 'download' => file.asset->url,
+      condition == null => url
     )
   `,
   label: `
