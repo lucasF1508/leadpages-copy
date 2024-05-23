@@ -307,6 +307,7 @@ const HeroHomeStatsCards = ({ cards: allCards, cardAnimationInterval }) => {
               const child = index + 1
               const side = [1, 3].includes(child) ? 'left' : 'right'
               const size = [2, 3].includes(child) ? 'small' : 'large'
+              const altText = name?.toLowerCase().replace(/\s+/g, '_') || title
 
               return (
                 <$CardContainer key={child} child={child}>
@@ -351,12 +352,9 @@ const HeroHomeStatsCards = ({ cards: allCards, cardAnimationInterval }) => {
                           }}
                         >
                           <Image
-                            image={{
-                              ...image,
-                              altText:
-                                name?.toLowerCase().replace(/\s+/g, '_') ||
-                                title,
-                            }}
+                            image={{ ...image, altText }}
+                            priority
+                            sizes="240px"
                           />
                         </motion.div>
                       </AnimatePresence>

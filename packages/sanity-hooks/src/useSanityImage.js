@@ -51,7 +51,7 @@ const getPlaceholderFromAsset = ({
 })
 
 const getMetaFromAsset = (image) => {
-  const url = builder.image(image).url()
+  const url = builder.image(image).auto('format').url()
   return {
     url,
     _key: image?.asset?._id,
@@ -67,6 +67,7 @@ const useSanityImage = (image) => {
     hotspot,
     crop,
     asset,
+    mimeType: asset?.mimeType,
     ...getSizesFromAsset(asset, crop),
     ...getLabelsFromImage(image),
     ...getPlaceholderFromAsset(asset),

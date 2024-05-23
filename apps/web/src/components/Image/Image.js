@@ -57,7 +57,8 @@ const Image = ({
   ...props
 }) => {
   const parsedImage = useImageParser(image)
-  const { url, width, height, placeholderType, lqip, alt, title } = parsedImage
+  const { url, width, height, placeholderType, lqip, alt, title, mimeType } =
+    parsedImage
 
   if (!url) return null
 
@@ -127,6 +128,7 @@ const Image = ({
         src={url}
         layout={layout}
         priority={priority}
+        loading={priority ? 'eager' : 'lazy'}
         alt={orgAlt || alt || url}
         title={orgAlt || title}
         placeholder={hasPlaceholder ? placeholderType : undefined}
@@ -134,6 +136,7 @@ const Image = ({
         objectFit={objectFit}
         objectPosition={objectPosition}
         sizes={sizes}
+        unoptimized={mimeType === 'image/svg+xml'}
         lazyBoundary={lazyBoundary}
       />
     </$Figure>
