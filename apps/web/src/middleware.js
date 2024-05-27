@@ -95,6 +95,9 @@ export async function middleware(request) {
     return response
   }
 
+  // Enable caching for 31 days
+  response.headers.set('Cache-Control', 'public, s-maxage=2678400')
+
   if (!incrementalPaths.length) return response
 
   const match = patterns.find((p) => p.test(url))
