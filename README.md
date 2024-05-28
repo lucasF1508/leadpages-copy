@@ -70,7 +70,7 @@ yarn start
 1. Once your PR has been approved, merge your changes into `develop`.
    1. Always "squash and merge" to maintain a clean history
 1. Test your changes in [the development environment](https://leadpages-rack-pinion.vercel.app/) once they've deployed.
-1. Create a local release branch `release/1.27.0` (or whatever the next version is) from the recently merged `develop` brach 
+1. Create a local release branch `release/1.27.0` (or whatever the next version is) from the recently merged `develop` branch
    1. ⚠️ Note this branch doesn't need to be pushed back up to GitHub
 2. Bump the version in the root `package.json` and create a tag (e.g. `v1.27.0`)
    1. `yarn version --mior` (or `--patch` for hotfixes / `--major` for breaking changes)
