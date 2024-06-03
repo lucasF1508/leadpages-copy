@@ -1,6 +1,7 @@
 import React from 'react'
 import { getDoc, getAllDocs, runQueries, getDocSlugs } from '@lib'
 import { ArchiveAuthor } from '@layouts/Archive'
+import filterForPublishedDate from '@lib/utils/filterForPublishedDate'
 
 const AuthorPage = (props) => <ArchiveAuthor {...props} />
 
@@ -48,10 +49,10 @@ export async function getStaticProps(context) {
     }),
     getAllDocs(docType, {
       order: 'order(publishedDate desc)',
-      filters: [
+      filters: filterForPublishedDate([
         "!(_id in path('drafts.**'))",
         `(publisher->slug.current == '${author}')`,
-      ],
+      ]),
       preview,
     }),
   ])

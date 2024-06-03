@@ -1,6 +1,7 @@
 import React from 'react'
 import { getDoc, runQueries, runQuery } from '@lib'
 import { ArchiveSitemap } from '@layouts/Archive'
+import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
 
 const UserSitemapPage = (props) => <ArchiveSitemap {...props} />
 
@@ -26,7 +27,7 @@ export const exporter = (props) => shapeData(props)
 export async function getStaticProps(context) {
   const docType = 'post'
   const { preview = false } = context
-  const sitemapPostQuery = `*[_type == 'post'] {
+  const sitemapPostQuery = `*[_type == 'post' && ${futurePublishedDateFilter()}] {
     "url": path,
     title,
     "category": {
