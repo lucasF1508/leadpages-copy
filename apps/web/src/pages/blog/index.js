@@ -2,11 +2,13 @@ import React from 'react'
 import { getDoc, getAllDocs, runQueries } from '@lib'
 import Archive from '@layouts/Archive'
 import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
+import filterForPublishedDate from '@lib/utils/filterForPublishedDate'
 
 const ArchivePage = ({ filterTags, ...props }) => {
   const filters = filterTags?.map(
     ({ value }) => `!('${value}' in tags[].value)`
   )
+
   return <Archive {...props} hasFeaturedPost={true} filters={filters} />
 }
 
@@ -78,8 +80,11 @@ export async function getStaticProps(context) {
       preview,
     }),
     getAllDocs(docType, {
-      filters: ["!(_id in path('drafts.**'))", ...filters],
-      order: 'order(publishedDate desc)',
+      filters: filterForPublishedDate([
+        "!(_id in path('drafts.**'))",
+        ...filters,
+      ]),
+      order: 'order(coalesce(publishedDate, _createdAt) desc)',
       offsetEnd: 1,
       paginationHasFeatured: true,
       hasPagination: false,

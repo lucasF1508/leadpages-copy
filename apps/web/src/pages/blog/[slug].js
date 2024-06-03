@@ -2,6 +2,7 @@ import React from 'react'
 import { getAllDocs, getDoc, getDocSlugs, runQueries } from '@lib'
 import { ArchiveSingle } from '@layouts/Archive'
 import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
+import filterForPublishedDate from '@lib/utils/filterForPublishedDate'
 
 const ArchiveSinglePage = (props) => <ArchiveSingle {...props} />
 
@@ -71,8 +72,11 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   const docPaths = await getDocSlugs('post', {
-    filters: ['isExternal != true', 'redirectToLegacy != true'],
-    order: 'order(publishedDate desc, _createdAt desc)',
+    filters: filterForPublishedDate([
+      'isExternal != true',
+      'redirectToLegacy != true',
+    ]),
+    order: 'order(coalesce(publishedDate, _createdAt) desc)',
   })
 
   const paths = docPaths.map(({ slug }) => ({
