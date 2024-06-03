@@ -2,6 +2,7 @@ import React from 'react'
 import { getDoc, getAllDocs, runQueries, getDocSlugs } from '@lib'
 import Archive from '@layouts/Archive'
 import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
+import filterForPublishedDate from '@lib/utils/filterForPublishedDate'
 
 const CategoryPage = (props) => <Archive {...props} />
 
@@ -56,10 +57,10 @@ export async function getStaticProps(context) {
     }),
     getAllDocs(docType, {
       order: 'order(publishedDate desc)',
-      filters: [
+      filters: filterForPublishedDate([
         "!(_id in path('drafts.**'))",
         `(primaryCategory->slug.current == '${category}' || '${category}' in secondaryCategories[]->slug.current)`,
-      ],
+      ]),
       preview,
     }),
   ])

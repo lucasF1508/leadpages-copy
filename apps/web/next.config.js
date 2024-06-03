@@ -39,6 +39,7 @@ const {
   GA4_TRACKING_ID,
   FB_PIXEL_ID,
   SENTRY_DSN,
+  SANITY_STUDIO_VERCEL_DEPLOY_URL,
 } = process.env
 
 const moduleExports = withBundleAnalyzer({
@@ -70,6 +71,7 @@ const moduleExports = withBundleAnalyzer({
     GA4_TRACKING_ID,
     FB_PIXEL_ID,
     SENTRY_DSN,
+    SANITY_STUDIO_VERCEL_DEPLOY_URL,
   },
   reactStrictMode: false,
   poweredByHeader: false,

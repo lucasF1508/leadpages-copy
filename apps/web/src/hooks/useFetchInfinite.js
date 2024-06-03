@@ -1,5 +1,6 @@
 import getClient from 'client'
 import useSWRInfinite from 'swr/infinite'
+import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
 
 const client = getClient()
 export const fetcher = ({ query, ...params }) => client.fetch(query, params)
@@ -14,6 +15,7 @@ const fetchInfinite = ({
   hasFeaturedPost,
   fetch = true,
   filters: _filters = [],
+  filterFuturePublished = true,
 }) => {
   const filtersArray = typeof _filters === 'string' ? [_filters] : _filters
 
@@ -24,6 +26,7 @@ const fetchInfinite = ({
     publisher && `(publisher->slug.current == '${publisher.slug}')`,
     searchQuery &&
       `(pt::text(content) match '${searchQuery}' || title match '${searchQuery}')`,
+    filterFuturePublished && futurePublishedDateFilter(),
     ...filtersArray,
   ]
     .filter(Boolean)
