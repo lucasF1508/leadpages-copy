@@ -158,6 +158,8 @@ const InlineCta = ({ node = {}, ...props }) => {
     imageBottom,
     bgColor,
     imageWidth = 'third',
+    links,
+    legacyLink,
   } = node
 
   return (
@@ -172,7 +174,7 @@ const InlineCta = ({ node = {}, ...props }) => {
       </$CTAImage>
       <$CTAContent>
         {content && <$Text content={content} isPost={true} />}
-        {ctaLink && (
+        {legacyLink && ctaLink && (
           <$CTAButton isFlex={true}>
             <Link
               {...ctaLink}
@@ -181,6 +183,19 @@ const InlineCta = ({ node = {}, ...props }) => {
             />
           </$CTAButton>
         )}
+        {!legacyLink &&
+          !!links?.length &&
+          links?.map(({ _key, ...link }) => (
+            <Link
+              className={
+                bgColor !== 'purple' && link.linkStyle === 'button' && theme
+              }
+              bgColor={bgColor}
+              key={_key}
+              align={'start'}
+              {...link}
+            />
+          ))}
       </$CTAContent>
     </$InlineCta>
   )

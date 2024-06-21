@@ -15,7 +15,6 @@ export const schemaInlineCTA = {
       F.field('blockContentSimple', {
         name: 'content',
         validation: (Rule) => Rule.required(),
-        group: 'content',
         initialValue: [
           {
             _type: 'block',
@@ -34,7 +33,6 @@ export const schemaInlineCTA = {
       }),
       F.image({
         name: 'image',
-        group: 'content',
         initialValue: {
           _type: 'image',
           asset: {
@@ -47,7 +45,7 @@ export const schemaInlineCTA = {
     ...G.group('links', [
       F.link({
         name: 'ctaLink',
-        group: 'content',
+        hidden: ({ parent }) => !parent.legacyLink,
         args: {
           url: { initialValue: 'https://lp.leadpages.com/free-trial/' },
           label: { initialValue: 'Start a Free Trial' },
@@ -56,24 +54,36 @@ export const schemaInlineCTA = {
           leadpagesDomain: { initialValue: 'lps.lpages.co' },
         },
       }),
+      F.links({
+        additionalFields: [F.field('signUp')],
+        hidden: ({ parent }) => parent.legacyLink,
+        validation: (Rule) =>
+          Rule.custom((field) =>
+            field?.some((link) => link._type === 'signUp') && field?.length > 1
+              ? 'When signup link is present, the CTA cannot contain other links'
+              : true
+          ),
+      }),
     ]),
     ...G.group('options', [
       F.boolean({
         name: 'contentRight',
         initialValue: true,
-        group: 'options',
       }),
       F.boolean({
         name: 'imageBottom',
         title: 'Align Image at Bottom',
         initialValue: false,
-        group: 'options',
+      }),
+      F.boolean({
+        name: 'legacyLink',
+        title: 'Use Legacy Link options',
+        initialValue: false,
       }),
       F.string({
         name: 'imageWidth',
         type: 'string',
         initialValue: 'third',
-        group: 'options',
         options: {
           list: [
             { title: '1/4', value: 'quarter' },
@@ -89,7 +99,6 @@ export const schemaInlineCTA = {
         type: 'string',
         initialValue: 'grayAlt',
         validation: (Rule) => Rule.required(),
-        group: 'options',
         options: {
           list: [
             { title: 'Light', value: 'grayAlt' },
@@ -114,7 +123,7 @@ export const schemaInlineCTA = {
       content: 'content',
     },
     prepare(selection) {
-      const { title, image, content } = selection
+      const { title, image } = selection
       return {
         title: title || 'Inline CTA',
         media: image,

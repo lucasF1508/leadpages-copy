@@ -134,12 +134,6 @@ const RTGButtonContainer = styled('div', {
 
   [`&:has(.email-sign-up-input)`]: {
     p: 0,
-
-    [`.email-sign-up-input`]: {
-      '&::before': {
-        opacity: `0`,
-      },
-    },
   },
 })
 
@@ -275,6 +269,7 @@ const Cta = ({
                   className={
                     bgColor !== 'purple' && link.linkStyle === 'button' && theme
                   }
+                  bgColor={bgColor}
                   key={_key}
                   {...link}
                 />

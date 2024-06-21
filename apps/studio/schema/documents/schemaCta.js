@@ -17,7 +17,7 @@ export const schemaCta = {
         validation: (Rule) =>
           Rule.custom((field) =>
             field.some((link) => link._type === 'signUp') && field.length > 1
-              ? 'When signup link is present, the CTA cannot contaain other links'
+              ? 'When signup link is present, the CTA cannot contain other links'
               : true
           ),
       }),

@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "1.4.4",
+    "@hubspot/api-client": "^11.1.0",
     "@lottiefiles/lottie-interactivity": "^1.6.1",
     "@lottiefiles/react-lottie-player": "^3.5.2",
     "@lp/chevron": "^3.0.3",

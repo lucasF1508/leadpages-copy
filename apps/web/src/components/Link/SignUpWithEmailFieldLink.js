@@ -2,11 +2,45 @@ import { Input } from '@components/Form/Inputs'
 import { keyframes, styled } from '@design'
 import { FiChevronRight as InternalIcon } from '@react-icons/all-files/fi/FiChevronRight'
 import useForm, { FormContext } from '@hooks/useForm'
-import { freeTrialEndpoints } from '@pages/api/fetch-trial-url'
 import Load from '@legacy/assets/images/global/submit_load_spinner.svg'
 import { useEffect, useRef, useState } from 'react'
-import { kebabCase } from 'lodash'
 import SubmitLoadSpinner from '@legacy/assets/svgs/SubmitLoadSpinner'
+import { checkOverflow } from '@lib/forms/checkOverflow'
+import planRedirect from '@lib/forms/planRedirect'
+import externalRedirect from '@lib/forms/externalRedirect'
+
+const overflowColors = {
+  primary: '#4938C2',
+  secondary: '$colors$ctaPurple',
+  grayAlt: '$colors$grayAlt',
+  tan: '$colors$tan',
+  lavender: '$colors$lavenderLight',
+  lavenderLight: '$colors$lavenderLight',
+  champagne: '$colors$champagne',
+  magnolia: '$colors$magnolia',
+  lavenderBlush: '$colors$lavenderBlush',
+  gray4: '$colors$gray',
+  gray: '$colors$grayAlt',
+  white: '$colors$white',
+  tealLight: '$colors$tealLight',
+  teal: '$colors$teal',
+  purple: '$colors$purple',
+  navy: '$colors$darkBlue',
+  purpleDark: '$colors$purpleDark',
+}
+
+const getOverflowColors = ({ colors = overflowColors } = {}) =>
+  Object.entries(colors).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: {
+        '&::before': {
+          background: `linear-gradient(90deg, ${value} 52.8%, transparent 71.47%)`,
+        },
+      },
+    }),
+    {}
+  )
 
 const rotate = keyframes({
   from: { transform: 'rotate(0deg)' },
@@ -15,13 +49,28 @@ const rotate = keyframes({
 
 const $Form = styled('div', {
   display: 'flex',
-  alignItems: 'center',
+  flexDirection: 'column',
   justifyContent: 'center',
   width: '100%',
   position: 'relative',
 
   '@>l': {
     justifyContent: 'flex-start',
+  },
+
+  variants: {
+    align: {
+      center: {
+        alignItems: 'center',
+      },
+      start: {
+        alignItems: 'flex-start',
+      },
+    },
+  },
+
+  defaultVariants: {
+    align: 'center',
   },
 })
 
@@ -40,17 +89,6 @@ const $FormInner = styled('form', {
     width: '$cols4',
   },
 
-  '&:has(.overflowing)': {
-    '&::before': {
-      background: 'linear-gradient(90deg, #4938C2 52.8%, transparent 71.47%)',
-      borderLeft: '3px solid $colors$primary',
-      borderTop: '3px solid $colors$primary',
-      borderBottom: '3px solid $colors$primary',
-      width: '42px',
-      opacity: 1,
-    },
-  },
-
   '&::before': {
     content: '',
     position: 'absolute',
@@ -65,9 +103,9 @@ const $FormInner = styled('form', {
   },
 
   [`
-    &:hover > button, 
+    &:hover > button,
     &:active > button,
-    &:hover > input, 
+    &:hover > input,
     &:active > input
     `]: {
     borderLeftColor: '$hoverColorAlt',
@@ -77,11 +115,47 @@ const $FormInner = styled('form', {
   },
 
   [`
-    &:hover > button, 
+    &:hover > button,
     &:active > button
     `]: {
     backgroundColor: '$hoverColorAlt',
   },
+
+  variants: {
+    overflowing: {
+      true: {
+        '&::before': {
+          borderLeft: '3px solid $colors$primary',
+          borderTop: '3px solid $colors$primary',
+          borderBottom: '3px solid $colors$primary',
+          width: '42px',
+          opacity: 1,
+        },
+      },
+      false: {},
+    },
+    overflowColor: getOverflowColors(),
+  },
+  defaultVariants: {
+    overflowing: false,
+    overflowColor: 'primary',
+  },
+})
+
+const $Input = styled(Input, {
+  width: '100%',
+})
+
+const $FormErrors = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '100%',
+  marginTop: '$2',
+  color: '$error',
+  fontSize: '16px',
+  textAlign: 'center',
+  type: 'cardHeading',
 })
 
 const $Submit = styled('button', {
@@ -121,94 +195,60 @@ const SignUpWithEmailFieldLink = ({
   type,
   placeholder,
   hasIcon,
+  signUpType,
+  external,
+  align = { '@initial': 'center', '@>l': 'start' },
+  bgColor,
   ...props
 }) => {
-  const { methods, isLoading, setIsLoading, setFormError } = useForm({
-    form: { name: 'HeroSignUp' },
-  })
+  const { methods, isLoading, setIsLoading, setFormError, formError } = useForm(
+    { form: { name: 'HeroSignUp' } }
+  )
   const { handleSubmit, watch } = methods
   const inputRef = useRef(null)
   const [isOverflowing, setIsOverflowing] = useState(false)
   const inputValue = watch('email')
-
-  const checkOverflow = () => {
-    const input = inputRef.current
-    const span = document.createElement('span')
-    const computedStyle = getComputedStyle(input)
-
-    const addPixels = (value, add) => {
-      const numericValue = parseInt(value, 10) + add
-      return `${numericValue}px`
-    }
-
-    span.style.visibility = 'hidden'
-    span.style.whiteSpace = 'pre'
-    span.style.paddingLeft = addPixels(computedStyle.paddingLeft, 3)
-    span.style.paddingRight = addPixels(computedStyle.paddingRight, 3)
-    span.style.paddingTop = addPixels(computedStyle.paddingTop, 3)
-    span.style.paddingBottom = addPixels(computedStyle.paddingBottom, 3)
-    span.style.font = computedStyle.font
-    document.body.appendChild(span)
-
-    span.textContent = input.value
-
-    const isTextOverflowing = span.offsetWidth > input.offsetWidth
-    setIsOverflowing(isTextOverflowing)
-
-    document.body.removeChild(span)
-  }
+  const isExternalRedirect = signUpType === 'external'
 
   const onSubmit = async (formData) => {
-    if (!formData.email || formData.email === '') {
-      const endpoint = freeTrialEndpoints[type]
-      window.location.href = `https://my.leadpages.com/order-leadpages/${endpoint}/t/d3yy2ARDnfEVTPU7?emailsubmission=${kebabCase(
-        type
-      )}`
+    setIsLoading(true)
+    setFormError(false)
+
+    if (isExternalRedirect) {
+      const { error } = await externalRedirect({
+        formData,
+        ...external,
+      })
+
+      if (error) setFormError(error)
+    } else {
+      const { error } = await planRedirect({ type, formData })
+
+      if (error) setFormError(error)
     }
 
-    try {
-      setIsLoading(true)
-
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...formData, type }),
-        redirect: 'follow',
-      }
-
-      const data = await fetch('/api/fetch-trial-url', requestOptions).then(
-        (_data) => _data.json()
-      )
-
-      const url = data && data['order-url']
-      if (url)
-        window.location.href = url.concat(`&emailsubmission=${kebabCase(type)}`)
-      setIsLoading(false)
-    } catch (e) {
-      setIsLoading(false)
-      // eslint-disable-next-line no-console
-      console.error('Failed :: Error:', e.message)
-      setFormError(
-        `Something went wrong with your submission, please reach out to our support team.`
-      )
-    }
+    setIsLoading(false)
   }
 
   useEffect(() => {
-    checkOverflow()
+    const currentOverflow = checkOverflow(inputRef)
+
+    if (currentOverflow !== isOverflowing) {
+      setIsOverflowing(checkOverflow(inputRef))
+    }
   }, [inputValue, isOverflowing])
 
   return (
     <FormContext {...methods}>
-      <$Form>
+      <$Form align={align}>
         <$FormInner
           onSubmit={handleSubmit(onSubmit)}
-          noValidate
+          noValidate={!isExternalRedirect}
           className={'email-sign-up-input'}
+          overflowing={isOverflowing}
+          overflowColor={bgColor}
         >
-          <Input
+          <$Input
             label="Email"
             name="email"
             placeholder={placeholder}
@@ -218,6 +258,7 @@ const SignUpWithEmailFieldLink = ({
             useValidation={false}
             ref={inputRef}
             className={isOverflowing ? 'overflowing' : ''}
+            required={isExternalRedirect}
           />
           <$Submit
             disabled={isLoading}
@@ -235,6 +276,11 @@ const SignUpWithEmailFieldLink = ({
             )}
           </$Submit>
         </$FormInner>
+        {formError && (
+          <$FormErrors>
+            <span>{formError}</span>
+          </$FormErrors>
+        )}
       </$Form>
     </FormContext>
   )

@@ -40,6 +40,8 @@ const {
   FB_PIXEL_ID,
   SENTRY_DSN,
   SANITY_STUDIO_VERCEL_DEPLOY_URL,
+  HUBSPOT_DEFAULT_PORTAL_ID,
+  HUBSPOT_DEFAULT_FORM_ID,
 } = process.env
 
 const moduleExports = withBundleAnalyzer({
@@ -72,6 +74,8 @@ const moduleExports = withBundleAnalyzer({
     FB_PIXEL_ID,
     SENTRY_DSN,
     SANITY_STUDIO_VERCEL_DEPLOY_URL,
+    HUBSPOT_DEFAULT_PORTAL_ID,
+    HUBSPOT_DEFAULT_FORM_ID,
   },
   reactStrictMode: false,
   poweredByHeader: false,
