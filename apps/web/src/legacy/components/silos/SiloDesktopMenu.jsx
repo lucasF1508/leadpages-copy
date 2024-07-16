@@ -12,12 +12,13 @@ import downArrowIcon from '@legacy/assets/images/global/arrow_down_large.svg'
 const DesktopMenuContainer = styled('div', {
   background: '$white',
   position: 'sticky',
-  top: '60px',
+  top: '0px',
+  paddingTop: '5.625rem',
   height: '60px',
   width: '100%',
   borderTop: '1px solid rgba(15, 12, 9, 0.08)',
   borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
-  zIndex: 49,
+  zIndex: '$dropdown',
   display: 'none',
 
   '@>m': {
@@ -63,11 +64,12 @@ const DesktopMenuIcon = styled('img', {
 const DesktopSubMenuContainer = styled('div', {
   background: '$white',
   position: 'sticky',
-  top: '60px',
+  top: '0px',
+  paddingTop: '5.625rem',
   width: '100%',
   borderTop: '1px solid rgba(15, 12, 9, 0.08)',
   borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
-  zIndex: 49,
+  zIndex: '$dropdown',
 
   '@<m': {
     display: 'none',

@@ -60,6 +60,14 @@ const NavLogo = ({ isSticky, darkHero, isStartPageHeader }) => {
   const lottie = useRef(null)
   const lightLogo = darkHero && !isNavOpen && !isSticky
 
+  const mouseEnter = () => {
+    lottie?.current.playSegments(isSticky ? [86, 103] : [40, 57], true)
+  }
+
+  const mouseLeave = () => {
+    lottie?.current.playSegments(isSticky ? [103, 119] : [57, 73], true)
+  }
+
   useEffect(() => {
     const checkAnimationLoaded = setInterval(() => {
       if (lottie?.current?.animationLoaded) {
@@ -79,14 +87,6 @@ const NavLogo = ({ isSticky, darkHero, isStartPageHeader }) => {
     if (!loaded) return
     lottie?.current?.playSegments(isSticky ? [73, 86] : [90, 73], true)
   }, [isSticky])
-
-  const mouseEnter = () => {
-    lottie?.current.playSegments(isSticky ? [86, 103] : [40, 57], true)
-  }
-
-  const mouseLeave = () => {
-    lottie?.current.playSegments(isSticky ? [103, 119] : [57, 73], true)
-  }
 
   return (
     <$LottieWrapper

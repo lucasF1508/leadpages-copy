@@ -37,27 +37,6 @@ const Lottie = ({
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(file.asset.url)
-      const result = await response.json()
-      setData(result)
-    }
-
-    const checkAnimationLoaded = setInterval(() => {
-      if (lottie?.current?.animationLoaded) {
-        setIsLoading(false)
-        clearInterval(checkAnimationLoaded)
-      }
-    }, 100)
-
-    fetchData()
-
-    return () => {
-      clearInterval(checkAnimationLoaded)
-    }
-  }, [])
-
   const hasYoyo = () => {
     direction *= -1
     lottie?.current.setDirection(direction)
@@ -67,7 +46,8 @@ const Lottie = ({
   const getInteractivity = () => {
     if (config && isJSON(config)) {
       return JSON.parse(config)
-    } else if (playOnScroll) {
+    }
+    if (playOnScroll) {
       return {
         mode: 'scroll',
         actions: [
@@ -78,7 +58,8 @@ const Lottie = ({
           },
         ],
       }
-    } else if (startInView) {
+    }
+    if (startInView) {
       return {
         mode: 'scroll',
         actions: [
@@ -102,6 +83,28 @@ const Lottie = ({
         break
     }
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(file.asset.url)
+      const result = await response.json()
+      setData(result)
+    }
+
+    const checkAnimationLoaded = setInterval(() => {
+      if (lottie?.current?.animationLoaded) {
+        setIsLoading(false)
+        clearInterval(checkAnimationLoaded)
+      }
+    }, 100)
+
+    fetchData()
+
+    return () => {
+      clearInterval(checkAnimationLoaded)
+    }
+  }, [])
+
   return (
     <>
       {isLoading && (
