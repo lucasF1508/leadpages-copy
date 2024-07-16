@@ -185,8 +185,6 @@ const NavBar = ({
   isStartPageHeader = false,
   isPreviewPage = false,
 }) => {
-  if (isPreviewPage) return null
-
   const { menu, buttons } = navigation || {}
   const { isNavOpen, dropdownSlug, setDropdownSlug, setNavOpen, hideNav } =
     useNavStore()
@@ -217,6 +215,8 @@ const NavBar = ({
       setNavOpen(false)
     }
   })
+
+  if (isPreviewPage) return null
 
   return (
     <>

@@ -37,8 +37,6 @@ const Pricing = ({ selectPlanButtonText, planOrder }) => {
   const { trialPlans, generalPlans } = planData || {}
   const classes = useStyles()
 
-  if (!trialPlans || !generalPlans) return null
-
   const [bundleData, setBundleData] = useState(null)
   const [couponData, setCouponData] = useState(null)
   const [previousPlan, setPreviousPlan] = useState(null)
@@ -92,6 +90,8 @@ const Pricing = ({ selectPlanButtonText, planOrder }) => {
       : null
     planRouter(planId, getTrialId(), couponData, routerBundleData, flow, window)
   }
+
+  if (!trialPlans || !generalPlans) return null
 
   return (
     <>
