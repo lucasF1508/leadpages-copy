@@ -5,7 +5,6 @@ import useGoogleTagManager from '@hooks/useGoogleTagManager'
 import useFacebookPixel from '@hooks/useFacebookPixel'
 import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useResizeEnd from '@hooks/useResizeEnd'
-import Header from '@components/Header'
 import Embed from '@components/Embed'
 import FullStory from '@components/FullStory'
 import Leadboxes from '@components/Leadboxes'
@@ -20,6 +19,7 @@ const PreviewBadge = dynamic(() => import('@hooks/usePreview'))
 const LayoutContainer = dynamic(() => import('@components/LayoutContainer'))
 const SEO = dynamic(() => import('@components/SEO'))
 const Footer = dynamic(() => import('@components/Footer'))
+const Nav = dynamic(() => import('@components/Nav'))
 const ModalParent = dynamic(() =>
   import('@components/Modal').then((mod) => mod.ModalParent)
 )
@@ -54,7 +54,15 @@ export default function App({
   // Promotions loading
   const [hasLoaded, setHasLoaded] = useState()
 
-  const { footer, globalHeaderFooter = {}, siteMeta, leadboxes } = global || {}
+  const [globalData, setGlobalData] = useState(global)
+  const {
+    footer,
+    globalHeaderFooter = {},
+    siteMeta,
+    leadboxes,
+    navigation,
+  } = globalData || {}
+
   const [previewData, setPreviewData] = useState(data)
   const [
     {
@@ -79,17 +87,12 @@ export default function App({
     simplifiedHeader,
     isPreviewPage,
     onPromotionsLoaded,
-    isPricingMenu = false,
-    underlaidMenu = false,
-    isStartPageHeader = false,
-    scrollTarget = '',
-    noLogin = false,
-    headerBkgColor = null,
-    hideSignUpButton = false,
-    hideBar = false,
-    darkHero = false,
     link,
     customCtaLink,
+    isPricingMenu = false,
+    isStartPageHeader = false,
+    hideBar = false,
+    darkHero = false,
     ...meta
   } = options
 
@@ -110,19 +113,12 @@ export default function App({
         <FullStory />
         <SEO seo={seo} siteMeta={siteMeta} isVariant={isVariant} />
         <LazyMotion features={loadFeatures} strict>
-          {/* {navigation && <Header navigation={navigation} />} */}
-          <Header
+          <Nav
+            navigation={navigation}
+            darkHero={darkHero}
             isPricingMenu={isPricingMenu}
-            underlaidMenu={underlaidMenu}
             simplifiedHeader={simplifiedHeader}
             isStartPageHeader={isStartPageHeader}
-            scrollTarget={scrollTarget}
-            noLogin={noLogin}
-            headerBkgColor={headerBkgColor}
-            hideSignUpButton={hideSignUpButton}
-            darkHero={darkHero}
-            link={link}
-            customCtaLink={customCtaLink}
           />
           <LayoutContainer>
             <Main {...pageData} {...meta} err={err} seo={seo} />
@@ -138,6 +134,7 @@ export default function App({
           initialData={data}
           queries={queries}
           setPreviewData={setPreviewData}
+          setGlobalData={setGlobalData}
         />
       )}
     </AppContext.Provider>

@@ -136,19 +136,24 @@ const $SquiggleContainer = styled('div', {
   my: '$9',
 })
 
-const $ScrollProgress = styled(motion.div, {
+const $ScrollProgressOuter = styled(motion.div, {
   display: 'none',
   position: 'sticky',
-  w: '100%',
-  h: '0.375rem',
-  mb: '-0.375rem',
-  bc: '$lightGray3',
-  top: '$headerHeight$s',
-  zIndex: '$cover',
+  top: 0,
+  background: '$white',
+  pt: `calc($headerHeight$s + 1.375rem)`,
+  zIndex: '$aboveContent',
 
   '@>1400': {
     display: 'block',
   },
+})
+
+const $ScrollProgress = styled('div', {
+  w: '100%',
+  h: '0.375rem',
+  mb: '-0.375rem',
+  bc: '$lightGray3',
 })
 
 const $ScrollProgressInner = styled('div', {
@@ -239,14 +244,16 @@ const ArchiveSingle = ({
         isVisible={showSidebar}
         useCustomSidebarLinks={useCustomSidebarLinks}
       />
-      <$ScrollProgress
-        animate={{ opacity: isScrolled ? 1 : 0, y: isScrolled ? 0 : '-100%' }}
+      <$ScrollProgressOuter
+        animate={{ opacity: isScrolled ? 1 : 0 }}
         transition={{ duration: 0.2 }}
       >
-        <$ScrollProgressInner>
-          <$ScrollProgressIndicator style={{ scaleX: scrollYProgress }} />
-        </$ScrollProgressInner>
-      </$ScrollProgress>
+        <$ScrollProgress>
+          <$ScrollProgressInner>
+            <$ScrollProgressIndicator style={{ scaleX: scrollYProgress }} />
+          </$ScrollProgressInner>
+        </$ScrollProgress>
+      </$ScrollProgressOuter>
       <Pinion component="archivePage">
         <$ArchiveLayout>
           <div>

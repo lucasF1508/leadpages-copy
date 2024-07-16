@@ -1,5 +1,6 @@
 export * from './heroes'
-export * from './menuColumns'
+export * from './primaryNav'
+export * from './templatesNav'
 export * from './schemaAnimate'
 export * from './schemaBackgroundColor'
 export { schemaBackgroundColorFull } from './schemaBackgroundColorFull'

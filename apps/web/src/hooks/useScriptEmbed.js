@@ -15,6 +15,7 @@ const useScriptEmbed = ({
   useEffect(() => {
     const parseScripts = async () => {
       const { default: parse, domToReact } = await import('html-react-parser')
+      if (!htmlString) return
 
       const parsedScripts = []
       const parsedComponents = parse(htmlString, {

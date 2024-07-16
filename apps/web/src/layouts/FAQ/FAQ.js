@@ -4,7 +4,6 @@ import { styled } from '@design'
 // components
 import Accordion from '@legacy/components/accordions/Accordion'
 import FAQHeader from '@legacy/components/headers/FAQHeader'
-import Layout from '@legacy/components/Layout'
 import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 // images
 import downArrow from '@legacy/assets/images/global/arrow_down_large.svg'
@@ -17,7 +16,6 @@ const OuterContainer = styled('div', {
   width: '100%',
   height: '100%',
   background: '$white',
-  position: 'relative',
 })
 
 const InnerContainer = styled('div', {
@@ -76,7 +74,7 @@ const SidebarContainer = styled('div', {
     scrolled: {
       true: {
         position: 'fixed',
-        top: '85px',
+        top: '105px',
         transition: 'position 0.3s ease',
       },
     },

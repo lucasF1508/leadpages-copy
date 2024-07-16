@@ -34,6 +34,7 @@ import {
 } from '@legacy/constants/templates'
 
 import tracker from '@legacy/components/templates/tracker'
+import { useNavStore } from '@components/Nav/NavStore'
 
 const stickyHeaderZIndex = 1501
 const sidebarWidth = 250
@@ -209,6 +210,7 @@ const Templates = ({
   const currentPath = router.asPath
   const queryString = useRef(getCategoryFromPath(currentPath))
   const firstLoad = useRef(true)
+  const setHideNav = useNavStore((state) => state.setHideNav)
 
   const onUpdateQueryString = (urlParams) => {
     if (firstLoad.current && urlParams === 'order_by=-release_date') {
@@ -284,6 +286,7 @@ const Templates = ({
   const setPositionResponsive = () => {
     if (showAppBarRef.current) {
       setShowAppBar(false)
+      setHideNav(false)
       showAppBarRef.current = false
     }
 
@@ -307,6 +310,7 @@ const Templates = ({
 
     if (showAppBarRef.current !== shouldShowAppBar) {
       setShowAppBar(shouldShowAppBar)
+      setHideNav(shouldShowAppBar)
       showAppBarRef.current = shouldShowAppBar
     }
 

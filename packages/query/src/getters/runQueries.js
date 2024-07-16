@@ -1,8 +1,12 @@
 import { getGlobalQueries, formatGlobalQueries } from './getGlobalQueries'
 
-export const runQueries = async (_docQueries, withGlobals = true) => {
+export const runQueries = async (
+  _docQueries,
+  withGlobals = true,
+  preview = false
+) => {
   const docQueries = Array.isArray(_docQueries) ? _docQueries : [_docQueries]
-  const globalQueries = await getGlobalQueries(false, true)
+  const globalQueries = await getGlobalQueries(preview, true)
 
   const responses = await Promise.allSettled([
     ...docQueries,

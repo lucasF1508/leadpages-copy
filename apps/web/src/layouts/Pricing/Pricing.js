@@ -33,6 +33,7 @@ import { getTrialId } from '@legacy/utils/trials'
 import backgroundImageSVG from '@legacy/assets/images/shapes/wavy-line-gray_pricing.svg'
 import testimonialImageRonCollins from '@legacy/assets/images/testimonials/ron-collins_far.png'
 import { AppContext } from '@app'
+import { makeStyles } from '@material-ui/styles'
 
 const HeadlineContainer = styled('div', {
   position: 'relative',
@@ -112,9 +113,17 @@ const AccordionSection = styled('div', {
   },
 })
 
+const useStyles = makeStyles({
+  planCompareWrapper: {
+    top: 0,
+    paddingTop: '5.625rem',
+  },
+})
+
 const Pricing = () => {
   const { planData, hasLoaded } = useContext(AppContext)
   const { trialPlans, generalPlans } = planData || {}
+  const classes = useStyles()
 
   const images = {
     testimonialImageRonCollins,
@@ -216,8 +225,11 @@ const Pricing = () => {
               selectPlanButtonText={
                 flow === FLOWS.REACTIVATION ? 'Select Plan' : 'Start Free Trial'
               }
+              PlanCompareStickyNavProps={{
+                className: classes.planCompareWrapper,
+              }}
             />
-          </PlanCompareWrapper>{' '}
+          </PlanCompareWrapper>
           <SpacerRow backgroundColor="$background" size="small" />
           <QuoteTestimonialsRotator
             testimonialsArray={testimonialsData}

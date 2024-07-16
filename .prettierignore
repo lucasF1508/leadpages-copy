@@ -1,3 +1,4 @@
 /apps/web/public/indices
 /apps/web/public/indices/
 /apps/web/public/indices/*
+/apps/web/public/*.json

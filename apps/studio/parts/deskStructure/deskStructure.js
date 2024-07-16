@@ -8,7 +8,7 @@ import {
   BsPlug,
   BsCollection,
 } from 'react-icons/bs'
-import { MdCallSplit } from 'react-icons/md'
+import { MdCallSplit, MdOutlineSmartButton } from 'react-icons/md'
 import { AiOutlineFileText, AiOutlineRetweet } from 'react-icons/ai'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import { RiLayoutBottom2Fill } from 'react-icons/ri'
@@ -100,6 +100,7 @@ export const deskStructure = () =>
       S.documentTypeListItem('cta').title('CTAs'),
       S.documentTypeListItem('templateCategory').title('Template Categories'),
       S.divider(),
+      GB.singletonListItem('navigation').icon(MdOutlineSmartButton),
       GB.singletonListItem('footer').icon(RiLayoutBottom2Fill),
       GB.categoriesListItem('category'),
       listItemSiteSettings,
