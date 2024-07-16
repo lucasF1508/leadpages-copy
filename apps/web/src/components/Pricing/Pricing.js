@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { styled } from '@design'
+
 // Components
 import {
   FLOWS,
@@ -17,15 +18,24 @@ import { getUrlParam } from '@legacy/utils/common'
 import { planRouter } from '@legacy/utils/plan-router'
 import { getTrialId } from '@legacy/utils/trials'
 import { AppContext } from '@app'
+import { makeStyles } from '@material-ui/styles'
 
 const PlanCompareWrapper = styled('div', {
   bc: '$background',
   pt: '16px',
 })
 
+const useStyles = makeStyles({
+  planCompareWrapper: {
+    top: 0,
+    paddingTop: '5.625rem',
+  },
+})
+
 const Pricing = ({ selectPlanButtonText, planOrder }) => {
   const { hasLoaded, planData } = useContext(AppContext)
   const { trialPlans, generalPlans } = planData || {}
+  const classes = useStyles()
 
   if (!trialPlans || !generalPlans) return null
 
@@ -105,6 +115,9 @@ const Pricing = ({ selectPlanButtonText, planOrder }) => {
                   : selectPlanButtonText || 'Start Free Trial'
               }
               planOrder={planOrder}
+              PlanCompareStickyNavProps={{
+                className: classes.planCompareWrapper,
+              }}
             />
           </PlanCompareWrapper>{' '}
         </>

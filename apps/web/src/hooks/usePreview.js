@@ -6,6 +6,7 @@ import { styled } from '@design'
 import Text from '@components/Text'
 import { $Link } from '@components/Link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getGlobalQueries } from '@lib'
 
 const $PreviewNotificationContainer = styled(motion.div, {
   position: 'fixed',
@@ -56,7 +57,13 @@ const $PreviewNotification = styled(motion.div, {
   },
 })
 
-const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
+const usePreview = ({
+  preview,
+  initialData,
+  queries,
+  setPreviewData,
+  setGlobalData,
+}) => {
   const { pathname } = useRouter()
   const [isLoading, setLoading] = useState(false)
   const [loadingText, setLoadingText] = useState('Fetching draft')
@@ -84,6 +91,8 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
     const getClient = (await import('client')).default
     const client = getClient({ preview: true })
 
+    const globalQueries = await getGlobalQueries(true)
+
     const allData = queries?.length
       ? await Promise.all(
           queries.map(({ query, params }) =>
@@ -94,6 +103,7 @@ const usePreview = ({ preview, initialData, queries, setPreviewData }) => {
 
     const previewData = await shapeData(allData)
     setPreviewData(previewData)
+    setGlobalData(globalQueries)
     setLoading(false)
 
     return () => undefined

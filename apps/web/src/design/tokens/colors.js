@@ -44,6 +44,7 @@ export const colors = {
   lavender: '#D1C6F9',
   lavenderLight: '#E4DEFC',
   lavenderBlush: '#fcedf5',
+  lavenderDark: '#A08BFF',
   champagne: '#f4e3cc',
   magnolia: '#f1edfd',
   teal: '#43E0F0',

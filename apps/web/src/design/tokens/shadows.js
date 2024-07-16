@@ -26,6 +26,7 @@ export const shadows = {
   mAlt: '0 8px 12px 0px $colors$whiteA5',
   lAlt: '0 16px 24px 2px $colors$whiteA5',
   xlAlt: '0 20px 32px 4px $colors$whiteA5',
+  nav: '0px 0px 2px 0px rgba(15, 12, 9, 0.04), 0px 2px 4px 0px rgba(15, 12, 9, 0.08)',
 }
 
 export default shadows

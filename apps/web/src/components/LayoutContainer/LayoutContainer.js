@@ -5,8 +5,6 @@ import useScrollToHash from '@hooks/useScrollToHash'
 import { m as motion, AnimatePresence } from 'framer-motion'
 
 const $LayoutContainer = styled(motion.div, {
-  pt: '$headerHeight$s',
-  mt: '-$headerHeight$s',
   w: '100%',
 })
 

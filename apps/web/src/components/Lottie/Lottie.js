@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { styled } from '@design'
-import { Player, Controls } from '@lottiefiles/react-lottie-player'
-import { create } from '@lottiefiles/lottie-interactivity'
+import LottieReact from 'lottie-react'
 import isJSON from '@utils/isJSON'
 import Loader from '@components/Loader'
 
@@ -31,72 +30,69 @@ const Lottie = ({
 }) => {
   if (!file || !file.asset) return null
   let direction = 1
-
   const { start = 0, end = 1 } = offset || {}
   const ref = useRef()
   const lottie = useRef(null)
   const { width, height, frames } = file?.asset || {}
   const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(file.asset.url)
+      const result = await response.json()
+      setData(result)
+    }
+
+    const checkAnimationLoaded = setInterval(() => {
+      if (lottie?.current?.animationLoaded) {
+        setIsLoading(false)
+        clearInterval(checkAnimationLoaded)
+      }
+    }, 100)
+
+    fetchData()
+
+    return () => {
+      clearInterval(checkAnimationLoaded)
+    }
+  }, [])
 
   const hasYoyo = () => {
     direction *= -1
-    ref.current.setPlayerDirection(direction)
-    ref.current.play()
+    lottie?.current.setDirection(direction)
+    lottie?.current.play()
   }
 
-  const hasPlayOnScroll = () => {
-    if (!lottie?.current) {
-      console.error('Lottie not initialized. Lottie:', lottie?.current)
-      return false
+  const getInteractivity = () => {
+    if (config && isJSON(config)) {
+      return JSON.parse(config)
+    } else if (playOnScroll) {
+      return {
+        mode: 'scroll',
+        actions: [
+          {
+            visibility: [start, end],
+            type: 'seek',
+            frames: [0, frames],
+          },
+        ],
+      }
+    } else if (startInView) {
+      return {
+        mode: 'scroll',
+        actions: [
+          {
+            visibility: [start, end],
+            type: 'play',
+          },
+        ],
+      }
     }
-    return create({
-      player: lottie?.current,
-      mode: 'scroll',
-      actions: [
-        {
-          visibility: [start, end],
-          type: 'seek',
-          frames: [0, frames],
-        },
-      ],
-    })
-  }
-
-  const hasStartInView = () => {
-    if (!lottie?.current) {
-      console.error('Lottie not initialized. Lottie:', lottie?.current)
-      return false
-    }
-
-    return create({
-      player: lottie?.current,
-      mode: 'scroll',
-      actions: [
-        {
-          visibility: [start, end],
-          type: 'play',
-        },
-      ],
-    })
-  }
-
-  const hasConfig = () => {
-    if (!lottie?.current) {
-      console.error('Lottie not initialized. Lottie:', lottie?.current)
-      return false
-    }
-
-    return create({
-      player: lottie?.current,
-      ...JSON.parse(config),
-    })
   }
 
   const handleEvent = (event) => {
     switch (event) {
-      case 'load':
-        setIsLoading(false)
-        break
       case 'complete':
         if (!config && yoyo) {
           hasYoyo()
@@ -106,18 +102,6 @@ const Lottie = ({
         break
     }
   }
-
-  const getInstance = (instance) => {
-    lottie.current = instance
-    if (config && isJSON(config)) {
-      hasConfig()
-    } else if (playOnScroll) {
-      hasPlayOnScroll()
-    } else if (startInView) {
-      hasStartInView()
-    }
-  }
-
   return (
     <>
       {isLoading && (
@@ -137,21 +121,16 @@ const Lottie = ({
         {...props}
         css={{ ratio: `${width}:${height}`, opacity: isLoading ? 0 : 1 }}
       >
-        <Player
+        <LottieReact
           ref={ref}
-          lottieRef={(instance) => getInstance(instance)}
-          onEvent={handleEvent}
-          keepLastFrame
+          lottieRef={lottie}
+          animationData={data}
           autoplay={autoplay}
           loop={loop}
-          src={file.asset.url}
-          speed={speed}
-        >
-          <Controls
-            visible={controlBar}
-            buttons={['play', 'repeat', 'frame', 'debug']}
-          />
-        </Player>
+          onComplete={() => handleEvent('complete')}
+          onLoopComplete={() => handleEvent('complete')}
+          interactivity={getInteractivity()}
+        />
       </$LottieContainer>
     </>
   )

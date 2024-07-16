@@ -20,11 +20,15 @@ const $ArchiveTableOfContentsContainer = styled(motion.div, {
   position: 'fixed',
   width: '100%',
   zIndex: '$dropdown',
-  top: '$headerHeight$s',
+  background: '$white',
+  top: 0,
+  pt: 'calc($headerHeight$s + 1.375rem)',
   maxHeight: 'calc(50vh - $headerHeight$s)',
   transition: 'opacity 0.15s ease-in-out',
 
   '@>1400': {
+    top: 'calc($headerHeight$s + 1.375rem)',
+    pt: 0,
     position: 'fixed',
     transition: 'transform 0.15s ease-in-out',
     width: 300,
@@ -195,7 +199,7 @@ const ArchiveTableOfContents = React.forwardRef(
     const { active, setSidebarSlugs } = useContext(SidebarContext) || {}
     const [open, setOpen] = useState(false)
     const [scrollPosition, setScrollPosition] = useState(0)
-    const { isSticky, showHeader, stickyMotionProps } = useStickyHeader({
+    const { isSticky, stickyMotionProps, showHeader } = useStickyHeader({
       offsetTop: offset,
     })
     const { scrollYProgress } = useScroll({
@@ -246,7 +250,7 @@ const ArchiveTableOfContents = React.forwardRef(
           <$ArchiveTableOfContentsContainer
             initial={{ opacity: 0 }}
             animate={{
-              y: showHeader ? 0 : '-4.375rem',
+              y: showHeader ? 0 : -90,
               opacity: isDesktop || isSticky ? 1 : 0,
             }}
             exit={{ opacity: 0 }}
@@ -264,7 +268,6 @@ const ArchiveTableOfContents = React.forwardRef(
             }}
           >
             <$ArchiveTableOfContentsToggle onClick={toggleMenu}>
-              {/* Empty flex item to center text */}
               <$ArchiveTableOfContentsToggleInner />
               <$ArchiveTableOfContentsToggleInner>
                 Jump to Section

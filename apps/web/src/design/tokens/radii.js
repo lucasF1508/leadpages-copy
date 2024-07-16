@@ -8,6 +8,8 @@ export const radii = {
   button: '$space$6',
   statsCard: '3.125rem',
   pill: '9501px',
+  nav: '0.75rem',
+  navItem: '0.375rem',
 }
 
 export default radii

@@ -60,7 +60,9 @@ export async function getStaticProps(context) {
       preview,
       params: { path: `/${path}` },
       projections: `category[]->`,
-    })
+    }),
+    true,
+    preview
   )
 
   // Only fetch pricing if we need it

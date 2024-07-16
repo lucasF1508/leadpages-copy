@@ -71,30 +71,34 @@ export async function getStaticProps(context) {
 
   // TODO: Combine 'postSettings' and 'pageArchive' queries
   // TODO: Grab 'perPage' from here so that we don't have to get it again later
-  const { data, global, queries } = await runQueries([
-    getDoc('postSettings', {}),
-    getAllDocs('categoryPost', {
-      filters: "!(_id in path('drafts.**'))",
-      projections: `${categoryPostCountQuery}`,
-      hasPagination: false,
-      preview,
-    }),
-    getAllDocs(docType, {
-      filters: filterForPublishedDate([
-        "!(_id in path('drafts.**'))",
-        ...filters,
-      ]),
-      order: 'order(coalesce(publishedDate, _createdAt) desc)',
-      offsetEnd: 1,
-      paginationHasFeatured: true,
-      hasPagination: false,
-      preview,
-    }),
-    getDoc('pageArchive', {
-      filters: [`archiveOf == "${docType}"`],
-      preview,
-    }),
-  ])
+  const { data, global, queries } = await runQueries(
+    [
+      getDoc('postSettings', {}),
+      getAllDocs('categoryPost', {
+        filters: "!(_id in path('drafts.**'))",
+        projections: `${categoryPostCountQuery}`,
+        hasPagination: false,
+        preview,
+      }),
+      getAllDocs(docType, {
+        filters: filterForPublishedDate([
+          "!(_id in path('drafts.**'))",
+          ...filters,
+        ]),
+        order: 'order(coalesce(publishedDate, _createdAt) desc)',
+        offsetEnd: 1,
+        paginationHasFeatured: true,
+        hasPagination: false,
+        preview,
+      }),
+      getDoc('pageArchive', {
+        filters: [`archiveOf == "${docType}"`],
+        preview,
+      }),
+    ],
+    true,
+    preview
+  )
 
   return {
     props: {

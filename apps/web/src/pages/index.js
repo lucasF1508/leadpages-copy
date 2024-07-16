@@ -38,7 +38,9 @@ export async function getStaticProps(context) {
     getDoc('pageHome', {
       preview,
       params: { slug: 'home' },
-    })
+    }),
+    true,
+    preview
   )
 
   return {

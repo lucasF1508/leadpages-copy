@@ -18,11 +18,12 @@ export const exporter = (props) => shapeData(props)
 export async function getStaticProps(context) {
   const { params, preview = false } = context
 
-  const { data, queries, global } = await runQueries([
-    getDoc('post', {
-      preview,
-      params,
-      projections: `
+  const { data, queries, global } = await runQueries(
+    [
+      getDoc('post', {
+        preview,
+        params,
+        projections: `
       relatedArticles[]->{
         ...,
         image {
@@ -51,14 +52,17 @@ export async function getStaticProps(context) {
             }
          }
       }`,
-    }),
-    getAllDocs('categoryPost', {
-      filters: ["!(_id in path('drafts.**'))"],
-      projections: `${categoryPostCountQuery}`,
-      order: 'order(lower(title) asc)',
-      hasPagination: false,
-    }),
-  ])
+      }),
+      getAllDocs('categoryPost', {
+        filters: ["!(_id in path('drafts.**'))"],
+        projections: `${categoryPostCountQuery}`,
+        order: 'order(lower(title) asc)',
+        hasPagination: false,
+      }),
+    ],
+    true,
+    preview
+  )
 
   return {
     props: {
