@@ -1538,10 +1538,10 @@
     react-transition-group "1.x"
     tinycolor2 "^1.4.1"
 
-"@lp/lib-upgrade-modal@^0.9.12":
-  version "0.9.12"
-  resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/lib-upgrade-modal/-/@lp/lib-upgrade-modal-0.9.12.tgz#fefd676132da3c608e66afe2d27338c890cc255b"
-  integrity sha512-0eq+FHV7Y6yHto/7qDd9hLt1D7J9OgaCqWbN0oGKL9jTVIBDGAae2e3zsqJ7S6H0+gsvxljVrfrZnCbBlMViHg==
+"@lp/lib-upgrade-modal@^0.9.14":
+  version "0.9.14"
+  resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/lib-upgrade-modal/-/@lp/lib-upgrade-modal-0.9.14.tgz#08cfa8cef1ca88285f837a178b4f8da0b9e8a9d5"
+  integrity sha512-HcuGz6hK/IfHXDXnoFWTdul2UP06gEtNVOkdOYcqh28iJeQ6sa7WS7HEGZxr2ePFO/5QkMBrQ9ypy8mnFUcEFg==
 
 "@lp/slugify@^0.1.0":
   version "0.1.0"
