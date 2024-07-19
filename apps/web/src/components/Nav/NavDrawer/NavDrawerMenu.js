@@ -78,6 +78,16 @@ const $DisclosureIcon = styled('div', {
 
 const $NavDrawerPrimary = styled(m.div, {})
 
+const $NavDrawerLink = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+
+  '> a': {
+    flex: 1,
+  },
+})
+
 const navDrawerPrimaryVariants = {
   initial: {},
   animate: {
@@ -170,8 +180,10 @@ const NavDrawerMenu = ({ menu, buttons }) => {
         exit={{ y: 50, opacity: 0 }}
         transition={{ duration: 0.2, delay: menu?.length && menu.length * 0.1 }}
       >
-        {buttons.map(({ _key, link, ...rest }) => (
-          <Link key={_key} href={link?.href} {...rest} />
+        {buttons.map(({ _key, url, ...rest }) => (
+          <$NavDrawerLink key={_key} onClick={() => setNavOpen(false)}>
+            <Link url={url} {...rest} />
+          </$NavDrawerLink>
         ))}
       </$NavDrawerButtons>
     </$NavDrawerMenu>
