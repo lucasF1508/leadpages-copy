@@ -76,6 +76,7 @@ export async function getStaticProps(context) {
       order: 'order(title)',
       preview,
       hasPagination: false,
+      slice: 'none',
     }),
   ])
 
