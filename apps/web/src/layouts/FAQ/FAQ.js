@@ -8,8 +8,6 @@ import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 // images
 import downArrow from '@legacy/assets/images/global/arrow_down_large.svg'
 import close from '@legacy/assets/images/global/x_close.svg'
-// data
-import { faqPageData } from '@legacy/data/faq_data'
 
 const OuterContainer = styled('div', {
   position: 'relative',
@@ -236,7 +234,6 @@ const FAQSection = styled('div', {
 })
 
 const Section = styled('div', {
-  paddingTop: '1rem',
   width: '100%',
   paddingTop: '85px',
   marginTop: '-85px',
@@ -264,15 +261,16 @@ const SectionTitle = styled('div', {
   },
 })
 
-const FAQPage = () => {
+const FAQPage = ({ docs = [] }) => {
   const [FAQsSidebarScrolled, setFAQsSidebarScrolled] = useState(false)
   const [FAQsMainMenuScrolled, setFAQsMainMenuScrolled] = useState(false)
   const [showFAQsSubMenu, setShowFAQsSubMenu] = useState(false)
 
   const categories = []
-  faqPageData.forEach((el) =>
-    categories.indexOf(el.category) === -1 ? categories.push(el.category) : null
-  )
+  docs.forEach((el) => {
+    const title = el?.category && el.category[0]?.title
+    return categories.indexOf(title) === -1 ? categories.push(title) : null
+  })
 
   const toggleSubMenu = () => {
     setShowFAQsSubMenu(!showFAQsSubMenu)
@@ -303,6 +301,22 @@ const FAQPage = () => {
       setShowFAQsSubMenu(false)
     }
   }
+
+  const faqPageData = [...docs].reduce((acc, item) => {
+    if (!item.category) return acc
+    const category = Array.isArray(item.category)
+      ? item.category[0]?.title
+      : item.category
+
+    return [
+      ...acc,
+      {
+        category,
+        title: item.title,
+        content: item.content,
+      },
+    ]
+  }, [])
 
   useEffect(() => {
     window.addEventListener('scroll', handleFAQsScroll)
@@ -372,7 +386,7 @@ const FAQPage = () => {
               </SubmenuHeader>
               <SubmenuContent>
                 {categories.map((item) => (
-                  <SubmenuLink>
+                  <SubmenuLink key={item}>
                     <ScrollLink
                       activeClass="activeFAQsLink"
                       to={item}
