@@ -62,6 +62,11 @@ const $Pill = styled('span', {
   borderRadius: '$pill',
   type: 'overline',
   lh: '1.4',
+
+  '> div': {
+    position: 'relative',
+    top: 1,
+  },
 })
 
 const $Icon = styled('div', {
@@ -119,7 +124,11 @@ const NavItem = ({ data }) => {
           {label && (
             <$NavItemHeading>
               <$NavItemHeadingLabel>{label}</$NavItemHeadingLabel>
-              {pillContent && <$Pill>{pillContent}</$Pill>}
+              {pillContent && (
+                <$Pill>
+                  <div>{pillContent}</div>
+                </$Pill>
+              )}
             </$NavItemHeading>
           )}
           <$SecondaryText>{secondaryText}</$SecondaryText>

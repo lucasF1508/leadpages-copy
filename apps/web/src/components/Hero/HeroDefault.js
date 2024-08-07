@@ -183,7 +183,7 @@ const HeroDefault = ({
     extendBackgroundColor = false,
   } = backgroundOptions
 
-  const darkBackground = features.darkHeros.includes(backgroundColor)
+  const darkBackground = features.darkBackgrounds.includes(backgroundColor)
   const bc = extendBackgroundColor ? palette?.dominant?.background : null
 
   return (

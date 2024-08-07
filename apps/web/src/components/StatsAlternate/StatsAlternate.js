@@ -177,7 +177,7 @@ const StatsAlternate = ({
   ...props
 }) => {
   const backgroundColor = _backgroundColor || 'navy'
-  const darkBackground = features.darkHeros.includes(backgroundColor)
+  const darkBackground = features.darkBackgrounds.includes(backgroundColor)
 
   return (
     <$StatsAlternate {...props} className={darkBackground && darkTheme}>

@@ -28,8 +28,8 @@ const Rack = ({ components, children, ...props }) => {
             ({ _key, _type: component, width, ...componentData }) => {
               const Component = RackComponentList[component]
               const { backgroundColor, legacyComponent } = componentData
-              const darkBackground =
-                features.darkHeros.includes(backgroundColor)
+              const useDarkTheme =
+                features.darkBackgrounds.includes(backgroundColor)
 
               if (!Component) {
                 console.error(
@@ -50,7 +50,7 @@ const Rack = ({ components, children, ...props }) => {
                   backgroundColor={backgroundColor}
                   legacyComponent={legacyComponent}
                   component={component}
-                  className={darkBackground && darkTheme}
+                  className={useDarkTheme && darkTheme}
                 >
                   <Component {...componentData} />
                 </Pinion>

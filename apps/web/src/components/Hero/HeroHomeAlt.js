@@ -147,7 +147,7 @@ const HeroHomeAlt = ({
   const { displayBrowserContainer = false, backgroundColor = false } =
     backgroundOptions || {}
 
-  const darkBackground = features.darkHeros.includes(backgroundColor)
+  const darkBackground = features.darkBackgrounds.includes(backgroundColor)
   const hasMedia = media?.condition !== 'none'
 
   return (
