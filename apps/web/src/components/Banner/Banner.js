@@ -1,191 +1,205 @@
 import React from 'react'
-import { styled } from '@design'
+import { styled, darkTheme, theme } from '@design'
 import Image from '@components/Image'
 import Link from '@components/Link'
+import { features } from 'config'
+import { colorOptions } from '@design/objects'
 
-const BannerContainer = styled('div', {
-  maxWidth: '$extended',
+const $Banner = styled('div', {
+  maxWidth: '$narrow',
   position: 'relative',
   marginLeft: 'auto',
   marginRight: 'auto',
   background: '$grayAlt',
 
-  '@<s': {
-    paddingRight: '3rem',
-    paddingLeft: '3rem',
+  variants: {
+    backgroundColor: colorOptions,
   },
 })
 
-const FlexRow = styled('div', {
-  maxWidth: '$extended',
-  marginLeft: 'auto',
-  marginRight: 'auto',
+const $BannerInner = styled('div', {
   display: 'flex',
-  flexWrap: 'wrap',
-
-  '@<s': {
-    flexDirection: 'column-reverse',
-  },
-})
-
-const FlexRowItem = styled('div', {
-  minHeight: '1px',
-  position: 'relative',
+  flexDirection: 'column-reverse',
   textAlign: 'center',
-  textDecoration: 'none',
-  width: '100%',
-})
+  gap: '$1_5',
 
-const FlexRowLeft = styled(FlexRowItem, {
-  alignSelf: 'flex-end',
-  textAlign: 'left',
-  paddingRight: '1%',
-
-  '@<s': {
-    flex: '0 0 100%',
-    maxWidth: '100%',
-  },
-
-  '@>s': {
-    WebkitBoxFlex: 0,
-    MsFlex: '0 0 23%',
-    flex: '0 0 23%',
-    maxWidth: '23%',
-  },
-
-  '@>m': {
-    marginBottom: '0rem',
-    WebkitBoxFlex: 0,
-    MsFlex: '0 0 23%',
-    flex: '0 0 23%',
-    maxWidth: '23%',
-  },
-})
-const HeaderImgLeft = styled('div', {
-  width: '100%',
-})
-
-const FlexRowRight = styled(FlexRowItem, {
-  textAlign: 'center',
-  alignSelf: 'center',
-  paddingLeft: '1%',
-  paddingRight: '1%',
-
-  '@<s': {
-    flex: '0 0 100%',
-    maxWidth: '100%',
-  },
-
-  '@>s': {
-    flex: '0 0 64.6%',
-    maxWidth: '64.6%',
-  },
-
-  '@>m': {
-    marginBottom: '0rem',
-    flex: '0 0 64.6%',
-    maxWidth: '64.6%',
+  '@>769': {
+    flexDirection: 'row',
     textAlign: 'left',
+    gap: 0,
   },
 })
 
-const LeftHeading = styled('div', {
+const $Image = styled('div', {
+  width: '100%',
+  position: 'relative',
+  display: 'flex',
+  minWidth: '12.5rem',
+  maxWidth: '15.5rem',
+  alignSelf: 'center',
+
+  '@>769': {
+    mt: '$4_5',
+    alignSelf: 'unset',
+  },
+
+  '> figure': {
+    alignSelf: 'flex-end',
+  },
+
+  variants: {
+    imagePosition: {
+      edge: {},
+      content: {
+        mb: '$4_5',
+        ml: '$4_5',
+      },
+    },
+  },
+})
+
+const $Content = styled('div', {
+  padding: '$4_5',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '$3',
+
+  '@>1025': {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: '$4_5',
+  },
+})
+
+const $Heading = styled('div', {
   fontFamily: 'Value Serif',
   fontSize: '1.875rem',
-  letterSpacing: '-0.03125rem',
-  lineHeight: '2.25rem',
+  lineHeight: '$lineHeights$m',
   color: '$text',
-  marginBottom: '2rem',
+})
 
-  '@<s': {
-    fontSize: '1.5rem',
-    lineHeight: '1.75rem',
-    letterSpacing: 0,
+const $SubHeading = styled('div', {
+  color: '$text',
+  fontFamily: 'Apercu Pro',
+  fontSize: '1.125rem',
+  lineHeight: '1.5rem',
+  fontWeight: 500,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flexDirection: 'column',
+  gap: '$1_5',
+
+  '@>769': {
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
   },
 })
 
-const LeftSubHeading = styled('div', {
+const $Body = styled('div', {
   color: '$textAlt',
   fontFamily: 'Apercu Pro',
   fontSize: '1.125rem',
-  lineHeight: '1.75rem',
-  marginBottom: '2rem',
+  lineHeight: '1.5rem',
+})
 
-  '@<s': {
-    fontSize: '1rem',
+const $ContentInner = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1.125rem',
+})
+
+const $Link = styled('div', {})
+
+const $Pill = styled('div', {
+  py: '$0_5',
+  px: '$1_5',
+  backgroundColor: '$lavenderLight',
+  borderRadius: '$pill',
+
+  '> div': {
+    color: '$primary',
+    lh: '1.4',
+    position: 'relative',
+    top: 1,
+    fontWeight: '$normal',
+    type: 'overline',
   },
 })
 
-const SubFlexRow = styled('div', {
-  '@media (min-width: 769px)': {
-    display: 'flex',
-  },
+const $LayoutContainer = styled('div', {
+  marginLeft: '$4_5',
+  marginRight: '$4_5',
 
-  '@<s': {
-    paddingLeft: '5%',
-    paddingRight: '5%',
-  },
-})
-
-const SubFlexRowLeft = styled('div', {
-  marginTop: '66px',
-  alignSelf: 'center',
-  marginRight: '24px',
-  textAlign: 'left',
-
-  '@<s': {
-    textAlign: 'center',
+  '@>s': {
+    marginLeft: '$6',
+    marginRight: '$6',
   },
 })
 
-const SubFlexRowRight = styled('div', {
-  alignSelf: 'center',
-  textAlign: 'left',
+const Banner = ({
+  heading,
+  subheading,
+  image,
+  links,
+  body,
+  pill,
+  componentColor: backgroundColor,
+  backgroundColor: sectionColor,
+  imagePosition = 'edge',
+  linkIsHidden = false,
+}) => {
+  const link = links?.[0]
+  const { darkBackgrounds } = features
+  const useDarkMode =
+    backgroundColor !== 'transparent'
+      ? darkBackgrounds.includes(backgroundColor)
+      : darkBackgrounds.includes(sectionColor)
 
-  '@<s': {
-    textAlign: 'center',
-  },
-
-  '@media (max-width: 768px)': {
-    marginBottom: '2rem',
-  },
-})
-
-const Banner = ({ heading, subheading, image, link }) => (
-  <BannerContainer>
-    <FlexRow>
-      {image && (
-        <FlexRowLeft>
-          <HeaderImgLeft>
-            <Image image={image} alt={image?.altText} />
-          </HeaderImgLeft>
-        </FlexRowLeft>
-      )}
-      <FlexRowRight>
-        <SubFlexRow>
-          <SubFlexRowLeft>
-            {heading && <LeftHeading>{heading}</LeftHeading>}
-            {subheading && <LeftSubHeading>{subheading}</LeftSubHeading>}
-          </SubFlexRowLeft>
-          {link && (
-            <SubFlexRowRight>
-              <Link
-                {...link}
-                css={
-                  link.linkStyle === 'button'
-                    ? {
-                        width: '192px',
-                        px: 0,
-                      }
-                    : undefined
-                }
-              />
-            </SubFlexRowRight>
+  return (
+    <$LayoutContainer>
+      <$Banner
+        backgroundColor={backgroundColor}
+        className={useDarkMode ? darkTheme : theme}
+      >
+        <$BannerInner>
+          {image && (
+            <$Image imagePosition={imagePosition}>
+              <Image image={image} alt={image?.altText} />
+            </$Image>
           )}
-        </SubFlexRow>
-      </FlexRowRight>
-    </FlexRow>
-  </BannerContainer>
-)
+          <$Content>
+            <$ContentInner>
+              {heading && <$Heading>{heading}</$Heading>}
+              {subheading && (
+                <$SubHeading>
+                  {pill && (
+                    <$Pill>
+                      <div>{pill}</div>
+                    </$Pill>
+                  )}
+                  <div>{subheading}</div>
+                </$SubHeading>
+              )}
+              {body && <$Body>{body}</$Body>}
+            </$ContentInner>
+            {link && !linkIsHidden && (
+              <$Link>
+                <Link
+                  {...link}
+                  css={{
+                    minWidth: 'unset',
+                    paddingLeft: '$2_5',
+                    paddingRight: '$2_5',
+                  }}
+                />
+              </$Link>
+            )}
+          </$Content>
+        </$BannerInner>
+      </$Banner>
+    </$LayoutContainer>
+  )
+}
 
 export default Banner

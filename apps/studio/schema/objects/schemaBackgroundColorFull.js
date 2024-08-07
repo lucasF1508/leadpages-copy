@@ -9,7 +9,7 @@ export const colorOptions = [
   { title: 'Light Lavender', value: 'lavender' },
   { title: 'Teal', value: 'teal' },
   { title: 'Light Teal', value: 'tealLight' },
-  ...features.darkHeros,
+  ...features.darkBackgrounds,
 ]
 
 export const schemaBackgroundColorFull = F.dropdown(colorOptions, {

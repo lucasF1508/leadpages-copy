@@ -2,7 +2,7 @@
 export const features = {
   // ecommerce: true,
   // products: true,
-  darkHeros: ['navy', 'purple', 'purpleDark'],
+  darkBackgrounds: ['navy', 'purple', 'purpleDark'],
   lightHeros: ['gray'],
 }
 

@@ -19,7 +19,7 @@ export const shapeData = (data) => {
   const [hero] = heroes || []
 
   // Page options
-  const darkHero = features.darkHeros.includes(
+  const darkHero = features.darkBackgrounds.includes(
     hero?.backgroundOptions?.backgroundColor
   )
 

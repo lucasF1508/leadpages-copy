@@ -26,6 +26,8 @@ export const pinionTokens = {
       },
       banner: {
         px: 'unset',
+        zIndex: '$under',
+
         '> div': {
           maxWidth: '$base',
         },

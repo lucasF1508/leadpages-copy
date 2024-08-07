@@ -186,7 +186,7 @@ const SocialProof = ({
   background,
 }) => {
   const bgColor = _bgColor || 'navy'
-  const darkBackground = features.darkHeros.includes(bgColor)
+  const darkBackground = features.darkBackgrounds.includes(bgColor)
 
   return (
     <$SocialProofSection

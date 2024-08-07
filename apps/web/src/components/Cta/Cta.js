@@ -224,7 +224,7 @@ const Cta = ({
   zIndex,
 }) => {
   const bgColor = _bgColor || 'navy'
-  const darkBackground = features.darkHeros.includes(bgColor)
+  const darkBackground = features.darkBackgrounds.includes(bgColor)
   const RTGContainerPadding = paddingScale
     ? { py: `${6 * paddingScale}rem`, '@>s': { py: `${10 * paddingScale}rem` } }
     : {}
