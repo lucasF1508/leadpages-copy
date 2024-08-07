@@ -276,6 +276,8 @@ const Templates = ({
   const showScrollTopRef = useRef(false)
   const [showScrollToTop, setShowScrollToTop] = useState(false)
 
+  const isInitialPreview = currentPath.includes('preview')
+
   const classes = useStyles({ sidebarOpen: state.ui.sidebarOpen })
 
   const getGalleryTop = () =>
@@ -425,6 +427,13 @@ const Templates = ({
       augmentedActions.init()
     }
   }, [state.ui.hasLoaded, augmentedActions])
+
+  useEffect(() => {
+    if (isInitialPreview) {
+      const path = kind === TemplateKind.LandingPage ? '/templates' : '/website-templates';
+      setCurrentURL(path);
+    }
+  }, [isInitialPreview]);
 
   const hasCheckedRef = useRef(false)
   useEffect(() => {
