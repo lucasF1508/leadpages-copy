@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled } from '@design'
+import { styled, theme } from '@design'
 import Heading from '@components/Heading'
 import Text from '@components/Text'
 import Link from '@components/Link'
