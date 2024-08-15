@@ -577,6 +577,7 @@ const Templates = ({
                     key={template.ui.guid}
                     template={template}
                     onPreviewTemplate={handlePreview}
+                    previewButtonText="View"
                   />
                 ))}
               </Gallery>
