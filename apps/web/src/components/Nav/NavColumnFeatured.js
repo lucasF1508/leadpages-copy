@@ -45,7 +45,7 @@ const $NavColumnFeaturedGroup = styled('div', {
 
 const groupItemsByMenuHeading = (items) => {
   const groupedItems = items.reduce((acc, item) => {
-    if (item._type === 'menuHeading') {
+    if (item._type === 'menuHeading' || acc.length === 0) {
       acc.push([item])
     } else {
       acc[acc.length - 1].push(item)
