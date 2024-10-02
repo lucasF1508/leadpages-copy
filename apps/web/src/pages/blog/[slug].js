@@ -24,6 +24,24 @@ export async function getStaticProps(context) {
         preview,
         params,
         projections: `
+      content[]{
+        ...,
+        image {
+          ...,
+          asset->
+        },
+        cta-> {
+          ...,
+          links[] {
+            ...,
+            "url": page->path,
+          },
+          image {
+            ...,
+            asset->
+          }
+        },
+      }, 
       relatedArticles[]->{
         ...,
         image {

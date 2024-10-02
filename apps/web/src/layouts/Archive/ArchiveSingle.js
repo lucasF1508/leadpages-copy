@@ -231,9 +231,9 @@ const ArchiveSingle = ({
     }
   }, [offsetRef.current])
 
-  const openingH2 = content.findIndex(({ style }) => style === 'h2')
-  const excerpt = content.slice(0, openingH2)
-  const rest = content.slice(openingH2)
+  const openingH2 = content?.findIndex(({ style }) => style === 'h2')
+  const excerpt = content?.slice(0, openingH2)
+  const rest = content?.slice(openingH2)
 
   return (
     <div>
