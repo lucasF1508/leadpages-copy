@@ -121,7 +121,6 @@ export const fields = [
           { title: 'Lavender light', value: 'lavenderLight' },
           { title: 'Transparent', value: 'transparent' },
           { title: 'Text Highlight', value: 'textHighlight' },
-          { title: 'Champagne', value: 'champagne' },
           { title: 'Magnolia', value: 'magnolia' },
         ],
         layout: 'radio',
