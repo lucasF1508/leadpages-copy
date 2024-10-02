@@ -5,6 +5,7 @@ import Text from '@components/Text'
 import Link from '@components/Link'
 import Image from '@components/Image'
 import ImageFallback from '@images/Leadpages-Free-Trial@2x.png'
+import omit from 'lodash/omit'
 
 const $Heading = styled(Heading, {
   pb: '$3',
@@ -149,7 +150,19 @@ const $InlineCta = styled('div', {
   },
 })
 
+const $Links = styled('div', {
+  d: 'flex',
+  gap: '$2',
+})
+
 const InlineCta = ({ node = {}, ...props }) => {
+  const { cta: globalCta, ...rest } = node
+
+  const data = {
+    ...rest,
+    ...(globalCta || {}),
+  }
+
   const {
     image,
     content,
@@ -160,7 +173,7 @@ const InlineCta = ({ node = {}, ...props }) => {
     imageWidth = 'third',
     links,
     legacyLink,
-  } = node
+  } = data
 
   return (
     <$InlineCta
@@ -183,19 +196,21 @@ const InlineCta = ({ node = {}, ...props }) => {
             />
           </$CTAButton>
         )}
-        {!legacyLink &&
-          !!links?.length &&
-          links?.map(({ _key, ...link }) => (
-            <Link
-              className={
-                bgColor !== 'purple' && link.linkStyle === 'button' && theme
-              }
-              bgColor={bgColor}
-              key={_key}
-              align={'start'}
-              {...link}
-            />
-          ))}
+        <$Links>
+          {!legacyLink &&
+            !!links?.length &&
+            links?.map(({ _key, ...link }) => (
+              <Link
+                className={
+                  bgColor !== 'purple' && link.linkStyle === 'button' && theme
+                }
+                bgColor={bgColor}
+                key={_key}
+                align={'start'}
+                {...link}
+              />
+            ))}
+        </$Links>
       </$CTAContent>
     </$InlineCta>
   )

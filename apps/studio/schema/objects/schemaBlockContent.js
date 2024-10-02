@@ -246,6 +246,10 @@ export const blockContent = {
     }),
     {
       type: 'inlineCTA',
+      hidden: true,
+    },
+    {
+      type: 'schemaInlineCTAGlobalBlock',
     },
     {
       type: 'logoGrid',

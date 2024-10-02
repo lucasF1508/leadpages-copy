@@ -97,7 +97,17 @@ export const deskStructure = () =>
         icon: BsQuestionCircle,
       }),
       S.documentTypeListItem('feature').title('Features'),
-      S.documentTypeListItem('cta').title('CTAs'),
+      S.listItem()
+        .title('CTAs')
+        .child(
+          S.list()
+            .title('CTAs')
+            .items([
+              S.documentTypeListItem('cta').title('Primary CTAs'),
+              S.documentTypeListItem('inlineCTAGlobal').title('Blog CTAs'),
+            ])
+        )
+        .icon(AiOutlineFileText),
       S.documentTypeListItem('templateCategory').title('Template Categories'),
       S.divider(),
       GB.singletonListItem('navigation').icon(MdOutlineSmartButton),

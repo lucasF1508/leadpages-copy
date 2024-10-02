@@ -12,6 +12,7 @@ const RendererList = {
   socialLinks: dynamic(() => import('./SocialLinksRenderer')),
   table: dynamic(() => import('./TableRenderer')),
   inlineCTA: dynamic(() => import('./InlineCTA')),
+  schemaInlineCTAGlobalBlock: dynamic(() => import('./InlineCTA')),
   dropShadowBox: dynamic(() => import('./DropShadowBox')),
   logoGrid: dynamic(() => import('./InlineLogoGrid')),
 }
