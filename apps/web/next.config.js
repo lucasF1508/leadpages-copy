@@ -84,12 +84,8 @@ const moduleExports = withBundleAnalyzer({
     includePaths: [path.resolve(__dirname, 'node_modules')],
   },
   images: {
-    domains: ['cdn.sanity.io', 'assets.vercel.com'],
+    domains: ['cdn.sanity.io', 'assets.vercel.com', 'storage.googleapis.com'],
     deviceSizes: [320, 640, 750, 828, 1080, 1200, 1600, 1920, 2048, 3840],
-  },
-  i18n: {
-    locales: ['en'],
-    defaultLocale: 'en',
   },
   redirects: async () => {
     const redirects = await adminRedirects({
