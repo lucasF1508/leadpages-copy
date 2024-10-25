@@ -44,7 +44,7 @@ const $NavColumnFeaturedGroup = styled('div', {
 })
 
 const groupItemsByMenuHeading = (items) => {
-  const groupedItems = items.reduce((acc, item) => {
+  const groupedItems = items?.reduce((acc, item) => {
     if (item._type === 'menuHeading' || acc.length === 0) {
       acc.push([item])
     } else {
@@ -57,11 +57,11 @@ const groupItemsByMenuHeading = (items) => {
 }
 
 const NavColumnFeatured = ({ items }) => {
-  const groups = groupItemsByMenuHeading(items)
+  const groups = groupItemsByMenuHeading(items) || []
 
   return (
     <$NavColumnFeatured>
-      {groups.map((group, index) => (
+      {groups?.map((group, index) => (
         <$NavColumnFeaturedGroup key={index}>
           {group.map(({ _type, _key, ...componentData }) => {
             const Component = ColumnComponentList[_type]

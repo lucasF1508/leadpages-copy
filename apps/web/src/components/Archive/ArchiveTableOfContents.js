@@ -145,7 +145,7 @@ const $ScrollProgressIndicator = styled(motion.div, {
 })
 
 export const shapeSidebarData = (content, useCustomSidebarLinks) => {
-  const sideBarData = content.reduce(
+  const sideBarData = content?.reduce(
     (acc, { markDefs, children, style: itemStyle, _type }) => {
       if (useCustomSidebarLinks) {
         const isCustomSidebarLink = markDefs?.find(
@@ -225,7 +225,7 @@ const ArchiveTableOfContents = React.forwardRef(
     }
 
     useMemo(() => {
-      setSidebarSlugs(filteredSidebarData.map(({ slug }) => slug))
+      setSidebarSlugs(filteredSidebarData?.map(({ slug }) => slug))
     }, [])
 
     const handleScroll = () => {
