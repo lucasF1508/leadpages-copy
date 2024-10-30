@@ -252,6 +252,10 @@ export const type = {
       '@>m': typeSizes.lg,
       lh: '$lineHeights$m',
     },
+    tabsContent: {
+      ...typeSizes.base,
+      '@>1025': typeSizes.lg,
+    },
   },
   fontStyles: {
     baseType: {

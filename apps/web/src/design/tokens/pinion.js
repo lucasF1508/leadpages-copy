@@ -181,6 +181,21 @@ export const pinionTokens = {
           maxWidth: '$base',
         },
       },
+      templateHero: {
+        px: '$3',
+
+        '@>1025': {
+          px: '$7_5',
+        },
+      },
+      template: {
+        overflow: 'hidden',
+        px: '$4_5',
+
+        '@>1025': {
+          px: '$7_5',
+        },
+      },
       archivePage: {
         px: 'unset',
         mt: '$3',

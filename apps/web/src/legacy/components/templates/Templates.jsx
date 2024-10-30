@@ -185,7 +185,7 @@ const isAbove1024Breakpoint = () => {
 
 const getQueryStringFromPath = (url) => url.split('?').slice(1).join('')
 
-const getCategoryFromPath = (currentPath) => {
+export const getCategoryFromPath = (currentPath) => {
   const queryStringFromPath = getQueryStringFromPath(currentPath)
   const category = currentPath?.split('category/')[1]?.split('?')[0]
 
@@ -430,10 +430,11 @@ const Templates = ({
 
   useEffect(() => {
     if (isInitialPreview) {
-      const path = kind === TemplateKind.LandingPage ? '/templates' : '/website-templates';
-      setCurrentURL(path);
+      const path =
+        kind === TemplateKind.LandingPage ? '/templates' : '/website-templates'
+      setCurrentURL(path)
     }
-  }, [isInitialPreview]);
+  }, [isInitialPreview])
 
   const hasCheckedRef = useRef(false)
   useEffect(() => {

@@ -186,7 +186,7 @@ const InlineCta = ({ node = {}, ...props }) => {
         <Image objectFit="contain" image={image || ImageFallback} />
       </$CTAImage>
       <$CTAContent>
-        {content && <$Text content={content} isPost={true} />}
+        {content && <$Text content={content} usePostTokens={true} />}
         {legacyLink && ctaLink && (
           <$CTAButton isFlex={true}>
             <Link

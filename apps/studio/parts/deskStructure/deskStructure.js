@@ -9,17 +9,24 @@ import {
   BsCollection,
 } from 'react-icons/bs'
 import { MdCallSplit, MdOutlineSmartButton } from 'react-icons/md'
-import { AiOutlineFileText, AiOutlineRetweet } from 'react-icons/ai'
+import {
+  AiOutlineFileText,
+  AiOutlineRetweet,
+  AiOutlineSetting,
+} from 'react-icons/ai'
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 import { RiLayoutBottom2Fill } from 'react-icons/ri'
 import { listItemSiteSettings } from './listItems'
+import templatesListItems from '../utils/templatesListItems'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
 const allTemplatesTypes = getTemplateSchemas().map(({ name }) => name)
 
-export const deskStructure = () =>
-  S.list()
+export const deskStructure = async () => {
+  templatesListItems()
+
+  return S.list()
     .title('Menu')
     .items([
       S.listItem()
@@ -42,6 +49,45 @@ export const deskStructure = () =>
         )
         .icon(AiOutlineFileText),
       S.documentTypeListItem('post'),
+      S.listItem()
+        .title('Templates')
+        .child(
+          S.list()
+            .title('Templates')
+            .items([
+              S.listItem()
+                .title('Leadpage Templates')
+                .icon(AiOutlineFileText)
+                .child(
+                  S.documentList()
+                    .title('Leadpage Templates')
+                    .filter('_type == "template" && kind == "LeadpageTemplate"')
+                ),
+              S.listItem()
+                .title('Website Templates')
+                .icon(AiOutlineFileText)
+                .child(
+                  S.documentList()
+                    .title('Website Templates')
+                    .filter('_type == "template" && kind == "SiteTemplate"')
+                ),
+              S.documentTypeListItem('templateCategory').title(
+                'Template Categories'
+              ),
+              S.divider(),
+              GB.singletonListItem('templateSettings', {
+                title: 'Template Settings',
+                id: 'templateSettings',
+                documentId: 'templateSettings',
+              }).icon(AiOutlineSetting),
+              GB.singletonListItem('templateSettings', {
+                title: 'Website Template Settings',
+                id: 'websiteTemplateSettings',
+                documentId: 'websiteTemplateSettings',
+              }).icon(AiOutlineSetting),
+            ])
+        )
+        .icon(AiOutlineFileText),
       S.listItem()
         .title('A/B Tests')
         .child(
@@ -108,7 +154,6 @@ export const deskStructure = () =>
             ])
         )
         .icon(AiOutlineFileText),
-      S.documentTypeListItem('templateCategory').title('Template Categories'),
       S.divider(),
       GB.singletonListItem('navigation').icon(MdOutlineSmartButton),
       GB.singletonListItem('footer').icon(RiLayoutBottom2Fill),
@@ -118,6 +163,7 @@ export const deskStructure = () =>
         ? [S.documentTypeListItem('feed').title('Importer')]
         : []),
     ])
+}
 
 export const getDefaultDocumentNode = ({ schemaType }) => {
   if (allTemplatesTypes.includes(schemaType)) {

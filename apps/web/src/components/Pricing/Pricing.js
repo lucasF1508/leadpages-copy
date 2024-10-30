@@ -19,6 +19,7 @@ import { planRouter } from '@legacy/utils/plan-router'
 import { getTrialId } from '@legacy/utils/trials'
 import { AppContext } from '@app'
 import { makeStyles } from '@material-ui/styles'
+import useStickyHeader from '@hooks/useStickyHeader'
 
 const PlanCompareWrapper = styled('div', {
   bc: '$background',
@@ -28,14 +29,22 @@ const PlanCompareWrapper = styled('div', {
 const useStyles = makeStyles({
   planCompareWrapper: {
     top: 0,
-    paddingTop: '5.625rem',
+    paddingTop: ({ paddingTop }) => paddingTop,
+    transition: 'padding-top 0.2s linear',
   },
 })
 
 const Pricing = ({ selectPlanButtonText, planOrder }) => {
   const { hasLoaded, planData } = useContext(AppContext)
   const { trialPlans, generalPlans } = planData || {}
-  const classes = useStyles()
+  const { showHeader } = useStickyHeader({
+    offsetTop: 10,
+  })
+
+  const props = {
+    paddingTop: showHeader ? '5.625rem' : 0,
+  }
+  const classes = useStyles(props)
 
   const [bundleData, setBundleData] = useState(null)
   const [couponData, setCouponData] = useState(null)
@@ -119,7 +128,7 @@ const Pricing = ({ selectPlanButtonText, planOrder }) => {
                 className: classes.planCompareWrapper,
               }}
             />
-          </PlanCompareWrapper>{' '}
+          </PlanCompareWrapper>
         </>
       )}
     </>

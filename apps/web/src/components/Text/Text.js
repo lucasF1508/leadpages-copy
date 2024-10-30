@@ -50,7 +50,7 @@ const Text = ({
   return (
     <$Text
       tagStyle={tagStyle}
-      tokenSet={props.isPost ? 'post' : 'default'}
+      tokenSet={props.usePostTokens ? 'post' : 'default'}
       className={className}
       {...props}
     >

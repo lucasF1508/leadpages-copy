@@ -89,7 +89,11 @@ export async function getStaticProps(context) {
 
 export async function getStaticPaths() {
   const docPaths = await getDocSlugs(['page', 'customer', 'integration'])
-  const excludedPaths = ['/product/feature-index']
+  const excludedPaths = [
+    '/product/feature-index',
+    '/website-templates',
+    '/templates',
+  ]
 
   const paths = docPaths.reduce((acc, { slug, path }) => {
     if (excludedPaths.includes(path)) return acc

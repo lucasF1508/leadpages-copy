@@ -4,6 +4,7 @@ import { TbListCheck } from 'react-icons/tb'
 import { MdFormatListNumbered, MdOutlineBackupTable } from 'react-icons/md'
 import { F } from 'part:gearbox-schema-tool/schema-builder'
 import styled from 'styled-components'
+import { colors } from '../decorators/colors'
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -15,11 +16,6 @@ import styled from 'styled-components'
  *    type: 'blockContent'
  *  }
  */
-
-const colorText = '#0f0c09'
-const colorTextAlt = '#575452'
-const colorTextHighlight = '#603eff'
-const colorTextHighlightAlt = '#34afbb'
 
 const LargerTextStyle = (props) => (
   <span style={{ fontSize: '1.125em' }}>{props.children}</span>
@@ -126,53 +122,7 @@ export const blockContent = {
               ),
             },
           },
-          ...[
-            {
-              title: 'Default Color',
-              value: 'textColor',
-              color: colorText,
-            },
-            {
-              title: 'Alt Color',
-              value: 'textColorAlt',
-              color: colorTextAlt,
-            },
-            {
-              title: 'Highlight Color',
-              value: 'textColorHighlight',
-              color: colorTextHighlight,
-            },
-            {
-              title: 'Alt Highlight Color',
-              value: 'textColorHighlightAlt',
-              color: colorTextHighlightAlt,
-            },
-          ].map(({ title, value, color }) => ({
-            title,
-            value,
-            blockEditor: {
-              render: (props) => (
-                <span
-                  style={{
-                    color,
-                  }}
-                >
-                  {props.children}
-                </span>
-              ),
-              icon: () => (
-                <span
-                  style={{
-                    display: 'block',
-                    width: '20px',
-                    height: '20px',
-                    borderRadius: '4px',
-                    backgroundColor: color,
-                  }}
-                />
-              ),
-            },
-          })),
+          ...colors,
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [

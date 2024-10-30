@@ -2938,12 +2938,12 @@
     react-rx "^1.0.0-beta.6"
     rxjs "^6.5.3"
 
-"@sanity/react-hooks@^2.36.1":
-  version "2.36.1"
-  resolved "https://registry.yarnpkg.com/@sanity/react-hooks/-/react-hooks-2.36.1.tgz#9dd21c2bc61ae76e567df3442058377568d255c0"
-  integrity sha512-LtxRQB3Xxt5oxc9RtgpBY9JxxPVci6r+OeZFkTIpfXD53kxBo3PwiTpDoqTHUIxbMROZ2HLovZWZ6HVi5hlFQA==
+"@sanity/react-hooks@^2.36.2":
+  version "2.36.2"
+  resolved "https://registry.yarnpkg.com/@sanity/react-hooks/-/react-hooks-2.36.2.tgz#bcb98ef4c75ed29e757c9a5c7f451ae38ffc06fa"
+  integrity sha512-oDUzmJsKBLXnFcYUgrRsklC+10wxTxW5BtEKAtFJSYwYRmNvCkP0ufO3eHWptDChaiQnLxBntZNAZw80ecVvWg==
   dependencies:
-    "@sanity/types" "2.35.0"
+    "@sanity/types" "2.36.2"
     react-rx "^1.0.0-beta.6"
     rxjs "^6.5.3"
 
@@ -3091,10 +3091,10 @@
     "@types/react" "^17.0.42"
     rxjs "^6.5.3"
 
-"@sanity/types@2.35.0":
-  version "2.35.0"
-  resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.35.0.tgz#e74aba391885061188f8a045e37b9d1f0806ff38"
-  integrity sha512-hocM0bZVa6ONVjLA50gxRSwIcmsaRPpvhl71MgutHxcnvsGZD55n2LQZb4n7h+J9yEFSkz9lY8HbY8n/bw8tsw==
+"@sanity/types@2.36.2":
+  version "2.36.2"
+  resolved "https://registry.yarnpkg.com/@sanity/types/-/types-2.36.2.tgz#14c3595e73d895af60b60cd88cb0b6c254a854ba"
+  integrity sha512-cg0kq2wq63e9HMP6oqk9rnI7AgxjkZlhb39xgcV9QH8FaWpYR6+H7uFBkIVsCCrgdmkLjMvF5z0dmXgQfBHUlA==
   dependencies:
     "@sanity/client" "^3.3.3"
     "@sanity/color" "^2.1.14"
