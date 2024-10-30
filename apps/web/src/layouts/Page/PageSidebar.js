@@ -52,7 +52,9 @@ const PageSidebar = ({
         )}
         <Rack>
           <$SidebarPinion maxWidth="content">
-            {children || <Text content={content} isPost={true} displayIds />}
+            {children || (
+              <Text content={content} usePostTokens={true} displayIds />
+            )}
           </$SidebarPinion>
         </Rack>
       </$SidebarPageContainer>

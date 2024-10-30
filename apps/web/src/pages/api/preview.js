@@ -1,3 +1,4 @@
+import { getTemplateUrl } from '@lib/utils/templates'
 import getClient from 'client'
 
 const { SANITY_STUDIO_PREVIEW_SECRET } = process.env
@@ -14,14 +15,17 @@ const preview = async (req, res) => {
 
   // Fetch the headless CMS to check if the provided `slug` exists
   // getPostBySlug would implement the required fetching logic to the headless CMS
-  const { slug, url } =
-    (await client.fetch(
-      `*[_type == $type && slug.current == $slug][0]{"url": path, "slug": slug.current}`,
-      {
-        slug: req.query.slug,
-        type: req.query.type,
-      }
-    )) || {}
+  const {
+    slug,
+    url,
+    kind: templateType,
+  } = (await client.fetch(
+    `*[_type == $type && slug.current == $slug][0]{"url": path, "slug": slug.current, kind}`,
+    {
+      slug: req.query.slug,
+      type: req.query.type,
+    }
+  )) || {}
 
   // If the slug doesn't exist prevent preview mode from being enabled
   if (!slug) {
@@ -36,6 +40,9 @@ const preview = async (req, res) => {
     }
   )
 
+  const proto = process.env.NODE_ENV === 'development' ? `http://` : `https://`
+  const { host } = req.headers
+
   if (req?.query?.fetch === 'true') {
     const corsOrigin =
       process.env.NODE_ENV === 'development'
@@ -45,9 +52,6 @@ const preview = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', corsOrigin)
     res.setHeader('Access-Control-Allow-Credentials', true)
 
-    const proto =
-      process.env.NODE_ENV === 'development' ? `http://` : `https://`
-    const { host } = req.headers
     const absoluteUrl = new URL(`${proto}${host}${url}`).toString()
     const previewHtml = await fetch(absoluteUrl, {
       credentials: `include`,
@@ -57,6 +61,14 @@ const preview = async (req, res) => {
       .catch((err) => console.error(err))
 
     return res.send(previewHtml)
+  }
+
+  if (templateType) {
+    const templateUrl = new URL(
+      `${proto}${host}${getTemplateUrl(templateType, slug)}`
+    ).toString()
+
+    return res.redirect(307, templateUrl)
   }
 
   return res.redirect(307, url)

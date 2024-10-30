@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { styled } from '@design'
-import PropTypes from 'prop-types'
 import { Link as ScrollLink } from 'react-scroll'
 // Assets
 import closeMenuIcon from '@legacy/assets/images/global/x_close.svg'
 import downArrowIcon from '@legacy/assets/images/global/arrow_down_large.svg'
 import { useRouter } from 'next/router'
+import useStickyHeader from '@hooks/useStickyHeader'
+import { m as motion } from 'framer-motion'
+import { navOffset } from '@components/Nav/Nav'
+import scrollLock from '@hooks/useScrollLock'
 import { getSidebarSlug, SidebarContext } from './SidebarProvider'
 import { $PageLink } from './SidebarPage'
 
@@ -43,30 +46,32 @@ const MobileSubMenuSubheading = styled('div', {
   },
 })
 
-const MobileMenuContainer = styled('div', {
+const MobileMenuContainer = styled(motion.div, {
   display: 'none',
   position: 'fixed',
   top: '0px',
   width: '100%',
-  zIndex: 1501,
+  zIndex: '$headerBackground',
   height: '72px',
   background: '$white',
   borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
+  paddingTop: '5.125rem',
 
   '@<m': {
     '&.mobileMenuVisible': {
       display: 'block',
-      transition: 'all 0.3s ease',
     },
   },
 })
 
 const MobileMenuFlexbox = styled('div', {
-  marginTop: '24px',
   marginLeft: '32px',
-  marginRight: '24px',
+  marginRight: '32px',
   display: 'flex',
-  justifyContent: 'space-between',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  height: '100%',
+  position: 'relative',
 })
 
 const MobileMenuHeading = styled('div', {
@@ -76,6 +81,9 @@ const MobileMenuHeading = styled('div', {
   lineHeight: '24px',
   fontWeight: 500,
   cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
 })
 
 const MobileMenuIcon = styled('img', {
@@ -85,41 +93,23 @@ const MobileMenuIcon = styled('img', {
 })
 
 const MobileMenuSubmenu = styled('div', {
-  zIndex: 150,
-  width: '100%',
-  height: '100%',
-  position: 'fixed',
-  top: 0,
-})
+  position: 'absolute',
+  bottom: '-1px',
+  transform: 'translateY(100%)',
+  left: '-32px',
+  right: '-32px',
+  overflow: 'scroll',
 
-const SubmenuHeader = styled('div', {
-  height: '72px',
-  width: '100%',
-  background: '$white',
-  borderBottom: '1px solid rgba(15, 12, 9, 0.08)',
-})
-
-const SubmenuHeaderFlexbox = styled('div', {
-  paddingTop: '24px',
-  marginLeft: '32px',
-  marginRight: '24px',
-  display: 'flex',
-  justifyContent: 'space-between',
-})
-
-const SubmenuHeaderHeading = styled('div', {
-  color: '$textAlt',
-  fontFamily: 'Apercu Pro',
-  fontSize: '16px',
-  lineHeight: '24px',
-  fontWeight: 500,
-  cursor: 'pointer',
-})
-
-const SubmenuHeaderIcon = styled('img', {
-  width: '16px',
-  height: '16px',
-  cursor: 'pointer',
+  variants: {
+    showHeader: {
+      true: {
+        maxHeight: 'calc(100vh - 10.25rem)',
+      },
+      false: {
+        maxHeight: 'calc(100vh - 5.125rem)',
+      },
+    },
+  },
 })
 
 const SubmenuContent = styled('div', {
@@ -159,19 +149,27 @@ const StyledScrollLink = styled(ScrollLink, {
   },
 })
 
-const MenuHeaderDisplayLink = styled(ScrollLink, {
-  display: 'none',
-
-  '&.activeSection': {
-    display: 'block',
-  },
-})
-
 const MenuHeaderLinkWrapper = styled('div', {
-  position: 'absolute',
   background: '$white',
-  width: '200px',
 })
+
+const getActiveTitle = (links, activeFromContext, url) =>
+  links.reduce((acc, { links: sectionLinks }) => {
+    if (acc) return acc
+
+    return sectionLinks.reduce(
+      (innerAcc, { heading, title, isPageLink, link }) => {
+        if (innerAcc) return innerAcc
+
+        const sectionHeading = isPageLink ? link?.label : title || heading
+        const sectionSlug = getSidebarSlug(sectionHeading)
+        const isActive = activeFromContext === sectionSlug || url === link?.url
+
+        return isActive ? sectionHeading : innerAcc
+      },
+      null
+    )
+  }, null)
 
 const SiloComparisonMobileMenu = ({ links, verbiage }) => {
   const [showMobileMenuBar, setShowMobileMenuBar] = useState(false)
@@ -179,6 +177,11 @@ const SiloComparisonMobileMenu = ({ links, verbiage }) => {
   const { active } = useContext(SidebarContext)
   const { asPath } = useRouter()
   const url = asPath.replace(/[#|?].*/g, '')
+  const activeTitle = getActiveTitle(links, active, url)
+
+  const { showHeader, stickyMotionProps } = useStickyHeader({
+    offsetTop: 10,
+  })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -205,143 +208,84 @@ const SiloComparisonMobileMenu = ({ links, verbiage }) => {
     setShowMobileSubMenu(!showMobileSubMenu)
   }
 
+  useEffect(() => {
+    scrollLock(showMobileSubMenu)
+  }, [showMobileSubMenu])
+
   return (
-    <>
-      {/* Mobile Menu Bar */}
-      <MobileMenuContainer
-        className={showMobileMenuBar ? 'mobileMenuVisible' : ''}
-        onClick={toggleMobileSubMenuVisibility}
-      >
-        <MobileMenuFlexbox>
-          <MobileMenuHeading>
-            <MenuHeaderLinkWrapper>
-              {verbiage.menu.title_closed}
-            </MenuHeaderLinkWrapper>
-            {links.map(({ title: sectionTitle, links: sectionLinks }) => (
-              <div key={sectionTitle}>
-                {sectionLinks.map(({ heading, title, isPageLink, link }) => {
-                  const sectionHeading = isPageLink
-                    ? link?.label
-                    : title || heading
-                  const sectionSlug = getSidebarSlug(sectionHeading)
+    <MobileMenuContainer
+      className={showMobileMenuBar ? 'mobileMenuVisible' : ''}
+      onClick={toggleMobileSubMenuVisibility}
+      animate={{
+        y: !showHeader ? navOffset * -1 : 0,
+      }}
+      transition={stickyMotionProps?.transition}
+    >
+      <MobileMenuFlexbox>
+        <MobileMenuHeading>
+          <MenuHeaderLinkWrapper>
+            {showMobileSubMenu
+              ? verbiage.menu.title_open
+              : activeTitle || verbiage.menu.title_closed}
+          </MenuHeaderLinkWrapper>
+          {!showMobileSubMenu ? (
+            <MobileMenuIcon src={downArrowIcon.src} alt="down arrow" />
+          ) : (
+            <MobileMenuIcon
+              src={closeMenuIcon.src}
+              alt="close menu icon"
+              onClick={toggleMobileSubMenuVisibility}
+            />
+          )}
+        </MobileMenuHeading>
+        {showMobileSubMenu && (
+          <MobileMenuSubmenu showHeader={showHeader}>
+            <SubmenuContent>
+              {links.map(({ title: sectionTitle, links: sectionLinks }) => (
+                <MobileSubMenuSection key={sectionTitle}>
+                  <SubmenuInnerSeparator />
+                  <MobileSubMenuHeading>{sectionTitle}</MobileSubMenuHeading>
+                  {sectionLinks.map(({ heading, title, isPageLink, link }) => {
+                    const sectionHeading = isPageLink
+                      ? link?.label
+                      : title || heading
+                    const sectionSlug = getSidebarSlug(sectionHeading)
+                    const isActive = active === sectionSlug || url === link?.url
 
-                  const isActive = active === sectionSlug || url === link?.url
-
-                  return (
-                    <MenuHeaderLinkWrapper key={sectionSlug}>
-                      <MenuHeaderDisplayLink
-                        className={isActive && 'activeSection'}
+                    return !isPageLink ? (
+                      <StyledScrollLink
                         onClick={() => handleRouteClick()}
+                        className={isActive && 'active'}
                         to={sectionSlug}
-                        aria-label={sectionHeading}
+                        alt={sectionHeading}
                         smooth
                         duration={500}
                         key={sectionHeading}
-                        offset={-62}
+                        css={{ textDecoration: 'none' }}
+                        offset={-100}
                       >
-                        {sectionHeading}
-                      </MenuHeaderDisplayLink>
-                    </MenuHeaderLinkWrapper>
-                  )
-                })}
-              </div>
-            ))}
-          </MobileMenuHeading>
-          <MobileMenuIcon src={downArrowIcon.src} alt="down arrow" />
-        </MobileMenuFlexbox>
-      </MobileMenuContainer>
-      {/* Mobile Sub Menu */}
-      {showMobileSubMenu && (
-        <MobileMenuSubmenu>
-          <SubmenuHeader>
-            <SubmenuHeaderFlexbox>
-              <SubmenuHeaderHeading>
-                {verbiage.menu.title_open}
-              </SubmenuHeaderHeading>
-              <SubmenuHeaderIcon
-                src={closeMenuIcon.src}
-                alt="close menu icon"
-                onClick={toggleMobileSubMenuVisibility}
-              />
-            </SubmenuHeaderFlexbox>
-          </SubmenuHeader>
-          <SubmenuContent>
-            {links.map(({ title: sectionTitle, links: sectionLinks }) => (
-              <MobileSubMenuSection key={sectionTitle}>
-                <SubmenuInnerSeparator />
-                <MobileSubMenuHeading>{sectionTitle}</MobileSubMenuHeading>
-                {sectionLinks.map(({ heading, title, isPageLink, link }) => {
-                  const sectionHeading = isPageLink
-                    ? link?.label
-                    : title || heading
-                  const sectionSlug = getSidebarSlug(sectionHeading)
-
-                  const isActive = active === sectionSlug || url === link?.url
-
-                  return !isPageLink ? (
-                    <StyledScrollLink
-                      onClick={() => handleRouteClick()}
-                      className={isActive && 'active'}
-                      to={sectionSlug}
-                      alt={sectionHeading}
-                      smooth
-                      duration={500}
-                      key={sectionHeading}
-                      css={{ textDecoration: 'none' }}
-                      offset={-100}
-                    >
-                      <MobileSubMenuSubheading>
-                        {sectionHeading}
-                      </MobileSubMenuSubheading>
-                    </StyledScrollLink>
-                  ) : (
-                    <$PageLink
-                      className={isActive && 'active'}
-                      key={sectionSlug}
-                      {...link}
-                      disabled={isActive}
-                      linkStyle="none"
-                    />
-                  )
-                })}
-              </MobileSubMenuSection>
-            ))}
-          </SubmenuContent>
-        </MobileMenuSubmenu>
-      )}
-    </>
+                        <MobileSubMenuSubheading>
+                          {sectionHeading}
+                        </MobileSubMenuSubheading>
+                      </StyledScrollLink>
+                    ) : (
+                      <$PageLink
+                        className={isActive && 'active'}
+                        key={sectionSlug}
+                        {...link}
+                        disabled={isActive}
+                        linkStyle="none"
+                      />
+                    )
+                  })}
+                </MobileSubMenuSection>
+              ))}
+            </SubmenuContent>
+          </MobileMenuSubmenu>
+        )}
+      </MobileMenuFlexbox>
+    </MobileMenuContainer>
   )
-}
-
-SiloComparisonMobileMenu.defaultProps = {
-  pageRoutes: [],
-}
-
-SiloComparisonMobileMenu.propTypes = {
-  pageRoutes: PropTypes.arrayOf(
-    PropTypes.shape({
-      sectionName: PropTypes.string,
-      sectionCardTitle: PropTypes.string,
-      sectionPages: PropTypes.arrayOf(
-        PropTypes.shape({
-          pageName: PropTypes.string,
-          pageUrl: PropTypes.string,
-          pageTitle: PropTypes.string,
-          pageSupertitle: PropTypes.string,
-        })
-      ),
-    })
-  ),
-  verbiage: PropTypes.shape({
-    main: PropTypes.shape({
-      title: PropTypes.string,
-      supertitle: PropTypes.string,
-    }),
-    menu: PropTypes.shape({
-      title_closed: PropTypes.string,
-      title_open: PropTypes.string,
-    }),
-  }).isRequired,
 }
 
 export default SiloComparisonMobileMenu

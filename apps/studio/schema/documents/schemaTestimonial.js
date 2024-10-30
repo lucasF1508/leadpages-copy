@@ -7,30 +7,21 @@ export const schemaTestimonial = {
   title: 'Testimonial',
   type: 'document',
   fields: [
+    F.string({
+      name: 'title',
+      description:
+        'Optional title used when the testimonial is displayed on Template Detail Page',
+    }),
     F.string({ name: 'authorName' }),
     F.string({ name: 'authorTitle' }),
     F.text({ name: 'testimonial' }),
-    F.number({
-      name: 'rating',
-      validation: (Rule) => Rule.min(1).max(5).positive().precision(1),
-      initialValue: 5,
-      options: {
-        list: [
-          { title: '5', value: 5 },
-          { title: '4.5', value: 4.5 },
-          { title: '4', value: 4 },
-          { title: '3.5', value: 3.5 },
-          { title: '3', value: 3 },
-          { title: '2.5', value: 2.5 },
-          { title: '2', value: 2 },
-          { title: '1.5', value: 1.5 },
-          { title: '1', value: 1 },
-          { title: '0.5', value: 0.5 },
-        ],
-        layout: 'dropdown',
-      },
-    }),
+    F.field('rating'),
     F.image(),
+    F.links({
+      name: 'source',
+      validation: (Rule) => Rule.max(1),
+      link: { args: { linkStyle: false, hasIcon: false } },
+    }),
     F.multiReference('categoryTestimonial', { name: 'category' }),
   ],
   preview: P.titleImage({

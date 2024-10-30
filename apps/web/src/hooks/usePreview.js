@@ -75,6 +75,12 @@ const usePreview = ({
 
     const { shapeData = (data) => data } =
       {
+        '/website-templates/website-template/[slug]': await import(
+          '@utils/shapeTemplateData'
+        ),
+        '/templates/landing-page-template/[slug]': await import(
+          '@utils/shapeTemplateData'
+        ),
         '/[...slug]': await import('@pages/[...slug].js'),
         '/home/[...variant]': await import('@pages/index'),
         '/': await import('@pages/index'),

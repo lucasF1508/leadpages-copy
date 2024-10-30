@@ -36,6 +36,21 @@ export const buildDraftPatches = (docs = [], filter = (doc) => doc) =>
     ]
   }, [])
 
+export const buildDocPatches = (docs = [], filter = (doc) => doc) =>
+  docs.reduce((acc, doc) => {
+    if (!doc) return acc
+
+    return [
+      ...acc,
+      {
+        id: doc._id,
+        create: {
+          ...filter(omitBy(doc, (v, k) => ['_id', '_rev'].includes(k))),
+        },
+      },
+    ]
+  }, [])
+
 export const buildDeletePatches = (docs = []) =>
   docs.reduce((acc, doc) => {
     if (!doc) return acc

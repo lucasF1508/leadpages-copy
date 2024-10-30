@@ -15,6 +15,7 @@ import CTA from '@components/Cta'
 import { useRouter } from 'next/router'
 import ArchiveTableOfContentsInline from '@components/Archive/ArchiveTableOfContentsInline'
 import Waypoint from '@components/Waypoint'
+import useStickyHeader from '@hooks/useStickyHeader'
 import ArchiveAuthorBio from './ArchiveAuthorBio'
 import ArchivePublishDate from './ArchivePublishDate'
 
@@ -208,6 +209,9 @@ const ArchiveSingle = ({
   const [isScrolled, setIsScrolled] = useState(false)
   const [offset, setOffset] = useState(25)
   const [showSidebar, setShowSidebar] = useState(true)
+  const { showHeader } = useStickyHeader({
+    offsetTop: 10,
+  })
   const { scrollYProgress } = useScroll({
     target: contentRef,
     offset: ['start', 'end end'],
@@ -245,8 +249,11 @@ const ArchiveSingle = ({
         useCustomSidebarLinks={useCustomSidebarLinks}
       />
       <$ScrollProgressOuter
-        animate={{ opacity: isScrolled ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
+        animate={{
+          opacity: isScrolled ? 1 : 0,
+          y: showHeader ? 0 : '-5.75rem',
+        }}
+        transition={{ duration: 0.2, ease: 'linear' }}
       >
         <$ScrollProgress>
           <$ScrollProgressInner>
@@ -288,7 +295,7 @@ const ArchiveSingle = ({
                 }}
               />
               {!!excerpt?.length && (
-                <Text content={excerpt} isPost={true} displayIds />
+                <Text content={excerpt} usePostTokens={true} displayIds />
               )}
               <ArchiveTableOfContentsInline
                 content={content}
@@ -296,7 +303,7 @@ const ArchiveSingle = ({
                 useCustomSidebarLinks={useCustomSidebarLinks}
               />
               {!!rest?.length && (
-                <Text content={rest} isPost={true} displayIds />
+                <Text content={rest} usePostTokens={true} displayIds />
               )}
             </div>
             <Waypoint

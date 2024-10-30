@@ -5,11 +5,15 @@ import { TemplateShape, templatesBaseUrl } from '@legacy/constants/templates'
 import Footer from '@components/Footer'
 import { useRouter } from 'next/router'
 import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
+import getClient from 'client'
 import ReadyToGrow from '../product/ReadyToGrow'
 import TemplatePreview from './TemplatePreview'
 import PreviewBackdrop from './PreviewBackdrop'
 
 const mandrelApi = new MandrelApi({ baseUrl: templatesBaseUrl })
+
+const client = getClient()
+
 const Preview = ({ templateId, galleryRoot, previewTemplate, planData }) => {
   const showFooter = useEvalBreakpoint('>xs')
   const [selectedTemplate, setSelectedTemplate] = useState(previewTemplate)
@@ -17,8 +21,12 @@ const Preview = ({ templateId, galleryRoot, previewTemplate, planData }) => {
 
   useEffect(() => {
     async function fetchPreviewTemplate(id) {
+      const _id = await client.fetch(`  
+        *[ _type == "template" && slug.current == "${id}" || _id == "${id}" ][0]._id 
+      `)
+
       try {
-        const template = await mandrelApi.getTemplateById(id)
+        const template = await mandrelApi.getTemplateById(_id)
         // If we could pass the screenshot to the SEO component from here,
         // we could avoid an extra call to the Mandrel API
         // const templateScreenshot = template.template.thumbnailUrlWebp

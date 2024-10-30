@@ -66,6 +66,7 @@ const Link = (
     icon,
     hasHash,
     hash,
+    scrollOffset = 0,
     hasIcon: hasIconOrg,
     disabled,
     popUpId,
@@ -149,7 +150,7 @@ const Link = (
           {...props}
           onClick={(e) => {
             e.preventDefault()
-            scrollToHash(hash)
+            scrollToHash(hash, scrollOffset)
           }}
         >
           {children || label}

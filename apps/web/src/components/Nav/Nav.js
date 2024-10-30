@@ -33,7 +33,7 @@ const scaleOut = keyframes({
 const $NavBar = styled(m.div, {
   position: 'sticky',
   top: '0.625rem',
-  z: '$flyout',
+  z: '$header',
   mx: '0.625rem',
 })
 
@@ -177,6 +177,19 @@ const $NavBarOverlay = styled(m.div, {
   backgroundColor: 'rgba(0, 0, 0, 0.1)',
 })
 
+export const navOffset = 82
+
+const hideNavOnScrollDown = [
+  'pricing',
+  'templates',
+  'website-templates',
+  'blog',
+  'landing-pages-guide',
+  'conversion-optimization-guide',
+  'lead-generation-guide',
+  'product',
+]
+
 const NavBar = ({
   navigation,
   darkHero,
@@ -192,11 +205,13 @@ const NavBar = ({
     offsetTop: 10,
   })
   const { asPath } = useRouter()
-  const hideOnScroll = asPath.includes('blog')
 
   const isTransparent = !isSticky && !isNavOpen
   const isDesktopNav = useMediaQuery('(min-width: 960px)')
-  const visibleSidebar = useMediaQuery('(min-width: 1400px)')
+
+  const shouldHide = asPath
+    .split('/')
+    .some((path) => hideNavOnScrollDown.includes(path))
 
   const handleValueChange = (value) => {
     setDropdownSlug(value)
@@ -231,10 +246,7 @@ const NavBar = ({
       </AnimatePresence>
       <$NavBar
         animate={{
-          y:
-            hideNav || (hideOnScroll && !showHeader && !visibleSidebar)
-              ? -90
-              : 0,
+          y: shouldHide && (hideNav || !showHeader) ? navOffset * -1 : 0,
         }}
         transition={stickyMotionProps?.transition}
       >
