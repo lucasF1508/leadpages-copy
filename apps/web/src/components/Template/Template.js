@@ -16,7 +16,7 @@ const Template = ({
   relatedTemplatesData,
   reviewsData: defaultReviews,
 }) => {
-  const [ref, heroInView] = useInView()
+  const [ref, heroInView, entry] = useInView()
   const mergedData = mergeTemplateData(templateData, templateSettingsData)
 
   const {
@@ -32,7 +32,7 @@ const Template = ({
 
   return (
     <>
-      <NavSecondary visible={!heroInView}>
+      <NavSecondary visible={entry && !heroInView}>
         <TemplateNav title={templateTitle} {...rest} />
       </NavSecondary>
       <Rack>

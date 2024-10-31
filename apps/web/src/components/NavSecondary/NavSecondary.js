@@ -25,7 +25,7 @@ const $NavSecondaryInner = styled('div', {
   },
 })
 
-const NavSecondary = ({ children, visible = true }) => {
+const NavSecondary = ({ children, visible = false }) => {
   const { showHeader, stickyMotionProps } = useStickyHeader({
     offsetTop: 10,
   })
