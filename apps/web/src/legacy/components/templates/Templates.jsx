@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { kebabCase } from 'lodash'
 import clsx from 'clsx'
 import AppBar from '@material-ui/core/AppBar'
 import Backdrop from '@material-ui/core/Backdrop'
@@ -35,6 +36,9 @@ import {
 
 import tracker from '@legacy/components/templates/tracker'
 import { useNavStore } from '@components/Nav/NavStore'
+import { Events } from '@legacy/components/templates/tracker'
+
+import { getTemplateUrl } from '../../../lib/utils/templates'
 
 const stickyHeaderZIndex = 1501
 const sidebarWidth = 250
@@ -199,13 +203,7 @@ export const getCategoryFromPath = (currentPath) => {
   return queryString
 }
 
-const Templates = ({
-  kind,
-  onPreviewTemplate,
-  isPreviewing,
-  setCurrentURL,
-  setPreviousURL,
-}) => {
+const Templates = ({ kind, isPreviewing, setCurrentURL, setPreviousURL }) => {
   const router = useRouter()
   const currentPath = router.asPath
   const queryString = useRef(getCategoryFromPath(currentPath))
@@ -371,9 +369,8 @@ const Templates = ({
   // On popstate, the browser emits some scolling events that can interfere
   // with the visual state.
   const enableSidebarListeners = useRef(true)
-  const handlePreview = (t) => {
+  const handlePreview = () => {
     enableSidebarListeners.current = false
-    onPreviewTemplate(t, document.documentElement.scrollTop)
   }
 
   const setSidebarPosition = () => {
@@ -579,6 +576,10 @@ const Templates = ({
                     template={template}
                     onPreviewTemplate={handlePreview}
                     previewButtonText="View"
+                    linkHref={getTemplateUrl(
+                      kind,
+                      kebabCase(template.template.name)
+                    )}
                   />
                 ))}
               </Gallery>
@@ -595,7 +596,6 @@ Templates.propTypes = {
   state: TemplateState.isRequired,
   kind: PropTypes.oneOf([TemplateKind.LandingPage, TemplateKind.Site])
     .isRequired,
-  onPreviewTemplate: PropTypes.func.isRequired,
   isPreviewing: PropTypes.bool.isRequired,
   setCurrentURL: PropTypes.func.isRequired,
   setPreviousURL: PropTypes.func.isRequired,

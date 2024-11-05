@@ -1553,10 +1553,10 @@
   resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/substring-matcher/-/@lp/substring-matcher-0.1.3.tgz#861309486a76d1031f477e2b07fbdc3dbd6b75a7"
   integrity sha1-hhMJSGp20QMfR34rB/vcPb1rdac=
 
-"@lp/template-gallery@^1.0.12":
-  version "1.0.12"
-  resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/template-gallery/-/@lp/template-gallery-1.0.12.tgz#73968b676ce3e5a3ff3641f8723ba78fa704ecdf"
-  integrity sha512-CrvIim1zJHNE9LCk+rUYeokjAjTAm5ET1GgyjmJ+W7cQz30MEsT/8+CdmsIaQsJ5WtPsIJ6clfc57rLVOjGvog==
+"@lp/template-gallery@^1.0.15":
+  version "1.0.15"
+  resolved "https://leadpages.jfrog.io/leadpages/api/npm/npm/@lp/template-gallery/-/@lp/template-gallery-1.0.15.tgz#472236e265fd97970bb4f1a9f68d0aefa4766485"
+  integrity sha512-ZImDfrKixuwsCFWqbkrgzXNtSbqntgSWEmJfla9NSO6H5jwXoTQLj/HlljEdyJBONklJg83fHqwlLxxjqAJ9bw==
   dependencies:
     "@babel/runtime" "^7.11.2"
     react-infinite-scroll-hook "^3.0.0"

@@ -3,18 +3,20 @@ import { Events } from '@legacy/components/templates/tracker'
 import { useRouter } from 'next/router'
 import { kebabCase } from 'lodash'
 
+import { getTemplateUrl } from '../../lib/utils/templates'
+
 const usePreviewTemplate = () => {
   const router = useRouter()
   const [previewTemplate, setPreviewTemplate] = useState(null)
 
   const handlePreviewTemplate = (template) => {
-    const basePath = router.asPath.includes('website-templates')
-      ? '/website-templates/website-template'
-      : '/templates/landing-page-template'
+    const url = getTemplateUrl(
+      router.asPath.includes('website-templates')
+        ? 'WebsiteTemplate'
+        : 'LeadpageTemplate',
+      kebabCase(template.template.name)
+    )
 
-    const formattedTemplateName = kebabCase(template.template.name)
-
-    const url = `${basePath}/${formattedTemplateName}`
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({
       event: Events.templatePreviewed,
