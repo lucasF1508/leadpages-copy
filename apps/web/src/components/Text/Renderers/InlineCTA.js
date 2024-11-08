@@ -1,11 +1,11 @@
 import React from 'react'
-import { styled, theme } from '@design'
+import { styled, darkTheme, theme } from '@design'
+import { features } from 'config'
 import Heading from '@components/Heading'
 import Text from '@components/Text'
 import Link from '@components/Link'
 import Image from '@components/Image'
 import ImageFallback from '@images/Leadpages-Free-Trial@2x.png'
-import omit from 'lodash/omit'
 
 const $Heading = styled(Heading, {
   pb: '$3',
@@ -175,6 +175,11 @@ const InlineCta = ({ node = {}, ...props }) => {
     legacyLink,
   } = data
 
+  const { darkBackgrounds } = features
+  const useDarkMode =
+    bgColor !== 'transparent' &&
+    [...darkBackgrounds, 'primary'].includes(bgColor)
+
   return (
     <$InlineCta
       {...props}
@@ -199,16 +204,23 @@ const InlineCta = ({ node = {}, ...props }) => {
         <$Links>
           {!legacyLink &&
             !!links?.length &&
-            links?.map(({ _key, ...link }) => (
-              <Link
-                className={
-                  bgColor !== 'purple' && link.linkStyle === 'button' && theme
-                }
-                bgColor={bgColor}
-                key={_key}
-                align={'start'}
-                {...link}
-              />
+            links?.map(({ _key, _type, linkStyle, ...link }) => (
+              <>
+                <Link
+                  key={_key}
+                  className={
+                    (_type === 'signUp' || linkStyle === 'button') &&
+                    useDarkMode
+                      ? darkTheme
+                      : theme
+                  }
+                  bgColor={bgColor}
+                  align={'start'}
+                  _type={_type}
+                  linkStyle={linkStyle}
+                  {...link}
+                />
+              </>
             ))}
         </$Links>
       </$CTAContent>
