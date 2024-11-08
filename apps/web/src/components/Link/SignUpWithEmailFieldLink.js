@@ -199,6 +199,7 @@ const SignUpWithEmailFieldLink = ({
   external,
   align = { '@initial': 'center', '@>l': 'start' },
   bgColor,
+  className,
   ...props
 }) => {
   const { methods, isLoading, setIsLoading, setFormError, formError } = useForm(
@@ -240,7 +241,7 @@ const SignUpWithEmailFieldLink = ({
 
   return (
     <FormContext {...methods}>
-      <$Form align={align}>
+      <$Form align={align} className={className}>
         <$FormInner
           onSubmit={handleSubmit(onSubmit)}
           noValidate={!isExternalRedirect}
