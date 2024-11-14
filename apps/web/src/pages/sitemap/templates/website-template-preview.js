@@ -26,7 +26,7 @@ export const getServerSideProps = async (context) => {
     fetchedTemplates.map((item) => ({
       loc: `${NEXT_PUBLIC_URL}/website-templates/preview/${item?._meta?.id}`,
       changefreq: 'yearly',
-      priority: 0.7,
+      priority: 0.5,
       lastmod: new Date(item?._meta?.updated).toISOString(),
     }))
   )

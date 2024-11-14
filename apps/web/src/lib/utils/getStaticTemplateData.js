@@ -43,7 +43,16 @@ const getTemplateData = async ({ templateId, templateType }) => {
       ? 'Grow your business faster when you start with our high-converting, mobile-responsive templates. Use our drag-and-drop builder to customize your own website.'
       : `Every template is professionally-designed with over a decade of conversion marketing expertise baked in, so you can be confident you'll capture leads and sales. Use our intuitive drag-and-drop builder to quickly make a beautiful mobile-responsive landing page in 30 minutes or less.`
 
-  const template = await mandrelApi.getTemplateById(_id)
+  let template
+
+  try {
+    template = await mandrelApi.getTemplateById(_id)
+  } catch (error) {
+    console.error('Error fetching Template from Mandrel', error)
+    return {
+      _id: null,
+    }
+  }
 
   const templateScreenshot = template.template.thumbnailUrlWebp
   if (templateScreenshot) {
@@ -72,6 +81,7 @@ const getTemplateData = async ({ templateId, templateType }) => {
     title,
     heroContent,
     seo,
+    template,
   }
 }
 

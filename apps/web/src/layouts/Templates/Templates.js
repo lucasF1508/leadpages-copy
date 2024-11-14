@@ -24,6 +24,7 @@ const Templates = ({
   heroContent: _heroContent,
   isWebsiteGallery = false,
   seo,
+  template,
 }) => {
   const router = useRouter()
   const pathname = router.asPath
@@ -116,6 +117,7 @@ const Templates = ({
           galleryRoot={currentURL}
           previewTemplate={previewTemplate}
           planData={planData}
+          templateData={template}
         />
       )}
       <Gallery

@@ -72,7 +72,9 @@ const SEO = ({
       {/* prevents webcrawlers from indexing the page (https://bit.ly/3cnArCt) */}
       {seo.noIndex && <meta name="robots" content="noindex" />}
       {/* specifies a canonical page (https://bit.ly/2K8ohBD) */}
-      {seo.canonical && <link rel="canonical" href={seo.canonical} />}
+      {seo.canonical && (
+        <link rel="canonical" href={seo.canonical} key="canonical" />
+      )}
     </Head>
   )
 }
