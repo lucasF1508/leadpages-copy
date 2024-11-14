@@ -134,7 +134,7 @@ const SEO = (props) => {
           content="11470417057f03716e17affcb71896ef"
         />
         {image?.url && <meta name="image" content={image?.url} />}
-        {url && <link rel="canonical" href={url} />}
+        {url && <link rel="canonical" href={url} key="canonical" />}
         {url && <meta property="og:url" content={url} />}
         {locale && <meta property="og:locale" content={locale} />}
         {type && <meta property="og:type" content={type} />}

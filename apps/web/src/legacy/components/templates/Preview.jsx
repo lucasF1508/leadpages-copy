@@ -6,23 +6,34 @@ import Footer from '@components/Footer'
 import { useRouter } from 'next/router'
 import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
 import getClient from 'client'
+import Head from 'next/head'
+import { getTemplateUrl } from '@lib/utils/templates'
+import { kebabCase } from 'lodash'
 import ReadyToGrow from '../product/ReadyToGrow'
 import TemplatePreview from './TemplatePreview'
 import PreviewBackdrop from './PreviewBackdrop'
+
+const { NEXT_PUBLIC_URL } = process.env
 
 const mandrelApi = new MandrelApi({ baseUrl: templatesBaseUrl })
 
 const client = getClient()
 
-const Preview = ({ templateId, galleryRoot, previewTemplate, planData }) => {
+const Preview = ({
+  templateId,
+  galleryRoot,
+  previewTemplate,
+  planData,
+  templateData,
+}) => {
   const showFooter = useEvalBreakpoint('>xs')
   const [selectedTemplate, setSelectedTemplate] = useState(previewTemplate)
   const router = useRouter()
 
   useEffect(() => {
     async function fetchPreviewTemplate(id) {
-      const _id = await client.fetch(`  
-        *[ _type == "template" && slug.current == "${id}" || _id == "${id}" ][0]._id 
+      const _id = await client.fetch(`
+        *[ _type == "template" && slug.current == "${id}" || _id == "${id}" ][0]._id
       `)
 
       try {
@@ -44,23 +55,37 @@ const Preview = ({ templateId, galleryRoot, previewTemplate, planData }) => {
   }, [templateId, selectedTemplate])
 
   return (
-    <PreviewBackdrop>
-      {selectedTemplate && (
-        <>
-          <TemplatePreview
-            template={selectedTemplate}
-            galleryRoot={galleryRoot}
-            planData={planData}
+    <>
+      {templateData && (
+        <Head>
+          <link
+            rel="canonical"
+            href={`${NEXT_PUBLIC_URL}${getTemplateUrl(
+              templateData.kind,
+              kebabCase(templateData.template?.name)
+            )}`}
+            key="canonical"
           />
-          {showFooter && (
-            <div>
-              <ReadyToGrow />
-              <Footer />
-            </div>
-          )}
-        </>
+        </Head>
       )}
-    </PreviewBackdrop>
+      <PreviewBackdrop>
+        {selectedTemplate && (
+          <>
+            <TemplatePreview
+              template={selectedTemplate}
+              galleryRoot={galleryRoot}
+              planData={planData}
+            />
+            {showFooter && (
+              <div>
+                <ReadyToGrow />
+                <Footer />
+              </div>
+            )}
+          </>
+        )}
+      </PreviewBackdrop>
+    </>
   )
 }
 
