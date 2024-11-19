@@ -8,7 +8,6 @@ import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
 import getClient from 'client'
 import Head from 'next/head'
 import { getTemplateUrl } from '@lib/utils/templates'
-import { kebabCase } from 'lodash'
 import ReadyToGrow from '../product/ReadyToGrow'
 import TemplatePreview from './TemplatePreview'
 import PreviewBackdrop from './PreviewBackdrop'
@@ -25,6 +24,7 @@ const Preview = ({
   previewTemplate,
   planData,
   templateData,
+  slug,
 }) => {
   const showFooter = useEvalBreakpoint('>xs')
   const [selectedTemplate, setSelectedTemplate] = useState(previewTemplate)
@@ -62,7 +62,7 @@ const Preview = ({
             rel="canonical"
             href={`${NEXT_PUBLIC_URL}${getTemplateUrl(
               templateData.kind,
-              kebabCase(templateData.template?.name)
+              slug?.current
             )}`}
             key="canonical"
           />
