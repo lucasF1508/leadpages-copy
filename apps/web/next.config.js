@@ -9,7 +9,6 @@ require('dotenv').config({
   path: findUp.sync([`.env.${process.env.NODE_ENV}`, '.env.local', '.env']),
 })
 const { init: buildJSON } = require('indices/buildJSON')
-const { withSentryConfig } = require('@sentry/nextjs')
 
 const {
   SANITY_STUDIO_API_PROJECT_ID,
@@ -38,13 +37,12 @@ const {
   UA_TRACKING_ID,
   GA4_TRACKING_ID,
   FB_PIXEL_ID,
-  SENTRY_DSN,
   SANITY_STUDIO_VERCEL_DEPLOY_URL,
   HUBSPOT_DEFAULT_PORTAL_ID,
   HUBSPOT_DEFAULT_FORM_ID,
 } = process.env
 
-const moduleExports = withBundleAnalyzer({
+module.exports = withBundleAnalyzer({
   env: {
     SANITY_STUDIO_API_PROJECT_ID,
     SANITY_STUDIO_API_DATASET,
@@ -72,7 +70,6 @@ const moduleExports = withBundleAnalyzer({
     UA_TRACKING_ID,
     GA4_TRACKING_ID,
     FB_PIXEL_ID,
-    SENTRY_DSN,
     SANITY_STUDIO_VERCEL_DEPLOY_URL,
     HUBSPOT_DEFAULT_PORTAL_ID,
     HUBSPOT_DEFAULT_FORM_ID,
@@ -204,10 +201,4 @@ const moduleExports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
-  sentry: {
-    hideSourceMaps: true,
-    autoInstrumentMiddleware: false,
-  },
 })
-
-module.exports = withSentryConfig(moduleExports, {})
