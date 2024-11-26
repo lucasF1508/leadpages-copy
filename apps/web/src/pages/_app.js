@@ -121,7 +121,14 @@ export default function App({
             isStartPageHeader={isStartPageHeader}
           />
           <LayoutContainer>
-            <Main {...pageData} {...meta} err={err} seo={seo} />
+            <Main
+              {...pageData}
+              {...meta}
+              footer={footer}
+              slimFooter={slimFooter}
+              err={err}
+              seo={seo}
+            />
           </LayoutContainer>
           <Footer slimFooter={slimFooter} data={footer} />
           <ModalParent />

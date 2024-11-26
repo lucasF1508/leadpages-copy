@@ -25,6 +25,8 @@ const Preview = ({
   planData,
   templateData,
   slug,
+  footer,
+  slimFooter,
 }) => {
   const showFooter = useEvalBreakpoint('>xs')
   const [selectedTemplate, setSelectedTemplate] = useState(previewTemplate)
@@ -79,7 +81,7 @@ const Preview = ({
             {showFooter && (
               <div>
                 <ReadyToGrow />
-                <Footer />
+                <Footer data={footer} slimFooter={slimFooter} />
               </div>
             )}
           </>

@@ -59,7 +59,8 @@ module.exports = {
       },
       {
         userAgent: '*',
-        disallow: '/blog/search',
+        allow: '/blog/search',
+        disallow: '/blog/search?s=',
       },
     ],
   },

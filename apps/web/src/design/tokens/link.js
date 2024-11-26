@@ -144,10 +144,10 @@ export const link = {
     },
     footer: {
       true: {
-        display: 'inline',
+        display: 'inline-block',
         color: 'inherit',
         textDecoration: 'none',
-        paddingBottom: '0.5rem',
+        paddingBottom: '0.25rem',
         borderBottom: '3px solid transparent',
 
         '&:hover': {
