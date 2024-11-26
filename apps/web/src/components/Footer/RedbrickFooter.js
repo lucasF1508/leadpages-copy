@@ -2,13 +2,17 @@ import React from 'react'
 import { styled } from '@design'
 import DeliveraSVG from '@legacy/assets/images/logos/delivra-logo-black.svg'
 import LeadpagesSVG from '@legacy/assets/images/logos/leadpages-logo-black.svg'
-import RebaseSVG from '@legacy/assets/images/logos/rebase-logo-black.svg'
-import ShiftSVG from '@legacy/assets/images/logos/shift-logo-black.svg'
+import AnimotoSVG from '@legacy/assets/images/logos/animoto-logo-black.svg'
+import ShiftSVG from '@legacy/assets/images/logos/shift-logo-black-alt.svg'
 import Image from 'next/image'
 
 const RedbrickFooterContainer = styled('div', {
-  fontSize: '12px',
+  fontSize: '0.75rem',
   textAlign: 'center',
+  color: '$textAlt',
+  paddingTop: '3.75rem',
+  justifyContent: 'center',
+  borderTop: '1px solid rgba(15, 12, 9, 0.08)',
 
   [`
     a:link,
@@ -24,17 +28,16 @@ const RedbrickFooterContainer = styled('div', {
 
 const LogoContainer = styled('div', {
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   flexWrap: 'wrap',
+  gap: '1.5rem',
+  marginTop: '1.875rem',
 
-  gap: '42px',
-  marginTop: '30px',
-
-  '@media (max-width: 768px)': {
-    flexDirection: 'column',
-    gap: '24px',
+  '@>769': {
+    flexDirection: 'row',
+    gap: '2.625rem',
   },
 })
 
@@ -44,18 +47,36 @@ const RedbrickFooter = () => (
     <a
       target="_blank"
       rel="noreferrer noopener"
-      href="https://rdbrck.com/"
+      href="https://rdbrck.com?utm_source=leadpages"
       style={{ textDecoration: 'underline' }}
     >
       Redbrick
     </a>{' '}
     family of brands.
     <LogoContainer>
-      <a target="_blank" rel="noreferrer noopener" href="https://tryshift.com/">
-        <Image src={ShiftSVG.src} alt="Shift Logo" width={80} height={24} />
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://animoto.com?utm_source=leadpages"
+      >
+        <Image
+          src={AnimotoSVG.src}
+          alt="Animoto Logo"
+          width={122}
+          height={32}
+        />
       </a>
-      <a target="_blank" rel="noreferrer noopener" href="https://rebase.io/">
-        <Image src={RebaseSVG.src} alt="Rebase Logo" width={74} height={16} />
+      <a
+        target="_blank"
+        rel="noreferrer noopener"
+        href="https://www.delivra.com?utm_source=leadpages"
+      >
+        <Image
+          src={DeliveraSVG.src}
+          alt="Delivera Logo"
+          width={77}
+          height={16}
+        />
       </a>
       <a
         target="_blank"
@@ -72,14 +93,9 @@ const RedbrickFooter = () => (
       <a
         target="_blank"
         rel="noreferrer noopener"
-        href="https://www.delivra.com/"
+        href="https://shift.com?utm_source=leadpages"
       >
-        <Image
-          src={DeliveraSVG.src}
-          alt="Delivera Logo"
-          width={77}
-          height={16}
-        />
+        <Image src={ShiftSVG.src} alt="Shift Logo" width={80} height={24} />
       </a>
     </LogoContainer>
   </RedbrickFooterContainer>

@@ -2,18 +2,18 @@ import React from 'react'
 import * as NextLink from 'next/link'
 import { styled } from '@design'
 import Link from '@components/Link'
-import logoIconSVG from '@legacy/assets/images/global/leadpages-symbol_large.svg'
+import logoIconSVG from '@legacy/assets/images/global/leadpages-wordmark_large.svg'
 import FooterRowBottom from './FooterRowBottom'
-import LegacyFooter, { FlexRow, FooterLast } from './LegacyFooter'
+import LegacyFooter from './LegacyFooter'
+import RedbrickFooter from './RedbrickFooter'
 
-const FooterContainer = styled('footer', {
+const $Footer = styled('footer', {
   borderTop: '1px solid rgba(15, 12, 9, 0.08)',
-  paddingTop: '3rem',
-  paddingBottom: '1rem',
-  paddingRight: '6rem',
-  paddingLeft: '6rem',
-  marginRight: 'auto',
-  marginLeft: 'auto',
+  paddingTop: '4.5rem',
+  paddingBottom: '3.75rem',
+  paddingRight: '3.625rem',
+  paddingLeft: '3.625rem',
+
   variants: {
     slimFooter: {
       true: {
@@ -23,99 +23,78 @@ const FooterContainer = styled('footer', {
   },
 })
 
-const InnerContainer = styled('div', {
-  maxWidth: '1140px',
-  marginLeft: 'auto',
+const $FooterInner = styled('div', {
+  maxWidth: '$extended',
   marginRight: 'auto',
+  marginLeft: 'auto',
 })
 
-const FlexRowItem = styled('div', {
-  minHeight: '1px',
-  position: 'relative',
-  textAlign: 'center',
-  textDecoration: 'none',
-  width: '100%',
-  paddingLeft: '1%',
-  paddingRight: '1%',
-  marginBottom: '1.5rem',
-})
+const $FooterContent = styled('div', {
+  maxWidth: '18rem',
+  mx: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '4.5rem',
+  paddingBottom: '4.5rem',
+  alignItems: 'center',
 
-const Col2 = styled(FlexRowItem, {
-  '@media (min-width: 576px)': {
-    WebkitBoxFlex: 0,
-    MsFlex: '0 0 47%',
-    flex: '0 0 47%',
-    maxWidth: '47%',
+  '@>769': {
+    maxWidth: '$contentFooter',
   },
 
-  '@media (min-width: 768px)': {
-    WebkitBoxFlex: 0,
-    MsFlex: '0 0 31.3333%',
-    flex: '0 0 31.3333%',
-    maxWidth: '31.3333%',
-  },
-
-  '@media (min-width: 992px)': {
-    marginBottom: '0rem',
-    WebkitBoxFlex: 0,
-    MsFlex: '0 0 14.6666%',
-    flex: '0 0 14.6666%',
-    maxWidth: '14.6666%',
-    textAlign: 'left',
-  },
-})
-
-const Col4 = styled(FlexRowItem, {
-  '@media (min-width: 768px)': {
-    WebkitBoxFlex: 0,
-    MsFlex: '0 0 100%',
-    flex: '0 0 100%',
+  '@>1200': {
+    flexDirection: 'row',
     maxWidth: '100%',
-  },
-
-  '@media (min-width: 992px)': {
-    marginBottom: '0rem',
-    WebkitBoxFlex: 0,
-    MsFlex: '0 0 31.3333%',
-    flex: '0 0 31.3333%',
-    maxWidth: '31.3333%',
-    textAlign: 'left',
+    alignItems: 'flex-start',
   },
 })
 
-const SmallCaps = styled('div', {
+const $Logo = styled('div', {
+  flex: 1,
+})
+
+const $Menus = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(1, 1fr)',
+  gap: '2.25rem',
+  width: '100%',
+  flexShrink: 1,
+
+  '@>390': {
+    gcg: '3rem',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    maxWidth: '$contentFooter',
+  },
+
+  '@>769': {
+    gcg: '2.25rem',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+  },
+})
+
+const $SmallCaps = styled('div', {
   marginBottom: '0.8rem',
-  fontSize: '12px',
-  fontStyle: 'normal',
+  fontSize: '0.75rem',
+  fontWeight: 500,
   color: '$socialGray',
-  letterSpacing: '2px',
-  lineHeight: '18px',
+  letterSpacing: '0.125rem',
+  lineHeight: '1.125rem',
   textTransform: 'uppercase',
 })
 
-const FlexColumn = styled('div', {
-  WebkitBoxOrient: 'vertical',
-  WebkitBoxDirection: 'normal',
-  MsFlexDirection: 'column',
-  flexDirection: 'column',
-  display: 'flex',
-  MsFlexWrap: 'wrap',
-  flexWrap: 'wrap',
-  paddingLeft: 0,
-  marginBottom: 0,
-  listStyle: 'none',
+const $Menu = styled('div', {
+  color: '$textAlt',
 })
 
-const FlexColumnItem = styled('div', {
-  display: 'block',
-  padding: '0.5rem 0',
-  fontSize: '14px',
-  lineHeight: '20px',
+const $MenuItem = styled('div', {
+  padding: '0.625rem 0 0',
+  fontSize: '0.875rem',
+  lineHeight: '1.25rem',
   textDecoration: 'none',
   fontFamily: `'Apercu Pro'`,
 })
 
-const StyledLink = styled('a', {
+const $StyledLink = styled('a', {
   textDecoration: 'none',
   color: 'inherit',
 
@@ -126,11 +105,10 @@ const StyledLink = styled('a', {
   },
 })
 
-const LogoIconContainer = styled('img', {
-  width: '33px',
-  height: '24px',
+const $LogoIconContainer = styled('img', {
+  width: '9rem',
+  height: '1.5rem',
   position: 'relative',
-  top: '7px',
 })
 
 const Footer = ({ slimFooter, isPreviewPage, data = {} }) => {
@@ -140,46 +118,38 @@ const Footer = ({ slimFooter, isPreviewPage, data = {} }) => {
 
   if (menus?.length > 0) {
     return (
-      <FooterContainer slimFooter={slimFooter}>
-        {!slimFooter && (
-          <InnerContainer>
-            <FlexRow
-              css={{
-                justifyContent: 'space-between',
-              }}
-            >
-              <Col4>
-                <FlexColumn>
-                  <FlexColumnItem>
-                    <NextLink href="/" passHref>
-                      <StyledLink>
-                        <LogoIconContainer
-                          src={logoIconSVG.src}
-                          alt="Leadpages SVG logo"
-                        />
-                      </StyledLink>
-                    </NextLink>
-                  </FlexColumnItem>
-                </FlexColumn>
-              </Col4>
-              {menus.map(({ _key, heading, links }) => (
-                <Col2 key={_key}>
-                  <SmallCaps>{heading}</SmallCaps>
-                  <FlexColumn>
+      <$Footer slimFooter={slimFooter}>
+        <$FooterInner>
+          {!slimFooter && (
+            <$FooterContent>
+              <$Logo>
+                <NextLink href="/" passHref>
+                  <$StyledLink>
+                    <$LogoIconContainer
+                      src={logoIconSVG.src}
+                      alt="Leadpages SVG logo"
+                    />
+                  </$StyledLink>
+                </NextLink>
+              </$Logo>
+              <$Menus>
+                {menus.map(({ _key, heading, links }) => (
+                  <$Menu key={_key}>
+                    <$SmallCaps>{heading}</$SmallCaps>
                     {links?.map(({ _key: _linkKey, ...link }) => (
-                      <FlexColumnItem key={_linkKey}>
+                      <$MenuItem key={_linkKey}>
                         <Link {...link} footer={true} />
-                      </FlexColumnItem>
+                      </$MenuItem>
                     ))}
-                  </FlexColumn>
-                </Col2>
-              ))}
-            </FlexRow>
-          </InnerContainer>
-        )}
-        <FooterRowBottom />
-        <FooterLast />
-      </FooterContainer>
+                  </$Menu>
+                ))}
+              </$Menus>
+            </$FooterContent>
+          )}
+          <FooterRowBottom />
+          <RedbrickFooter />
+        </$FooterInner>
+      </$Footer>
     )
   }
 

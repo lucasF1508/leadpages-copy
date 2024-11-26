@@ -26,6 +26,8 @@ const Templates = ({
   seo,
   template,
   slug,
+  footer,
+  slimFooter,
 }) => {
   const router = useRouter()
   const pathname = router.asPath
@@ -120,6 +122,8 @@ const Templates = ({
           planData={planData}
           templateData={template}
           slug={slug}
+          footer={footer}
+          slimFooter={slimFooter}
         />
       )}
       <Gallery
