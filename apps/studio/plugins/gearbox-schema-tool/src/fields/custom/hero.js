@@ -17,6 +17,7 @@ export const hero = ({
     heading: {},
     content: {},
     link: {},
+    links: {},
     media: {},
     align: {},
     ...argsOrg,
@@ -37,6 +38,15 @@ export const hero = ({
       ? F.links({
           group: 'content',
           link: { ...args.link },
+          additionalFields: [F.field('signUp')],
+          validation: (Rule) =>
+            Rule.custom((field) =>
+              field?.some((link) => link._type === 'signUp') &&
+              field?.length > 1
+                ? "When SignUp (Trial) link is present, Hero's cannot contain other links."
+                : true
+            ),
+          ...args.links,
         })
       : '',
     args.media

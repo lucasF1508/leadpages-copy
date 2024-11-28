@@ -10,6 +10,19 @@ import Image from '@components/Image'
 import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
 import { features } from 'config'
 
+export const heroColors = {
+  gray: { bc: '$grayAlt' },
+  gray4: { bc: '$gray' },
+  tan: { bc: '$backgroundAlt' },
+  white: { bc: '$white' },
+  lavender: { bc: '$lavenderLight' },
+  teal: { bc: '$teal' },
+  tealLight: { bc: '$tealLight' },
+  purple: { bc: '$purple' },
+  purpleDark: { bc: '$purpleDark' },
+  navy: { bc: '$darkBlue' },
+}
+
 export const $Hero = styled('div', {
   display: 'flex',
   justifyContent: 'center',
@@ -57,16 +70,7 @@ export const $Hero = styled('div', {
         },
       },
     },
-    backgroundColor: {
-      gray: { bc: '$grayAlt' },
-      gray4: { bc: '$gray' },
-      tan: { bc: '$backgroundAlt' },
-      white: { bc: '$white' },
-      lavender: { bc: '$lavenderLight' },
-      teal: { bc: '$tealLight' },
-      purple: { bc: '$purple' },
-      navy: { bc: '$darkBlue' },
-    },
+    backgroundColor: heroColors,
   },
 
   defaultVariants: {

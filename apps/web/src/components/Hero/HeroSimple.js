@@ -5,7 +5,7 @@ import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
 import { features } from 'config'
 import Link from '@components/Link'
 import { LinksContainer } from './HeroHome'
-import { $Hero, $BackgroundImage } from './HeroDefault'
+import { $Hero, $BackgroundImage, heroColors } from './HeroDefault'
 
 const $Text = styled(Text, {
   variants: {
@@ -40,29 +40,7 @@ const $HeroSimple = styled($Hero, {
   },
 
   variants: {
-    backgroundColor: {
-      gray: {
-        bc: '$grayAlt',
-      },
-      gray4: {
-        bc: '$gray',
-      },
-      white: {
-        bc: '$white',
-      },
-      lavender: {
-        bc: '$lavenderLight',
-      },
-      teal: {
-        bc: '$tealLight',
-      },
-      purple: {
-        bc: '$purple',
-      },
-      navy: {
-        bc: '$darkBlue',
-      },
-    },
+    backgroundColor: heroColors,
   },
 })
 
