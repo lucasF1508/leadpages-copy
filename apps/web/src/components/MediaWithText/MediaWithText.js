@@ -367,6 +367,7 @@ const MediaWithText = ({
                 grayLinks={grayLinks}
                 css={{ gap: '$2' }}
                 key={_key}
+                _type={_type}
                 {...iconProps}
                 {...link}
               >

@@ -5,6 +5,7 @@ import Text from '@components/Text'
 import Link from '@components/Link'
 import { features } from 'config'
 import HeroVideoBrowser from './HeroVideoBrowser'
+import { heroColors } from './HeroDefault'
 
 const ShapesLeft = styled('div', {
   position: 'absolute',
@@ -57,16 +58,7 @@ const $Hero = styled('div', {
       small: { '@media (min-width: 769px)': { minHeight: '25rem' } },
       default: { '@media (min-width: 769px)': { minHeight: '58rem' } },
     },
-    backgroundColor: {
-      gray: { bc: '$grayAlt' },
-      gray4: { bc: '$gray' },
-      tan: { bc: '$backgroundAlt' },
-      white: { bc: '$white' },
-      lavender: { bc: '$lavenderLight' },
-      teal: { bc: '$tealLight' },
-      purple: { bc: '$purple' },
-      navy: { bc: '$darkBlue' },
-    },
+    backgroundColor: heroColors,
     alignBackgroundImages: {
       default: {
         [`& ${ShapesLeft}`]: {
@@ -139,6 +131,10 @@ export const LinksContainer = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   gap: '$2',
+
+  '> div': {
+    alignItems: 'center',
+  },
 })
 
 const TextContainer = styled('div', {
