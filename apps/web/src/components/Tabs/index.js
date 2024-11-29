@@ -3,6 +3,13 @@ import TabsReveal from './TabsReveal'
 import TabsRotator from './TabsRotator'
 import TabsRevealAlt from './TabsRevealAlt'
 import TabsRotatorAlt from './TabsRotatorAlt'
+import TabsContentGroup from './TabsContentGroup'
 
 export default Tabs
-export { TabsReveal, TabsRotator, TabsRotatorAlt, TabsRevealAlt }
+export {
+  TabsReveal,
+  TabsRotator,
+  TabsRotatorAlt,
+  TabsRevealAlt,
+  TabsContentGroup,
+}

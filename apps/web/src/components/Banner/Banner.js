@@ -59,15 +59,28 @@ const $Image = styled('div', {
 })
 
 const $Content = styled('div', {
-  padding: '$4_5',
   display: 'flex',
   flexDirection: 'column',
   gap: '$3',
 
-  '@>1025': {
-    flexDirection: 'row',
-    alignItems: 'center',
+  '@>769': {
+    padding: '$4_5',
+  },
+
+  '@>1200': {
     gap: '$4_5',
+  },
+
+  variants: {
+    hasImage: {
+      true: {},
+      false: {
+        '@>1200': {
+          flexDirection: 'row',
+          alignItems: 'center',
+        },
+      },
+    },
   },
 })
 
@@ -109,7 +122,25 @@ const $ContentInner = styled('div', {
   gap: '1.125rem',
 })
 
-const $Link = styled('div', {})
+const $Link = styled('div', {
+  '& > div': {
+    '@>769': { alignItems: 'flex-start', maxWidth: '$cols6' },
+  },
+
+  variants: {
+    type: {
+      signUp: {
+        flexBasis: '100%',
+
+        '& form': {
+          width: '100%',
+          maxWidth: '$cols5',
+          mb: 0,
+        },
+      },
+    },
+  },
+})
 
 const $Pill = styled('div', {
   py: '$0_5',
@@ -168,7 +199,7 @@ const Banner = ({
               <Image image={image} alt={image?.altText} />
             </$Image>
           )}
-          <$Content>
+          <$Content hasImage={!!image}>
             <$ContentInner>
               {heading && <$Heading>{heading}</$Heading>}
               {subheading && (
@@ -184,7 +215,7 @@ const Banner = ({
               {body && <$Body>{body}</$Body>}
             </$ContentInner>
             {link && !linkIsHidden && (
-              <$Link>
+              <$Link type={link?._type}>
                 <Link
                   {...link}
                   css={{

@@ -5,12 +5,12 @@ import { fadeIn } from 'react-animations'
 import Media from '@components/Media'
 import Image from '@components/Image'
 import Link from '@components/Link'
-import ContentGroup from '@components/ContentGroup'
 import PaginationDots from '@legacy/components/rotators/PaginationDots'
 import ReactSlick from '@legacy/components/rotators/ReactSlick_Base'
 // images
 import ArrowRightSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
 import { AnimatePresence, m } from 'framer-motion'
+import TabsContentGroup from './TabsContentGroup'
 
 const OuterContainer = styled('div', {
   width: '100%',
@@ -163,19 +163,6 @@ const CardLink = styled(Link, {
   justifyContent: 'flex-start',
 })
 
-const $LinkContainer = styled('div', {
-  w: '100%',
-  ta: 'center',
-  mt: '$4_5',
-
-  '& a': {
-    h: 'unset',
-    minWidth: 'unset',
-    p: '$1_5 $3',
-    gcg: '0.625rem',
-  },
-})
-
 const $AnimatedMedia = styled(m.div, {})
 
 const TabsRotatorAlt = ({
@@ -185,10 +172,12 @@ const TabsRotatorAlt = ({
   heading,
   content,
   animate: animateLeadingText = false,
-  link,
+  link: _link,
+  links,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [cardContentHeight, setCardContentHeight] = useState(0)
+  const link = links?.[0] || _link
 
   const [loadSlick, setLoadSlick] = useState(false)
   useEffect(() => setLoadSlick(true), [])
@@ -228,23 +217,20 @@ const TabsRotatorAlt = ({
   return (
     <OuterContainer>
       <InnerContainer>
-        {(heading || content) && (
-          <ContentGroup
-            heading={heading}
-            content={content}
-            animate={animateLeadingText}
-            css={{
-              heading: { typeSizes: '4xl' },
-              content: {
-                '&:last-child': { mb: 0 },
-                typeSizes: 'lg',
-                lineHeight: '1.6em',
-              },
-
-              mb: '$4_5',
-            }}
-          />
-        )}
+        <TabsContentGroup
+          heading={heading}
+          content={content}
+          animate={animateLeadingText}
+          link={link}
+          css={{
+            heading: { typeSizes: '4xl' },
+            content: {
+              '&:last-child': { mb: 0 },
+              typeSizes: 'lg',
+              lineHeight: '1.6em',
+            },
+          }}
+        />
         <Flexbox>
           <FlexTop className={activeIndex === null ? 'nullstate' : ''}>
             <FlexTopContent>
@@ -286,7 +272,7 @@ const TabsRotatorAlt = ({
           <SlickRotator {...settings}>
             {items.map(
               (
-                { title, content: _content, icon, iconAltText, link: _link },
+                { title, content: _content, icon, iconAltText, link: itemLink },
                 index
               ) => (
                 <Card
@@ -307,10 +293,10 @@ const TabsRotatorAlt = ({
                     </CardHead>
                     <CardBody>
                       <CardText>{_content}</CardText>
-                      {_link?.condition && _link.label && (
+                      {itemLink?.condition && itemLink.label && (
                         <CardLinkHolder>
-                          <CardLink {..._link} aria-label={''}>
-                            <span>{`${_link.label}  `}</span>
+                          <CardLink {...itemLink} aria-label={''}>
+                            <span>{`${itemLink.label}  `}</span>
                             <CardLinkArrowSVG
                               src={ArrowRightSVG.src}
                               alt="arrow icon"
@@ -326,11 +312,6 @@ const TabsRotatorAlt = ({
           </SlickRotator>
         )}
       </RotatorContainer>
-      {link && (
-        <$LinkContainer>
-          <Link {...link} css={{ svg: { w: '20px', h: '20px' } }} />
-        </$LinkContainer>
-      )}
     </OuterContainer>
   )
 }

@@ -38,7 +38,16 @@ export const schemaTabs = F.object({
         }),
         validation: (Rule) => Rule.max(4),
       }),
-      F.link({ hidden: ({ parent }) => !parent.alternateLayout }),
+      F.link({
+        hidden: ({ parent, value }) =>
+          !value?.condition || !parent.alternateLayout,
+      }),
+      F.links({
+        group: 'link',
+        additionalFields: [F.field('signUp')],
+        hidden: ({ parent }) => !!parent?.link?.condition,
+        validation: (Rule) => Rule.max(1),
+      }),
     ]),
     ...G.group('options', [
       F.boolean({

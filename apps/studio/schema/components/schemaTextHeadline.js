@@ -9,6 +9,10 @@ export const schemaTextHeadline = F.object({
   fields: [
     ...G.group('content', [
       F.field('blockContentHeadline', { name: 'content' }),
+      F.links({
+        additionalFields: [F.field('signUp')],
+        validation: (Rule) => Rule.max(1),
+      }),
     ]),
     ...G.group('options', [
       F.field('backgroundColor'),

@@ -5,6 +5,12 @@ export const schemaTextBlock = F.object({
   icon,
   title: 'Text Standard',
   name: 'textBlock',
-  fields: [F.blockContent()],
+  fields: [
+    F.blockContent(),
+    F.links({
+      additionalFields: [F.field('signUp')],
+      validation: (Rule) => Rule.max(1),
+    }),
+  ],
   preview: P.blockContent({ title: 'Text Standard' }),
 })

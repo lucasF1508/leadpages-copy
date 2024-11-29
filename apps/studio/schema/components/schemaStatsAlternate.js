@@ -17,6 +17,7 @@ export const schemaStatsAlternate = F.object({
       F.blockContent(),
       F.links({
         validation: (Rule) => Rule.max(1),
+        additionalFields: [F.field('signUp')],
       }),
       F.array({
         title: 'Stats Array',
@@ -79,8 +80,8 @@ export const schemaStatsAlternate = F.object({
 
       return {
         title:
-          P.richText({ content: [heading], title: 'Media with Text' }) ||
-          'Media with Text',
+          P.richText({ content: [heading], title: 'Stats Alternate' }) ||
+          'Stats Alternate',
         subtitle: P.richText({ content: subtitle }),
       }
     },

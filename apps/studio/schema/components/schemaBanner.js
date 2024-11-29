@@ -18,6 +18,7 @@ export const schemaBanner = F.object({
       F.string({ name: 'subheading' }),
       F.text({ name: 'body' }),
       F.links({
+        additionalFields: [F.field('signUp')],
         validation: (Rule) => Rule.max(1),
       }),
     ]),

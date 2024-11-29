@@ -16,10 +16,6 @@ const $StatsAlternate = styled('div', {
     gap: '3.375rem',
   },
 
-  '@>1025': {
-    gap: 0,
-  },
-
   '@>l': {
     gap: '3.375rem',
     flexDirection: 'row',
@@ -47,13 +43,7 @@ const $StatsAlternate = styled('div', {
   },
 })
 
-const $StatsAlternateColumn = styled('div', {
-  maxWidth: '18.125rem',
-
-  '@>510': {
-    maxWidth: 'none',
-  },
-})
+const $StatsAlternateColumn = styled('div', {})
 
 const $StatsAlternateStatGrid = styled('div', {
   display: 'grid',
@@ -90,6 +80,11 @@ const $StatsAlternateStat = styled('div', {
         borderTopLeftRadius: '$statsCard',
       },
     },
+    onLightBackground: {
+      true: {
+        bc: '$gray',
+      },
+    },
   },
 })
 
@@ -102,6 +97,10 @@ const $StatsAlternateContent = styled('div', {
 
   '@>l': {
     maxWidth: '26.5rem',
+  },
+
+  '& form': {
+    maxWidth: 'unset',
   },
 })
 
@@ -216,6 +215,7 @@ const StatsAlternate = ({
                 key={_key}
                 isLast={i === stats.length - 1}
                 isFirst={i === 0}
+                onLightBackground={!!darkBackground}
               >
                 <$StatTitle>{stat}</$StatTitle>
                 <$StatLabel>{label}</$StatLabel>

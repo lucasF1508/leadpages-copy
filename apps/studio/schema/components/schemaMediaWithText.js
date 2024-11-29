@@ -9,9 +9,14 @@ export const schemaMediaWithText = F.field('object', {
   fields: [
     ...G.group('content', [
       F.field('blockContentHeadline', { name: 'content' }),
-      F.array({
-        name: 'links',
-        of: [F.link()],
+      F.links({
+        additionalFields: [F.field('signUp')],
+        validation: (Rule) =>
+          Rule.custom((field) =>
+            field?.some((link) => link._type === 'signUp') && field?.length > 1
+              ? "When SignUp (Trial) link is present, Hero's cannot contain other links."
+              : true
+          ),
       }),
     ]),
     ...G.group('media', [

@@ -258,10 +258,11 @@ export const pinionTokens = {
         box: [{ property: 'py' }],
       },
       teal: {
-        bc: '$tealLight',
+        bc: '$teal',
         my: 'unset',
         box: [{ property: 'py' }],
       },
+      tealLight: { bc: '$tealLight', my: 'unset', box: [{ property: 'py' }] },
       purple: {
         bc: '$purple',
         my: 'unset',

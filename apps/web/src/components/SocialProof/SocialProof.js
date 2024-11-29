@@ -149,6 +149,7 @@ const $Links = styled('div', {
   ff: 'column',
   jc: 'center',
   gap: '$3',
+  zIndex: 1,
 
   '@>600': {
     ff: 'row',

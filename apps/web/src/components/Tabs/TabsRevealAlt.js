@@ -4,11 +4,11 @@ import { AnimatePresence, m } from 'framer-motion'
 import Image from '@components/Image'
 import Media from '@components/Media'
 import Link from '@components/Link'
-import ContentGroup from '@components/ContentGroup'
 
 // images
 import ArrowDownSVG from '@legacy/assets/images/global/arrow_down_small.svg'
 import ArrowRightSVG from '@legacy/assets/images/global/arrow_right_purple.svg'
+import TabsContentGroup from './TabsContentGroup'
 
 const OuterContainer = styled('div', {
   width: '100%',
@@ -163,16 +163,15 @@ const CardText = styled('div', {
   fontSize: '16px',
   lineHeight: '24px',
   color: '$textAlt',
-  marginBottom: '1.5rem',
+  marginBottom: '1rem',
 })
 
 const CardLinkHolder = styled('div', {
   marginBottom: '1rem',
-  height: '16px',
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
-  marginTop: '1.5rem',
+  marginTop: '1rem',
 })
 
 const CardLinkArrowSVG = styled('img', {
@@ -200,19 +199,6 @@ const CardLink = styled(Link, {
   },
 })
 
-const $LinkContainer = styled('div', {
-  w: '100%',
-  ta: 'center',
-  mt: '$4_5',
-
-  '& a': {
-    h: 'unset',
-    minWidth: 'unset',
-    p: '$1_5 $3',
-    gcg: '0.625rem',
-  },
-})
-
 const RevealMedia = styled(Media, {})
 
 const RevealImage = styled(Image, {})
@@ -227,10 +213,12 @@ const TabsRevealAlt = ({
   items,
   heading,
   content,
-  link,
+  link: _link,
+  links,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [shouldAutoplay, setShouldAutoplay] = useState(autoplay)
+  const link = links?.[0] || _link
 
   const handleCardClick = (index) => {
     if (activeIndex === index) return
@@ -255,27 +243,25 @@ const TabsRevealAlt = ({
   return (
     <OuterContainer>
       <InnerContainer>
-        {(heading || content) && (
-          <ContentGroup
-            heading={heading}
-            content={content}
-            animate={animateLeadingText}
-            css={{
-              heading: { fontSize: '2.5rem' },
-              content: {
-                '&:last-child': { mb: 0 },
-                typeSizes: 'xl',
-                lineHeight: '1.4em',
-              },
-              mb: '$6',
-            }}
-          />
-        )}
+        <TabsContentGroup
+          heading={heading}
+          content={content}
+          animate={animateLeadingText}
+          link={link}
+          css={{
+            heading: { fontSize: '2.5rem' },
+            content: {
+              '&:last-child': { mb: 0 },
+              typeSizes: 'xl',
+              lineHeight: '1.4em',
+            },
+          }}
+        />
         <Flexbox align={align}>
           <FlexLeft tabWidth={tabWidth}>
             {items.map(
               (
-                { title, content: _content, icon, iconAltText, link: _link },
+                { title, content: _content, icon, iconAltText, link: itemLink },
                 index
               ) => (
                 <Card
@@ -315,10 +301,10 @@ const TabsRevealAlt = ({
                     </CardHead>
                     <CardBody>
                       <CardText>{_content}</CardText>
-                      {_link?.condition && _link.label && (
+                      {itemLink?.condition && itemLink.label && (
                         <CardLinkHolder>
-                          <CardLink {..._link} aria-label={''}>
-                            {`${_link.label} `}
+                          <CardLink {...itemLink} aria-label={''}>
+                            {`${itemLink.label} `}
                             <CardLinkArrowSVG
                               src={ArrowRightSVG.src}
                               alt="arrow icon"
@@ -366,11 +352,6 @@ const TabsRevealAlt = ({
             </FlexRightContent>
           </FlexRight>
         </Flexbox>
-        {link && (
-          <$LinkContainer>
-            <Link {...link} />
-          </$LinkContainer>
-        )}
       </InnerContainer>
     </OuterContainer>
   )
