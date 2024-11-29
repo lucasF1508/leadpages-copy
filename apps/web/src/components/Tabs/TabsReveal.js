@@ -175,7 +175,6 @@ const CardText = styled('div', {
   fontSize: '16px',
   lineHeight: '24px',
   color: '$textAlt',
-  marginBottom: '1.5rem',
 })
 
 const CardLinkHolder = styled('div', {
@@ -290,7 +289,7 @@ const ProductToolkitClickReveal = ({
                     </CardHead>
                     <CardBody>
                       <CardText>{content}</CardText>
-                      {link?.condition && (
+                      {link?.condition && link?.url && (
                         <CardLinkHolder>
                           <CardLink {...link} aria-label={''}>
                             {`${link.label}  `}

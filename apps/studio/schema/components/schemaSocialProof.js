@@ -9,7 +9,15 @@ export const schemaSocialProof = F.object({
     ...G.group('content', [
       F.string({ name: 'overline' }),
       F.blockContent({ name: 'content' }),
-      F.links(),
+      F.links({
+        additionalFields: [F.field('signUp')],
+        validation: (Rule) =>
+          Rule.custom((field) =>
+            field?.some((link) => link._type === 'signUp') && field?.length > 1
+              ? "When SignUp (Trial) link is present, Hero's cannot contain other links."
+              : true
+          ),
+      }),
     ]),
     ...G.group('options', [
       F.field('backgroundColorFull', {
@@ -45,8 +53,8 @@ export const schemaSocialProof = F.object({
         title:
           P.richText({
             content: [heading],
-            title: 'Media with Text',
-          }) || 'Media with Text',
+            title: 'Social Proof',
+          }) || 'Social Proof',
         subtitle: P.richText({ content: subtitle }),
         media: image,
       }
