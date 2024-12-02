@@ -3,6 +3,9 @@ import { getPlanData, getGroupedPlanData } from '@utils/plans'
 import { runQueries } from '@lib'
 import Templates from '@layouts/Templates'
 import getTemplateData from '@utils/getStaticTemplateData'
+import getClient from 'client'
+
+const client = getClient()
 
 const WebsiteTemplatesPage = (props) => (
   <Templates {...props} isWebsiteGallery />
@@ -13,10 +16,14 @@ export async function getStaticProps(context) {
   const { id: templateId } = params
   const slug = '/website-templates'
 
-  const { _id, ...rest } = await getTemplateData({
-    templateId,
-    templateType: 'website',
-  })
+  const [templateData, templateSlug] = await Promise.all([
+    getTemplateData({ templateId, templateType: 'website' }),
+    client.fetch(`
+      *[ _type == "template" && (slug.current == "${templateId}" || _id == "${templateId}") ][0].slug
+    `),
+  ])
+
+  const { _id, ...rest } = templateData
 
   if (!_id) {
     return {
@@ -36,7 +43,7 @@ export async function getStaticProps(context) {
       preview,
       planData,
       global,
-      data: [rest],
+      data: [{ ...rest, slug: templateSlug }],
     },
   }
 }
