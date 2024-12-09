@@ -1,20 +1,4 @@
-const submitToHubSpot = async (formData) => {
-  const response = await fetch('/api/send-hubspot', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData),
-  })
-
-  if (!response.ok) {
-    const { error } = await response.json()
-    console.error(error.message)
-    throw new Error('Failed to submit form. Please contact support.')
-  }
-
-  return response
-}
+import { submitToHubSpot } from '@lib/forms/hubspotHelpers'
 
 const externalRedirect = async ({ formData, url, ...hubspotFormIds }) => {
   if (!formData.email || formData.email === '') {
@@ -28,8 +12,8 @@ const externalRedirect = async ({ formData, url, ...hubspotFormIds }) => {
 
   try {
     await submitToHubSpot({
-      pageUri: window.location.href,
-      pageName: document.title,
+      page_url: window.location.href,
+      page_name: document.title,
       portalId,
       formId,
       ...formData,

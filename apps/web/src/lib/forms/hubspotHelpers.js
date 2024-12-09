@@ -1,3 +1,6 @@
+const { HUBSPOT_DEFAULT_FORM_ID, HUBSPOT_DEFAULT_PORTAL_ID } =
+  process?.env || {}
+
 /* eslint-disable camelcase */
 export const filterContactData = (data) => ({
   firstname: data?.firstname || data?.firstName || data?.name?.split(' ')[0],
@@ -184,7 +187,12 @@ export const associateResponses = async ({ client, companyId, contactId }) => {
 }
 
 export const formApiSubmission = async (data) => {
-  const { portalId, formId, pageUri, pageName } = data
+  const {
+    portalId = HUBSPOT_DEFAULT_PORTAL_ID,
+    formId = HUBSPOT_DEFAULT_FORM_ID,
+    page_url,
+    page_name,
+  } = data
 
   if (!portalId || !formId || !data.email)
     return {
@@ -204,8 +212,8 @@ export const formApiSubmission = async (data) => {
   const body = {
     fields: formatFormFields(data),
     context: {
-      pageUri,
-      pageName,
+      pageUri: page_url,
+      pageName: page_name,
     },
   }
 
@@ -234,4 +242,22 @@ export const formApiSubmission = async (data) => {
     message: inlineMessage,
     response,
   }
+}
+
+export const submitToHubSpot = async (formData) => {
+  const response = await fetch('/api/send-hubspot', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+
+  if (!response.ok) {
+    const { error } = await response.json()
+    console.error(error.message)
+    throw new Error('Failed to submit form. Please contact support.')
+  }
+
+  return response
 }
