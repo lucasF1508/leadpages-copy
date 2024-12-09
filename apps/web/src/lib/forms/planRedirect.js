@@ -1,4 +1,5 @@
 import { freeTrialEndpoints } from '@pages/api/fetch-trial-url'
+import { submitToHubSpot } from '@lib/forms/hubspotHelpers'
 import { kebabCase } from 'lodash'
 
 const planRedirect = async ({ type, formData }) => {
@@ -24,7 +25,13 @@ const planRedirect = async ({ type, formData }) => {
     )
 
     const url = data && data['order-url']
-    if (url) {
+    const isSubmitted = await submitToHubSpot({
+      page_url: window.location.href,
+      page_name: document.title,
+      ...formData,
+    })
+
+    if (url && isSubmitted) {
       window.location.href = url.concat(`&emailsubmission=${kebabCase(type)}`)
       return true
     }

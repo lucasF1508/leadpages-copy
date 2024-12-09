@@ -223,7 +223,10 @@ const SignUpWithEmailFieldLink = ({
 
       if (error) setFormError(error)
     } else {
-      const { error } = await planRedirect({ type, formData })
+      const { error } = await planRedirect({
+        type,
+        formData: { ...formData, trial_type: type },
+      })
 
       if (error) setFormError(error)
     }
