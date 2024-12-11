@@ -40,6 +40,13 @@ import { Events } from '@legacy/components/templates/tracker'
 
 import { getTemplateUrl } from '../../../lib/utils/templates'
 
+const customTemplateIds = [
+  '7ZSCbCoHdiE49WenWPoCLe',
+  'RfijoAZKHWuDFbQDyWZPRo',
+  'pvUj4rdpRwWzsXDnWxKytg',
+  'Pdpa6sFKmZdekRyqb9sLL3',
+]
+
 const stickyHeaderZIndex = 1501
 const sidebarWidth = 250
 
@@ -570,18 +577,22 @@ const Templates = ({ kind, isPreviewing, setCurrentURL, setPreviousURL }) => {
                     </Typography>
                   </NoResults>
                 )}
-                {state.templates.map((template) => (
-                  <TemplateThumbnail
-                    key={template.ui.guid}
-                    template={template}
-                    onPreviewTemplate={handlePreview}
-                    previewButtonText="View"
-                    linkHref={getTemplateUrl(
-                      kind,
-                      kebabCase(template.template.name)
-                    )}
-                  />
-                ))}
+                {state.templates
+                  .filter(
+                    (template) => !customTemplateIds.includes(template._meta.id)
+                  )
+                  .map((template) => (
+                    <TemplateThumbnail
+                      key={template.ui.guid}
+                      template={template}
+                      onPreviewTemplate={handlePreview}
+                      previewButtonText="View"
+                      linkHref={getTemplateUrl(
+                        kind,
+                        kebabCase(template.template.name)
+                      )}
+                    />
+                  ))}
               </Gallery>
             </Box>
           </Grid>
