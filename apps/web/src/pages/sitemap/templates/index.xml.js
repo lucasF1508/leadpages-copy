@@ -1,13 +1,17 @@
 import { getServerSideSitemapIndexLegacy } from 'next-sitemap'
 
-const { NEXT_PUBLIC_URL } = process.env
+export const getServerSideProps = async (context) => {
+  const { req } = context
+  const rootUrl = `${req.headers['x-forwarded-proto'] || 'http'}://${
+    req.headers.host
+  }`
 
-export const getServerSideProps = async (context) =>
-  getServerSideSitemapIndexLegacy(context, [
-    `${NEXT_PUBLIC_URL}/sitemap/templates/leadpages-template`,
-    `${NEXT_PUBLIC_URL}/sitemap/templates/website-template`,
-    `${NEXT_PUBLIC_URL}/sitemap/templates/categories`,
+  return getServerSideSitemapIndexLegacy(context, [
+    `${rootUrl}/sitemap/templates/leadpages-template.xml`,
+    `${rootUrl}/sitemap/templates/website-template.xml`,
+    `${rootUrl}/sitemap/templates/categories.xml`,
   ])
+}
 
 // Default export to prevent next.js errors
 export default function SitemapIndex() {}

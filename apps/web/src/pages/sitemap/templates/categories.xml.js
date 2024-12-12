@@ -1,15 +1,17 @@
 import { getDocSlugs } from '@lib'
 import { getServerSideSitemapLegacy } from 'next-sitemap'
 
-const { NEXT_PUBLIC_URL } = process.env
-
 export const getServerSideProps = async (context) => {
+  const { req } = context
+  const rootUrl = `${req.headers['x-forwarded-proto'] || 'http'}://${
+    req.headers.host
+  }`
   const slugs = await getDocSlugs('templateCategory', {
     projections: { templateType: 'templateType', _updatedAt: '_updatedAt' },
   })
 
   const paths = slugs?.map(({ slug, templateType, _updatedAt }) => ({
-    loc: `${NEXT_PUBLIC_URL}/${
+    loc: `${rootUrl}/${
       templateType === 'website' ? 'website-templates' : 'templates'
     }/category/${slug}`,
     changefreq: 'yearly',

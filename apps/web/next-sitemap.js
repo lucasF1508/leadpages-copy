@@ -17,6 +17,7 @@ module.exports = {
   siteUrl,
   changefreq: 'yearly',
   generateRobotsTxt: true,
+  generateIndexSitemap: false,
   exclude: [
     '/studio',
     '/studio/*',
@@ -33,12 +34,23 @@ module.exports = {
     '/blog/*',
     '/sitemap',
     '/sitemap/*',
+    `/comparisons/*`,
+    `/integrations/*`,
+    `/customers/*`,
+    `/conversion-optimization-guide/*`,
+    `/landing-pages-guide/*`,
+    `/lead-generation-guide/*`,
+    `/use-cases/*`,
     ...variantPaths,
   ],
   robotsTxtOptions: {
     additionalSitemaps: [
       `${siteUrl}/sitemap/blog/index.xml`,
       `${siteUrl}/sitemap/templates/index.xml`,
+      `${siteUrl}/sitemap/comparisons.xml`,
+      `${siteUrl}/sitemap/integrations.xml`,
+      `${siteUrl}/sitemap/customers.xml`,
+      `${siteUrl}/sitemap/pages.xml`,
     ],
     policies: [
       {

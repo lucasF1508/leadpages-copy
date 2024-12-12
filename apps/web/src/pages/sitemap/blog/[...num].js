@@ -4,13 +4,15 @@ import findValuesForKey from '@lib/utils/findValuesForKey'
 import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
 import { perPage } from './index.xml'
 
-const { NEXT_PUBLIC_URL } = process.env
 const { SANITY_STUDIO_API_PROJECT_ID } = process.env
 const { SANITY_STUDIO_API_DATASET } = process.env
 
 export const getServerSideProps = async (context) => {
+  const { req } = context
+  const rootUrl = `${req.headers['x-forwarded-proto'] || 'http'}://${
+    req.headers.host
+  }`
   const { query: { num: [num] = [0] } = {} } = context
-  const today = new Date().toLocaleDateString('en-CA')
 
   const slice = `${Number(num) * perPage}..${Number(num * perPage) + perPage}`
 
@@ -40,7 +42,7 @@ export const getServerSideProps = async (context) => {
     }, [])
 
     return {
-      loc: `${NEXT_PUBLIC_URL}${doc.path}`,
+      loc: `${rootUrl}${doc.path}`,
       changefreq: 'yearly',
       priority: 0.7,
       lastmod: new Date(doc._updatedAt).toISOString(),

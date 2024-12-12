@@ -7,6 +7,7 @@ import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Embed from '@components/Embed'
 import FullStory from '@components/FullStory'
+import SpeedInsights from '@components/SpeedInsights'
 import Leadboxes from '@components/Leadboxes'
 import { LazyMotion } from 'framer-motion'
 
@@ -101,6 +102,7 @@ export default function App({
       value={{ ...siteMeta, hasLoaded, setHasLoaded, options, planData }}
     >
       <MarketingThemeProvider>
+        <SpeedInsights />
         <ToastManager />
         <Promotions
           onPromotionsLoaded={onPromotionsLoaded}
