@@ -96,7 +96,7 @@ const Comparisons = () => {
         backgroundColor="$grayAlt"
       />
       <OuterContainer>
-        {cardData.map((card) => (
+        {cardData?.map((card) => (
           <ComparisonCards key={card.title} {...card} />
         ))}
       </OuterContainer>

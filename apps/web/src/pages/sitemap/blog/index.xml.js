@@ -3,16 +3,21 @@ import { runQuery } from '@lib'
 
 export const perPage = 250
 
-const { NEXT_PUBLIC_URL } = process.env
-
 export const getServerSideProps = async (context) => {
+  const { req } = context
+  const rootUrl = `${req.headers['x-forwarded-proto'] || 'http'}://${
+    req.headers.host
+  }`
   const { count } = await runQuery(`*[0]{"count":count(*[_type == 'post'])}`)
 
-  const pages = []
+  const pages = [
+    `${rootUrl}/sitemap/blog/categories.xml`,
+    `${rootUrl}/sitemap/blog/authors.xml`,
+  ]
 
   let pagination = 0
   for (let index = 0; index < count; index += perPage) {
-    pages.push(`${NEXT_PUBLIC_URL}/sitemap/blog/${pagination}`)
+    pages.push(`${rootUrl}/sitemap/blog/${pagination}`)
     pagination++
   }
 
