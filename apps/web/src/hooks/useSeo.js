@@ -1,5 +1,7 @@
-import { useSanityImage } from 'sanity-hooks'
+// import { useNextSanityImage } from 'next-sanity-image'
 import { useRouter } from 'next/router'
+import useImageParser from './useImageParser'
+
 
 /* eslint-disable prefer-destructuring */
 const GTAG_TRACKING_ID = process.env.GTAG_TRACKING_ID
@@ -40,12 +42,13 @@ const useSeo = ({ seo, siteMeta, isVariant } = {}) => {
     publishDate,
     modifyDate,
   } = seo || {}
-  const image = !hasImageUrl && useSanityImage(seoImage || seoImageDefault)
+  
+  const _image = useImageParser(seoImage || seoImageDefault, {
+    imageBuilder: (imageUrlBuilder) => imageUrlBuilder.width(1200).height(630),
+  })
 
-  const robots =
-    VERCEL_ENV !== 'production'
-      ? 'noindex,nofollow'
-      : ''
+  const image = hasImageUrl && typeof seoImage === 'string' ? seoImage : _image
+  const robots = VERCEL_ENV !== 'production' ? 'noindex,nofollow' : ''
 
   return {
     GTM_CONTAINER_ID,
@@ -59,15 +62,7 @@ const useSeo = ({ seo, siteMeta, isVariant } = {}) => {
           siteName,
         }),
     seoDescription,
-    image: hasImageUrl
-      ? { url: seoImage }
-      : image
-      ? {
-          width: 1200,
-          height: 630,
-          url: image?.builder?.width(1200).height(630).url(),
-        }
-      : {},
+    image,
     url: isVariant
       ? NEXT_PUBLIC_URL
       : `${NEXT_PUBLIC_URL || ''}${asPath

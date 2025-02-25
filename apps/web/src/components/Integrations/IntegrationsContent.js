@@ -549,7 +549,7 @@ class IntegrationsContent extends React.Component {
                 dataSet={integrations}
                 searchableProperties={['integration']}
               />
-              {filteredCategories.map((item) => (
+              {filteredCategories?.map((item) => (
                 <SidebarScrollLink
                   key={item}
                   activeClass="activeIntegrationsLink"
@@ -569,7 +569,7 @@ class IntegrationsContent extends React.Component {
             >
               <MainMenuFlexbox>
                 <MainMenuHeading>
-                  {filteredCategories.map((item) => (
+                  {filteredCategories?.map((item) => (
                     <SubmenuScrollLink
                       key={item}
                       activeClass="activeIntegrationsSection"
@@ -600,7 +600,7 @@ class IntegrationsContent extends React.Component {
                   </SubmenuHeaderFlexbox>
                 </SubmenuHeader>
                 <SubmenuContent>
-                  {filteredCategories.map((item) => (
+                  {filteredCategories?.map((item) => (
                     <ScrollLink
                       key={item}
                       activeClass="activeIntegrationsLink"
@@ -619,7 +619,7 @@ class IntegrationsContent extends React.Component {
 
             <BodyContainer>
               <MainContainer id="maincontainer">
-                {filteredCategories.map((item) => (
+                {filteredCategories?.map((item) => (
                   <Section name={item} key={item}>
                     <SectionTitle>{item}</SectionTitle>
                     <SectionIntegration>
@@ -711,7 +711,7 @@ class IntegrationsContent extends React.Component {
                     </SectionIntegration>
                   </Section>
                 ))}
-                {filteredCategories.length === 0 && (
+                {filteredCategories?.length === 0 && (
                   <NoIntegrationsContainer>
                     <NoIntegrationsHeading>
                       Don’t see what you’re looking for?

@@ -1,6 +1,6 @@
 import React from 'react'
 import WhatIsConversionOptimization from '@layouts/ConversionOptimizationGuide/WhatIsConversionOptimization'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const WhatIsConversionOptimizationPage = (props) => (
   <WhatIsConversionOptimization {...props} />

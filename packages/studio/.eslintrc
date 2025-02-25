@@ -1,0 +1,6 @@
+{
+  "extends": "@sanity/eslint-config-studio",
+  "rules": {
+    "perfectionist/sort-objects": "off"
+  }
+}

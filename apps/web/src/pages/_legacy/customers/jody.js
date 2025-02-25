@@ -1,6 +1,6 @@
 import React from 'react'
 import Jody from '@layouts/Customers/Jody'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const JodyPage = (props) => <Jody {...props} />
 

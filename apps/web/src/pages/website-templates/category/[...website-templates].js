@@ -1,6 +1,6 @@
 import React from 'react'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
-import { runQueries, getDoc } from '@lib'
+import { runQueries, runQuery } from '@lib/queries'
 import Templates from '@layouts/Templates'
 
 const WebsiteTemplatesPage = (props) => (
@@ -22,13 +22,7 @@ export async function getStaticProps(context) {
   const { 'website-templates': websiteTemplates = [] } = params
   const [category] = websiteTemplates
 
-  const { data: templateCategoryDoc } =
-    (await getDoc('templateCategory', {
-      preview,
-      params: { slug: category },
-      filters: [`templateType == "website"`],
-      projections: ``,
-    })) || {}
+  const templateCategoryDoc = await runQuery(`*[_type == "templateCategory" && templateType == $templateType && slug.current == $slug][0]`, {preview, params: { templateType: 'website', slug: category }}) || {}
 
   const { seo: seoData } = templateCategoryDoc || {}
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import BestLandingPages2018 from '@layouts/LandingPageExamples/BestLandingPages2018'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const BestLandingPages2018Page = (props) => <BestLandingPages2018 {...props} />
 

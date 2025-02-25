@@ -240,7 +240,7 @@ const HighlightedArticle = ({ heading, content, url, ariaLabel, image }) => (
       rel="noreferrer noopener"
       target="_blank"
     >
-      {image && <HighlightedArticle_Image image={image} alt={image.altText} />}
+      {image && <HighlightedArticle_Image image={image} alt={image?.altText} />}
       <HighlightedArticle_TextContainer>
         {heading && (
           <HighlightedArticle_Heading>{heading}</HighlightedArticle_Heading>
@@ -264,12 +264,12 @@ const StandardArticle = ({ heading, content, url, linkAltText, image }) => (
       rel="noreferrer noopener"
       target="_blank"
     >
-      {image && image.asset.mimeType.includes('svg') && (
+      {image && image?.asset?.mimeType?.includes('svg') && (
         <Article_ImageContainer>
           <Article_ImageSVG image={image} alt={image.altText} />
         </Article_ImageContainer>
       )}
-      {image && !image.asset.mimeType.includes('svg') && (
+      {image && !image?.asset?.mimeType?.includes('svg') && (
         <Article_ImageContainer>
           <Article_Image image={image} alt={image.altText} />
         </Article_ImageContainer>

@@ -1,7 +1,8 @@
 import React from 'react'
-import { getDoc, runQueries, runQuery } from '@lib'
 import { ArchiveSitemap } from '@layouts/Archive'
 import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
+import { query, runQueries } from '@lib/queries'
+import { seoQuery } from '@lib/queries/globalQueries'
 
 const UserSitemapPage = (props) => <ArchiveSitemap {...props} />
 
@@ -27,28 +28,23 @@ export const exporter = (props) => shapeData(props)
 export async function getStaticProps(context) {
   const docType = 'post'
   const { preview = false } = context
-  const sitemapPostQuery = `*[_type == 'post' && ${futurePublishedDateFilter()}] {
-    "url": path,
-    title,
-    "category": {
-      ...(primaryCategory-> {
-        "slug": slug.current,
-        "title": title,
-        "url": path,
-      })
-    }
-  }`
 
   const { data, global, queries } = await runQueries([
-    getDoc('postSettings', {}),
-    {
-      data: await runQuery(sitemapPostQuery),
-      query: sitemapPostQuery,
-    },
-    getDoc('pageArchive', {
-      filters: [`archiveOf == "${docType}"`],
-      preview,
-    }),
+    query(`*[_type == 'postSettings'][0]`, {preview}),
+    query(`*[_type == 'post' && ${futurePublishedDateFilter()}] {
+        "url": path,
+        title,
+        "category": {
+          ...(primaryCategory-> {
+            "slug": slug.current,
+            "title": title,
+            "url": path,
+          })
+        }
+      }`, 
+      {preview}
+    ),
+    query(`*[_type == 'pageArchive' && archiveOf == "${docType}"][0] {..., ${seoQuery}}`, {preview}),
   ])
 
   return {

@@ -6,6 +6,7 @@ import Loader from '@components/Loader'
 
 const $LottieContainer = styled('div', {
   transition: 'opacity 125ms $easing$base',
+  position: 'relative',
 
   '> div': {
     position: 'absolute',
@@ -28,12 +29,12 @@ const Lottie = ({
   speed = 1,
   ...props
 }) => {
-  if (!file || !file.asset) return null
+  if (!file?.url) return null
   let direction = 1
   const { start = 0, end = 1 } = offset || {}
   const ref = useRef()
   const lottie = useRef(null)
-  const { width, height, frames } = file?.asset || {}
+  const { width, height, frames, url } = file || {}
   const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState(null)
 
@@ -86,7 +87,7 @@ const Lottie = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(file.asset.url)
+      const response = await fetch(url)
       const result = await response.json()
       setData(result)
     }

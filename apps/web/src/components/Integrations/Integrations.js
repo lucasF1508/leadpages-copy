@@ -5,7 +5,7 @@ import ReadyToGrow from '@legacy/components/product/ReadyToGrow'
 import IntegrationsContent from './IntegrationsContent'
 import IntegrationsHeader from './IntegrationsHeader'
 
-const Integrations = ({ categories, docs }) => {
+const Integrations = ({ categories, docs = [] }) => {
   const integrations = docs.map((doc) => {
     const { title, excerpt, category, status, path, hasSubpage } = doc
     const { icon, content: description } = excerpt
@@ -27,7 +27,7 @@ const Integrations = ({ categories, docs }) => {
       <IntegrationsHeader />
       <IntegrationsContent
         integrations={integrations}
-        categories={categories.map(({ title }) => title)}
+        categories={categories?.map(({ title }) => title)}
       />
       <ReadyToGrow />
     </>

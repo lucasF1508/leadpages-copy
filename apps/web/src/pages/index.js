@@ -1,9 +1,12 @@
 import React from 'react'
-import { getDoc, runQueries } from '@lib'
+import { query, runQueries } from '@lib/queries'
 import HomePage from '@layouts/HomePage'
 import { features } from 'config'
+import pageQuery from '@lib/queries/components'
 
 const IndexPage = (props) => <HomePage {...props} />
+
+const types = ['pageHome']
 
 export const shapeData = (data, isVariant = false) => {
   const [pageData] = (data?.length && data) || []
@@ -34,13 +37,20 @@ export const exporter = (props) => shapeData(props)
 export async function getStaticProps(context) {
   const { preview = false } = context
 
-  const { data, queries, global } = await runQueries(
-    getDoc('pageHome', {
-      preview,
-      params: { slug: 'home' },
-    }),
-    true,
-    preview
+  const { data, global, queries } = await runQueries(
+    query(
+      `*[_type in $types && path == $path] | order(_updatedAt desc) [0] {
+        ...,
+        ${pageQuery}
+      }`,
+      {
+        params: {
+          path: '/home',
+          types,
+        },
+        preview,
+      }
+    )
   )
 
   return {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Kate from '@layouts/Customers/Kate'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const KatePage = (props) => <Kate {...props} />
 

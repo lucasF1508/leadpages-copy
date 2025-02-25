@@ -1,8 +1,9 @@
 import React from 'react'
-import { getDoc, getAllDocs, runQueries } from '@lib'
+import { query, runQueries, runQuery } from '@lib/queries'
 import Archive from '@layouts/Archive'
-import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
-import filterForPublishedDate from '@lib/utils/filterForPublishedDate'
+import { categoryPostCountQuery } from '@lib/queries/components'
+import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
+import { seoQuery } from '@lib/queries/globalQueries'
 
 const ArchivePage = ({ filterTags, ...props }) => {
   const filters = filterTags?.map(
@@ -14,22 +15,20 @@ const ArchivePage = ({ filterTags, ...props }) => {
 
 export const shapeData = ([
   data,
-  { docs: categories },
-  { docs: _docs },
+  categories,
+  _docs,
   blogData,
 ]) => {
   const { seo, tags: filterTags } = blogData
-  // TODO: Audit getAllDocs, getDocPagination, getDocSlice
-  // Trim data
 
   const docs = _docs.map(
     ({
-      path,
+      path = '',
       publishedDate,
-      publisher,
-      image,
+      publisher = {},
+      image = {},
       primaryCategory,
-      title,
+      title = '',
       _id,
     }) => ({
       path,
@@ -59,45 +58,54 @@ export async function getStaticProps(context) {
   const docType = 'post'
   const { preview = false } = context
 
-  const {
-    data: { tags: filterTags },
-  } = await getDoc('pageArchive', {
-    filters: [`archiveOf == "${docType}"`],
-    preview,
-  })
+  const { tags: filterTags } = await runQuery(`*[_type == "pageArchive" && archiveOf == "${docType}"][0]`)
 
   const filters =
     filterTags?.map(({ value }) => `!('${value}' in tags[].value)`) || []
 
-  // TODO: Combine 'postSettings' and 'pageArchive' queries
-  // TODO: Grab 'perPage' from here so that we don't have to get it again later
   const { data, global, queries } = await runQueries(
     [
-      getDoc('postSettings', {}),
-      getAllDocs('categoryPost', {
-        filters: "!(_id in path('drafts.**'))",
-        projections: `${categoryPostCountQuery}`,
-        hasPagination: false,
-        preview,
-      }),
-      getAllDocs(docType, {
-        filters: filterForPublishedDate([
-          "!(_id in path('drafts.**'))",
-          ...filters,
-        ]),
-        order: 'order(coalesce(publishedDate, _createdAt) desc)',
-        offsetEnd: 1,
-        paginationHasFeatured: true,
-        hasPagination: false,
-        preview,
-      }),
-      getDoc('pageArchive', {
-        filters: [`archiveOf == "${docType}"`],
-        preview,
-      }),
+      query(
+        `*[_type == "postSettings"][0]{
+            ...,
+            cta->,
+            trendingArticles[]->,
+        }`,
+        {
+          preview,
+        }
+      ),
+      query(
+        `*[_type == "categoryPost"] {
+          ...,
+          ${categoryPostCountQuery}
+        }`,
+        {
+          preview,
+        }
+      ),
+      query(
+        `*[_type == "${docType}" && ${futurePublishedDateFilter()} && ${filters.join('&&')}] | order(coalesce(publishedDate, _createdAt) desc) {
+            ...,
+            relatedArticles[]->,
+            publisher->,
+            primaryCategory-> {
+              ...,
+              "url": path
+            },
+            secondaryCategories[]->,
+        }`,
+        {
+          preview,
+        }
+      ),  
+      query(
+        `*[_type == "pageArchive" && archiveOf == "${docType}"][0] {
+          ...,
+          ${seoQuery}
+        }`
+      ),
     ],
-    true,
-    preview
   )
 
   return {

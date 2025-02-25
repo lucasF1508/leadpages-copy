@@ -1,6 +1,6 @@
 import React from 'react'
 import Checkouts from '@layouts/Product/Checkouts'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const CheckoutsPage = (props) => <Checkouts {...props} />
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import LeadGenStrategies from '@layouts/LeadGenerationGuide/LeadGenStrategies'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const LeadGenStrategiesPage = (props) => <LeadGenStrategies {...props} />
 

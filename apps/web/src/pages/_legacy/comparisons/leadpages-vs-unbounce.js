@@ -1,6 +1,6 @@
 import React from 'react'
 import LeadpagesVsUnbounce from '@layouts/Comparisons/LeadpagesVsUnbounce'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const LeadpagesVsUnbouncePage = (props) => <LeadpagesVsUnbounce {...props} />
 

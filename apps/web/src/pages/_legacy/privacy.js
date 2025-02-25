@@ -1,6 +1,6 @@
 import React from 'react'
 import { PrivacyPolicy } from '@layouts/Legal'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const PrivacyPolicyPage = (props) => <PrivacyPolicy {...props} />
 

@@ -1,5 +1,0 @@
-/* stylelint-disable */
-.input {
-  composes: textInput from 'part:@sanity/base/theme/forms/text-input-style';
-}
-/* stylelint-enable */

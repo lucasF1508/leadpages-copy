@@ -1,6 +1,6 @@
 import React from 'react'
 import Shohawk from '@layouts/Customers/Shohawk'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const ShohawkPage = (props) => <Shohawk {...props} />
 

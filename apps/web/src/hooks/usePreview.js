@@ -6,7 +6,7 @@ import { styled } from '@design'
 import Text from '@components/Text'
 import { $Link } from '@components/Link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { getGlobalQueries } from '@lib'
+import { getGlobalQueries } from '@lib/queries'
 
 const $PreviewNotificationContainer = styled(motion.div, {
   position: 'fixed',
@@ -98,6 +98,12 @@ const usePreview = ({
     const client = getClient({ preview: true })
 
     const globalQueries = await getGlobalQueries(true)
+    const [
+      navigation,
+      leadboxes,
+      siteMeta,
+      footer,
+    ] = await Promise.all(globalQueries);
 
     const allData = queries?.length
       ? await Promise.all(
@@ -109,7 +115,12 @@ const usePreview = ({
 
     const previewData = await shapeData(allData)
     setPreviewData(previewData)
-    setGlobalData(globalQueries)
+    setGlobalData({
+      navigation,
+      leadboxes,
+      siteMeta,
+      footer,
+    })
     setLoading(false)
 
     return () => undefined
@@ -122,7 +133,7 @@ const usePreview = ({
       method: 'POST',
     })
     setLoadingText('Redirecting...')
-    window.location.reload()
+    window?.location?.reload()
   }
 
   useEffect(() => {

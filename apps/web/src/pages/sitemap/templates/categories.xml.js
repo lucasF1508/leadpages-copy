@@ -1,4 +1,4 @@
-import { getDocSlugs } from '@lib'
+import { runQuery } from '@lib/queries'
 import { getServerSideSitemapLegacy } from 'next-sitemap'
 
 export const getServerSideProps = async (context) => {
@@ -6,17 +6,16 @@ export const getServerSideProps = async (context) => {
   const rootUrl = `${req.headers['x-forwarded-proto'] || 'http'}://${
     req.headers.host
   }`
-  const slugs = await getDocSlugs('templateCategory', {
-    projections: { templateType: 'templateType', _updatedAt: '_updatedAt' },
-  })
 
-  const paths = slugs?.map(({ slug, templateType, _updatedAt }) => ({
+  const res = await runQuery(`*[_type == "templateCategory"]{templateType, _updatedAt, modified, "slug": slug.current}`)
+
+  const paths = res?.map(({ slug, templateType, _updatedAt }) => ({
     loc: `${rootUrl}/${
       templateType === 'website' ? 'website-templates' : 'templates'
     }/category/${slug}`,
     changefreq: 'yearly',
     priority: 0.7,
-    lastmod: _updatedAt,
+    lastmod: modified || _updatedAt,
   }))
 
   return getServerSideSitemapLegacy(context, paths)

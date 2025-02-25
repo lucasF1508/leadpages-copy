@@ -1,12 +1,13 @@
 import React from 'react'
-import { getAllDocs, getDoc, getDocSlugs, runQueries } from '@lib'
 import { ArchiveSingle } from '@layouts/Archive'
-import { categoryPostCountQuery } from '@lib/feeds/utils/sanity/feedQueries'
-import filterForPublishedDate from '@lib/utils/filterForPublishedDate'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
+import { categoryPostCountQuery } from '@lib/queries/components'
+import { contentQuery } from '@lib/queries/components'
+import { seoQuery } from '@lib/queries/globalQueries'
 
 const ArchiveSinglePage = (props) => <ArchiveSingle {...props} />
 
-export const shapeData = ([data, { docs: categories }]) => [
+export const shapeData = ([data, categories]) => [
   {
     ...data,
     categories,
@@ -15,71 +16,50 @@ export const shapeData = ([data, { docs: categories }]) => [
 
 export const exporter = (props) => shapeData(props)
 
+const types = ['post']
+
 export async function getStaticProps(context) {
   const { params, preview = false } = context
+  const {slug} = params
 
   const { data, queries, global } = await runQueries(
     [
-      getDoc('post', {
-        preview,
-        params,
-        projections: `
-      content[]{
-        ...,
-        image {
-          ...,
-          asset->
-        },
-        cta-> {
-          ...,
-          links[] {
+      query(
+        `*[_type in $types && slug.current == $slug][0] {
             ...,
-            "url": page->path,
-          },
-          image {
-            ...,
-            asset->
-          }
-        },
-      }, 
-      relatedArticles[]->{
-        ...,
-        image {
-          ...,
-          asset->
-        },
-        primaryCategory->,
-        publisher->
-      },
-      "settings": *[_type == 'postSettings'][0] {
-        ...,
-        relatedArticlesImage {
-          ...,
-          asset->
-        },
-        defaultCtaImage {
-          ...,
-          asset->
-        },
-        cta->,
-        trendingArticles[]-> {
-            ...,
-            image {
+            ${contentQuery},
+            relatedArticles[]->,
+            publisher->,
+            primaryCategory-> {
               ...,
-              asset->
-            }
-         }
-      }`,
-      }),
-      getAllDocs('categoryPost', {
-        filters: ["!(_id in path('drafts.**'))"],
-        projections: `${categoryPostCountQuery}`,
-        order: 'order(lower(title) asc)',
-        hasPagination: false,
-      }),
+              "url": path
+            },
+            secondaryCategories[]->, 
+            "settings": *[_type == 'postSettings'][0] {
+              ...,
+              cta->,
+              trendingArticles[]->
+            },
+            ${seoQuery}
+          }`,
+        {
+          params: {
+            slug,
+            types,
+          },
+          preview,
+        }
+      ),
+      query(
+        `*[_type == "categoryPost"] | order(lower(title) asc) {
+          ...,
+          ${categoryPostCountQuery}
+        }`,
+        {
+          preview,
+        }
+      ),
     ],
-    true,
-    preview
   )
 
   return {
@@ -93,19 +73,10 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const docPaths = await getDocSlugs('post', {
-    filters: filterForPublishedDate([
-      'isExternal != true',
-      'redirectToLegacy != true',
-    ]),
-    order: 'order(coalesce(publishedDate, _createdAt) desc)',
+  const paths = await getStaticPathsParams({
+    filter: 'isExternal != true && redirectToLegacy != true',
+    types,
   })
-
-  const paths = docPaths.map(({ slug }) => ({
-    params: {
-      slug,
-    },
-  }))
 
   return {
     paths,

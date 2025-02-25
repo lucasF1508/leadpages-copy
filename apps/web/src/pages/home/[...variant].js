@@ -1,23 +1,40 @@
 import React from 'react'
 import HomePage from '@layouts/HomePage'
-import { getDoc, getDocSlugs, runQueries } from '@lib'
+import {getStaticPathsParams, query, runQueries } from '@lib/queries'
 import { shapeData } from '..'
+import { pageQuery } from '@lib/queries/components'
 
 const IndexPage = (props) => <HomePage {...props} />
 
 export const exporter = (props) => shapeData(props)
 
+const types = ['pageHome']
+
 export async function getStaticProps(context) {
   const { preview = false, params } = context
   const { variant } = params
 
-  const [slug] = variant
+  const path = [
+    '/',
+    ...(Array.isArray(variant) ? variant : [variant]),
+  ]
+    .join('/')
+    .replaceAll('//', '/')
 
   const { data, queries, global } = await runQueries(
-    getDoc('pageHome', {
-      preview,
-      params: { slug },
-    })
+    query(
+      `*[_type in $types && path == $path] | order(_updatedAt desc) [0] {
+        ...,
+        ${pageQuery}
+      }`,
+      {
+        params: {
+          path,
+          types,
+        },
+        preview,
+      }
+    ),
   )
 
   return {
@@ -31,25 +48,21 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const docPaths = await getDocSlugs(['pageHome'])
-  const excludedPaths = ['/home']
+  const _paths = await getStaticPathsParams({
+    catchAll: true,
+    filter: 'path != "/home"',
+    types,
+  })
 
-  const paths = docPaths.reduce((acc, { slug, path }) => {
-    if (excludedPaths.includes(path)) return acc
-
-    return [
-      ...acc,
-      {
-        params: {
-          variant: path?.split('/').filter(Boolean) || [slug],
-        },
-      },
-    ]
-  }, [])
+  const paths = _paths.map(({ params }) => ({
+    params: {
+      variant: params.slug,
+    }
+  }))
 
   return {
-    paths,
     fallback: false,
+    paths,
   }
 }
 

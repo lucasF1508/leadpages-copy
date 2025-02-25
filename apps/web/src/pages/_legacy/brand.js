@@ -1,6 +1,6 @@
 import React from 'react'
 import Brand from '@layouts/Brand'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const BrandPage = (props) => <Brand {...props} />
 

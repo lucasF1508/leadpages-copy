@@ -1,6 +1,6 @@
 import React from 'react'
 import LeadpagesVsSquarespace from '@layouts/Comparisons/LeadpagesVsSquarespace'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const LeadpagesVsSquarespacePage = (props) => (
   <LeadpagesVsSquarespace {...props} />

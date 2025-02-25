@@ -1,5 +1,5 @@
 import { getServerSideSitemapLegacy } from 'next-sitemap'
-import { runQuery } from '@lib'
+import { runQuery } from '@lib/queries'
 import { generateEntries, sortPaths } from '@pages/sitemap.xml'
 
 export const getServerSideProps = async (context) => {
@@ -14,7 +14,7 @@ export const getServerSideProps = async (context) => {
     .toString()
 
   const res = await runQuery(
-    `*[_type == "page" && slug.current in [${filterPaths}]] {path, _updatedAt}`
+    `*[_type == "page" && slug.current in [${filterPaths}]] {path, _updatedAt, modified}`
   )
   const entries = generateEntries(res, context)
 

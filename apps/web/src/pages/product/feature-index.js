@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@design'
-import { getDoc, getAllDocs, runQueries } from '@lib'
+import { query, runQueries } from '@lib/queries'
 import { PageSidebar } from '@layouts/Page'
 import FeatureGrid from '@components/FeatureGrid'
 import Heading from '@components/Heading'
@@ -25,7 +25,7 @@ const FatureIndex = ({ _id, hero, title, categories, docs }) => {
     <PageSidebar hero={hero} sidebarLinks={sidebarLinks} title={title}>
       {categories?.map(({ _id: key, title: categoryTitle }) => {
         const slug = getSidebarSlug(categoryTitle)
-        const items = docs?.filter(({ category }) => category?._key === key)
+        const items = docs?.filter(({ category }) => category?._id === key)
 
         return (
           <>
@@ -45,7 +45,7 @@ const FatureIndex = ({ _id, hero, title, categories, docs }) => {
   )
 }
 
-export const shapeData = ([data, { docs: categories }, { docs }]) => [
+export const shapeData = ([data, categories, docs]) => [
   {
     ...data,
     categories,
@@ -58,26 +58,31 @@ export const exporter = (props) => shapeData(props)
 export async function getStaticProps(context) {
   const { preview = false } = context
   const slug = '/feature-index'
-  const docType = 'feature'
+    const docType = 'feature'
 
   const { data, global, queries } = await runQueries([
-    getDoc('pageArchive', {
-      filters: [`archiveOf == "${docType}"`],
-      preview,
-    }),
-    getAllDocs('categoryFeature', {
-      filters: "!(_id in path('drafts.**'))",
-      order: 'order(title)',
-      preview,
-      hasPagination: false,
-    }),
-    getAllDocs(docType, {
-      filters: "!(_id in path('drafts.**'))",
-      order: 'order(title)',
-      preview,
-      hasPagination: false,
-      slice: 'none',
-    }),
+    query(
+      `*[_type == "pageArchive" && archiveOf == "${docType}"][0]`,
+      {
+        preview,
+      }
+    ),
+    query(
+      `*[_type == "categoryFeature"] | order(lower(title) asc)`,
+      {
+        preview,
+      }
+    ),
+    query(
+      `*[_type == "${docType}"] | order(lower(title) asc) {
+        ...,
+        category->,
+        status-> 
+      }`,
+      {
+        preview,
+      }
+    ),
   ])
 
   return {

@@ -6,8 +6,8 @@ const flattenDirectoryTree = ({
   acc: _acc = [],
   children: _children,
 }) =>
-  _children.reduce((acc, { path, children, type }) => {
-    const route = path.substring(path.indexOf(rootDir) + rootDir.length)
+  _children?.reduce((acc, { path, children, type }) => {
+    const route = path.substring(path.indexOf(rootDir) + rootDir.length || 0)
 
     if (type === 'file' && route.includes('[[...')) {
       const wildcard = route
@@ -26,9 +26,10 @@ const flattenDirectoryTree = ({
   }, _acc)
 
 const directoryToRoutes = (directory) => {
-  const { name, children } = directoryTree(directory, {
-    attributes: ['type'],
-  })
+  const { name, children } =
+    directoryTree(directory, {
+      attributes: ['type'],
+    }) || {}
 
   return flattenDirectoryTree({ rootDir: name, children })
 }
@@ -57,7 +58,7 @@ const getSanityPaths = async ({
 }
 
 const filter = (directory, routes) =>
-  directory.filter((route) => !routes.includes(route))
+  directory?.filter((route) => !routes.includes(route))
 
 const filterRoutesFromSanity = async ({ directory, ...sanityProps }) => {
   const dirPaths = directoryToRoutes(directory)

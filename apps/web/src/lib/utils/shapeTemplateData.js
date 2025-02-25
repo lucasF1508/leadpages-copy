@@ -1,4 +1,4 @@
-import { getAllDocs } from '@lib'
+import { query, runQuery } from '@lib/queries'
 import fetchTaxons from '@lib/mandrel/fetchTaxons'
 
 const tagSections = [
@@ -43,25 +43,23 @@ export const shapeData = async (data, preview) => {
 
   const { data: templateReviews } =
     categoryTestimonial && categorySlug
-      ? await getAllDocs('testimonial', {
-          preview,
-          filters: `_type == "testimonial" && "${categorySlug}" in category[]->slug.current`,
-          hasPagination: false,
-          slice: '0..2',
-          order: 'order(_updatedAt desc)',
-        })
+    ? await runQuery(
+        `*[_type == "testimonial" && "${categorySlug}" in category[]->slug.current] | order(_updatedAt desc) [0..2]`,
+        { preview }
+      )
       : {}
 
   const relatedTemplatesData = templateData?.relatedTemplates || []
-  const reviewsData = templateReviews?.docs || _reviewsData?.docs || []
+  const reviewsData = templateReviews || _reviewsData || []
   const seo = {
     ...templateSettingsData?.seo,
     ...Object.fromEntries(
       Object.entries(templateData?.seo || {}).filter(([, value]) => value)
     ),
-    seoTitle: `${templateData?.seo?.seoTitle || ''}${
+    seoTitle: `${templateData?.seo?.seoTitle || templateData?.title || ''}${
       templateSettingsData?.seo?.seoTitle ? ' | ' : ''
     }${templateSettingsData?.seo?.seoTitle || ''}`,
+    hasCustomSeoTitle: !!templateData?.seo?.seoTitle,
   }
 
   const tags = await sortTags(templateData?.tags || [])

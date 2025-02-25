@@ -1,7 +1,7 @@
 import React from 'react'
 import ComparePlans from '@layouts/ComparePlans'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const ComparePlansPage = (props) => <ComparePlans {...props} />
 

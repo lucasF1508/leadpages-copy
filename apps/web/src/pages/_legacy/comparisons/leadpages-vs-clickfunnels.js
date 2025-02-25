@@ -1,6 +1,6 @@
 import React from 'react'
 import LeadpagesVsClickfunnels from '@layouts/Comparisons/LeadpagesVsClickfunnels'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const LeadpagesVsClickfunnelsPage = (props) => (
   <LeadpagesVsClickfunnels {...props} />

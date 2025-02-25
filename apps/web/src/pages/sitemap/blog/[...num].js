@@ -1,5 +1,5 @@
 import { getServerSideSitemapLegacy } from 'next-sitemap'
-import { runQuery } from '@lib'
+import { runQuery } from '@lib/queries'
 import findValuesForKey from '@lib/utils/findValuesForKey'
 import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
 import { perPage } from './index.xml'
@@ -17,7 +17,7 @@ export const getServerSideProps = async (context) => {
   const slice = `${Number(num) * perPage}..${Number(num * perPage) + perPage}`
 
   const docs = await runQuery(
-    `*[_type == "post" && ${futurePublishedDateFilter()}] | order(_updatedAt desc) [${slice}] {_updatedAt, ...}`
+    `*[_type == "post" && ${futurePublishedDateFilter()}] | order(_updatedAt desc) [${slice}]`
   )
 
   const entires = docs.map((doc) => {
@@ -45,7 +45,7 @@ export const getServerSideProps = async (context) => {
       loc: `${rootUrl}${doc.path}`,
       changefreq: 'yearly',
       priority: 0.7,
-      lastmod: new Date(doc._updatedAt).toISOString(),
+      lastmod: new Date(doc?.modified || doc?._updatedAt).toISOString(),
       images: images.length ? images : undefined,
     }
   })

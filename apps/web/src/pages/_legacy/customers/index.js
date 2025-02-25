@@ -1,5 +1,5 @@
 import React from 'react'
-import { runQueries, runQuery } from '@lib'
+import { runQueries, runQuery } from '@lib/queries'
 import Customers from '@layouts/Customers'
 
 const CustomersPage = (props) => <Customers {...props} />

@@ -1,6 +1,6 @@
 import React from 'react'
 import Integrations from '@layouts/Integrations/IntegrationsLegacy'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const IntegrationsPage = (props) => <Integrations {...props} />
 

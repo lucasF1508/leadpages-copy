@@ -1,5 +1,5 @@
 import { getServerSideSitemapLegacy } from 'next-sitemap'
-import { runQuery } from '@lib'
+import { runQuery } from '@lib/queries'
 
 export const getServerSideProps = async (context) => {
   const { req } = context
@@ -7,7 +7,7 @@ export const getServerSideProps = async (context) => {
     req.headers.host
   }`
 
-  const res = await runQuery(`*[_type == "publisher"]{path, _updatedAt}`)
+  const res = await runQuery(`*[_type == "publisher"]{path, _updatedAt, modified}`)
   const entries =
     res?.map(({ path, _updatedAt }) => ({
       loc: `${rootUrl}${path}`,

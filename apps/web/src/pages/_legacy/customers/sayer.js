@@ -1,6 +1,6 @@
 import React from 'react'
 import Sayer from '@layouts/Customers/Sayer'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const SayerPage = (props) => <Sayer {...props} />
 

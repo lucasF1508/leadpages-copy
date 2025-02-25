@@ -1,13 +1,15 @@
 import React from 'react'
-import { getDoc, getAllDocs, runQueries, getDocSlugs } from '@lib'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import { ArchiveAuthor } from '@layouts/Archive'
-import filterForPublishedDate from '@lib/utils/filterForPublishedDate'
+import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
+import { seoQuery } from '@lib/queries/globalQueries'
 
 const AuthorPage = (props) => <ArchiveAuthor {...props} />
 
-export const shapeData = ([publisher, { docs: _docs, pagination }]) => {
-  const { seo } = publisher
-  const docs = _docs.map(
+export const shapeData = ([publisher, _docs]) => {
+  const { seo } = publisher || {}
+
+  const docs = _docs?.map(
     ({
       path,
       publishedDate,
@@ -29,7 +31,6 @@ export const shapeData = ([publisher, { docs: _docs, pagination }]) => {
     {
       publisher,
       docs,
-      pagination,
       seo,
     },
   ]
@@ -38,23 +39,16 @@ export const shapeData = ([publisher, { docs: _docs, pagination }]) => {
 export const dataShaper = (props) => shapeData(props)
 
 export async function getStaticProps(context) {
-  const docType = 'post'
   const { preview = false, params } = context
   const { author } = params
 
   const { data, queries, global } = await runQueries([
-    getDoc('publisher', {
-      filters: `slug.current == '${author}'`,
-      projections: '"slug": slug.current',
-    }),
-    getAllDocs(docType, {
-      order: 'order(publishedDate desc)',
-      filters: filterForPublishedDate([
-        "!(_id in path('drafts.**'))",
-        `(publisher->slug.current == '${author}')`,
-      ]),
-      preview,
-    }),
+    query(`*[_type == 'publisher' && slug.current == '${author}'][0]{
+      ...,
+      "slug": slug.current,
+      ${seoQuery}
+    }`),
+    query(`*[_type == 'post' && (publisher->slug.current == '${author}') && ${futurePublishedDateFilter()}] | order(publishedDate desc)`, {preview}),
   ])
 
   return {
@@ -68,13 +62,11 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const publisherPaths = await getDocSlugs(['publisher'], {
-    filters: `count(*[_type == 'post' && references(^._id)]) > 0`,
+  const paths = await getStaticPathsParams({
+    types: ['publisher'],
+    filter: `count(*[_type == 'post' && references(^._id)]) > 0`,
+    key: 'author'
   })
-
-  const paths = publisherPaths.map(({ slug: author }) => ({
-    params: { author },
-  }))
 
   return {
     paths,

@@ -1,0 +1,6 @@
+{
+  "name": "tsconfig",
+  "description": "A collection of TypeScript configurations",
+  "version": "0.0.1",
+  "private": true
+}

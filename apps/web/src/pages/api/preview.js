@@ -9,8 +9,12 @@ const preview = async (req, res) => {
   res.clearPreviewData()
   // Check the secret and next parameters
   // This secret should only be known to this API route and the CMS
-  if (req.query.secret !== SANITY_STUDIO_PREVIEW_SECRET || !req.query.slug) {
-    return res.status(401).json({ message: 'Invalid token' })
+  if (req.query.secret !== SANITY_STUDIO_PREVIEW_SECRET) {
+    return res.status(401).json({ message: 'Preview Unavailable - Invalid token' })
+  }
+
+  if (!req.query.path) {
+    return res.status(401).json({ message: 'Preview Unavailable - Invalid Path' })
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
@@ -20,17 +24,12 @@ const preview = async (req, res) => {
     url,
     kind: templateType,
   } = (await client.fetch(
-    `*[_type == $type && slug.current == $slug][0]{"url": path, "slug": slug.current, kind}`,
+    `*[_type == $type && path == $path][0]{"url": path, "slug": slug.current, kind}`,
     {
-      slug: req.query.slug,
+      path: req.query.path,
       type: req.query.type,
     }
   )) || {}
-
-  // If the slug doesn't exist prevent preview mode from being enabled
-  if (!slug) {
-    return res.status(401).json({ message: 'Invalid slug' })
-  }
 
   // Enable Preview Mode by setting the cookies
   res.setPreviewData(

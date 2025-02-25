@@ -1,6 +1,6 @@
 import React from 'react'
 import Zapier from '@layouts/Zapier'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const ZapierPage = (props) => <Zapier {...props} />
 

@@ -1,5 +1,5 @@
 import { getServerSideSitemapIndexLegacy } from 'next-sitemap'
-import { runQuery } from '@lib'
+import { runQuery } from '@lib/queries'
 
 export const perPage = 250
 

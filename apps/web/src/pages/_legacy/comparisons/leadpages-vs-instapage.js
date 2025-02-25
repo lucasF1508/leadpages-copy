@@ -1,6 +1,6 @@
 import React from 'react'
 import LeadpagesVsInstapage from '@layouts/Comparisons/LeadpagesVsInstapage'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const LeadpagesVsInstapagePage = (props) => <LeadpagesVsInstapage {...props} />
 

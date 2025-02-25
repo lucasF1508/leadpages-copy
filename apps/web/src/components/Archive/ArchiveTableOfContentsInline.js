@@ -63,8 +63,8 @@ const $Gradient = styled('div', {
 const ArchiveTableOfContentsInline = React.forwardRef(
   ({ content, useCustomSidebarLinks }, ref) => {
     const filteredSidebarData = shapeSidebarData(content, useCustomSidebarLinks)
-    const visibleItems = filteredSidebarData.slice(0, 5)
-    const extraItems = filteredSidebarData.slice(5)
+    const visibleItems = filteredSidebarData?.slice(0, 5) || []
+    const extraItems = filteredSidebarData?.slice(5)
     const [expanded, setExpanded] = useState(false)
 
     const handleClick = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import Contact from '@layouts/Contact'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const ContactPage = (props) => <Contact {...props} />
 

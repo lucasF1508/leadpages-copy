@@ -1,6 +1,6 @@
 import React from 'react'
 import LandingPageExamples from '@layouts/LandingPageExamples'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const LandingPageExamplesPage = (props) => <LandingPageExamples {...props} />
 

@@ -1,5 +1,5 @@
 import { getServerSideSitemapLegacy } from 'next-sitemap'
-import { runQuery } from '@lib'
+import { runQuery } from '@lib/queries'
 
 export const getServerSideProps = async (context) => {
   const { req } = context

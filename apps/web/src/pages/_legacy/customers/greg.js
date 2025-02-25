@@ -1,6 +1,6 @@
 import React from 'react'
 import Greg from '@layouts/Customers/Greg'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const GregPage = (props) => <Greg {...props} />
 

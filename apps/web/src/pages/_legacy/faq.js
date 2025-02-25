@@ -1,6 +1,6 @@
 import React from 'react'
 import FAQ from '@layouts/FAQ'
-import { getAllDocs, runQueries } from '@lib'
+import { query, runQueries } from '@lib/queries'
 
 const FAQPage = (props) => <FAQ {...props} />
 
@@ -10,19 +10,12 @@ export async function getStaticProps(context) {
   const options = { underlaidMenu: true }
 
   const { preview = false } = context
-  const docType = 'faq'
 
   const { data, global } = await runQueries([
-    getAllDocs(docType, {
-      filters: "!(_id in path('drafts.**'))",
-      order: 'order(title)',
-      preview,
-      hasPagination: false,
-      slice: 'none',
-    }),
+    query(`*[_type == "faq"] | order(lower(title) asc) {..., category[]->}`, {preview})
   ])
 
-  const [{ docs }] = data
+  const [docs] = data
 
   return {
     props: {

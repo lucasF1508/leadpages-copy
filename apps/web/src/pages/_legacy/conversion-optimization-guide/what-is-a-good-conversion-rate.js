@@ -1,6 +1,6 @@
 import React from 'react'
 import WhatIsAGoodConversionRate from '@layouts/ConversionOptimizationGuide/WhatIsAGoodConversionRate'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const WhatIsAGoodConversionRatePage = (props) => (
   <WhatIsAGoodConversionRate {...props} />

@@ -1,4 +1,3 @@
-<br>
 <img src="https://user-images.githubusercontent.com/4299551/229001290-f1b4d3f8-5eeb-4941-837d-787a608a548c.svg" width="300">
 
 # Rack & Pinion - Next.js app
