@@ -7,13 +7,15 @@ export const getServerSideProps = async (context) => {
     req.headers.host
   }`
 
-  const res = await runQuery(`*[_type == "publisher"]{path, _updatedAt, modified}`)
+  const res = await runQuery(
+    `*[_type == "publisher"]{path, _updatedAt, modified}`
+  )
   const entries =
-    res?.map(({ path, _updatedAt }) => ({
+    res?.map(({ path, _updatedAt, modified }) => ({
       loc: `${rootUrl}${path}`,
       changefreq: 'yearly',
       priority: 0.7,
-      lastmod: new Date(_updatedAt).toISOString(),
+      lastmod: new Date(modified || _updatedAt).toISOString(),
     })) || []
 
   return getServerSideSitemapLegacy(context, entries)

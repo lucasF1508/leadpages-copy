@@ -7,9 +7,11 @@ export const getServerSideProps = async (context) => {
     req.headers.host
   }`
 
-  const res = await runQuery(`*[_type == "templateCategory"]{templateType, _updatedAt, modified, "slug": slug.current}`)
+  const res = await runQuery(
+    `*[_type == "templateCategory"]{templateType, _updatedAt, modified, "slug": slug.current}`
+  )
 
-  const paths = res?.map(({ slug, templateType, _updatedAt }) => ({
+  const paths = res?.map(({ slug, templateType, _updatedAt, modified }) => ({
     loc: `${rootUrl}/${
       templateType === 'website' ? 'website-templates' : 'templates'
     }/category/${slug}`,
