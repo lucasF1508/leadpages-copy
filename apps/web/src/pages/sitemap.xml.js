@@ -1,5 +1,5 @@
 import { getServerSideSitemapIndexLegacy } from 'next-sitemap'
-import { runQuery } from '@lib'
+import { runQuery } from '@lib/queries'
 
 export const sortPaths = (paths) => {
   const { parentPaths, orphanPaths } = paths?.reduce(
@@ -25,11 +25,11 @@ export const generateEntries = (paths, context) => {
   }`
 
   return (
-    paths.map(({ path, _updatedAt }) => ({
+    paths.map(({ path, _updatedAt, modified }) => ({
       loc: `${rootUrl}${path}`,
       changefreq: 'yearly',
       priority: 0.7,
-      lastmod: new Date(_updatedAt).toISOString(),
+      lastmod: new Date(modified || _updatedAt).toISOString(),
     })) || []
   )
 }

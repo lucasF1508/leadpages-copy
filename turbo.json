@@ -4,45 +4,23 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "dist/**"]
     },
-    "analyze": {
-      "cache": false,
-      "dependsOn": ["query#build"],
-      "outputs": []
-    },
     "start": {
       "cache": false,
-      "dependsOn": ["indices#build"],
       "outputs": []
-    },
-    "query#start": {
-      "dependsOn": ["schema-registry#build", "client#build"],
-      "outputs": ["dist/**"]
     },
     "client#build": {
       "dependsOn": [],
       "outputs": ["dist/**"]
     },
-    "schema-registry#build": {
-      "dependsOn": [],
-      "outputs": ["dist/**"]
-    },
-    "query#build": {
-      "dependsOn": ["schema-registry#build", "client#build"],
-      "outputs": ["dist/**"]
-    },
     "indices#build": {
       "cache": false,
-      "dependsOn": ["schema-registry#build", "query#build", "client#build"],
+      "dependsOn": ["client#build"],
       "outputs": []
-    },
-    "web#start": {
-      "cache": false,
-      "dependsOn": ["query#build", "sanity-hooks#build"]
     },
     "web#build": {
       "cache": false,
       "outputs": [".next/**", "dist/**"],
-      "dependsOn": ["studio#build", "query#build", "sanity-hooks#build"]
+      "dependsOn": ["client#build", "indices#build", "studio#build"]
     },
     "studio#build": {
       "dependsOn": [],

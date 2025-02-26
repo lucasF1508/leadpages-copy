@@ -1,6 +1,0 @@
-{
-  "toolSwitcher": {
-    "order": ["desk", "media-library"],
-    "hidden": ["vercel-deploy", "dashboard"]
-  }
-}

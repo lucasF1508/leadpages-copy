@@ -1,6 +1,6 @@
 import React from 'react'
 import HowToImproveConversionRate from '@layouts/ConversionOptimizationGuide/HowToImproveConversionRate'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const HowToImproveConversionRatePage = (props) => (
   <HowToImproveConversionRate {...props} />

@@ -1,6 +1,6 @@
 import React from 'react'
 import HowToCalculateCro from '@layouts/ConversionOptimizationGuide/HowToCalculateCro'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const HowToCalculateCroPage = (props) => <HowToCalculateCro {...props} />
 

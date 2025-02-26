@@ -107,10 +107,10 @@ const TemplateTabsReviews = ({ data }) => {
             ({
               _id,
               rating,
-              title: reviewTitle,
+              title: name,
               testimonial,
               image,
-              authorName,
+              titleSecondary,
               authorTitle,
               source,
             }) => {
@@ -121,7 +121,7 @@ const TemplateTabsReviews = ({ data }) => {
                   <$Rating>
                     <Ratings rating={rating || 5} />
                   </$Rating>
-                  {reviewTitle && <$Title>{reviewTitle}</$Title>}
+                  {titleSecondary && <$Title>{titleSecondary}</$Title>}
                   {testimonial && <$Content>{testimonial}</$Content>}
                   {reviewLink && (
                     <$Link>
@@ -134,9 +134,9 @@ const TemplateTabsReviews = ({ data }) => {
                         <Image image={image} />
                       </$AuthorImage>
                     )}
-                    {(authorName || authorTitle) && (
+                    {(name || authorTitle) && (
                       <$AuthorContent>
-                        <$AuthorName>{authorName}</$AuthorName>
+                        <$AuthorName>{name}</$AuthorName>
                         <$AuthorTitle>{authorTitle}</$AuthorTitle>
                       </$AuthorContent>
                     )}

@@ -1,7 +1,9 @@
 const path = require('path')
 const findUp = require('find-up')
+
 const adminRedirects = require('redirects')
 const { filterRoutesFromSanity } = require('directoryToRoutes')
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
@@ -162,22 +164,21 @@ module.exports = withBundleAnalyzer({
       dataset: SANITY_STUDIO_API_DATASET,
     })
 
-    if (incrementalPaths.length) {
-      const builtPaths = await buildJSON({
-        files: [
-          {
-            path: path.join('./public/indices/incrementalPaths.json'),
-            data: incrementalPaths,
-          },
-        ],
-      })
+    const builtPaths = await buildJSON({
+      files: [
+        {
+          path: path.join('./public/indices/incrementalPaths.json'),
+          data: incrementalPaths || [],
+        },
+      ],
+    })
 
-      if (builtPaths.every(({ status }) => status === 'fulfilled')) {
-        console.log(
-          `Built index of ${incrementalPaths.length} incremental paths.`
-        )
-      }
+    if (builtPaths?.every(({ status }) => status === 'fulfilled')) {
+      console.log(
+        `Built index of ${incrementalPaths?.length} incremental paths.`
+      )
     }
+    
 
     return {
       afterFiles: [

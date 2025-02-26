@@ -1,19 +1,19 @@
 import React from 'react'
-import { getDoc, getAllDocs, runQueries } from '@lib'
+import { runQueries, query } from '@lib/queries'
 import Integrations from '@layouts/Integrations'
 
 const IntegrationsPage = (props) => <Integrations {...props} />
 
 export const shapeData = ([
   data,
-  { docs: categories },
-  { docs, pagination },
+  categories,
+  docs,
 ]) => [
   {
     settings: data,
+    seo: data.seo,
     categories,
     docs,
-    pagination,
   },
 ]
 
@@ -25,21 +25,23 @@ export async function getStaticProps(context) {
   const docType = 'integration'
 
   const { data, global, queries } = await runQueries([
-    getDoc('pageArchive', {
-      filters: [`archiveOf == "${docType}"`],
-      preview,
-    }),
-    getAllDocs('categoryIntegration', {
-      filters: "!(_id in path('drafts.**'))",
-      order: 'order(lower(title) asc)',
-      preview,
-    }),
-    getAllDocs(docType, {
-      filters: "!(_id in path('drafts.**'))",
-      order: 'order(lower(title) asc)',
-      preview,
-    }),
-  ])
+    query(
+      `*[_type == 'pageArchive' && archiveOf == "${docType}"][0]`,
+      {preview}
+    ),
+    query(
+      `*[_type == "categoryIntegration"] | order(lower(title) asc)`,
+      {preview}
+    ),
+    query(
+      `*[_type == "${docType}"] | order(lower(title) asc) {
+        ...,
+        category->,
+        status->
+      }`,
+      {preview}
+    ),
+  ], true)
 
   return {
     props: {

@@ -1,0 +1,57 @@
+.layout {
+  height: 100%;
+
+  [data-testid='field-group-tabs'] > div:first-child {
+    display: none;
+  }
+}
+
+.toolbar {
+  @media (min-width: 899px) {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 0.75rem;
+    width: 100%;
+  }
+}
+
+.tools {
+  margin-bottom: 1rem;
+
+  @media (min-width: 899px) {
+    flex: 1 1 auto;
+    margin-bottom: unset;
+  }
+}
+
+.buttonStyles {
+  background-color: #425ca6;
+  border-radius: 9999px;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  letter-spacing: -0.03rem;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &[data-size='large'] {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  &[data-size='small'] {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  [data-link] {
+    background: inherit;
+    color: inherit;
+    border: none !important;
+  }
+}

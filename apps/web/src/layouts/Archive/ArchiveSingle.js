@@ -192,6 +192,7 @@ const $ArchiveSocialShare = styled('div', {
 const ArchiveSingle = ({
   _createdAt,
   _updatedAt,
+  modified,
   publishedDate,
   content,
   image,
@@ -279,7 +280,7 @@ const ArchiveSingle = ({
             />
             <ArchivePublishDate
               publisher={publisher}
-              updatedAt={_updatedAt}
+              updatedAt={modified || _updatedAt}
               publishedDate={publishedDate || _createdAt}
             />
             {publisher && (

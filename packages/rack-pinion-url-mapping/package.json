@@ -1,0 +1,22 @@
+{
+  "name": "rack-pinion-url-mapping",
+  "private": true,
+  "version": "4.2.0",
+  "description": "Get redirects & rewrites from Sanity",
+  "main": "./index.js",
+  "repository": "https://github.com/gearbox-built",
+  "author": "Devin Edwards",
+  "license": "UNLICENSED",
+  "scripts": {
+    "blast:node": "rm -rf node_modules"
+  },
+  "dependencies": {
+    "config": "*",
+    "client": "*",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.57",
+    "@swc/core": "^1.2.173"
+  }
+}

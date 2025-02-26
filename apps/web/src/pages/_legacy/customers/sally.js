@@ -1,6 +1,6 @@
 import React from 'react'
 import Sally from '@layouts/Customers/Sally'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const SallyPage = (props) => <Sally {...props} />
 

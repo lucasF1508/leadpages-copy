@@ -65,6 +65,7 @@ export default function App({
   } = globalData || {}
 
   const [previewData, setPreviewData] = useState(data)
+  
   const [
     {
       seo,

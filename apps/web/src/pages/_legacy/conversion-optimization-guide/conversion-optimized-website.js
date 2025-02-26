@@ -1,6 +1,6 @@
 import React from 'react'
 import ConversionOptimizedWebsite from '@layouts/ConversionOptimizationGuide/ConversionOptimizedWebsite'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const ConversionOptimizedWebsitePage = (props) => (
   <ConversionOptimizedWebsite {...props} />

@@ -1,8 +1,9 @@
 import React from 'react'
-import { getDoc, getDocSlugs, runQueries } from '@lib'
+import {getStaticPathsParams, query, runQueries } from '@lib/queries'
 import Page, { PageSidebar } from '@layouts/Page'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
 import { features } from 'config'
+import pageQuery from '@lib/queries/components'
 
 const DynamicPage = ({ hasSidebar, ...props }) =>
   hasSidebar ? <PageSidebar {...props} /> : <Page {...props} />
@@ -51,18 +52,31 @@ export const shapeData = (data) => {
 
 export const exporter = (props) => shapeData(props)
 
+const types = ['page', 'customer', 'integration']
+
 export async function getStaticProps(context) {
   const { params, preview = false } = context
-  const path = params?.slug?.join('/')
+  const path = [
+    '/',
+    ...(Array.isArray(params?.slug) ? params.slug : [params.slug]),
+  ]
+    .join('/')
+    .replaceAll('//', '/')
 
   const { data, queries, global } = await runQueries(
-    getDoc(['page', 'customer', 'integration'], {
-      preview,
-      params: { path: `/${path}` },
-      projections: `category[]->`,
-    }),
-    true,
-    preview
+    query(
+      `*[_type in $types && path == $path] | order(_updatedAt desc) [0] {
+        ...,
+        ${pageQuery}
+      }`,
+      {
+        params: {
+          path,
+          types,
+        },
+        preview,
+      }
+    ),
   )
 
   // Only fetch pricing if we need it
@@ -88,29 +102,15 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const docPaths = await getDocSlugs(['page', 'customer', 'integration'])
-  const excludedPaths = [
-    '/product/feature-index',
-    '/website-templates',
-    '/templates',
-  ]
-
-  const paths = docPaths.reduce((acc, { slug, path }) => {
-    if (excludedPaths.includes(path)) return acc
-
-    return [
-      ...acc,
-      {
-        params: {
-          slug: path?.split('/').filter(Boolean) || [slug],
-        },
-      },
-    ]
-  }, [])
+  const paths = await getStaticPathsParams({
+    catchAll: true,
+    filter: 'slug.current != "404" && path != "/product/feature-index" && path != "/website-templates" && path != "/templates"',
+    types,
+  })
 
   return {
-    paths,
     fallback: false,
+    paths,
   }
 }
 

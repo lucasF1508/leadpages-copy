@@ -1,6 +1,6 @@
 import React from 'react'
 import Submission from '@layouts/Contact/Submission'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const SubmissionPage = (props) => <Submission {...props} />
 

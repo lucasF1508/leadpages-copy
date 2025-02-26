@@ -1,0 +1,13 @@
+[data-testid='studio-navbar'] > div[data-ui='Grid']:not([hidden]) {
+  display: flex;
+  justify-content: space-between;
+}
+
+div:has(> .toolbar) {
+  flex: 1;
+}
+
+.tools a > span > span > div {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}

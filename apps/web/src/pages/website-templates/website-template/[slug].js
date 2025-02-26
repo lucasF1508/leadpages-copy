@@ -1,5 +1,5 @@
 import React from 'react'
-import { runQueries, getDocSlugs, getDoc, getAllDocs } from '@lib'
+import { runQueries, query, getStaticPathsParams } from '@lib/queries'
 import TemplateComponent from '@components/Template'
 import { shapeData } from '@utils/shapeTemplateData'
 
@@ -11,26 +11,28 @@ export async function getStaticProps(context) {
 
   const { data, queries, global } = await runQueries(
     [
-      getDoc('template', {
+    query(
+      `*[_type == "template" && slug.current == $slug][0] {
+        ...,
+        "slug": slug.current,
+        "relatedTemplates": *[_type == "template" && kind == 'SiteTemplate' && slug.current != $slug && (categories[].value)[@ in ^.categories[].value] != null]|order(count((categories[].value)[@ in ^.^.categories[].value]) desc)[0..7]
+      }`,
+      {
+        params: {
+          slug,
+          types,
+        },
         preview,
-        filters: `slug.current == '${slug}'`,
-        projections: `"slug": slug.current, "relatedTemplates": *[_type == "template" && kind == 'SiteTemplate' && slug.current != "${slug}" && (categories[].value)[@ in ^.categories[].value] != null]|order(count((categories[].value)[@ in ^.^.categories[].value]) desc)[0..7]`,
-      }),
-      getDoc('templateSettings', {
-        preview,
-        filters: `_id == "websiteTemplateSettings"`,
-      }),
-      getAllDocs('testimonial', {
-        preview,
-        filters:
-          '_type == "testimonial" && "websites" in category[]->slug.current',
-        hasPagination: false,
-        slice: '0..2',
-        order: 'order(_updatedAt desc)',
-      }),
+      }
+    ),
+    query(`*[_type == "templateSettings" && _id == "websiteTemplateSettings"][0] {
+        ...,
+        cta->
+      }`, {
+      preview
+    }),
+    query(`*[_type == "testimonial" && "websites" in category[]->slug.current] | order(_updatedAt desc) [0..2]`, {preview})
     ],
-    true,
-    preview
   )
 
   return {
@@ -43,20 +45,17 @@ export async function getStaticProps(context) {
   }
 }
 
+const types = ['template']
+
 export async function getStaticPaths() {
-  const docPaths = await getDocSlugs('template', {
-    filters: ['kind == "SiteTemplate"'],
+  const paths = await getStaticPathsParams({
+    filter: 'kind == "SiteTemplate"',
+    types,
   })
 
-  const paths = docPaths.map(({ slug }) => ({
-    params: {
-      slug,
-    },
-  }))
-
   return {
-    paths,
     fallback: false,
+    paths,
   }
 }
 

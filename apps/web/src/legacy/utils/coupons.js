@@ -37,8 +37,10 @@ export function checkCouponExpired(coupon) {
 }
 
 function couponAttempted(coupon) {
+  if (!window) return
+
   window.dataLayer = window.dataLayer || []
-  window.dataLayer.push({
+  window.dataLayer?.push({
     event: 'couponAttempted',
     couponData: coupon,
   })

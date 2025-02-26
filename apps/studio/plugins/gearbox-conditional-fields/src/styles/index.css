@@ -1,4 +1,0 @@
-/* Sibling Conditional Fields  */
-[data-focus-path] + [data-focus-path] {
-  margin-top: 1.125rem;
-}

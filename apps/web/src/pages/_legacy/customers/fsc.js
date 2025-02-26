@@ -1,6 +1,6 @@
 import React from 'react'
 import FSC from '@layouts/Customers/FSC'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const FSCPage = (props) => <FSC {...props} />
 

@@ -1,5 +1,5 @@
 import { getServerSideSitemapLegacy } from 'next-sitemap'
-import { runQuery } from '@lib'
+import { runQuery } from '@lib/queries'
 
 export const getServerSideProps = async (context) => {
   const { req } = context
@@ -7,7 +7,7 @@ export const getServerSideProps = async (context) => {
     req.headers.host
   }`
   const docs = await runQuery(
-    `*[_type == "template" && kind == 'LeadpageTemplate'] | order(_updatedAt desc) {_updatedAt, ...}`
+    `*[_type == "template" && kind == 'LeadpageTemplate'] | order(_updatedAt desc)`
   )
 
   return getServerSideSitemapLegacy(
@@ -16,7 +16,7 @@ export const getServerSideProps = async (context) => {
       loc: `${rootUrl}/templates/landing-page-template/${item?.slug?.current}`,
       changefreq: 'yearly',
       priority: 0.7,
-      lastmod: new Date(item?._updatedAt).toISOString(),
+      lastmod: new Date(item?.modified || item?._updatedAt).toISOString(),
     }))
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import Product from '@layouts/Product'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const ProductPage = (props) => <Product {...props} />
 

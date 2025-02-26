@@ -1,6 +1,6 @@
 import React from 'react'
 import ActiveCampaign from '@layouts/Integrations/ActiveCampaign'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const ActiveCampaignPage = (props) => <ActiveCampaign {...props} />
 

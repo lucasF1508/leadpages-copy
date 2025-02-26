@@ -1,6 +1,6 @@
 import React from 'react'
 import Comparisons from '@layouts/Comparisons'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const ComparisonsPage = (props) => <Comparisons {...props} />
 

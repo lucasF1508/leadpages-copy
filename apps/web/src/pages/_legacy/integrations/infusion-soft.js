@@ -1,6 +1,6 @@
 import React from 'react'
 import InfusionSoft from '@layouts/Integrations/InfusionSoft'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const InfusionSoftPage = (props) => <InfusionSoft {...props} />
 

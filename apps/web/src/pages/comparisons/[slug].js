@@ -1,5 +1,5 @@
 import React from 'react'
-import { getDoc, getDocSlugs, runQueries } from '@lib'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import PageSidebar from '@layouts/Page/PageSidebar'
 import { features } from 'config'
 
@@ -32,15 +32,20 @@ export const shapeData = (data) => {
 
 export const exporter = (props) => shapeData(props)
 
+const types = ['comparison']
+
 export async function getStaticProps(context) {
   const { params, preview = false } = context
   const slug = params?.slug
 
   const { data, queries, global } = await runQueries(
-    getDoc('comparison', {
-      preview,
-      params: { slug },
-    })
+    query(
+      `*[_type in $types && slug.current == $slug][0]`,
+      {
+        preview,
+        params: { slug, types },
+      }
+    ),
   )
 
   return {
@@ -54,15 +59,13 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const docPaths = await getDocSlugs(['comparison'])
-
-  const paths = docPaths.map(({ slug }) => ({
-    params: { slug },
-  }))
+  const paths = await getStaticPathsParams({
+    types,
+  })
 
   return {
-    paths,
     fallback: false,
+    paths,
   }
 }
 

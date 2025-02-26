@@ -58,7 +58,7 @@ const ListingBlock = ({
   heading,
   subheading,
   link,
-  listings: listingsOrg,
+  listings: listingsOrg = [],
   hasFeaturedListing = false,
   ctaLabel = 'Read More',
   type = 'regular',

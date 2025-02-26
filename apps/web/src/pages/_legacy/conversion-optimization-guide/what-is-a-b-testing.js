@@ -1,6 +1,6 @@
 import React from 'react'
 import WhatIsABTesting from '@layouts/ConversionOptimizationGuide/WhatIsABTesting'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const WhatIsABTestingPage = (props) => <WhatIsABTesting {...props} />
 

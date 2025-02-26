@@ -1,6 +1,6 @@
 import React from 'react'
 import LeadpagesVsKartra from '@layouts/Comparisons/LeadpagesVsKartra'
-import { runQueries } from '@lib'
+import { runQueries } from '@lib/queries'
 
 const LeadpagesVsKartraPage = (props) => <LeadpagesVsKartra {...props} />
 

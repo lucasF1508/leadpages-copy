@@ -1,9 +1,0 @@
-{
-  "name": "gearbox-vimeo",
-  "private": true,
-  "version": "0.1.0",
-  "description": "",
-  "main": "dist/index.js",
-  "author": "Troy McGinnis <troy@gearboxbuilt.com>",
-  "license": "UNLICENSED"
-}

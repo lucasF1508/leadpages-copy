@@ -12,7 +12,7 @@ import useMediaQuery from '@hooks/useMediaQuery'
 import ArchiveTableOfContentsInner from './ArchiveTableOfContentsInner'
 
 const filterDuplicateByKey = (array, key) =>
-  array.filter(
+  array?.filter(
     (v, i, a) => a.findIndex((t) => (key ? t[key] === v[key] : t === v)) === i // Remove duplicates
   )
 
