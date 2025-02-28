@@ -10,14 +10,17 @@ import SingletonListItem from './SingletonListItem'
 import CategoriesListItem from './CategoriesListItem'
 import IframePreview from './CustomViews/IframePreview'
 import SeoPane from './CustomViews/SeoPane'
+import templatesListItems from '../../utils/templatesListItems'
 import {StructureBuilder} from 'sanity/structure'
 import {ConfigContext} from 'sanity'
 import {TbAppWindow} from 'react-icons/tb'
 
 const pageTemplates = config?.studio?.docTypes
 
-export const structure = (S: StructureBuilder, context: ConfigContext) =>
-  S.list()
+export const structure = async (S: StructureBuilder, context: ConfigContext) => {
+  templatesListItems(context)
+
+  return S.list()
     .title('Menu')
     .items([
       S.listItem()
@@ -192,6 +195,7 @@ export const structure = (S: StructureBuilder, context: ConfigContext) =>
         )
         .icon(MdSettings),
     ])
+}
 
 export const defaultDocumentNode = (S: StructureBuilder, {schemaType}: {schemaType: string}) => {
   if (pageTemplates.includes(schemaType)) {
