@@ -124,7 +124,7 @@ const Preview = ({ template, galleryRoot, planData }) => {
         device={device}
         previewUrl={template.template.previewUrl}
       />
-      <Link href={galleryRoot} passHref>
+      <Link href={galleryRoot} passHref legacyBehavior>
         <Button
           variant="outlined"
           id="use-template-btn-footer"

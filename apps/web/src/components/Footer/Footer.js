@@ -2,7 +2,7 @@ import React from 'react'
 import * as NextLink from 'next/link'
 import { styled } from '@design'
 import Link from '@components/Link'
-import logoIconSVG from '@legacy/assets/images/global/leadpages-wordmark_large.svg'
+import logoIconSVG from '@public/images/logo.svg'
 import FooterRowBottom from './FooterRowBottom'
 import LegacyFooter from './LegacyFooter'
 import RedbrickFooter from './RedbrickFooter'
@@ -106,8 +106,8 @@ const $StyledLink = styled('a', {
 })
 
 const $LogoIconContainer = styled('img', {
-  width: '9rem',
-  height: '1.5rem',
+  width: '9.5rem',
+  height: '2rem',
   position: 'relative',
 })
 
@@ -123,7 +123,7 @@ const Footer = ({ slimFooter, isPreviewPage, data = {} }) => {
           {!slimFooter && (
             <$FooterContent>
               <$Logo>
-                <NextLink href="/" passHref>
+                <NextLink href="/" passHref legacyBehavior>
                   <$StyledLink>
                     <$LogoIconContainer
                       src={logoIconSVG.src}

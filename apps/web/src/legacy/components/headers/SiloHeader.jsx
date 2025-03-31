@@ -121,9 +121,7 @@ const SiloHeader = ({ title, supertitle, breadcrumbs }) => (
       {breadcrumbs && (
         <BreadCrumbsContainer>
           <Link href={breadcrumbs.parentPageLink}>
-            <a>
-              <ParentPage>{breadcrumbs.parentPageName}</ParentPage>
-            </a>
+            <ParentPage>{breadcrumbs.parentPageName}</ParentPage>
           </Link>
           <RightArrow src={ArrowRightPurple.src} alt="Grey right arrow" />
           {breadcrumbs.currentPageName}

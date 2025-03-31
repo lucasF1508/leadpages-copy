@@ -33,5 +33,25 @@ export const schemaFooter = {
         }),
       ],
     }),
+    F.string({name: 'address' }),
+    F.string({name: 'copyright' }),
+    F.array({
+      name: 'social', 
+      of: [
+        F.object({
+          name: 'platform', 
+          fields: [
+            F.string({
+              name: 'url'
+            })
+          ]}
+        )]
+      }),
+    F.array({
+      name: 'legal',
+      of: [
+        F.link(),
+      ],
+    }),
   ],
 }

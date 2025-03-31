@@ -1,7 +1,7 @@
-import { styled } from '@design'
 import { useEffect, useState } from 'react'
-import Image from '@components/Image'
+import { styled } from '@design'
 import { AnimatePresence, m } from 'framer-motion'
+import Image from '@components/Image'
 import { useCarouselStore } from './NavColumnCarousel'
 
 const $Slider = styled('div', {
@@ -102,17 +102,11 @@ const NavColumnCarouselForeground = ({
   return (
     <$Slider>
       <$Slides>
-        <AnimatePresence mode={'popLayout'} initial={false}>
+        <AnimatePresence initial={false} mode={'popLayout'}>
           {combinedSlides.map(
             ({ templateImage, _key }, i) =>
               currentSlide === i && (
                 <$Slide
-                  key={`${_key}-${i}`}
-                  initial={
-                    isTimerActive
-                      ? { opacity: 0, x: -100, y: 100 }
-                      : { opacity: 0, scaleX: 0.95, scaleY: 0.95, y: 10 }
-                  }
                   animate={
                     isTimerActive
                       ? {
@@ -137,6 +131,12 @@ const NavColumnCarouselForeground = ({
                           y: 10,
                         }
                   }
+                  initial={
+                    isTimerActive
+                      ? { opacity: 0, x: -100, y: 100 }
+                      : { opacity: 0, scaleX: 0.95, scaleY: 0.95, y: 10 }
+                  }
+                  key={`${_key}-${i}`}
                   transition={{ duration: 0.4 }}
                 >
                   <$Image>

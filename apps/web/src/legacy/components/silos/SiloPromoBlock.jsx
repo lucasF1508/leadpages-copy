@@ -157,13 +157,11 @@ const SiloPromoBlock = ({ overridePromoContent }) => {
             <ArrowRight src={rightArrowSVG.src} />
           </Button>
         ) : (
-          <Link href={link}>
-            <a aria-label={linkAlt}>
-              <Button>
-                {buttonText}
-                <ArrowRight src={rightArrowSVG.src} />
-              </Button>
-            </a>
+          <Link href={link} aria-label={linkAlt}>
+            <Button>
+              {buttonText}
+              <ArrowRight src={rightArrowSVG.src} />
+            </Button>
           </Link>
         )}
       </ContentFlexItem>

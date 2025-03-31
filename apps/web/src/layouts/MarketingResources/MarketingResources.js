@@ -502,7 +502,7 @@ const MarketingResourcesPage = ({ customers }) => {
               </CustomersSubHeading>
             </div>
             <HeadingButton>
-              <Link href="/customers" passHref>
+              <Link href="/customers" passHref legacyBehavior>
                 <HeadingLink alt="customers">
                   All Customer Stories&nbsp;
                   <Icon_ArrowRight src={arrowRightSVG.src} alt="right arrow" />

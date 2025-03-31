@@ -76,7 +76,7 @@ const ToolkitCardStyle_3Across = styled('a', {
 })
 
 const ToolkitCard = ({ title, image, link }) => (
-  <Link href={link?.url || '/'} passHref>
+  <Link href={link?.url || '/'} passHref legacyBehavior>
     <ToolkitCardStyle_3Across>
       <ImageContainer>
         <Image image={image} objectFit="contain" />

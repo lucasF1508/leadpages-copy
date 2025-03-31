@@ -129,15 +129,13 @@ const SaveTime = () => (
             that works for you like a 24/7 sales team.
           </LeftSubHeading>
           <Link href="/integrations">
-            <a>
-              <LeftCTA>
-                Explore all Leadpages integrations&nbsp;
-                <ArrowRightPurple
-                  src={rightArrowPurple.src}
-                  alt="purple right arrow"
-                />
-              </LeftCTA>
-            </a>
+            <LeftCTA>
+              Explore all Leadpages integrations&nbsp;
+              <ArrowRightPurple
+                src={rightArrowPurple.src}
+                alt="purple right arrow"
+              />
+            </LeftCTA>
           </Link>
         </LeftContainer>
       </FlexRowLeft>

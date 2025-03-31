@@ -12,12 +12,16 @@ export const getServerSideProps = async (context) => {
 
   return getServerSideSitemapLegacy(
     context,
-    docs.map((item) => ({
-      loc: `${rootUrl}/templates/landing-page-template/${item?.slug?.current}`,
-      changefreq: 'yearly',
-      priority: 0.7,
-      lastmod: new Date(item?.modified || item?._updatedAt).toISOString(),
-    }))
+    docs.map((item) => {
+      const { modified, _updatedAt, slug } = item
+
+      return {
+        loc: `${rootUrl}/templates/landing-page-template/${slug?.current}`,
+        changefreq: 'yearly',
+        priority: 0.7,
+        lastmod: new Date(modified || _updatedAt).toISOString(),
+      }
+    })
   )
 }
 

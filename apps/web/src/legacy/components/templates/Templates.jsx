@@ -495,21 +495,22 @@ const Templates = ({ kind, isPreviewing, setCurrentURL, setPreviousURL }) => {
               container
               justifyContent="center"
             >
-              <Link href="/templates">
-                <a className={`${classes.tabLink}${activeLandingPageLink}`}>
-                  Landing Pages
-                </a>
+              <Link
+                href="/templates"
+                className={`${classes.tabLink}${activeLandingPageLink}`}
+              >
+                Landing Pages
               </Link>
-              <Link href="/website-templates">
-                <a className={`${classes.tabLink}${activeWebsiteLink}`}>
-                  Websites
-                </a>
+              <Link
+                href="/website-templates"
+                className={`${classes.tabLink}${activeWebsiteLink}`}
+              >
+                Websites
               </Link>
             </Grid>
           </Toolbar>
         </AppBar>
       </Slide>
-
       <Box className={classes.galleryRoot}>
         <IconButton
           style={{

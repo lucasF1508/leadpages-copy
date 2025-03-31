@@ -273,7 +273,7 @@ const CustomerStoriesThumbnailRotator = ({ customers }) => {
           <SlickRotator {...settings}>
             {customers.map(({ title, path, excerpt }, index) => (
               <ThumbnailSection key={index}>
-                <Link href={path} passHref>
+                <Link href={path} passHref legacyBehavior>
                   <StyledLink aria-label={excerpt?.image?.alt}>
                     <ImageContainer
                       data-gtm="customer-story-link"

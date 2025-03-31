@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  @import './components/pinion';
+  @import './components/portable-text';
+  @import './components/link';
+  @import './components/list';
+}
+
+@layer base {
+  :root {
+    --header-height: theme(magic-numbers.header-height.initial);
+
+    @media (min-width: theme(screens.md)) {
+      --header-height: theme(magic-numbers.header-height.md);
+    }
+  }
+
+  html {
+    @apply bg-surface-neutral-dark text-body text-[16px] antialiased;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
 import NextLink from 'next/link'
-import NextImage from 'next/image'
+import NextImage from 'next/legacy/image'
 import Image from '@components/Image'
 import { RPIcon } from '@legacy/constants/types'
 // images
@@ -177,7 +177,7 @@ const IconCard = ({
           </IconCardHeading>
           <div className="details">{content || description}</div>
           {link?.condition && (
-            <NextLink href={link.url || link.route} passHref>
+            <NextLink href={link.url || link.route} passHref legacyBehavior>
               <IconCardLink alt={link.altText}>
                 <CTA>
                   {link.label}
@@ -217,7 +217,7 @@ const IconCard = ({
         </IconCardHeading>
         <div className="details">{content || description}</div>
         {link?.condition && (
-          <NextLink href={link.url || link.route} passHref>
+          <NextLink href={link.url || link.route} passHref legacyBehavior>
             <IconCardLink alt={link.altText}>
               <CTA>
                 {link.label}

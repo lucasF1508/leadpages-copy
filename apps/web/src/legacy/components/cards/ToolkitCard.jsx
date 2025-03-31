@@ -75,7 +75,7 @@ const ToolkitCardStyle_3Across = styled('a', {
 })
 
 const ToolkitCard = ({ title, iconSVG, alt, productId, linkRoute, hide }) => (
-  <Link href={linkRoute} passHref>
+  <Link href={linkRoute} passHref legacyBehavior>
     <ToolkitCardStyle_3Across
       css={
         hide.indexOf(productId) !== -1

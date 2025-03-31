@@ -25,6 +25,11 @@ export const schemaMenuCard = F.object({
           "Add a valid hex code prepended with a '#', This will be the background color of the card when hovered.",
         placeholder: '#000000',
       }),
+      F.boolean('disableHover', {
+        name: 'disableHover',
+        description: 'Maintain Image Color on Hover',
+        initialValue: false,
+      }),
       F.radio(['white', 'black'], {
         name: 'hoverColor',
         description: 'This will be the color of the image when the user hovers over it.',

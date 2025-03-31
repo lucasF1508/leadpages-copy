@@ -112,7 +112,7 @@ const Pagination = ({ pagination, isMobile }) => {
               )
             }
             return (
-              <NextLink key={key} href={url} passHref>
+              <NextLink key={key} href={url} passHref legacyBehavior>
                 <$PaginationLink isActive={isActive} hasIcon={!!icon}>
                   {icon === 'next' && <NextIcon />}
                   {icon === 'prev' && <PrevIcon />}

@@ -127,7 +127,7 @@ const LeadpagesVsKartra = () => (
               <StyledParagraphSmall>
                 If you’re questioning the difference between Leadpages and
                 Kartra, look no further. This assessment shows how{' '}
-                <Link href="/" passHref>
+                <Link href="/" passHref legacyBehavior>
                   <ArticleLink>Leadpages</ArticleLink>
                 </Link>{' '}
                 stacks up to Kartra. As two major players in the conversion
@@ -138,7 +138,7 @@ const LeadpagesVsKartra = () => (
                 We want you to pick the tool that will help you sell more, even
                 if it’s not us. As we compare Leadpages and Kartra, we’ll take
                 into account{' '}
-                <Link href="/comparisons" passHref>
+                <Link href="/comparisons" passHref legacyBehavior>
                   <ArticleLink>seven major criteria</ArticleLink>
                 </Link>{' '}
                 that are the most important to you when deciding between
@@ -403,7 +403,7 @@ const LeadpagesVsKartra = () => (
               </OL>
               <StyledParagraphSmall>
                 Our templates are beautiful and built to convert. With an{' '}
-                <Link href="/templates" passHref>
+                <Link href="/templates" passHref legacyBehavior>
                   <ArticleLink>abundance of template choices</ArticleLink>
                 </Link>
                 , you can feel confident in your page design, even if you have
@@ -535,14 +535,14 @@ const LeadpagesVsKartra = () => (
                   mentioned above)
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/alert-bars" passHref>
+                  <Link href="/product/alert-bars" passHref legacyBehavior>
                     <ArticleLink>Alert bars</ArticleLink>
                   </Link>
                   , which are publishable on any website or landing page to
                   prompt user actions (get those sign-ups)
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/pop-up-builder" passHref>
+                  <Link href="/product/pop-up-builder" passHref legacyBehavior>
                     <ArticleLink>Intuitive pop-up forms</ArticleLink>
                   </Link>
                   , which diverts the attention of visitors on any page to
@@ -745,7 +745,7 @@ const LeadpagesVsKartra = () => (
               <StyledParagraphSmall>
                 Are you wondering about the value of Leadpages? Let’s break it
                 down. There are different{' '}
-                <Link href="/pricing" passHref>
+                <Link href="/pricing" passHref legacyBehavior>
                   <ArticleLink>pricing tiers</ArticleLink>
                 </Link>{' '}
                 to suit every budget. We have standard, pro, and advanced

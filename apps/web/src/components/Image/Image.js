@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import NextImage from 'next/image'
+import NextImage from 'next/legacy/image'
 import useImageParser from '@hooks/useImageParser'
 import { m as motion, useMotionValue } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'

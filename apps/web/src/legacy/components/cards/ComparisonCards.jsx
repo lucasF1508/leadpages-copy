@@ -148,7 +148,7 @@ const ComparisonCards = ({
   linkAlt,
 }) => (
   <CardContainer>
-    <Link href={link} passHref>
+    <Link href={link} passHref legacyBehavior>
       <StyledLink aria-label={linkAlt}>
         <CardImageItem>
           <VersusContainer>

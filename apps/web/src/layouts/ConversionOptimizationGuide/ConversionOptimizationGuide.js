@@ -380,6 +380,7 @@ const ConversionRateOptimizationGuide = () => (
               <Link
                 href="/conversion-optimization-guide/what-is-conversion-optimization"
                 passHref
+                legacyBehavior
               >
                 <ArticleLink aria-label="What Is Conversion Rate Optimization (CRO)?">
                   Chapter One: What is a Conversion Rate
@@ -426,6 +427,7 @@ const ConversionRateOptimizationGuide = () => (
               <Link
                 href="/conversion-optimization-guide/how-to-calculate-cro"
                 passHref
+                legacyBehavior
               >
                 <ArticleLink aria-label="How Do I Calculate My Conversion Rate?">
                   Chapter Two: How Do I Calculate My Conversion Rate
@@ -436,6 +438,7 @@ const ConversionRateOptimizationGuide = () => (
               <Link
                 href="/conversion-optimization-guide/what-is-a-good-conversion-rate"
                 passHref
+                legacyBehavior
               >
                 <ArticleLink aria-label="What's A Good Conversion Rate?">
                   (Chapter 3: What’s a good Conversion Rate)
@@ -448,6 +451,7 @@ const ConversionRateOptimizationGuide = () => (
               <Link
                 href="/conversion-optimization-guide/how-to-improve-conversion-rate"
                 passHref
+                legacyBehavior
               >
                 <ArticleLink aria-label="How Can I Improve Conversion My Rate?">
                   Chapter Four: How Can I Improve My Conversion Rate
@@ -461,6 +465,7 @@ const ConversionRateOptimizationGuide = () => (
               <Link
                 href="/conversion-optimization-guide/what-is-a-b-testing"
                 passHref
+                legacyBehavior
               >
                 <ArticleLink aria-label="A/B Testing?">
                   Chapter Five: A/B Split Testing
@@ -476,6 +481,7 @@ const ConversionRateOptimizationGuide = () => (
               <Link
                 href="/conversion-optimization-guide/conversion-optimized-website"
                 passHref
+                legacyBehavior
               >
                 <ArticleLink aria-label="Creating a Conversion-Optimized Website">
                   Chapter Six: Creating a Conversion-Optimized Website

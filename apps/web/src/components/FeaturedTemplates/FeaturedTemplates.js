@@ -327,7 +327,7 @@ const FeaturedTemplates = (props) => {
                     {...linkProps}
                   >
                     {image?.templateUrl ? (
-                      <NextLink href={image.templateUrl}>
+                      <NextLink href={image.templateUrl} legacyBehavior>
                         <TemplateImage image={image} alt="template preview" />
                       </NextLink>
                     ) : (

@@ -167,7 +167,7 @@ const PrivacyPage = () => (
               pages; and automate marketing activities to send relevant
               communications to subscribers via our website (our “Website”)
               located at&nbsp;
-              <Link href="/" passHref>
+              <Link href="/" passHref legacyBehavior>
                 <StyledLink>www.leadpages.com</StyledLink>
               </Link>{' '}
               (the “Service”).

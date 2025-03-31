@@ -136,7 +136,12 @@ const BrandAssets = () => (
         >
           <Button>Download Brand Assets</Button>
         </StyledLink>
-        <Link href="/brand" aria-label="Get Our Brand Guide" passHref>
+        <Link
+          href="/brand"
+          aria-label="Get Our Brand Guide"
+          passHref
+          legacyBehavior
+        >
           <StyledLink>
             <Button>Get Our Brand Guide</Button>
           </StyledLink>

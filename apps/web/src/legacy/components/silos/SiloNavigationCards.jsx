@@ -154,7 +154,7 @@ const SiloNavigationCards = ({
           {nextPageIndex === 0 ? 'Review:' : 'Continue reading:'}
         </CardSectionHeading>
         <Card>
-          <Link href={pageUrl} passHref>
+          <Link href={pageUrl} passHref legacyBehavior>
             <StyledLink>
               <Flexbox>
                 <CardTextContainer>
@@ -177,7 +177,7 @@ const SiloNavigationCards = ({
 
     return (
       <Card>
-        <Link href={pageUrl} passHref>
+        <Link href={pageUrl} passHref legacyBehavior>
           <StyledLink>
             <Flexbox>
               <CardTextContainer>
@@ -202,7 +202,7 @@ const SiloNavigationCards = ({
           <CardSectionHeading>{sectionCardTitle}</CardSectionHeading>
           {sectionPages.map(({ pageUrl, pageTitle, pageSupertitle }, idx) => (
             <Card key={idx}>
-              <Link href={pageUrl} passHref>
+              <Link href={pageUrl} passHref legacyBehavior>
                 <StyledLink>
                   <Flexbox>
                     <CardTextContainer>

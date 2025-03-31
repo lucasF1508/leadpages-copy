@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from '@design'
 import PropTypes from 'prop-types'
 import NextLink from 'next/link'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 // components
 import IconCardsGrid from './IconCardsGrid'
 
@@ -47,7 +47,7 @@ const FeatureIconsGrid = ({
     {showSectionLink && (
       <SectionLink>
         Visit Leadpages{' '}
-        <NextLink href="/product/feature-index" passHref>
+        <NextLink href="/product/feature-index" passHref legacyBehavior>
           <StyledLink>feature index</StyledLink>
         </NextLink>{' '}
         for the full story.

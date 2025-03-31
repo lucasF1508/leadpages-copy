@@ -1,0 +1,76 @@
+.pinion {
+  @apply box-px box-my relative w-full;
+
+  .pinion-section & {
+    @apply box-[my(section)] px-0;
+  }
+}
+
+.pinion-inner {
+  @apply max-w-content align-center;
+}
+
+.pinion-textBlock{
+  .pinion-inner {
+    @apply max-w-cols10;
+  }
+}
+
+.pinion-cards,
+.pinion-cardsBlock,
+.pinion-featureCards,
+.pinion-cta,
+.pinion-embed,
+.pinion-logoGrid,
+.pinion-gallery,
+.pinion-hero,
+.pinion-section,
+.pinion-tableBlock,
+.pinion-textWithStats,
+.pinion-mediaWithTextSticky,
+.pinion-mediaWithItems,
+.pinion-resourceCards,
+.pinion-testimonial,
+.pinion-video {
+  .pinion-inner {
+    @apply max-w-base;
+  }
+
+  &.has-background {
+    @apply box-py !m-0;
+  }
+}
+
+.pinion-featureCards,
+.pinion-cta,
+.pinion-mediaWithItems {
+  @apply overflow-hidden;
+}
+
+.pinion-marquee {
+  @apply overflow-hidden;
+
+  .pinion-inner {
+    @apply max-w-none;
+  }
+}
+
+.pinion-media,
+.pinion-mediaWithText {
+  .pinion-inner {
+    @apply max-w-cols10;
+  }
+
+  &.has-background {
+    @apply !m-0;
+  }
+}
+
+.pinion-imageSlider,
+.pinion-slider {
+  @apply overflow-hidden;
+
+  .pinion-inner {
+    @apply max-w-base;
+  }
+}

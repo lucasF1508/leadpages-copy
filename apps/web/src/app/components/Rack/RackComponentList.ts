@@ -1,0 +1,67 @@
+import dynamic from 'next/dynamic'
+// import { space } from 'postcss/lib/list'
+
+/**
+ * List of dynamic components to be used within the application.
+ *
+ * @namespace RackComponentList
+ *
+ * @property {Function|Array} component - Dynamic component or array with component and Pinion params.
+ *
+ * @example
+ *  component: dynamic(() => import('@/components/client/Component')),
+ *  component: [dynamic(() => import('@/components/client/Component')), { pinion: false }],
+ *  component: [dynamic(() => import('@/components/client/Component')), { baseStyles: false }],
+ *  component: [dynamic(() => import('@/components/client/Component')), { backgroundColor: 'primary' }],
+ *  component: [dynamic(() => import('@/components/client/Component')), { className: 'mt-2' }],
+ *  component: [dynamic(() => import('@/components/client/Component')), { classNames: { root: 'mt-2', inner: 'ml-1' }],
+ */
+const RackComponentList = {
+  cardsBlock: dynamic(() => import('@/components/Cards')),
+  cta: dynamic(() => import('@/components/CTA')),
+  featureCards: dynamic(() => import('@/components/FeatureCards')),
+  marquee: dynamic(() => import('@/components/Marquee')),
+  mediaWithItems: dynamic(() => import('@/components/MediaWithItems')),
+  mediaWithTextSticky: dynamic(() => import('@/components/MediaWithText/MediaWithTextSticky')),
+  resourceCards: dynamic(() => import('@/components/ResourceCards')),
+  section: [dynamic(() => import('@/components/Section')), { pinion: false }],
+  spacer: dynamic(() => import('@/components/Spacer')),
+  testimonial: dynamic(() => import('@/components/Testimonial')),
+  textBlock: dynamic(() => import('@/components/Text/TextBlock')),
+  textWithStats: dynamic(() => import('@/components/TextWithStats')),
+  
+  // TEMP - Remove when all components are implemented
+  // accordion: dynamic(() => import('@/components/client/Accordion')),
+  // border: dynamic(() => import('@/components/client/Border')),
+  // cards: dynamic(() => import('@/components/client/Cards')),
+  // embed: dynamic(() => import('@/components/client/Embed')),
+  // formComponent: dynamic(() => import('@/components/client/Form')),
+  // gallery: dynamic(() => import('@/components/client/Gallery')),
+  // heading: dynamic(() => import('@/components/client/Heading')),
+  // imageSlider: dynamic(() => import('@/components/client/ImageSlider')),
+  // link: dynamic(() => import('@/components/client/Link')),
+  // logoGrid: dynamic(() => import('@/components/client/LogoGrid')),
+  // media: dynamic(() => import('@/components/client/Media/MediaBlock')),
+  // mediaWithText: dynamic(() => import('@/components/client/MediaWithText')),
+  // pageAnchor: [
+  //   dynamic(() => import('@/components/client/PageAnchor')),
+  //   { pinion: false },
+  // ],
+  // section: [
+  //   dynamic(() => import('@/components/client/Section')),
+  //   { baseStyles: false },
+  // ],
+  // sectionReference: [
+  //   dynamic(() => import('@/components/client/SectionReference')),
+  //   { pinion: false },
+  // ],
+  // slider: dynamic(() => import('@/components/client/Slider')),
+  // spacer: [
+  //   dynamic(() => import('@/components/client/Spacer')),
+  //   { pinion: false },
+  // ],
+  // tableBlock: dynamic(() => import('@/components/client/Table')),
+  // video: dynamic(() => import('@/components/client/Video/VideoEmbed')),
+}
+
+export default RackComponentList

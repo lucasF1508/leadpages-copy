@@ -365,7 +365,7 @@ const ProductFeaturesClickReveal = ({
                       <>
                         <br />
                         <br />
-                        <Link href={link.route} passHref>
+                        <Link href={link.route} passHref legacyBehavior>
                           <OutboundLink aria-label={link.altText}>
                             {link.text}
                             <ArrowRightImg

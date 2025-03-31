@@ -82,10 +82,6 @@ const usePreview = ({
           '@utils/shapeTemplateData'
         ),
         '/[...slug]': await import('@pages/[...slug].js'),
-        '/home/[...variant]': await import('@pages/index'),
-        '/': await import('@pages/index'),
-        '/home': await import('@pages/index'),
-        '/home-working': await import('@pages/index'),
         '/404': await import('@pages/404'),
         '/integrations': await import('@pages/integrations'),
         '/blog': await import('@pages/blog'),
@@ -98,12 +94,9 @@ const usePreview = ({
     const client = getClient({ preview: true })
 
     const globalQueries = await getGlobalQueries(true)
-    const [
-      navigation,
-      leadboxes,
-      siteMeta,
-      footer,
-    ] = await Promise.all(globalQueries);
+    const [navigation, leadboxes, siteMeta, footer] = await Promise.all(
+      globalQueries
+    )
 
     const allData = queries?.length
       ? await Promise.all(

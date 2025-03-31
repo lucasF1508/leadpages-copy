@@ -188,7 +188,7 @@ const ThreeColumnOverlap = ({
         <FlexRow3>
           <FlexRow3Container>
             {column1link && (
-              <Link href={column1link} passHref>
+              <Link href={column1link} passHref legacyBehavior>
                 <StyledLink aria-label={column1linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
@@ -216,7 +216,11 @@ const ThreeColumnOverlap = ({
               </Link>
             )}
             {column1outboundlink && (
-              <OutboundLink href={column1outboundlink} alt={column1linkAlt}>
+              <OutboundLink
+                href={column1outboundlink}
+                alt={column1linkAlt}
+                legacyBehavior
+              >
                 <GalleryContainer>
                   <BigTabImage>
                     <ImageContainer
@@ -245,7 +249,7 @@ const ThreeColumnOverlap = ({
         <FlexRow3>
           <FlexRow3Container>
             {column2link && (
-              <Link href={column2link} passHref>
+              <Link href={column2link} passHref legacyBehavior>
                 <StyledLink aria-label={column2linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
@@ -273,7 +277,11 @@ const ThreeColumnOverlap = ({
               </Link>
             )}
             {column2outboundlink && (
-              <OutboundLink href={column2outboundlink} alt={column2linkAlt}>
+              <OutboundLink
+                href={column2outboundlink}
+                alt={column2linkAlt}
+                legacyBehavior
+              >
                 <GalleryContainer>
                   <BigTabImage>
                     <ImageContainer
@@ -302,7 +310,7 @@ const ThreeColumnOverlap = ({
         <FlexRow3>
           <FlexRow3Container>
             {column3link && (
-              <Link href={column3link} passHref>
+              <Link href={column3link} passHref legacyBehavior>
                 <StyledLink aria-label={column3linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
@@ -330,7 +338,11 @@ const ThreeColumnOverlap = ({
               </Link>
             )}
             {column3outboundlink && (
-              <OutboundLink href={column3outboundlink} alt={column3linkAlt}>
+              <OutboundLink
+                href={column3outboundlink}
+                alt={column3linkAlt}
+                legacyBehavior
+              >
                 <GalleryContainer>
                   <BigTabImage>
                     <ImageContainer

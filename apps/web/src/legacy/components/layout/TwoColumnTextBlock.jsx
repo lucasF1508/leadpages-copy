@@ -129,7 +129,7 @@ const TwoColumnTextBlock = ({ textBlockArray }) => (
               </StyledLink>
             )}
             {linkType === 'internal' && (
-              <NextLink href={linkRoute} passHref>
+              <NextLink href={linkRoute} passHref legacyBehavior>
                 <StyledLink aria-label={linkAltText} target="_blank">
                   <LinkText>
                     {linkText}

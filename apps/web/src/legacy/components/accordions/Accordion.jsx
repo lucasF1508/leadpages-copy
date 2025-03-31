@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // material ui
 import Accordion from '@components/Accordion'
 import { styled } from '@design'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { VSTypography } from '@lp/ui'
 // images
 import ArrowDownSVG from '../../assets/images/global/arrow_down_large.svg'

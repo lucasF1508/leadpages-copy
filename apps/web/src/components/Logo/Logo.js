@@ -1,8 +1,8 @@
 import React from 'react'
 import { styled } from '@design'
+import logo from '@images/logo.svg'
 import NextLink from 'next/link'
 import Image from '@components/Image'
-import logo from '@images/logo.svg'
 
 export const $Logo = styled('a', {
   d: 'flex',
@@ -14,7 +14,7 @@ export const $Logo = styled('a', {
 })
 
 const Logo = () => (
-  <NextLink href="/" passHref>
+  <NextLink href="/" legacyBehavior passHref>
     <$Logo>
       <Image image={logo} type="static" />
     </$Logo>

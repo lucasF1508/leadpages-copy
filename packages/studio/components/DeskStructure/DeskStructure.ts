@@ -3,23 +3,33 @@ import config from 'config'
 import {RiLayoutBottom2Line} from 'react-icons/ri'
 import {BsFilePerson, BsQuestionCircle, BsPlug, BsCollection} from 'react-icons/bs'
 import {MdCallSplit, MdOutlineSmartButton} from 'react-icons/md'
-import {AiOutlineFileText, AiOutlineRetweet, AiOutlineSetting} from 'react-icons/ai'
+import {AiOutlineHome, AiOutlineFileText, AiOutlineRetweet, AiOutlineSetting} from 'react-icons/ai'
 import {MdBusiness, MdSettings} from 'react-icons/md'
 import {BsGraphUp, BsArrowLeftRight, BsNewspaper, BsCodeSlash, BsSignpost2} from 'react-icons/bs'
 import SingletonListItem from './SingletonListItem'
 import CategoriesListItem from './CategoriesListItem'
 import IframePreview from './CustomViews/IframePreview'
 import SeoPane from './CustomViews/SeoPane'
+import templatesListItems from '../../utils/templatesListItems'
 import {StructureBuilder} from 'sanity/structure'
 import {ConfigContext} from 'sanity'
 import {TbAppWindow} from 'react-icons/tb'
 
 const pageTemplates = config?.studio?.docTypes
 
-export const structure = (S: StructureBuilder, context: ConfigContext) =>
-  S.list()
+export const structure = async (S: StructureBuilder, context: ConfigContext) => {
+  templatesListItems(context)
+
+  return S.list()
     .title('Menu')
     .items([
+      SingletonListItem({
+        type: 'pageHomeRebrand',
+        title: 'Home Page Rebrand',
+        icon: AiOutlineHome,
+        S,
+      }),
+      S.divider(),
       S.listItem()
         .title('Pages')
         .child(
@@ -192,6 +202,7 @@ export const structure = (S: StructureBuilder, context: ConfigContext) =>
         )
         .icon(MdSettings),
     ])
+}
 
 export const defaultDocumentNode = (S: StructureBuilder, {schemaType}: {schemaType: string}) => {
   if (pageTemplates.includes(schemaType)) {

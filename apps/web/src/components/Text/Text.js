@@ -1,15 +1,18 @@
 import React from 'react'
-import isString from 'lodash/isString'
-import PortableText from '@sanity/block-content-to-react'
 import { styled } from '@design'
-import { getTypeUtil } from '@design/utils'
 import { textDefaultTokens, textPostTokens } from '@design/tokens/text'
-import RendererList from './Renderers/RendererList'
-import MarksList from './Marks/MarksList'
-import ListsList from './Lists/ListsList'
+import { getTypeUtil } from '@design/utils'
+import PortableText from '@sanity/block-content-to-react'
+import isString from 'lodash/isString'
 import ListItemsList from './Lists/ListItemsList'
+import ListsList from './Lists/ListsList'
+import MarksList from './Marks/MarksList'
+import RendererList from './Renderers/RendererList'
 
 const $Text = styled('article', {
+  defaultVariants: {
+    tagStyle: 'baseType',
+  },
   variants: {
     tagStyle: getTypeUtil,
     tokenSet: {
@@ -17,22 +20,19 @@ const $Text = styled('article', {
       post: { ...textPostTokens },
     },
   },
-  defaultVariants: {
-    tagStyle: 'baseType',
-  },
 })
 
 const Text = ({
-  content,
-  tagStyle,
-  className,
   children,
-  renderers = RendererList,
-  marks = MarksList,
+  className,
+  content,
+  displayIds = false,
   list = ListsList,
   listItem = ListItemsList,
+  marks = MarksList,
+  renderers = RendererList,
   styleMap = {},
-  displayIds = false,
+  tagStyle,
   ...props
 }) => {
   if (!children && !content) return null
@@ -40,8 +40,8 @@ const Text = ({
   if (isString(content))
     return (
       <$Text
-        tagStyle={tagStyle}
         className={className}
+        tagStyle={tagStyle}
         {...props}
         dangerouslySetInnerHTML={{ __html: content }}
       />
@@ -49,19 +49,19 @@ const Text = ({
 
   return (
     <$Text
+      className={className}
       tagStyle={tagStyle}
       tokenSet={props.usePostTokens ? 'post' : 'default'}
-      className={className}
       {...props}
     >
       {children || (
         <PortableText
           blocks={content.map((item) => ({ ...item, displayIds, styleMap }))}
           serializers={{
-            types: renderers,
-            marks,
             list,
             listItem,
+            marks,
+            types: renderers,
           }}
         />
       )}

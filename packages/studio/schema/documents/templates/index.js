@@ -1,6 +1,7 @@
 export * from './schemaPage'
 export * from './schemaPageArchive'
 export * from './schemaPageHome'
+export * from './schemaPageHomeRebrand'
 export * from './schemaPost'
 export * from './schemaCustomer'
 export * from './schemaComparison'

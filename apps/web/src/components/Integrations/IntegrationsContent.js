@@ -641,7 +641,11 @@ class IntegrationsContent extends React.Component {
                             <>
                               {/* Subpage included here */}
                               {subpage ? (
-                                <Link href={subpage.route} passHref>
+                                <Link
+                                  href={subpage.route}
+                                  passHref
+                                  legacyBehavior
+                                >
                                   <StyledLink>
                                     <IntegrationContainer
                                       key={integration}

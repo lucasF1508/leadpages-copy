@@ -1,6 +1,6 @@
 import { styled } from '@design'
 import useCarousel from '@hooks/useCarousel'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FiChevronLeft as ArrowLeft } from '@react-icons/all-files/fi/FiChevronLeft'
 import { FiChevronRight as ArrowRight } from '@react-icons/all-files/fi/FiChevronRight'
@@ -233,17 +233,15 @@ const TemplateRelated = ({ relatedTemplatesData }) => {
                 return (
                   <$Slide key={_id}>
                     <Link href={`${getTemplateUrl(kind, slug.current)}`}>
-                      <a>
-                        <$SlideImage>
-                          <Image
-                            src={thumbnailUrlWebp}
-                            layout="fill"
-                            objectFit="cover"
-                            objectPosition="top"
-                          />
-                        </$SlideImage>
-                        <$SlideTitle>{title}</$SlideTitle>
-                      </a>
+                      <$SlideImage>
+                        <Image
+                          src={thumbnailUrlWebp}
+                          layout="fill"
+                          objectFit="cover"
+                          objectPosition="top"
+                        />
+                      </$SlideImage>
+                      <$SlideTitle>{title}</$SlideTitle>
                     </Link>
                   </$Slide>
                 )

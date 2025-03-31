@@ -375,7 +375,11 @@ const Footer = ({ slimFooter }) => (
                 </OutboundFooterLink>
               </FlexColumnItem>
               <FlexColumnItem>
-                <OutboundFooterLink href="/affiliates" data-gtm="footer-link">
+                <OutboundFooterLink
+                  href="/affiliates"
+                  data-gtm="footer-link"
+                  legacyBehavior
+                >
                   Affiliate Program
                 </OutboundFooterLink>
               </FlexColumnItem>
@@ -393,7 +397,7 @@ const Footer = ({ slimFooter }) => (
                 </FooterLink>
               </FlexColumnItem>
               <FlexColumnItem>
-                <FooterLink href="/press" data-gtm="footer-link">
+                <FooterLink href="/press" data-gtm="footer-link" legacyBehavior>
                   Press
                 </FooterLink>
               </FlexColumnItem>
@@ -403,7 +407,7 @@ const Footer = ({ slimFooter }) => (
                 </FooterLink>
               </FlexColumnItem>
               <FlexColumnItem>
-                <FooterLink href="/faq" data-gtm="footer-link">
+                <FooterLink href="/faq" data-gtm="footer-link" legacyBehavior>
                   FAQs
                 </FooterLink>
               </FlexColumnItem>

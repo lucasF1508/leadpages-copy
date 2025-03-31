@@ -4,7 +4,7 @@ import DeliveraSVG from '@legacy/assets/images/logos/delivra-logo-black.svg'
 import LeadpagesSVG from '@legacy/assets/images/logos/leadpages-logo-black.svg'
 import AnimotoSVG from '@legacy/assets/images/logos/animoto-logo-black.svg'
 import ShiftSVG from '@legacy/assets/images/logos/shift-logo-black-alt.svg'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 
 const RedbrickFooterContainer = styled('div', {
   fontSize: '0.75rem',

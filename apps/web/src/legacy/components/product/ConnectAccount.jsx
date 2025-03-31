@@ -130,15 +130,13 @@ const ConnectAccount = () => (
           should work for you—not the other way around.
         </LeftSubHeading>
         <Link href="/integrations">
-          <a>
-            <LeftCTA>
-              Explore all Leadpages integrations
-              <ArrowRightPurple
-                src={rightArrowPurple.src}
-                alt="purple right arrow"
-              />
-            </LeftCTA>
-          </a>
+          <LeftCTA>
+            Explore all Leadpages integrations
+            <ArrowRightPurple
+              src={rightArrowPurple.src}
+              alt="purple right arrow"
+            />
+          </LeftCTA>
         </Link>
       </FlexRowLeft>
       <FlexRowRight>

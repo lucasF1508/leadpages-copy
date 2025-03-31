@@ -10,10 +10,9 @@
     "dist/**"
   ],
   "scripts": {
-    "build": "tsc",
-    "start": "tsc --watch",
+    "start:emails": "tsc --watch",
     "dev": "email dev --dir ./src --port 3334",
-    "lint": "eslint emails/",
+    "lint:email": "eslint emails/",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "blast:node": "rm -rf node_modules",
     "ts": "tsc --noEmit"

@@ -246,15 +246,13 @@ const CheckoutsProduct = () => (
                 href="/product/checkouts"
                 aria-label="Leadpages checkouts product detail page"
               >
-                <a>
-                  <CTA>
-                    Leadpages Checkouts
-                    <ArrowRightPurple
-                      src={rightArrowPurple.src}
-                      alt="purple right arrow"
-                    />
-                  </CTA>
-                </a>
+                <CTA>
+                  Leadpages Checkouts
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
+                </CTA>
               </Link>
             </FeaturesContainer>
           </TextContainer>

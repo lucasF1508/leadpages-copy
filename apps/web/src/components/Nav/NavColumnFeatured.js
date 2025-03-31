@@ -74,7 +74,7 @@ const NavColumnFeatured = ({ items }) => {
             }
 
             return (
-              <Component data={componentData} key={_key} isFeaturedColumn />
+              <Component data={componentData} isFeaturedColumn key={_key} />
             )
           })}
         </$NavColumnFeaturedGroup>

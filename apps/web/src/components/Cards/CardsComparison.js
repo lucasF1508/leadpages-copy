@@ -154,7 +154,7 @@ const CardsComparison = ({ comparisons }) => (
 
       return (
         <CardContainer key={_key}>
-          <Link href={href} passHref>
+          <Link href={href} passHref legacyBehavior>
             <StyledLink aria-label={title}>
               <CardImageItem>
                 <VersusContainer>

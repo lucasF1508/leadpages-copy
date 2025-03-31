@@ -1,0 +1,250 @@
+.link,
+.link[type='button'],
+.link[type='submit'] {
+  @apply duration-fast inline-flex flex-row flex-nowrap items-center justify-center transition-colors;
+
+  svg {
+    @apply z-above-content relative flex-[0_0_auto] !stroke-current;
+  }
+}
+
+/* TODO revisit when inline links are designed */
+.link-inline {
+  @apply link text-button-surface-solid underline decoration-from-font;
+
+  &:hover {
+    @apply text-button-surface-solid-hover;
+  }
+
+  &:active {
+    @apply text-button-surface-solid-active;
+  }
+
+  &.disabled,
+  &[disabled] {
+    @apply !text-button-surface-solid-disabled;
+  }
+}
+
+.link-text {
+  @apply link type-button text-button-text-outline relative relative gap-1.5 rounded-md;
+
+  &:hover {
+    @apply text-button-text-outline-hover;
+  }
+
+  &:focus {
+    @apply ring-button-surface-icon-ring ring-offset-button-surface-icon-ring-offset outline-none ring-1 ring-offset-2;
+  }
+
+  &:active {
+    @apply text-button-text-outline-hover;
+  }
+
+  &.disabled,
+  &[disabled] {
+    @apply !text-button-text-outline-disabled;
+  }
+}
+
+.link-text-secondary {
+  @apply link type-button text-button-text-outline relative gap-1.5 rounded-md;
+
+  &:hover {
+    @apply text-button-text-outline-hover;
+  }
+
+  &:focus {
+    @apply ring-button-surface-icon-ring ring-offset-button-surface-icon-ring-offset outline-none ring-1 ring-offset-2;
+  }
+
+  &:active {
+    @apply text-button-text-outline-hover;
+  }
+
+  &.disabled,
+  &[disabled] {
+    @apply !text-button-text-outline-disabled;
+  }
+}
+
+.link-buttons {
+  @apply link rounded-button type-button h-6 gap-0.5 whitespace-nowrap px-2.5 transition-colors;
+}
+
+.link-button-solid,
+.link-button-solid[type='button'],
+.link-button-solid[type='submit'] {
+  @apply link-buttons bg-button-surface-solid text-button-text-solid;
+
+  &:hover {
+    @apply bg-button-surface-solid-hover;
+  }
+
+  &:active {
+    @apply bg-button-surface-solid-active;
+  }
+
+  &:focus {
+    @apply ring-button-surface-solid-ring ring-offset-button-surface-solid-ring-offset outline-none ring-1 ring-offset-2;
+  }
+
+  &.disabled,
+  &[disabled] {
+    @apply !bg-button-surface-solid-disabled/50 !text-button-text-solid-disabled;
+  }
+}
+
+.link-button-outline,
+.link-button-outline[type='button'],
+.link-button-outline[type='submit'] {
+  @apply link-buttons bg-button-surface-outline text-button-text-outline border-button-border-outline border;
+
+  &:hover {
+    @apply bg-button-surface-outline-hover;
+  }
+
+  &:focus {
+    @apply ring-button-surface-outline-ring ring-offset-button-surface-outline-ring-offset outline-none ring-1 ring-offset-2;
+  }
+
+  &:active {
+    @apply bg-button-surface-outline-active border-transparent;
+  }
+
+  &.disabled,
+  &[disabled] {
+    @apply !bg-button-surface-outline-disabled !text-button-text-outline-disabled !border-button-border-outline-disabled;
+  }
+}
+
+.link-button-secondary,
+.link-button-secondary[type='button'],
+.link-button-secondary[type='submit'] {
+  @apply link-buttons bg-button-surface-secondary text-button-text-secondary border-button-border-secondary border;
+
+  &:hover {
+    @apply bg-button-surface-secondary-hover;
+  }
+
+  &:active {
+    @apply bg-button-surface-secondary-active border-transparent;
+  }
+
+  &:focus {
+    @apply ring-button-surface-secondary-ring ring-offset-button-surface-secondary-ring-offset outline-none ring-1 ring-offset-2;
+  }
+
+  &.disabled,
+  &[disabled] {
+    @apply !bg-button-surface-outline-disabled !text-button-text-outline-disabled !border-button-border-outline-disabled;
+  }
+}
+
+.link-label {
+  @apply z-above-content relative transition-transform;
+
+  .link-text:hover &,
+  .link-text-secondary:hover &,
+  .link-text:focus &,
+  .link-text-secondary:focus & {
+    @apply translate-x-2;
+  }
+
+  .disabled &,
+  [disabled] & {
+    @apply !translate-x-0;
+  }
+}
+
+.link-icon-only {
+  @apply link text-button-text-outline relative h-6 w-6 rounded-md;
+
+  &.disabled,
+  &[disabled] {
+    @apply text-button-text-icon-disabled;
+  }
+
+  &:focus {
+    @apply ring-button-surface-icon-ring outline-none ring-1 ring-offset-0;
+  }
+}
+
+.link-icon {
+  .link-text &,
+  .link-text-secondary &,
+  .link-icon-only & {
+    @apply rounded-button flex h-6 w-6 items-center justify-center;
+  }
+}
+
+.link-icon-background {
+  @apply rounded-button z-base border-border absolute right-0 h-full w-6 border transition-all;
+
+  .link-text:hover &,
+  .link-text-secondary:hover &,
+  .link-text:focus &,
+  .link-text-secondary:focus & {
+    @apply w-full;
+  }
+
+  .link-text & {
+    @apply bg-button-surface-outline border-button-border-outline;
+
+    .theme-light & {
+      @apply bg-button-surface-solid border-none;
+    }
+  }
+
+  .link-text:active &,
+  .link-text-secondary:active & {
+    @apply !border-transparent;
+  }
+
+  .link-icon-only & {
+    @apply bg-button-surface-icon;
+  }
+  .link-icon-only:hover & {
+    @apply bg-button-surface-icon-active;
+  }
+
+  .link-icon-only:active & {
+    @apply !border-transparent;
+  }
+
+  .link-text-secondary & {
+    @apply bg-button-surface-icon;
+  }
+
+  .link-text-secondary .link-label + .link-icon & {
+    @apply border-none;
+  }
+
+  .link-text-secondary:hover & {
+    @apply bg-button-surface-icon-hover;
+  }
+
+  .link-text-secondary:active & {
+    @apply bg-button-surface-icon-active;
+  }
+
+  .disabled &,
+  [disabled] & {
+    @apply !h-6 !w-6;
+  }
+
+  .link-text.disabled &,
+  .link-text[disabled] & {
+    @apply !bg-button-surface-outline-disabled !text-button-text-outline-disabled !border-button-border-outline-disabled;
+  }
+
+  .link-text-secondary.disabled &,
+  .link-text-secondary[disabled] & {
+    @apply !bg-button-surface-icon-disabled !text-button-text-icon-disabled;
+  }
+
+  .link-icon-only.disabled &,
+  .link-icon-only[disabled] & {
+    @apply !border-button-border-icon-disabled bg-button-surface-icon-disabled;
+  }
+}

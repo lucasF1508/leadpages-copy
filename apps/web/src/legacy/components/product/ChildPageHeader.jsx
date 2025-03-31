@@ -183,50 +183,46 @@ const ChildPageHeader = ({
           </LeftHeading>
           <LeftSubHeading>{subheadingText}</LeftSubHeading>
           {outboundCTA === 'true' && (
-            <Link href={link}>
-              <a
-                aria-label={linkText}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <LeftCTA>
-                  {CTAtext}
-                  <ArrowRightPurple
-                    src={rightArrowPurple.src}
-                    alt="purple right arrow"
-                  />
-                </LeftCTA>
-              </a>
+            <Link
+              href={link}
+              aria-label={linkText}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <LeftCTA>
+                {CTAtext}
+                <ArrowRightPurple
+                  src={rightArrowPurple.src}
+                  alt="purple right arrow"
+                />
+              </LeftCTA>
             </Link>
           )}
           {!!showCTA && (
-            <Link href={link}>
-              <a aria-label={linkText}>
-                <LeftCTA>
-                  {CTAtext}
-                  <ArrowRightPurple
-                    src={rightArrowPurple.src}
-                    alt="purple right arrow"
-                  />
-                </LeftCTA>
-              </a>
+            <Link href={link} aria-label={linkText}>
+              <LeftCTA>
+                {CTAtext}
+                <ArrowRightPurple
+                  src={rightArrowPurple.src}
+                  alt="purple right arrow"
+                />
+              </LeftCTA>
             </Link>
           )}
           {!!showLB && (
-            <Link href="">
-              <a
-                aria-label={linkText}
-                data-leadbox-popup={dataleadboxpopup}
-                data-leadbox-domain={dataleadboxdomain}
-              >
-                <LeftCTA>
-                  {CTAtext}
-                  <ArrowRightPurple
-                    src={rightArrowPurple.src}
-                    alt="purple right arrow"
-                  />
-                </LeftCTA>
-              </a>
+            <Link
+              href=""
+              aria-label={linkText}
+              data-leadbox-popup={dataleadboxpopup}
+              data-leadbox-domain={dataleadboxdomain}
+            >
+              <LeftCTA>
+                {CTAtext}
+                <ArrowRightPurple
+                  src={rightArrowPurple.src}
+                  alt="purple right arrow"
+                />
+              </LeftCTA>
             </Link>
           )}
         </FlexRowLeft>

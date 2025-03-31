@@ -1,11 +1,15 @@
 import React, { memo } from 'react'
-import Image from '@components/Image'
-import Video from '@components/Video'
-import Lottie from '@components/Lottie'
-import RatioContainer from '@components/RatioContainer'
-import Text from '@components/Text'
 import { styled } from '@design'
 import dynamic from 'next/dynamic'
+import Image from '@components/Image'
+import RatioContainer from '@components/RatioContainer'
+import Text from '@components/Text'
+import Video from '@components/Video'
+
+const Lottie = dynamic(
+  () => import('@components/Lottie'),
+  { ssr: false }
+)
 
 const WistiaEmbed = dynamic(() =>
   import('@legacy/components/videos/Wistia_CustomerFeatureVideo')
@@ -56,13 +60,13 @@ const Element = ({ condition, type, media, priority, ratio, ...props }) => {
     case 'lottie':
       return (
         <Lottie
-          type={type}
           advancedConfig={advancedConfig}
           autoplay={autoplay}
           loop={loop}
           offset={offset}
           playOnScroll={playOnScroll}
           startInView={startInView}
+          type={type}
           yoyo={yoyo}
           {...media}
           {...props}
@@ -112,7 +116,7 @@ const Media = ({
   }
 
   return (
-    <$Media className={className} type={type} css={css}>
+    <$Media className={className} css={css} type={type}>
       {ratio ? (
         <RatioContainer ratio={ratio}>
           <Element {...elementProps} />

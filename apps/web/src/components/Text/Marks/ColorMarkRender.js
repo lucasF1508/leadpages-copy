@@ -4,7 +4,7 @@ import { styled } from '@design'
 const $StyledText = styled('span', {})
 
 const ColorMarkRender = (props) => {
-  const { mark, children } = props
+  const { children, mark } = props
   let css = {}
   switch (mark) {
     case 'textColorHighlight':

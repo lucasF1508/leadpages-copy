@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { VideoButton } from '@components/Button'
 import { styled, keyframes } from '@design'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 // utilities
 import shouldDisplayVideo from '@legacy/utils/should-display-video'
 // images

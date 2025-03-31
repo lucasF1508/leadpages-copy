@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import React from 'react'
 import styled from 'styled-components'
 import DeliveraSVG from '../../assets/images/logos/delivra-logo-black.svg'

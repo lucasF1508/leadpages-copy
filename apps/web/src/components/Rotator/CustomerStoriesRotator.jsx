@@ -413,7 +413,11 @@ const CustomerStoriesRotator = ({ showBackgroundImage }) => {
       )}
       <InnerContainer>
         <DetailContainer>
-          <Link href={customerFeaturettesData[activeIndex].link.route} passHref>
+          <Link
+            href={customerFeaturettesData[activeIndex].link.route}
+            passHref
+            legacyBehavior
+          >
             <StyledLink
               aria-label={customerFeaturettesData[activeIndex].quote.title}
               data-gtm="customer-story-link"
@@ -430,6 +434,7 @@ const CustomerStoriesRotator = ({ showBackgroundImage }) => {
             <Link
               href={customerFeaturettesData[activeIndex].link.route}
               passHref
+              legacyBehavior
             >
               <StyledLink
                 aria-label={customerFeaturettesData[activeIndex].quote.title}

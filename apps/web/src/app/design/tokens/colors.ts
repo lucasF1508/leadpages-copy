@@ -1,0 +1,534 @@
+// Base Palette created by using Gearbox Brand colors with Radix Colors
+// See https://www.radix-ui.com/colors/custom for more about usage, accessibility and contrast
+
+// Primitives for colors
+const palette = {
+  blue: {
+    50: '#EDFCFC',
+    100: '#D2F9F9',
+    200: '#A7F2F3',
+    300: '#8FEFEF',
+    400: '#46C9EA',
+    500: '#57ABFF',
+    600: '#5280FD',
+    700: '#4452D0',
+    800: '#1F0D87',
+    900: '#0F0934',
+  },
+  red: {
+    50: '#FFEAE4',
+    100: '#FFDFD1',
+    200: '#FFC6AE',
+    300: '#FFB291', //  #FF8378 Checking on the Secondary
+    400: '#FF8B74',
+    500: '#FF6D6D',
+    600: '#F2526F',
+    700: '#B45309',
+    800: '#AA0145',
+    900: '#73002A',
+  },
+  purple: {
+    50: '#FFF4FF',
+    100: '#E4D1FF',
+    200: '#DDB8FF',
+    300: '#C47FF3',
+    400: '#A767F1',
+    500: '#9061EE',
+    600: '#7E4AFF',
+    700: '#603EFF', // #6245F2 Checking on the primary
+    800: '#3123AF',
+    900: '#1F0D87',
+  },
+  green: {
+    50: '#ECFDF5',
+    100: '#D1FAE8',
+    200: '#A7F3D1',
+    300: '#76FFC1',
+    400: '#34D38B',
+    500: '#10B96D',
+    600: '#059655',
+    700: '#047844',
+    800: '#065F37',
+    900: '#064E2E',
+  },
+  lime: {
+    50: '#FDFFFA',
+    100: '#F7FFE5',
+    200: '#EFFFCC',
+    300: '#DEFF99',
+    400: '#CEFF66',
+    500: '#B8FF22',
+    600: '#AEFF00',
+    700: '#9EE800',
+    800: '#6FA202',
+    900: '#3D5900',
+  },
+  obsidian: {
+    50: '#F9FBFC',
+    100: '#F9F7FD',
+    200: '#F4F0FF',
+    300: '#DBD8E4',
+    400: '#CFCBDE',
+    500: '#B1ADBF',
+    600: '#878394',
+    700: '#726F7F',
+    800: '#524F5F',
+    900: '#302E3C',
+  },
+  opacity: {
+    indigo: {
+      0: 'rgb(96, 62, 255, 0)',
+      50: 'rgb(96, 62, 255, 0.05)',
+      100: 'rgb(96, 62, 255, 0.1)',
+      200: 'rgb(96, 62, 255, 0.2)',
+      300: 'rgb(96, 62, 255, 0.3)',
+      400: 'rgb(96, 62, 255, 0.4)',
+      500: 'rgb(96, 62, 255, 0.5)',
+      600: 'rgb(96, 62, 255, 0.6)',
+      700: 'rgb(96, 62, 255, 0.7)',
+      800: 'rgb(96, 62, 255, 0.8)',
+      900: 'rgb(96, 62, 255, 0.9)',
+      1000: 'rgb(96, 62, 255, 1)',
+    },
+    lime: {
+      0: 'rgb(206, 255, 102, 0)',
+      50: 'rgb(206, 255, 102, 0.05)',
+      100: 'rgb(206, 255, 102, 0.1)',
+      200: 'rgb(206, 255, 102, 0.2)',
+      300: 'rgb(206, 255, 102, 0.3)',
+      400: 'rgb(206, 255, 102, 0.4)',
+      500: 'rgb(206, 255, 102, 0.5)',
+      600: 'rgb(206, 255, 102, 0.6)',
+      700: 'rgb(206, 255, 102, 0.7)',
+      800: 'rgb(206, 255, 102, 0.8)',
+      900: 'rgb(206, 255, 102, 0.9)',
+      1000: 'rgb(206, 255, 102, 1)',
+    },
+    teal: {
+      0: 'rgb(143, 239, 239, 0)',
+      50: 'rgb(143, 239, 239, 0.05)',
+      100: 'rgb(143, 239, 239, 0.1)',
+      200: 'rgb(143, 239, 239, 0.2)',
+      300: 'rgb(143, 239, 239, 0.3)',
+      400: 'rgb(143, 239, 239, 0.4)',
+      500: 'rgb(143, 239, 239, 0.5)',
+      600: 'rgb(143, 239, 239, 0.6)',
+      700: 'rgb(143, 239, 239, 0.7)',
+      800: 'rgb(143, 239, 239, 0.8)',
+      900: 'rgb(143, 239, 239, 0.9)',
+      1000: 'rgb(143, 239, 239, 1)',
+    },
+    light: {
+      0: 'rgb(255, 255, 255, 0)',
+      50: 'rgb(255, 255, 255, 0.05)',
+      100: 'rgb(255, 255, 255, 0.1)',
+      200: 'rgb(255, 255, 255, 0.2)',
+      300: 'rgb(255, 255, 255, 0.3)',
+      400: 'rgb(255, 255, 255, 0.4)',
+      500: 'rgb(255, 255, 255, 0.5)',
+      600: 'rgb(255, 255, 255, 0.6)',
+      700: 'rgb(255, 255, 255, 0.7)',
+      800: 'rgb(255, 255, 255, 0.8)',
+      900: 'rgb(255, 255, 255, 0.9)',
+      1000: 'rgb(255, 255, 255, 1)',
+    },
+    obsidian: {
+      0: 'rgb(82, 79, 95, 0)',
+      50: 'rgb(82, 79, 95, 0.05)',
+      100: 'rgb(82, 79, 95, 0.1)',
+      200: 'rgb(82, 79, 95, 0.2)',
+      300: 'rgb(82, 79, 95, 0.3)',
+      400: 'rgb(82, 79, 95, 0.4)',
+      500: 'rgb(82, 79, 95, 0.5)',
+      600: 'rgb(82, 79, 95, 0.6)',
+      700: 'rgb(82, 79, 95, 0.7)',
+      800: 'rgb(82, 79, 95, 0.8)',
+      900: 'rgb(82, 79, 95, 0.9)',
+      1000: 'rgb(82, 79, 95, 1)',
+    },
+    dark: {
+      0: 'rgb(17, 16, 24, 0)',
+      50: 'rgb(17, 16, 24, 0.05)',
+      100: 'rgb(17, 16, 24, 0.1)',
+      200: 'rgb(17, 16, 24, 0.2)',
+      300: 'rgb(17, 16, 24, 0.3)',
+      400: 'rgb(17, 16, 24, 0.4)',
+      500: 'rgb(17, 16, 24, 0.5)',
+      600: 'rgb(17, 16, 24, 0.6)',
+      700: 'rgb(17, 16, 24, 0.7)',
+      800: 'rgb(17, 16, 24, 0.8)',
+      900: 'rgb(17, 16, 24, 0.9)',
+      1000: 'rgb(17, 16, 24, 1)',
+    },
+  },
+  transparent: 'transparent',
+  black: '#000',
+  white: '#fff',
+  light: '#fff',
+  dark: '#111018',
+}
+
+const brand = {
+  DEFAULT: palette.purple[700],
+  indigo: {
+    DEFAULT: palette.purple[700],
+    primary: palette.purple[700],
+    strong: palette.purple[900],
+    muted: palette.purple[200],
+  },
+  lime: {
+    DEFAULT: palette.lime[400],
+    primary: palette.lime[400],
+    strong: palette.lime[700],
+    muted: palette.lime[200],
+  },
+  violet: {
+    DEFAULT: palette.purple[500],
+    primary: palette.purple[500],
+    strong: palette.purple[800],
+    muted: palette.purple[100],
+  },
+  fuchsia: {
+    DEFAULT: palette.purple[600],
+    primary: palette.purple[600],
+    strong: palette.purple[300],
+    muted: palette.purple[50],
+  },
+  teal: {
+    DEFAULT: palette.blue[300],
+    primary: palette.blue[300],
+    strong: palette.blue[700],
+    muted: palette.blue[100],
+  },
+  seafoam: {
+    DEFAULT: palette.green[300],
+    primary: palette.green[300],
+    strong: palette.green[700],
+    muted: palette.green[50],
+  },
+  peach: {
+    DEFAULT: palette.red[300],
+    primary: palette.red[300],
+    strong: palette.red[600],
+    muted: palette.red[100],
+  },
+  feedback: {
+    success: {
+      DEFAULT: palette.green[300],
+      primary: palette.green[300],
+      muted: palette.green[100],
+    },
+    error: {
+      DEFAULT: palette.red[700],
+      primary: palette.red[700],
+      muted: palette.red[200],
+    },
+  },
+}
+
+const themeDark = {
+  DEFAULT: palette.purple[700],
+  primary: {
+    DEFAULT: palette.purple[700],
+    indigo: palette.purple[700],
+    lime: palette.lime[400],
+  },
+  secondary: {
+    violet: palette.purple[600], //9061EE
+    fuchsia: palette.purple[300], // '#FF8378', // DOESN'T Match palette?
+    teal: palette.blue[300],
+    peach: palette.red[300],
+    blue: palette.blue[600], // '#FF8378', // DOESN'T Match palette?
+    navy: palette.blue[800], // "#9061EE", // DOESN'T Match palette?
+  },
+  tertiary: {
+    seafom: palette.green[300],
+    coral: palette.red[700],
+  },
+  neutral: {
+    DEFAULT: palette.obsidian[500],
+    light: palette.light,
+    obsidian: palette.obsidian[500],
+    dark: palette.dark,
+  },
+  surface: {
+    DEFAULT: palette.dark,
+    neutral: {
+      DEFAULT: palette.white,
+      light: palette.white,
+      medium: palette.obsidian[800],
+      dark: palette.dark,
+    },
+    opacity: palette.opacity,
+    brand,
+  },
+  body: {
+    DEFAULT: palette.white,
+    muted: palette.obsidian[300],
+    disabled: palette.obsidian[700],
+    neutral: {
+      DEFAULT: palette.obsidian[300],
+      body: palette.obsidian[300],
+      primary: palette.white,
+      disabled: palette.obsidian[700],
+      brand,
+      feedback: {
+        success: {
+          DEFAULT: palette.green[300],
+          primary: palette.green[300],
+          muted: palette.green[100],
+        },
+        error: {
+          DEFAULT: palette.red[400],
+          primary: palette.red[400],
+          muted: palette.red[100],
+        },
+      },
+    },
+  },
+  border: {
+    DEFAULT: palette.white,
+    light: palette.white,
+    primary: palette.obsidian[700],
+    muted: palette.obsidian[900],
+  },
+  button: {
+    surface: {
+      solid: {
+        DEFAULT: palette.lime[400],
+        hover: palette.lime[500],
+        active: palette.lime[600],
+        focus: palette.lime[600],
+        disabled: palette.obsidian[800],
+        ring: {
+          DEFAULT: palette.obsidian[300],
+          offset: palette.obsidian[800],
+        },
+      },
+      outline: {
+        DEFAULT: palette.opacity.lime[200],
+        hover: palette.opacity.lime[400],
+        active: palette.opacity.lime[400],
+        focus: palette.opacity.lime[400],
+        disabled: palette.opacity.obsidian[100],
+        ring: {
+          DEFAULT: palette.obsidian[300],
+          offset: palette.obsidian[800],
+        },
+      },
+      secondary: {
+        DEFAULT: palette.opacity.light[200],
+        hover: palette.opacity.light[200],
+        active: palette.opacity.light[200],
+        focus: palette.opacity.light[200],
+        disabled: palette.opacity.light[50],
+        ring: {
+          DEFAULT: palette.lime[400],
+          offset: palette.obsidian[800],
+        },
+      },
+      icon: {
+        DEFAULT: palette.opacity.light[100],
+        hover: palette.opacity.light[100],
+        active: palette.opacity.light[200],
+        focus: palette.opacity.light[100],
+        disabled: palette.opacity.light[100],
+        ring: {
+          DEFAULT: palette.obsidian[300],
+        },
+      },
+    },
+    border: {
+      outline: {
+        DEFAULT: palette.lime[300],
+        default: palette.lime[300],
+        hover: palette.lime[500],
+        active: palette.opacity.lime[0],
+        disabled: palette.opacity.obsidian[700],
+      },
+      secondary: {
+        DEFAULT: palette.opacity.light[600],
+        default: palette.opacity.light[600],
+        hover: palette.opacity.light[900],
+        active: palette.opacity.light[0],
+        disabled: palette.opacity.obsidian[700],
+      },
+      icon: {
+        DEFAULT: palette.opacity.light[600],
+        default: palette.opacity.light[600],
+        hover: palette.opacity.light[900],
+        active: palette.opacity.light[0],
+        disabled: palette.opacity.obsidian[700],
+      },
+    },
+    text: {
+      solid: {
+        DEFAULT: palette.obsidian[900],
+        default: palette.obsidian[900],
+        hover: palette.dark,
+        disabled: palette.obsidian[600],
+      },
+      outline: {
+        DEFAULT: palette.lime[50],
+        default: palette.lime[50],
+        hover: palette.white,
+        disabled: palette.obsidian[600],
+      },
+      secondary: {
+        DEFAULT: palette.obsidian[100],
+        default: palette.obsidian[100],
+        hover: palette.white,
+        disabled: palette.obsidian[600],
+      },
+      icon: {
+        DEFAULT: palette.lime[500],
+        default: palette.lime[500],
+        hover: palette.white,
+        disabled: palette.obsidian[600],
+      },
+    },
+  },
+}
+
+export const gradient = {
+  'gradient-invert-lime': `linear-gradient(90deg,${palette.lime[200]} 0%, ${palette.white} 100%)`,
+  'gradient-invert-purple': `linear-gradient(90deg,${palette.purple[100]} 0%, ${palette.white} 100%)`,
+  'gradient-dark-lime': `linear-gradient(90deg,${palette.lime[700]} 0%, ${palette.lime[400]} 100%)`,
+  'gradient-dark-purple': `linear-gradient(90deg,${palette.purple[500]} 0%, ${palette.purple[300]} 100%)`,
+  'gradient-section': `linear-gradient(0deg, #FFFFFF 30%, #F4EFFF 100%)`,
+  'gradient-input': `linear-gradient(90deg, ${palette.opacity.light[400]} -119.45%, ${palette.opacity.light[800]} -9.73%, ${palette.opacity.light[400]} 100%)`,
+  'gradient-border': `linear-gradient(90deg, rgba(255, 255, 255, 0.4) 30%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.4) 70%)`,
+  'gradient-border-light': `linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.1) 30%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 70%, rgba(255, 255, 255, 0) 90%)`,
+}
+
+// Map primitives to semantic names, The initial colors will also be set to light-theme.
+export const colors = {
+  brand,
+  ...palette,
+  grey: palette.obsidian,
+  ...themeDark,
+  overlay: palette.opacity,
+  input: themeDark.body, // This will need to be updated when defined.
+  success: brand.feedback.success,
+  error: brand.feedback.error,
+  current: 'currentColor',
+}
+
+export const themeLight = {
+  surface: {
+    DEFAULT: palette.white,
+  },
+  body: {
+    DEFAULT: palette.dark,
+    muted: palette.obsidian[800],
+    neutral: {
+      DEFAULT: palette.dark,
+      primary: palette.dark,
+      body: palette.obsidian[800],
+      disabled: palette.obsidian[500],
+    },
+  },
+  border: {
+    DEFAULT: palette.dark,
+    dark: palette.dark,
+    primary: palette.obsidian[400],
+    muted: palette.obsidian[100],
+  },
+  button: {
+    surface: {
+      solid: {
+        DEFAULT: palette.lime[400],
+        hover: palette.lime[500],
+        active: palette.lime[600],
+        focus: palette.lime[600],
+        disabled: palette.obsidian[100],
+        ring: {
+          DEFAULT: palette.opacity.dark[700],
+          offset: palette.white,
+        },
+      },
+      outline: {
+        DEFAULT: palette.opacity.lime[400],
+        hover: palette.opacity.lime[500],
+        active: palette.opacity.lime[500],
+        focus: palette.opacity.lime[500],
+        disabled: palette.opacity.obsidian[100],
+        ring: {
+          DEFAULT: palette.opacity.dark[700],
+          offset: palette.white,
+        },
+      },
+      secondary: {
+        DEFAULT: palette.opacity.obsidian[100],
+        hover: palette.opacity.obsidian[200],
+        active: palette.opacity.obsidian[200],
+        focus: palette.opacity.obsidian[200],
+        disabled: palette.opacity.obsidian[100],
+        ring: {
+          DEFAULT: palette.lime[700],
+          offset: palette.white,
+        },
+      },
+      icon: {
+        DEFAULT: palette.opacity.obsidian[100],
+        hover: palette.opacity.obsidian[100],
+        active: palette.opacity.obsidian[200],
+        focus: palette.opacity.obsidian[200],
+        disabled: palette.opacity.obsidian[100],
+        ring: {
+          DEFAULT: palette.opacity.dark[700],
+          offset: palette.white,
+        },
+      },
+    },
+    border: {
+      outline: {
+        DEFAULT: palette.lime[600],
+        default: palette.lime[600],
+        hover: palette.lime[700],
+        active: palette.opacity.obsidian[100],
+        disabled: palette.opacity.obsidian[100],
+      },
+      secondary: {
+        DEFAULT: palette.opacity.obsidian[500],
+        default: palette.opacity.obsidian[500],
+        hover: palette.opacity.obsidian[700],
+        active: palette.opacity.obsidian[0],
+        disabled: palette.opacity.obsidian[100],
+      },
+      icon: {
+        DEFAULT: palette.opacity.obsidian[500],
+        default: palette.opacity.obsidian[500],
+        hover: palette.opacity.obsidian[700],
+        active: palette.opacity.obsidian[0],
+        disabled: palette.opacity.obsidian[100],
+      },
+    },
+    text: {
+      solid: {
+        DEFAULT: palette.obsidian[900],
+        default: palette.obsidian[900],
+        hover: palette.dark,
+        disabled: palette.obsidian[500],
+      },
+      outline: {
+        DEFAULT: palette.obsidian[900],
+        default: palette.obsidian[900],
+        hover: palette.dark,
+        disabled: palette.obsidian[500],
+      },
+      secondary: {
+        DEFAULT: palette.obsidian[900],
+        default: palette.obsidian[900],
+        hover: palette.dark,
+        disabled: palette.obsidian[500],
+      },
+      icon: {
+        DEFAULT: palette.obsidian[900],
+        default: palette.obsidian[900],
+        hover: palette.dark,
+        disabled: palette.obsidian[500],
+      },
+    },
+  },
+}

@@ -79,7 +79,7 @@ const LeadGenerationTools = () => (
             </ParagraphSmall>
             <ParagraphSmall>
               Leadpages landing pages are also equipped with&nbsp;
-              <Link href="/product/leadmeter" passHref>
+              <Link href="/product/leadmeter" passHref legacyBehavior>
                 <ArticleLink aria-label="Leadmeter">Leadmeter,</ArticleLink>
               </Link>
               &nbsp; built-in technology that instantly analyzes your page's
@@ -158,7 +158,11 @@ const LeadGenerationTools = () => (
               of social media lead generation. You can reach a broader audience
               and sell to them in as little as two taps on their phone. Get some
               helpful&nbsp;
-              <OutboundLink href="" alt="Instagram lead generation tactics">
+              <OutboundLink
+                href=""
+                alt="Instagram lead generation tactics"
+                legacyBehavior
+              >
                 Instagram lead generation tactics
               </OutboundLink>
               &nbsp; here.
@@ -232,7 +236,7 @@ const LeadGenerationTools = () => (
             <ParagraphSmall>
               If you can dream up a lead generation tactic, Leadpages probably
               has an integration option for it. If not, you can always&nbsp;
-              <Link href="/contact" passHref>
+              <Link href="/contact" passHref legacyBehavior>
                 <ArticleLink aria-label="contact us" data-gtm="contact-us-link">
                   contact us
                 </ArticleLink>
@@ -390,7 +394,7 @@ const LeadGenerationTools = () => (
               Use the resources at your disposal. And with Leadpages, all of the
               resources are yours for the taking with our extensive list
               of&nbsp;
-              <Link href="/integrations" passHref>
+              <Link href="/integrations" passHref legacyBehavior>
                 <ArticleLink aria-label="integrations">
                   integrations.
                 </ArticleLink>
@@ -423,7 +427,11 @@ const LeadGenerationTools = () => (
             <ParagraphSmall>
               If you’ve loved learning about lead generation, check out
               our&nbsp;
-              <Link href="/conversion-optimization-guide" passHref>
+              <Link
+                href="/conversion-optimization-guide"
+                passHref
+                legacyBehavior
+              >
                 <ArticleLink aria-label="conversion rate guide">
                   conversion rate guide.
                 </ArticleLink>

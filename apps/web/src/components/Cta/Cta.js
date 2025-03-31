@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled, darkTheme, theme } from '@design'
 import Link from '@components/Link'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import Text from '@components/Text'
 import { Link as ScrollLink } from 'react-scroll'
 import { features } from 'config'

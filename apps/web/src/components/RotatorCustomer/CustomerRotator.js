@@ -291,7 +291,7 @@ const CustomerRotator = ({ showBackgroundImage, customers }) => {
       )}
       <InnerContainer>
         <DetailContainer>
-          <Link href={customers[activeIndex].path} passHref>
+          <Link href={customers[activeIndex].path} passHref legacyBehavior>
             <StyledLink
               aria-label={customers[activeIndex].excerpt.linkText}
               data-gtm="customer-story-link"
@@ -304,7 +304,7 @@ const CustomerRotator = ({ showBackgroundImage, customers }) => {
             </StyledLink>
           </Link>
           <TextContainer>
-            <Link href={customers[activeIndex].path} passHref>
+            <Link href={customers[activeIndex].path} passHref legacyBehavior>
               <StyledLink
                 aria-label={customers[activeIndex].excerpt.linkText}
                 data-gtm="customer-story-link"

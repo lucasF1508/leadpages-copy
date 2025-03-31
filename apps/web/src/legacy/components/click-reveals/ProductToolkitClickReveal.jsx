@@ -241,7 +241,7 @@ const ProductToolkitClickReveal = ({ itemArray }) => {
                       <CardText>{text}</CardText>
                       {linkRoute && (
                         <CardLinkHolder>
-                          <Link href={linkRoute} passHref>
+                          <Link href={linkRoute} passHref legacyBehavior>
                             <CardLink aria-label={linkAltText}>
                               {`${linkText}  `}
                               <CardLinkArrowSVG

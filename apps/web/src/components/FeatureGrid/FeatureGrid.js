@@ -64,7 +64,7 @@ const FeatureGrid = ({
     {showSectionLink && (
       <SectionLink>
         Visit Leadpages{' '}
-        <NextLink href="/product/feature-index" passHref>
+        <NextLink href="/product/feature-index" passHref legacyBehavior>
           <StyledLink>feature index</StyledLink>
         </NextLink>{' '}
         for the full story.

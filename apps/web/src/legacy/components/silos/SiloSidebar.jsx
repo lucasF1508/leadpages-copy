@@ -120,7 +120,7 @@ const SiloSidebar = ({
               )
             }
             return (
-              <Link href={pageUrl} key={pageUrl} passHref>
+              <Link href={pageUrl} key={pageUrl} passHref legacyBehavior>
                 <StyledLink
                   aria-label={pageName}
                   css={{ textDecoration: 'none' }}

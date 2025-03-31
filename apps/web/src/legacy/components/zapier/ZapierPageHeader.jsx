@@ -174,9 +174,7 @@ const ZapierPageHeader = ({ image, imageAltText }) => (
           </LeftSubHeading>
           <RTGButtonContainer>
             <Link href="/pricing" aria-label="Leadpages Free Trial">
-              <a>
-                <RTGButton>Try It Free</RTGButton>
-              </a>
+              <RTGButton>Try It Free</RTGButton>
             </Link>
           </RTGButtonContainer>
         </FlexRowLeft>

@@ -111,15 +111,13 @@ const ThreeColumn = () => (
             <Title>Leadpages plans</Title>
             <Copy>Helping small businesses grow big.</Copy>
             <Link href="/pricing">
-              <a>
-                <CTA>
-                  Leadpages pricing&nbsp;
-                  <ArrowRightPurple
-                    src={rightArrowPurple.src}
-                    alt="purple right arrow"
-                  />
-                </CTA>
-              </a>
+              <CTA>
+                Leadpages pricing&nbsp;
+                <ArrowRightPurple
+                  src={rightArrowPurple.src}
+                  alt="purple right arrow"
+                />
+              </CTA>
             </Link>
           </FlexRow3Container>
         </FlexRow3>
@@ -128,15 +126,13 @@ const ThreeColumn = () => (
             <Title>Tech Support</Title>
             <Copy>Get in touch with our customer success team.</Copy>
             <Link href="/contact" data-gtm="contact-us-link">
-              <a>
-                <CTA>
-                  Leadpages Support &nbsp;
-                  <ArrowRightPurple
-                    src={rightArrowPurple.src}
-                    alt="purple right arrow"
-                  />
-                </CTA>
-              </a>
+              <CTA>
+                Leadpages Support &nbsp;
+                <ArrowRightPurple
+                  src={rightArrowPurple.src}
+                  alt="purple right arrow"
+                />
+              </CTA>
             </Link>
           </FlexRow3Container>
         </FlexRow3>

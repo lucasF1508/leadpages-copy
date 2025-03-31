@@ -652,7 +652,7 @@ const SectionContent_Logo = () => (
     </SubsectionParagraph>
     <SubsectionParagraph>
       Please&nbsp;
-      <Link href="/contact" passHref>
+      <Link href="/contact" passHref legacyBehavior>
         <SubsectionSpanLink>contact us</SubsectionSpanLink>
       </Link>
       &nbsp; and include a link to a visual mockup of the intended use.
@@ -797,7 +797,7 @@ const SectionContent_Questions = () => (
     <SubsectionParagraph>
       If you have questions about the Leadpages brand and how to use it,
       please&nbsp;
-      <Link href="/contact" passHref>
+      <Link href="/contact" passHref legacyBehavior>
         <SubsectionSpanLink>reach out to our team</SubsectionSpanLink>
       </Link>
       . When in doubt we’re here to help.

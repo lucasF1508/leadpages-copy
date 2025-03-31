@@ -130,11 +130,11 @@ const FooterRowBottom = () => (
       <div>
         ©{new Date().getFullYear()} Leadpages (US), Inc. All Rights Reserved.{' '}
         <$FooterTOSTextSpan>
-          <NextLink href="/privacy" passHref>
+          <NextLink href="/privacy" passHref legacyBehavior>
             <StyledLink data-gtm="footer-link">Privacy Policy</StyledLink>
           </NextLink>
           &nbsp;&nbsp;|&nbsp;&nbsp;
-          <NextLink href="/legal" passHref>
+          <NextLink href="/legal" passHref legacyBehavior>
             <StyledLink data-gtm="footer-link">Legal</StyledLink>
           </NextLink>
         </$FooterTOSTextSpan>

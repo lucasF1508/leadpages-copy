@@ -1,8 +1,4 @@
 import React from 'react'
-import dynamic from 'next/dynamic'
-import Modal, { ModalProvider, ModalLink } from '@components/Modal'
-import NextLink from 'next/link'
-import { m as motion } from 'framer-motion'
 import { styled } from '@design'
 import { link as linkTokens } from '@design/tokens/link'
 import { FiChevronRight as InternalIcon } from '@react-icons/all-files/fi/FiChevronRight'
@@ -10,8 +6,12 @@ import { FiDownload as DownloadIcon } from '@react-icons/all-files/fi/FiDownload
 import { FiExternalLink as ExternalIcon } from '@react-icons/all-files/fi/FiExternalLink'
 import { FiMaximize2 as ModalIcon } from '@react-icons/all-files/fi/FiMaximize2'
 import { MdPlayArrow as VideoIcon } from '@react-icons/all-files/md/MdPlayArrow'
+import { m as motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { scrollToHash } from '@hooks/useScrollToHash'
+import Modal, { ModalLink, ModalProvider } from '@components/Modal'
 import SignUpWithEmailFieldLink from './SignUpWithEmailFieldLink'
 
 export const $Link = styled(motion.a, linkTokens)
@@ -62,7 +62,6 @@ const Link = (
     label,
     target,
     rel = 'noopener noreferrer',
-    page,
     icon,
     hasHash,
     hash,
@@ -87,17 +86,17 @@ const Link = (
   if (_type === 'signUp') {
     return (
       <SignUpWithEmailFieldLink
+        aria-label={ariaLabel}
+        data-gtm={dataGtm}
+        hasIcon={hasIconOrg}
         label={label}
         ref={ref}
-        data-gtm={dataGtm}
-        aria-label={ariaLabel}
-        hasIcon={hasIconOrg}
         {...props}
       />
     )
   }
 
-  if (!url && !['modal', 'video', 'leadpagesTrigger'].includes(condition))
+  if (!url && !['leadpagesTrigger', 'modal', 'video'].includes(condition))
     return null
   const { Modal: ModalComponent = () => null, modalKey, modalCss } = props
   const Icon = Icons[icon || condition]
@@ -110,10 +109,10 @@ const Link = (
   if (disabled) {
     return (
       <Element
-        as="span"
-        ref={ref}
-        data-gtm={dataGtm}
         aria-label={ariaLabel}
+        as="span"
+        data-gtm={dataGtm}
+        ref={ref}
         {...props}
         disabled
       >
@@ -135,11 +134,15 @@ const Link = (
       }
 
       return (
-        <NextLink href={`${url}${hasHash && hash ? `#${hash}` : ''}`} passHref>
+        <NextLink
+          href={`${url}${hasHash && hash ? `#${hash}` : ''}`}
+          legacyBehavior
+          passHref
+        >
           <Element
-            ref={ref}
-            data-gtm={dataGtm}
             aria-label={ariaLabel}
+            data-gtm={dataGtm}
+            ref={ref}
             {...props}
           >
             {children || label}
@@ -166,13 +169,13 @@ const Link = (
     case 'download':
       return (
         <Element
-          ref={ref}
+          aria-label={ariaLabel}
+          data-gtm={dataGtm}
           download={condition === 'download'}
           href={url}
-          target={target ? '_blank' : undefined}
+          ref={ref}
           rel={rel}
-          data-gtm={dataGtm}
-          aria-label={ariaLabel}
+          target={target ? '_blank' : undefined}
           {...props}
         >
           {children || label}
@@ -183,13 +186,13 @@ const Link = (
       return (
         <ModalProvider>
           <ModalLink
-            ref={ref}
+            aria-label={ariaLabel}
+            component={$Link}
+            data-gtm={dataGtm}
             href={`#${modalKey}`}
             modalKey={modalKey}
-            component={$Link}
+            ref={ref}
             rel={rel}
-            data-gtm={dataGtm}
-            aria-label={ariaLabel}
             {...props}
           >
             {children || label}
@@ -203,12 +206,12 @@ const Link = (
     case 'leadpagesTrigger':
       return (
         <Element
+          aria-label={ariaLabel}
+          data-gtm={dataGtm}
+          data-leadbox-domain={leadpagesDomain}
+          data-leadbox-popup={popUpId}
           ref={ref}
           rel={rel}
-          data-leadbox-popup={popUpId}
-          data-leadbox-domain={leadpagesDomain}
-          data-gtm={dataGtm}
-          aria-label={ariaLabel}
           {...props}
         >
           {children || label}
@@ -219,13 +222,13 @@ const Link = (
       return (
         <ModalProvider>
           <ModalLink
-            ref={ref}
+            aria-label={ariaLabel}
+            component={$Link}
+            data-gtm={dataGtm}
             href={`#${modalKey || 'video'}`}
             modalKey={modalKey || 'video'}
-            component={$Link}
+            ref={ref}
             rel={rel}
-            data-gtm={dataGtm}
-            aria-label={ariaLabel}
             {...props}
           >
             {children || label}
@@ -239,9 +242,9 @@ const Link = (
             modalKey={modalKey || 'video'}
           >
             <Video
+              type="static"
               video={video}
               videoControls={{ muted: false, controls: true, loop: false }}
-              type="static"
             />
           </Modal>
         </ModalProvider>
@@ -253,4 +256,4 @@ const Link = (
 }
 
 export default React.forwardRef(Link)
-export { InternalIcon, DownloadIcon, ExternalIcon, ModalIcon, VideoIcon }
+export { DownloadIcon, ExternalIcon, InternalIcon, ModalIcon, VideoIcon }

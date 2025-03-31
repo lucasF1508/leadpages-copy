@@ -48,3 +48,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Ignore TypeScript build info
+tsconfig.tsbuildinfo

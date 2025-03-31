@@ -347,6 +347,7 @@ const LandingPagesGuide = () => {
                   <Link
                     href="/landing-pages-guide/what-is-a-landing-page"
                     passHref
+                    legacyBehavior
                   >
                     <HeaderLink aria-label="What is a landing page?">
                       What is a landing page?
@@ -488,6 +489,7 @@ const LandingPagesGuide = () => {
                   <Link
                     href="/landing-pages-guide/when-to-use-landing-pages"
                     passHref
+                    legacyBehavior
                   >
                     <HeaderLink aria-label="When should a landing page be used?">
                       When should a landing page be used?
@@ -527,6 +529,7 @@ const LandingPagesGuide = () => {
                   <Link
                     href="/landing-pages-guide/how-do-landing-pages-work"
                     passHref
+                    legacyBehavior
                   >
                     <HeaderLink aria-label="Do landing pages actually work?">
                       Do landing pages actually work?
@@ -556,6 +559,7 @@ const LandingPagesGuide = () => {
                   <Link
                     href="/landing-pages-guide/landing-page-elements"
                     passHref
+                    legacyBehavior
                   >
                     <HeaderLink aria-label="What should be included in a landing page?">
                       What should be included in a landing page?
@@ -818,6 +822,7 @@ const LandingPagesGuide = () => {
                 <Link
                   href="https://www.leadpages.com/templates/preview/3USYNTFrf3sS6CdWNru2JL"
                   passHref
+                  legacyBehavior
                 >
                   <TemplateLink aria-label="newsletter signup" target="_blank">
                     <SmallImage
@@ -844,6 +849,7 @@ const LandingPagesGuide = () => {
                 <Link
                   href="https://www.leadpages.com/templates/preview/5WWvnJPVus8RLMqcxT5vYL"
                   passHref
+                  legacyBehavior
                 >
                   <TemplateLink aria-label="app pricing tiers" target="_blank">
                     <SmallImage2
