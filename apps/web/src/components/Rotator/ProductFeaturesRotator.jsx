@@ -290,7 +290,7 @@ const ProductFeaturesRotator = ({ animations, instanceId, itemArray }) => {
                             />
                           </CardLinkExternal>
                         ) : (
-                          <Link href={link.route} passHref>
+                          <Link href={link.route} passHref legacyBehavior>
                             <CardLink aria-label={link.altText}>
                               <span>{`${link.text}  `}</span>
                               <CardLinkArrowSVG

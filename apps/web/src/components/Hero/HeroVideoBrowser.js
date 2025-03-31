@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from '@components/Image'
 import Media from '@components/Media'
-import NextImage from 'next/image'
+import NextImage from 'next/legacy/image'
 import { styled, keyframes } from '@design'
 import shouldDisplayVideo from '@legacy/utils/should-display-video'
 import { IoPlaySharp as PlayButton } from '@react-icons/all-files/io5/IoPlaySharp'

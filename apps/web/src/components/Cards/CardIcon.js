@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@design'
-import NextImage from 'next/image'
+import NextImage from 'next/legacy/image'
 import Image from '@components/Image'
 // images
 import { FiChevronRight as Icon } from '@react-icons/all-files/fi/FiChevronRight'

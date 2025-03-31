@@ -1,0 +1,18 @@
+import plugin from 'tailwindcss/plugin'
+
+export const nthChild = plugin(({ matchVariant }) => {
+  matchVariant('nth', (value) => `&:nth-child(${value})`, {
+    values: {
+      1: '1',
+      2: '2',
+      3: '3',
+      4: '4',
+      5: '5',
+      6: '6',
+      7: '7',
+      8: '8',
+      9: '9',
+      10: '10',
+    },
+  })
+})

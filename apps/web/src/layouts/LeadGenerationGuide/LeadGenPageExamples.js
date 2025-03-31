@@ -65,7 +65,7 @@ const LeadGenerationLandingPageExamples = () => (
                 In this chapter, we’re going to take you through some of our
                 most popular lead generation landing page examples. Leadpages
                 offers pre-designed,&nbsp;
-                <Link href="/templates" passHref>
+                <Link href="/templates" passHref legacyBehavior>
                   <ArticleLink aria-label="mobile-responsive templates">
                     mobile-responsive templates
                   </ArticleLink>
@@ -87,7 +87,7 @@ const LeadGenerationLandingPageExamples = () => (
             </ParagraphLarge>
             <ParagraphSmall>
               Check out our&nbsp;
-              <Link href="/templates" passHref>
+              <Link href="/templates" passHref legacyBehavior>
                 <ArticleLink aria-label="Landing Page Template Library">
                   Landing Page Template Library
                 </ArticleLink>
@@ -109,7 +109,10 @@ const LeadGenerationLandingPageExamples = () => (
                 />
               </IframeWrapper>
             </TemplatePreviewHolder>
-            <StaticTemplateLink href="/templates/preview/LotufspwjLfnDgSi67fMsN">
+            <StaticTemplateLink
+              href="/templates/preview/LotufspwjLfnDgSi67fMsN"
+              legacyBehavior
+            >
               <StaticPreviewImage src="https://storage.googleapis.com/lp-template-assets-prod/screenshots%2FLotufspwjLfnDgSi67fMsN-552x316.jpg?cb=-3556065429173465727" />
             </StaticTemplateLink>
             <H3>
@@ -141,7 +144,11 @@ const LeadGenerationLandingPageExamples = () => (
             </ParagraphSmall>
             <ParagraphSmall>
               This&nbsp;
-              <Link href="/templates/preview/LotufspwjLfnDgSi67fMsN" passHref>
+              <Link
+                href="/templates/preview/LotufspwjLfnDgSi67fMsN"
+                passHref
+                legacyBehavior
+              >
                 <ArticleLink aria-label="modern ebook sales landing page">
                   modern ebook sales landing page
                 </ArticleLink>
@@ -160,7 +167,11 @@ const LeadGenerationLandingPageExamples = () => (
             </ParagraphSmall>
             <ParagraphSmall>
               Want a shorter form ebook landing page? This&nbsp;
-              <Link href="/templates/preview/5WWvnJPVus8RLMqcxT5vYL" passHref>
+              <Link
+                href="/templates/preview/5WWvnJPVus8RLMqcxT5vYL"
+                passHref
+                legacyBehavior
+              >
                 <ArticleLink aria-label="'yoga' ebook template">
                   &#39;yoga&#39; ebook template
                 </ArticleLink>
@@ -217,7 +228,11 @@ const LeadGenerationLandingPageExamples = () => (
                 />
               </IframeWrapper>
             </TemplatePreviewHolder>
-            <Link href="/templates/preview/N2dpddPyVb9Srarv8LBf2N" passHref>
+            <Link
+              href="/templates/preview/N2dpddPyVb9Srarv8LBf2N"
+              passHref
+              legacyBehavior
+            >
               <StaticTemplateLink>
                 <StaticPreviewImage src="https://storage.googleapis.com/lp-template-assets-prod/screenshots%2FN2dpddPyVb9Srarv8LBf2N-552x316.jpg?cb=-3556065429173465727" />
               </StaticTemplateLink>
@@ -295,6 +310,7 @@ const LeadGenerationLandingPageExamples = () => (
             <Link
               href="https://www.leadpages.com/templates/preview/4yZ7th3Tx78PHEKsKk76ZL"
               passHref
+              legacyBehavior
             >
               <StaticTemplateLink>
                 <StaticPreviewImage src="https://storage.googleapis.com/lp-template-assets-prod/screenshots%2F4yZ7th3Tx78PHEKsKk76ZL-552x316.jpg?cb=-3556065429173465727" />
@@ -314,7 +330,11 @@ const LeadGenerationLandingPageExamples = () => (
             </ParagraphSmall>
             <ParagraphSmall>
               This&nbsp;
-              <Link href="/templates/preview/4yZ7th3Tx78PHEKsKk76ZL" passHref>
+              <Link
+                href="/templates/preview/4yZ7th3Tx78PHEKsKk76ZL"
+                passHref
+                legacyBehavior
+              >
                 <ArticleLink aria-label="video teaser page">
                   video teaser page
                 </ArticleLink>
@@ -372,6 +392,7 @@ const LeadGenerationLandingPageExamples = () => (
             <Link
               href="https://www.leadpages.com/templates/preview/DWuvg2EYRszYpi2MVajEL3"
               passHref
+              legacyBehavior
             >
               <StaticTemplateLink>
                 <StaticPreviewImage src="https://storage.googleapis.com/lp-template-assets-prod/screenshots%2FDWuvg2EYRszYpi2MVajEL3-552x316.jpg?cb=-3556065429173465727" />
@@ -459,6 +480,7 @@ const LeadGenerationLandingPageExamples = () => (
             <Link
               href="https://www.leadpages.com/templates/preview/Bj7utMBun2bi9McBaqsxpR"
               passHref
+              legacyBehavior
             >
               <StaticTemplateLink>
                 <StaticPreviewImage src="https://storage.googleapis.com/lp-template-assets-prod/screenshots%2FBj7utMBun2bi9McBaqsxpR-552x316.jpg?cb=-3556065429173465727" />
@@ -487,7 +509,11 @@ const LeadGenerationLandingPageExamples = () => (
             </ParagraphSmall>
             <ParagraphSmall>
               This&nbsp;
-              <Link href="/templates/preview/Bj7utMBun2bi9McBaqsxpR" passHref>
+              <Link
+                href="/templates/preview/Bj7utMBun2bi9McBaqsxpR"
+                passHref
+                legacyBehavior
+              >
                 <ArticleLink aria-label="webinar registration page">
                   webinar registration page
                 </ArticleLink>
@@ -495,7 +521,7 @@ const LeadGenerationLandingPageExamples = () => (
               &nbsp; utilizes conversion design practices to be one of the most
               effective webinar registration landing pages in the
               Leadpages&nbsp;
-              <Link href="/templates" passHref>
+              <Link href="/templates" passHref legacyBehavior>
                 <ArticleLink aria-label="library of landing page templates.">
                   library of landing page templates.
                 </ArticleLink>
@@ -534,21 +560,33 @@ const LeadGenerationLandingPageExamples = () => (
             </ParagraphSmall>
             <UL>
               <ListItem>
-                <Link href="/templates/preview/GD2ZuptcW7YYkY7WhnNGKV" passHref>
+                <Link
+                  href="/templates/preview/GD2ZuptcW7YYkY7WhnNGKV"
+                  passHref
+                  legacyBehavior
+                >
                   <ArticleLink aria-label="Product sales page">
                     Product sales page
                   </ArticleLink>
                 </Link>
               </ListItem>
               <ListItem>
-                <Link href="/templates/preview/wszPGCvaqxemzfc6crzA5F" passHref>
+                <Link
+                  href="/templates/preview/wszPGCvaqxemzfc6crzA5F"
+                  passHref
+                  legacyBehavior
+                >
                   <ArticleLink aria-label="eBook download page">
                     eBook download page
                   </ArticleLink>
                 </Link>
               </ListItem>
               <ListItem>
-                <Link href="/templates/preview/RAuDp8gisdZnTuNM3YBrMN" passHref>
+                <Link
+                  href="/templates/preview/RAuDp8gisdZnTuNM3YBrMN"
+                  passHref
+                  legacyBehavior
+                >
                   <ArticleLink aria-label="Free consultation page">
                     Free consultation page
                   </ArticleLink>
@@ -556,21 +594,33 @@ const LeadGenerationLandingPageExamples = () => (
                 &nbsp; (great for coaches!)
               </ListItem>
               <ListItem>
-                <Link href="/templates/preview/oYiKzy8jiQdz2hPqccWeAQ" passHref>
+                <Link
+                  href="/templates/preview/oYiKzy8jiQdz2hPqccWeAQ"
+                  passHref
+                  legacyBehavior
+                >
                   <ArticleLink aria-label="Giveaway page">
                     Giveaway page
                   </ArticleLink>
                 </Link>
               </ListItem>
               <ListItem>
-                <Link href="/templates/preview/pTJXjktpzhgwqNXPde88DN" passHref>
+                <Link
+                  href="/templates/preview/pTJXjktpzhgwqNXPde88DN"
+                  passHref
+                  legacyBehavior
+                >
                   <ArticleLink aria-label="‘Invite a friend’ thank you page">
                     ‘Invite a friend’ thank you page
                   </ArticleLink>
                 </Link>
               </ListItem>
               <ListItem>
-                <Link href="/templates/preview/LApBheviYtgmrVKjnHQyDR" passHref>
+                <Link
+                  href="/templates/preview/LApBheviYtgmrVKjnHQyDR"
+                  passHref
+                  legacyBehavior
+                >
                   <ArticleLink aria-label="Thank you page">
                     Thank you page
                   </ArticleLink>
@@ -580,7 +630,7 @@ const LeadGenerationLandingPageExamples = () => (
             <br></br>
             <ParagraphSmall>
               Check out our full&nbsp;
-              <Link href="/templates" passHref>
+              <Link href="/templates" passHref legacyBehavior>
                 <ArticleLink aria-label="Landing Page Library">
                   Landing Page Library
                 </ArticleLink>

@@ -163,7 +163,7 @@ const ColumnFeatureOverlap = ({
           <Title>{title}</Title>
           <MainText>{text}</MainText>
           {link && (
-            <StyledLink href={link}>
+            <StyledLink href={link} legacyBehavior>
               <a aria-label={linkAlt}>
                 <Button>{buttonText}</Button>
               </a>

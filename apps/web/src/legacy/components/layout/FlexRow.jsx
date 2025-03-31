@@ -412,7 +412,7 @@ const FlexRow = ({
                   </CTA>
                 </OutboundStyledLink>
               ) : (
-                <Link href={link} key={index} passHref>
+                <Link href={link} key={index} passHref legacyBehavior>
                   <StyledLink aria-label={linkAlt || text}>
                     <CTA>
                       {checkmarks && (

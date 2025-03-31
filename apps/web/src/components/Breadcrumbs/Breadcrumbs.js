@@ -134,7 +134,7 @@ const Breadcrumbs = ({ hidden }) => {
       <$Breadcrumbs aria-label="breadcrumbs" hidden={hidden}>
         <$BreadcrumbsInner>
           <$Breadcrumb>
-            <Link href="/">
+            <Link href="/" legacyBehavior>
               <a>Home</a>
             </Link>
           </$Breadcrumb>
@@ -145,7 +145,7 @@ const Breadcrumbs = ({ hidden }) => {
               }
               return (
                 <$Breadcrumb key={breadcrumb.href}>
-                  <Link href={breadcrumb.href}>
+                  <Link href={breadcrumb.href} legacyBehavior>
                     <a>{convertBreadcrumb(breadcrumb.breadcrumb)}</a>
                   </Link>
                 </$Breadcrumb>

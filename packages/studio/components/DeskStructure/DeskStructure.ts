@@ -3,7 +3,7 @@ import config from 'config'
 import {RiLayoutBottom2Line} from 'react-icons/ri'
 import {BsFilePerson, BsQuestionCircle, BsPlug, BsCollection} from 'react-icons/bs'
 import {MdCallSplit, MdOutlineSmartButton} from 'react-icons/md'
-import {AiOutlineFileText, AiOutlineRetweet, AiOutlineSetting} from 'react-icons/ai'
+import {AiOutlineHome, AiOutlineFileText, AiOutlineRetweet, AiOutlineSetting} from 'react-icons/ai'
 import {MdBusiness, MdSettings} from 'react-icons/md'
 import {BsGraphUp, BsArrowLeftRight, BsNewspaper, BsCodeSlash, BsSignpost2} from 'react-icons/bs'
 import SingletonListItem from './SingletonListItem'
@@ -23,6 +23,13 @@ export const structure = async (S: StructureBuilder, context: ConfigContext) => 
   return S.list()
     .title('Menu')
     .items([
+      SingletonListItem({
+        type: 'pageHomeRebrand',
+        title: 'Home Page Rebrand',
+        icon: AiOutlineHome,
+        S,
+      }),
+      S.divider(),
       S.listItem()
         .title('Pages')
         .child(

@@ -11,7 +11,7 @@ const $AccordionContainer = styled('div', {
   margin: 'auto',
 })
 
-const StyledLink = styled('a', {
+const StyledLink = styled(Link, {
   c: '$primary',
   pb: '3px',
   bb: '2px solid $colors$purpleLight',
@@ -45,14 +45,8 @@ const Faq = ({ showSectionLink, faqs }) => (
     {showSectionLink && (
       <SectionLink>
         Have more questions? See our{' '}
-        <Link href="/faq" passHref>
-          <StyledLink>full FAQ page</StyledLink>
-        </Link>{' '}
-        or{' '}
-        <Link href="/contact" passHref>
-          <StyledLink>contact us</StyledLink>
-        </Link>
-        .
+        <StyledLink href="/faq">full FAQ page</StyledLink> or{' '}
+        <StyledLink href="/contact">contact us</StyledLink>.
       </SectionLink>
     )}
   </$AccordionSection>

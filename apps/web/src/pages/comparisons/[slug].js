@@ -1,7 +1,7 @@
 import React from 'react'
-import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import PageSidebar from '@layouts/Page/PageSidebar'
 import { features } from 'config'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 
 const DynamicPage = (props) => <PageSidebar {...props} />
 

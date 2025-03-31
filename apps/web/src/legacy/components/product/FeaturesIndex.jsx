@@ -568,7 +568,11 @@ class FeaturesIndex extends React.Component {
                     Try a new search, or reach out to our team with questions
                     about a specific feature.
                   </NoIntegrationsCaption>
-                  <InboundLink href="/contact" aria-label="contact us">
+                  <InboundLink
+                    href="/contact"
+                    aria-label="contact us"
+                    legacyBehavior
+                  >
                     <a>
                       <NoIntegrationsButton>Contact us</NoIntegrationsButton>
                     </a>

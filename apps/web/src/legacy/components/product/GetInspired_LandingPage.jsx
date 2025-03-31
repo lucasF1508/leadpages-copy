@@ -216,11 +216,9 @@ const GetInspired_LandingPage = () => (
       </GIFlexbox>
       <GIButtonContainer>
         <Link href="/templates">
-          <a>
-            <GIButton>
-              <GIButtonCopy>See All Landing Page Templates</GIButtonCopy>
-            </GIButton>
-          </a>
+          <GIButton>
+            <GIButtonCopy>See All Landing Page Templates</GIButtonCopy>
+          </GIButton>
         </Link>
       </GIButtonContainer>
     </GIContainer>

@@ -205,7 +205,6 @@ const SiloDesktopMenu = ({
           <DesktopMenuIcon src={downArrowIcon.src} alt="down arrow" />
         </DesktopMenuFlexbox>
       </DesktopMenuContainer>
-
       {/* Desktop Sub Menu */}
       {showDesktopSubMenu && (
         <DesktopSubMenuContainer>
@@ -243,7 +242,7 @@ const SiloDesktopMenu = ({
                           {pageName}
                         </StyledScrollLink>
                       ) : (
-                        <Link href={pageUrl} passHref>
+                        <Link href={pageUrl} passHref legacyBehavior>
                           <ColumnLink
                             onClick={() => handleRouteClick()}
                             aria-label={pageName}

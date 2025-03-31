@@ -207,7 +207,7 @@ const HeadlineSection = ({
       )}
       {button && (
         <ButtonHolder>
-          <StyledLink href={button.route}>
+          <StyledLink href={button.route} legacyBehavior>
             <a aria-label={button.text}>
               <Button>
                 <ButtonContents>

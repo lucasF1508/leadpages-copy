@@ -1,24 +1,25 @@
 import React, { useEffect } from 'react'
+import { darkTheme, keyframes, styled } from '@design'
 import {
   Item as NavBarPrimitiveItem,
+  Link as NavBarPrimitiveLink,
   List as NavBarPrimitiveList,
   Root as NavBarPrimitiveRoot,
-  Link as NavBarPrimitiveLink,
   Viewport as NavBarPrimitiveViewport,
 } from '@radix-ui/react-navigation-menu'
-import { styled, keyframes, darkTheme } from '@design'
-import Link from '@components/Link'
-import scrollLock from '@hooks/useScrollLock'
 import { AnimatePresence, m } from 'framer-motion'
+import { isEmpty } from 'lodash'
+import { useRouter } from 'next/router'
+import { useNavStore } from '@/state/navStore'
+import useEventListener from '@hooks/useEventListener'
+import useMediaQuery from '@hooks/useMediaQuery'
+import scrollLock from '@hooks/useScrollLock'
+import useStickyHeader from '@hooks/useStickyHeader'
+import Link from '@components/Link'
 import NavBarMenu from '@components/Nav/NavBar/NavBarMenu'
 import NavDrawer, { NavDrawerTrigger } from '@components/Nav/NavDrawer'
-import { isEmpty } from 'lodash'
-import useStickyHeader from '@hooks/useStickyHeader'
-import useMediaQuery from '@hooks/useMediaQuery'
-import { useNavStore } from '@components/Nav/NavStore'
-import useEventListener from '@hooks/useEventListener'
-import { useRouter } from 'next/router'
-import NavLogo from './NavLogo'
+import { useNavStore as useLegacyNavStore } from '@components/Nav/NavStore'
+import NavLogo from '@/components/Nav/NavLogo'
 
 const scaleIn = keyframes({
   from: { transform: 'rotateX(-30deg) scale(0.9)', opacity: 0 },
@@ -89,10 +90,42 @@ const $NavBarList = styled(NavBarPrimitiveList, {
 })
 
 const $NavBarLink = styled(NavBarPrimitiveLink, {
-  all: 'unset',
-  d: 'flex',
-  ai: 'center',
-  jc: 'center',
+  '> div': {
+    height: '100%',
+    
+    '> div': {
+      position: 'absolute',
+      width: '9.5rem',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      d: 'flex',
+      jc: 'center',
+
+      'svg *': {
+        fill: 'currentColor',
+      }
+    },
+  },
+
+  variants: {
+    lightLogo: {
+      true: {
+        '> div': {
+          '> div': {
+            color: '$white',
+          },
+        },
+      },
+      false: {
+        '> div': {
+          '> div': {
+            color: '$text',
+          },
+        },
+      },
+    },
+  },
 })
 
 const $NavBarViewport = styled(NavBarPrimitiveViewport, {
@@ -118,7 +151,8 @@ const $NavBarViewport = styled(NavBarPrimitiveViewport, {
 })
 
 const $NavBarLogo = styled(NavBarPrimitiveItem, {
-  d: 'flex',
+  maxWidth: '9.125rem',
+  position: 'relative',
 })
 
 const $ViewportPosition = styled('div', {
@@ -200,7 +234,9 @@ const NavBar = ({
 }) => {
   const { menu, buttons } = navigation || {}
   const { isNavOpen, dropdownSlug, setDropdownSlug, setNavOpen, hideNav } =
-    useNavStore()
+    useLegacyNavStore()
+  const setIsSticky = useNavStore((state) => state.setIsSticky)
+    
   const { isSticky, showHeader, stickyMotionProps } = useStickyHeader({
     offsetTop: 10,
   })
@@ -231,6 +267,10 @@ const NavBar = ({
     }
   })
 
+  useEffect(() => {
+    setIsSticky(isSticky)
+  }, [isSticky])
+
   if (isPreviewPage) return null
 
   return (
@@ -238,9 +278,9 @@ const NavBar = ({
       <AnimatePresence>
         {isNavOpen && (
           <$NavBarOverlay
-            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
           />
         )}
       </AnimatePresence>
@@ -257,15 +297,30 @@ const NavBar = ({
           <$NavBarRoot onValueChange={handleValueChange} value={dropdownSlug}>
             <$NavBarList>
               <$NavBarLogo>
-                <$NavBarLink href="/">
-                  <NavLogo isSticky={isSticky} darkHero={darkHero} />
+                <$NavBarLink 
+                  css={{
+                    display: 'block',
+                    height: '100%',
+                    transitionProperty: 'width',
+                    minWidth: isSticky ? '2rem' : '9.5rem',
+                    '> div': {
+                      transitionDuration: isSticky ? '0.4s': '0.3s',
+                      transitionDelay: isSticky ? '0.5s' : '0s',                      
+                      width: isSticky ? '2rem' : '9.5rem',
+                    }
+                  }} 
+                  href="/" 
+                  legacyBehavior
+                  lightLogo={darkHero && !isSticky && !isNavOpen}
+                >
+                  <NavLogo darkHero={darkHero} />
                 </$NavBarLink>
               </$NavBarLogo>
               {!isPricingMenu && !isStartPageHeader && !simplifiedHeader && (
                 <NavBarMenu
-                  menu={menu}
                   currentDropdown={dropdownSlug}
                   isTransparent={darkHero && !isSticky && !isNavOpen}
+                  menu={menu}
                 />
               )}
               {!isPricingMenu && buttons && buttons.length > 0 && (
@@ -279,14 +334,14 @@ const NavBar = ({
                     return isPricing ? (
                       <></>
                     ) : (
-                      <$NavBarButton key={_key} linkStyle={linkStyle}>
+                      <$NavBarButton key={_key}>
                         <Link
-                          linkStyle={linkStyle}
-                          url={url}
                           css={{
                             color: linkStyle === 'text' && '$textAlt',
                             px: linkStyle !== 'text' && '$3',
                           }}
+                          linkStyle={!!linkStyle ? linkStyle : 'ghost'}
+                          url={url}
                           {...rest}
                         />
                         {linkStyle === 'text' && <$Indicator />}
@@ -297,9 +352,9 @@ const NavBar = ({
               )}
               {!simplifiedHeader && (
                 <NavDrawerTrigger
+                  isDark={darkHero && !isSticky && !isNavOpen && darkHero}
                   isNavOpen={isNavOpen}
                   setNavOpen={setNavOpen}
-                  isDark={darkHero && !isSticky && !isNavOpen && darkHero}
                 />
               )}
             </$NavBarList>
@@ -308,7 +363,7 @@ const NavBar = ({
               <$NavBarViewport />
             </$ViewportPosition>
 
-            <NavDrawer isNavOpen={isNavOpen} menu={menu} buttons={buttons} />
+            <NavDrawer buttons={buttons} isNavOpen={isNavOpen} menu={menu} />
           </$NavBarRoot>
         </$NavBarContents>
       </$NavBar>

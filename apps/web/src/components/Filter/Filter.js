@@ -139,7 +139,7 @@ const Filter = ({ items, ...props }) => {
   return (
     <$Filter {...props}>
       <$FilterInner>
-        <NextLink href={`/${baseUrl}`} passHref>
+        <NextLink href={`/${baseUrl}`} passHref legacyBehavior>
           <$FilterItem isActive={asPath === `/${baseUrl}` || type === 'page'}>
             All
           </$FilterItem>
@@ -147,7 +147,7 @@ const Filter = ({ items, ...props }) => {
         {items
           .filter(({ path }) => path)
           .map(({ title, path, slug: filterSlug }) => (
-            <NextLink key={title} href={path} passHref>
+            <NextLink key={title} href={path} passHref legacyBehavior>
               <$FilterItem
                 isActive={
                   asPath === path ||

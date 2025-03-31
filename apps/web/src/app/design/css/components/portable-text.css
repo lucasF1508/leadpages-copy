@@ -1,0 +1,18 @@
+.portable-text {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply mb-3 mt-6 first:mt-0 last:mb-0 lg:mt-8;
+  }
+
+  p {
+    @apply my-3 first:mt-0 last:mb-0;
+  }
+
+  a:not([class*='link-']) {
+    @apply text-body hover:text-body;
+  }
+}

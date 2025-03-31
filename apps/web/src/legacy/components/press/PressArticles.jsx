@@ -464,15 +464,13 @@ const PressArticles = () => {
             reach out.
           </Caption>
           <Link href="/contact">
-            <a>
-              <CTA>
-                Get in Touch&nbsp;
-                <ArrowRightPurple
-                  src={rightArrowPurple.src}
-                  alt="purple right arrow"
-                />
-              </CTA>
-            </a>
+            <CTA>
+              Get in Touch&nbsp;
+              <ArrowRightPurple
+                src={rightArrowPurple.src}
+                alt="purple right arrow"
+              />
+            </CTA>
           </Link>
         </HeadingContainer>
         <HighlightedArticleContainer>

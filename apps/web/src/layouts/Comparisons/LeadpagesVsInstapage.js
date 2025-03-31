@@ -398,7 +398,7 @@ const LeadpagesVsInstapage = () => (
                   page.
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/alert-bars" passHref>
+                  <Link href="/product/alert-bars" passHref legacyBehavior>
                     <ArticleLink>
                       <strong>Alert bars</strong>
                     </ArticleLink>
@@ -408,7 +408,7 @@ const LeadpagesVsInstapage = () => (
                   to promote.
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/pop-up-builder" passHref>
+                  <Link href="/product/pop-up-builder" passHref legacyBehavior>
                     <ArticleLink>
                       <strong>Pop-ups</strong>
                     </ArticleLink>
@@ -417,7 +417,7 @@ const LeadpagesVsInstapage = () => (
                   visitors leave.
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/pop-up-builder" passHref>
+                  <Link href="/product/pop-up-builder" passHref legacyBehavior>
                     <ArticleLink>
                       <strong>Checkouts</strong>
                     </ArticleLink>
@@ -562,7 +562,7 @@ const LeadpagesVsInstapage = () => (
               <StyledParagraphSmall>
                 A big part of SEO is page load speed, and this is one area where
                 Leadpages really excels. The platform has{' '}
-                <Link href="/blog/landing-page-speed/" passHref>
+                <Link href="/blog/landing-page-speed/" passHref legacyBehavior>
                   <ArticleLink>lightning-fast page load speeds</ArticleLink>
                 </Link>{' '}
                 of 2.4 seconds faster than average, so you’ll never lose leads

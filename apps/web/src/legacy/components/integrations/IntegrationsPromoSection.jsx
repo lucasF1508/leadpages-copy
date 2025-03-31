@@ -157,7 +157,7 @@ const IntegrationsPromoSection = ({
             <ChecklistItem>{info}</ChecklistItem>
           </CheckboxContainer>
         ))}
-        <Link href={link} passHref>
+        <Link href={link} passHref legacyBehavior>
           <StyledLink aria-label={linkAlt}>
             <Button>{buttonText}</Button>
           </StyledLink>

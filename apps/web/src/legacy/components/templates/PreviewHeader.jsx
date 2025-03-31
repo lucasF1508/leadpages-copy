@@ -146,7 +146,7 @@ const PreviewHeader = ({
       >
         <Grid container className={classes.left} wrap="nowrap">
           <Grid container className={classes.leftLg} wrap="nowrap">
-            <NextLink href={galleryRoot} passHref shallow>
+            <NextLink href={galleryRoot} passHref shallow legacyBehavior>
               <IconButton id="gallery-return" aria-label="Back">
                 <ArrowBackIcon color="primary" />
               </IconButton>
@@ -163,7 +163,7 @@ const PreviewHeader = ({
             </Typography>
           </Grid>
           <Grid container className={classes.leftSm} wrap="nowrap">
-            <NextLink href={galleryRoot} passHref>
+            <NextLink href={galleryRoot} passHref legacyBehavior>
               <Link
                 component="button"
                 underline="hover"

@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
-import { GATSBY_IMAGE } from '../../constants/types';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import styled from 'styled-components'
+import { GATSBY_IMAGE } from '../../constants/types'
 // images
-import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg';
+import rightArrowPurple from '../../assets/images/global/arrow_right_purple.svg'
 
 const OuterContainer = styled.div`
   margin-top: -60px;
   padding-top: 108px;
   position: relative;
   background-color: #f7f7f7;
-`;
+`
 
 const HeaderContainer = styled.div`
   max-width: 1140px;
@@ -25,14 +25,14 @@ const HeaderContainer = styled.div`
     padding-left: 6rem;
   }
   z-index: 2;
-`;
+`
 
 const FlexRow = styled.div`
   padding-top: 3rem;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-`;
+`
 
 const FlexRowItem = styled.div`
   min-height: 1px;
@@ -42,7 +42,7 @@ const FlexRowItem = styled.div`
   width: 100%;
   padding-left: 1%;
   padding-right: 1%;
-`;
+`
 
 const FlexRowLeft = styled(FlexRowItem)`
   justify-content: space-between;
@@ -67,10 +67,10 @@ const FlexRowLeft = styled(FlexRowItem)`
     flex: 0 0 45%;
     max-width: 45%;
   }
-`;
+`
 const HeaderImgLeft = styled.div`
   width: 100%;
-`;
+`
 
 const FlexRowRight = styled(FlexRowItem)`
   text-align: left;
@@ -90,7 +90,7 @@ const FlexRowRight = styled(FlexRowItem)`
     max-width: 45%;
     text-align: left;
   }
-`;
+`
 
 const SmallHeading = styled.div`
   font-family: 'Space Mono';
@@ -100,7 +100,7 @@ const SmallHeading = styled.div`
   letter-spacing: 2px;
   line-height: 18px;
   text-transform: uppercase;
-`;
+`
 
 const LeftHeading = styled.div`
   margin-top: 1rem;
@@ -115,7 +115,7 @@ const LeftHeading = styled.div`
     line-height: 1.75rem;
     letter-spacing: 0;
   }
-`;
+`
 
 const LeftSubHeading = styled.div`
   color: #575452;
@@ -127,7 +127,7 @@ const LeftSubHeading = styled.div`
     font-size: 1rem;
     line-height: 1.5rem;
   }
-`;
+`
 
 const LeftCTA = styled.div`
   color: #603eff;
@@ -137,12 +137,12 @@ const LeftCTA = styled.div`
   text-align: left;
   font-weight: 500;
   margin-bottom: 3rem;
-`;
+`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   cursor: pointer;
-`;
+`
 
 const SVGContainer = styled.img`
   position: absolute;
@@ -158,19 +158,19 @@ const SVGContainer = styled.img`
   }
   /* max-width: 667px;
   max-height: 583px; */
-`;
+`
 
 const ArrowRightPurple = styled.img`
   width: 20px;
   height: 10px;
-`;
+`
 
 const OutboundLink = styled.a`
   text-decoration: none;
   &:hover {
     cursor: pointer;
   }
-`;
+`
 const ChildPageHeader = ({
   bgColor,
   bgImage,
@@ -200,10 +200,18 @@ const ChildPageHeader = ({
           </LeftHeading>
           <LeftSubHeading>{subheadingText}</LeftSubHeading>
           {outboundCTA === 'true' && (
-            <OutboundLink href={link} alt={linkText} rel="noopener nofollow" target="_blank">
+            <OutboundLink
+              href={link}
+              alt={linkText}
+              rel="noopener nofollow"
+              target="_blank"
+            >
               <LeftCTA>
                 {CTAtext}
-                <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
+                <ArrowRightPurple
+                  src={rightArrowPurple}
+                  alt="purple right arrow"
+                />
               </LeftCTA>
             </OutboundLink>
           )}
@@ -211,7 +219,10 @@ const ChildPageHeader = ({
             <StyledLink to={link} alt={linkText}>
               <LeftCTA>
                 {CTAtext}
-                <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
+                <ArrowRightPurple
+                  src={rightArrowPurple}
+                  alt="purple right arrow"
+                />
               </LeftCTA>
             </StyledLink>
           )}
@@ -224,7 +235,10 @@ const ChildPageHeader = ({
             >
               <LeftCTA>
                 {CTAtext}
-                <ArrowRightPurple src={rightArrowPurple} alt="purple right arrow" />
+                <ArrowRightPurple
+                  src={rightArrowPurple}
+                  alt="purple right arrow"
+                />
               </LeftCTA>
             </OutboundLink>
           )}
@@ -237,7 +251,7 @@ const ChildPageHeader = ({
       </FlexRow>
     </HeaderContainer>
   </OuterContainer>
-);
+)
 
 ChildPageHeader.defaultProps = {
   bgColor: '#f7f7f7',
@@ -254,7 +268,7 @@ ChildPageHeader.defaultProps = {
   showLB: false,
   dataleadboxpopup: '',
   dataleadboxdomain: '',
-};
+}
 
 ChildPageHeader.propTypes = {
   bgColor: PropTypes.string,
@@ -273,6 +287,6 @@ ChildPageHeader.propTypes = {
   dataleadboxdomain: PropTypes.string,
   image: GATSBY_IMAGE.isRequired,
   imageAltText: PropTypes.string.isRequired,
-};
+}
 
-export default ChildPageHeader;
+export default ChildPageHeader

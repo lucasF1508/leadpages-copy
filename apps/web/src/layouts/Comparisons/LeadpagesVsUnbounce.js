@@ -356,7 +356,7 @@ const LeadpagesVsUnbounce = () => (
                   tweak before you publish it.
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/alert-bars" passHref>
+                  <Link href="/product/alert-bars" passHref legacyBehavior>
                     <ArticleLink>
                       <strong>Alert bars:</strong>
                     </ArticleLink>
@@ -365,7 +365,7 @@ const LeadpagesVsUnbounce = () => (
                   special offers, events, and more.
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/pop-up-builder" passHref>
+                  <Link href="/product/pop-up-builder" passHref legacyBehavior>
                     <ArticleLink>
                       <strong>Pop-ups:</strong>
                     </ArticleLink>

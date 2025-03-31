@@ -1,12 +1,12 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
-import { Link as ScrollLink } from 'react-scroll';
-import styled from 'styled-components';
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { Link as ScrollLink } from 'react-scroll'
+import styled from 'styled-components'
 // Constants
-import { TemplateState, TemplateActions } from '../../constants/templates';
+import { TemplateState, TemplateActions } from '../../constants/templates'
 // Images
-import backgroundSVG from '../../assets/images/shapes/wave-corner-lavender.svg';
+import backgroundSVG from '../../assets/images/shapes/wave-corner-lavender.svg'
 
 const OuterContainer = styled.div`
   position: relative;
@@ -30,7 +30,7 @@ const OuterContainer = styled.div`
   @media (max-width: 450px) {
     height: 600px;
   }
-`;
+`
 
 const BackgroundContainer = styled.div`
   position: relative;
@@ -40,7 +40,7 @@ const BackgroundContainer = styled.div`
   background-color: #603eff;
   overflow: visible;
   border-radius: 3px;
-`;
+`
 
 const ShapeMaskContainer = styled.div`
   position: relative;
@@ -49,7 +49,7 @@ const ShapeMaskContainer = styled.div`
   max-width: 1200px;
   overflow: hidden;
   border-top-right-radius: 3px;
-`;
+`
 
 const TextContainer = styled.div`
   position: absolute;
@@ -72,7 +72,7 @@ const TextContainer = styled.div`
     margin-right: 24px;
     max-width: 265px;
   }
-`;
+`
 
 const PromoHeadline = styled.h2`
   font-family: 'Value Serif';
@@ -84,7 +84,7 @@ const PromoHeadline = styled.h2`
     letter-spacing: 0.5px;
     line-height: 28px;
   }
-`;
+`
 
 const PromoText = styled.p`
   margin-top: 30px;
@@ -97,7 +97,7 @@ const PromoText = styled.p`
     letter-spacing: 0px;
     line-height: 22px;
   }
-`;
+`
 
 const PromoCTA = styled.button`
   width: 236px;
@@ -116,14 +116,15 @@ const PromoCTA = styled.button`
   transition: all 0.3s ease;
   &:hover {
     border-radius: 24px;
-    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.26), 0 14px 28px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.26),
+      0 14px 28px 0 rgba(0, 0, 0, 0.25);
   }
   @media (max-width: 450px) {
     width: 200px;
     height: 42px;
     font-size: 14px;
   }
-`;
+`
 
 const PromoSubCTA = styled.p`
   margin-top: 29px;
@@ -136,7 +137,7 @@ const PromoSubCTA = styled.p`
   @media (max-width: 450px) {
     font-size: 12px;
   }
-`;
+`
 
 const PromoSubCTALink = styled.a`
   padding-bottom: 2px;
@@ -147,7 +148,7 @@ const PromoSubCTALink = styled.a`
   &:hover {
     border-bottom: 3px solid white;
   }
-`;
+`
 
 const SVGContainer = styled.img`
   position: absolute;
@@ -167,7 +168,7 @@ const SVGContainer = styled.img`
     right: -10px;
     width: 120%;
   }
-`;
+`
 
 const PromoHeroImage = styled(GatsbyImage)`
   position: absolute;
@@ -192,38 +193,45 @@ const PromoHeroImage = styled(GatsbyImage)`
     right: -20px;
     bottom: -55px;
   }
-`;
+`
 
 const TemplatePromoSection = ({ state, actions }) => {
   const images = useStaticQuery(graphql`
     query TemplatePromoSectionQuery {
       promoHeroImage: file(
-        relativePath: { eq: "assets/images/heros/template-gallery-promo-hero_926px@2x.png" }
+        relativePath: {
+          eq: "assets/images/heros/template-gallery-promo-hero_926px@2x.png"
+        }
       ) {
         ...constrained
       }
     }
-  `);
+  `)
 
   const selectHolidayCategory = () => {
     if (Object.keys(state?.taxons)?.length) {
-      const [holidayTaxon] = state.taxons.filter(e => e.value === 'holiday');
-      actions.onUpdateCategory(holidayTaxon);
+      const [holidayTaxon] = state.taxons.filter((e) => e.value === 'holiday')
+      actions.onUpdateCategory(holidayTaxon)
     }
-  };
+  }
 
   return (
     <OuterContainer>
       <BackgroundContainer>
         <ShapeMaskContainer>
           <TextContainer>
-            <PromoHeadline>New Templates to Kickstart Your Holiday Campaign</PromoHeadline>
+            <PromoHeadline>
+              New Templates to Kickstart Your Holiday Campaign
+            </PromoHeadline>
             <PromoText>
-              From Black Friday to New Years, these brand new landing page templates are designed to
-              help your small business end the year with a bang!
+              From Black Friday to New Years, these brand new landing page
+              templates are designed to help your small business end the year
+              with a bang!
             </PromoText>
             <ScrollLink to="tab-toolbar" offset={-70} spy smooth duration={300}>
-              <PromoCTA onClick={selectHolidayCategory}>View Holiday Templates</PromoCTA>
+              <PromoCTA onClick={selectHolidayCategory}>
+                View Holiday Templates
+              </PromoCTA>
             </ScrollLink>
             <PromoSubCTA>
               Access more{' '}
@@ -237,15 +245,18 @@ const TemplatePromoSection = ({ state, actions }) => {
           </TextContainer>
           <SVGContainer src={backgroundSVG} alt="background svg" />
         </ShapeMaskContainer>
-        <PromoHeroImage image={getImage(images.promoHeroImage)} alt="hero image" />
+        <PromoHeroImage
+          image={getImage(images.promoHeroImage)}
+          alt="hero image"
+        />
       </BackgroundContainer>
     </OuterContainer>
-  );
-};
+  )
+}
 
 TemplatePromoSection.propTypes = {
   state: TemplateState.isRequired,
   actions: TemplateActions.isRequired,
-};
+}
 
-export default TemplatePromoSection;
+export default TemplatePromoSection

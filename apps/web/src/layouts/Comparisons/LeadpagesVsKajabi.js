@@ -126,7 +126,7 @@ const LeadpagesVsKajabi = () => (
               </StyledParagraphLarge>
               <StyledParagraphLarge>
                 But how do you decide? How does{' '}
-                <Link href="/" passHref>
+                <Link href="/" passHref legacyBehavior>
                   <ArticleLink>Leadpages</ArticleLink>
                 </Link>{' '}
                 stack up against Kajabi? As two major movers and shakers in the
@@ -141,7 +141,7 @@ const LeadpagesVsKajabi = () => (
               </StyledParagraphSmall>
               <StyledParagraphSmall>
                 As we compare Leadpages and Kajabi, we’ll take into account{' '}
-                <Link href="/comparisons" passHref>
+                <Link href="/comparisons" passHref legacyBehavior>
                   <ArticleLink>seven major criteria</ArticleLink>
                 </Link>{' '}
                 we believe are the most important to you when deciding between
@@ -422,7 +422,7 @@ const LeadpagesVsKajabi = () => (
               </OL>
               <StyledParagraphSmall>
                 Our templates are built to convert. With an{' '}
-                <Link href="/templates" passHref>
+                <Link href="/templates" passHref legacyBehavior>
                   <ArticleLink>abundance of template choices</ArticleLink>
                 </Link>
                 , you can feel confident in your page design, even if you have
@@ -538,14 +538,14 @@ const LeadpagesVsKajabi = () => (
                   <StyledImage image={leadmeterExcellent} />
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/alert-bars" passHref>
+                  <Link href="/product/alert-bars" passHref legacyBehavior>
                     <ArticleLink>Alert bars</ArticleLink>
                   </Link>
                   , which prompt user action, are publishable on any website or
                   landing page
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/pop-up-builder" passHref>
+                  <Link href="/product/pop-up-builder" passHref legacyBehavior>
                     <ArticleLink>Intuitive pop-up forms</ArticleLink>
                   </Link>
                   , captures the attention of visitors on any page to increase

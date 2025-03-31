@@ -94,13 +94,13 @@ const ArchiveBreadcrumbs = ({ hidden, primaryCategory }) => (
   <$Breadcrumbs aria-label="breadcrumbs" hidden={hidden}>
     <$BreadcrumbsInner>
       <$Breadcrumb>
-        <Link href="/blog">
+        <Link href="/blog" legacyBehavior>
           <a>Blog</a>
         </Link>
       </$Breadcrumb>
       {primaryCategory && (
         <$Breadcrumb activeLink={true}>
-          <Link href={primaryCategory.url}>
+          <Link href={primaryCategory.url} legacyBehavior>
             <a>{primaryCategory.title}</a>
           </Link>
         </$Breadcrumb>

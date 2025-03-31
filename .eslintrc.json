@@ -1,20 +1,46 @@
 {
+  "root": true,
   "extends": [
-    "airbnb-base",
     "next/core-web-vitals",
-    "plugin:prettier/recommended"
+    "next",
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:perfectionist/recommended-natural"
   ],
-  "plugins": ["react", "jsx-a11y", "import", "unused-imports", "html"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import",
+    "unused-imports",
+    "html",
+    "@typescript-eslint",
+    "perfectionist"
+  ],
   "rules": {
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-var-requires": "off",
     "react-hooks/exhaustive-deps": "off",
     "react-hooks/rules-of-hooks": "off",
     "react/no-array-index-key": "off",
     "react/jsx-pascal-case": "off",
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/require-default-props": "warn",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          "tsx"
+        ]
+      }
+    ],
+    "react/require-default-props": "off",
     "react/prop-types": "off",
     "react/no-danger": "off",
+    "react/display-name": "off",
     "import/prefer-default-export": "off",
     "import/no-named-as-default": "off",
     "react/jsx-props-no-spreading": "off",
@@ -27,8 +53,89 @@
     "arrow-body-style": "warn",
     "class-methods-use-this": "off", // _document.tsx use render method without `this` keyword,
     "no-underscore-dangle": "off", //We use Sanity internals for setting react keys
-    "no-console": ["error", { "allow": ["warn", "error"] }],
-    "no-plusplus": "off"
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
+    "no-plusplus": "off",
+    "perfectionist/sort-imports": [
+      "error",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": [
+          [
+            "types",
+            "type",
+            "internal-type",
+            "parent-type",
+            "sibling-type",
+            "index-type"
+          ],
+          "react",
+          "clsx",
+          [
+            "builtin",
+            "external"
+          ],
+          "@/**",
+          "@utils/**",
+          "@lib/**",
+          "@hooks/**",
+          "@components/**",
+          "@pages/**",
+          "internal",
+          "side-effect",
+          "style",
+          "object",
+          "unknown",
+          [
+            "parent",
+            "sibling",
+            "index"
+          ]
+        ],
+        "custom-groups": {
+          "value": {
+            "types": [
+              "@types",
+              "@types/*"
+            ],
+            "react": [
+              "react",
+              "react-*"
+            ],
+            "clsx": "clsx",
+            "@/**": "@/**",
+            "@utils/**": "@utils/**",
+            "@lib/**": "@lib/**",
+            "@hooks/**": "@hooks/**",
+            "@components/**": "@components/**",
+            "@pages/**": "@pages/**"
+          }
+        },
+        "newlines-between": "never"
+      }
+    ],
+    "perfectionist/sort-object-types": [
+      "error",
+      {
+        "type": "natural",
+        "order": "asc",
+        "groups": [
+          "id",
+          "unknown"
+        ],
+        "custom-groups": {
+          "id": "id"
+        }
+      }
+    ]
   },
   "settings": {
     "import/core-modules": []

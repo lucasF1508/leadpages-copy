@@ -263,7 +263,7 @@ const ThreeColumn = ({
         <FlexRow3>
           <FlexRow3Container>
             {column1link && (
-              <StyledLink href={column1link}>
+              <StyledLink href={column1link} legacyBehavior>
                 <a aria-label={column1linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
@@ -291,7 +291,11 @@ const ThreeColumn = ({
               </StyledLink>
             )}
             {column1outboundlink && (
-              <OutboundLink href={column1outboundlink} alt={column1linkAlt}>
+              <OutboundLink
+                href={column1outboundlink}
+                alt={column1linkAlt}
+                legacyBehavior
+              >
                 <GalleryContainer>
                   <BigTabImage>
                     <ImageContainer
@@ -321,7 +325,7 @@ const ThreeColumn = ({
         <FlexRow3>
           <FlexRow3Container>
             {column2link && (
-              <StyledLink href={column2link}>
+              <StyledLink href={column2link} legacyBehavior>
                 <a aria-label={column2linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
@@ -349,7 +353,11 @@ const ThreeColumn = ({
               </StyledLink>
             )}
             {column2outboundlink && (
-              <OutboundLink href={column2outboundlink} alt={column2linkAlt}>
+              <OutboundLink
+                href={column2outboundlink}
+                alt={column2linkAlt}
+                legacyBehavior
+              >
                 <GalleryContainer>
                   <BigTabImage>
                     <ImageContainer
@@ -379,7 +387,7 @@ const ThreeColumn = ({
         <FlexRow3>
           <FlexRow3Container>
             {column3link && (
-              <StyledLink href={column3link}>
+              <StyledLink href={column3link} legacyBehavior>
                 <a aria-label={column3linkAlt}>
                   <GalleryContainer>
                     <BigTabImage>
@@ -407,7 +415,11 @@ const ThreeColumn = ({
               </StyledLink>
             )}
             {column3outboundlink && (
-              <OutboundLink href={column3outboundlink} alt={column3linkAlt}>
+              <OutboundLink
+                href={column3outboundlink}
+                alt={column3linkAlt}
+                legacyBehavior
+              >
                 <GalleryContainer>
                   <BigTabImage>
                     <ImageContainer

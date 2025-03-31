@@ -129,7 +129,7 @@ const BlogSection = () => {
             you need to optimize your marketing strategy.
           </CustomersSubHeading>
         </div>
-        <Link href="https://www.leadpages.com/blog" passHref>
+        <Link href="https://www.leadpages.com/blog" passHref legacyBehavior>
           <HeadingLink alt="blog">
             <HeadingButton>
               Visit the Blog&nbsp;

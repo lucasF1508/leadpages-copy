@@ -295,17 +295,15 @@ const SiloComparisonDesktopMenu = ({
               <ColumnContainer>
                 <SiloCompareImage competitorImage={competitorImage} />
                 <Link href="/comparisons">
-                  <a>
-                    <BackToContainer>
-                      <BackToColFLex>
-                        <BackToText>Back To</BackToText>
-                        <CompareText>
-                          <StyledArrowLeft src={ArrowLeftSVG.src} />
-                          All Comparisons
-                        </CompareText>
-                      </BackToColFLex>
-                    </BackToContainer>
-                  </a>
+                  <BackToContainer>
+                    <BackToColFLex>
+                      <BackToText>Back To</BackToText>
+                      <CompareText>
+                        <StyledArrowLeft src={ArrowLeftSVG.src} />
+                        All Comparisons
+                      </CompareText>
+                    </BackToColFLex>
+                  </BackToContainer>
                 </Link>
               </ColumnContainer>
               {pageRoutes.map(({ sectionName, sectionPages }) => (

@@ -1,5 +1,5 @@
-import { create } from 'zustand'
 import { styled } from '@design'
+import { create } from 'zustand'
 import Image from '@components/Image'
 import NavColumnCarouselForeground from './NavColumnCarouselForeground'
 

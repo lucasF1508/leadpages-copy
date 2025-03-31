@@ -358,7 +358,7 @@ const CustomerStoriesThumbnailRotator = () => {
                 index
               ) => (
                 <ThumbnailSection key={index}>
-                  <Link href={link} passHref>
+                  <Link href={link} passHref legacyBehavior>
                     <StyledLink aria-label={imageAltText}>
                       <ImageContainer
                         data-gtm="customer-story-link"

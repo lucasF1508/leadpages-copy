@@ -321,15 +321,13 @@ const TransformComponent = () => (
                 publish.
               </FlexRowItem6Copy>
               <Link href="/product/leadmeter">
-                <a>
-                  <CTA>
-                    Discover Leadmeter &nbsp;
-                    <ArrowRightPurple
-                      src={rightArrowPurple.src}
-                      alt="purple right arrow"
-                    />
-                  </CTA>
-                </a>
+                <CTA>
+                  Discover Leadmeter &nbsp;
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
+                </CTA>
               </Link>
             </FlexRowItem6>
             <FlexRowItem6>
@@ -385,15 +383,13 @@ const TransformComponent = () => (
                 drag-and-drop customization.
               </FlexRowItem6Copy>
               <Link href="/templates">
-                <a>
-                  <CTA>
-                    Visit template gallery &nbsp;
-                    <ArrowRightPurple
-                      src={rightArrowPurple.src}
-                      alt="purple right arrow"
-                    />
-                  </CTA>
-                </a>
+                <CTA>
+                  Visit template gallery &nbsp;
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
+                </CTA>
               </Link>
             </FlexRowItem6>
           </SkillCopyContainer>

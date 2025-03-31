@@ -13,145 +13,165 @@ require('dotenv').config({
 const { init: buildJSON } = require('indices/buildJSON')
 
 const {
-  SANITY_STUDIO_API_PROJECT_ID,
-  SANITY_STUDIO_API_DATASET,
-  SANITY_STUDIO_API_VERSION,
-  SANITY_STUDIO_PREVIEW_SECRET,
-  SANITY_STUDIO_APP_TOKEN,
+  DEVELOPMENT_TRAIL_SIGNUP_ENDPOINT,
+  FB_PIXEL_ID,
+  GA4_TRACKING_ID,
+  GTAG_TRACKING_ID,
+  GTM_CONTAINER_ID,
+  HCAPTCHA_SITEKEY,
+  HUBSPOT_DEFAULT_FORM_ID,
+  HUBSPOT_DEFAULT_PORTAL_ID,
+  LEADPAGES_API_HOST,
+  LEADPAGES_REACTIVATION_HOST,
+  LEADPAGES_TRIAL_HOST,
+  MC_API_KEY,
+  MC_AUDIENCE_ID,
+  MC_SERVER_PREFIX,
   NEXT_PUBLIC_URL,
-  VERCEL_ENV,
+  RECAPTCHA_SITE_KEY,
+  SANITY_STUDIO_API_DATASET,
+  SANITY_STUDIO_API_PROJECT_ID,
+  SANITY_STUDIO_API_VERSION,
+  SANITY_STUDIO_APP_TOKEN,
+  SANITY_STUDIO_PREVIEW_SECRET,
+  SANITY_STUDIO_VERCEL_DEPLOY_URL,
   SENDGRID_API_KEY,
   SENDGRID_TEMPLATE_ID,
   SENDGRID_URL,
   SENDGRID_VERIFIED_SENDER,
-  RECAPTCHA_SITE_KEY,
-  MC_API_KEY,
-  MC_AUDIENCE_ID,
-  MC_SERVER_PREFIX,
-  HCAPTCHA_SITEKEY,
   STARGATE_API_HOST,
-  LEADPAGES_API_HOST,
-  LEADPAGES_TRIAL_HOST,
-  LEADPAGES_REACTIVATION_HOST,
-  DEVELOPMENT_TRAIL_SIGNUP_ENDPOINT,
-  GTM_CONTAINER_ID,
-  GTAG_TRACKING_ID,
   UA_TRACKING_ID,
-  GA4_TRACKING_ID,
-  FB_PIXEL_ID,
-  SANITY_STUDIO_VERCEL_DEPLOY_URL,
-  HUBSPOT_DEFAULT_PORTAL_ID,
-  HUBSPOT_DEFAULT_FORM_ID,
+  VERCEL_ENV,
 } = process.env
 
 module.exports = withBundleAnalyzer({
   env: {
-    SANITY_STUDIO_API_PROJECT_ID,
-    SANITY_STUDIO_API_DATASET,
-    SANITY_STUDIO_API_VERSION,
-    SANITY_STUDIO_PREVIEW_SECRET,
-    SANITY_STUDIO_APP_TOKEN,
+    DEVELOPMENT_TRAIL_SIGNUP_ENDPOINT,
+    FB_PIXEL_ID,
+    GA4_TRACKING_ID,
+    GTAG_TRACKING_ID,
+    GTM_CONTAINER_ID,
+    HCAPTCHA_SITEKEY,
+    HUBSPOT_DEFAULT_FORM_ID,
+    HUBSPOT_DEFAULT_PORTAL_ID,
+    LEADPAGES_API_HOST,
+    LEADPAGES_REACTIVATION_HOST,
+    LEADPAGES_TRIAL_HOST,
+    MC_API_KEY,
+    MC_AUDIENCE_ID,
+    MC_SERVER_PREFIX,
     NEXT_PUBLIC_URL,
+    RECAPTCHA_SITE_KEY,
+    SANITY_STUDIO_API_DATASET,
+    SANITY_STUDIO_API_PROJECT_ID,
+    SANITY_STUDIO_API_VERSION,
+    SANITY_STUDIO_APP_TOKEN,
+    SANITY_STUDIO_PREVIEW_SECRET,
+    SANITY_STUDIO_VERCEL_DEPLOY_URL,
     SENDGRID_API_KEY,
     SENDGRID_TEMPLATE_ID,
     SENDGRID_URL,
     SENDGRID_VERIFIED_SENDER,
-    MC_API_KEY,
-    MC_AUDIENCE_ID,
-    MC_SERVER_PREFIX,
-    RECAPTCHA_SITE_KEY,
-    VERCEL_ENV,
-    HCAPTCHA_SITEKEY,
     STARGATE_API_HOST,
-    LEADPAGES_API_HOST,
-    LEADPAGES_TRIAL_HOST,
-    LEADPAGES_REACTIVATION_HOST,
-    DEVELOPMENT_TRAIL_SIGNUP_ENDPOINT,
-    GTM_CONTAINER_ID,
-    GTAG_TRACKING_ID,
     UA_TRACKING_ID,
-    GA4_TRACKING_ID,
-    FB_PIXEL_ID,
-    SANITY_STUDIO_VERCEL_DEPLOY_URL,
-    HUBSPOT_DEFAULT_PORTAL_ID,
-    HUBSPOT_DEFAULT_FORM_ID,
+    VERCEL_ENV,
   },
-  reactStrictMode: false,
-  poweredByHeader: false,
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  sassOptions: {
-    includePaths: [path.resolve(__dirname, 'node_modules')],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  experimental: {
+    scrollRestoration: true,
   },
   images: {
-    domains: ['cdn.sanity.io', 'assets.vercel.com', 'storage.googleapis.com'],
     deviceSizes: [320, 640, 750, 828, 1080, 1200, 1600, 1920, 2048, 3840],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.vercel.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'customer-4yowinxxlegi56v8.cloudflarestream.com',
+      },
+    ]
   },
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  poweredByHeader: false,
+  reactStrictMode: false,
   redirects: async () => {
     const redirects = await adminRedirects({
-      projectId: SANITY_STUDIO_API_PROJECT_ID,
       dataset: SANITY_STUDIO_API_DATASET,
+      projectId: SANITY_STUDIO_API_PROJECT_ID,
     })
 
     return [
       {
-        source: '/podcast',
         destination: 'https://lp.leadpages.com/podcast/',
         permanent: true,
+        source: '/podcast',
       },
       {
-        source: '/affiliates',
         destination: 'https://lp.leadpages.com/affiliates/',
         permanent: true,
+        source: '/affiliates',
       },
       {
-        source: '/why-leadpages',
         destination: 'https://lp.leadpages.com/why-leadpages/',
         permanent: true,
+        source: '/why-leadpages',
       },
       {
-        source: '/free-trial',
         destination: 'https://lp.leadpages.com/free-trial/',
         permanent: true,
+        source: '/free-trial',
       },
       {
-        source: '/webinars',
         destination: 'https://lp.leadpages.com/webinars/',
         permanent: true,
+        source: '/webinars',
       },
       {
-        source: '/demo',
         destination: 'https://lp.leadpages.com/demo/',
         permanent: true,
+        source: '/demo',
       },
       {
-        source: '/webinars/:slug',
         destination: 'https://lp.leadpages.com/:slug',
         permanent: true,
+        source: '/webinars/:slug',
       },
       {
+        destination: '/blog',
+        permanent: true,
         source: '/blog/page/:page*',
-        destination: '/blog',
-        permanent: true,
       },
       {
+        destination: '/blog',
+        permanent: true,
         source: '/blog/category/:category/page/:page*',
-        destination: '/blog',
-        permanent: true,
       },
       {
+        destination: '/blog',
+        permanent: true,
         source: '/blog/(\\d{4})',
-        destination: '/blog',
-        permanent: true,
       },
       {
+        destination: '/blog',
+        permanent: true,
         source: '/blog/(\\d{4})/(.*)',
-        destination: '/blog',
-        permanent: true,
       },
       {
-        source: '/blog/(.*)/feed',
         destination: '/blog',
         permanent: true,
+        source: '/blog/(.*)/feed',
       },
       ...redirects,
     ]
@@ -159,16 +179,16 @@ module.exports = withBundleAnalyzer({
   rewrites: async () => {
     // Incremental path rewrites
     const incrementalPaths = await filterRoutesFromSanity({
+      dataset: SANITY_STUDIO_API_DATASET,
       directory: './src/pages/_legacy',
       projectId: SANITY_STUDIO_API_PROJECT_ID,
-      dataset: SANITY_STUDIO_API_DATASET,
     })
 
     const builtPaths = await buildJSON({
       files: [
         {
-          path: path.join('./public/indices/incrementalPaths.json'),
           data: incrementalPaths || [],
+          path: path.join('./public/indices/incrementalPaths.json'),
         },
       ],
     })
@@ -178,28 +198,25 @@ module.exports = withBundleAnalyzer({
         `Built index of ${incrementalPaths?.length} incremental paths.`
       )
     }
-    
+
 
     return {
       afterFiles: [
         {
-          source: '/studio/:path*',
           destination:
             process.env.NODE_ENV === 'development'
               ? 'http://localhost:3333/studio/:path*'
               : '/studio/index.html',
+          source: '/studio/:path*',
         },
         {
-          source: '/home',
           destination: '/',
+          source: '/home',
         },
       ],
     }
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  experimental: {
-    scrollRestoration: true,
+  sassOptions: {
+    includePaths: [path.resolve(__dirname, 'node_modules')],
   },
 })

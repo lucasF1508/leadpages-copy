@@ -358,7 +358,11 @@ const ResourcesHeader = () => {
                 )}
                 {outboundLink && (
                   <FlexRow3Container>
-                    <OutboundLink href={outboundLink} alt={linkAltText}>
+                    <OutboundLink
+                      href={outboundLink}
+                      alt={linkAltText}
+                      legacyBehavior
+                    >
                       <MobileFlexbox>
                         <IconContainer image={image} alt={imageAltText} />
                         <FlexRow3Heading>{title}</FlexRow3Heading>
@@ -369,7 +373,7 @@ const ResourcesHeader = () => {
                 )}
                 {internalLink && (
                   <FlexRow3Container>
-                    <StyledLink href={internalLink}>
+                    <StyledLink href={internalLink} legacyBehavior>
                       <a aria-label={linkAltText}>
                         <MobileFlexbox>
                           <IconContainer image={image} alt={imageAltText} />

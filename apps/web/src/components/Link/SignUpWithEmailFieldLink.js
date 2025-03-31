@@ -1,7 +1,7 @@
 import { Input } from '@components/Form/Inputs'
 import { keyframes, styled } from '@design'
 import { FiChevronRight as InternalIcon } from '@react-icons/all-files/fi/FiChevronRight'
-import useForm, { FormContext } from '@hooks/useForm'
+import useForm, { FormProvider } from '@/hooks/useForm'
 import Load from '@legacy/assets/images/global/submit_load_spinner.svg'
 import { useEffect, useRef, useState } from 'react'
 import SubmitLoadSpinner from '@legacy/assets/svgs/SubmitLoadSpinner'
@@ -202,7 +202,13 @@ const SignUpWithEmailFieldLink = ({
   className,
   ...props
 }) => {
-  const { methods, isLoading, setIsLoading, setFormError, formError } = useForm(
+  const { 
+    methods, 
+    isLoading, 
+    setIsLoading, 
+    setFormError, 
+    formError 
+  } = useForm(
     { form: { name: 'HeroSignUp' } }
   )
   const { handleSubmit, watch } = methods
@@ -243,7 +249,7 @@ const SignUpWithEmailFieldLink = ({
   }, [inputValue, isOverflowing])
 
   return (
-    <FormContext {...methods}>
+    <FormProvider {...methods}>
       <$Form align={align} className={className}>
         <$FormInner
           onSubmit={handleSubmit(onSubmit)}
@@ -286,7 +292,7 @@ const SignUpWithEmailFieldLink = ({
           </$FormErrors>
         )}
       </$Form>
-    </FormContext>
+    </FormProvider>
   )
 }
 

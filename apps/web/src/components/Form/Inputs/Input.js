@@ -1,4 +1,5 @@
-/* eslint-disable react/display-name */
+/* eslint-disable perfectionist/sort-objects */
+
 import React, { forwardRef } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { styled } from '@design'
@@ -71,19 +72,20 @@ const Input = forwardRef(
     return (
       <Controller
         control={control}
-        rules={rules}
         name={name}
-        as={
+        render={({ field }) => (
           <$Input
+            {...field}
             as={type === 'textarea' ? 'textarea' : undefined}
-            label={label}
-            type={type}
-            placeholder={placeholder}
             component={component}
+            label={label}
+            placeholder={placeholder}
             ref={ref}
+            type={type}
             {...props}
           />
-        }
+        )}
+        rules={rules}
       />
     )
   }

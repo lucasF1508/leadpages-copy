@@ -4,10 +4,10 @@ const { DEVELOPMENT_TRAIL_SIGNUP_ENDPOINT } = process.env
 const { VERCEL_ENV } = process.env
 
 export const freeTrialEndpoints = {
-  standardAnnual: 'lamghdv4qr14',
-  standardMonthly: 'fvnp9stiiu14',
   proAnnual: 'jh4rs6oedh14',
   proMonthly: 'rv7qq6f68t14',
+  standardAnnual: 'lamghdv4qr14',
+  standardMonthly: 'fvnp9stiiu14',
 }
 
 const fetchTrialUrl = async (req, res) => {
@@ -17,11 +17,11 @@ const fetchTrialUrl = async (req, res) => {
       const endpoint = freeTrialEndpoints[type]
 
       const requestOptions = {
-        method: 'POST',
+        body: JSON.stringify(_.omit(req.body, 'type')),
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(_.omit(req.body, 'type')),
+        method: 'POST',
         redirect: 'follow',
       }
 
@@ -38,7 +38,7 @@ const fetchTrialUrl = async (req, res) => {
     } catch (e) {
       // eslint-disable-next-line
       console.log(`Failed :: Error: ${e.message}`)
-      res.status(500).json({ statusCode: 500, message: e.message })
+      res.status(500).json({ message: e.message, statusCode: 500 })
     }
   } else {
     res.setHeader('Allow', 'POST')

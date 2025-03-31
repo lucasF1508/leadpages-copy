@@ -146,7 +146,7 @@ const SiloBackAndForthNavCards = ({
     <CardSectionHeading>{heading}</CardSectionHeading>
     <CardsContainer>
       <Card>
-        <Link href={backToUrl} passHref>
+        <Link href={backToUrl} passHref legacyBehavior>
           <StyledLink>
             <Flexbox>
               <ArrowLeft src={leftArrowIcon.src} alt="left arrow" />
@@ -159,7 +159,7 @@ const SiloBackAndForthNavCards = ({
         </Link>
       </Card>
       <Card>
-        <Link href={nextUrl} passHref>
+        <Link href={nextUrl} passHref legacyBehavior>
           <StyledLink>
             <Flexbox>
               <CardTextContainer>

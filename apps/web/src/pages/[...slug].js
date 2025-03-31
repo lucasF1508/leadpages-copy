@@ -1,5 +1,5 @@
 import React from 'react'
-import {getStaticPathsParams, query, runQueries } from '@lib/queries'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import Page, { PageSidebar } from '@layouts/Page'
 import { getPlanData, getGroupedPlanData } from '@utils/plans'
 import { features } from 'config'
@@ -76,7 +76,7 @@ export async function getStaticProps(context) {
         },
         preview,
       }
-    ),
+    )
   )
 
   // Only fetch pricing if we need it
@@ -104,7 +104,8 @@ export async function getStaticProps(context) {
 export async function getStaticPaths() {
   const paths = await getStaticPathsParams({
     catchAll: true,
-    filter: 'slug.current != "404" && path != "/product/feature-index" && path != "/website-templates" && path != "/templates"',
+    filter:
+      'slug.current != "404" && path != "/product/feature-index" && path != "/website-templates" && path != "/templates"',
     types,
   })
 

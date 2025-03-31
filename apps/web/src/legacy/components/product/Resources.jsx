@@ -209,20 +209,19 @@ const Resources = () => (
                 Level-up your skills with virtual workshops, coaching, and free
                 resources.
               </FlexRowItem6Copy>
-              <Link href="/marketing-resources">
-                <a
-                  aria-label="resources link"
-                  rel="noreferrer noopener"
-                  // target="_blank"
-                >
-                  <FlexRowItem6CTA>
-                    Discover Marketing Resources&nbsp;
-                    <ArrowRightPurple
-                      src={rightArrowPurple.src}
-                      alt="purple right arrow"
-                    />
-                  </FlexRowItem6CTA>
-                </a>
+              <Link
+                href="/marketing-resources"
+                aria-label="resources link"
+                // target="_blank"
+                rel="noreferrer noopener"
+              >
+                <FlexRowItem6CTA>
+                  Discover Marketing Resources&nbsp;
+                  <ArrowRightPurple
+                    src={rightArrowPurple.src}
+                    alt="purple right arrow"
+                  />
+                </FlexRowItem6CTA>
               </Link>
             </FlexRowItem6>
           </FlexCopyContainer>

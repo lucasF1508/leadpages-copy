@@ -87,7 +87,7 @@ const HowToCalculateCRO = () => (
             </ParagraphSmall>
             <ParagraphSmall>
               Another example would be making a sale on a&nbsp;
-              <Link href="/templates/sales" passHref>
+              <Link href="/templates/sales" passHref legacyBehavior>
                 <ArticleLink aria-label="Sales Templates">
                   sales page.
                 </ArticleLink>

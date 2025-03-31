@@ -263,7 +263,7 @@ const ProductToolkitRotator = ({ itemArray }) => {
                       <CardText>{text}</CardText>
                       {linkRoute && (
                         <CardLinkHolder>
-                          <Link href={linkRoute} passHref>
+                          <Link href={linkRoute} passHref legacyBehavior>
                             <CardLink aria-label={linkAltText}>
                               <span>{`${linkText}  `}</span>
                               <CardLinkArrowSVG

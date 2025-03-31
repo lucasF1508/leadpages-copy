@@ -368,7 +368,11 @@ const LeadGenerationStrategies = () => (
             </ParagraphSmall>
             <ParagraphSmall>
               What do you need to outline? Check out these&nbsp;
-              <Link href="/landing-pages-guide/landing-page-elements" passHref>
+              <Link
+                href="/landing-pages-guide/landing-page-elements"
+                passHref
+                legacyBehavior
+              >
                 <ArticleLink aria-label="essential landing page elements">
                   essential landing page elements
                 </ArticleLink>

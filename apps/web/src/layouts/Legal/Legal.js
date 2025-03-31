@@ -792,7 +792,7 @@ const MarketingResourcePage = () => (
               online order for your access and use of the Services (“Ordering
               Document”). For the most current information about our pricing and
               payment, please review our Pricing and Payment Terms (
-              <Link href="/pricing" passHref>
+              <Link href="/pricing" passHref legacyBehavior>
                 <StyledInternalLink aria-label="link to Leadpages pricing and payment terms">
                   www.leadpages.com/pricing
                 </StyledInternalLink>
@@ -943,7 +943,7 @@ const MarketingResourcePage = () => (
               Leadpages, its Site visitors, its Users, or the public as required
               or permitted by law. More information on Leadpages’ Privacy Policy
               can be reviewed at{' '}
-              <Link href="/privacy" passHref>
+              <Link href="/privacy" passHref legacyBehavior>
                 <StyledInternalLink aria-label="link to Leadpages privacy policy">
                   www.leadpages.com/privacy
                 </StyledInternalLink>

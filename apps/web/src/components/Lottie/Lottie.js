@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useEffect, useRef, useState, useId } from 'react'
 import { styled } from '@design'
-import LottieReact from 'lottie-react'
+import LottieReact, {LottiePlayer} from 'lottie-react';
 import isJSON from '@utils/isJSON'
 import Loader from '@components/Loader'
 
@@ -17,19 +17,21 @@ const $LottieContainer = styled('div', {
   },
 })
 
+LottiePlayer.setIDPrefix('lottie-legacy-')
+
 const Lottie = ({
   lottie: file = {},
-  advancedConfig: { config, controlBar = false } = {},
+  advancedConfig: { config } = {},
   playOnScroll,
   startInView,
   autoplay,
   offset = {},
   loop,
   yoyo,
-  speed = 1,
   ...props
 }) => {
   if (!file?.url) return null
+  const id = useId()
   let direction = 1
   const { start = 0, end = 1 } = offset || {}
   const ref = useRef()
@@ -126,14 +128,15 @@ const Lottie = ({
         css={{ ratio: `${width}:${height}`, opacity: isLoading ? 0 : 1 }}
       >
         <LottieReact
-          ref={ref}
-          lottieRef={lottie}
           animationData={data}
           autoplay={autoplay}
+          interactivity={getInteractivity()}
           loop={loop}
+          lottieRef={lottie}
           onComplete={() => handleEvent('complete')}
           onLoopComplete={() => handleEvent('complete')}
-          interactivity={getInteractivity()}
+          ref={ref}
+          id={`lottie-legacy-${id}`}
         />
       </$LottieContainer>
     </>

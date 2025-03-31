@@ -206,7 +206,7 @@ export default withConfig(
         }),
         F.boolean({
           name: 'hasIcon',
-          title: 'Has  Icon',
+          title: 'Has Icon',
           initialValue: false,
           group: 'options',
         }),

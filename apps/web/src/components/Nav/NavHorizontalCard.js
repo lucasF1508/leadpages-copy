@@ -1,8 +1,8 @@
+import { useState } from 'react'
+import { styled } from '@design'
 import Image from '@components/Image'
 import Link from '@components/Link'
-import { styled } from '@design'
 import { $LinkUnderline } from '@components/Nav/NavStackedCard'
-import { useState } from 'react'
 
 const $NavHorizontalCard = styled('div', {
   d: 'flex',
@@ -109,11 +109,11 @@ const NavHorizontalCard = ({ data }) => {
   if (!image) return null
 
   return (
-    <$Link url={url} target={target} condition={condition}>
+    <$Link condition={condition} target={target} url={url}>
       <$NavHorizontalCard
+        linkStyle={linkStyle}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        linkStyle={linkStyle}
       >
         <$Image image={image} />
         <$Content>
@@ -124,19 +124,19 @@ const NavHorizontalCard = ({ data }) => {
               <Link
                 as="span"
                 condition={condition}
-                label={linkLabel}
-                url={url}
                 css={{
                   px: linkStyle !== 'text' && '$2',
                 }}
                 hasIcon={hasIcon}
+                label={linkLabel}
                 linkStyle={linkStyle}
+                url={url}
               />
               <$LinkUnderline
-                initial={{ scaleX: 0 }}
                 animate={{
                   scaleX: linkStyle === 'text' && isHovered ? 1 : 0,
                 }}
+                initial={{ scaleX: 0 }}
                 transition={{ duration: 0.2 }}
               />
             </$LinkLabel>

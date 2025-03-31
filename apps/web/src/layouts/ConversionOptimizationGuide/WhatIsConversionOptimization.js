@@ -312,6 +312,7 @@ const WhatIsConversionOptimization = () => (
               <Link
                 href="/conversion-optimization-guide/how-to-improve-conversion-rate"
                 passHref
+                legacyBehavior
               >
                 <ArticleLink aria-label="How Can I Improve My Conversion Rate?">
                   (How Can I Improve Conversion Rate On My Page?)
@@ -496,6 +497,7 @@ const WhatIsConversionOptimization = () => (
               <Link
                 href="/conversion-optimization-guide/what-is-a-b-testing"
                 passHref
+                legacyBehavior
               >
                 <ArticleLink aria-label="What Is Conversion Rate Optimization (CRO)?">
                   Learn about A/B testing in chapter five.

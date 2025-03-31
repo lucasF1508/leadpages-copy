@@ -74,11 +74,12 @@ const NavRowCards = ({ cards }) => {
           link,
           hoverColor = 'white',
           backgroundColor,
+          disableHover
         }) => (
           <$Link {...link} linkStyle="none" key={_key}>
             <$NavRowCard onClick={() => setNavOpen(false)}>
               <$Image
-                hover={hoverColor}
+                hover={!disableHover && hoverColor}
                 css={{ '&:hover': { backgroundColor } }}
               >
                 <Image image={image} objectFit="contain" />

@@ -136,10 +136,8 @@ const TwoButtonCTA = ({ headline, caption }) => (
       >
         <LeftButton>Share Your Story</LeftButton>
       </a>
-      <Link href="/pricing">
-        <a aria-label="Start a free trial">
-          <RightButton>Start a Free Trial</RightButton>
-        </a>
+      <Link href="/pricing" aria-label="Start a free trial">
+        <RightButton>Start a Free Trial</RightButton>
       </Link>
     </ButtonContainer>
   </Container>

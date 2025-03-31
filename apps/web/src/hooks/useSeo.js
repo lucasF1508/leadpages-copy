@@ -2,7 +2,6 @@
 import { useRouter } from 'next/router'
 import useImageParser from './useImageParser'
 
-
 /* eslint-disable prefer-destructuring */
 const GTAG_TRACKING_ID = process.env.GTAG_TRACKING_ID
 const GTM_CONTAINER_ID = process.env.GTM_CONTAINER_ID
@@ -42,7 +41,7 @@ const useSeo = ({ seo, siteMeta, isVariant } = {}) => {
     publishDate,
     modifyDate,
   } = seo || {}
-  
+
   const _image = useImageParser(seoImage || seoImageDefault, {
     imageBuilder: (imageUrlBuilder) => imageUrlBuilder.width(1200).height(630),
   })

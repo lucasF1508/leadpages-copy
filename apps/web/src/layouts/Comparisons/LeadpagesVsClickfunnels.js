@@ -114,7 +114,7 @@ const LeadpagesVsClickfunnels = () => (
             <SectionWrapper name="overview">
               <StyledParagraphLarge>
                 Ever wonder how{' '}
-                <Link href="/" passHref>
+                <Link href="/" passHref legacyBehavior>
                   <ArticleLink>Leadpages</ArticleLink>
                 </Link>{' '}
                 stacks up against ClickFunnels? As two major players in the
@@ -259,7 +259,7 @@ const LeadpagesVsClickfunnels = () => (
               </StyledParagraphSmall>
               <StyledParagraphSmall>
                 Leadpages’{' '}
-                <Link href="/templates" passHref>
+                <Link href="/templates" passHref legacyBehavior>
                   <ArticleLink>large number of template choices</ArticleLink>
                 </Link>{' '}
                 provides a lot of polished options that can accomodate most
@@ -369,7 +369,7 @@ const LeadpagesVsClickfunnels = () => (
                   <StyledImage image={leadmeterExcellent} />
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/alert-bars" passHref>
+                  <Link href="/product/alert-bars" passHref legacyBehavior>
                     <ArticleLink>
                       <strong>Alert bars:</strong>
                     </ArticleLink>
@@ -378,7 +378,7 @@ const LeadpagesVsClickfunnels = () => (
                   top-of-page text bars.
                 </ListItem>
                 <ListItem>
-                  <Link href="/product/pop-up-builder" passHref>
+                  <Link href="/product/pop-up-builder" passHref legacyBehavior>
                     <ArticleLink>
                       <strong>Pop-up forms:</strong>
                     </ArticleLink>

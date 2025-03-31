@@ -379,7 +379,11 @@ const LeadGenerationLandingPages = () => (
               for conversion. We have an entire guide just about how to improve
               your conversion rate by designing and optimizing your landing
               page. Check out the&nbsp;
-              <Link href="/conversion-optimization-guide" passHref>
+              <Link
+                href="/conversion-optimization-guide"
+                passHref
+                legacyBehavior
+              >
                 <ArticleLink aria-label="conversion optimization guide here.">
                   conversion optimization guide here.
                 </ArticleLink>
@@ -470,6 +474,7 @@ const LeadGenerationLandingPages = () => (
             <Link
               href="https://www.leadpages.com/templates/preview/KdUWPeeU3gTG49WLGEqnqQ"
               passHref
+              legacyBehavior
             >
               <TemplateLink aria-label="app pricing tiers" target="_blank">
                 <TemplateImage
@@ -510,7 +515,7 @@ const LeadGenerationLandingPages = () => (
             </ParagraphSmall>
             <ParagraphSmall>
               Check out&nbsp;
-              <Link href="/integrations" passHref>
+              <Link href="/integrations" passHref legacyBehavior>
                 <ArticleLink aria-label="Leadpages integrations">
                   Leadpages integrations
                 </ArticleLink>

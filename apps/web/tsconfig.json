@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "tsconfig/nextjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/app/*"],
+      "@types": ["./src/app/types"],
+      "@types/*": ["./src/app/types/*"],
+      "@app": ["./src/pages/_app"],
+      "@config": ["./config"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@utils/*": ["./src/lib/utils/*"],
+      "@design": ["./src/design"],
+      "@design/*": ["./src/design/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@public/*": ["./public/*"],
+      "@images/*": ["./public/images/*"],
+      "@icons/*": ["./public/icons/*"],
+      "@legacy/*": ["./src/legacy/*"],
+      "underscore": ["lodash"]
+    },
+    "typeRoots": ["./global-types", "./node_modules/@types"],
+    "strictNullChecks": true
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "src/**/*.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}

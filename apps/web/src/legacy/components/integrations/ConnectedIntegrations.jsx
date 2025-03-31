@@ -229,7 +229,7 @@ const ConnectedIntegrations = () => (
         </MobileFlexContainer>
       </ImageContainer>
       <ButtonContainer>
-        <Link href="/integrations" passHref>
+        <Link href="/integrations" passHref legacyBehavior>
           <StyledLink>
             <Button>Explore Leadpages Integrations</Button>
           </StyledLink>

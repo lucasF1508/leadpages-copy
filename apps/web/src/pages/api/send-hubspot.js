@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-import-module-exports
-import { formApiSubmission } from '@lib/forms/hubspotHelpers'
+import { formApiSubmission } from '@/lib/forms/hubspotHelpers'
 
-module.exports = async (req, res) => {
-  const { method, body: data = {} } = req
+const sendHubspot = async (req, res) => {
+  const { body: data = {}, method } = req
 
   if (!['POST'].includes(method)) {
     return res.status(405).send('Method Not Allowed')
@@ -22,3 +22,5 @@ module.exports = async (req, res) => {
     data,
   })
 }
+
+export default sendHubspot

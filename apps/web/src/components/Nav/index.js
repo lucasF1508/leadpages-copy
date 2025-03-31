@@ -1,23 +1,21 @@
-import NavRow from './NavRow'
-import NavRowPrimary from './NavRowPrimary'
-import NavRowCards from './NavRowCards'
+import Nav from './Nav'
 import NavColumnFeatured from './NavColumnFeatured'
 import NavHeading from './NavHeading'
-import NavStackedCard from './NavStackedCard'
 import NavHorizontalCard from './NavHorizontalCard'
 import NavItem from './NavItem'
-import Nav from './Nav'
-import NavLogo from './NavLogo'
+import NavRow from './NavRow'
+import NavRowCards from './NavRowCards'
+import NavRowPrimary from './NavRowPrimary'
+import NavStackedCard from './NavStackedCard'
 
 export {
-  NavRowPrimary,
-  NavRowCards,
-  NavHeading,
-  NavRow,
   NavColumnFeatured,
-  NavItem,
-  NavStackedCard,
+  NavHeading,
   NavHorizontalCard,
-  NavLogo,
+  NavItem,
+  NavRow,
+  NavRowCards,
+  NavRowPrimary,
+  NavStackedCard,
 }
 export default Nav

@@ -17,6 +17,7 @@ import {colors} from '../decorators/colors'
  *  }
  */
 
+const SmallerTextStyle = (props) => <span style={{fontSize: '0.875em'}}>{props.children}</span>
 const LargerTextStyle = (props) => <span style={{fontSize: '1.125em'}}>{props.children}</span>
 
 export const blockContent = {
@@ -33,6 +34,7 @@ export const blockContent = {
       // use your content.
       styles: [
         {title: 'Normal', value: 'normal'},
+        {title: 'Smaller', value: 'small', component: SmallerTextStyle},
         {
           title: 'Larger',
           value: 'large',

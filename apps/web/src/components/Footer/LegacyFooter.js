@@ -189,7 +189,7 @@ const LegacyFooter = ({ slimFooter, isPreviewPage }) => {
             <Col4>
               <FlexColumn>
                 <FlexColumnItem>
-                  <NextLink href="/" passHref>
+                  <NextLink href="/" passHref legacyBehavior>
                     <StyledLink>
                       <LogoIconContainer
                         src={logoIconSVG.src}
@@ -204,32 +204,40 @@ const LegacyFooter = ({ slimFooter, isPreviewPage }) => {
               <SmallCaps>Product</SmallCaps>
               <FlexColumn>
                 <FlexColumnItem>
-                  <NextLink href="/product/feature-index" passHref>
+                  <NextLink
+                    href="/product/feature-index"
+                    passHref
+                    legacyBehavior
+                  >
                     <FooterLink data-gtm="footer-link">Features</FooterLink>
                   </NextLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/integrations" passHref>
+                  <NextLink href="/integrations" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">Integrations</FooterLink>
                   </NextLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/templates" passHref>
+                  <NextLink href="/templates" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">Templates</FooterLink>
                   </NextLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/pricing" passHref>
+                  <NextLink href="/pricing" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">Pricing</FooterLink>
                   </NextLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <OutboundFooterLink href="/demo" data-gtm="footer-link">
+                  <OutboundFooterLink
+                    href="/demo"
+                    data-gtm="footer-link"
+                    legacyBehavior
+                  >
                     Watch a Demo
                   </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/comparisons" passHref>
+                  <NextLink href="/comparisons" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">Comparisons</FooterLink>
                   </NextLink>
                 </FlexColumnItem>
@@ -267,7 +275,7 @@ const LegacyFooter = ({ slimFooter, isPreviewPage }) => {
                   </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/landing-pages-guide" passHref>
+                  <NextLink href="/landing-pages-guide" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">
                       Landing Pages Guide
                     </FooterLink>
@@ -299,7 +307,7 @@ const LegacyFooter = ({ slimFooter, isPreviewPage }) => {
                   </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/customers" passHref>
+                  <NextLink href="/customers" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">
                       Customer Stories
                     </FooterLink>
@@ -317,7 +325,11 @@ const LegacyFooter = ({ slimFooter, isPreviewPage }) => {
                   </OutboundFooterLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <OutboundFooterLink href="/affiliates" data-gtm="footer-link">
+                  <OutboundFooterLink
+                    href="/affiliates"
+                    data-gtm="footer-link"
+                    legacyBehavior
+                  >
                     Affiliate Program
                   </OutboundFooterLink>
                 </FlexColumnItem>
@@ -335,24 +347,24 @@ const LegacyFooter = ({ slimFooter, isPreviewPage }) => {
               <SmallCaps>Company</SmallCaps>
               <FlexColumn>
                 <FlexColumnItem>
-                  <NextLink href="/contact" passHref>
+                  <NextLink href="/contact" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link_contact-us-link">
                       Contact
                     </FooterLink>
                   </NextLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/press" passHref>
+                  <NextLink href="/press" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">Press</FooterLink>
                   </NextLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/careers" passHref>
+                  <NextLink href="/careers" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">Careers</FooterLink>
                   </NextLink>
                 </FlexColumnItem>
                 <FlexColumnItem>
-                  <NextLink href="/faq" passHref>
+                  <NextLink href="/faq" passHref legacyBehavior>
                     <FooterLink data-gtm="footer-link">FAQs</FooterLink>
                   </NextLink>
                 </FlexColumnItem>

@@ -214,7 +214,6 @@ const SiloMobileMenu = ({ pageRoutes, verbiage, useScrollLink }) => {
           <MobileMenuIcon src={downArrowIcon.src} alt="down arrow" />
         </MobileMenuFlexbox>
       </MobileMenuContainer>
-
       {/* Mobile Sub Menu */}
       {showMobileSubMenu && (
         <MobileMenuSubmenu>
@@ -256,7 +255,7 @@ const SiloMobileMenu = ({ pageRoutes, verbiage, useScrollLink }) => {
                     )
                   }
                   return (
-                    <Link href={pageUrl} key={pageUrl} passHref>
+                    <Link href={pageUrl} key={pageUrl} passHref legacyBehavior>
                       <StyledLink
                         onClick={() => handleRouteClick()}
                         aria-label={pageName}

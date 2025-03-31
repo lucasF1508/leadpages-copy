@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { styled } from '@design'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from 'next/legacy/image'
 import { Link as ScrollLink } from 'react-scroll'
 // images
 import PlayButtonSVG from '@legacy/assets/images/global/play-button_purple.svg'
@@ -203,9 +203,7 @@ const ReadyToGrow = ({
           <RTGButtonContainer>
             {!scrollTarget && (
               <Link href="/pricing">
-                <a>
-                  <RTGButton>{buttonText}</RTGButton>
-                </a>
+                <RTGButton>{buttonText}</RTGButton>
               </Link>
             )}
             {scrollTarget && (
@@ -227,32 +225,28 @@ const ReadyToGrow = ({
         )}
         {showDemoVideo && (
           <RTGButtonContainer>
-            <Link href="">
-              <a
-                href=""
-                data-leadbox-popup="nTViYpWLsxbkHpgfxpzrM2"
-                data-leadbox-domain="lps.leadpages.net"
-              >
-                <RTGVideoButton>
-                  <PlayButtonIcon>
-                    <Image
-                      src={PlayButtonSVG}
-                      alt="play button icon"
-                      lazyBoundary="1000px"
-                    />
-                  </PlayButtonIcon>
-                  Watch a quick demo
-                </RTGVideoButton>
-              </a>
+            <Link
+              href=""
+              data-leadbox-popup="nTViYpWLsxbkHpgfxpzrM2"
+              data-leadbox-domain="lps.leadpages.net"
+            >
+              <RTGVideoButton>
+                <PlayButtonIcon>
+                  <Image
+                    src={PlayButtonSVG}
+                    alt="play button icon"
+                    lazyBoundary="1000px"
+                  />
+                </PlayButtonIcon>
+                Watch a quick demo
+              </RTGVideoButton>
             </Link>
           </RTGButtonContainer>
         )}
         {showDownloader && (
           <RTGButtonContainer>
             <Link href="https://s3.amazonaws.com/lpmarketinglibrary/Brand+Assets+-+Leadpages/Leadpages+Press+Kit.zip">
-              <a>
-                <RTGButton>Download Brand Assets</RTGButton>
-              </a>
+              <RTGButton>Download Brand Assets</RTGButton>
             </Link>
           </RTGButtonContainer>
         )}

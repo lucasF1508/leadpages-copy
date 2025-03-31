@@ -183,16 +183,14 @@ const ColumnsRight = ({ columnItems }) => {
               <ItemHeader>{header}</ItemHeader>
               <ItemText>{text}</ItemText>
               {link && (
-                <Link href={link.route}>
-                  <a aria-label={link.altText}>
-                    <CTA>
-                      {`${link.text}`}
-                      <ArrowRightPurple
-                        src={rightArrowPurple.src}
-                        alt="purple right arrow"
-                      />
-                    </CTA>
-                  </a>
+                <Link href={link.route} aria-label={link.altText}>
+                  <CTA>
+                    {`${link.text}`}
+                    <ArrowRightPurple
+                      src={rightArrowPurple.src}
+                      alt="purple right arrow"
+                    />
+                  </CTA>
                 </Link>
               )}
             </ColumnItem>

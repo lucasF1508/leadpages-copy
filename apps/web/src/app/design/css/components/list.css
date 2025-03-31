@@ -1,0 +1,38 @@
+.list-bullet,
+.list-number,
+.list-check {
+  @apply ml-0 mt-3;
+
+  li {
+    @apply relative mt-0.5 list-none pl-3 leading-normal first:mt-0;
+  }
+}
+
+.list-bullet {
+  li::before {
+    @apply rounded-round bg-body absolute left-0.5 top-[0.75em] mt-[-0.125rem] block h-[0.25em] w-[0.25em] content-[''];
+    font-size: inherit;
+  }
+}
+
+.list-number {
+  counter-reset: list;
+
+  li::before {
+    @apply text-body absolute left-0 top-0 text-right font-bold leading-normal;
+    content: counter(list, numeric) '. ';
+    counter-increment: list;
+  }
+}
+
+.list-check {
+  @apply mt-3;
+
+  li {
+    @apply relative list-none pl-3;
+  }
+}
+
+.list-check-icon {
+  @apply stroke-body absolute left-0 top-1/2 h-2 w-2 -translate-y-1/2;
+}

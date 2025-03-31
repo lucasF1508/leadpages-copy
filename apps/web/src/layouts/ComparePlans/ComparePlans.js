@@ -242,11 +242,11 @@ const ComparePlans = () => {
         />
         <SectionLink>
           Have more questions? See our{' '}
-          <Link href="/faq" passHref>
+          <Link href="/faq" passHref legacyBehavior>
             <StyledLink>full FAQ page</StyledLink>
           </Link>{' '}
           or{' '}
-          <Link href="/contact" passHref>
+          <Link href="/contact" passHref legacyBehavior>
             <StyledLink>contact us</StyledLink>
           </Link>
           .

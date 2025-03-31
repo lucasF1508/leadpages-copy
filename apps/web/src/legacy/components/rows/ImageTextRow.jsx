@@ -1,18 +1,18 @@
-import React from 'react';
-import { GatsbyImage } from 'gatsby-plugin-image';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { GATSBY_IMAGE } from '../../constants/types';
+import React from 'react'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import { GATSBY_IMAGE } from '../../constants/types'
 // utilities
-import shouldDisplayVideo from '../../utils/should-display-video';
+import shouldDisplayVideo from '../../utils/should-display-video'
 // gif
-import gif from '../../assets/images/resources/marketing-resources-holiday-hustle-2021.gif';
+import gif from '../../assets/images/resources/marketing-resources-holiday-hustle-2021.gif'
 
 const OuterContainer = styled.div`
   padding-right: 3rem;
   padding-left: 3rem;
-  background-color: ${props => props.backgroundColor};
-`;
+  background-color: ${(props) => props.backgroundColor};
+`
 
 const InnerContainer = styled.div`
   display: flex;
@@ -25,7 +25,7 @@ const InnerContainer = styled.div`
   @media (max-width: 576px) {
     flex-flow: column-reverse wrap;
   }
-`;
+`
 
 const MediaContainer = styled.div`
   position: relative;
@@ -49,7 +49,7 @@ const MediaContainer = styled.div`
     -ms-flex: 0 0 41.6%;
     flex: 0 0 41.6%;
   }
-`;
+`
 
 const DesktopImage = styled.img`
   top: 0;
@@ -58,7 +58,7 @@ const DesktopImage = styled.img`
   @media (max-width: 576px) {
     display: none;
   }
-`;
+`
 
 const GifContainer = styled.div`
   width: 100%;
@@ -67,7 +67,7 @@ const GifContainer = styled.div`
   right: 0;
   margin-left: auto;
   margin-right: auto;
-`;
+`
 
 const DesktopFallbackImage = styled(GatsbyImage)`
   width: 100%;
@@ -75,7 +75,7 @@ const DesktopFallbackImage = styled(GatsbyImage)`
   @media (min-width: 576px) {
     margin-top: 3rem;
   }
-`;
+`
 
 const MobileImage = styled(GatsbyImage)`
   width: 100%;
@@ -83,7 +83,7 @@ const MobileImage = styled(GatsbyImage)`
   @media (min-width: 576px) {
     margin-top: 3rem;
   }
-`;
+`
 
 const TextContainer = styled.div`
   position: relative;
@@ -102,24 +102,24 @@ const TextContainer = styled.div`
     flex: 0 0 50%;
     text-align: left;
   }
-`;
+`
 
 const Badge = styled.div`
   display: inline-block;
   margin-bottom: 1.25rem;
   padding: 4px 8px;
   border-radius: 3px;
-  background-color: ${props => props.backgroundColor};
-  color: ${props => props.textColor};
+  background-color: ${(props) => props.backgroundColor};
+  color: ${(props) => props.textColor};
   font-family: 'Space Mono';
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 2px;
   text-transform: uppercase;
   > span {
-    opacity: ${props => (props.textColor === '#ffffff' ? 0.7 : 1)};
+    opacity: ${(props) => (props.textColor === '#ffffff' ? 0.7 : 1)};
   }
-`;
+`
 
 const Title = styled.div`
   margin-bottom: 1.25rem;
@@ -128,7 +128,7 @@ const Title = styled.div`
   line-height: 30px;
   font-weight: 500;
   color: #fff;
-`;
+`
 
 const Body = styled.div`
   margin-bottom: 1.25rem;
@@ -136,21 +136,21 @@ const Body = styled.div`
   font-size: 16px;
   line-height: 24px;
   color: #fff;
-`;
+`
 
 const StyledLink = styled.a`
   cursor: pointer;
   text-decoration: none;
-`;
+`
 
 const Button = styled.button`
   width: 209px;
   height: 48px;
   border: 3px solid;
   border-radius: 48px;
-  border-color: ${props => (props.secondary ? '#ffffff' : '#603eff')};
-  background-color: ${props => (props.secondary ? '#ffffff' : '#603eff')};
-  color: ${props => (props.secondary ? '#603eff' : '#ffffff')};
+  border-color: ${(props) => (props.secondary ? '#ffffff' : '#603eff')};
+  background-color: ${(props) => (props.secondary ? '#ffffff' : '#603eff')};
+  color: ${(props) => (props.secondary ? '#603eff' : '#ffffff')};
   font-size: 16px;
   font-weight: 500;
   line-height: 28px;
@@ -164,10 +164,10 @@ const Button = styled.button`
   }
   &:hover {
     border: 3px solid;
-    border-color: ${props => (props.secondary ? '#cccccc' : '#4d32cc')};
-    background-color: ${props => (props.secondary ? '#cccccc' : '#4d32cc')};
+    border-color: ${(props) => (props.secondary ? '#cccccc' : '#4d32cc')};
+    background-color: ${(props) => (props.secondary ? '#cccccc' : '#4d32cc')};
   }
-`;
+`
 
 const ImageTextRow = ({
   image,
@@ -181,7 +181,7 @@ const ImageTextRow = ({
   ctaLink,
   buttonStyling,
 }) => {
-  const displayGif = shouldDisplayVideo();
+  const displayGif = shouldDisplayVideo()
   return (
     <OuterContainer backgroundColor={backgroundColor}>
       <InnerContainer>
@@ -204,19 +204,24 @@ const ImageTextRow = ({
           </Badge>
           <Title>{title}</Title>
           <Body>{body}</Body>
-          <StyledLink href={ctaLink} alt={ctaText} target="_blank" rel="nofollow noreferrer">
+          <StyledLink
+            href={ctaLink}
+            alt={ctaText}
+            target="_blank"
+            rel="nofollow noreferrer"
+          >
             <Button secondary={buttonStyling === 'secondary'}>{ctaText}</Button>
           </StyledLink>
         </TextContainer>
       </InnerContainer>
     </OuterContainer>
-  );
-};
+  )
+}
 
 ImageTextRow.defaultProps = {
   backgroundColor: '#ffffff',
   buttonStyling: 'primary',
-};
+}
 
 ImageTextRow.propTypes = {
   backgroundColor: PropTypes.string,
@@ -229,6 +234,6 @@ ImageTextRow.propTypes = {
   ctaText: PropTypes.string.isRequired,
   ctaLink: PropTypes.string.isRequired,
   buttonStyling: PropTypes.oneOf(['primary', 'secondary']),
-};
+}
 
-export default ImageTextRow;
+export default ImageTextRow

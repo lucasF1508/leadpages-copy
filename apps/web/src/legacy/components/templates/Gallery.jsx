@@ -102,14 +102,14 @@ const Gallery = ({
       </HeadlineContainer>
       <TabHeadingContainer name="tab-toolbar">
         <TabHeadingFlexbox>
-          <Link href="/templates" passHref>
+          <Link href="/templates" passHref legacyBehavior>
             <TabLink
               className={asPath.includes('/templates') ? 'active-template' : ''}
             >
               Landing Pages
             </TabLink>
           </Link>
-          <Link href="/website-templates" passHref>
+          <Link href="/website-templates" passHref legacyBehavior>
             <TabLink
               className={
                 asPath.includes('/website-templates') ? 'active-template' : ''
