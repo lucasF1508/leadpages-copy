@@ -14,7 +14,6 @@ const RedbrickStructuredDataScript = () => (
             "name":"Leadpages",
             "legalName":"Leadpages (US), Inc.",
             "alternateName":"Leadpages Canada Inc.",
-            "alternateName":"Leadpages.net",
             "url":"https://www.leadpages.com",
             "logo":{
               "@type":"ImageObject",
