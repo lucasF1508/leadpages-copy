@@ -46,8 +46,8 @@ const RedbrickStructuredDataScript = () => (
               "https://www.linkedin.com/company/leadpages",
               "https://www.twitter.com/Leadpages",
               "https://www.instagram.com/leadpages/",
-              "https://www.pinterest.com/leadpagesHQ/"
-              "https://www.tiktok.com/@leadpages_"
+              "https://www.pinterest.com/leadpagesHQ/",
+              "https://www.tiktok.com/@leadpages_",
               "https://www.youtube.com/@LeadpagesSoftware"
             ],
             "parentOrganization":{
