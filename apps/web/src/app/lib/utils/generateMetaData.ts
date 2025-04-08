@@ -26,10 +26,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const {siteMeta} = global || {}
   const {siteName} = siteMeta || {}
 
-  const { seoDescription: description, seoImage: image, seoTitle: title } = seo
+  const { seoDescription: description, seoImage: image, seoTitle: title } = seo || {}
   const robots = VERCEL_ENV !== 'production' ? 'noindex, nofollow' : ''
 
-  const { metadata: { dimensions: { height, width }}} = image || {}
+  const { metadata: { dimensions: { height, width } = {}} = {}} = image || {}
  
   return {
     description,
