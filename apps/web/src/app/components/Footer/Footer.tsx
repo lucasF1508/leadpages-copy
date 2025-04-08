@@ -6,6 +6,7 @@ import React from 'react'
 import Logo from '@public/images/logo.svg'
 import getClient from 'client'
 import Image from '@/components/Image'
+import Link from '@/components/Link'
 import Social from '@/components/Social'
 import RedbrickFooter from './RedbrickFooter'
 
@@ -20,17 +21,10 @@ export interface FooterProps {
   social: SocialShareItemType[]
 }
 
-// TODO - Remove and update Link Component to use app router
-const Link = ({ children, className, label }: any) => (
-  <a className={className} href="#">
-    {label || children}
-  </a>
-)
-
 const Footer = async () => {
   const client = getClient()
   const { address, copyright, legal, menu, social }: FooterProps =
-    await client.fetch(`*[_type == 'footer'] [0]`)
+    await client.fetch(`*[_type == 'footer'] [0]`) || {}
 
   const year = new Date().getFullYear()
 
@@ -53,6 +47,7 @@ const Footer = async () => {
                 {links.map((link: any) => (
                   <Link
                     className="type-body-xs text-body-neutral-body block"
+                    hasIcon={false}
                     key={link.label}
                     {...link}
                   />
@@ -75,7 +70,7 @@ const Footer = async () => {
                   <span className="text-body-neutral-body">|</span>
                 )}
                 <Link
-                  className="block"
+                  className="block type-caption-xxs"
                   key={link.label}
                   {...link}
                   linkStyle="text"
