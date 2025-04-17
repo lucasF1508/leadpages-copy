@@ -35,16 +35,16 @@ const Item = ({ children }: {children: React.ReactNode}) => (
 )
 
 const NavDrawerMenu = ({ navigation }: NavDrawerMenuProps) => {
-  const { buttons, menu } = navigation
-    const [current, setCurrent] = useState<null | number>(null)
-    const handleClick = (index: number) => {
-      if (current === index) {
-        setCurrent(null)
-        return null
-      }
-      setCurrent(index)
+  const { buttons, menu } = navigation || {}
+  const [current, setCurrent] = useState<null | number>(null)
+  const handleClick = (index: number) => {
+    if (current === index) {
+      setCurrent(null)
       return null
     }
+    setCurrent(index)
+    return null
+  }
 
   return (
     <div className={clsx('h-full max-h-full w-full flex flex-col justify-between px-2 pt-2 relative')}>
@@ -110,7 +110,7 @@ const NavDrawerMenu = ({ navigation }: NavDrawerMenuProps) => {
         exit={{ opacity: 0, y: 50 }}
         initial={{ opacity: 0, y: 50 }}
         transition={{ delay: menu?.length && menu.length * 0.1, duration: 0.2 }}>
-          {buttons.map(({_key, ...button}: LinkType, i: number) => <Link key={_key} {...button} linkStyle={i === 0 ? 'text' : 'button-solid'} />)}
+          {buttons?.map(({_key, ...button}: LinkType, i: number) => <Link key={_key} {...button} linkStyle={i === 0 ? 'text' : 'button-solid'} />)}
       </m.div>
     </div>
   )
