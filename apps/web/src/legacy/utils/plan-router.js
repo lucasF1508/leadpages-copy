@@ -16,6 +16,7 @@ export const buildCheckoutUrl = (
   flow,
   windowObj
 ) => {
+  const {document} = windowObj || {}
   let checkoutUrl =
     flow === 'reactivation'
       ? `${process.env.LEADPAGES_REACTIVATION_HOST}/my-account/re-activate/`
@@ -34,6 +35,8 @@ export const buildCheckoutUrl = (
       couponData.validPlans.indexOf(planId) !== -1
     couponValue = couponAvailableForPlan ? couponData.code : null
   }
+
+  const funnelyticsParams = {key: '_fsRef', value: document?.location?.href?.split('?')[0]}
   const couponParams = { key: 'coupon', value: couponValue }
   const bundleParams = { key: 'bundle', value: bundleData?._meta?.id || null }
   const templateParams = {
@@ -43,7 +46,7 @@ export const buildCheckoutUrl = (
 
   // push params to an array
   const paramsArray = []
-  paramsArray.push(planIdParams, couponParams, bundleParams, templateParams)
+  paramsArray.push(planIdParams, couponParams, bundleParams, templateParams, funnelyticsParams)
   // remove falsy params, then add to url
   const filteredParamsArray = paramsArray.filter((el) => !!el.value)
   if (filteredParamsArray.length > 0) {
@@ -53,6 +56,7 @@ export const buildCheckoutUrl = (
     })
     checkoutUrl += `?${urlParams.toString()}`
   }
+
   return checkoutUrl
 }
 

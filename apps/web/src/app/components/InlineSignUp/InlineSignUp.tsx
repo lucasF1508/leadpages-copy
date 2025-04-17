@@ -77,34 +77,34 @@ const InlineSignUp = ({ className, classNames, external, label, placeholder, sig
   }
 
   return (
-      <div className='flex flex-col justify-center relative'>
-        <FormProvider {...methods}>
-          <form
-            className={clsx(
-              'flex flex-row flex-wrap items-center justify-start md:gap-0 gap-[0.125rem] max-w-[27rem] md:flex-nowrap',
-              className,
-              classNames?.root
-            )}
-            onSubmit={handleSubmit(interceptSubmit)}
-          >
-            <input
-              className={
-                clsx(
-                  '[background-color:transparent] focus:bg-light bg-gradient-input backdrop-blur-md transition-all duration-200 ease-in-out',
-                  "!ring-brand-lime flex-[1_1_auto] type-body-sm block h-6 rounded-md border-none p-2.5 py-0 text-obsidian-900 placeholder:text-dark max-md:flex-[1_1_auto]")}
-              disabled={isLoading}
-              placeholder={placeholder}
-              type="email"
-              {...register('email')}
-            />
-            <button className="link-button-solid max-md:w-full" disabled={isLoading} type="submit">
-              {label}
-              {isLoading ? <Loader /> : <LinkIcon />}
-            </button>
+    <>
+      <FormProvider {...methods}>
+        <form
+          className={clsx(
+            'flex flex-row flex-wrap items-center justify-start md:gap-0 gap-[0.125rem] w-full max-w-[27rem] md:flex-nowrap relative',
+            className,
+            classNames?.root
+          )}
+          onSubmit={handleSubmit(interceptSubmit)}
+        >
+          <input
+            className={
+              clsx(
+                '[background-color:transparent] focus:bg-light bg-gradient-input backdrop-blur-md transition-all duration-200 ease-in-out md:w-full md:max-w-cols3',
+                "!ring-brand-lime flex-[1_1_auto] type-body-sm block h-6 rounded-md border-none p-2.5 py-0 text-obsidian-900 placeholder:text-dark max-md:flex-[1_1_auto]")}
+            disabled={isLoading}
+            placeholder={placeholder}
+            type="email"
+            {...register('email')}
+          />
+          <button className="link-button-solid max-md:w-full" disabled={isLoading} type="submit">
+            {label}
+            {isLoading ? <Loader /> : <LinkIcon />}
+          </button>
+          {formError && <p className='text-xs text-error absolute -bottom-3 left-0 pt-1 max-w-full'>{formError}</p>}
         </form>
       </FormProvider>
-      {formError && <p className='text-xs text-error absolute bottom-0 translate-y-full pt-1 max-w-full'>{formError}</p>}
-    </div>
+    </>
   )
 }
  
