@@ -10,7 +10,7 @@ const NavBarViewport = () => (
   >
     <NavBarPrimitiveViewport
       className={clsx(
-        'shadow-dropdown w-full relative mt-1.5 origin-center overflow-scroll rounded-lg bg-surface-neutral-dark/90',
+        'shadow-dropdown w-full relative mt-1.5 origin-center overflow-scroll rounded-lg bg-surface-neutral-dark/90 border border-border-muted',
         'h-[var(--radix-navigation-menu-viewport-height)] max-h-[calc(100vh-var(--header-height)-2.625rem)] min-h-[18.75rem]',
         'data-[state=closed]:animate-[scale-out_200ms_ease] data-[state=open]:animate-[scale-in_200ms_ease]'
       )}

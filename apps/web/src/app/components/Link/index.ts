@@ -1,6 +1,7 @@
 import Link from './Link'
 import LinkDisabled from './LinkDisabled'
 import LinkExternal, { DownloadIcon, ExternalIcon } from './LinkExternal'
+import LinkIcon from './LinkIcon'
 import LinkInternal, { InternalIcon } from './LinkInternal'
 import Links, { type LinksProps } from './Links'
 
@@ -11,6 +12,7 @@ export {
   InternalIcon,
   LinkDisabled,
   LinkExternal,
+  LinkIcon,
   LinkInternal,
   Links,
 }

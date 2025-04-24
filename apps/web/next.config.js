@@ -30,6 +30,7 @@ const {
   NEXT_PUBLIC_URL,
   RECAPTCHA_SITE_KEY,
   SANITY_STUDIO_API_DATASET,
+  SANITY_STUDIO_API_DATASET_LEGACY,
   SANITY_STUDIO_API_PROJECT_ID,
   SANITY_STUDIO_API_VERSION,
   SANITY_STUDIO_APP_TOKEN,
@@ -63,6 +64,7 @@ module.exports = withBundleAnalyzer({
     NEXT_PUBLIC_URL,
     RECAPTCHA_SITE_KEY,
     SANITY_STUDIO_API_DATASET,
+    SANITY_STUDIO_API_DATASET_LEGACY,
     SANITY_STUDIO_API_PROJECT_ID,
     SANITY_STUDIO_API_VERSION,
     SANITY_STUDIO_APP_TOKEN,
@@ -86,20 +88,20 @@ module.exports = withBundleAnalyzer({
     deviceSizes: [320, 640, 750, 828, 1080, 1200, 1600, 1920, 2048, 3840],
     remotePatterns: [
       {
-        protocol: 'https',
         hostname: 'cdn.sanity.io',
+        protocol: 'https',
       },
       {
-        protocol: 'https',
         hostname: 'assets.vercel.com',
+        protocol: 'https',
       },
       {
-        protocol: 'https',
         hostname: 'storage.googleapis.com',
+        protocol: 'https',
       },
       {
-        protocol: 'https',
         hostname: 'customer-4yowinxxlegi56v8.cloudflarestream.com',
+        protocol: 'https',
       },
     ]
   },
@@ -108,7 +110,7 @@ module.exports = withBundleAnalyzer({
   reactStrictMode: false,
   redirects: async () => {
     const redirects = await adminRedirects({
-      dataset: SANITY_STUDIO_API_DATASET,
+      dataset: SANITY_STUDIO_API_DATASET_LEGACY,
       projectId: SANITY_STUDIO_API_PROJECT_ID,
     })
 
@@ -179,7 +181,7 @@ module.exports = withBundleAnalyzer({
   rewrites: async () => {
     // Incremental path rewrites
     const incrementalPaths = await filterRoutesFromSanity({
-      dataset: SANITY_STUDIO_API_DATASET,
+      dataset: SANITY_STUDIO_API_DATASET_LEGACY,
       directory: './src/pages/_legacy',
       projectId: SANITY_STUDIO_API_PROJECT_ID,
     })

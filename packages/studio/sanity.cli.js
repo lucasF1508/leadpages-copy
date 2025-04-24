@@ -8,7 +8,7 @@ export default defineCliConfig({
   },
   api: {
     projectId: '1ux2e04i',
-    dataset: 'development',
+    dataset: 'production_v3',
   },
   vite: (prevConfig) => ({
     ...prevConfig,

@@ -27,7 +27,7 @@
 }
 
 .link-text {
-  @apply link type-button text-button-text-outline relative relative gap-1.5 rounded-md;
+  @apply link type-button text-button-text-outline relative gap-1.5 rounded-md;
 
   &:hover {
     @apply text-button-text-outline-hover;
@@ -75,7 +75,7 @@
 .link-button-solid,
 .link-button-solid[type='button'],
 .link-button-solid[type='submit'] {
-  @apply link-buttons bg-button-surface-solid text-button-text-solid;
+  @apply link-buttons bg-button-surface-solid text-button-text-solid border border-button-surface-solid;
 
   &:hover {
     @apply bg-button-surface-solid-hover;

@@ -36,8 +36,13 @@ const Item = ({ children, dropdown, index }: {
   </NavBarPrimitiveItem>
 )
 
-const Trigger = ({ children }: { children: React.ReactNode }) => (
-  <NavBarPrimitiveTrigger className="link-text-secondary text-button-text-secondary group-hover/trigger:text-button-text-secondary transition-colors duration-300 h-full">
+const Trigger = ({ children, active }: { children: React.ReactNode, active: boolean }) => (
+  <NavBarPrimitiveTrigger className={
+    clsx(
+      "link-text-secondary text-body-neutral-body group-hover/trigger:text-button-text-secondary transition-colors duration-300 h-full",
+      active && 'text-button-text-secondary',
+    )
+  }>
     {children}
   </NavBarPrimitiveTrigger>
 )
@@ -55,6 +60,8 @@ const Content = ({ children }: { children: React.ReactNode }) => (
     {children}
   </NavBarPrimitiveContent>
 )
+
+export const NavItemUnderline = () => <div className='h-[0.125rem] w-full bg-surface-neutral-light absolute -bottom-[calc(0.75rem+1px)] scale-x-0 group-hover/trigger:scale-x-100 transition-all duration-300'/>
 
 const NavBarMenu = ({ menu }: { menu: any }) =>
   menu.map(
@@ -80,7 +87,7 @@ const NavBarMenu = ({ menu }: { menu: any }) =>
         return (
           <Item dropdown index={index} key={_key}>
             <div className='group/trigger h-full'>
-              <Trigger>
+              <Trigger active={active}>
                 {label}
                 <Icon
                   className="transition-transform duration-200 ease-in-out"
@@ -88,7 +95,7 @@ const NavBarMenu = ({ menu }: { menu: any }) =>
                   style={{ transform: active ? 'scale(-1, -1)' : 'scale(1, 1)' }}
                 />
               </Trigger>
-              <div className='h-[0.125rem] w-full bg-surface-neutral-light absolute -bottom-[calc(1rem+1px)] scale-x-0 group-hover/trigger:scale-x-100 transition-all duration-300'/>
+              <NavItemUnderline />
             </div>
             <Content>
               <ul
@@ -124,7 +131,7 @@ const NavBarMenu = ({ menu }: { menu: any }) =>
         <Item index={index} key={_key}>
           <div className='group/trigger'>
             <Link {...link} hasIcon={false} className='link-text-secondary text-button-text-secondary' linkStyle='text' />
-            <div className='h-[0.188rem] w-full bg-surface-neutral-light absolute -bottom-[calc(1rem+1px)] scale-x-0 group-hover/trigger:scale-x-100 transition-all duration-300'/>
+            <NavItemUnderline />
           </div>
         </Item>
       )

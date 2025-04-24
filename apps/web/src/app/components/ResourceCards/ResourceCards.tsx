@@ -4,6 +4,7 @@ import { LinkType, SanityImageProps } from '@/types'
 import Heading from '@/components/Heading'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
+import { UpRightIcon } from '@/components/Icons/UpRightIcon'
 
 interface ResourceCardProps {
   title?: string
@@ -20,14 +21,6 @@ interface ResourceCardsProps {
   links: LinkType[]
   cards: ResourceCardProps[]
 }
-
-const CardIcon = () => (
-  <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.5 7L6.5 18" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-    <path d="M11.5 6.13153C11.5 6.13153 17.1335 5.65664 17.9885 6.51155C18.8434 7.36647 18.3684 13 18.3684 13" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-)
-
 
 const Card = ({children, fullWidth, index, ...props}: LinkType & {
   children: React.ReactNode
@@ -93,7 +86,11 @@ const ResourceCards = ({ ...props }: ResourceCardsProps) => {
                     <div className={clsx('flex flex-col justify-between h-full grow lg:max-w-[19.875rem]')}>
                       <div className='flex gap-2 justify-between items-center'>
                         <Heading className='type-overline-xxs' heading={heading} as='h6' />
-                        {hasIcon && <div className='h-3 w-3'><CardIcon /></div>}
+                        {hasIcon && (
+                          <div className='h-3 w-3'>
+                            <UpRightIcon />
+                          </div>
+                        )}
                       </div>
                       <Heading heading={title} as='h5' className={clsx('type-h3 pt-4 lg:pt-2', image && fullWidth && 'lg:pt-5' )} />
                     </div>

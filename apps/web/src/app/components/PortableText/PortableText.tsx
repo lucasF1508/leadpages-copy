@@ -65,6 +65,10 @@ export type ColorMarksType = typeof colorMarks
 
 export const defaultBlockStyles: BlockStylesType = {
   'h1-home': { className: 'type-title-t1', tag: 'h1' },
+  'h1-hero': { className: 'type-title-t4 sm:type-title-t3 md:type-title-t2', tag: 'h1' },
+  'h2-hero': { className: 'type-title-t6 sm:type-title-t4 md:type-title-t3', tag: 'h1' },
+  'h3-hero': { className: 'type-title-t7 sm:type-title-t5 md:type-title-t4', tag: 'h1' },
+  'h4-hero': { className: 'type-h2 md:type-h1', tag: 'h1' },
   h1: { className: 'type-title-t4 sm:type-title-t3 md:type-title-t2', tag: 'h2' },
   h2: { className: 'type-title-t6 sm:type-title-t4 md:type-title-t3', tag: 'h2' },
   h3: { className: 'type-title-t7 sm:type-title-t5 md:type-title-t4', tag: 'h3' },

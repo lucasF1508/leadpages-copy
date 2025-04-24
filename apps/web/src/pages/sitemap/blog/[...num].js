@@ -1,11 +1,11 @@
 import { getServerSideSitemapLegacy } from 'next-sitemap'
 import { runQuery } from '@lib/queries'
-import findValuesForKey from '@lib/utils/findValuesForKey'
 import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
+import findValuesForKey from '@lib/utils/findValuesForKey'
 import { perPage } from './index.xml'
 
 const { SANITY_STUDIO_API_PROJECT_ID } = process.env
-const { SANITY_STUDIO_API_DATASET } = process.env
+const { SANITY_STUDIO_API_DATASET_LEGACY } = process.env
 
 export const getServerSideProps = async (context) => {
   const { req } = context
@@ -29,7 +29,7 @@ export const getServerSideProps = async (context) => {
       const url = [
         `https://cdn.sanity.io/images`,
         SANITY_STUDIO_API_PROJECT_ID,
-        SANITY_STUDIO_API_DATASET,
+        SANITY_STUDIO_API_DATASET_LEGACY,
         `${hash}-${dimensions}.${extension}`,
       ].join('/')
 

@@ -6,10 +6,10 @@ import clsx from 'clsx'
 import popupGraph from '@public/lottie/popup-graph.json'
 import popupWriteAi from '@public/lottie/popup-write-with-ai.json'
 import { motion, spring, useAnimate } from "motion/react";
-import Links from '@/components/Links'
+import {Links} from '@/components/Link'
 import Lottie from '@/components/Lottie'
 import Video from '@/components/Video'
-import HeroHomeBackground from './HeroHomeBackground'
+import HeroGradient from '../HeroGradient/HeroGradientHome'
 
 export interface HeroHomeProps {
   className?: string
@@ -132,7 +132,7 @@ const HeroHome = ({
         }
       </div>
       <div className="max-w-cols10 box-mt relative mx-auto w-[87.5%]">
-        <HeroHomeBackground className='absolute left-1/2 top-0 z-[-10] max-w-none -translate-x-1/2 -translate-y-1/2 transform w-[237.85%]' />
+        <HeroGradient className='absolute left-1/2 top-0 z-[-10] max-w-none -translate-x-1/2 -translate-y-1/2 transform w-[237.85%]' />
         <motion.div
           style={{
             perspective: 750,

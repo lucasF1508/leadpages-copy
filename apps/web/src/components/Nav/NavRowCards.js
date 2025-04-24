@@ -82,7 +82,7 @@ const NavRowCards = ({ cards }) => {
                 hover={!disableHover && hoverColor}
                 css={{ '&:hover': { backgroundColor } }}
               >
-                <Image image={image} objectFit="contain" />
+                <Image image={image} objectFit="contain" isLegacy={false}/>
               </$Image>
               <$Label>{label}</$Label>
             </$NavRowCard>

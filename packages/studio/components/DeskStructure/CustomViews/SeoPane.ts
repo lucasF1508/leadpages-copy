@@ -1,5 +1,5 @@
 import {SEOPane} from 'sanity-plugin-seo-pane'
-import {getPreviewUrl} from '@/utils/getPreviewUrl'
+import {getPreviewUrl} from '@/utils/getPreviewUrl' // TODO: Move to bolts
 import {StructureBuilder} from 'sanity/structure'
 
 const SeoPane = (S: StructureBuilder) =>

@@ -12,13 +12,14 @@
 
 .pinion-textBlock{
   .pinion-inner {
-    @apply max-w-cols10;
+    @apply max-w-base;
   }
 }
 
 .pinion-cards,
 .pinion-cardsBlock,
 .pinion-featureCards,
+.pinion-faqs,
 .pinion-cta,
 .pinion-embed,
 .pinion-logoGrid,
@@ -26,11 +27,15 @@
 .pinion-hero,
 .pinion-section,
 .pinion-tableBlock,
+.pinion-textColumns,
 .pinion-textWithStats,
+.pinion-mediaWithText,
 .pinion-mediaWithTextSticky,
 .pinion-mediaWithItems,
 .pinion-resourceCards,
-.pinion-testimonial,
+.pinion-resourceCard,
+.pinion-testimonialBlock,
+.pinion-upsell,
 .pinion-video {
   .pinion-inner {
     @apply max-w-base;
@@ -43,7 +48,8 @@
 
 .pinion-featureCards,
 .pinion-cta,
-.pinion-mediaWithItems {
+.pinion-mediaWithItems,
+.pinion-testimonialBlock {
   @apply overflow-hidden;
 }
 
@@ -55,8 +61,7 @@
   }
 }
 
-.pinion-media,
-.pinion-mediaWithText {
+.pinion-media {
   .pinion-inner {
     @apply max-w-cols10;
   }

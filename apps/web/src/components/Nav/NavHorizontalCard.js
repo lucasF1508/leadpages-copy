@@ -115,7 +115,7 @@ const NavHorizontalCard = ({ data }) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <$Image image={image} />
+        <$Image image={image} isLegacy={false}/>
         <$Content>
           {heading && <$Heading>{heading}</$Heading>}
           {content && <$SecondaryText>{content}</$SecondaryText>}

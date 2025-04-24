@@ -10,6 +10,7 @@ import {
 import { AnimatePresence, m } from 'framer-motion'
 import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
+import NavLogo from '@/components/Nav/NavLogo'
 import { useNavStore } from '@/state/navStore'
 import useEventListener from '@hooks/useEventListener'
 import useMediaQuery from '@hooks/useMediaQuery'
@@ -19,7 +20,6 @@ import Link from '@components/Link'
 import NavBarMenu from '@components/Nav/NavBar/NavBarMenu'
 import NavDrawer, { NavDrawerTrigger } from '@components/Nav/NavDrawer'
 import { useNavStore as useLegacyNavStore } from '@components/Nav/NavStore'
-import NavLogo from '@/components/Nav/NavLogo'
 
 const scaleIn = keyframes({
   from: { transform: 'rotateX(-30deg) scale(0.9)', opacity: 0 },
@@ -334,13 +334,18 @@ const NavBar = ({
                     return isPricing ? (
                       <></>
                     ) : (
-                      <$NavBarButton key={_key}>
+                      <$NavBarButton 
+                        css={{
+                          mr: asPath.includes('pricing') && '$3',
+                        }} 
+                        key={_key}
+                      >
                         <Link
                           css={{
                             color: linkStyle === 'text' && '$textAlt',
                             px: linkStyle !== 'text' && '$3',
                           }}
-                          linkStyle={!!linkStyle ? linkStyle : 'ghost'}
+                          linkStyle={!!linkStyle ? linkStyle === 'button' ? 'ghost' : linkStyle : 'ghost'}
                           url={url}
                           {...rest}
                         />

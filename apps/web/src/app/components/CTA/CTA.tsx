@@ -4,8 +4,8 @@ import React from 'react'
 import clsx from 'clsx'
 import Heading from '@/components/Heading'
 import Image from '@/components/Image'
+import {Links} from '@/components/Link'
 import Text from '@/components/Text'
-import Links from '../Links'
 
 export interface CTAProps {
   backgroundImage?: ImageType
@@ -22,57 +22,100 @@ export interface CTAProps {
   mobileAlignment?: 'center' | 'left'
 }
 
-const CTA = ({ backgroundImage, className, classNames, content, desktopOrientation = 'vertical', heading, links, mobileAlignment = 'center' }:CTAProps) => (
-    <div className={clsx('relative box-py box-[mt*-1]', className, classNames?.root)}>
-      <div className={
-          clsx(
-            'bg-opacity-light-100/10 rounded-xl overflow-hidden border-border-muted relative backdrop-blur-lg pt-7 md:pb-7 px-3 sm:px-6', 
-            classNames?.inner
-          )}
-        >
-        <Heading className={
-          clsx(
-            'type-title-t7 sm:type-title-t5 md:type-title-t4 mb-3', 
-            mobileAlignment === 'center' && 'text-center mx-auto max-w-[10.294em]', 
-            desktopOrientation === 'horizontal' && 'md:ml-0 md:max-w-[10.294em] md:text-left',
-            desktopOrientation === 'vertical' && 'max-w-cols8',
-            classNames?.heading
-          )} 
-          heading={heading}
-        />
-        <div 
-          className={
+const CTAHorizontal = ({
+  content,
+  heading,
+  image,
+  links,
+  mobileAlignment = 'center',
+}: {
+  image?: ImageType
+} & CTAProps) => <div className='flex flex-col md:flex-row gap-4'>
+        <div className={
             clsx(
-              'type-body-lg max-w-[23rem] relative z-content',
-              mobileAlignment === 'center' && 'mx-auto text-center', 
-              desktopOrientation === 'horizontal' && 'md:max-w-[34rem] md:text-left md:w-[65%] nav-break:w-[calc(50%-1rem)] md:ml-0',
-              desktopOrientation === 'vertical' && 'md:max-w-cols8',
-            )}
-          >
+              'sm:max-w-[32rem] flex-[1_1_100%] z-content', 
+              mobileAlignment === 'center' && 'max-md:text-center max-md:mx-auto')
+            }>
+          <Heading className={
+            clsx(
+              'type-title-t7 sm:type-title-t5 md:type-title-t4 mb-3', 
+              mobileAlignment === 'center' && 'max-md:max-w-[10.294em] max-md:mx-auto', 
+            )} 
+            heading={heading}
+          />
           <Text className='text-body-muted' content={content}/>
-          <div className={clsx('mt-[2.75rem]', desktopOrientation === 'vertical' && 'flex justify-center')}>
-            <Links links={links}/>
+          <div className={clsx('mt-[2.75rem]', mobileAlignment === 'center' && 'max-md:flex max-md:justify-center')}>
+            <Links links={links} />
           </div>
         </div>
         <div 
           className={clsx(
-            '-mx-3 w-auto relative  bottom-0 right-0 z-base',
-            'sm:-mx-6 max-md:max-h-[25rem]',
-            'lg:w-full',
-            desktopOrientation === 'horizontal' && 'md:mx-0 md:absolute md:translate-y-[26%] md:translate-x-[40%] nav-break:translate-x-[40%] md:w-[85%]',
-            desktopOrientation === 'vertical' && 'md:max-h-[16rem] md:scale-125 md:translate-x-1/4'
+            'relative -mx-3 sm:-mx-6 -mb-7 md:ml-0 max-sm:aspect-[272/204] max-md:aspect-[648/486] md:w-full md:-my-7 flex-1'
           )}
         >
-          <div className='aspect-[416/290] md:hidden' />
-          <Image className={clsx(
-            'max-w-[50rem] top-3 w-[150%]',
-            'max-md:absolute max-md:left-1/2 max-md:-translate-x-1/2',
-            'md:w-full md:max-w-none'
-          )} image={backgroundImage}/>
+          <Image className={
+            clsx(
+              'absolute top-0 md:top-1/2 left-0 bottom-0 md:-translate-y-1/2 w-full md:h-full md:overflow-visible'
+            )} 
+            image={image}
+          />
         </div>
+      </div>
+
+const CTAVertical = ({
+  content,
+  heading,
+  image,
+  links,
+}: {
+  image?: ImageType
+} & CTAProps) => <div className='flex flex-col gap-4'>
+        <div className={clsx('z-content max-w-cols8 mx-auto text-center')}>
+          <Heading className={
+            clsx(
+              'type-title-t7 sm:type-title-t5 md:type-title-t4 mb-3', 
+            )} 
+            heading={heading}
+          />
+          <Text className='text-body-muted' content={content}/>
+          <div className={clsx('mt-[2.75rem]')}>
+            <Links links={links} />
+          </div>
+        </div>
+        <div 
+          className={clsx(
+            'relative -mx-3 sm:-mx-6 aspect-[1216/280] w-full -my-7 flex-1'
+          )}
+        >
+          <Image className={
+            clsx(
+              'absolute top-0 left-0 bottom-0 w-full overflow-visible'
+            )} 
+            image={image}
+          />
+        </div>
+      </div>
+
+const CTA = ({ backgroundImage, className, classNames, content, desktopOrientation = 'vertical', heading, links, mobileAlignment = 'center' }:CTAProps) => {
+    const CTAComponent = desktopOrientation === 'horizontal' ? CTAHorizontal : CTAVertical
+    
+    return <div className={clsx('relative', className, classNames?.root)}>
+      <div className={
+          clsx(
+            'bg-surface-neutral-medium/30 rounded-xl overflow-hidden border-border-muted relative backdrop-blur-lg py-7 px-3 sm:px-6', 
+            classNames?.inner
+          )}
+        >
+          <CTAComponent 
+            content={content} 
+            heading={heading} 
+            image={backgroundImage} 
+            links={links} 
+            mobileAlignment={mobileAlignment}
+          />
       </div>
       <div className="z-under bg-[radial-gradient(ellipse_at_center,_#372A6E_0%,_rgba(0,0,0,0)_75%)] absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2  aspect-[1/1] h-[75%]" />
     </div>
-  )
+}
 
 export default CTA

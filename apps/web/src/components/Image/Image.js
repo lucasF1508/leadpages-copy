@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import NextImage from 'next/legacy/image'
-import useImageParser from '@hooks/useImageParser'
+import useImageParserLegacy from '@hooks/useImageParser'
+import useImageParser from '@/hooks/useImageParser'
 import { m as motion, useMotionValue } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { styled } from '@design'
@@ -54,9 +55,10 @@ const Image = ({
   sizes,
   lazyBoundary = '1000px',
   alt: orgAlt,
+  isLegacy = true,
   ...props
 }) => {
-  const parsedImage = useImageParser(image)
+  const parsedImage = isLegacy ? useImageParserLegacy(image) : useImageParser(image)
   const { url, width, height, placeholderType, lqip, alt, title, mimeType } =
     parsedImage
 

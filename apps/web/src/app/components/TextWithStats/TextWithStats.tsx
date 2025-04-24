@@ -1,11 +1,13 @@
 import type { ContentType } from '@types'
 import React from 'react'
+import clsx from 'clsx'
 import Text from '@/components/Text'
 
 type StatType = {
   _key: string
   content?: string
   stat?: string
+  statSize?: 'large' | 'small'
 }
 
 interface TextWithStatsProps {
@@ -22,8 +24,15 @@ const TextWithStats = ({ content, stats }: TextWithStatsProps) => (
         <div className='flex flex-col gap-4 sm:gap-5 min-w-cols2 max-w-cols4 flex-[1_1_auto]'>
           {stats.map((stat) => (
             <div className='flex flex-col gap-1 sm:gap-1.5' key={stat?._key}>
-              <div className='type-stat-md sm:type-stat-lg bg-gradient-dark-purple text-transparent bg-clip-text'>{stat.stat}</div>
-              <div className='type-body-xs'>{stat.content}</div>
+              <div className={
+                clsx(
+                  'bg-gradient-purple text-transparent bg-clip-text', 
+                  stat?.statSize === 'large' ? 'type-stat-md sm:type-stat-lg' : `type-stat-sm`
+                )
+              }>
+                  {stat?.stat}
+              </div>
+              <div className='type-body-xs'>{stat?.content}</div>
             </div>
           ))}
         </div>

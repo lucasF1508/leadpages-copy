@@ -19,7 +19,7 @@ interface PinionParams {
   pinion?: boolean
 }
 
-interface RackProps {
+export interface RackProps {
   as?: keyof JSX.IntrinsicElements
   children?: React.ReactNode
   className?: string

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import clsx from 'clsx'
 import Autoplay from 'embla-carousel-autoplay'
 import { motion as m } from 'motion/react'
-import useCarousel from '@/hooks/useCarousel'
 import Heading from '@/components/Heading'
-import Text from '@/components/Text'
-import { type MediaWithItemsContainer, useMediaWithItemsStore } from './MediaWithItems'
 import Link from '@/components/Link'
+import Text from '@/components/Text'
+import useCarousel from '@/hooks/useCarousel'
+import { type MediaWithItemsContainer, useMediaWithItemsStore } from './MediaWithItems'
 
 const MediaWithItemsSlider = ({
   className,
@@ -62,7 +62,7 @@ const MediaWithItemsSlider = ({
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
         {items &&
-          items.map(({ _key, content, title, link }, i) => (
+          items.map(({ _key, content, link, title }, i) => (
             <div
               className={clsx(
                 'max-w-tablet-cols7 relative w-full flex-[0_0_auto] overflow-hidden transition-opacity duration-300',

@@ -1,5 +1,5 @@
 // import client from 'client'
-import * as templatesSchema from '../schema/documents/templates'
+import * as templatesSchema from '../legacy/schema/documents/templates'
 
 const SANITY_STUDIO_API_VERSION = import.meta.env.SANITY_STUDIO_API_VERSION
 
