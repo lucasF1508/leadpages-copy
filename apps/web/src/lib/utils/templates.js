@@ -16,9 +16,9 @@ const getTemplateUrl = (kind, slug) =>
   `/${getKindSlug(kind)}/${getKindSlugSecondary(kind)}/${slug}`
 
 export {
+  getKindQueryParam,
   getKindSlug,
   getKindTitle,
   getTemplatePreviewUrl,
-  getKindQueryParam,
   getTemplateUrl,
 }

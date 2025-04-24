@@ -1,12 +1,10 @@
 import React from 'react'
-import getClient from 'client'
+import { draftMode } from 'next/headers'
 import Nav from '@/components/Nav'
+import { getNavigation } from './getNavigation'
 
 const Header = async () => {
-  const client = getClient()
-  const navigation = await client.fetch(
-    `*[_type == 'navigation' && slug.current == 'primary-navigation'][0]`
-  )
+  const navigation = await getNavigation(draftMode().isEnabled)
 
   return <Nav navigation={navigation} />
 }

@@ -114,7 +114,7 @@ const NavStackedCardContents = ({ data }) => {
       onMouseLeave={() => setIsHovered(false)}
       linkStyle={linkStyle}
     >
-      <$Image image={image} />
+      <$Image image={image} isLegacy={false}/>
       <$Content>
         <div>
           <AnimatePresence mode="popLayout">

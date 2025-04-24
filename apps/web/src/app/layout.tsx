@@ -1,11 +1,13 @@
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
+import { draftMode } from 'next/headers'
 import Script from 'next/script'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { generateMetadata } from '@/lib/utils/generateMetaData'
 import TrackingScripts, { RedbrickStructuredDataScript } from '@/components/TrackingScripts'
+import generateMetadata from '@/lib/utils/generateMetadata'
 import './globals.css'
+import PreviewPane from './components/PreviewPane'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -55,6 +57,9 @@ export default function RootLayout({
         <main>{children}</main>
         {/* @ts-expect-error Server Component https://github.com/vercel/next.js/issues/42292 */}
         <Footer />
+        {draftMode().isEnabled && (
+          <PreviewPane />
+        )}
       </body>
     </html>
   )

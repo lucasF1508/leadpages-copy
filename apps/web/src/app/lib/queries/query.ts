@@ -17,7 +17,13 @@ const query = (
   query: string,
   { params, preview = false }: QueryParams = {}
 ): QueryType => {
-  const client = getClient({ preview })
+  const client = getClient({ 
+    // @ts-ignore
+    config: {
+      dataset: process.env.SANITY_STUDIO_API_DATASET,
+    }, 
+    preview 
+  })
 
   return {
     data: client.fetch(query, params),

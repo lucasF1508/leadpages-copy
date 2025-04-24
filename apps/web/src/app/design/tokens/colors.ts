@@ -168,6 +168,24 @@ const palette = {
   dark: '#111018',
 }
 
+export const gradientLight = {
+  'gradient-lime': `linear-gradient(90deg,${palette.lime[200]} 0%, ${palette.white} 100%)`,
+  'gradient-purple': `linear-gradient(90deg,${palette.purple[100]} 0%, ${palette.white} 100%)`,
+  'gradient-purple-invert': `linear-gradient(90deg,${palette.purple[500]} 0%, ${palette.purple[300]} 100%)`,
+  'gradient-border': `linear-gradient(90deg, rgba(255, 255, 255, 0.4) 30%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.4) 70%)`,
+  'gradient-border-light': `linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.1) 30%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 70%, rgba(255, 255, 255, 0) 90%)`,
+  
+}
+
+export const gradient = {
+  'gradient-lime': `linear-gradient(90deg,${palette.lime[700]} 0%, ${palette.lime[400]} 100%)`,
+  'gradient-purple': `linear-gradient(90deg,${palette.purple[500]} 0%, ${palette.purple[300]} 100%)`,
+  'gradient-purple-invert': `linear-gradient(90deg,${palette.purple[100]} 0%, ${palette.white} 100%)`,
+  'gradient-section': `linear-gradient(0deg, #FFFFFF 30%, #F4EFFF 100%)`,
+  'gradient-input': `linear-gradient(90deg, ${palette.opacity.light[400]} -119.45%, ${palette.opacity.light[800]} -9.73%, ${palette.opacity.light[400]} 100%)`,
+  'gradient-border': `linear-gradient(90deg, rgba(82, 79, 95, 0.1) 30%, rgba(82, 79, 95, 0.2) 50%, rgba(82, 79, 95, 0.1) 70%)`,
+}
+
 const brand = {
   DEFAULT: palette.purple[700],
   indigo: {
@@ -258,6 +276,7 @@ const themeDark = {
       light: palette.white,
       medium: palette.obsidian[800],
       dark: palette.dark,
+      opacity: palette.opacity.light[100],
     },
     opacity: palette.opacity,
     brand,
@@ -390,17 +409,6 @@ const themeDark = {
   },
 }
 
-export const gradient = {
-  'gradient-invert-lime': `linear-gradient(90deg,${palette.lime[200]} 0%, ${palette.white} 100%)`,
-  'gradient-invert-purple': `linear-gradient(90deg,${palette.purple[100]} 0%, ${palette.white} 100%)`,
-  'gradient-dark-lime': `linear-gradient(90deg,${palette.lime[700]} 0%, ${palette.lime[400]} 100%)`,
-  'gradient-dark-purple': `linear-gradient(90deg,${palette.purple[500]} 0%, ${palette.purple[300]} 100%)`,
-  'gradient-section': `linear-gradient(0deg, #FFFFFF 30%, #F4EFFF 100%)`,
-  'gradient-input': `linear-gradient(90deg, ${palette.opacity.light[400]} -119.45%, ${palette.opacity.light[800]} -9.73%, ${palette.opacity.light[400]} 100%)`,
-  'gradient-border': `linear-gradient(90deg, rgba(255, 255, 255, 0.4) 30%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.4) 70%)`,
-  'gradient-border-light': `linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.1) 30%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 70%, rgba(255, 255, 255, 0) 90%)`,
-}
-
 // Map primitives to semantic names, The initial colors will also be set to light-theme.
 export const colors = {
   brand,
@@ -417,6 +425,9 @@ export const colors = {
 export const themeLight = {
   surface: {
     DEFAULT: palette.white,
+    neutral: {
+      opacity: palette.opacity.dark[100],
+    },
   },
   body: {
     DEFAULT: palette.dark,
@@ -427,6 +438,9 @@ export const themeLight = {
       body: palette.obsidian[800],
       disabled: palette.obsidian[500],
     },
+  },
+  neutral: {
+    light: palette.dark,
   },
   border: {
     DEFAULT: palette.dark,

@@ -8,6 +8,7 @@ import {
   duration,
   easing,
   gradient,
+  gradientLight,
   keyframes,
   magicNumbers,
   screens,
@@ -21,12 +22,17 @@ import {
 export const themes: ThemeConfig[] = [
   {
     extend: {
-      colors,
+      backgroundImage: {
+        ...gradient, 
+        ...gradientLight
+      },
+      colors
     },
     name: 'theme-dark',
   },
   {
     extend: {
+      backgroundImage: gradient,
       colors: themeLight,
     },
     name: 'theme-light',
@@ -42,7 +48,6 @@ const theme = {
   spacing,
   ...type,
   extend: {
-    backgroundImage: gradient,
     borderRadius,
     boxShadow,
     keyframes,

@@ -1,19 +1,19 @@
+import runBlogQueries, { getBlogQuery, getPageType } from './blogQueries'
 import getPerPage from './getPerPage'
 import getStaticPathsParams from './getStaticPathsParams'
-import query from './query'
-import runQuery from './runQuery'
-import runQueries from './runQueries'
-import runBlogQueries, { getPageType, getBlogQuery } from './blogQueries'
 import { getGlobalQueries } from './globalQueries'
+import query from './query'
+import runQueries from './runQueries'
+import runQuery from './runQuery'
 
 export {
-  query,
-  runQuery,
-  runQueries,
+  getBlogQuery,
+  getGlobalQueries,
+  getPageType,
   getPerPage,
   getStaticPathsParams,
+  query,
   runBlogQueries,
-  getPageType,
-  getGlobalQueries,
-  getBlogQuery,
+  runQueries,
+  runQuery,
 }

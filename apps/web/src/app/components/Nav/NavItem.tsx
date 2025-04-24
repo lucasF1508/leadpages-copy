@@ -59,14 +59,14 @@ const NavItem = ({ data }: NavItemProps) => {
             )}
             <div className="flex flex-col gap-[0.125rem]">
               <div className='flex items-center gap-1'>
-              {label && <h5 className="type-h5 !leading-normal">{label}</h5>}
-              {pillContent && (
-                <div className='bg-gradient-invert-purple flex items-center rounded-lg'>
-                  <span className="type-overline-xxs py-[0.25rem] px-1.5 bg-gradient-dark-purple text-transparent bg-clip-text">
-                    {pillContent}
-                  </span>
-                </div>
-              )}
+                {label && <h5 className="type-h5 !leading-normal">{label}</h5>}
+                {pillContent && (
+                  <div className='bg-gradient-purple-invert flex items-center rounded-lg'>
+                    <span className="type-overline-xxs py-[0.25rem] px-1.5 bg-gradient-purple text-transparent bg-clip-text">
+                      {pillContent}
+                    </span>
+                  </div>
+                )}
               </div>
               {secondaryText && (
                 <span className="hidden md:block type-caption-xs text-body-neutral-body">{secondaryText}</span>

@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
-import { useRouter } from 'next/router'
-import Head from 'next/head'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { AppContext } from '@app'
 // Components
 import Gallery from '@legacy/components/templates/Gallery'
 import Preview from '@legacy/components/templates/Preview'
-import { AppContext } from '@app'
 // Utils
 import { TemplateKind } from '@legacy/constants/templates'
 import usePreviewTemplate from '@legacy/hooks/usePreviewTemplate'
 import { createClient } from '@sanity/client'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 const sanityConfig = {
-  dataset: process.env.SANITY_STUDIO_API_DATASET,
+  dataset: process.env.SANITY_STUDIO_API_DATASET_LEGACY,
   projectId: process.env.SANITY_STUDIO_API_PROJECT_ID,
   apiVersion: process.env.SANITY_STUDIO_API_VERSION,
 }
@@ -110,26 +110,26 @@ const Templates = ({
       <Head>
         <title>{pageData?.seo?.seoTitle || seoTitle}</title>
         <meta
-          name="description"
           content={pageData?.seo?.seoDescription || seoDescription}
+          name="description"
         />
       </Head>
       {templateId && (
         <Preview
-          templateId={templateId}
-          galleryRoot={currentURL}
-          previewTemplate={previewTemplate}
-          planData={planData}
-          templateData={template}
-          slug={slug}
           footer={footer}
+          galleryRoot={currentURL}
+          planData={planData}
+          previewTemplate={previewTemplate}
           slimFooter={slimFooter}
+          slug={slug}
+          templateData={template}
+          templateId={templateId}
         />
       )}
       <Gallery
-        kind={isWebsiteGallery ? TemplateKind.Site : TemplateKind.LandingPage}
         handlePreviewTemplate={handlePreviewTemplate}
         isPreviewing={!!templateId}
+        kind={isWebsiteGallery ? TemplateKind.Site : TemplateKind.LandingPage}
         setCurrentURL={setCurrentURL}
         setPreviousURL={setPreviousURL}
         {...pageData}

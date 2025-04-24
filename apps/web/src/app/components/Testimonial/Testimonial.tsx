@@ -1,53 +1,63 @@
+'use client'
+
+import type { TestimonialCardProps } from './TestimonialCard';
 import React from 'react'
 import clsx from 'clsx'
-import Stars from '@/components/Stars'
-import Image from '@/components/Image'
-import { SanityImageProps } from '@/types'
 import Heading from '@/components/Heading'
- 
+import { LinkIcon } from '@/components/Link'
+import useCarousel from '@/hooks/useCarousel'
+import TestimonialCard from './TestimonialCard'
+
 interface TestimonialProps {
-  testimonial: {
-    title: string
-    authorTitle: string
-    testimonial: string
-    image: SanityImageProps
-    rating: number
-  }
   heading?: string
   subheading?: string
+  testimonials: TestimonialCardProps[]
 }
+ 
+const Testimonial = ({ heading, subheading, testimonials }: TestimonialProps) => {
+  const {indices, ref, scrollNext, scrollPrev} = useCarousel({
+    active: testimonials?.length > 1
+  })
 
-const Testimonial = ({ testimonial, heading, subheading }: TestimonialProps) => {
-  const {title, authorTitle, testimonial: body, image, rating} = testimonial
+  const {active = 0} = indices || {}
 
   return (
     <div className='flex flex-col gap-5 sm:gap-7 md:gap-8'>
-      <div className='flex flex-col gap-2 max-md:max-w-[33.25rem]'>
-        {heading && <Heading heading={heading} />}
-        {subheading && <Heading heading={subheading} className='type-body-sm sm:type-size-body-lg'/>}
+      <div className='flex flex-col gap-4 nav-break:flex-row justify-between'>
+        {(heading || subheading) && (
+          <div className='flex flex-col gap-2 max-md:max-w-[33.25rem] text-light'>
+            {heading && <Heading heading={heading} />}
+            {subheading && <Heading className='type-body-sm sm:type-size-body-lg' heading={subheading}/>}
+          </div>
+        )}
+        {testimonials?.length > 1 && (        
+          <div className='nav-break:self-end'>          
+            <div className='flex gap-2 sm:gap-3 md:gap-4'>
+              <div className='link-button-secondary border-none w-6 h-6 rotate-180 cursor-pointer' onClick={scrollPrev}>
+                <LinkIcon/>
+              </div>
+              <div className='link-button-secondary border-none w-6 h-6 cursor-pointer' onClick={scrollNext}>
+                <LinkIcon/>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-      <div className={clsx('flex flex-col gap-[4.375rem] px-3 py-4 sm:p-7 bg-opacity-light-100/10 rounded-xl')}>
-        <div className='flex flex-col gap-4'>
-          <div className='max-w-[8.5rem]'><Stars rating={rating} /></div>
-          <div className='relative type-quote-xs sm:type-quote-md md:type-quote-lg'>
-            <span className='absolute left-0 top-0 -translate-x-full text-purple-100'>"</span>
-            <article className={
-              clsx(
-                'bg-brand bg-clip-text text-transparent bg-gradient-to-r from-purple-100 to-white'
-              )
-            }>
-              {body}"
-            </article>
-          </div>
-          <div className='flex gap-4 items-center'>
-            <div className='w-7 sm:w-9 shrink-0'>
-              <Image image={image} />
+      <div ref={ref}>
+        <div className='flex gap-4'>
+          {testimonials?.map((testimonial, i) => (
+            <div 
+              className={clsx(
+                'flex-[0_0_100%] transition-opacity duration-300', 
+                i !== active && 'opacity-50')
+              } 
+              key={testimonial._id}
+            >
+              <TestimonialCard
+                {...testimonial} 
+              />
             </div>
-            <div className='flex flex-col gap-0.5 sm:gap-1'>
-              <h5 className='type-overline-xs'>{title}</h5>
-              <h6 className='type-overline-xxs'>{authorTitle}</h6>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

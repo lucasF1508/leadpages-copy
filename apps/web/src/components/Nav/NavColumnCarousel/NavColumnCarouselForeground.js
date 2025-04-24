@@ -140,7 +140,7 @@ const NavColumnCarouselForeground = ({
                   transition={{ duration: 0.4 }}
                 >
                   <$Image>
-                    <Image image={templateImage} sizes="300px" />
+                    <Image image={templateImage} sizes="300px" isLegacy={false}/>
                   </$Image>
                 </$Slide>
               )

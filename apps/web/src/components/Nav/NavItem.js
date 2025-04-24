@@ -117,7 +117,7 @@ const NavItem = ({ data }) => {
       <Link css={{ ai: 'flex-start', gcg: '$2' }} {...link}>
         {icon && (
           <$Icon>
-            <Image image={icon} />
+            <Image image={icon} isLegacy={false}/>
           </$Icon>
         )}
         <$NavItemContents>

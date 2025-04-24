@@ -11,7 +11,7 @@ import { motion as m } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import useStickyHeader from '@/hooks/useStickyHeader'
 import { useNavStore } from '@/state/navStore'
-import { NavBarViewport } from '@/components/Nav/NavBar'
+import NavBarViewport from '../NavBar/NavBarViewport'
 import Link from '@/components/Link'
 import { LinkProps } from '@/types'
 import NavDrawerTrigger from '@/components/Nav/NavDrawer/NavDrawerTrigger'
@@ -20,6 +20,7 @@ import evalBreakpoint from '@/lib/utils/evalBreakpoint'
 import isEmpty from 'lodash/isEmpty'
 import { useShallow } from 'zustand/react/shallow'
 import NavLogo from '@/components/Nav/NavLogo'
+import { NavItemUnderline } from './NavBarMenu'
 
 interface NavBarProps {
   children?: React.ReactNode
@@ -34,7 +35,6 @@ const hideNavOnScrollDown = [
   'landing-pages-guide',
   'conversion-optimization-guide',
   'lead-generation-guide',
-  'product',
 ]
 
 const NavBar = ({ children, navigation }: NavBarProps) => {
@@ -43,7 +43,7 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
 
   const { buttons } = navigation || {}  
 
-  const { dropdownSlug, hideNav, isNavActive, setDropdownSlug, setNavActive, isSticky } = useNavStore(
+  const { dropdownSlug, hideNav, isNavActive, setDropdownSlug, setNavActive, isSticky = false } = useNavStore(
     useShallow((state) => ({ 
       dropdownSlug: state.dropdownSlug,
       hideNav: state.hideNav,
@@ -94,7 +94,7 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
       animate={{
         y:
           shouldHide && (hideNav || !showHeader)
-            ? 'calc(var(--header-height) * -1)'
+            ? 'calc((var(--header-height) + 1.25rem) * -1)'
             : 0,
       }}
       className={
@@ -123,7 +123,7 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
           value={dropdownSlug}
         >
           <NavBarPrimitiveList 
-            className="min-h-header-height md:min-h-header-height.md flex justify-between list-none items-center p-2 gap-3" 
+            className="min-h-header-height md:min-h-header-height.md flex justify-between list-none items-center py-1.5 pr-1.5 pl-[1.875rem] gap-3" 
             onBlur={handlePointerLeave}
             onFocus={handlePointerEnter}
           >
@@ -141,13 +141,14 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
               {buttons?.map(({ _key, url, ...rest }: LinkProps & {_key: string}, i: number) => {
                 const isPricing =
                   asPath?.includes('pricing') && url === '/pricing'
+                const buttonStyle = isTransparent ? 'button-outline' : 'button-solid'
 
                 return isPricing ? (
                   null
                 ) : (
                   <div className="gap-1.5 whitespace-nowrap group/trigger h-full flex justify-center flex-col relative" key={_key}>
-                    <Link url={url} {...rest} linkStyle={i === 0 ? 'text' : 'button-solid'}/>
-                    {i !== buttons.length - 1 && <div className='h-[0.188rem] w-full bg-surface-neutral-light absolute -bottom-[calc(1rem+1px)] scale-x-0 group-hover/trigger:scale-x-100 transition-all duration-300'/>}
+                    <Link url={url} {...rest} linkStyle={i === 0 ? 'text' : buttonStyle}/>
+                    {i !== buttons.length - 1 && <NavItemUnderline />}
                   </div>
                 )
               })}

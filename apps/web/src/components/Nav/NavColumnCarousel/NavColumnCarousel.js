@@ -54,7 +54,7 @@ const NavColumnCarousel = ({
     <$NavColumnCarousel>
       {templateBackgroundImage && (
         <$Image>
-          <Image image={templateBackgroundImage} />
+          <Image image={templateBackgroundImage} isLegacy={false}/>
         </$Image>
       )}
       <NavColumnCarouselForeground

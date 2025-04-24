@@ -1,93 +1,19 @@
-import type {
-  FieldReturn,
-  RadioField,
-  RadioList,
-  LinkField,
-  ArrayField,
-} from '@gearbox-built/sanity-schema-tool'
+// import config from 'config'
+import type {LinkField, ArrayField} from '@gearbox-built/sanity-schema-tool'
 import {F, G, withConfig} from '@gearbox-built/sanity-schema-tool'
-import config from 'config'
 import ImageInput from '@/components/Input/ImageInput'
 import LinkInput from '@/components/Input/LinkInput'
 import {lottieArgs} from './lottie'
-import {defineField} from 'sanity'
 
-// Add your custom types here for autocomplete
 declare module '@gearbox-built/sanity-schema-tool' {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   export namespace F {
-    const dropdown: typeof customTypes.F.dropdown
     const rawLink: typeof customTypes.F.rawLink
-    const accordionItems: typeof customTypes.F.accordionItems
-    const fieldDefaultsCustom: typeof customTypes.F.fieldDefaultsCustom
     const links: typeof customTypes.F.links
-  }
-  export namespace G {
-    const postDefaults: typeof customTypes.G.postDefaults
-    const componentDefaults: typeof customTypes.G.componentDefaults
   }
 }
 
 export const customTypes = {
   F: {
-    dropdown: (list: RadioList, props: RadioField): FieldReturn =>
-      F.string({options: {list, layout: 'dropdown'}}, props),
-    fieldDefaultsCustom: ({
-      title: _title = {},
-      slug: _slug = {},
-      path = {},
-      parent = {},
-      htmlFooter = {},
-    } = {}) =>
-      [
-        F.message(
-          '⚠ ️The current page is set to redirect to a legacy version of the page. To disable this redirect, disable the <b>Redirect to legacy page</b> option in the <b>Page Options</b> tab and redeploy the website.',
-          {
-            name: 'redirectMessage',
-            hidden: ({parent}) => parent?.redirectToLegacy != true,
-            group: 'content',
-          }
-        ),
-        F.title({group: 'content', ..._title}),
-        _slug && F.slug({group: 'meta', ..._slug}),
-        parent &&
-          F.reference('page', {
-            name: 'parent',
-            title: 'Parent Page',
-            group: 'meta',
-            description: `Set parent page for nested URL structures. Path will prepend parent page's path.`,
-            ...parent,
-          }),
-        path &&
-          defineField({
-            type: 'path',
-            name: 'path',
-            title: 'Path',
-            readOnly: true,
-            group: 'meta',
-            description: `Automatically updates.`,
-            ...path,
-          }),
-        F.text({
-          name: 'htmlFooter',
-          title: 'Footer HTML',
-          group: 'meta',
-          description: 'HTML to be inserted before the closing body tag on this page only.',
-          ...htmlFooter,
-        }),
-      ].filter(Boolean),
-    rawLink: (props?: Partial<LinkField>) =>
-      F.link(
-        {
-          args: {
-            linkSize: false,
-            linkStyle: false,
-          },
-          initialValue: undefined,
-          fields: undefined,
-        },
-        props
-      ),
     links: (
       props?: Partial<ArrayField> & {signUpOption?: boolean},
       linkProps?: Partial<LinkField>,
@@ -122,26 +48,37 @@ export const customTypes = {
         }
       )
     },
-    accordionItems: (name: string, of?: any[], props?: Partial<ArrayField>) =>
-      F.array({
-        name,
-        of: [
-          F.object({
-            name: 'accordionItem',
-            fields: [F.title(), F.blockContent()],
-          }),
-          ...(of || []),
-        ],
-        ...props,
-      }),
+    rawLink: (props?: Partial<LinkField>) =>
+      F.link(
+        {
+          args: {
+            linkSize: false,
+            linkStyle: false,
+          },
+          initialValue: undefined,
+          fields: undefined,
+        },
+        props
+      ),
   },
   G: {
-    postDefaults: () => [G.define('content'), G.define('media'), G.meta()],
-    componentDefaults: () => [G.define('content'), G.define('media'), G.options()],
+    postDefaults: () => [G.content(), G.define('media'), G.meta()],
+    componentDefaults: () => [G.content(), G.define('media'), G.options()],
   },
 }
 
-const pageTemplates = config?.studio?.docTypes
+// Config used by both legacy and new studio, once migrated this can be pulled from the package
+// const pageTemplates = config?.studio?.docTypes
+const pageTemplates = [
+  'page',
+  'pageHome',
+  // 'post',
+  // 'pageArchive',
+  // 'customer',
+  // 'integration',
+  // 'comparison',
+  // 'publisher',
+]
 
 export default withConfig(
   {
@@ -152,31 +89,8 @@ export default withConfig(
     media: {
       conditions: {
         lottie: [],
-        wistia: [],
       },
-      fields: [
-        ...G.group('content', [...lottieArgs]),
-        F.string({
-          name: 'maxWidth',
-          description: 'eg. auto, 100px, 100%, etc.',
-          group: 'options',
-          hidden: ({parent}) => parent?.condition === 'none' || parent?.condition === 'lottie',
-        }),
-        F.string({
-          group: 'content',
-          name: 'wistiaId',
-          description: 'ID of the Wistia video you wish to load (eg. ago55021i9).',
-          hidden: ({parent}) => parent?.condition !== 'wistia',
-        }),
-      ],
-    },
-    hero: {
-      args: {
-        link: false,
-        content: false,
-        heading: false,
-      },
-      fields: [F.field('blockContentHero', {name: 'content', group: 'content'})],
+      fields: G.group('content', lottieArgs),
     },
     link: {
       conditions: {
@@ -185,6 +99,14 @@ export default withConfig(
       args: {
         condition: {
           required: false,
+        },
+        url: {
+          hidden: ({parent}) => !['external', 'internal'].includes(parent?.condition),
+          //TODO: Is there a way to provide a dynamic desctiption depending on the condition?
+          description: 'Internal links must have a relative url to work correctly.',
+        },
+        page: {
+          hidden: true,
         },
       },
       fields: [

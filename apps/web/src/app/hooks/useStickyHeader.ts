@@ -11,7 +11,7 @@ const useStickyHeader = ({ offsetTop = 200 } = {}) => {
     })),
   )
 
-  const [showHeader, setShowHeader] = useState(false)
+  const [showHeader, setShowHeader] = useState(true)
   const { scrollY } = useScroll()
   const prevScrollY = useMotionValue(0)
   const hasSticky = useMotionValue(isSticky)

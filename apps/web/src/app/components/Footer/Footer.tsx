@@ -4,11 +4,13 @@ import type { SocialShareItemType } from '@/components/Social'
 import type { LinkType } from '@types'
 import React from 'react'
 import Logo from '@public/images/logo.svg'
-import getClient from 'client'
+import { draftMode } from 'next/headers'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import Social from '@/components/Social'
+import { query } from '@/lib/queries'
 import RedbrickFooter from './RedbrickFooter'
+import { getFooter } from './getFooter'
 
 export interface FooterProps {
   address: string
@@ -22,10 +24,9 @@ export interface FooterProps {
 }
 
 const Footer = async () => {
-  const client = getClient()
-  const { address, copyright, legal, menu, social }: FooterProps =
-    await client.fetch(`*[_type == 'footer'] [0]`) || {}
+  const footer = await getFooter(draftMode().isEnabled)
 
+  const { address, copyright, legal, menu, social }: FooterProps = footer || {}
   const year = new Date().getFullYear()
 
   return (

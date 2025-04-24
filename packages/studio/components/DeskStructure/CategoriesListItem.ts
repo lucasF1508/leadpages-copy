@@ -1,5 +1,6 @@
 import type {ConfigContext} from 'sanity'
 import type {StructureBuilder} from 'sanity/structure'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 import {FaSitemap} from 'react-icons/fa'
 
 interface CategoriesListItemProps {
@@ -36,11 +37,14 @@ const CategoriesListItem = ({
               const schemaType = listItem.getSchemaType()
               if (!schemaType || typeof schemaType === 'string') return listItem
               const {name: type, title, icon} = schemaType
-              const item = S.documentTypeListItem(type)
-              title && item.title(title)
-              icon && item.icon(icon)
 
-              return item
+              return orderableDocumentListDeskItem({
+                type,
+                title,
+                icon,
+                S,
+                context,
+              })
             }),
         ])
     )

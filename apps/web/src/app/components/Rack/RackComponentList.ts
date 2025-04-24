@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-// import { space } from 'postcss/lib/list'
 
 /**
  * List of dynamic components to be used within the application.
@@ -16,19 +15,25 @@ import dynamic from 'next/dynamic'
  *  component: [dynamic(() => import('@/components/client/Component')), { className: 'mt-2' }],
  *  component: [dynamic(() => import('@/components/client/Component')), { classNames: { root: 'mt-2', inner: 'ml-1' }],
  */
+
 const RackComponentList = {
   cardsBlock: dynamic(() => import('@/components/Cards')),
   cta: dynamic(() => import('@/components/CTA')),
+  faqs: dynamic(() => import('@/components/FAQs')),
   featureCards: dynamic(() => import('@/components/FeatureCards')),
   marquee: dynamic(() => import('@/components/Marquee')),
   mediaWithItems: dynamic(() => import('@/components/MediaWithItems')),
+  mediaWithText: dynamic(() => import('@/components/MediaWithText')),
   mediaWithTextSticky: dynamic(() => import('@/components/MediaWithText/MediaWithTextSticky')),
+  resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
   spacer: dynamic(() => import('@/components/Spacer')),
-  testimonial: dynamic(() => import('@/components/Testimonial')),
+  testimonialBlock: dynamic(() => import('@/components/Testimonial')),
   textBlock: dynamic(() => import('@/components/Text/TextBlock')),
+  textColumns: dynamic(() => import('@/components/TextColumns')),
   textWithStats: dynamic(() => import('@/components/TextWithStats')),
+  upsell: dynamic(() => import('@/components/Upsell')),
   
   // TEMP - Remove when all components are implemented
   // accordion: dynamic(() => import('@/components/client/Accordion')),

@@ -1,4 +1,4 @@
-import * as templatesSchema from '../schema/documents/templates'
+import * as templatesSchema from '../legacy/schema/documents/templates'
 
 export const getTemplateSchemas = ({
   includes,

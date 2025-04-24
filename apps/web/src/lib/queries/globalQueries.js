@@ -1,12 +1,10 @@
+import { getNavigation } from '@/components/Header/getNavigation'
+import { getFooter } from '@/components/Footer/getFooter'
+
 import runQuery from './runQuery'
 
 const globalQueries = {
-  navigation: {
-    query: `*[_type == 'navigation' && slug.current == $slug][0]`,
-    params: {
-      slug: 'primary-navigation',
-    },
-  },
+  navigation: {},
   siteMeta: {
     query: `*[_type == 'seoSite'][0] {
       ...,
@@ -17,12 +15,7 @@ const globalQueries = {
   leadboxes: {
     query: `*[_type == 'leadboxes'][0]`,
   },
-  footer: {
-    query: `*[_type == 'footer'][0] {
-      ...,
-      navigation->
-    }`,
-  },
+  footer: {},
 }
 
 export const seoQuery = `"seo": {
@@ -45,11 +38,16 @@ export const formatGlobalQueries = (responses) => {
   return globalData
 }
 
-export const getGlobalQueries = ({ preview = false }) =>
-  Object.keys(globalQueries).map((key) => {
+export const getGlobalQueries = ({ preview = false }) => {
+  const _globals = Object.keys(globalQueries).map((key) => {
     const { query, params } = globalQueries[key]
+    if (!query) return null
 
     return runQuery(query, { params, preview })
-  })
+  }).filter(Boolean)
+
+  const globals = [getNavigation(preview), ..._globals, getFooter(preview)]
+  return globals
+}
 
 export default globalQueries

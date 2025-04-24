@@ -9,7 +9,7 @@ const ColorMarkRender = ({children, markKey}: {
 
   switch (markKey) {
     case 'textGradient':
-      className = 'bg-gradient-dark-purple text-transparent bg-clip-text'
+      className = 'bg-gradient-purple text-transparent bg-clip-text inline-flex'
       break
     case 'textColorHighlight': // TODO Expand during design rollout
     case 'textColorHighlightAlt':
