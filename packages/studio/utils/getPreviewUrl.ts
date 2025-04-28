@@ -3,7 +3,7 @@ import sanityConfig from 'config'
 
 const datasetEndpoints: Record<string, string> = {
   production_v3: '/preview',
-  production: '/preview/api',
+  production: '/api/preview',
 }
 
 export const getPreviewUrl = (doc: SanityDocumentLike, dataset: string) => {

@@ -1,5 +1,5 @@
-import { getTemplateUrl } from '@lib/utils/templates'
 import getClient from 'client'
+import { getTemplateUrl } from '@lib/utils/templates'
 
 const { SANITY_STUDIO_PREVIEW_SECRET } = process.env
 const { NEXT_PUBLIC_URL } = process.env

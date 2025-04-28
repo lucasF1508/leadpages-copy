@@ -1,12 +1,12 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
-import useIsMount from '@hooks/useIsMount'
-import Loader from '@components/Loader'
+import React, { useEffect, useRef, useState } from 'react'
 import { styled } from '@design'
-import Text from '@components/Text'
-import { $Link } from '@components/Link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 import { getGlobalQueries } from '@lib/queries'
+import useIsMount from '@hooks/useIsMount'
+import { $Link } from '@components/Link'
+import Loader from '@components/Loader'
+import Text from '@components/Text'
 
 const $PreviewNotificationContainer = styled(motion.div, {
   position: 'fixed',
@@ -139,15 +139,15 @@ const usePreview = ({
     <AnimatePresence mode="wait">
       {preview && (
         <$PreviewNotificationContainer
-          initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{
             y: 50,
             opacity: 0,
           }}
+          initial={{ y: 50, opacity: 0 }}
           ref={ref}
         >
-          <$PreviewNotification drag dragMomentum={false} dragConstraints={ref}>
+          <$PreviewNotification drag dragConstraints={ref} dragMomentum={false}>
             <$PreviewNotificationContent>
               <Text css={{ type: 'baseType', fontSize: '0.75rem', mb: '$2' }}>
                 You are currently in preview mode and are able to see drafts
@@ -168,7 +168,6 @@ const usePreview = ({
             <AnimatePresence initial={false} mode="wait">
               {isLoading && (
                 <$PreviewNotificationLoader
-                  initial={{ y: 0 }}
                   animate={{ y: '-100%' }}
                   exit={{
                     y: 0,
@@ -177,6 +176,7 @@ const usePreview = ({
                       duration: 0.3,
                     },
                   }}
+                  initial={{ y: 0 }}
                   transition={{
                     duration: 0.3,
                   }}
@@ -195,8 +195,8 @@ const usePreview = ({
                   </Text>
                   <Loader
                     css={{ d: 'block', ml: '$1' }}
-                    width={24}
                     height={24}
+                    width={24}
                   />
                 </$PreviewNotificationLoader>
               )}

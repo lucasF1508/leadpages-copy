@@ -1,20 +1,19 @@
 import React, { useState } from 'react'
-import dynamic from 'next/dynamic'
 import globalStyles from '@design/globalStyles'
-import useGoogleTagManager from '@hooks/useGoogleTagManager'
+import Promotions from '@legacy/components/promotions/Promotions'
+// Legacy
+import ToastManager from '@legacy/components/toasts/ToastManager'
+import { LazyMotion } from 'framer-motion'
+import dynamic from 'next/dynamic'
 import useFacebookPixel from '@hooks/useFacebookPixel'
 import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
+import useGTag from '@hooks/useGTag'
+import useGoogleTagManager from '@hooks/useGoogleTagManager'
 import useResizeEnd from '@hooks/useResizeEnd'
 import Embed from '@components/Embed'
 import FullStory from '@components/FullStory'
-import SpeedInsights from '@components/SpeedInsights'
 import Leadboxes from '@components/Leadboxes'
-import { LazyMotion } from 'framer-motion'
-
-// Legacy
-import ToastManager from '@legacy/components/toasts/ToastManager'
-import Promotions from '@legacy/components/promotions/Promotions'
-import useGTag from '@hooks/useGTag'
+import SpeedInsights from '@components/SpeedInsights'
 
 const PreviewBadge = dynamic(() => import('@hooks/usePreview'))
 const LayoutContainer = dynamic(() => import('@components/LayoutContainer'))
@@ -87,10 +86,7 @@ export default function App({
   const {
     slimFooter,
     simplifiedHeader,
-    isPreviewPage,
     onPromotionsLoaded,
-    link,
-    customCtaLink,
     isPricingMenu = false,
     isStartPageHeader = false,
     hideBar = false,
@@ -106,45 +102,45 @@ export default function App({
         <SpeedInsights />
         <ToastManager />
         <Promotions
-          onPromotionsLoaded={onPromotionsLoaded}
           alertBarData={alertBarData}
+          onPromotionsLoaded={onPromotionsLoaded}
         />
         <Leadboxes data={leadboxData} />
         {hideBar && (
           <style type="text/css">{`.lp-bar__iframe-wrapper,.lp-bar__pusher{display:none;}`}</style>
         )}
         <FullStory />
-        <SEO seo={seo} siteMeta={siteMeta} isVariant={isVariant} />
+        <SEO isVariant={isVariant} seo={seo} siteMeta={siteMeta} />
         <LazyMotion features={loadFeatures} strict>
           <Nav
-            navigation={navigation}
             darkHero={darkHero}
             isPricingMenu={isPricingMenu}
-            simplifiedHeader={simplifiedHeader}
             isStartPageHeader={isStartPageHeader}
+            navigation={navigation}
+            simplifiedHeader={simplifiedHeader}
           />
           <LayoutContainer>
             <Main
               {...pageData}
               {...meta}
-              footer={footer}
-              slimFooter={slimFooter}
               err={err}
+              footer={footer}
               seo={seo}
+              slimFooter={slimFooter}
             />
           </LayoutContainer>
-          <Footer slimFooter={slimFooter} data={footer} />
+          <Footer data={footer} slimFooter={slimFooter} />
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>
       {htmlFooter && <Embed code={htmlFooter} />}
       {preview && (
         <PreviewBadge
-          preview={preview}
           initialData={data}
+          preview={preview}
           queries={queries}
-          setPreviewData={setPreviewData}
           setGlobalData={setGlobalData}
+          setPreviewData={setPreviewData}
         />
       )}
     </AppContext.Provider>
