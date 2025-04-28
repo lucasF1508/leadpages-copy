@@ -25,7 +25,7 @@ export async function getStaticProps(context) {
   const { data, queries, global } = await runQueries(
     [
       query(
-        `*[_type in $types && slug.current == $slug][0] {
+        `*[_type in $types && slug.current == $slug] | order(_updatedAt desc) [0]{
             ...,
             ${contentQuery},
             relatedArticles[]->,
