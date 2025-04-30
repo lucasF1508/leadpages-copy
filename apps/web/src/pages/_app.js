@@ -5,6 +5,7 @@ import Promotions from '@legacy/components/promotions/Promotions'
 import ToastManager from '@legacy/components/toasts/ToastManager'
 import { LazyMotion } from 'framer-motion'
 import dynamic from 'next/dynamic'
+import { RedbrickStructuredDataScript } from '@/components/TrackingScripts'
 import useFacebookPixel from '@hooks/useFacebookPixel'
 import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
 import useGTag from '@hooks/useGTag'
@@ -13,6 +14,7 @@ import useResizeEnd from '@hooks/useResizeEnd'
 import Embed from '@components/Embed'
 import FullStory from '@components/FullStory'
 import Leadboxes from '@components/Leadboxes'
+import SchemaMarkup from '@components/SchemaMarkup'
 import SpeedInsights from '@components/SpeedInsights'
 
 const PreviewBadge = dynamic(() => import('@hooks/usePreview'))
@@ -133,6 +135,15 @@ export default function App({
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>
+      <RedbrickStructuredDataScript />
+      <SchemaMarkup
+        _type={pageData._type}
+        pageData={pageData}
+        structuredData={[
+          ...(siteMeta?.company?.structuredData || []),
+          ...(pageData?.structuredData || []),
+        ]}
+      />
       {htmlFooter && <Embed code={htmlFooter} />}
       {preview && (
         <PreviewBadge

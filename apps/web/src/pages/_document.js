@@ -1,8 +1,9 @@
 import React from 'react'
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { getCssText } from '@design/stitches.config'
-import { ServerStyleSheets } from '@material-ui/core/styles'
 import ProfitWellRetain from '@legacy/scripts/ProfitWellRetain'
+import { ServerStyleSheets } from '@material-ui/core/styles'  
+import NextDocument, { Head, Html, Main, NextScript } from 'next/document'
+import RedbrickStructuredDataScript from '@/components/TrackingScripts/RedbrickStructuredDataScript'
 
 const { FB_PIXEL_ID } = process.env
 
@@ -36,22 +37,23 @@ export default class Document extends NextDocument {
             <noscript>
               <img
                 height="1"
-                width="1"
-                style={{ display: 'none' }}
                 src={`https://www.facebook.com/tr?id=${FB_PIXEL_ID}&ev=PageView&noscript=1`}
+                style={{ display: 'none' }}
+                width="1"
               />
             </noscript>
           )}
           <style
-            id="stitches"
             dangerouslySetInnerHTML={{ __html: getCssText() }}
+            id="stitches"
           />
           <link
-            rel="dns-prefetch preconnect"
             href="https://static.leadpages.com"
+            rel="dns-prefetch preconnect"
           />
           <script>window.dataLayer = window.dataLayer || []</script>
           <ProfitWellRetain />
+          <RedbrickStructuredDataScript />
         </Head>
         <body>
           <Main />

@@ -92,6 +92,7 @@ export const schemaPost = {
     ]),
     ...G.group('excerpt', [F.excerpt()]),
     ...G.group('meta', [
+      F.field('structuredData'),
       F.datetime({
         name: 'modified',
         readOnly: true,
