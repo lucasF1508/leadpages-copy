@@ -11,5 +11,6 @@ export const schemaCompanyInfo = {
     F.field('email'),
     F.string({name: 'phone'}),
     F.field('social'),
+    F.field('structuredData'),
   ],
 }

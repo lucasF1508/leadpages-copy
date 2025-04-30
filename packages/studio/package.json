@@ -19,6 +19,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@gearbox-built/sanity-structured-data": "^0.4.0",
     "@gearbox-built/sanity-admin-message": "^0.1.0",
     "@gearbox-built/sanity-autocomplete-address": "^0.2.0",
     "@gearbox-built/sanity-multi-reference": "^0.1.0",

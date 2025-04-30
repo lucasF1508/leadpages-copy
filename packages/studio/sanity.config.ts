@@ -2,6 +2,8 @@ import type {WorkspaceOptions} from 'sanity'
 import adminMessagePlugin from '@gearbox-built/sanity-admin-message'
 import autoCompleteAddressPlugin from '@gearbox-built/sanity-autocomplete-address'
 import multiReferencesPlugin from '@gearbox-built/sanity-multi-reference'
+import {structuredData} from '@gearbox-built/sanity-structured-data'
+import structuredDataConfig from './structuredDataConfig'
 import vimeoPlugin from '@gearbox-built/sanity-vimeo'
 import {table} from '@sanity/table'
 import {visionTool} from '@sanity/vision'
@@ -61,6 +63,7 @@ const config = defineConfig(
           generatePath,
           apiVersion: import.meta.env.SANITY_STUDIO_API_VERSION,
         }),
+        structuredData(structuredDataConfig),
       ],
       document: {
         actions: DocumentActions,
