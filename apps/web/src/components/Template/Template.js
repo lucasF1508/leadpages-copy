@@ -1,13 +1,13 @@
+import { useInView } from 'react-intersection-observer'
+import { mergeTemplateData } from '@utils/mergeTemplateData'
 import CTA from '@components/Cta'
+import NavSecondary from '@components/NavSecondary'
 import Pinion from '@components/Pinion'
 import Rack from '@components/Rack'
 import TemplateHero from '@components/Template/TemplateHero'
-import TemplateTabs from '@components/Template/TemplateTabs'
-import TemplateRelated from '@components/Template/TemplateRelated'
 import TemplateNav from '@components/Template/TemplateNav'
-import NavSecondary from '@components/NavSecondary'
-import { useInView } from 'react-intersection-observer'
-import { mergeTemplateData } from '@utils/mergeTemplateData'
+import TemplateRelated from '@components/Template/TemplateRelated'
+import TemplateTabs from '@components/Template/TemplateTabs'
 import { navOffset } from '../Nav/Nav'
 
 const Template = ({
@@ -37,8 +37,8 @@ const Template = ({
       </NavSecondary>
       <Rack>
         <Pinion
-          component="templateHero"
           backgroundColor="gray4"
+          component="templateHero"
           css={{
             marginTop: navOffset * -1,
             paddingTop: navOffset + 36,
@@ -50,21 +50,21 @@ const Template = ({
           </div>
         </Pinion>
         <Pinion
-          component="template"
           backgroundColor="gray4"
+          component="template"
           css={{
             pt: '$14',
           }}
         >
           <TemplateTabs
+            defaultReviews={defaultReviews}
             details={{ ...details, tags, templateTitle }}
-            reviews={reviews}
             included={{ ...included, includedItems }}
             kind={kind}
-            defaultReviews={defaultReviews}
+            reviews={reviews}
           />
         </Pinion>
-        <Pinion component="template" backgroundColor="gray4">
+        <Pinion backgroundColor="gray4" component="template">
           <TemplateRelated relatedTemplatesData={relatedTemplatesData} />
         </Pinion>
       </Rack>

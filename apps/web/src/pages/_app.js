@@ -5,6 +5,7 @@ import Promotions from '@legacy/components/promotions/Promotions'
 import ToastManager from '@legacy/components/toasts/ToastManager'
 import { LazyMotion } from 'framer-motion'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 import { RedbrickStructuredDataScript } from '@/components/TrackingScripts'
 import useFacebookPixel from '@hooks/useFacebookPixel'
 import useFocusOutlineOnTab from '@hooks/useFocusOutlineOnTab'
@@ -55,6 +56,7 @@ export default function App({
 
   // Promotions loading
   const [hasLoaded, setHasLoaded] = useState()
+  const { pathname } = useRouter()
 
   const [globalData, setGlobalData] = useState(global)
   const {
@@ -84,6 +86,11 @@ export default function App({
   const htmlFooter = [globalHtmlFooter, pageHtmlFooter].join('')
 
   // Option
+  const isTemplate = [
+    "/templates/landing-page-template/[slug]",
+    "/website-templates/website-template/[slug]"
+  ].includes(pathname)
+
   const options = { ...legacyOptions, ...pageOptions }
   const {
     slimFooter,
@@ -135,7 +142,7 @@ export default function App({
           <ModalParent />
         </LazyMotion>
       </MarketingThemeProvider>
-      <RedbrickStructuredDataScript />
+      <RedbrickStructuredDataScript includeSoftwareApplication={!isTemplate}/>
       <SchemaMarkup
         _type={pageData._type}
         pageData={pageData}

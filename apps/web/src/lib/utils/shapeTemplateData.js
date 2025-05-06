@@ -1,5 +1,5 @@
-import { query, runQuery } from '@lib/queries'
 import fetchTaxons from '@lib/mandrel/fetchTaxons'
+import { runQuery } from '@lib/queries'
 
 const tagSections = [
   'Industries',

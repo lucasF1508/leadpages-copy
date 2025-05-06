@@ -1,7 +1,7 @@
 import React from 'react'
-import { runQueries, query, getStaticPathsParams } from '@lib/queries'
-import TemplateComponent from '@components/Template'
 import { shapeData } from '@utils/shapeTemplateData'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
+import TemplateComponent from '@components/Template'
 
 const Template = (props) => <TemplateComponent {...props} />
 

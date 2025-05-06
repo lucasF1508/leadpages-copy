@@ -1,6 +1,9 @@
 import { blocksToText } from '@lib/utils/blockContent'
 import { getTemplateTitle } from '@lib/utils/getTemplateTitle'
-import { getKindTitle, getTemplateUrl } from '@lib/utils/templates'
+import { getKindTitle } from '@lib/utils/templates'
+
+// Reviews Temporarily hidden at Von-Claro's Request until solution for sourcing unique reviews is found
+// Reviews are currently sourced from a general category creating too many duplicates
 
 const handleRatings = (reviews) => {
   const totalReviews = reviews?.length || 0;
@@ -24,8 +27,19 @@ const handleRatings = (reviews) => {
   }
 }
 
-export const shapeProduct = ({template, reviews = []}) => {
-  const {_id, heading, kind, slug, fullPageScreenshotUrlWebp, content} = template
+export const shapeProduct = ({
+  template, 
+  reviews = []
+}) => {
+  const {
+    _id, 
+    heading, 
+    kind, 
+    // slug, 
+    fullPageScreenshotUrlWebp, 
+    content
+  } = template
+
   const { description: blocks } = content || {}
   const description = !!blocks?.length && blocksToText(blocks, {nonTextBehavior: 'remove'})
 
@@ -34,7 +48,7 @@ export const shapeProduct = ({template, reviews = []}) => {
     bestRating, 
     worstRating, 
     totalReviews,
-    hasReviews
+    // hasReviews
   } = handleRatings(reviews)
 
   const defaultProductData = {
@@ -47,38 +61,28 @@ export const shapeProduct = ({template, reviews = []}) => {
       type: "Brand",
       name: 'Leadpages',
     },
-    offers: {
-      type: "Offer",
-      url: getTemplateUrl(kind, slug),
-      itemCondition: "https://schema.org/NewCondition",
-      availability: "https://schema.org/InStock",
-      price: 74.00, // Ensure price is a string with 2 decimals
-      priceCurrency: "USD"
-    },
-    aggregateRating:
-    hasReviews
-      && {
-          type: "AggregateRating",
-          ratingValue: averageRating.toFixed(1),
-          reviewCount: totalReviews,
-          bestRating: bestRating,
-          worstRating: worstRating,
-        },
-    review: reviews?.map(({authorName, _createdAt, testimonial, rating}) => ({
-      type: "Review",
-      author: {
-        type: "Person",
-        name: authorName
-      },
-      datePublished: _createdAt,
-      description: testimonial,
-      reviewRating: {
-        type: "Rating",
-        bestRating,
-        ratingValue: rating,
-        worstRating,
-      }
-    }))
+    aggregateRating: {
+      type: "AggregateRating",
+      ratingValue: averageRating.toFixed(1),
+      reviewCount: totalReviews,
+      bestRating: bestRating,
+      worstRating: worstRating,
+    }
+    // review: reviews?.map(({authorName, _createdAt, testimonial, rating}) => ({
+    //   type: "Review",
+    //   author: {
+    //     type: "Person",
+    //     name: authorName
+    //   },
+    //   datePublished: _createdAt,
+    //   description: testimonial,
+    //   reviewRating: {
+    //     type: "Rating",
+    //     bestRating,
+    //     ratingValue: rating,
+    //     worstRating,
+    //   }
+    // }))
   }
 
   return defaultProductData
