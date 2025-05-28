@@ -26,7 +26,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkType>(
         linkSize && `link-${linkSize}`,
         hasIcon && `link-w-icon`,
         hasIcon && !linkStyle?.includes('text') && '[&_.link-icon-background]:hidden',
-        !hasIcon && 'hover:[&_.link-label]:transform-none',
+        !hasIcon && '[&_.link-label]:hover:transform-none',
         className
       ),
       condition,
