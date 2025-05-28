@@ -31,6 +31,7 @@ export interface MediaWithItemsProps
     link?: ClassValue
     media?: ClassValue
     root?: ClassValue
+    title?: ClassValue
   }
   content?: ContentType
   contentAlign?: 'left' | 'right'
@@ -70,6 +71,7 @@ export const useMediaWithItemsStore = create<MediaWithItemsStore>((set) => ({
 const MediaWithItems = ({
   className,
   classNames,
+  content,
   duration = 10,
   items,
   mediaItems,
@@ -110,13 +112,26 @@ const MediaWithItems = ({
   return (
     <div className='flex flex-col gap-5 sm:gap-7 md:gap-8 md:gap max-md:max-w-[33.5rem] align-center'>
         <div className='flex justify-between md:items-end gap-4 max-md:flex-col'>
-          {title && <div className={clsx('max-w-cols8')}>
-            <Text
-              as="div"
-              className={clsx('type-title-t7 sm:type-title-t5 md:type-title-t3', classNames?.content)}
-              content={title}
-            />
-          </div>}
+          <div className={clsx('max-w-cols8')}>
+            {title && 
+              <div>
+                <Text
+                  as="div"
+                  className={clsx('type-title-t7 sm:type-title-t5 md:type-title-t3', classNames?.title)}
+                  content={title}
+                />
+              </div>
+            }
+            {content && 
+              <div className='mt-2'>
+                <Text
+                  as="div"
+                  className={clsx(classNames?.content)}
+                  content={content}
+                />
+              </div>
+            }
+          </div>
           <div className='flex gap-2 sm:gap-3 md:gap-4'>
             <div className='link-button-secondary border-none w-6 h-6 rotate-180' onClick={() => handleSetActiveIndex(activeIndex - 1)}>
               <LinkIcon/>
