@@ -101,7 +101,12 @@ export async function getStaticProps(context) {
   }
 }
 
-const appRouterPages = ['"/pricing"', '"/product/lead-agent"', '"/product/lead-enrichment"']
+const appRouterPages = [
+  '"/pricing"',
+  '"/product/lead-agent"', 
+  '"/product/lead-enrichment"',
+  '"/platform/landing-page-builder"',
+]
 
 export async function getStaticPaths() {
   const paths = await getStaticPathsParams({

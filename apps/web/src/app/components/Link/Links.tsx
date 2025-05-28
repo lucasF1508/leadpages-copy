@@ -4,6 +4,7 @@ import type { ClassValue } from 'clsx'
 import clsx from 'clsx'
 import InlineSignUp from '@/components/InlineSignUp'
 import Link from './Link'
+import { hasLink } from './utils'
 
 export interface LinksProps extends LinkProps {
   className?: ClassValue
@@ -14,29 +15,48 @@ export interface LinksProps extends LinkProps {
   links: LinkType[]
 }
 
-const Links = ({ className, classNames, links, ...props }: LinksProps) =>
-  links?.length > 0 ? (
+const Links = ({ className, classNames, links, ...props }: LinksProps) => {
+  const hasSignUpLink = links?.some((link) => link._type === 'signUp')
+
+  if (!links?.length) return null
+
+  if (hasSignUpLink) {
+    return (
+      <div className={clsx(className, classNames?.root)}>
+        {
+          links
+            .filter((link) => link._type === 'signUp')
+            .map((link) => 
+              (
+                <InlineSignUp 
+                  className={clsx(classNames?.link)} 
+                  key={link._key}
+                  {...(link as InlineSignUpProps)}
+                />
+              )
+          )
+        }
+      </div>
+    )
+  }
+
+  return (
     <div className={clsx(className, classNames?.root)}>
       {
-        links.map((link) => link?._type === 'signUp' 
-            ? (
-            <InlineSignUp 
-              key={link._key} 
-              {...link as InlineSignUpProps}
-            />
-          )
-            :
+        links?.map((link) => 
+          hasLink(link) && 
           (
             <Link
               className={clsx(classNames?.link)}
-              {...props}
               {...link}
+              {...props}
               key={link._key}
             />
           )
         )
       }
     </div>
-  ) : <></>
+  )
+}
 
 export default Links
