@@ -10,7 +10,7 @@ import Link from '@/components/Link'
 import NavColumnCarousel from '@/components/Nav/NavColumnCarousel'
 import NavColumnFeatured from '@/components/Nav/NavColumnFeatured'
 import NavRow, { NavRowProps } from '@/components/Nav/NavRow'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 import { hasDropdown } from '../utils'
 import {LinkType, SanityImageProps} from '@/types'
 import { NavRowPrimaryProps } from '../NavRowPrimary'
@@ -77,7 +77,7 @@ const NavBarMenu = ({ menu }: { menu: any }) =>
       }: NavBarItemProps,
       index: number
     ) => {
-      const { dropdownSlug } = useNavStore()
+      const { dropdownSlug } = navStore()
       const rows = _rows || templateRows
       const active = dropdownSlug === `trigger-${index}`
       const { items, position = 'right' } = menuColumnFeatured || {}

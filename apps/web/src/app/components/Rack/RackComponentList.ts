@@ -17,7 +17,9 @@ import dynamic from 'next/dynamic'
  */
 
 const RackComponentList = {
+  addOnCards: dynamic(() => import('@/components/AddOnCards')),
   cardsBlock: dynamic(() => import('@/components/Cards')),
+  comparePlans: dynamic(() => import('@/components/ComparePlans')),
   cta: dynamic(() => import('@/components/CTA')),
   faqs: dynamic(() => import('@/components/FAQs')),
   featureCards: dynamic(() => import('@/components/FeatureCards')),
@@ -25,6 +27,10 @@ const RackComponentList = {
   mediaWithItems: dynamic(() => import('@/components/MediaWithItems')),
   mediaWithText: dynamic(() => import('@/components/MediaWithText')),
   mediaWithTextSticky: dynamic(() => import('@/components/MediaWithText/MediaWithTextSticky')),
+  pageAnchor: [
+    dynamic(() => import('@/components/PageAnchor')),
+    { pinion: false },
+  ],
   resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
@@ -48,10 +54,6 @@ const RackComponentList = {
   // logoGrid: dynamic(() => import('@/components/client/LogoGrid')),
   // media: dynamic(() => import('@/components/client/Media/MediaBlock')),
   // mediaWithText: dynamic(() => import('@/components/client/MediaWithText')),
-  // pageAnchor: [
-  //   dynamic(() => import('@/components/client/PageAnchor')),
-  //   { pinion: false },
-  // ],
   // section: [
   //   dynamic(() => import('@/components/client/Section')),
   //   { baseStyles: false },

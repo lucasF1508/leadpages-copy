@@ -5,8 +5,8 @@ import type { IconType } from '@react-icons/all-files'
 import type { Reference } from '@sanity/types'
 import type { ClassValue } from 'clsx'
 
-export type LinkStyleType = 'button-outline' | 'button-solid' | 'ghost' | 'none' | 'text'
-export type LinkSizeType = 'large' | 'regular'
+export type LinkStyleType = 'button-outline' | 'button-secondary' | 'button-solid' | 'ghost' | 'none' | 'text'
+export type LinkSizeType = 'small'
 
 export interface CommonLinkType {
   _key?: string

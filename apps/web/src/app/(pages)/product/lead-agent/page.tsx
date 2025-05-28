@@ -1,7 +1,6 @@
 import type { ResolvingMetadata } from 'next'
-
+import Layout, { pageQuery } from '@/(pages)/_page'
 import { generateMetadataStatic } from '@/lib/utils/generateMetadata/generateMetadataStatic'
-import Layout, { pageQuery } from '../_page'
 
 type Props = {
   params: Promise<{ id: string }>
@@ -12,7 +11,7 @@ export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata
 ) { 
-  return await generateMetadataStatic({ path: '/product/lead-agent', parent });
+  return await generateMetadataStatic({ parent, path: '/product/lead-agent' });
 }
 
 export default async function Page() {

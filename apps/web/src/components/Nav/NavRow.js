@@ -3,7 +3,7 @@ import Link from '@components/Link'
 import NavHeading from './NavHeading'
 import NavRowCards from './NavRowCards'
 import NavRowPrimary from './NavRowPrimary'
-import { useNavStore } from './NavStore'
+import { navStore } from './NavStore'
 
 const $NavRow = styled('div', {
   w: '100%',
@@ -39,7 +39,7 @@ const NavRow = ({
   isTemplateRow,
 }) => {
   const { links } = menuHeading || {}
-  const setNavOpen = useNavStore((state) => state.setNavOpen)
+  const setNavOpen = navStore((state) => state.setNavOpen)
   const link = links && links[0]
 
   return (

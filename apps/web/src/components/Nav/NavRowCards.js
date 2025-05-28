@@ -1,7 +1,7 @@
 import Image from '@components/Image'
 import Link from '@components/Link'
 import { styled } from '@design'
-import { useNavStore } from './NavStore'
+import { navStore } from './NavStore'
 
 const $NavRowCards = styled('div', {
   display: 'grid',
@@ -62,7 +62,7 @@ const $Image = styled('div', {
 })
 
 const NavRowCards = ({ cards }) => {
-  const setNavOpen = useNavStore((state) => state.setNavOpen)
+  const setNavOpen = navStore((state) => state.setNavOpen)
 
   return (
     <$NavRowCards>

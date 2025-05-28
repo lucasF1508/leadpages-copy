@@ -8,6 +8,10 @@
   }
 }
 
+.link-small {
+  @apply !type-size-h6 !h-[2.75rem]
+}
+
 /* TODO revisit when inline links are designed */
 .link-inline {
   @apply link text-button-surface-solid underline decoration-from-font;

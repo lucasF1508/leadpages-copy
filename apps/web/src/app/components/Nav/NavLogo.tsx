@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { Player } from '@lottiefiles/react-lottie-player'
 import LogoLottie from '@public/Leadpages-Logo-V2.json'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 
 // LogoLottie segments
 const markIn: AnimationSegment = [0, 30]
@@ -18,7 +18,7 @@ const markHoverOut: AnimationSegment = [135, 150]
 const NavLogo = () => {
   const lottie = useRef<AnimationItem | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const isSticky = useNavStore((state) => state.isSticky)
+  const isSticky = navStore((state) => state.isSticky)
 
   const getInstance = (instance: AnimationItem) => {
     lottie.current = instance

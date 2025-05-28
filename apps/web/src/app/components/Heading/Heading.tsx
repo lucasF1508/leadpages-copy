@@ -26,7 +26,7 @@ interface HeadingProps
   as?: HeadingElements
   baseStyles?: boolean
   className?: ClassValue
-  content?: PortableTextBlock[]
+  content?: PortableTextBlock[] | string
   heading?: string
   style?: string
 }

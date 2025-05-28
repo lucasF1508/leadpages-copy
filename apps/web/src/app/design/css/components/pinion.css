@@ -10,7 +10,7 @@
   @apply max-w-content align-center;
 }
 
-.pinion-textBlock{
+.pinion-textBlock {
   .pinion-inner {
     @apply max-w-base;
   }
@@ -36,6 +36,8 @@
 .pinion-resourceCard,
 .pinion-testimonialBlock,
 .pinion-upsell,
+.pinion-addOnCards,
+.pinion-comparePlans,
 .pinion-video {
   .pinion-inner {
     @apply max-w-base;

@@ -6,7 +6,7 @@ import NavRow from '@components/Nav/NavRow'
 import { MdKeyboardArrowDown as DisclosureIcon } from '@react-icons/all-files/md/MdKeyboardArrowDown'
 import { m } from 'framer-motion'
 import NavColumnFeatured from '../NavColumnFeatured'
-import { useNavStore } from '../NavStore'
+import { navStore } from '../NavStore'
 
 const $NavDrawerMenu = styled('div', {
   maxHeight: '100%',
@@ -104,7 +104,7 @@ const itemVariants = {
 }
 
 const NavDrawerMenu = ({ menu, buttons }) => {
-  const { setNavOpen } = useNavStore()
+  const { setNavOpen } = navStore()
   const [current, setCurrent] = useState(null)
 
   const handleClick = (index) => {

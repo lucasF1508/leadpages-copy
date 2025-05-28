@@ -2,7 +2,7 @@ import { styled } from '@design'
 import Image from '@components/Image'
 import Link from '@components/Link'
 import { useCarouselStore } from './NavColumnCarousel'
-import { useNavStore } from './NavStore'
+import { navStore } from './NavStore'
 
 const $NavItem = styled('div', {
   d: 'flex',
@@ -81,7 +81,7 @@ const $Icon = styled('div', {
 
 const NavItem = ({ data }) => {
   const updateImageData = useCarouselStore((state) => state.updateImageData)
-  const setNavOpen = useNavStore((state) => state.setNavOpen)
+  const setNavOpen = navStore((state) => state.setNavOpen)
   const setTimeoutId = useCarouselStore((state) => state.setTimeoutId)
   const timeoutId = useCarouselStore((state) => state.timeoutId)
   const clearTimeoutId = useCarouselStore((state) => state.clearTimeoutId)

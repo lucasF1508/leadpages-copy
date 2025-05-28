@@ -1,8 +1,8 @@
 import React from 'react'
-import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import Page, { PageSidebar } from '@layouts/Page'
-import { getPlanData, getGroupedPlanData } from '@utils/plans'
 import { features } from 'config'
+import { getGroupedPlanData, getPlanData } from '@utils/plans'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import pageQuery from '@lib/queries/components'
 
 const DynamicPage = ({ hasSidebar, ...props }) =>
@@ -101,11 +101,13 @@ export async function getStaticProps(context) {
   }
 }
 
+const appRouterPages = ['"/pricing"', '"/product/lead-agent"', '"/product/lead-enrichment"']
+
 export async function getStaticPaths() {
   const paths = await getStaticPathsParams({
     catchAll: true,
     filter:
-      'slug.current != "404" && path != "/product/feature-index" && path != "/website-templates" && path != "/templates"',
+      `slug.current != "404" && path != "/product/feature-index" && path != "/website-templates" && path != "/templates" && !(path in [${appRouterPages}])`,
     types,
   })
 
