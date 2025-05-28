@@ -130,7 +130,7 @@ const NavBarMenu = ({ menu }: { menu: any }) =>
       return (
         <Item index={index} key={_key}>
           <div className='group/trigger'>
-            <Link {...link} hasIcon={false} className='link-text-secondary text-button-text-secondary' linkStyle='text' />
+            <Link {...link} hasIcon={false} className='link-text-secondary text-body-neutral-body group-hover/trigger:text-button-text-secondary' linkStyle='text' />
             <NavItemUnderline />
           </div>
         </Item>
