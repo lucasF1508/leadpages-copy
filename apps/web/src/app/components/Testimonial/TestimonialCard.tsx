@@ -17,7 +17,7 @@ const TestimonialCard = ({ title, authorTitle, testimonial: body, image, rating 
   return (
       <div className={clsx('flex flex-col gap-9 px-3 py-4 sm:p-7 bg-surface-neutral-opacity rounded-xl')}>
         <div className='flex flex-col gap-4'>
-          <div className='max-w-[8.5rem]'><Stars rating={rating} /></div>
+          {rating && <div className='max-w-[8.5rem]'><Stars rating={rating} /></div>}
           <div className='relative type-quote-xs sm:type-quote-md md:type-quote-lg'>
             <span className='absolute left-0 top-0 -translate-x-full text-purple-100'>"</span>
             <article className={
@@ -29,12 +29,14 @@ const TestimonialCard = ({ title, authorTitle, testimonial: body, image, rating 
             </article>
           </div>
           <div className='flex gap-4 items-center'>
-            <div className='w-7 sm:w-9 shrink-0'>
-              <Image image={image} />
-            </div>
+            {image &&            
+              <div className='w-7 sm:w-9 shrink-0'>
+                <Image image={image} />
+              </div>
+            }
             <div className='flex flex-col gap-0.5 sm:gap-1'>
-              <h5 className='type-overline-xs'>{title}</h5>
-              <h6 className='type-overline-xxs'>{authorTitle}</h6>
+              {title && <h5 className='type-overline-xs'>{title}</h5>}
+              {authorTitle && <h6 className='type-overline-xxs'>{authorTitle}</h6>}
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import { motion as m } from 'motion/react'
 import Link from '@/components/Link'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 
 interface NavHeadingProps {
   data: any
@@ -13,7 +13,7 @@ const NavHeading = ({ data }: NavHeadingProps) => {
   const { heading, links } = data || {}
   const link = links?.length > 0 && links[0]
   const [isHovered, setIsHovered] = useState(false)
-  const setNavActive = useNavStore((state) => state.setNavActive)
+  const setNavActive = navStore((state) => state.setNavActive)
 
   if (!heading && !link) return null
 

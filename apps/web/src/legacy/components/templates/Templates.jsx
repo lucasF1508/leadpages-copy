@@ -35,7 +35,7 @@ import {
 } from '@legacy/constants/templates'
 
 import tracker from '@legacy/components/templates/tracker'
-import { useNavStore } from '@components/Nav/NavStore'
+import { navStore } from '@components/Nav/NavStore'
 import { Events } from '@legacy/components/templates/tracker'
 
 import { getTemplateUrl } from '../../../lib/utils/templates'
@@ -215,7 +215,7 @@ const Templates = ({ kind, isPreviewing, setCurrentURL, setPreviousURL }) => {
   const currentPath = router.asPath
   const queryString = useRef(getCategoryFromPath(currentPath))
   const firstLoad = useRef(true)
-  const setHideNav = useNavStore((state) => state.setHideNav)
+  const setHideNav = navStore((state) => state.setHideNav)
 
   const onUpdateQueryString = (urlParams) => {
     if (firstLoad.current && urlParams === 'order_by=-release_date') {

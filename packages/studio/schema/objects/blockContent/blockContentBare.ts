@@ -17,7 +17,29 @@ export const blockContentBare = F.array({
       lists: [],
       marks: {
         decorators: [...defaultDecorators],
-        annotations: [],
+        annotations: [
+          F.link({
+            name: 'link',
+            args: {
+              label: false,
+              linkStyle: false,
+              linkSize: false,
+            },
+            fields: [
+              F.dropdown(['inline'], {
+                name: 'linkStyle',
+                initialValue: 'inline',
+                group:'options',
+                hidden: true
+              }),
+              F.string({
+                name: 'href',
+                hidden: ({parent}) => !parent.href,
+                group: 'content',
+              }),
+            ],
+          }),
+        ],
       },
     },
   ],

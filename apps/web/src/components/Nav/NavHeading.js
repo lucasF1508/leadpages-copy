@@ -2,7 +2,7 @@ import Link from '@components/Link'
 import { styled } from '@design'
 import { m } from 'framer-motion'
 import { useState } from 'react'
-import { useNavStore } from './NavStore'
+import { navStore } from './NavStore'
 
 const $NavHeading = styled('div', {
   d: 'flex',
@@ -59,7 +59,7 @@ const NavHeading = ({ data, isMobile = false }) => {
   const { heading, links } = data
   const link = links?.length > 0 && links[0]
   const [isHovered, setIsHovered] = useState(false)
-  const setNavOpen = useNavStore((state) => state.setNavOpen)
+  const setNavOpen = navStore((state) => state.setNavOpen)
 
   if (!heading && !link) return null
 

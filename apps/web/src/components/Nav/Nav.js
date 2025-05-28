@@ -11,7 +11,7 @@ import { AnimatePresence, m } from 'framer-motion'
 import { isEmpty } from 'lodash'
 import { useRouter } from 'next/router'
 import NavLogo from '@/components/Nav/NavLogo'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 import useEventListener from '@hooks/useEventListener'
 import useMediaQuery from '@hooks/useMediaQuery'
 import scrollLock from '@hooks/useScrollLock'
@@ -19,7 +19,7 @@ import useStickyHeader from '@hooks/useStickyHeader'
 import Link from '@components/Link'
 import NavBarMenu from '@components/Nav/NavBar/NavBarMenu'
 import NavDrawer, { NavDrawerTrigger } from '@components/Nav/NavDrawer'
-import { useNavStore as useLegacyNavStore } from '@components/Nav/NavStore'
+import { navStore as useLegacyNavStore } from '@components/Nav/NavStore'
 
 const scaleIn = keyframes({
   from: { transform: 'rotateX(-30deg) scale(0.9)', opacity: 0 },
@@ -235,7 +235,7 @@ const NavBar = ({
   const { menu, buttons } = navigation || {}
   const { isNavOpen, dropdownSlug, setDropdownSlug, setNavOpen, hideNav } =
     useLegacyNavStore()
-  const setIsSticky = useNavStore((state) => state.setIsSticky)
+  const setIsSticky = navStore((state) => state.setIsSticky)
     
   const { isSticky, showHeader, stickyMotionProps } = useStickyHeader({
     offsetTop: 10,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { AnimatePresence, motion as m } from 'motion/react'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 import NavDrawerMenu from './NavDrawerMenu'
  
 interface NavDrawerProps {
@@ -8,7 +8,7 @@ interface NavDrawerProps {
 }
 
 const NavDrawer = ({navigation}: NavDrawerProps) => {
-  const isNavActive = useNavStore((state) => state.isNavActive)
+  const isNavActive = navStore((state) => state.isNavActive)
 
   return (
     <AnimatePresence mode="wait">

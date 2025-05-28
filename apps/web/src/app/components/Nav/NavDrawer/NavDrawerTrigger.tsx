@@ -1,9 +1,9 @@
 import { Slant as Hamburger } from 'hamburger-react'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
  
 const NavDrawerTrigger = () => {
-  const isNavActive = useNavStore(state => state.isNavActive)
-  const setNavActive = useNavStore(state => state.setNavActive)
+  const isNavActive = navStore(state => state.isNavActive)
+  const setNavActive = navStore(state => state.setNavActive)
 
   return (
     <Hamburger 

@@ -81,7 +81,7 @@ const InlineSignUp = ({ className, classNames, external, label, placeholder, sig
       <FormProvider {...methods}>
         <form
           className={clsx(
-            'flex flex-row flex-wrap items-center justify-start md:gap-0 gap-[0.125rem] w-full max-w-[27rem] md:flex-nowrap relative',
+            'flex flex-row flex-wrap items-center justify-start md:gap-0 gap-[0.125rem] w-full md:flex-nowrap relative',
             className,
             classNames?.root
           )}
@@ -90,7 +90,7 @@ const InlineSignUp = ({ className, classNames, external, label, placeholder, sig
           <input
             className={
               clsx(
-                '[background-color:transparent] focus:bg-light bg-gradient-input backdrop-blur-md transition-all duration-200 ease-in-out md:w-full md:max-w-cols3',
+                '[background-color:transparent] focus:bg-light bg-gradient-input backdrop-blur-md transition-all duration-200 ease-in-out md:w-full',
                 "!ring-brand-lime flex-[1_1_auto] type-body-sm block h-6 rounded-md border-none p-2.5 py-0 text-obsidian-900 placeholder:text-dark max-md:flex-[1_1_auto]")}
             disabled={isLoading}
             placeholder={placeholder}

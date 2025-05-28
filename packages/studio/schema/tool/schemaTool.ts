@@ -15,18 +15,43 @@ declare module '@gearbox-built/sanity-schema-tool' {
 export const customTypes = {
   F: {
     links: (
-      props?: Partial<ArrayField> & {signUpOption?: boolean},
+      props?: Partial<ArrayField> & {signUpOption?: boolean, linkStyle?: boolean},
       linkProps?: Partial<LinkField>,
       additionalFields = []
     ) => {
-      const {signUpOption} = props || {}
+      const {signUpOption, linkStyle = true} = props || {}
       return F.array(
         {
           name: 'links',
           of: [
-            F.link(linkProps),
+            F.link({
+              ...linkProps,
+              fields: [
+                ...( 
+                linkStyle ? [F.dropdown(['button-solid', 'button-outline', 'button-secondary', 'text', 'text-secondary'], {
+                  name: 'linkStyle',
+                  initialValue: 'inline',
+                  group:'options'
+                })] : []),
+              ],   
+              args: {
+                ...linkProps?.args,
+                linkStyle: false,
+                linkSize: false,
+              },   
+            }),
             ...(signUpOption ? [F.field('signUp')] : []),
             ...(additionalFields || []),
+          ],
+          validation: (Rule) => [
+            ...(signUpOption ? [
+              Rule.max(1),
+              Rule.custom((field) =>
+                 field?.some((link: any) => link._type === 'signUp') && field.length > 1
+                   ? 'When signup link is present, the CTA cannot contain other links'
+                   : true
+                ),
+              ] : [])
           ],
         },
         {

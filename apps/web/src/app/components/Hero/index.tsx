@@ -1,10 +1,12 @@
 import type { HeroHomeProps } from './HeroHome'
+import type { HeroPricingProps } from './HeroPricing/HeroPricing'
+import type { HeroWithMediaProps } from './HeroWithMedia'
 import HeroHome from './HeroHome'
+import HeroPricing from './HeroPricing'
 import HeroWithMedia from './HeroWithMedia'
-import { HeroWithMediaProps } from './HeroWithMedia'
 
 interface HeroProps {
-  hero: (HeroHomeProps | HeroWithMediaProps) & any[]
+  hero: (HeroHomeProps | HeroPricingProps |HeroWithMediaProps) & any[]
 }
 
 // TODO Expand as more Hero types are added.
@@ -15,6 +17,8 @@ const Hero = ({ hero }: HeroProps) => {
   switch (heroProps?._type) {
     case 'heroHome':
       return <HeroHome {...heroProps} />
+    case 'heroPricing':
+      return <HeroPricing {...heroProps} />
     default:
       return <HeroWithMedia {...heroProps} />
   }

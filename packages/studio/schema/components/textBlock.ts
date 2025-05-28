@@ -15,7 +15,7 @@ export const textBlock = F.object({
   fields: [
     ...G.group('content', [
       F.field('blockContent', {name: 'content'}),  
-      F.links()
+      F.links({validation: (Rule) => Rule.max(1)}),
     ]),
     ...G.group('options', [
       F.dropdown(['center', 'start'], {

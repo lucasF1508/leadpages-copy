@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
-import { LinkProps, SanityImageProps } from '@/types'
-import Link from '@/components/Link'
+import { ContentType, LinkProps, SanityImageProps } from '@/types'
+import { hasLinks, Links } from '@/components/Link'
 import Text from '@/components/Text'
 import { hasImage } from '@/components/Media'
 import Image from '@/components/Image'
@@ -11,23 +11,47 @@ interface ResourceCardProps {
   image: SanityImageProps
   heading: string
   link: LinkProps
+  links: LinkProps[]
   title: string
+  content: ContentType
 }
 
-const ResourceCard = ({ image, heading, link, title }: ResourceCardProps) => ( 
-  <div className={clsx('bg-surface-neutral-medium/30 theme-light:bg-surface-opacity-dark-900 rounded-lg px-3 py-4 sm:px-7 text-light flex flex-col nav-break:flex-row justify-between gap-4 nav-break:gap-8 items-end')}>
+const ResourceCard = ({ image, heading, link, links: _links, title, content }: ResourceCardProps) => {
+  const links = _links || [link]
+
+  return <div className={clsx('bg-surface-neutral-medium/30 theme-light:bg-surface-opacity-dark-900 rounded-lg px-3 py-4 sm:px-7 text-light flex flex-col nav-break:flex-row justify-between gap-4 nav-break:gap-8 items-end')}>
     <div className='w-full nav-break:max-w-[32.5rem] flex flex-col gap-13 justify-between'>
-      <div className='flex items-center gap-2 justify-between'>
-        <Text content={heading} className='type-overline-xxs'/>
-        <div className='nav-break:hidden'>
-          <UpRightIcon />
-        </div>
-      </div>
-      <div className='text-light flex flex-col gap-4'>
-        <Text content={title} className='type-h1'/>
-        <div>
-          <Link {...link} linkStyle='button-outline' className='theme-light:text-light' />
-        </div>
+      {heading && 
+        (<div className='flex items-center gap-2 justify-between'>
+          <Text content={heading} className='type-overline-xxs'/>
+          <div className='nav-break:hidden'>
+            <UpRightIcon />
+          </div>
+        </div>)
+      }
+      <div className='flex flex-col gap-4'>
+        {
+          title && 
+            <Text 
+              as='div' 
+              content={title} 
+              className='type-h1' 
+            />
+        }
+        {content &&
+          <Text content={content} className='type-body-lg'/>
+        }
+        {hasLinks(links) &&        
+          <div>
+            <Links 
+              links={links} 
+              classNames={{
+                link: 'theme-light:text-light max-w-none'
+              }} 
+              linkStyle='button-outline'
+            />  
+          </div>
+        }
       </div>
     </div>
     {hasImage(image) && (
@@ -39,6 +63,6 @@ const ResourceCard = ({ image, heading, link, title }: ResourceCardProps) => (
       </div>
     )}
   </div>
-)
+}
  
 export default ResourceCard

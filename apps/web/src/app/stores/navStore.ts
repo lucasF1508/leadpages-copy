@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
 interface NavState {
   dropdownSlug: string
@@ -12,7 +11,7 @@ interface NavState {
   setNavActive: (isNavActive: boolean) => void
 }
 
-export const useNavStore = create<NavState>(
+export const navStore = create<NavState>(
     (set) => ({
       dropdownSlug: '',
       hideNav: false,
