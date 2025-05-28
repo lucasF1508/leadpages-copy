@@ -10,7 +10,7 @@ import {
 import { motion as m } from 'motion/react'
 import { usePathname } from 'next/navigation'
 import useStickyHeader from '@/hooks/useStickyHeader'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 import NavBarViewport from '../NavBar/NavBarViewport'
 import Link from '@/components/Link'
 import { LinkProps } from '@/types'
@@ -43,7 +43,7 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
 
   const { buttons } = navigation || {}  
 
-  const { dropdownSlug, hideNav, isNavActive, setDropdownSlug, setNavActive, isSticky = false } = useNavStore(
+  const { dropdownSlug, hideNav, isNavActive, setDropdownSlug, setNavActive, isSticky = false } = navStore(
     useShallow((state) => ({ 
       dropdownSlug: state.dropdownSlug,
       hideNav: state.hideNav,
@@ -137,7 +137,7 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
               </Link>
             </NavBarPrimitiveItem>
             <div className='max-nav-break:hidden flex items-center gap-3 self-stretch'>{children}</div>
-            <div className="ml-auto hidden items-center justify-center gap-3 sm:flex self-stretch">
+            <div className="ml-auto hidden items-center justify-center gap-3 sm:flex self-stretch mr-1.5">
               {buttons?.map(({ _key, url, ...rest }: LinkProps & {_key: string}, i: number) => {
                 const isPricing =
                   asPath?.includes('pricing') && url === '/pricing'

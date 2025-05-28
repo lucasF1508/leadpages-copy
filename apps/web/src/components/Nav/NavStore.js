@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export const useNavStore = create((set) => ({
+export const navStore = create((set) => ({
   isNavOpen: false,
   dropdownSlug: '',
   hideNav: false,

@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 import Link from '@/components/Link'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 import NavHeading from './NavHeading'
 import NavRowCards from './NavRowCards'
 import NavRowPrimary from './NavRowPrimary'
@@ -27,7 +27,7 @@ const NavRow = ({
   menuHeading,
 }: NavRowProps) => {
   const { links } = menuHeading || {}
-  const setNavActive = useNavStore((state) => state.setNavActive)
+  const setNavActive = navStore((state) => state.setNavActive)
   const link = links && links[0]
 
   return (

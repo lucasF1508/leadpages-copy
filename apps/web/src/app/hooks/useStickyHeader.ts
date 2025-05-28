@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useMotionValue, useScroll } from 'motion/react'
 import { useShallow } from 'zustand/react/shallow'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 
 const useStickyHeader = ({ offsetTop = 200 } = {}) => {
-  const { isSticky, setIsSticky } = useNavStore(
+  const { isSticky, setIsSticky } = navStore(
     useShallow((state) => ({ 
       isSticky: state.isSticky,
       setIsSticky: state.setIsSticky,

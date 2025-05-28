@@ -426,6 +426,7 @@ export const themeLight = {
   surface: {
     DEFAULT: palette.white,
     neutral: {
+      DEFAULT: palette.dark,
       opacity: palette.opacity.dark[100],
     },
   },

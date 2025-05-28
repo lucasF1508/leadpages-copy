@@ -4,10 +4,10 @@ import React from 'react'
 import Bar from '@/components/Nav/NavBar/NavBar'
 import Menu from '@/components/Nav/NavBar/NavBarMenu'
 import Overlay from '@/components/Nav/NavOverlay'
-import { useNavStore } from '@/state/navStore'
+import { navStore } from '@/stores/navStore'
 
 const Nav = ({ navigation }: { navigation: any }) => {
-  const { isNavActive } = useNavStore()
+  const { isNavActive } = navStore()
   const { menu } = navigation || {}
   return (
     <>

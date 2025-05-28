@@ -18,7 +18,7 @@ const Links = ({ className, classNames, links, ...props }: LinksProps) =>
   links?.length > 0 ? (
     <div className={clsx(className, classNames?.root)}>
       {
-        links.map((link) => link._type === 'signUp' 
+        links.map((link) => link?._type === 'signUp' 
             ? (
             <InlineSignUp 
               key={link._key} 
