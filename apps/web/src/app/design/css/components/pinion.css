@@ -81,3 +81,7 @@
     @apply max-w-base;
   }
 }
+
+.pinion-mediaWithText {
+  @apply overflow-hidden;
+}
