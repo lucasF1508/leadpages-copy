@@ -7,9 +7,9 @@
 // export * from './logoGrid'
 // export * from './table'
 // export * from './textColumns'
+// export * from './blockquote'
 
 export * from './video'
-export * from './blockquote'
 export * from './cardsBlock'
 export * from './embed'
 export * from './marquee'
