@@ -96,7 +96,12 @@ const shapeData = (data, currentDocs = []) => {
           acc.updates.push(update)
         }
       } else {
-        const newDoc = shapeFields(_meta, kind, template)
+        const newDoc = shapeFields(_meta, kind, template) || {}
+        if (currentDocs.some((doc) => doc.slug?.current === newDoc.slug?.current)) {
+          console.warn(`Skipping template with duplicate slug: ${newDoc.slug?.current}`)
+          return acc
+        }
+
         acc.newDocs.push(newDoc)
       }
 
@@ -117,7 +122,7 @@ const templatesListItems = async (context) => {
 
   const [_mandrelTemplates, sanityTemplateDocs] = await Promise.all([
     fetchTemplates(),
-    client.fetch(`*[_type == "template"] { _id, _updatedAt }`),
+    client.fetch(`*[_type == "template"] { _id, _updatedAt, slug }`),
   ])
 
   const {leadpages, sites} = _mandrelTemplates

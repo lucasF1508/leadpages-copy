@@ -1,5 +1,5 @@
-import { MandrelApi } from '@lp/template-gallery/dist/mandrel-api'
 import { templatesBaseUrl } from '@legacy/constants/templates'
+import { MandrelApi } from '@lp/template-gallery/dist/mandrel-api'
 import { parseInt } from 'lodash'
 
 const mandrelApi = new MandrelApi({

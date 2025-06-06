@@ -1,6 +1,6 @@
-import getClient from 'client'
-import { MandrelApi } from '@lp/template-gallery/dist/mandrel-api'
 import { templatesBaseUrl } from '@legacy/constants/templates'
+import { MandrelApi } from '@lp/template-gallery/dist/mandrel-api'
+import getClient from 'client'
 
 const mandrelApi = new MandrelApi({ baseUrl: templatesBaseUrl })
 

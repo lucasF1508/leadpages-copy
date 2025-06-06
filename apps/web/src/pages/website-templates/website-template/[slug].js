@@ -1,7 +1,7 @@
 import React from 'react'
-import { runQueries, query, getStaticPathsParams } from '@lib/queries'
-import TemplateComponent from '@components/Template'
 import { shapeData } from '@utils/shapeTemplateData'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
+import TemplateComponent from '@components/Template'
 
 const Template = (props) => <TemplateComponent {...props} />
 
@@ -12,7 +12,7 @@ export async function getStaticProps(context) {
   const { data, queries, global } = await runQueries(
     [
     query(
-      `*[_type == "template" && slug.current == $slug][0] {
+      `*[_type == "template" && slug.current == $slug && kind == 'SiteTemplate'][0] {
         ...,
         "slug": slug.current,
         "relatedTemplates": *[_type == "template" && kind == 'SiteTemplate' && slug.current != $slug && (categories[].value)[@ in ^.categories[].value] != null]|order(count((categories[].value)[@ in ^.^.categories[].value]) desc)[0..7]
