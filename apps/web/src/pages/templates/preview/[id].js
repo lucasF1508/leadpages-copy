@@ -1,9 +1,9 @@
 import React from 'react'
-import { getPlanData, getGroupedPlanData } from '@utils/plans'
-import { runQueries } from '@lib/queries'
 import Templates from '@layouts/Templates'
-import getTemplateData from '@utils/getStaticTemplateData'
 import getClient from 'client'
+import getTemplateData from '@utils/getStaticTemplateData'
+import { getGroupedPlanData, getPlanData } from '@utils/plans'
+import { runQueries } from '@lib/queries'
 
 const client = getClient()
 

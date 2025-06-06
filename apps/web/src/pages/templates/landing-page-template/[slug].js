@@ -12,7 +12,7 @@ export async function getStaticProps(context) {
   const { data, queries, global } = await runQueries(
     [
     query(
-      `*[_type == "template" && slug.current == $slug][0] {
+      `*[_type == "template" && slug.current == $slug && kind == 'LeadpageTemplate'][0] {
         ...,
         "slug": slug.current,
         "relatedTemplates": *[_type == "template" && kind == 'LeadpageTemplate' && slug.current != $slug && (categories[].value)[@ in ^.categories[].value] != null]|order(count((categories[].value)[@ in ^.^.categories[].value]) desc)[0..7]
