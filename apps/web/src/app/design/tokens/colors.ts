@@ -381,6 +381,13 @@ const themeDark = {
       },
     },
     text: {
+      inline: {
+        DEFAULT: palette.purple[100],
+        default: palette.purple[100],
+        hover: palette.white,
+        active: palette.white,
+        disabled: palette.obsidian[700],
+      },
       solid: {
         DEFAULT: palette.obsidian[900],
         default: palette.obsidian[900],
@@ -520,6 +527,13 @@ export const themeLight = {
       },
     },
     text: {
+      inline: {
+        DEFAULT: palette.blue[800],
+        default: palette.blue[800],
+        hover: palette.dark,
+        active: palette.dark,
+        disabled: palette.obsidian[500],
+      },
       solid: {
         DEFAULT: palette.obsidian[900],
         default: palette.obsidian[900],

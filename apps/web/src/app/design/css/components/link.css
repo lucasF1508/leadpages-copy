@@ -14,19 +14,19 @@
 
 /* TODO revisit when inline links are designed */
 .link-inline {
-  @apply link text-button-surface-solid underline decoration-from-font;
+  @apply link text-button-text-inline decoration-from-font;
 
   &:hover {
-    @apply text-button-surface-solid-hover;
+    @apply text-button-text-inline-hover;
   }
 
   &:active {
-    @apply text-button-surface-solid-active;
+    @apply text-button-text-inline-active;
   }
 
   &.disabled,
   &[disabled] {
-    @apply !text-button-surface-solid-disabled;
+    @apply !text-button-text-inline-disabled;
   }
 }
 

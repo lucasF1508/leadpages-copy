@@ -103,6 +103,7 @@ export async function getStaticProps(context) {
 
 const appRouterPages = [
   '"/pricing"',
+  '"/product/checkouts"', 
   '"/product/lead-agent"', 
   '"/product/lead-enrichment"',
   '"/product/website-builder"',
