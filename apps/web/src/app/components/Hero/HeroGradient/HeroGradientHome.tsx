@@ -13,7 +13,7 @@ const HeroGradientHome = ({ className = ''}) => (
       hasPlaceholder={false}
       image={mobileBackgroundGradient}
       priority
-      sizes='464px'
+      sizes='(max-width: 639px) 464px'
     />
     <svg className={clsx(className, 'max-sm:hidden')} fill="none" preserveAspectRatio="xMidYMid meet"  viewBox="0 0 2400 1789" xmlns="http://www.w3.org/2000/svg">
       <mask height="1222" id="b" maskUnits="userSpaceOnUse" style={{ maskType: "alpha" }} width="1222" x="1081" y="305">
