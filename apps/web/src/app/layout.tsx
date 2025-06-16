@@ -20,6 +20,23 @@ const uxumVF = localFont({
   variable: '--font-uxumvf',
 })
 
+const rocGrotesk = localFont({
+  display: 'swap',
+  src: [
+    {
+      path: './design/font/rocgrotesk-regular-webfont.woff2',
+      style: 'normal',
+      weight: '400',
+    },
+    {
+      path: './design/font/rocgrotesk-medium-webfont.woff2',
+      style: 'normal',
+      weight: '500',
+    },
+  ],
+  variable: '--font-roc-grotesk-variable',
+})
+
 export { generateMetadata }
 
 export default function RootLayout({
@@ -35,7 +52,6 @@ export default function RootLayout({
           href="https://static.leadpages.com"
           rel="dns-prefetch preconnect"
         />
-        <link href="https://use.typekit.net/yhf6rvc.css" rel="stylesheet" />
         <meta
           content="11470417057f03716e17affcb71896ef"
           name="p:domain_verify"
@@ -50,7 +66,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${uxumVF.variable} theme-dark font-sans [--font-roc-grotesk-variable:'roc-grotesk-variable',sans-serif] text-body`}
+        className={`${inter.variable} ${uxumVF.variable} ${rocGrotesk.variable} theme-dark font-sans text-body`}
       >
         {/* @ts-expect-error Server Component https://github.com/vercel/next.js/issues/42292 */}
         <Header />
