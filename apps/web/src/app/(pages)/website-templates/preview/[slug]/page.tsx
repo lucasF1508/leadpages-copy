@@ -32,7 +32,7 @@ export default async function Page({
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  const params = await getStaticPathsParams({ type: 'template', filter: 'kind == "LeadpageTemplate"' })
+  const params = await getStaticPathsParams({ type: 'template', filter: 'kind == "SiteTemplate"' })
   const paths = params.map(({params: {slug}}: any) => ({
     slug,
   }))
