@@ -102,10 +102,12 @@ export async function getStaticProps(context) {
 }
 
 const appRouterPages = [
+  '"/templates"',
   '"/pricing"',
   '"/product/checkouts"', 
-  '"/product/lead-agent"', 
   '"/product/audience-insights"', 
+  '"/product/lead-agent"', 
+  '"/use-cases/lead-generation"', 
   '"/product/lead-enrichment"',
   '"/product/website-builder"',
   '"/platform/landing-page-builder"',

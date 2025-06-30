@@ -1,0 +1,32 @@
+{
+  "name": "migration",
+  "version": "0.1.0",
+  "private": true,
+  "description": "",
+  "bin": {
+    "rackpinion": "./cli.ts"
+  },
+  "scripts": {
+    "map": "tsx -r tsconfig-paths/register src/map/index.ts",
+    "import": "tsx -r tsconfig-paths/register src/import/index.ts",
+    "delete": "tsx -r tsconfig-paths/register src/tools/delete.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tsconfig": "*",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.20.3",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@gearbox-built/bolts": "^0.3.1",
+    "@sanity/client": "^7.5.0",
+    "@sanity/import": "^3.38.2",
+    "client": "*",
+    "inquirer": "^12.6.3",
+    "lodash": "^4.17.21",
+    "studio": "*"
+  }
+}

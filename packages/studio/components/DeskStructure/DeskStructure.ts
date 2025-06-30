@@ -8,11 +8,16 @@ import {StructureBuilder} from 'sanity/structure'
 import {ConfigContext} from 'sanity'
 import SingletonListItem from './SingletonListItem'
 import { RiLayoutBottom2Line } from 'react-icons/ri'
+import CategoriesListItem from './CategoriesListItem'
+import syncTemplateData from '@/utils/syncTemplateData'
+import {AiOutlineFileText, AiOutlineSetting} from 'react-icons/ai'
 
 const pageTemplates = config?.studio?.docTypes
 
-export const structure = (S: StructureBuilder, context: ConfigContext) =>
-  S.list()
+export const structure = (S: StructureBuilder, context: ConfigContext) => {
+  syncTemplateData(context)
+  
+  return S.list()
     .title('Menu')
     .items([
       S.listItem()
@@ -29,9 +34,49 @@ export const structure = (S: StructureBuilder, context: ConfigContext) =>
       S.divider(),
       S.documentTypeListItem('testimonial'),
       S.documentTypeListItem('faq'),
+      // S.listItem()
+      //   .title('Templates')
+      //   .child(
+      //     S.list()
+      //       .title('Templates')
+      //       .items([
+      //         S.listItem()
+      //           .title('Leadpage Templates')
+      //           .icon(AiOutlineFileText)
+      //           .child(
+      //             S.documentList()
+      //               .title('Leadpage Templates')
+      //               .filter('_type == "template" && kind == "LeadpageTemplate"')
+      //           ),
+      //         S.listItem()
+      //           .title('Website Templates')
+      //           .icon(AiOutlineFileText)
+      //           .child(
+      //             S.documentList()
+      //               .title('Website Templates')
+      //               .filter('_type == "template" && kind == "SiteTemplate"')
+      //           ),
+      //         S.documentTypeListItem('templateCategory').title('Template Categories'),
+      //         S.divider(),
+      //         SingletonListItem({
+      //           type: 'templateSettings',
+      //           title: 'Template Settings',
+      //           documentId: 'templateSettings',
+      //           S,
+      //         }).icon(AiOutlineSetting),
+      //         SingletonListItem({
+      //           type: 'templateSettings',
+      //           title: 'Website Template Settings',
+      //           documentId: 'websiteTemplateSettings',
+      //           S,
+      //         }).icon(AiOutlineSetting),
+      //       ])
+      //   )
+      //   .icon(AiOutlineFileText),
       S.divider(),
       SingletonListItem({type: 'navigation', title: 'Navigation', icon: MdOutlineSmartButton, S}),
       SingletonListItem({type: 'footer', title: 'Footer', icon: RiLayoutBottom2Line, S}),
+      CategoriesListItem({type: 'category', title: 'Categories', S, context}),
       S.listItem()
         .title('Site Settings')
         .child(
@@ -43,6 +88,7 @@ export const structure = (S: StructureBuilder, context: ConfigContext) =>
       )
       .icon(MdSettings),
     ])
+  }
 
 export const defaultDocumentNode = (S: StructureBuilder, {schemaType}: {schemaType: string}) => {
   if (pageTemplates.includes(schemaType)) {

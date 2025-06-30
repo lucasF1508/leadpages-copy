@@ -1,3 +1,4 @@
+import { colors } from '@/schema/decorators/colors'
 import React from 'react'
 
 const defaultDecorators = [
@@ -8,6 +9,7 @@ const defaultDecorators = [
     value: 'underline',
     icon: () => <span style={{textDecoration: 'underline', fontWeight: 700}}>U</span>,
   },
+  ...colors
 ]
 
 export default defaultDecorators
