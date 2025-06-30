@@ -2,14 +2,10 @@ import type { ResolvingMetadata } from 'next'
 
 import { generateMetadataStatic } from '@/lib/utils/generateMetadata/generateMetadataStatic'
 import Layout, { pageQuery } from '@/(pages)/_page'
-
-type Props = {
-  params: Promise<{ id: string }>
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-}
+import { GenerateMetadataProps } from '@/lib/utils/generateMetadata/generateMetadata'
 
 export async function generateMetadata(  
-  { params, searchParams }: Props,
+  { params, searchParams }: GenerateMetadataProps,
   parent: ResolvingMetadata
 ) { 
   return await generateMetadataStatic({ path: '/platform/landing-page-builder', parent });

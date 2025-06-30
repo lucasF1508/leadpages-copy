@@ -7,8 +7,7 @@ import {PatchEvent, set, unset, useFormValue} from 'sanity'
 const TitleField = React.forwardRef((props, ref) => {
   const {value} = props
   const {onChange, onBlur, onFocus} = props?.elementProps || {}
-  const title = useFormValue(['title'])
-  const kind = useFormValue(['kind'])
+  const {title, kind} = useFormValue(['title', 'kind']) || {}
 
   const handleChange = (event) => {
     const inputValue = event.target.value
@@ -19,17 +18,11 @@ const TitleField = React.forwardRef((props, ref) => {
     <Stack space={[3]}>
       <Text size={0}>Heading preview:</Text>
       <Text size={1}>
-        {!value
-          ? getTemplateTitle({
-              templateTitle: title,
-              heading: undefined,
-              kind,
-            })
-          : getTemplateTitle({
-              templateTitle: title,
-              heading: value,
-              kind,
-            })}
+        {getTemplateTitle({
+          templateTitle: title,
+          heading: value || undefined,
+          kind,
+        })}
       </Text>
       <TextInput
         ref={ref}

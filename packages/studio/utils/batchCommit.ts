@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type {Transaction} from '@sanity/client'
 import type {ToastContextValue} from '@sanity/ui'
 import type {PatchOperations, SanityClient, SanityDocument} from 'sanity'
@@ -125,7 +126,7 @@ export const batchCommit = async ({
   limit?: number
   patches: PatchesType
   start?: number
-  toast: ToastContextValue
+  toast?: ToastContextValue
 }) => {
   const range = patches.slice(start, start + limit)
   if (!range.length) return

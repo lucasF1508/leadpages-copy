@@ -5,23 +5,27 @@ import config from 'config'
 import { parseImageRef } from '@/lib/utils/parseImageRef'
 
 interface GenerateMetadataStaticProps {
-  path: string;
+  path?: string;
+  slug?: string;
   parent?: ResolvingMetadata
+  types?: string[];
 }
 
-const types = config?.studio?.docTypes
+const configTypes = config?.studio?.docTypes
 
-const seoQuery = `*[path == $path && _type in $types] {
+const seoQuery = `*[(path == $path || slug.current == $slug) && _type in $types] {
     ...(seo),
     "seoTitle": coalesce(seo.seoTitle, title),
   }
 `
 
 export const generateMetadataStatic = async ({
-  path,
+  path = '',
+  slug = '',
+  types = configTypes,
   parent,
 }: GenerateMetadataStaticProps): Promise<Metadata> => {
-  const [data] = await runQuery(seoQuery, { params: { path, types }, preview: draftMode().isEnabled })
+  const [data] = await runQuery(seoQuery, { params: { path, types, slug }, preview: draftMode().isEnabled })
   const parentProps = await parent
 
   const {
@@ -30,9 +34,9 @@ export const generateMetadataStatic = async ({
     seoDescription: description,
   } = data || {}
 
-    const {
-      url = null,
-    } = parseImageRef(image) || {}
+  const {
+    url = null,
+  } = parseImageRef(image) || {}
   
   return {
     title,

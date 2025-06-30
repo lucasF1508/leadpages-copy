@@ -1,5 +1,5 @@
 {
-  "version": "3.1.12",
+  "version": "3.1.13",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -12,6 +12,9 @@
     "serve": "turbo run serve",
     "dev": "yarn start",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "docs:map": "yarn workspace migration run map",
+    "docs:import": "yarn workspace migration run import",
+    "docs:delete": "yarn workspace migration run delete",
     "blast:node": "turbo run blast:node",
     "blast:next": "turbo run blast:next",
     "blast:dist": "turbo run blast:dist",

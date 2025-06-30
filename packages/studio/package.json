@@ -19,12 +19,12 @@
     "sanity"
   ],
   "dependencies": {
-    "@gearbox-built/sanity-structured-data": "^0.4.0",
     "@gearbox-built/sanity-admin-message": "^0.1.0",
     "@gearbox-built/sanity-autocomplete-address": "^0.2.0",
     "@gearbox-built/sanity-multi-reference": "^0.1.0",
     "@gearbox-built/sanity-path-input": "^0.1.0",
     "@gearbox-built/sanity-schema-tool": "^1.1.1",
+    "@gearbox-built/sanity-structured-data": "^0.4.0",
     "@gearbox-built/sanity-vimeo": "^0.2.0",
     "@sanity/orderable-document-list": "^1.2.1",
     "@sanity/table": "^1.0.1",
@@ -33,6 +33,7 @@
     "bolts": "*",
     "client": "*",
     "deepmerge": "^4.3.1",
+    "inquirer": "^12.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",

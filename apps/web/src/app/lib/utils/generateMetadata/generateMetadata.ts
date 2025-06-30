@@ -8,6 +8,12 @@ const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_URL
 
 const seoQuery = `*[_type == 'seoSite'] | order(_updatedAt desc) [0]`
 
+export type GenerateMetadataProps = {
+  params: Promise<{ slug: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+ 
+
 export async function generateMetadata(): Promise<Metadata> {
   const data = await runQuery(seoQuery, { preview: draftMode().isEnabled }) || {}
 

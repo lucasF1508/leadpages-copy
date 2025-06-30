@@ -1,7 +1,7 @@
 import React from 'react'
-import { getPlanData, getGroupedPlanData } from '@utils/plans'
-import { runQueries } from '@lib/queries'
 import Templates from '@layouts/Templates'
+import { getGroupedPlanData, getPlanData } from '@utils/plans'
+import { runQueries } from '@lib/queries'
 
 const TemplatesPage = (props) => <Templates {...props} />
 
