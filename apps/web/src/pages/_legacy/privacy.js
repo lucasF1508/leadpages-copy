@@ -1,12 +1,12 @@
-import React from 'react'
-import { PrivacyPolicy } from '@layouts/Legal'
-import { runQueries } from '@lib/queries'
+import React from "react"
+import { PrivacyPolicy } from "@layouts/Legal"
+import { runQueries } from "@lib/queries"
 
 const PrivacyPolicyPage = (props) => <PrivacyPolicy {...props} />
 
 export async function getStaticProps(context) {
   const { preview = false } = context
-  const slug = '/legal'
+  const slug = "/legal"
 
   const { global } = await runQueries([])
 

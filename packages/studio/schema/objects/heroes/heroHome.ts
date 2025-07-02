@@ -1,4 +1,4 @@
-import {BiImage as icon} from 'react-icons/bi'
+import { IoHomeOutline as icon } from "react-icons/io5";
 import {F, G, P} from '@/schema/tool'
 
 export const heroHome = F.object({

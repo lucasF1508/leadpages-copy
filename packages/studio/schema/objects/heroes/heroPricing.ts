@@ -1,4 +1,5 @@
-import {BiImage as icon, BiCheckCircle, BiXCircle} from 'react-icons/bi'
+import { BiCheckCircle, BiXCircle} from 'react-icons/bi'
+import { RiMoneyDollarCircleLine as icon } from "react-icons/ri";
 import { MdPriceChange } from "react-icons/md";
 import {F, G, P} from '@/schema/tool'
 import startCase from 'lodash/startCase'
