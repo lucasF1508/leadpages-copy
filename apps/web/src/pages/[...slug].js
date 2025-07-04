@@ -107,7 +107,6 @@ const appRouterPages = [
   '"/product/checkouts"', 
   '"/product/audience-insights"', 
   '"/product/lead-agent"', 
-  '"/use-cases/lead-generation"', 
   '"/product/lead-enrichment"',
   '"/product/website-builder"',
   '"/platform/landing-page-builder"',
