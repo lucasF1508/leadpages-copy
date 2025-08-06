@@ -6,11 +6,11 @@ import { useNextSanityImage } from 'next-sanity-image'
 
 type PlaceholderType = 'blur' | 'empty'
 
-const client = getClient({ 
+const client = getClient({
   // @ts-expect-error Better typing for client required
   config: {
     dataset: process.env.SANITY_STUDIO_API_DATASET,
-  }, 
+  },
 })
 
 type useImageParserReturnType = {

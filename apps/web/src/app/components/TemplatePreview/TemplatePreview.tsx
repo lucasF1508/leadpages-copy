@@ -19,24 +19,27 @@ const toggleNav = [
 ]
 
 const TemplatePreview = ({ data }: TemplatePreviewProps) => {
-  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(buildCheckoutUrl())
+  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(buildCheckoutUrl({planType: 'proMonthly', data}))
   const {categories, kind, title, slug} = data
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const url = buildCheckoutUrl()
-    setCheckoutUrl(url)
-  }, [data])
+    const url = buildCheckoutUrl({planType: 'proMonthly', data})
+
+    if(checkoutUrl !== url) {
+      setCheckoutUrl(url)
+    }
+  }, [data?._id])
 
   return (
     <div className="fixed inset-0 z-cover bg-dark">
       <div className="w-full h-full flex flex-col">
         <div className='h-header-height.md flex items-center justify-between py-[0.625rem] px-3 border-b border-border-muted'>
           <div className='flex-[1_1_100%]'>
-            <TemplatePreviewNav 
-              categories={categories} 
-              kind={kind} 
-              title={title} 
+            <TemplatePreviewNav
+              categories={categories}
+              kind={kind}
+              title={title}
               slug={slug}
             />
           </div>
@@ -65,7 +68,7 @@ const TemplatePreview = ({ data }: TemplatePreviewProps) => {
               }
             )}
           </div>
-          {checkoutUrl &&          
+          {checkoutUrl &&
             <div className='flex-[1_1_100%] flex justify-end'>
               <Link
                 href={checkoutUrl}
@@ -78,7 +81,7 @@ const TemplatePreview = ({ data }: TemplatePreviewProps) => {
           }
         </div>
         <div className='grow flex items-center justify-center w-full'>
-          <div               
+          <div
             className={
             clsx(
               'transition-all duration-300 ease-in-out h-full w-full overflow-hidden',
