@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import omit from 'lodash/omit'
+import {getFreeTrialCheckoutUrl} from '@/lib/utils/getFreeTrialCheckoutUrl'
 
 const { DEVELOPMENT_TRAIL_SIGNUP_ENDPOINT } = process.env
 const { VERCEL_ENV } = process.env
@@ -14,10 +15,11 @@ const fetchTrialUrl = async (req, res) => {
   if (req.method === 'POST') {
     try {
       const { type } = req.body
-      const endpoint = freeTrialEndpoints[type]
+      const endpoint = getFreeTrialCheckoutUrl(type)
+
 
       const requestOptions = {
-        body: JSON.stringify(_.omit(req.body, 'type')),
+        body: JSON.stringify(omit(req.body, 'type')),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -27,7 +29,7 @@ const fetchTrialUrl = async (req, res) => {
 
       const data = await fetch(
         VERCEL_ENV !== 'development'
-          ? `https://my.leadpages.com/order-leadpages/${endpoint}/t/d3yy2ARDnfEVTPU7/?request=new-signup`
+          ? [endpoint,'request=new-signup'].join('?')
           : DEVELOPMENT_TRAIL_SIGNUP_ENDPOINT,
         requestOptions
       )

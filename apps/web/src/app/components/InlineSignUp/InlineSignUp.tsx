@@ -1,6 +1,6 @@
 'use client'
 
-import type { FreeTrialKey } from '@/lib/forms/planRedirect';
+import type {FreeTrialKeyType} from '@/lib/utils/getFreeTrialCheckoutUrl'
 import type { ClassValue } from 'clsx';
 import React from 'react'
 import clsx from 'clsx'
@@ -9,7 +9,7 @@ import Loader from '@/components/Loader'
 import useForm, { FormProvider } from '@/hooks/useForm'
 import externalRedirect from '@/lib/forms/externalRedirect'
 import planRedirect from '@/lib/forms/planRedirect'
- 
+
 export interface InlineSignUpProps {
   className?: ClassValue
   classNames?: {
@@ -24,15 +24,15 @@ export interface InlineSignUpProps {
   label?: string
   placeholder?: string
   signUpType?: string
-  type: FreeTrialKey
+  type: FreeTrialKeyType
 }
 
 const InlineSignUp = ({ className, classNames, external, label, placeholder, signUpType, type: plan}: InlineSignUpProps) => {
   const {
-    formError, 
-    isLoading, 
-    methods, 
-    setFormError, 
+    formError,
+    isLoading,
+    methods,
+    setFormError,
     setIsLoading
   } = useForm({
     form: {
@@ -107,5 +107,5 @@ const InlineSignUp = ({ className, classNames, external, label, placeholder, sig
     </>
   )
 }
- 
+
 export default InlineSignUp

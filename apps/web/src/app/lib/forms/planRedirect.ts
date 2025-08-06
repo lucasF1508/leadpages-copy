@@ -1,8 +1,7 @@
+import type { FreeTrialKeyType} from '@/lib/utils/getFreeTrialCheckoutUrl';
 import { kebabCase } from 'lodash'
 import { submitToHubSpot } from '@/lib/forms/hubspotHelpers'
-import { freeTrialEndpoints } from '@pages/api/fetch-trial-url'
-
-export type FreeTrialKey = 'proAnnual' | 'proMonthly' | 'standardAnnual' | 'standardMonthly';
+import {getFreeTrialCheckoutUrl} from '@/lib/utils/getFreeTrialCheckoutUrl'
 
 interface FormData {
   [key: string]: any;
@@ -11,13 +10,12 @@ interface FormData {
 
 interface PlanRedirectParams {
   formData: FormData;
-  type: FreeTrialKey;
+  type: FreeTrialKeyType;
 }
 
 const planRedirect = async ({ formData, type }: PlanRedirectParams): Promise<{ error: string } | boolean> => {
   if (!formData.email || formData.email === '') {
-    const endpoint = freeTrialEndpoints[type]
-    const defaultUrl = `https://my.leadpages.com/order-leadpages/${endpoint}/t/d3yy2ARDnfEVTPU7`
+    const defaultUrl = getFreeTrialCheckoutUrl(type)
     window.location.href = `${defaultUrl}?emailsubmission=${kebabCase(type)}`
     return true
   }

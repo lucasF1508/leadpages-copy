@@ -1,9 +1,8 @@
 import { styled } from '@design'
 import { FiExternalLink as Icon } from '@react-icons/all-files/fi/FiExternalLink'
+import {getFreeTrialCheckoutUrl} from '@/lib/utils/getFreeTrialCheckoutUrl'
+import { getKindQueryParam, getTemplatePreviewUrl } from '@lib/utils/templates'
 import Link from '@components/Link'
-import { getTemplatePreviewUrl, getKindQueryParam } from '@lib/utils/templates'
-
-const { LEADPAGES_REACTIVATION_HOST } = process.env
 
 const $TemplateHeroLinks = styled('div', {
   display: 'flex',
@@ -23,20 +22,20 @@ const $TemplateHeroLinks = styled('div', {
 })
 
 const TemplateHeroLinks = ({ kind, id, slug }) => {
-  const url = `${LEADPAGES_REACTIVATION_HOST}/order-leadpages/fvnp9stiiu14/t/d3yy2ARDnfEVTPU7/?lp_template_data=${getKindQueryParam(
+  const url = [getFreeTrialCheckoutUrl('standardMonthly'), `lp_template_data=${getKindQueryParam(
     kind
-  )}-${id}`
+  )}-${id}`].join('?')
 
   return (
     <$TemplateHeroLinks>
       <Link
-        url={getTemplatePreviewUrl(kind, slug, id)}
         condition="internal"
         linkStyle="ghost"
+        url={getTemplatePreviewUrl(kind, slug, id)}
       >
         Live Demo <Icon />
       </Link>
-      <Link url={url} condition="external" linkStyle="button">
+      <Link condition="external" linkStyle="button" url={url}>
         Use this Template
       </Link>
     </$TemplateHeroLinks>

@@ -45,7 +45,7 @@ const Page = ({
   const { components, hero } = data || {}
 
   return (
-    <div className='min-h-dvh'>
+    <div>
       {!!hero?.length && <Hero hero={hero} />}
       {!!components?.length && <Rack components={components} />}
     </div>

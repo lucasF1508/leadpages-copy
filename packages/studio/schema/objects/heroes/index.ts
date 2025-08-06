@@ -1,3 +1,4 @@
 export * from './heroWithMedia'
 export * from './heroHome'
 export * from './heroPricing'
+export * from './heroSimple'

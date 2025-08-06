@@ -1,25 +1,28 @@
+import type { FreeTrialKeyType} from '@/lib/utils/getFreeTrialCheckoutUrl';
+import type { TemplateType } from '@/types/template'
+import {getFreeTrialCheckoutUrl} from '@/lib/utils/getFreeTrialCheckoutUrl'
+import {getKindQueryParam} from '@/lib/utils/getKindSlug'
 interface Param {
   key: string;
-  value: string | null | undefined;
+  value: null | string | undefined;
 }
 
-const fetchFunnelyticsParam = (): string | null => {
+const fetchFunnelyticsParam = (): null | string => {
   if (typeof window === 'undefined') return null;
   const funnelyticsParam = window?.location?.href?.split('?')[0] ?? null;
   return funnelyticsParam;
 };
 
-const fetchPreviewTemplate = (): string | null => {
-  if (typeof window === 'undefined') return null;
-  const template = window.localStorage?.getItem('lp_template_data') || null;
-  return template;
-};
-
 export const buildCheckoutUrl = (
-  planId = "rv7qq6f68t14",
-  trialId = 'd3yy2ARDnfEVTPU7',
+  {
+    data,
+    planType,
+  }: {
+    data?: TemplateType;
+    planType: FreeTrialKeyType;
+  }
 ) => {
-  let checkoutUrl = `${process.env.LEADPAGES_TRIAL_HOST}/order-leadpages/${planId}/t/${trialId}/`;
+  const checkoutUrl = getFreeTrialCheckoutUrl(planType);
 
   const funnelyticsParams: Param = {
     key: '_fsRef',
@@ -28,7 +31,7 @@ export const buildCheckoutUrl = (
 
   const templateParams: Param = {
     key: 'lp_template_data',
-    value: fetchPreviewTemplate(),
+    value: data?._id ? [getKindQueryParam(data.kind), data._id].join('-') : null,
   };
 
   const paramsArray: Param[] = [templateParams, funnelyticsParams];
@@ -41,7 +44,8 @@ export const buildCheckoutUrl = (
         urlParams.append(el.key, el.value);
       }
     });
-    return `${checkoutUrl}?${urlParams.toString()}`;
+
+    return [checkoutUrl, urlParams.toString()].join('?');
   }
 
   return checkoutUrl;

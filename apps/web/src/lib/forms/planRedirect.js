@@ -1,11 +1,10 @@
-import { freeTrialEndpoints } from '@pages/api/fetch-trial-url'
+import kebabCase from 'lodash/kebabCase'
+import {getFreeTrialCheckoutUrl} from '@/lib/utils/getFreeTrialCheckoutUrl'
 import { submitToHubSpot } from '@lib/forms/hubspotHelpers'
-import { kebabCase } from 'lodash'
 
 const planRedirect = async ({ type, formData }) => {
   if (!formData.email || formData.email === '') {
-    const endpoint = freeTrialEndpoints[type]
-    const defaultUrl = `https://my.leadpages.com/order-leadpages/${endpoint}/t/d3yy2ARDnfEVTPU7`
+    const defaultUrl = getFreeTrialCheckoutUrl(type)
     window.location.href = `${defaultUrl}?emailsubmission=${kebabCase(type)}`
     return true
   }

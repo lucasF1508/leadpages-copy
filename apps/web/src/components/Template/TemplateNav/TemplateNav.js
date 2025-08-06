@@ -1,12 +1,11 @@
 import { styled } from '@design'
-import TemplateHeroBreadcrumbs from '@components/Template/TemplateHero/TemplateHeroBreadcrumbs'
-import useMediaQuery from '@hooks/useMediaQuery'
-import Link from '@components/Link'
 import { FiExternalLink as Icon } from '@react-icons/all-files/fi/FiExternalLink'
+import {getFreeTrialCheckoutUrl} from '@/lib/utils/getFreeTrialCheckoutUrl'
 import { getTemplatePreviewUrl } from '@utils/templates'
 import { getKindQueryParam } from '@lib/utils/templates'
-
-const { LEADPAGES_REACTIVATION_HOST } = process.env
+import useMediaQuery from '@hooks/useMediaQuery'
+import Link from '@components/Link'
+import TemplateHeroBreadcrumbs from '@components/Template/TemplateHero/TemplateHeroBreadcrumbs'
 
 const $TemplateNav = styled('div', {
   px: '$2_5',
@@ -51,9 +50,9 @@ const $TemplateNavLinks = styled('div', {
 })
 
 const TemplateNav = ({ title, kind, _id, slug }) => {
-  const url = `${LEADPAGES_REACTIVATION_HOST}/order-leadpages/fvnp9stiiu14/t/d3yy2ARDnfEVTPU7/?lp_template_data=${getKindQueryParam(
-    kind
-  )}-${_id}`
+  const url = [getFreeTrialCheckoutUrl('standardMonthly'), `lp_template_data=${getKindQueryParam(
+      kind
+    )}-${_id}`].join('?')
   const isDesktopNav = useMediaQuery('(min-width: 960px)')
 
   return (
@@ -66,9 +65,9 @@ const TemplateNav = ({ title, kind, _id, slug }) => {
       </$TemplateNavInner>
       <$TemplateNavLinks>
         <Link
-          url={getTemplatePreviewUrl(kind, slug, _id)}
           condition="internal"
           linkStyle="ghost"
+          url={getTemplatePreviewUrl(kind, slug, _id)}
         >
           {isDesktopNav && `Live `}Demo {isDesktopNav && <Icon />}
         </Link>
