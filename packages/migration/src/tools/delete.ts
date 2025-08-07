@@ -1,9 +1,9 @@
 //@ts-nocheck
-import inquirer from 'inquirer'
 import type { PatchesType } from 'studio/utils/batchCommit';
-import batchCommit, { buildDeletePatches } from 'studio/utils/batchCommit'
 import { transferClients } from '@src/client'
 import { runner } from '@src/utils/runner'
+import inquirer from 'inquirer'
+import batchCommit, { buildDeletePatches } from 'studio/utils/batchCommit'
 
 const main = async () => {
   const { docType } = await inquirer.prompt([

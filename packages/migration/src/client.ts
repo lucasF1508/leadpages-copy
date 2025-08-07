@@ -6,7 +6,7 @@ loadEnv()
 const config = {
   apiVersion: process.env.SANITY_STUDIO_API_VERSION,
   projectId: process.env.SANITY_STUDIO_API_PROJECT_ID,
-  token: process.env.SANITY_STUDIO_APP_TOKEN,
+  token: process.env.SANITY_STUDIO_APP_TOKEN_DANGEROUS,
   useCdn: false,
 }
 

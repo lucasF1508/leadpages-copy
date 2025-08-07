@@ -196,7 +196,7 @@ const Lottie = ({
           onEvent={handleEvent}
           ref={ref}
           speed={speed}
-          src={file?.file || url}
+          src={url || file?.file}
         >
           <Controls
             buttons={['play', 'repeat', 'frame', 'debug']}

@@ -10,7 +10,6 @@ export const cta = F.object({
     F.field('blockContent', {name: 'content'}), 
     F.links({
       signUpOption: true,
-      validation: (Rule) => Rule.max(1),
     }),
     F.image({name: 'backgroundImage'}),
     F.radio(['horizontal', 'vertical'], {name: 'desktopOrientation'}),  

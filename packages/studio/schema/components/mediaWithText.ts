@@ -10,6 +10,7 @@ export const mediaWithText = F.field('object', {
     ...G.group('content', [
       F.string({name: 'pillContent'}),
       F.field('blockContent', {name: 'content'}),
+      F.links(),
     ]),
     ...G.group('media', [
       F.media({

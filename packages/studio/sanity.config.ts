@@ -39,6 +39,10 @@ const config = defineConfig(
       projectId: import.meta.env.SANITY_STUDIO_API_PROJECT_ID,
       icon: Logo,
       dataset,
+      releases: {
+        enabled: false,
+      },
+      scheduledPublishing: {enabled: false},
       plugins: [
         structureTool({
           name: 'desk',
