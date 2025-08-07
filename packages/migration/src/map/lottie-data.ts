@@ -1,10 +1,9 @@
 // @ts-nocheck
+import { findPaths } from '@gearbox-built/bolts/utils'
+import migrate from '@src/utils/migrate'
 /* eslint-disable no-console */
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
-import batchCommit, {buildPatches, mergePatches} from '@gearbox-built/bolts'
-import { findPaths } from '@gearbox-built/bolts/utils'
-import migrate from '@src/utils/migrate'
 
 const query = `*[_type == 'sanity.fileAsset' && extension == 'json'] {
   _id,
@@ -60,8 +59,8 @@ const mapDocuments = (assets) =>
     .flat()
 
 migrate({
-  query,
   mappers: mapDocuments,
+  query,
 }).catch((err) => {
   console.error(err)
   process.exit(1)

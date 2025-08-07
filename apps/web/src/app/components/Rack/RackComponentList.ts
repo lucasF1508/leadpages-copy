@@ -23,7 +23,8 @@ const RackComponentList = {
   cta: dynamic(() => import('@/components/CTA')),
   faqs: dynamic(() => import('@/components/FAQs')),
   featureCards: dynamic(() => import('@/components/FeatureCards')),
-  marquee: dynamic(() => import('@/components/Marquee')),
+  marquee: dynamic(() => import('@/components/Marquee/MarqueeBlock')),
+  media: dynamic(() => import('@/components/Media/MediaBlock')),
   mediaWithItems: dynamic(() => import('@/components/MediaWithItems')),
   mediaWithText: dynamic(() => import('@/components/MediaWithText')),
   mediaWithTextSticky: dynamic(() => import('@/components/MediaWithText/MediaWithTextSticky')),
@@ -40,7 +41,7 @@ const RackComponentList = {
   textColumns: dynamic(() => import('@/components/TextColumns')),
   textWithStats: dynamic(() => import('@/components/TextWithStats')),
   upsell: dynamic(() => import('@/components/Upsell')),
-  
+
   // TEMP - Remove when all components are implemented
   // accordion: dynamic(() => import('@/components/client/Accordion')),
   // border: dynamic(() => import('@/components/client/Border')),
@@ -52,7 +53,6 @@ const RackComponentList = {
   // imageSlider: dynamic(() => import('@/components/client/ImageSlider')),
   // link: dynamic(() => import('@/components/client/Link')),
   // logoGrid: dynamic(() => import('@/components/client/LogoGrid')),
-  // media: dynamic(() => import('@/components/client/Media/MediaBlock')),
   // mediaWithText: dynamic(() => import('@/components/client/MediaWithText')),
   // section: [
   //   dynamic(() => import('@/components/client/Section')),

@@ -16,6 +16,16 @@ export const featureCards = F.object({
               F.image({name: 'icon'}),
               F.field('blockContentSimple', {name: 'content'}),
             ],
+            preview: {
+              select: {
+                content: 'content',
+                icon: 'icon',
+              },
+              prepare: ({content, icon}) => ({
+                title: content ? P.richText(content) : 'Feature Card',
+                media: icon,
+              }),
+            },
           }),
         ],
       }),
@@ -27,14 +37,15 @@ export const featureCards = F.object({
   preview: {
     select: {
       cta: 'cta',
+      cards: 'cards',
     },
-    prepare({cta}) {
-      const {heading, content } = cta || {}
+    prepare: ({cta}) => {
+      const { heading, content = [], backgroundImage } = cta || {}
       return {
         title: heading || 'Feature Cards',
-        subtitle: P.richText(content),
-        media: icon,
+        subtitle: P.richText([...(content)]) || '(No CTA Configured)',
+        media: backgroundImage
       }
-    },
+    }
   },
 })

@@ -116,7 +116,7 @@ export async function getStaticPaths() {
   const paths = await getStaticPathsParams({
     catchAll: true,
     filter:
-      `slug.current != "404" && path != "/product/feature-index" && path != "/website-templates" && path != "/templates" && !(path in [${appRouterPages}])`,
+      `slug.current != "404" && !(path in [${appRouterPages}]) && !path match "/use-cases/*"`,
     types,
   })
 

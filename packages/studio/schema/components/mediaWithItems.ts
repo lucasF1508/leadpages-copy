@@ -8,7 +8,7 @@ export const mediaWithItems = F.field('object', {
   groups: G.fieldGroupComponentOptions(),
   fields: [
     ...G.group('content', [
-      F.string({name: 'title', required: true}),
+      F.string({name: 'title'}),
       F.field('blockContentSimple', { name: 'content' }),
       F.array({
         name: 'mediaItems',

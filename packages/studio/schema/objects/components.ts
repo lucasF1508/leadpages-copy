@@ -4,7 +4,7 @@ import * as allComponentsSchema from '../components'
 import { section } from './section'
 
 const componentsSchema = Object.values(allComponentsSchema)
-  .filter(({ name }) => !['embed', 'video', 'media', 'mediaWithTextSticky'].includes(name))
+  .filter(({ name }) => !['embed', 'video', 'mediaWithTextSticky'].includes(name))
   .map(({ name, title }) => F.field(name, { name, title }))
 
 export const schemaComponents = F.array({

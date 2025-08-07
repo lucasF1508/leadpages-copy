@@ -1,11 +1,18 @@
 import { SanityDocument } from "sanity"
 
-type Mapper = (shapeData: any) => any
+type Mapper = (docs: SanityDocument[]) => Promise<SanityDocument[]> | SanityDocument[]
 
-const queueMappers = (docs: SanityDocument[], ...mappers: Mapper[]): SanityDocument[] => {
-  if (mappers.length === 0) return docs
-
-  return mappers.reduce((result, mapper) => mapper(result), docs)
+const queueMappers = async (
+  docs: SanityDocument[],
+  ...mappers: Mapper[]
+): Promise<SanityDocument[]> => {
+  return mappers.reduce(
+    async (prevDocsPromise, mapper) => {
+      const resolvedDocs = await prevDocsPromise
+      return mapper(resolvedDocs)
+    },
+    Promise.resolve(docs)
+  )
 }
 
 export { queueMappers }

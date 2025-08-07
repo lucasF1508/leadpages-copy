@@ -1,15 +1,17 @@
-import type { ContentType,  MediaType } from '@types'
+import type { ContentType,  LinkType,  MediaType } from '@types'
 import type { ClassValue } from 'clsx'
 import React from 'react'
 import clsx from 'clsx'
 import Media, {hasMedia} from '@/components/Media'
 import Text from '@/components/Text'
+import { Links, hasLinks } from '../Link'
 
 export type MediaWithTextType = {
   _key: string
   alignContent?: 'left' | 'right'
   className?: ClassValue
   content?: ContentType
+  links?: LinkType[]
   media: MediaType
   pillContent?: string
 }
@@ -17,6 +19,7 @@ export type MediaWithTextType = {
 const MediaWithText = ({
   alignContent,
   content,
+  links,
   media,
   pillContent,
 }: MediaWithTextType) => <div
@@ -63,6 +66,7 @@ const MediaWithText = ({
               content={content}
             />
           )}
+          {hasLinks(links) && (<Links className='mt-2' links={links}/>)}
         </div>
       </div>
     </div>

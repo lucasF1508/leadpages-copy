@@ -45,7 +45,7 @@ const CTAHorizontal = ({
           />
           <Text className='text-body-muted' content={content}/>
           <div className={clsx('mt-[2.75rem]', mobileAlignment === 'center' && 'max-md:flex max-md:justify-center')}>
-            <Links links={links} />
+            <Links classNames={{link: 'max-md:mb-1 max-md:w-full', root: 'md:flex gap-2'}} links={links}/>
           </div>
         </div>
         <div 

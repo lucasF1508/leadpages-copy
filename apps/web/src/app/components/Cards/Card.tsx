@@ -4,6 +4,7 @@ import React from 'react'
 import clsx from 'clsx'
 import Image from '@/components/Image'
 import Text from '@/components/Text'
+import { hasImage } from '../Media'
 
 export interface CardProps {
   _id?: string
@@ -44,7 +45,7 @@ const Card = ({
     {backgroundImage && <Image className='absolute inset-0 z-base' fill image={backgroundImage} />}
     <div className={clsx('relative z-content p-4', contentSize === 'large' && 'md:p-6', classNames?.contentGroup)}>
       <div className={clsx('flex', contentSize === 'large' ? 'flex-col' : 'flex-row gap-3',)}>
-        {icon && <div className={clsx('shrink-0 flex items-center justify-center mb-2', contentSize === 'large' && 'w-8 h-8', classNames?.iconContainer)}>
+        {hasImage(icon) && <div className={clsx('shrink-0 flex items-center justify-center mb-2', contentSize === 'large' && 'w-8 h-8', classNames?.iconContainer)}>
           <Image className={clsx('w-5 h-5', classNames?.icon)} image={icon} />
         </div>}
         {!!content?.length && <Text className={clsx('*:!my-0 flex-col flex gap-2 [&_p]:text-body-muted', classNames?.content)} content={content} />}

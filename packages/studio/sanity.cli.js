@@ -7,8 +7,8 @@ export default defineCliConfig({
     basePath: '/studio',
   },
   api: {
-    // projectId: 'zh3laji4', // Sandbox Project ID
-    projectId: "1ux2e04i",
+    projectId: 'zh3laji4', // Sandbox Project ID
+    // projectId: "1ux2e04i",
     dataset: 'production_v3',
   },
   vite: (prevConfig) => ({

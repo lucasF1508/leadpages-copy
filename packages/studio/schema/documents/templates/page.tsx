@@ -11,7 +11,7 @@ export const page = F.document({
   fieldsets: [FS.seo(), FS.define('meta', {collapsed: false})],
   fields: [
     orderRankField({type: 'page'}),
-    ...G.group('content', [F.title(), F.field('hero'), F.field('components', {})]),
+    ...G.group('content', [F.title(), F.field('hero'), F.field('components', {}), F.datetime({name: 'modified', hidden: true})]),
     ...G.group('meta', [F.slug(), F.field('path')]),
     ...G.group('seo', [F.seo()]),
   ],
