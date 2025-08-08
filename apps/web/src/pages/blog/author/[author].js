@@ -1,8 +1,8 @@
 import React from 'react'
-import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import { ArchiveAuthor } from '@layouts/Archive'
-import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import { seoQuery } from '@lib/queries/globalQueries'
+import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
 
 const AuthorPage = (props) => <ArchiveAuthor {...props} />
 
@@ -21,7 +21,7 @@ export const shapeData = ([publisher, _docs]) => {
       path,
       publishedDate,
       author,
-      image,
+      image: image || null,
       primaryCategory,
       title,
     })

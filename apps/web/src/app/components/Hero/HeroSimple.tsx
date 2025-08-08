@@ -17,14 +17,14 @@ export interface HeroSimpleProps {
 
 const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
   <div className='relative overflow-hidden'>
-    <Pinion component="hero">
+    <Pinion className={clsx(hasMedia(media) && '!mb-0')} component="hero">
       {(label || pill) && (
         <div className="flex flex-col sm:flex-row gap-2 mb-2 items-start sm:items-center">
           {label && (
             <Label
               className={clsx('type-overline-xxs')}
               content={label}
-            
+
             />
           )}
           {pill && (
@@ -48,15 +48,14 @@ const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
       )}
       {hasLinks(links) && (
         <Links
-          className={clsx('mt-2 gap-2 sm:gap-3 flex flex-col sm:flex-row max-w-cols6')} 
+          className={clsx('mt-2 gap-2 sm:gap-3 flex flex-col sm:flex-row max-w-cols6')}
           links={links}
         />
       )}
       {hasMedia(media) && (
-        <div className='mt-6 -mb-10 relative w-full h-[31.25rem]'>
+        <div className='mt-6 relative w-full'>
           <Media
             className={clsx('w-full object-cover')}
-            fill
             media={media}
             priority
           />
@@ -67,4 +66,4 @@ const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
 )
 
 export default Hero
-      
+
