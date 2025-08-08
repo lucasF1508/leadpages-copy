@@ -1,9 +1,9 @@
 import React from 'react'
-import { runQueries, getStaticPathsParams, query } from '@lib/queries'
 import Archive from '@layouts/Archive'
+import { getStaticPathsParams, query, runQueries } from '@lib/queries'
 import { categoryPostCountQuery } from '@lib/queries/components'
-import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
 import { seoQuery } from '@lib/queries/globalQueries'
+import { futurePublishedDateFilter } from '@lib/utils/filterForPublishedDate'
 
 const CategoryPage = (props) => <Archive {...props} />
 
@@ -19,7 +19,7 @@ export const shapeData = ([
       path,
       publishedDate,
       publisher,
-      image,
+      image: image || null,
       primaryCategory,
       title,
     })
@@ -57,7 +57,7 @@ export async function getStaticProps(context) {
       `*[_type == "categoryPost" && slug.current == $category][0] {
         ...,
         "slug": slug.current,
-        ${seoQuery} 
+        ${seoQuery}
       }`,
       {
         preview,
@@ -76,7 +76,7 @@ export async function getStaticProps(context) {
         preview,
         params: { category },
       }
-    ),  
+    ),
   ])
 
   return {
