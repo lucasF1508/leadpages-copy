@@ -10,7 +10,7 @@ const map = {
     }
 
     const mappedItems = items.flatMap((column: any) => {
-      const {content, title} = column
+    const {content, title} = column
 
     return [{
       _type: "block",
@@ -43,6 +43,10 @@ const map = {
   h2: (item: any) => ({
     ...item,
     style: 'h4',
+  }),
+  h3: (item: any) => ({
+    ...item,
+    style: 'h4',
   })
 }
 
@@ -54,7 +58,8 @@ const shapeMediaWithText = (component: Record<string, any>): Record<string, any>
     "priority",
     "alignImage",
     "alignText",
-    "contentOptions"
+    "contentOptions",
+    "linkDecorators"
   ])
 
   return {

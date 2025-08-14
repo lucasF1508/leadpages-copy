@@ -14,8 +14,8 @@ const shapeMarquee = (component: Record<string, any>): Record<string, any> => {
     ]),
     logos: (component.images || []).map((_image: Record<string, any>) => {
       const {image, link} = _image
-      
-       return { 
+
+       return {
         ...image,
         _type: 'image',
         link,
@@ -27,8 +27,8 @@ const shapeMarquee = (component: Record<string, any>): Record<string, any> => {
   const content = {
     _type: 'textBlock',
     content: shapeMarksAndDefs(
-      component.content, 
-      addMarksAndMarkDefsToAllBlocks(['align']),  
+      component.content,
+      addMarksAndMarkDefsToAllBlocks(['align']),
       updateMarkDefByKey('7f2f729ec662', { linkStyle: 'button-solid' })
     ),
   }

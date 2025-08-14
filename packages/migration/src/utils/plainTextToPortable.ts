@@ -1,6 +1,11 @@
 import uid from '@sanity/uuid'
 
-const plainTextToPortable = (inputText: string, style = 'normal') => inputText
+const plainTextToPortable = (inputText: string, style = 'normal') => {
+  if (!inputText || typeof inputText !== 'string') {
+    return []
+  }
+  
+  return inputText
     .split(/\r?\n/) // split by newlines
     .filter((line: string) => line.trim() !== '') // ignore empty lines
     .map((line: string) => ({
@@ -17,5 +22,6 @@ const plainTextToPortable = (inputText: string, style = 'normal') => inputText
       markDefs: [],
       style
     }))
+  }
 
     export default plainTextToPortable;

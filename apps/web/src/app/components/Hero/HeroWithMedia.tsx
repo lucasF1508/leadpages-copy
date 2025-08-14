@@ -53,7 +53,7 @@ const Hero = ({ content, label, links, media, overflowMedia = false, pill }: Her
           )}
           {hasLinks(links) && (
             <Links
-              className={clsx('mt-2')} 
+              className={clsx('mt-2 space-x-2')} 
               links={links}
             />
           )}

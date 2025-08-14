@@ -104,21 +104,14 @@ export async function getStaticProps(context) {
 const appRouterPages = [
   '"/templates"',
   '"/pricing"',
-  '"/product/checkouts"',
-  '"/product/audience-insights"',
-  '"/product/lead-agent"',
-  '"/product/lead-enrichment"',
-  '"/product/website-builder"',
-  '"/platform/landing-page-builder"',
   '"/website-templates"',
-  '"/product/feature-index"',
 ]
 
 export async function getStaticPaths() {
   const paths = await getStaticPathsParams({
     catchAll: true,
     filter:
-      `slug.current != "404" && !(path in [${appRouterPages}]) && !(path match "/use-cases/*")`,
+      `slug.current != "404" && !(path in [${appRouterPages}]) && !(path match "/use-cases/*") && !(path match "/product/*") && !(path match "/platform/*")`,
     types,
   })
 

@@ -10,8 +10,12 @@ const shapeTabs = (component: Record<string, any>): Record<string, any> => {
       ...(omit(item, ['media', 'icon'])),
       _type: 'accordionItems',
     })),
-    mediaItems: component.items?.map(({media}: any) => ({
+    mediaItems: component.items?.map(({image, media}: any) => ({
       ...media,
+      condition: media?.condition || 'image',
+      image: {
+        ...(media?.image || image || {}),
+      },
     })),
   }
 }

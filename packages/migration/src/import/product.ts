@@ -18,17 +18,14 @@ const types = [
 const migrateDocs = async () => {
   const data = await from.fetch(`*[_type in $types && path in $paths]`, {
     paths: [
-      "/use-cases/small-business-websites",
-      "/use-cases/demand-capture",
-      "/use-cases/email-marketing",
-      "/use-cases/social-media",
-      "/use-cases/paid-ads",
-      "/use-cases/search-engine-marketing",
-      "/use-cases/ppc",
+      '/product/leadmeter',
+      '/product/pop-up-builder',
+      '/product/ai-engine', 
+      '/product/alert-bars', 
     ],
     types
   })
-
+  
   const docs = await queueMappers(
     data, 
     mapAssetRef,

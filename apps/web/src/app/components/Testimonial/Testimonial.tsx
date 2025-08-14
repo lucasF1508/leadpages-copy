@@ -51,10 +51,10 @@ const Testimonial = ({ heading, subheading, testimonials }: TestimonialProps) =>
                 'flex-[0_0_100%] transition-opacity duration-300', 
                 i !== active && 'opacity-50')
               } 
-              key={testimonial._id}
+              key={testimonial?._id}
             >
               <TestimonialCard
-                {...testimonial} 
+                {...(testimonial || {})} 
               />
             </div>
           ))}

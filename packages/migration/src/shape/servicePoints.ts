@@ -10,7 +10,7 @@ const shapeServicePoints = (component: Record<string, any>): Record<string, any>
     cards: component.servicePoints?.map((item: Record<string, any>) => ({
         ...(omit(item, ['heading', 'text', 'image'])),
         _type: 'card',
-        content: [...plainTextToPortable(item.heading, 'h5'), ...plainTextToPortable(item.text, 'normal'),],
+        content: [...plainTextToPortable(item?.heading, 'h5'), ...plainTextToPortable(item?.text, 'normal'),],
         icon: item.image
       })),
   }

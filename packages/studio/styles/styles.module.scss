@@ -55,3 +55,7 @@
     border: none !important;
   }
 }
+
+[data-ui='Popover__wrapper'] > div {
+  overflow: auto !important;
+}
