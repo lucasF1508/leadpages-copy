@@ -8,10 +8,10 @@ const shapeFeatureGrid = (component: Record<string, any>): Record<string, any> =
     ...filteredFields,
     _type: 'featureCards',
     cards: component.items?.map((item: Record<string, any>) => ({
-        ...(omit(item, ['hideLabel', 'title', 'media', 'link'])),
+        ...(omit(item, ['hideLabel', 'title', 'media', 'link', 'image'])),
         _type: 'card',
-        content: [...plainTextToPortable(item.title, 'h3'), ...plainTextToPortable(item.content, 'normal'),],
-        icon: item.media.image
+        content: [...plainTextToPortable(item?.title, 'h3'), ...plainTextToPortable(item?.content, 'normal'),],
+        icon: item?.media?.image || item?.image
       })),
   }
 }

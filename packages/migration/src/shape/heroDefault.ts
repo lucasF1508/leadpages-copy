@@ -1,4 +1,5 @@
 import mapBlockContent from "@src/map/map-block-content"
+import parseLinks from "@src/utils/parseLinks"
 import { omit } from "lodash"
 
 const map = {
@@ -15,7 +16,8 @@ const shapeHeroDefault = (hero: Record<string, any>): Record<string, any> => {
   return {
     ...filteredFields,
     _type: 'heroWithMedia',
-    content
+    content,
+    links: parseLinks(hero.links)
   }
 }
 

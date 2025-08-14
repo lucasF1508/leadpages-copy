@@ -40,34 +40,9 @@ export const blockContent = F.array({
         {title: 'Bullet', value: 'bullet'},
         {title: 'Numbered (Plain)', value: 'number'},
         {
-          title: 'Numbered (Branded)',
-          value: 'numberBranded',
-          icon: () => {
-            const $TbListCheck = styled(MdFormatListNumbered)`
-              > path[d^='M2'] {
-                color: #603eff;
-              }
-            `
-            return <$TbListCheck />
-          },
-        },
-        {
           title: 'Checks (Plain)',
-          value: 'checkmarksPlain',
-
+          value: 'checkmark',
           icon: TbListCheck,
-        },
-        {
-          title: 'Checks (Branded)',
-          value: 'checkmarksBranded',
-          icon: () => {
-            const $TbListCheck = styled(TbListCheck)`
-              > path[d^='M3.5'] {
-                color: #603eff;
-              }
-            `
-            return <$TbListCheck />
-          },
         },
       ],
       // Marks let you mark up inline text in the block editor.

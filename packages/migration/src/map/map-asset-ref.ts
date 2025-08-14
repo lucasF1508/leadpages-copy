@@ -49,7 +49,6 @@ const mapAssetRef = (docs: SanityDocument[]) => {
       url = `https://cdn.sanity.io/${type}/${from.config().projectId}/${from.config().dataset}/${_id}.${extension}`;
     }
 
-    console.log(`Asset URL for ${_type}:`, url);
     return url;
   });
 

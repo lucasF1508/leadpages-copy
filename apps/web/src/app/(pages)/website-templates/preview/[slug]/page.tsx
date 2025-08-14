@@ -36,7 +36,6 @@ export async function generateStaticParams() {
   const ids = await runQuery(
     `*[_type == "template" && kind == "SiteTemplate"]._id`,
   )
-
   const slugPaths = params.map(({params: {slug}}: any) => ({
     slug,
   }))

@@ -25,7 +25,7 @@ const MediaWithText = ({
 }: MediaWithTextType) => <div
       className={
         clsx(
-          'flex flex-col md:flex-nowrap gap-y-7 gap-x-4 items-center justify-center xs:px-3 md:px-0 max-w-[30rem] md:max-w-none mx-auto h-full w-full', 
+          'flex flex-col md:flex-nowrap gap-y-7 gap-x-4 items-center justify-center xs:px-3 md:px-0 max-w-[30rem] md:max-w-none mx-auto h-full w-full',
           alignContent === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'
         )
       }
@@ -35,14 +35,14 @@ const MediaWithText = ({
           className={
             clsx(
               'flex-[1_1_auto] w-auto md:w-full md:max-w-cols7 text-green-300 md:mx-0',
-               alignContent === 'left' ? 'mr-0 -ml-6' : 'ml-0 -mr-6',             
+               alignContent === 'left' ? 'mr-0 -ml-6' : 'ml-0 -mr-6',
             )
           }
         >
-          <Media 
-            media={media} 
-            priority 
-          /> 
+          <Media
+            media={media}
+            priority
+          />
         </div>
       }
       <div
@@ -66,7 +66,7 @@ const MediaWithText = ({
               content={content}
             />
           )}
-          {hasLinks(links) && (<Links className='mt-2' links={links}/>)}
+          {hasLinks(links) && (<Links className='mt-2 gap-2 flex flex-row justify-start' links={links}/>)}
         </div>
       </div>
     </div>

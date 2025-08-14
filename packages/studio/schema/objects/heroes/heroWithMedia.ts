@@ -18,7 +18,7 @@ export const heroWithMedia = F.object({
       }),
       F.links({
         signUpOption: true,
-        validation: (Rule) => Rule.max(1),
+        validation: (Rule) => Rule.max(2),
       }),
     ]),
     ...G.group('media', [

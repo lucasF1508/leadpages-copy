@@ -17,13 +17,13 @@ const _Link = ({
       <Link {...value}>
         <span className='relative group'>
           {children}
-          <div className={
+          <span className={
             clsx(
-            'h-full max-h-[0.125rem] bg-brand-violet-primary absolute w-full bottom-0 transition-all scale-y-100 duration-slow pointer-events-none -translate-y-full origin-bottom',
+            'block h-full max-h-[0.125rem] bg-brand-violet-primary absolute w-full bottom-0 transition-all scale-y-100 duration-slow pointer-events-none -translate-y-full origin-bottom',
             'group-hover:scale-y-150 group-hover:bg-brand-fuchsia-strong'
           )}/>
         </span>
-      </Link> 
+      </Link>
     )
   }
 

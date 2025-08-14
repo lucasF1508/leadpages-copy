@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 import clsx from 'clsx'
 import * as Primitives from '@radix-ui/react-accordion'
 import { useShallow } from 'zustand/react/shallow'
-import Link from '@/components/Link'
+import Link, { hasLink } from '@/components/Link'
 import Text from '@/components/Text'
 import useInterval from '@/hooks/useInterval'
 import {
@@ -47,18 +47,22 @@ const MediaWithItemsAccordionItem = ({
           'overflow-hidden data-[state=closed]:animate-[close_300ms_ease-out] data-[state=open]:animate-[open_300ms_ease-out]'
         )}
       >
-        <Text
-          as="div"
-          className={clsx(
-            'flex flex-col gap-1.5 [&_*]:!my-0',
-            title && 'pt-4'
-          )}
-          content={content}
-        />
-        <Link
-          className="mt-2"
-          {...link}
-        />
+        {content &&        
+          <Text
+            as="div"
+            className={clsx(
+              'flex flex-col gap-1.5 [&_*]:!my-0',
+              title && 'pt-4'
+            )}
+            content={content}
+          />
+        }
+        {hasLink(link) &&        
+          <Link
+            className="mt-2"
+            {...link}
+          />
+        }
       </Primitives.Content>
     </div>
   </Primitives.Item>
