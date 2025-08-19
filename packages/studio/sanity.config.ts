@@ -15,14 +15,17 @@ import {structureTool} from 'sanity/structure'
 import {media} from 'sanity-plugin-media'
 import './styles/styles.css'
 import DocumentActions from './actions/DocumentActions'
-import {defaultDocumentNode as legacyDefaultDocumentNode, structure as legacyStructure} from './legacy/components/DeskStructure'
+import {
+  defaultDocumentNode as legacyDefaultDocumentNode,
+  structure as legacyStructure,
+} from './legacy/components/DeskStructure'
 import {Layout as LegacyLayout, ToolMenu as LegacyToolMenu} from './legacy/components/Studio'
 import legacySchemaTypes from './legacy/schema'
 import schemaTypes from './schema'
 import {getPreviewPaneUrl} from './utils/getPreviewUrl'
 import {tags} from 'sanity-plugin-tags'
-import { defaultDocumentNode, structure } from './components/DeskStructure'
-import { Logo } from './components/Studio'
+import {defaultDocumentNode, structure} from './components/DeskStructure'
+import {Logo} from './components/Studio'
 
 const sanityDatasets = [
   import.meta.env.SANITY_STUDIO_API_DATASET,
@@ -48,7 +51,8 @@ const config = defineConfig(
           name: 'desk',
           title: 'Desk',
           structure: dataset === 'production_v3' ? structure : legacyStructure,
-          defaultDocumentNode: dataset === 'production_v3' ? defaultDocumentNode : legacyDefaultDocumentNode,
+          defaultDocumentNode:
+            dataset === 'production_v3' ? defaultDocumentNode : legacyDefaultDocumentNode,
         }),
         visionTool({defaultApiVersion: import.meta.env.SANITY_STUDIO_API_VERSION}),
         table(),
@@ -74,7 +78,8 @@ const config = defineConfig(
         productionUrl: getPreviewPaneUrl,
       },
       schema: {
-        types: dataset === import.meta.env.SANITY_STUDIO_API_DATASET ? schemaTypes : legacySchemaTypes,
+        types:
+          dataset === import.meta.env.SANITY_STUDIO_API_DATASET ? schemaTypes : legacySchemaTypes,
       },
       studio: {
         components: {

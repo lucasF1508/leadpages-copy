@@ -4,7 +4,7 @@ import type { LinkProps, SanityImageProps } from '@types'
 import React, { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import Image from '@/components/Image'
-import Link, {hasLink} from '@/components/Link'
+import Link, { hasLink } from '@/components/Link'
 import useEventListener from '@/hooks/useEventListener'
 import useImageRatio from '@/hooks/useImageRatio'
 
@@ -15,6 +15,7 @@ export type LogoWithLink = {
 export interface MarqueeProps {
   duration?: number
   images: LogoWithLink[]
+  logos?: LogoWithLink[]
   maxHeight?: number
   type: 'image' | 'logo'
 }
@@ -23,9 +24,12 @@ const MarqueeRow = React.forwardRef<HTMLDivElement, MarqueeProps>(
   ({ duration = 15, images, maxHeight, type }, ref) => {
     const selectors: string[] = []
     const styles = images
-    .map((image) => {
-      const { dimension } = useImageRatio(image, maxHeight || image?.maxHeight || 32)
-      const selector = `marquee-image-${image?._key}`
+      .map((image) => {
+        const { dimension } = useImageRatio(
+          image,
+          maxHeight || image?.maxHeight || 32
+        )
+        const selector = `marquee-image-${image?._key}`
         selectors.push(selector)
 
         return `
@@ -52,24 +56,26 @@ const MarqueeRow = React.forwardRef<HTMLDivElement, MarqueeProps>(
           <div
             className={clsx(
               'flex-[0_0_auto]',
-              selectors[index] ,
+              selectors[index],
               type === 'logo' ? 'ml-6 sm:ml-9' : 'ml-3 sm:ml-2'
             )}
             key={image?._key}
           >
             {hasLink(image?.link) ? (
-              <Link {...image?.link} className='w-full block'>
+              <Link {...image?.link} className="w-full block">
                 <Image
                   className={clsx('h-full w-full')}
                   hasPlaceholder={type === 'logo' ? false : undefined}
                   image={image}
                 />
               </Link>
-            ) : (<Image
-                  className={clsx('h-full w-full')}
-                  hasPlaceholder={type === 'logo' ? false : undefined}
-                  image={image}
-                />)}
+            ) : (
+              <Image
+                className={clsx('h-full w-full')}
+                hasPlaceholder={type === 'logo' ? false : undefined}
+                image={image}
+              />
+            )}
           </div>
         ))}
       </div>
@@ -77,7 +83,14 @@ const MarqueeRow = React.forwardRef<HTMLDivElement, MarqueeProps>(
   }
 )
 
-const Marquee = ({ duration: _duration, images, maxHeight, type }: MarqueeProps) => {
+const Marquee = ({
+  duration: _duration,
+  images: _images,
+  logos,
+  maxHeight,
+  type,
+}: MarqueeProps) => {
+  const images = _images || logos
   if (!images?.length) return null
 
   const duration = _duration || images.length * 5
@@ -111,7 +124,13 @@ const Marquee = ({ duration: _duration, images, maxHeight, type }: MarqueeProps)
       )}
       key={number}
     >
-      <MarqueeRow duration={duration} images={images} maxHeight={maxHeight} ref={ref}  type={type}/>
+      <MarqueeRow
+        duration={duration}
+        images={images}
+        maxHeight={maxHeight}
+        ref={ref}
+        type={type}
+      />
       {[...Array(number)].map((i, index) => (
         <MarqueeRow
           duration={duration}

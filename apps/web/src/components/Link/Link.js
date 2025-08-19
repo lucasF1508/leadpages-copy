@@ -129,7 +129,6 @@ const Link = (
   switch (_condition) {
     case 'internal':
       if (!children && !label) {
-        console.error('Link must have a label or children')
         return null
       }
 

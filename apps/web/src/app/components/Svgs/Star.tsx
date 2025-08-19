@@ -1,0 +1,36 @@
+import React from 'react'
+import clsx from 'clsx'
+
+const Star = ({ className = '' }) => (
+  <svg
+    className={clsx(className)}
+    fill="none"
+    height="17"
+    viewBox="0 0 17 17"
+    width="17"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M9.86379 1.86435L11.2276 4.6146C11.4136 4.99744 11.9096 5.36466 12.3281 5.43497L14.8 5.84907C16.3808 6.11473 16.7528 7.27108 15.6137 8.4118L13.6919 10.3495C13.3664 10.6776 13.1882 11.3105 13.2889 11.7637L13.8392 14.1623C14.2731 16.0609 13.2734 16.7954 11.6074 15.8031L9.29037 14.4201C8.87195 14.1701 8.18227 14.1701 7.75602 14.4201L5.43906 15.8031C3.78074 16.7954 2.77336 16.0531 3.20731 14.1623L3.7575 11.7637C3.85823 11.3105 3.68 10.6776 3.35454 10.3495L1.43275 8.4118C0.301377 7.27108 0.665588 6.11473 2.24641 5.84907L4.71839 5.43497C5.12909 5.36466 5.62504 4.99744 5.81101 4.6146L7.17485 1.86435C7.91877 0.372038 9.12762 0.372038 9.86379 1.86435Z"
+      stroke="url(#paint0_linear_215_4186)"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.1625"
+    />
+    <defs>
+      <linearGradient
+        gradientUnits="userSpaceOnUse"
+        id="paint0_linear_215_4186"
+        x1="0.774902"
+        x2="16.2749"
+        y1="8.49512"
+        y2="8.49512"
+      >
+        <stop stopColor="#C47FF3" />
+        <stop offset="1" stopColor="#7E4AFF" />
+      </linearGradient>
+    </defs>
+  </svg>
+)
+
+export default Star

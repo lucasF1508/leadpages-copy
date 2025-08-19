@@ -1,9 +1,9 @@
 import type { ClassValue } from 'clsx'
-import type { AnimationControls, MotionProps } from 'framer-motion'
+import type { AnimationControls, MotionProps } from 'motion/react'
 import type { ComponentPropsWithoutRef } from 'react'
 import React, { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import { m } from 'framer-motion'
+import { motion } from 'motion/react'
 
 interface AnimateChangeInHeightProps
   extends Omit<MotionProps, 'animate' | 'children'>,
@@ -50,7 +50,7 @@ const AnimateChangeInHeight: React.FC<AnimateChangeInHeightProps> = ({
   }, [])
 
   return (
-    <m.div
+    <motion.div
       className={clsx(className)}
       transition={{ duration: 0.1 }}
       {...motionProps}
@@ -58,7 +58,7 @@ const AnimateChangeInHeight: React.FC<AnimateChangeInHeightProps> = ({
       style={{ ...style, height }}
     >
       <div ref={containerRef}>{children}</div>
-    </m.div>
+    </motion.div>
   )
 }
 

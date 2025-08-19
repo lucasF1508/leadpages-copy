@@ -11,11 +11,11 @@ const config = {
 }
 
 export const transferClients = {
-  from: createClient({ 
+  from: createClient({
     ...config,
     dataset: process.env.SANITY_STUDIO_API_DATASET_LEGACY,
   }),
-  to: createClient({ 
+  to: createClient({
     ...config,
     dataset: process.env.SANITY_STUDIO_API_DATASET,
   }),

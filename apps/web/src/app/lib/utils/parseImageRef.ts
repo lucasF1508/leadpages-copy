@@ -2,7 +2,7 @@ interface ParseImageRefProps {
   _type: string
   asset: {
     _ref: string
-    _type: string 
+    _type: string
   }
   lqip: null | string
 }
@@ -15,7 +15,6 @@ export const parseImageRef = (image: ParseImageRefProps) => {
   const _ref = asset?._ref
 
   if (!_ref) {
-    console.error(`⚠️ parseImageRef: No asset ref found in image`, image)
     return null
   }
 
@@ -29,6 +28,6 @@ export const parseImageRef = (image: ParseImageRefProps) => {
     hash,
     height: Number(height),
     url,
-    width: Number(width)
+    width: Number(width),
   }
 }

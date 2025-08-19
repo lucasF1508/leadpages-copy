@@ -1,0 +1,17 @@
+{
+  "name": "icons",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Icon Generator for Rack & Pinion.",
+  "main": "all/index.js",
+  "scripts": {
+    "build": "yarn clean && node ./build.js",
+    "clean": "rm -rf ./all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "number-to-words": "^1.2.4"
+  }
+}

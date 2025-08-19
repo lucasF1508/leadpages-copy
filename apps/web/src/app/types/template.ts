@@ -1,10 +1,14 @@
-import { MandrelCategory } from "./mandrelCategory"
-import { Slug } from "./sanity"
-import { TagType as Tag } from "./tag"
-
-type TemplateKind = "LeadpageTemplate" | "SiteTemplate"
+import type {TemplateKind} from './mandrel'
+import type { MandrelCategory } from "./mandrelCategory"
+import type { Slug } from "./sanity"
+import type { TagType as Tag } from "./tag"
 
 type TemplateType = {
+  _createdAt: string
+  _id: string
+  _rev: string
+  _type: "template"
+  _updatedAt: string
   categories: MandrelCategory[]
   enabled: boolean
   fullPageScreenshotUrlWebp?: string
@@ -20,11 +24,7 @@ type TemplateType = {
   thumbnailUrl: string
   thumbnailUrlWebp: string
   title: string
-  _createdAt: string
-  _id: string
-  _rev: string
-  _type: "template"
-  _updatedAt: string
 }
 
-export type { TemplateType, TemplateKind }
+export type { TemplateType }
+export { TemplateKind }

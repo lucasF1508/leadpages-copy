@@ -15,8 +15,8 @@ const migrate = async ({
   documents,
   mappers: _mappers = [],
 }: {
-  query?: string,
-  params?: Record<string, any>,
+  query?: string
+  params?: Record<string, any>
   documents?: SanityDocument[]
   mappers?: Mapper[]
 }) => {
@@ -25,8 +25,9 @@ const migrate = async ({
   }
 
   const mappers = Array.isArray(_mappers) ? _mappers : [_mappers]
-  const docs = documents || await client.fetch(query, params)
-  const transformed = queueMappers(docs, ...mappers) 
+  const docs = documents || (await client.fetch(query, params))
+  const transformed = await queueMappers(docs, ...mappers)
+
   const patches = mergePatches(buildPatches(transformed))
   console.log(`Found ${patches.length} documents to migrate`)
 
@@ -51,14 +52,15 @@ const migrate = async ({
       break
     case 'dryrun':
       console.log('🧪 Dry run selected.')
-      console.log(util.inspect(patches, { showHidden: false, depth: null, colors: true }))
+      console.log(
+        util.inspect(patches, { showHidden: false, depth: null, colors: true })
+      )
       break
     case 'cancel':
       console.log('❌ Migration cancelled by user.')
       process.exit(0)
       break
   }
-  
 }
 
 export default migrate

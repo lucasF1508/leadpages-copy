@@ -79,7 +79,7 @@ export const RackInner = (
 }
 
 const Rack = ({
-  as = 'main',
+  as = 'div',
   children,
   className,
   classNames,

@@ -16,9 +16,11 @@ const shapeAssetRefForImport = (data, getNewAsset) => {
     ) {
       const ref = data.asset._ref;
       const newAssetPath = getNewAsset(ref);
+
       return {
         _type: data._type,
-        _sanityAsset: `${data._type}@${newAssetPath}`
+        _sanityAsset: `${data._type}@${newAssetPath}`,
+        ...(data?.lqip ? { lqip: data.lqip } : {}),
       };
     }
 

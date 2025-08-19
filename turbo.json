@@ -6,7 +6,8 @@
     },
     "start": {
       "cache": false,
-      "outputs": []
+      "outputs": [],
+      "dependsOn": ["icons#build"]
     },
     "client#build": {
       "dependsOn": [],
@@ -20,7 +21,7 @@
     "web#build": {
       "cache": false,
       "outputs": [".next/**", "dist/**"],
-      "dependsOn": ["client#build", "indices#build", "studio#build"]
+      "dependsOn": ["client#build", "indices#build", "studio#build", "icons#build"]
     },
     "studio#build": {
       "dependsOn": [],

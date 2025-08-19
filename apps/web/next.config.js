@@ -41,6 +41,7 @@ const {
   SENDGRID_URL,
   SENDGRID_VERIFIED_SENDER,
   STARGATE_API_HOST,
+  STARGATE_API_TEMPLATES_URL,
   UA_TRACKING_ID,
   VERCEL_ENV,
 } = process.env
@@ -75,6 +76,7 @@ module.exports = withBundleAnalyzer({
     SENDGRID_URL,
     SENDGRID_VERIFIED_SENDER,
     STARGATE_API_HOST,
+    STARGATE_API_TEMPLATES_URL,
     UA_TRACKING_ID,
     VERCEL_ENV,
   },
@@ -84,7 +86,7 @@ module.exports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
-  images: {
+    images: {
     deviceSizes: [320, 640, 750, 828, 1080, 1200, 1600, 1920, 2048, 3840],
     remotePatterns: [
       {
@@ -220,5 +222,13 @@ module.exports = withBundleAnalyzer({
   },
   sassOptions: {
     includePaths: [path.resolve(__dirname, 'node_modules')],
+  },
+  // disables warnings about using the vertx module in @lp/template-gallery
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...(config.resolve.fallback || {}),
+      vertx: false,
+    };
+    return config;
   },
 })

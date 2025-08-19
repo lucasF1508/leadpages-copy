@@ -1,5 +1,5 @@
 {
-  "version": "3.4.0",
+  "version": "3.5.0",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -22,7 +22,8 @@
     "blast": "yarn blast:node && yarn blast:turbo && yarn blast:next && yarn blast:dist && rm -rf node_modules",
     "reset": "yarn blast && rm yarn.lock",
     "build:web": "yarn workspace web build",
-    "analyze": "turbo run analyze"
+    "analyze": "turbo run analyze",
+    "icons": "yarn workspace icons build"
   },
   "dependencies": {},
   "devDependencies": {

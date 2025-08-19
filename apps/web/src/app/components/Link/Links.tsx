@@ -26,10 +26,10 @@ const Links = ({ className, classNames, links, ...props }: LinksProps) => {
         {
           links
             .filter((link) => link._type === 'signUp')
-            .map((link) => 
+            .map((link) =>
               (
-                <InlineSignUp 
-                  className={clsx(classNames?.link)} 
+                <InlineSignUp
+                  className={clsx(classNames?.link)}
                   key={link._key}
                   {...(link as InlineSignUpProps)}
                 />
@@ -43,8 +43,8 @@ const Links = ({ className, classNames, links, ...props }: LinksProps) => {
   return (
     <div className={clsx(className, classNames?.root)}>
       {
-        links?.map((link) => 
-          hasLink(link) && 
+        links?.map((link) =>
+          hasLink(link) &&
           (
             <Link
               className={clsx(classNames?.link)}

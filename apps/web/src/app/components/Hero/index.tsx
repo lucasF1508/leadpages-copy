@@ -4,6 +4,8 @@ import type { HeroWithMediaProps } from './HeroWithMedia'
 import HeroHome from './HeroHome'
 import HeroPricing from './HeroPricing'
 import HeroSimple from './HeroSimple'
+import HeroTemplate from './HeroTemplate'
+import HeroTextWithMarquee from './HeroTextWithMarquee'
 import HeroWithMedia from './HeroWithMedia'
 
 interface HeroProps {
@@ -22,6 +24,10 @@ const Hero = ({ hero }: HeroProps) => {
       return <HeroPricing {...heroProps} />
     case 'heroSimple':
       return <HeroSimple {...heroProps} />
+    case 'heroTemplate':
+      return <HeroTemplate {...heroProps} />
+    case 'heroTextWithMarquee':
+      return <HeroTextWithMarquee {...heroProps} />
     default:
       return <HeroWithMedia {...heroProps} />
   }
