@@ -1,5 +1,5 @@
 {
-  "version": "3.4.0",
+  "version": "3.5.0",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -23,7 +23,7 @@
     "reset": "yarn blast && rm yarn.lock",
     "build:web": "yarn workspace web build",
     "analyze": "turbo run analyze",
-     "icons": "yarn workspace icons build"
+    "icons": "yarn workspace icons build"
   },
   "dependencies": {},
   "devDependencies": {
