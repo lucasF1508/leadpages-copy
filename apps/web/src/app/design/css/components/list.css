@@ -19,8 +19,8 @@
   counter-reset: list;
 
   li::before {
-    @apply text-body absolute left-0 top-0 text-right font-bold leading-normal;
-    content: counter(list, numeric) '. ';
+    @apply absolute left-0 top-0 text-right font-bold leading-normal;
+    content: counter(list, numeric) ' | ';
     counter-increment: list;
   }
 }

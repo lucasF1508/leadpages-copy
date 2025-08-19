@@ -19,7 +19,7 @@ const palette = {
     50: '#FFEAE4',
     100: '#FFDFD1',
     200: '#FFC6AE',
-    300: '#FFB291', //  #FF8378 Checking on the Secondary
+    300: '#FFB291',
     400: '#FF8B74',
     500: '#FF6D6D',
     600: '#F2526F',
@@ -35,7 +35,7 @@ const palette = {
     400: '#A767F1',
     500: '#9061EE',
     600: '#7E4AFF',
-    700: '#603EFF', // #6245F2 Checking on the primary
+    700: '#603EFF',
     800: '#3123AF',
     900: '#1F0D87',
   },
@@ -174,7 +174,6 @@ export const gradientLight = {
   'gradient-purple-invert': `linear-gradient(90deg,${palette.purple[500]} 0%, ${palette.purple[300]} 100%)`,
   'gradient-border': `linear-gradient(90deg, rgba(255, 255, 255, 0.4) 30%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.4) 70%)`,
   'gradient-border-light': `linear-gradient(90deg, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.1) 30%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 70%, rgba(255, 255, 255, 0) 90%)`,
-  
 }
 
 export const gradient = {
@@ -188,6 +187,9 @@ export const gradient = {
 
 const brand = {
   DEFAULT: palette.purple[700],
+  primary: palette.purple[700],
+  secondary: palette.purple[500],
+  tertiary: palette.purple[300],
   indigo: {
     DEFAULT: palette.purple[700],
     primary: palette.purple[700],
@@ -252,12 +254,13 @@ const themeDark = {
     lime: palette.lime[400],
   },
   secondary: {
-    violet: palette.purple[600], //9061EE
-    fuchsia: palette.purple[300], // '#FF8378', // DOESN'T Match palette?
+    DEFAULT: palette.purple[500],
+    violet: palette.purple[600],
+    fuchsia: palette.purple[300],
     teal: palette.blue[300],
     peach: palette.red[300],
-    blue: palette.blue[600], // '#FF8378', // DOESN'T Match palette?
-    navy: palette.blue[800], // "#9061EE", // DOESN'T Match palette?
+    blue: palette.blue[600],
+    navy: palette.blue[800],
   },
   tertiary: {
     seafom: palette.green[300],
@@ -271,6 +274,7 @@ const themeDark = {
   },
   surface: {
     DEFAULT: palette.dark,
+    muted: palette.obsidian[900],
     neutral: {
       DEFAULT: palette.white,
       light: palette.white,
@@ -432,6 +436,7 @@ export const colors = {
 export const themeLight = {
   surface: {
     DEFAULT: palette.white,
+    muted: palette.obsidian[100],
     neutral: {
       DEFAULT: palette.dark,
       opacity: palette.opacity.dark[100],

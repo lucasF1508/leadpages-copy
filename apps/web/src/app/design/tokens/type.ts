@@ -127,6 +127,10 @@ const types = {
       fontSize: fontSizes.xs,
       lineHeight: 20 / 14,
     },
+    h7: {
+      fontSize: fontSizes.xxs,
+      lineHeight: 26 / 12,
+    },
   },
   stats: {
     lg: {
@@ -153,11 +157,15 @@ const types = {
     },
     b3: {
       fontSize: fontSizes.sm,
-      lineHeight: 24 / 16,
+      lineHeight: 28 / 16,
     },
     b4: {
       fontSize: fontSizes.xs,
-      lineHeight: 20 / 14,
+      lineHeight: 24 / 12,
+    },
+    b5: {
+      fontSize: fontSizes.xxs,
+      lineHeight: 24 / 12,
     },
   },
   overline: {
@@ -209,6 +217,7 @@ const [bodySizes, bodyStyles] = generateTypography({
     'body-md': types.body.b2,
     'body-sm': types.body.b3,
     'body-xs': types.body.b4,
+    'body-xxs': types.body.b5,
   },
   styles: {
     default: {
@@ -235,7 +244,7 @@ const [titleSizes, titleStyles] = generateTypography({
   styles: {
     default: {
       fontFamily: fontFamily.title,
-      fontWeight: fontWeight.black, // The design says 800 but the font is ultra which is 900
+      fontWeight: fontWeight.extrabold,
     },
   },
 })

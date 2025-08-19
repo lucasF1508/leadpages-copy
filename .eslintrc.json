@@ -49,7 +49,7 @@
     "jsx-a11y/alt-text": "off",
     "import/no-useless-path-segments": "off",
     "import/no-cycle": "off",
-    "no-nested-ternary": "warn",
+    "no-nested-ternary": "off",
     "arrow-body-style": "warn",
     "class-methods-use-this": "off", // _document.tsx use render method without `this` keyword,
     "no-underscore-dangle": "off", //We use Sanity internals for setting react keys

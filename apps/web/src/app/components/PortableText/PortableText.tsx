@@ -65,24 +65,50 @@ export type ColorMarksType = typeof colorMarks
 
 export const defaultBlockStyles: BlockStylesType = {
   'h1-home': { className: 'type-title-t1', tag: 'h1' },
-  'h1-hero': { className: 'type-title-t4 sm:type-title-t3 md:type-title-t2', tag: 'h1' },
-  'h2-hero': { className: 'type-title-t6 sm:type-title-t4 md:type-title-t3', tag: 'h1' },
-  'h3-hero': { className: 'type-title-t7 sm:type-title-t5 md:type-title-t4', tag: 'h1' },
+  'h1-hero': {
+    className: 'type-title-t4 sm:type-title-t3 md:type-title-t2',
+    tag: 'h1',
+  },
+  'h2-hero': {
+    className: 'type-title-t6 sm:type-title-t4 md:type-title-t3',
+    tag: 'h1',
+  },
+  'h3-hero': {
+    className: 'type-title-t7 sm:type-title-t5 md:type-title-t4',
+    tag: 'h1',
+  },
   'h4-hero': { className: 'type-h2 md:type-h1', tag: 'h1' },
-  h1: { className: 'type-title-t4 sm:type-title-t3 md:type-title-t2', tag: 'h2' },
-  h2: { className: 'type-title-t6 sm:type-title-t4 md:type-title-t3', tag: 'h2' },
-  h3: { className: 'type-title-t7 sm:type-title-t5 md:type-title-t4', tag: 'h3' },
+  h1: {
+    className: 'type-title-t4 sm:type-title-t3 md:type-title-t2',
+    tag: 'h2',
+  },
+  h2: {
+    className: 'type-title-t6 sm:type-title-t4 md:type-title-t3',
+    tag: 'h2',
+  },
+  h3: {
+    className: 'type-title-t7 sm:type-title-t5 md:type-title-t4',
+    tag: 'h3',
+  },
   h4: { className: 'type-h2 md:type-h1', tag: 'h4' },
   h5: { className: 'type-h3 md:type-h2', tag: 'h5' },
   h6: { className: 'type-h4 md:type-h3', tag: 'h6' },
-  large: { className: 'text-body-muted type-body-md sm:type-body-lg', tag: 'p' },
-  normal: { className: 'text-body-muted type-body', tag: 'p' },
-  small: { className: 'text-body-muted type-body-xs md:type-body-sm', tag: 'p' },
+  large: {
+    className: 'text-body-muted type-body-md sm:type-body-lg',
+    tag: 'p',
+  },
+  normal: { className: 'text-body-muted type-body-sm md:type-body', tag: 'p' },
+  small: {
+    className: 'text-body-muted type-body-xs md:type-body-sm',
+    tag: 'p',
+  },
   xsmall: { className: 'text-body-muted type-body-xs', tag: 'p' },
 }
 
 export const colorMarks = {
   highlight: 'text-theme',
+  primary: 'text-brand-primary',
+  secondary: 'text-brand-secondary',
 } as const
 
 const _PortableText = ({

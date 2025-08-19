@@ -21,4 +21,16 @@
   html {
     @apply bg-surface-neutral-dark text-body text-[16px] antialiased;
   }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .gradient-white-opacity {
+    @apply h-px bg-gradient-to-r bg-[linear-gradient(to_right,rgba(255,255,255,0)_0%,rgba(255,255,255,0.1)_10%,rgba(255,255,255,0.2)_50%,rgba(255,255,255,0.1)_90%,rgba(255,255,255,0)_100%)];
+  }
 }

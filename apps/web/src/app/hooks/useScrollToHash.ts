@@ -1,20 +1,72 @@
 import { useRouter } from 'next/router'
-import { magicNumbers } from '@/design/tokens/magicNumbers'
+import getCSSvar from '@/lib/utils/getCSSvar'
+import remToPixels from '@/lib/utils/remToPixels'
 
-const scrollToHash = (hash: string, _offset?: number): void => {
+export type CssOffsetHeights = Array<CssOffsetName>
+type CssOffsetName = 'header-height'
+
+interface ScrollToHashProps {
+  behavior?: ScrollOptions['behavior']
+  callback?: () => void
+  hash: string
+  offset?: number
+  scrollDownOffset?: CssOffsetHeights
+  scrollUpOffset?: CssOffsetHeights
+}
+
+const calcScrollOffset = (offsetVars?: CssOffsetHeights) => {
+  const offsetValue = ['header-height']
+    .filter(
+      (name: CssOffsetName) => !!offsetVars?.length && offsetVars.includes(name)
+    )
+    .map((cssVarName) => remToPixels(getCSSvar(cssVarName)))
+    .reduce((prev: number, current: number) => prev + current, 0) as number
+
+  return offsetValue
+}
+
+const waitForScrollTo = async (y: number, threshold = 5) =>
+  new Promise<void>((resolve) => {
+    const check = () => {
+      if (Math.abs(window.scrollY - y) <= threshold) {
+        resolve()
+      } else {
+        requestAnimationFrame(check)
+      }
+    }
+    check()
+  })
+
+const scrollToHash = async ({
+  behavior = 'smooth',
+  callback,
+  hash,
+  offset: _offset,
+  scrollDownOffset,
+  scrollUpOffset,
+}: ScrollToHashProps): Promise<void> => {
   const section = document.getElementById(hash)
   if (!section) return undefined
 
   const { top } = section.getBoundingClientRect()
-  const offset =
-    _offset ||
-    parseInt(magicNumbers['header-height']?.initial || '0', 10) * 16 * -1
+  const defaultOffset = calcScrollOffset(
+    top < 0 ? scrollUpOffset : scrollDownOffset
+  )
+
+  const offset = (_offset ?? defaultOffset) * -1
+  const y = window.scrollY + top + offset
 
   window.scrollTo({
-    behavior: 'smooth',
+    behavior,
     left: 0,
-    top: window.scrollY + top + offset,
+    top: y,
   })
+
+  if (typeof callback === 'function') {
+    await waitForScrollTo(y)
+    callback()
+  }
+
   return undefined
 }
 
@@ -31,11 +83,14 @@ const parseScrollTo = ({
       event.preventDefault()
       if (hash && base !== router.pathname) {
         router.push(scrollTo)
-        return
+        return undefined
       }
-      if(hash || base) {
-        scrollToHash((hash || base) ?? '', offset)
-      }
+
+      const target = hash || base
+      if (!target) return undefined
+
+      scrollToHash({ hash: target, offset })
+
       return undefined
     },
     href,
@@ -47,7 +102,7 @@ const useScrollToHash = (asPath: string, timeout = 0): void => {
   if (!hash) return undefined
 
   setTimeout(() => {
-    scrollToHash(hash)
+    scrollToHash({ hash })
   }, timeout)
 
   return undefined

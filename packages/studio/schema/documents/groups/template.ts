@@ -12,48 +12,43 @@ export const templateGroups = [
   G.define('seo', {title: 'SEO'}),
 ]
 
-const content = G.group('content', 
-  [
-    F.title({
-      title: 'Template Name',
-      validation: (Rule) => Rule.required(),
-      readOnly: true,
-      hidden: ({document}) => !document || document?._type === 'templateSettings' 
-    }),
-    F.string({
-      name: 'heading',
-      title: 'Heading',
-      components: {input: TitleField},
-      hidden: ({document}) => !document || document?._type === 'templateSettings' 
-    }),
-    F.object({
-      name: 'content',
-      title: 'Hero Content',
-      fields: [
-        F.field('rating'),
-        F.string({
-          name: 'text',
-        }),
-        F.field('blockContentBare', {
-          name: 'description',
-        }),
-      ],
-    }),
-    F.reference('cta', {
-        name: 'cta',
-        title: 'Call to Action',
-        description: 'Leave blank to omit page call to action.',
-    }),
-    F.field('string', {
-      name: 'id',
-      readOnly: true,
-      title: ` `,
-      description: 'This ID is used to match the template with its Mandrel counterpart.',
-      components: {input: IdField},
-      hidden: ({document}) => !document || document?._type === 'templateSettings' 
-    }),
-  ]
-)
+const content = G.group('content', [
+  F.title({
+    title: 'Template Name',
+    validation: (Rule) => Rule.required(),
+    readOnly: true,
+    hidden: ({document}) => !document || document?._type === 'templateSettings',
+  }),
+  F.string({
+    name: 'heading',
+    title: 'Heading',
+    components: {input: TitleField},
+    hidden: ({document}) => !document || document?._type === 'templateSettings',
+  }),
+  F.object({
+    name: 'content',
+    title: 'Hero Content',
+    fields: [
+      F.field('rating', {hidden: true}),
+      F.string({
+        name: 'text',
+        hidden: true,
+      }),
+      F.string({name: 'label'}),
+      F.field('blockContentBare', {
+        name: 'description',
+      }),
+    ],
+  }),
+  F.field('string', {
+    name: 'id',
+    readOnly: true,
+    title: ` `,
+    description: 'This ID is used to match the template with its Mandrel counterpart.',
+    components: {input: IdField},
+    hidden: ({document}) => !document || document?._type === 'templateSettings',
+  }),
+])
 
 const details = G.group('details', [
   F.object({
@@ -64,23 +59,15 @@ const details = G.group('details', [
       }),
       F.text({
         name: 'text',
+        hidden: true,
       }),
       F.blockContent({
         name: 'content',
+        title: 'Column 1',
       }),
-      F.array({
-        name: 'pageTemplatesIncluded',
-        hidden: ({document}) => {
-          if (!document) return true
-
-          const {_id, kind} = document || {}
-          return kind === 'LeadpageTemplate' || _id.includes('templateSettings')
-        },
-        of: [
-          F.string({
-            name: 'pageTitle',
-          }),
-        ],
+      F.blockContent({
+        name: 'column2',
+        title: 'Column 2',
       }),
     ],
   }),
@@ -137,6 +124,20 @@ const included = G.group('included', [
           }),
         ],
       }),
+      F.array({
+        name: 'pageTemplatesIncluded',
+        hidden: ({document}) => {
+          if (!document) return true
+
+          const {_id, kind} = document || {}
+          return kind === 'LeadpageTemplate' || _id.includes('templateSettings')
+        },
+        of: [
+          F.string({
+            name: 'pageTitle',
+          }),
+        ],
+      }),
     ],
   }),
   F.array({
@@ -178,19 +179,21 @@ const reviews = G.group('reviews', [
       F.text({
         name: 'text',
       }),
-      F.links({
-        name: 'link',
-        validation: (Rule) => Rule.max(1),
-      }, {args: {linkStyle: false}}),
-      // F.reference('categoryTestimonial', {
-      //   name: 'categoryTestimonial',
-      //   title: 'Category',
-      //   description: 'Override category from which testimonials are pulled inside reviews tab.',
-      //   hidden: ({document}) => {
-      //     const {_id} = document
-      //     return _id.includes('websiteTemplateSettings') || _id.includes('templateSettings')
-      //   },
-      // }),
+      F.links(
+        {
+          name: 'link',
+          validation: (Rule) => Rule.max(1),
+        },
+        {args: {linkStyle: false}}
+      ),
+      F.array({
+        name: 'testimonials',
+        of: [
+          F.reference('testimonial', {
+            name: 'review',
+          }),
+        ],
+      }),
     ],
   }),
 ])
@@ -243,10 +246,4 @@ const meta = G.group('meta', [
   ]),
 ])
 
-export {
-  content,
-  details,
-  included,
-  reviews,
-  meta,
-}
+export {content, details, included, reviews, meta}

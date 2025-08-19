@@ -27,7 +27,9 @@ const RackComponentList = {
   media: dynamic(() => import('@/components/Media/MediaBlock')),
   mediaWithItems: dynamic(() => import('@/components/MediaWithItems')),
   mediaWithText: dynamic(() => import('@/components/MediaWithText')),
-  mediaWithTextSticky: dynamic(() => import('@/components/MediaWithText/MediaWithTextSticky')),
+  mediaWithTextSticky: dynamic(
+    () => import('@/components/MediaWithText/MediaWithTextSticky')
+  ),
   pageAnchor: [
     dynamic(() => import('@/components/PageAnchor')),
     { pinion: false },
@@ -36,8 +38,12 @@ const RackComponentList = {
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
   spacer: dynamic(() => import('@/components/Spacer')),
+  templateDetails: dynamic(() => import('@/components/TemplateTabs')),
+  templateGallery: [
+    dynamic(() => import('@/components/TemplateGallery')),
+    { pinion: false },
+  ],
   testimonialBlock: dynamic(() => import('@/components/Testimonial')),
-  textBlock: dynamic(() => import('@/components/Text/TextBlock')),
   textColumns: dynamic(() => import('@/components/TextColumns')),
   textWithStats: dynamic(() => import('@/components/TextWithStats')),
   upsell: dynamic(() => import('@/components/Upsell')),

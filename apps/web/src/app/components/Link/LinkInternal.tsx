@@ -52,7 +52,7 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
     const handleScroll = (e: React.UIEvent) => {
       e.preventDefault()
       if (hasHash && hash) {
-        scrollToHash(hash)
+        scrollToHash({hash})
       }
     }
 

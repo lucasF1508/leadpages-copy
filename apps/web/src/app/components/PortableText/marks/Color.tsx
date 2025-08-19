@@ -6,14 +6,10 @@ const ColorMarkRender = ({children, markKey}: {
 }) => {
   let className = ''
 
-
   switch (markKey) {
     case 'textGradient':
       className = 'bg-gradient-purple text-transparent bg-clip-text inline-flex'
       break
-    case 'textColorHighlight': // TODO Expand during design rollout
-    case 'textColorHighlightAlt':
-    case 'textColorAlt':
     default:
       break
   }
