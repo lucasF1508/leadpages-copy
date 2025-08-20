@@ -2,9 +2,32 @@ import { draftMode } from 'next/headers'
 import Layout from '@/(pages)/_page'
 import { componentsQuery } from '@/(pages)/_page'
 import { query } from '@/lib/queries'
+import { generateMetadataStatic } from '@/lib/utils/generateMetadata/generateMetadataStatic'
+import mergeTemplateWithDefaults from '@/lib/utils/mergeObjectWithDefaults'
 import { TemplateKind } from '@/types/template-constants'
 
 export const dynamic = 'force-static'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ segments: string[] }>
+}) {
+  const { segments } = await params
+  const slug = segments?.length ? segments.pop() : undefined
+
+  return await generateMetadataStatic(
+    !segments?.length
+      ? {
+          path: '/website-templates',
+          types: ['pageTemplates'],
+        }
+      : {
+          slug,
+          types: ['templateCategory'],
+        }
+  )
+}
 
 export default async function Page({
   params,
@@ -19,6 +42,7 @@ export default async function Page({
   }
 
   const {
+    categoryHero,
     components: _components = [],
     hero: _hero,
     marquee,
@@ -40,7 +64,7 @@ export default async function Page({
 
   const hero = [
     {
-      ..._hero,
+      ...mergeTemplateWithDefaults(categoryHero || {}, _hero),
       _id: 'heroTextWithMarquee',
       _type: 'heroTextWithMarquee',
       marquee,

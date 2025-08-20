@@ -2,9 +2,31 @@ import { draftMode } from 'next/headers'
 import Layout from '@/(pages)/_page'
 import { componentsQuery } from '@/(pages)/_page'
 import { query } from '@/lib/queries'
+import { generateMetadataStatic } from '@/lib/utils/generateMetadata/generateMetadataStatic'
 import mergeTemplateWithDefaults from '@/lib/utils/mergeObjectWithDefaults'
 
 export const dynamic = 'force-static'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ segments: string[] }>
+}) {
+  const { segments } = await params
+  const slug = segments?.length ? segments.pop() : undefined
+
+  return await generateMetadataStatic(
+    !segments?.length
+      ? {
+          path: '/templates',
+          types: ['pageTemplates'],
+        }
+      : {
+          slug,
+          types: ['templateCategory'],
+        }
+  )
+}
 
 export default async function Page({
   params,
