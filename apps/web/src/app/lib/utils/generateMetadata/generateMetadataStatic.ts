@@ -1,14 +1,15 @@
 import { runQuery } from '@/lib/queries'
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next'
 import { draftMode } from 'next/headers'
 import config from 'config'
 import { parseImageRef } from '@/lib/utils/parseImageRef'
 
 interface GenerateMetadataStaticProps {
-  path?: string;
-  slug?: string;
+  path?: string
+  slug?: string
   parent?: ResolvingMetadata
-  types?: string[];
+  types?: string[]
+  canonical?: string
 }
 
 const configTypes = config?.studio?.docTypes
@@ -24,8 +25,12 @@ export const generateMetadataStatic = async ({
   slug = '',
   types = configTypes,
   parent,
+  canonical,
 }: GenerateMetadataStaticProps): Promise<Metadata> => {
-  const [data] = await runQuery(seoQuery, { params: { path, types, slug }, preview: draftMode().isEnabled })
+  const [data] = await runQuery(seoQuery, {
+    params: { path, types, slug },
+    preview: draftMode().isEnabled,
+  })
   const parentProps = await parent
 
   const {
@@ -34,10 +39,8 @@ export const generateMetadataStatic = async ({
     seoDescription: description,
   } = data || {}
 
-  const {
-    url = null,
-  } = parseImageRef(image) || {}
-  
+  const { url = null } = parseImageRef(image) || {}
+
   return {
     title,
     description,
@@ -45,7 +48,10 @@ export const generateMetadataStatic = async ({
       ...parentProps?.openGraph,
       description: description || parentProps?.description,
       title,
-      images: [(url && {height: 630, url, width: 1200}), ...(parentProps?.openGraph?.images || [])],
+      images: [
+        url && { height: 630, url, width: 1200 },
+        ...(parentProps?.openGraph?.images || []),
+      ],
     } as Metadata['openGraph'],
     twitter: {
       ...parentProps?.twitter,
@@ -53,5 +59,12 @@ export const generateMetadataStatic = async ({
       title,
       images: [url && url, ...(parentProps?.twitter?.images || [])],
     } as Metadata['twitter'],
-  };
-};
+    ...(canonical
+      ? {
+          alternates: {
+            canonical,
+          },
+        }
+      : {}),
+  }
+}
