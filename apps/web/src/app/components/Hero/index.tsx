@@ -9,7 +9,7 @@ import HeroTextWithMarquee from './HeroTextWithMarquee'
 import HeroWithMedia from './HeroWithMedia'
 
 interface HeroProps {
-  hero: (HeroHomeProps | HeroPricingProps |HeroWithMediaProps) & any[]
+  hero: (HeroHomeProps | HeroPricingProps | HeroWithMediaProps) & any[]
 }
 
 // TODO Expand as more Hero types are added.

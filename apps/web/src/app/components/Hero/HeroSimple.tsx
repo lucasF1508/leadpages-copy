@@ -58,6 +58,7 @@ const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
             className={clsx('w-full object-cover')}
             media={media}
             priority
+            sizes="(max-width: 1024px) 1216px, 100vw"
           />
         </div>
       )}

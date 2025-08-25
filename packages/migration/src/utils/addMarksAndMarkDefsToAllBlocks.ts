@@ -8,7 +8,7 @@ const addMarksAndMarkDefsToAllBlocks =
     marks: string[],
     markDefs: PortableTextMarkDef[] = []
   ): ((blocks: PortableTextBlock[]) => PortableTextBlock[]) =>
-  (blocks: PortableTextBlock[]) => blocks.map((block) => {
+  (blocks: PortableTextBlock[]) => blocks?.map((block) => {
       if (block._type !== 'block' || !Array.isArray(block.children)) return block;
 
       const updatedChildren = block.children.map((child) => {

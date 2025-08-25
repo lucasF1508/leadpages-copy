@@ -26,6 +26,7 @@ import {getPreviewPaneUrl} from './utils/getPreviewUrl'
 import {tags} from 'sanity-plugin-tags'
 import {defaultDocumentNode, structure} from './components/DeskStructure'
 import {Logo} from './components/Studio'
+import {docCreationControl} from './plugins/doc-creation-control'
 
 const sanityDatasets = [
   import.meta.env.SANITY_STUDIO_API_DATASET,
@@ -72,7 +73,20 @@ const config = defineConfig(
           apiVersion: import.meta.env.SANITY_STUDIO_API_VERSION,
         }),
         structuredData(structuredDataConfig),
-      ],
+        dataset !== 'production_v3' &&
+          docCreationControl({
+            exclude: [
+              'page',
+              'experiments',
+              'comparison',
+              'footer',
+              'navigation',
+              'integration',
+              'pageHome',
+              'template',
+            ],
+          }),
+      ].filter(Boolean),
       document: {
         actions: DocumentActions,
         productionUrl: getPreviewPaneUrl,

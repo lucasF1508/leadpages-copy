@@ -9,7 +9,7 @@ const updateMarkDefByKey =
     updates: Partial<PortableTextMarkDef>
   ): ContentTransformer =>
   (blocks: Block[]): Block[] =>
-    blocks.map((block) => {
+    blocks?.map((block) => {
       if (block._type !== 'block') return block;
 
       const markDefs = Array.isArray(block.markDefs)

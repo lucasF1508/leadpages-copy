@@ -15,7 +15,7 @@ export interface HeroMediaProps {
 
 const HeroMedia = ({ className, classNames, media, overflow }: HeroMediaProps) => {
   if (!hasMedia(media)) return null
-
+  
   return (
     <div
       className={clsx('relative w-full max-w-cols6', overflow && 'aspect-1', className, classNames?.root)}

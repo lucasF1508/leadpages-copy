@@ -24,7 +24,6 @@ export const structure = async (S: StructureBuilder, context: ConfigContext) => 
         S.list()
           .title('Pages')
           .items([
-            S.documentTypeListItem('pageHome').title('Home'),
             S.documentTypeListItem('page').title('Dynamic Pages'),
             S.listItem()
               .title('Legacy Pages')

@@ -14,12 +14,6 @@ interface GenerateMetadataStaticProps {
 
 const configTypes = config?.studio?.docTypes
 
-const seoQuery = `*[(path == $path || slug.current == $slug) && _type in $types] {
-    ...(seo),
-    "seoTitle": coalesce(seo.seoTitle, title),
-  }
-`
-
 export const generateMetadataStatic = async ({
   path = '',
   slug = '',
@@ -27,10 +21,21 @@ export const generateMetadataStatic = async ({
   parent,
   canonical,
 }: GenerateMetadataStaticProps): Promise<Metadata> => {
-  const [data] = await runQuery(seoQuery, {
-    params: { path, types, slug },
-    preview: draftMode().isEnabled,
-  })
+  const [data] = await runQuery(
+    `*[(path == $path || slug.current == $slug) && _type in $types] {
+    ...(seo),
+    "seoTitle": coalesce(seo.seoTitle, title),
+  }`,
+    {
+      params: {
+        path,
+        types,
+        slug,
+      },
+      preview: draftMode().isEnabled,
+    }
+  )
+
   const parentProps = await parent
 
   const {
@@ -39,7 +44,7 @@ export const generateMetadataStatic = async ({
     seoDescription: description,
   } = data || {}
 
-  const { url = null } = parseImageRef(image) || {}
+  const { url = null } = image ? parseImageRef(image) || {} : {}
 
   return {
     title,

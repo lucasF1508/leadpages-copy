@@ -22,7 +22,7 @@ const mapHeroField = async (hero: any): Promise<any[]> => {
     })
   )
 
-  return results.flat().filter(Boolean)
+  return results.flat().filter(Boolean).slice(0, 1)
 }
 
 const mapComponent = async (component: any): Promise<any | any[]> => {
@@ -55,7 +55,7 @@ const mapComponentsField = async (components: any) => {
 const appendGlobalCTA = async (doc: any, newDoc: any) => {
   try {
     const ctaRef = doc?.cta?._ref
-    if (!ctaRef) return
+    if (!ctaRef) return newDoc
 
     const globalCta = await from.fetch(`*[_id == $id][0]`, { id: ctaRef })
 

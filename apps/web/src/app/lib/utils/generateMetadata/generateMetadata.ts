@@ -9,10 +9,10 @@ const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_URL
 const seoQuery = `*[_type == 'seoSite'] | order(_updatedAt desc) [0]`
 
 export type GenerateMetadataProps = {
-  params: Promise<{ slug: string }>
+  params: Promise<{ segments?: string[], slug?: string }>
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
- 
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await runQuery(seoQuery, { preview: draftMode().isEnabled }) || {}
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const {
     url = null,
   } = parseImageRef(image) || {}
-      
+
   return {
     description,
     openGraph: {
@@ -42,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       url: `${NEXT_PUBLIC_URL}/`,
     } as Metadata['openGraph'],
-    robots,    
+    robots,
     title: {
       default: title,
       template,

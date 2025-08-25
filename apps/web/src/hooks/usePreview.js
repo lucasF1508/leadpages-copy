@@ -81,7 +81,7 @@ const usePreview = ({
         '/templates/landing-page-template/[slug]': await import(
           '@utils/shapeTemplateData'
         ),
-        '/[...slug]': await import('@pages/[...slug].js'),
+        '/[...slug]': await import('@utils/shapeData.js'),
         '/404': await import('@pages/404'),
         '/integrations': await import('@pages/integrations'),
         '/blog': await import('@pages/blog'),

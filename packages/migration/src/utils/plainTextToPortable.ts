@@ -4,7 +4,7 @@ const plainTextToPortable = (inputText: string, style = 'normal') => {
   if (!inputText || typeof inputText !== 'string') {
     return []
   }
-  
+
   return inputText
     .split(/\r?\n/) // split by newlines
     .filter((line: string) => line.trim() !== '') // ignore empty lines

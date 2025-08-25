@@ -1,7 +1,6 @@
 import { draftMode } from 'next/headers'
-import Layout from '@/(pages)/_page'
-import { componentsQuery } from '@/(pages)/_page'
-import { query } from '@/lib/queries'
+import Layout from '@/components/Layout'
+import { componentsQuery, query } from '@/lib/queries'
 import { generateMetadataStatic } from '@/lib/utils/generateMetadata/generateMetadataStatic'
 import mergeTemplateWithDefaults from '@/lib/utils/mergeObjectWithDefaults'
 

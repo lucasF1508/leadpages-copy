@@ -13,7 +13,7 @@ import Text from '@/components/Text'
 import { removeProps } from '@/lib/utils/removeProps'
 
 export interface MediaProps
-  extends Pick<NextImageProps, 'fill' | 'priority'>,
+  extends Pick<NextImageProps, 'fill' | 'priority' | 'sizes'>,
     Omit<React.ComponentProps<'figure'>, 'className'> {
   className?: ClassValue
   classNames?: {
@@ -31,6 +31,7 @@ const Elements: ElementTypes = {
   image: dynamic(() => import('@/components/Image')),
   lottie: dynamic(() => import('@/components/Lottie')),
   video: dynamic(() => import('@/components/Video')),
+  wistia: dynamic(() => import('@/components/WistiaEmbed')),
 }
 
 const lottieProps = [
@@ -51,17 +52,20 @@ const Media = ({
   fill = false,
   media: _media,
   priority,
+  sizes,
   ...props
 }: MediaProps) => {
   const { caption, condition, image, ratio, ...media } = _media || {}
 
   if (!condition || condition === 'none') return null
 
+
   const elementProps = {
     className: classNames?.media,
     fill,
     image,
     priority,
+    sizes,
     // There is probably a better way to do this but it requires a bigger refactor
     ...(!['lottie', 'video'].includes(condition) ? removeProps(media, lottieProps) : media),
   }

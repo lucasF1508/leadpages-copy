@@ -114,8 +114,17 @@ export default withConfig(
     media: {
       conditions: {
         lottie: [],
+        wistia: [],
       },
-      fields: G.group('content', lottieArgs),
+      fields: [
+        ...G.group('content', [...lottieArgs]),
+        F.string({
+          group: 'content',
+          name: 'wistiaId',
+          description: 'ID of the Wistia video you wish to load (eg. ago55021i9).',
+          hidden: ({parent}) => parent?.condition !== 'wistia',
+        }),
+      ],
     },
     link: {
       conditions: {

@@ -7,6 +7,8 @@ export const hasMedia = (media: any): media is MediaType => {
   switch (media?.condition) {
     case 'image':
       return hasImage(media?.image)
+    case 'wistia':
+      return !!media?.wistiaId
     default:
       return media ? !!media[media?.condition] : false
   }

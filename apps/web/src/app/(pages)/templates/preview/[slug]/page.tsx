@@ -1,9 +1,9 @@
+import type { GenerateMetadataProps } from '@/lib/utils/generateMetadata/generateMetadata'
 import type { ResolvingMetadata } from 'next'
 import { draftMode } from 'next/headers'
 import TemplatePreview from '@/components/TemplatePreview'
 import { getStaticPathsParams, query, runQuery } from '@/lib/queries'
 import { generateMetadataStatic } from '@/lib/utils/generateMetadata/generateMetadataStatic'
-import { GenerateMetadataProps } from '@/lib/utils/generateMetadata/generateMetadata'
 
 const queryData = (slug: string) =>
   query(
@@ -29,15 +29,15 @@ export async function generateMetadata(
   const slug = slugFromId || _slug
 
   return await generateMetadataStatic({
-    parent,
-    slug,
-    types: ['template'],
     canonical: [
       process.env.NEXT_PUBLIC_URL,
       'templates',
       'landing-page-template',
       slug,
     ].join('/'),
+    parent,
+    slug,
+    types: ['template'],
   })
 }
 
@@ -57,8 +57,8 @@ export const dynamicParams = false
 
 export async function generateStaticParams() {
   const params = await getStaticPathsParams({
-    type: 'template',
     filter: 'kind == "LeadpageTemplate"',
+    type: 'template',
   })
   const ids = await runQuery(
     `*[_type == "template" && kind == "LeadpageTemplate"]._id`

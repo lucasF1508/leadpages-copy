@@ -1,7 +1,7 @@
-import type { ClassNames } from './Rack';
+import type { ClassNames, RackProps } from './Rack'
 import Rack, { RackInner } from './Rack'
 import RackComponentList from './RackComponentList'
 
 export default Rack
-export type { ClassNames }
+export type { ClassNames, RackProps }
 export { RackComponentList, RackInner }
