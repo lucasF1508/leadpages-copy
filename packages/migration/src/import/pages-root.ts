@@ -7,32 +7,29 @@ import mapPage from '@src/map/map-page'
 import { queueMappers } from '@src/utils/queueMappers'
 import inquirer from 'inquirer'
 
-const {from, to} = transferClients
+const { from, to } = transferClients
 
 const operation = 'createOrReplace'
 const expected = 'yes'
-const types = [
-  'page',
-]
+const types = ['page']
 
 const migrateDocs = async () => {
-  const data = await from.fetch(`*[_type in $types && path in $paths && !(_id in path('drafts.**'))]`, {
-    paths: [
-      '/lead-management',
-      '/conversion-tools',
-      '/legal',
-      '/privacy',
-      '/about',
-      '/careers'
-    ],
-    types
-  })
-  
-  const docs = await queueMappers(
-    data, 
-    mapAssetRef,
-    mapPage,
+  const data = await from.fetch(
+    `*[_type in $types && path in $paths && !(_id in path('drafts.**'))]`,
+    {
+      paths: [
+        '/lead-management',
+        '/conversion-tools',
+        '/legal',
+        '/privacy',
+        '/about',
+        '/careers',
+      ],
+      types,
+    }
   )
+
+  const docs = await queueMappers(data, mapAssetRef, mapPage)
 
   console.log(docs)
 
@@ -41,7 +38,8 @@ const migrateDocs = async () => {
       message: `⚠️  This will ${operation} documents of types [${types}] from - "${from.config().projectId}" dataset: "${from.config().dataset}" to "${to.config().projectId}" dataset: "${to.config().dataset}".\n To confirm, type "${expected}":`,
       name: 'confirmation',
       type: 'input',
-      validate: (input) => input === expected || `You must type "${expected}" to confirm.`,
+      validate: (input) =>
+        input === expected || `You must type "${expected}" to confirm.`,
     },
   ])
 
@@ -54,10 +52,7 @@ const migrateDocs = async () => {
     client: to,
     operation,
   })
-    .then(({numDocs, warnings}: {
-      numDocs: number
-      warnings: string[]
-    }) => {
+    .then(({ numDocs, warnings }: { numDocs: number; warnings: string[] }) => {
       console.log('Imported %d documents', numDocs)
       console.log('Warnings:', warnings)
       // Note: There might be warnings! Check `warnings`

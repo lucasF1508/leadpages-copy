@@ -1,5 +1,5 @@
-import mapBlockContent from "@src/map/map-block-content"
-import { omit } from "lodash"
+import mapBlockContent from '@src/map/map-block-content'
+import { omit } from 'lodash'
 
 const map = {
   table: (item: any) => {
@@ -10,7 +10,9 @@ const map = {
     }
 
     const firstRow = rows[0]
-    const hasHeaderRow = firstRow?.cells?.every((cell: string) => typeof cell === 'string')
+    const hasHeaderRow = firstRow?.cells?.every(
+      (cell: string) => typeof cell === 'string'
+    )
 
     const dynamicTitles = hasHeaderRow
       ? firstRow.cells.map((title: string) => title.trim())
@@ -55,7 +57,9 @@ const map = {
   },
 }
 
-const shapeTextBlock = (component: Record<string, any>): Record<string, any> => {
+const shapeTextBlock = (
+  component: Record<string, any>
+): Record<string, any> => {
   const filteredFields = omit(component, [])
 
   return {

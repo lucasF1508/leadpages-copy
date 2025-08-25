@@ -19,7 +19,7 @@
   counter-reset: list;
 
   li::before {
-    @apply absolute left-0 top-0 text-right font-bold leading-normal;
+    @apply absolute left-0 top-0 text-right leading-normal;
     content: counter(list, numeric) ' | ';
     counter-increment: list;
   }

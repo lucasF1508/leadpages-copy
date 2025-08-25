@@ -17,7 +17,9 @@ const Media = ({
   }
   value: MediaType
 }) => (
-  <div className={clsx('relative mb-5 last:mb-0', classNames?.wrapper)}>
+  <div
+    className={clsx('relative my-5 first-mt-0 last:mb-0', classNames?.wrapper)}
+  >
     <_Media classNames={classNames} media={media} />
   </div>
 )

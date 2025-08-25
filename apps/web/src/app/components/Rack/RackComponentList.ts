@@ -18,6 +18,7 @@ import dynamic from 'next/dynamic'
 
 const RackComponentList = {
   addOnCards: dynamic(() => import('@/components/AddOnCards')),
+  cardClickable: dynamic(() => import('@/components/CardClickable')),
   cardsBlock: dynamic(() => import('@/components/Cards')),
   comparePlans: dynamic(() => import('@/components/ComparePlans')),
   cta: dynamic(() => import('@/components/CTA')),
@@ -44,6 +45,7 @@ const RackComponentList = {
     { pinion: false },
   ],
   testimonialBlock: dynamic(() => import('@/components/Testimonial')),
+  textBlockWithSidebar: dynamic(() => import('@/components/TextWithSidebar')),
   textColumns: dynamic(() => import('@/components/TextColumns')),
   textWithStats: dynamic(() => import('@/components/TextWithStats')),
   upsell: dynamic(() => import('@/components/Upsell')),

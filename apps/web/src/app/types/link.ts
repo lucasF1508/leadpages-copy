@@ -5,7 +5,13 @@ import type { IconType } from '@react-icons/all-files'
 import type { Reference } from '@sanity/types'
 import type { ClassValue } from 'clsx'
 
-export type LinkStyleType = 'button-outline' | 'button-secondary' | 'button-solid' | 'ghost' | 'none' | 'text'
+export type LinkStyleType =
+  | 'button-outline'
+  | 'button-secondary'
+  | 'button-solid'
+  | 'ghost'
+  | 'none'
+  | 'text'
 export type LinkSizeType = 'small'
 
 export interface CommonLinkType {
@@ -78,7 +84,6 @@ export type LinkProps = {
   url?: string
 }
 
-export type LinkType = { _type?: 'link' | 'signUp' } &
-  LinkComponentProps &
-  LinkProps & 
+export type LinkType = { _type?: 'link' | 'signUp' } & LinkComponentProps &
+  LinkProps &
   Omit<React.ComponentProps<'a'>, 'className' | 'target'>

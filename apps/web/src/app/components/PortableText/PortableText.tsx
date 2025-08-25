@@ -63,6 +63,26 @@ export type BlockStylesType = {
 }
 export type ColorMarksType = typeof colorMarks
 
+// When the design system changed hands there was an update to the mappings.
+// These were the original mapping and then need to be imported to components that require larger blockStyles
+export const defaultLargeBlockStyles: BlockStylesType = {
+  h1: {
+    className: 'type-title-t4 sm:type-title-t3 md:type-title-t2',
+    tag: 'h2',
+  },
+  h2: {
+    className: 'type-title-t6 sm:type-title-t4 md:type-title-t3',
+    tag: 'h2',
+  },
+  h3: {
+    className: 'type-title-t7 sm:type-title-t5 md:type-title-t4',
+    tag: 'h3',
+  },
+  h4: { className: 'type-h2 md:type-h1', tag: 'h4' },
+  h5: { className: 'type-h3 md:type-h2', tag: 'h5' },
+  h6: { className: 'type-h4 md:type-h3', tag: 'h6' },
+}
+
 export const defaultBlockStyles: BlockStylesType = {
   'h1-home': { className: 'type-title-t1', tag: 'h1' },
   'h1-hero': {
@@ -79,20 +99,20 @@ export const defaultBlockStyles: BlockStylesType = {
   },
   'h4-hero': { className: 'type-h2 md:type-h1', tag: 'h1' },
   h1: {
-    className: 'type-title-t4 sm:type-title-t3 md:type-title-t2',
+    className: 'type-title-t6 sm:type-title-t5 md:type-title-t4',
     tag: 'h2',
   },
   h2: {
-    className: 'type-title-t6 sm:type-title-t4 md:type-title-t3',
+    className: 'type-title-t7 sm:type-title-t6 md:type-title-t5',
     tag: 'h2',
   },
   h3: {
-    className: 'type-title-t7 sm:type-title-t5 md:type-title-t4',
+    className: 'type-h2 md:type-h1',
     tag: 'h3',
   },
-  h4: { className: 'type-h2 md:type-h1', tag: 'h4' },
-  h5: { className: 'type-h3 md:type-h2', tag: 'h5' },
-  h6: { className: 'type-h4 md:type-h3', tag: 'h6' },
+  h4: { className: 'type-h5 sm:type-h4 md:type-h2', tag: 'h4' },
+  h5: { className: 'type-h6 sm:type-h5 md:type-h3', tag: 'h5' },
+  h6: { className: 'type-h6 md:type-h4', tag: 'h6' },
   large: {
     className: 'text-body-muted type-body-md sm:type-body-lg',
     tag: 'p',
@@ -103,6 +123,7 @@ export const defaultBlockStyles: BlockStylesType = {
     tag: 'p',
   },
   xsmall: { className: 'text-body-muted type-body-xs', tag: 'p' },
+  blockquote: { className: 'type-quote-xs sm:type-quote-sm', tag: 'p' },
 }
 
 export const colorMarks = {
@@ -112,74 +133,87 @@ export const colorMarks = {
 } as const
 
 const _PortableText = ({
-  blockStyles = defaultBlockStyles,
+  blockStyles: _blockStyles = {},
   classNames = {},
   content = [],
-}: PortableTextProps) => (
-  <PortableText
-    components={{
-      // Styles require className of portable-text and refer to src/design/css/components/portable-text.css
-      block: createBlockStyles({ blockStyles, classNames }),
-      list: {
-        bullet: ({ children }) => (
-          <ul className={clsx('list list-bullet', classNames?.bulletList)}>
-            {children}
-          </ul>
-        ),
-        checkmark: ({ children }) => (
-          <ul className={clsx('list list-check', classNames?.checkmarkList)}>
-            {children}
-          </ul>
-        ),
-        number: ({ children }) => (
-          <ol className={clsx('list list-number', classNames?.numberList)}>
-            {children}
-          </ol>
-        ),
-      },
-      listItem: {
-        bullet: ({ children, value }) => (
-          <li
-            className={getClassNameFromBlockStyles(
-              value?.style,
-              classNames?.bulletItem
-            )}
-          >
-            {children}
-          </li>
-        ),
-        checkmark: ({ children, value }) => (
-          <li
-            className={getClassNameFromBlockStyles(
-              value?.style,
-              classNames?.checkmarkItem
-            )}
-          >
-            <CheckIcon className="list-check-icon" />
-            {children}
-          </li>
-        ),
-        number: ({ children, value }) => (
-          <li
-            className={getClassNameFromBlockStyles(
-              value?.style,
-              classNames?.numberItem
-            )}
-          >
-            {children}
-          </li>
-        ),
-      },
-      marks: {
-        ...createColorMarks(colorMarks),
-        textGradient: Color,
-        align: Align,
-        maxWidth: MaxWidth,
-        link: Link,
-      },
-      types: ComponentTypes({ classNames }),
-    }}
-    value={content}
-  />
-)
+}: PortableTextProps) => {
+  const blockStyles = {
+    ...defaultBlockStyles,
+    ..._blockStyles,
+  }
+  return (
+    <PortableText
+      components={{
+        // Styles require className of portable-text and refer to src/design/css/components/portable-text.css
+        block: createBlockStyles({ blockStyles, classNames }),
+        list: {
+          bullet: ({ children }) => (
+            <ul className={clsx('list list-bullet', classNames?.bulletList)}>
+              {children}
+            </ul>
+          ),
+          checkmark: ({ children }) => (
+            <ul className={clsx('list list-check', classNames?.checkmarkList)}>
+              {children}
+            </ul>
+          ),
+          number: ({ children }) => (
+            <ol className={clsx('list list-number', classNames?.numberList)}>
+              {children}
+            </ol>
+          ),
+        },
+        listItem: {
+          bullet: ({ children, value }) => (
+            <li
+              className={clsx(
+                getClassNameFromBlockStyles(
+                  value?.style,
+                  classNames?.bulletItem
+                )
+              )}
+            >
+              {children}
+            </li>
+          ),
+          checkmark: ({ children, value }) => (
+            <li
+              className={clsx(
+                getClassNameFromBlockStyles(
+                  value?.style,
+                  classNames?.checkmarkItem
+                )
+              )}
+            >
+              <CheckIcon className="list-check-icon" />
+              {children}
+            </li>
+          ),
+          number: ({ children, value }) => (
+            <li
+              className={clsx(
+                getClassNameFromBlockStyles(
+                  value?.style,
+                  classNames?.numberItem
+                )
+              )}
+            >
+              {children}
+            </li>
+          ),
+        },
+        marks: {
+          ...createColorMarks(colorMarks),
+          textGradient: Color,
+          align: Align,
+          maxWidth: MaxWidth,
+          link: Link,
+        },
+        types: ComponentTypes({ classNames }),
+      }}
+      value={content}
+    />
+  )
+}
+
 export default _PortableText

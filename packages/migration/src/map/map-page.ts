@@ -1,8 +1,8 @@
-import { SanityDocument } from "sanity"
-import { omit } from "lodash"
-import { transferClients } from "@src/client"
-import componentMappers from "@src/utils/componentMappers"
-import heroMappers from "@src/utils/heroMappers"
+import { SanityDocument } from 'sanity'
+import { omit } from 'lodash'
+import { transferClients } from '@src/client'
+import componentMappers from '@src/utils/componentMappers'
+import heroMappers from '@src/utils/heroMappers'
 
 const { from } = transferClients
 
@@ -32,7 +32,7 @@ const mapComponent = async (component: any): Promise<any | any[]> => {
     return await Promise.resolve(mapper(component))
   }
 
-  if (component._type === "spacer") {
+  if (component._type === 'spacer') {
     return component
   }
 
@@ -72,17 +72,17 @@ const appendGlobalCTA = async (doc: any, newDoc: any) => {
 const mapPage = async (docs: SanityDocument[]) => {
   return Promise.all(
     docs.map(async (doc) => {
-      const fieldsToExclude = ["redirectToLegacy", "options", "cta", "parent"]
+      const fieldsToExclude = ['redirectToLegacy', 'options', 'cta', 'parent']
       const newDoc: any = omit(doc, fieldsToExclude)
       const pageData = await appendGlobalCTA(doc, newDoc)
 
       for (const key in pageData) {
         switch (key) {
-          case "hero":
+          case 'hero':
             pageData.hero = await mapHeroField(pageData.hero)
             break
 
-          case "components":
+          case 'components':
             pageData.components = await mapComponentsField(pageData.components)
             break
 

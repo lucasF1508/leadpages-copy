@@ -231,7 +231,6 @@ const [bodySizes, bodyStyles] = generateTypography({
 })
 
 const [titleSizes, titleStyles] = generateTypography({
-  // TODO add responsive typography sizes
   sizes: {
     'title-t1': types.title.t1,
     'title-t2': types.title.t2,

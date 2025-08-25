@@ -5,7 +5,17 @@
   h4,
   h5,
   h6 {
-    @apply mb-3 mt-6 first:mt-0 last:mb-0 lg:mt-8;
+    @apply my-3 mt-6 first:mt-0 last:mb-0 lg:mt-8;
+  }
+
+  h4,
+  h5,
+  h6 {
+    & + h1,
+    & + h2,
+    & + h3 {
+      @apply mt-0;
+    }
   }
 
   p {
