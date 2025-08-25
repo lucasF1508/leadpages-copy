@@ -40,29 +40,33 @@ From the root of the project make sure all dependencies have been installed befo
 git clone [...]
 ```
 
-#### 2. Install dependencies
+#### 2. Ensure you are on Node 20+
 
-```
-yarn install
-```
-
-#### 3. Link to Vercel project
+#### 3. Connect the repo to Vercel using the [Vercel CLI](https://vercel.com/docs/cli): 
 
 ```
 vercel link
 ```
 
-#### 4. Pull environment variables
+#### 4. Pull the env vars from production from Vercel
 
 ```
-vercel env pull
+vercel env pull --environment production
 ```
 
-#### 5. Start development
+#### 5. Create a .npmrc in the root folder with the contents of the NPM_RC env variable [read more](https://vercel.com/guides/using-private-dependencies-with-vercel)
 
 ```
-yarn start
+source .env.local
+echo "$NPM_RC" > ./.npmrc
 ```
+
+#### 6. Install dependencies, build indices and start development
+
+```
+yarn install && yarn workspace indices build && yarn start
+```
+
 
 ## Cutting a Release
 
