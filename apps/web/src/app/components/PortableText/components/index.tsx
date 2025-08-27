@@ -3,8 +3,11 @@ import type {
   PortableTextTypeComponentProps,
 } from '@portabletext/react'
 import type { ClassValue } from 'clsx'
+import clsx from 'clsx'
+import PageAnchor from './Anchor'
 import Embed from './Embed'
 import Media from './Media'
+import Table from './Table'
 
 interface ComponentTypesProps {
   classNames: {
@@ -26,6 +29,12 @@ export const types = ({
 }: ComponentTypesProps): Record<string, PortableTextTypeComponent<any>> => ({
   embed: ({ value }) => <Embed className={classNames?.embed} value={value} />,
   media: ({ value }) => <Media classNames={classNames?.media} value={value} />,
+  pageAnchor: ({ value }) => (
+    <PageAnchor className={clsx(classNames?.pageAnchor)} value={value} />
+  ),
+  table: ({ value }) => (
+    <Table className={clsx(classNames?.table)} value={value} />
+  ),
 })
 
 const contentBlockReference = ({

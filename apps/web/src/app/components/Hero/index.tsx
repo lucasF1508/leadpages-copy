@@ -2,6 +2,7 @@ import type { HeroHomeProps } from './HeroHome'
 import type { HeroPricingProps } from './HeroPricing/HeroPricing'
 import type { HeroWithMediaProps } from './HeroWithMedia'
 import HeroBanner from './HeroBanner'
+import HeroBase from './HeroBase'
 import HeroHome from './HeroHome'
 import HeroPricing from './HeroPricing'
 import HeroSimple from './HeroSimple'
@@ -19,6 +20,8 @@ const Hero = ({ hero }: HeroProps) => {
   const [heroProps] = Array.isArray(hero) ? hero : [hero]
 
   switch (heroProps?._type) {
+    case 'heroBase':
+      return <HeroBase {...heroProps} />
     case 'heroHome':
       return <HeroHome {...heroProps} />
     case 'heroPricing':

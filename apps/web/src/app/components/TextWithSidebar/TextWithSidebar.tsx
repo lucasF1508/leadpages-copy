@@ -99,19 +99,19 @@ const TextWithSidebar = ({
           </Primitives.Item>
         </Primitives.Root>
       </aside>
-      <aside className="sticky box-[top(y)] gap-3 hidden md:flex flex-col rounded-md bg-surface-muted border border-surface-neutral-medium py-4 lg:py-6 z-dropdown">
+      <aside className="flex-[0_0_auto] w-[15.5rem] lg:w-[20rem] sticky top-2 gap-3 hidden md:flex flex-col rounded-md bg-surface-muted border border-surface-neutral-medium py-4 lg:py-6 z-dropdown max-h-[calc(100dvh-2rem)] overflow-scroll scrollbar-hide">
         {sidebar?.sections.map(({ heading, links }) => (
-          <div
-            className="flex flex-col gap-3 w-[15.5rem] lg:w-[20rem]"
-            key={heading}
-          >
+          <div className="flex flex-col gap-3" key={heading}>
             <h4 className="type-h4 lg:type-h3 px-3 lg:px-4">{heading}</h4>
             {!!links?.length &&
               links.map((link) => (
                 <div className="relative px-3 lg:px-4" key={link._key}>
                   <Link
                     {...link}
-                    className="type-body-sm lg:type-body relative"
+                    className={clsx(
+                      'type-body-sm lg:type-body relative hover:text-button-text-inline transition-colors',
+                      pathname === link?.url && 'text-button-text-inline'
+                    )}
                     hasIcon={false}
                     linkStyle="none"
                   />

@@ -8,17 +8,23 @@ export const heroBanner = F.object({
     G.define('content', {title: 'Content', default: true}),
     G.define('media', {title: 'Media'}),
   ],
-  fields: [...G.group('content', [F.string({name: 'label'}), F.string({name: 'heading'})])],
+  fields: [
+    ...G.group('content', [
+      F.string({name: 'label'}),
+      F.string({name: 'heading'}),
+      F.string({name: 'subheading'}),
+    ]),
+  ],
   preview: {
     select: {
+      label: 'label',
       heading: 'heading',
-      content: 'content',
+      subheading: 'subheading',
     },
-    prepare({heading = '', content}) {
-      const subtitle = content ? P.richText(content) : ''
+    prepare({label = '', heading = '', subheading = ''}) {
       return {
-        title: heading || subtitle,
-        subtitle: heading ? subtitle : '',
+        title: heading || 'Hero Banner',
+        subtitle: label || subheading,
       }
     },
   },

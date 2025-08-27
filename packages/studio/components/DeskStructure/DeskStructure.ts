@@ -1,17 +1,21 @@
-import {MdOutlineSmartButton, MdSettings} from 'react-icons/md'
+import {MdBusiness, MdOutlineSmartButton, MdSettings} from 'react-icons/md'
 import {BsGraphUp} from 'react-icons/bs'
 import config from 'config'
 import {AiOutlineHome} from 'react-icons/ai'
 import IframePreview from './CustomViews/IframePreview'
 import SeoPane from './CustomViews/SeoPane'
 import {StructureBuilder} from 'sanity/structure'
+import {BsPlug} from 'react-icons/bs'
 import {ConfigContext} from 'sanity'
+import {BiCategory} from 'react-icons/bi'
 import SingletonListItem from './SingletonListItem'
 import {RiLayoutBottom2Line} from 'react-icons/ri'
+import {GrStatusInfo} from 'react-icons/gr'
 import {PiSidebar} from 'react-icons/pi'
 import CategoriesListItem from './CategoriesListItem'
 import syncTemplateData from '@/utils/syncTemplateData'
 import {AiOutlineFileText, AiOutlineSetting} from 'react-icons/ai'
+import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 const pageTemplates = config?.studio?.docTypes
 
@@ -87,6 +91,38 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
             ])
         )
         .icon(AiOutlineFileText),
+      S.listItem()
+        .title('Integrations')
+        .child(
+          S.list()
+            .title('Integrations')
+            .items([
+              S.documentTypeListItem('integration').title('Integrations'),
+              S.divider(),
+              orderableDocumentListDeskItem({
+                type: 'categoryIntegration',
+                title: 'Integration Categories',
+                icon: BiCategory,
+                S,
+                context,
+              }),
+              orderableDocumentListDeskItem({
+                type: 'categoryIntegrationStatus',
+                title: 'Integration Status',
+                icon: GrStatusInfo,
+                S,
+                context,
+              }),
+              S.divider(),
+              SingletonListItem({
+                type: 'pageIntegrations',
+                title: 'Integrations Page',
+                documentId: 'pageIntegrations',
+                S,
+              }).icon(PiSidebar),
+            ])
+        )
+        .icon(BsPlug),
       S.divider(),
       SingletonListItem({type: 'navigation', title: 'Navigation', icon: MdOutlineSmartButton, S}),
       SingletonListItem({type: 'footer', title: 'Footer', icon: RiLayoutBottom2Line, S}),
@@ -96,7 +132,10 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
         .child(
           S.list()
             .title('Site Settings')
-            .items([SingletonListItem({type: 'seoSite', title: 'SEO', icon: BsGraphUp, S})])
+            .items([
+              SingletonListItem({type: 'seoSite', title: 'SEO', icon: BsGraphUp, S}),
+              S.documentTypeListItem('siteRedirect').title('Site Redirects'),
+            ])
         )
         .icon(MdSettings),
     ])

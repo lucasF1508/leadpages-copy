@@ -18,10 +18,14 @@
 .list-number {
   counter-reset: list;
 
-  li::before {
-    @apply absolute left-0 top-0 text-right leading-normal;
-    content: counter(list, numeric) ' | ';
-    counter-increment: list;
+  li {
+    @apply relative pl-6;
+
+    &::before {
+      @apply absolute right-[calc(100%-2.75rem)] top-0 text-right leading-normal whitespace-nowrap;
+      content: counter(list, numeric) ' | ';
+      counter-increment: list;
+    }
   }
 }
 

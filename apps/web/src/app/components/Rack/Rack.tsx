@@ -11,7 +11,7 @@ export type ClassNames = {
 }
 
 interface PinionParams {
-  align?: Align
+  alignment?: Align
   backgroundColor?: BackgroundColor
   baseStyles?: boolean
   className?: string
@@ -31,15 +31,16 @@ export const RackInner = (
   {
     _key,
     _type: component,
-    align,
+    alignment,
     backgroundColor,
+    columnsWidth,
     ...componentData
   }: RackInnerComponent,
   classNames?: ClassNames
 ) => {
   const _Component = RackComponentList[component] as [
     React.ComponentType<{ className?: string }>,
-    PinionParams?
+    PinionParams?,
   ]
 
   const [Component, pinionParams = {}] = Array.isArray(_Component)
@@ -66,8 +67,9 @@ export const RackInner = (
 
   return (
     <Pinion
-      align={align}
+      alignment={alignment}
       backgroundColor={backgroundColor}
+      columnsWidth={columnsWidth}
       key={_key}
       {...pinionParams}
       className={clsx(classNames?.pinion, pinionParams?.className)}

@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import LinkDisabled from './LinkDisabled'
 import LinkExternal from './LinkExternal'
 import LinkInternal from './LinkInternal'
+import LinkLeadpagesTrigger from './LinkLeadpagesTrigger'
 import LinkNull from './LinkNull'
 
 const Link = forwardRef<HTMLAnchorElement, LinkType>(
@@ -25,7 +26,9 @@ const Link = forwardRef<HTMLAnchorElement, LinkType>(
         linkStyle && `link-${linkStyle}`,
         linkSize && `link-${linkSize}`,
         hasIcon && `link-w-icon`,
-        hasIcon && !linkStyle?.includes('text') && '[&_.link-icon-background]:hidden',
+        hasIcon &&
+          !linkStyle?.includes('text') &&
+          '[&_.link-icon-background]:hidden',
         !hasIcon && '[&_.link-label]:!transform-none',
         className
       ),
@@ -39,6 +42,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkType>(
     switch (props.condition) {
       case 'internal':
         return <LinkInternal {...props} />
+      case 'leadpagesTrigger':
+        return <LinkLeadpagesTrigger {...props} />
       case 'external':
       case 'download':
         return <LinkExternal {...props} />

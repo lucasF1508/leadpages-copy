@@ -1,6 +1,9 @@
 import React from 'react'
 
-const ColorMarkRender = ({children, markKey}: {
+const ColorMarkRender = ({
+  children,
+  markKey,
+}: {
   children: React.ReactNode
   markKey?: string
 }) => {
@@ -8,7 +11,8 @@ const ColorMarkRender = ({children, markKey}: {
 
   switch (markKey) {
     case 'textGradient':
-      className = 'bg-gradient-purple text-transparent bg-clip-text inline-flex'
+      className =
+        'bg-gradient-to-l from-purple-500 to-purple-300 text-transparent bg-clip-text inline-flex'
       break
     default:
       break

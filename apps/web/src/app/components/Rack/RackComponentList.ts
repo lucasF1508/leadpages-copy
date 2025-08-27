@@ -24,6 +24,14 @@ const RackComponentList = {
   cta: dynamic(() => import('@/components/CTA')),
   faqs: dynamic(() => import('@/components/FAQs')),
   featureCards: dynamic(() => import('@/components/FeatureCards')),
+  integrationDirectory: [
+    dynamic(() => import('@/components/IntegrationDirectory')),
+    { pinion: false },
+  ],
+  jobPostings: [
+    dynamic(() => import('@/components/JobPostings')),
+    { pinion: false },
+  ],
   marquee: dynamic(() => import('@/components/Marquee/MarqueeBlock')),
   media: dynamic(() => import('@/components/Media/MediaBlock')),
   mediaWithItems: dynamic(() => import('@/components/MediaWithItems')),
@@ -45,38 +53,11 @@ const RackComponentList = {
     { pinion: false },
   ],
   testimonialBlock: dynamic(() => import('@/components/Testimonial')),
+  textBlock: dynamic(() => import('@/components/Text/TextBlock')),
   textBlockWithSidebar: dynamic(() => import('@/components/TextWithSidebar')),
   textColumns: dynamic(() => import('@/components/TextColumns')),
   textWithStats: dynamic(() => import('@/components/TextWithStats')),
   upsell: dynamic(() => import('@/components/Upsell')),
-
-  // TEMP - Remove when all components are implemented
-  // accordion: dynamic(() => import('@/components/client/Accordion')),
-  // border: dynamic(() => import('@/components/client/Border')),
-  // cards: dynamic(() => import('@/components/client/Cards')),
-  // embed: dynamic(() => import('@/components/client/Embed')),
-  // formComponent: dynamic(() => import('@/components/client/Form')),
-  // gallery: dynamic(() => import('@/components/client/Gallery')),
-  // heading: dynamic(() => import('@/components/client/Heading')),
-  // imageSlider: dynamic(() => import('@/components/client/ImageSlider')),
-  // link: dynamic(() => import('@/components/client/Link')),
-  // logoGrid: dynamic(() => import('@/components/client/LogoGrid')),
-  // mediaWithText: dynamic(() => import('@/components/client/MediaWithText')),
-  // section: [
-  //   dynamic(() => import('@/components/client/Section')),
-  //   { baseStyles: false },
-  // ],
-  // sectionReference: [
-  //   dynamic(() => import('@/components/client/SectionReference')),
-  //   { pinion: false },
-  // ],
-  // slider: dynamic(() => import('@/components/client/Slider')),
-  // spacer: [
-  //   dynamic(() => import('@/components/client/Spacer')),
-  //   { pinion: false },
-  // ],
-  // tableBlock: dynamic(() => import('@/components/client/Table')),
-  // video: dynamic(() => import('@/components/client/Video/VideoEmbed')),
 }
 
 export default RackComponentList

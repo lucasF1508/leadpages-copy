@@ -14,7 +14,7 @@ export const textBlock = F.object({
   groups: [G.define('content', {default: true}), G.define('options')],
   fields: [
     ...G.group('content', [
-      F.field('blockContent', {name: 'content'}),  
+      F.field('blockContent', {name: 'content'}),
       F.links({validation: (Rule) => Rule.max(1)}),
     ]),
     ...G.group('options', [
@@ -22,8 +22,9 @@ export const textBlock = F.object({
         name: 'alignment',
         title: 'Content Align',
         description: 'Align the content relative to the container',
-        initialValue: 'center',
-      })
+        hidden: true,
+      }),
+      F.columnsWidth({name: 'columnsWidth', title: 'Max Width'}),
     ]),
   ],
   preview: {

@@ -63,21 +63,6 @@ export const blockContent = F.array({
               linkStyle: false,
             },
             fields: [
-              F.dropdown(
-                [
-                  'button-solid',
-                  'button-outline',
-                  'button-secondary',
-                  'text',
-                  'text-secondary',
-                  'inline',
-                ],
-                {
-                  name: 'linkStyle',
-                  initialValue: 'inline',
-                  group: 'options',
-                }
-              ),
               F.string({
                 name: 'href',
                 hidden: ({parent}) => !parent.href,
@@ -161,6 +146,12 @@ export const blockContent = F.array({
     }),
     {
       type: 'embed',
+    },
+    {
+      type: 'table',
+    },
+    {
+      type: 'pageAnchor',
     },
   ],
 })

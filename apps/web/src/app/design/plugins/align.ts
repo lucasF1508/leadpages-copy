@@ -6,13 +6,13 @@ export const align = plugin(({ addUtilities }) => {
       marginLeft: 'auto',
       marginRight: 'auto',
     },
-    '.align-left': {
-      marginLeft: '0',
-      marginRight: 'auto',
-    },
-    '.align-right': {
+    '.align-end': {
       marginLeft: 'auto',
       marginRight: '0',
+    },
+    '.align-start': {
+      marginLeft: '0',
+      marginRight: 'auto',
     },
   })
 })

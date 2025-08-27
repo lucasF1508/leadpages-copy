@@ -1,5 +1,7 @@
 import {F} from '@/schema/tool'
-import {defaultDecorators} from './util'
+import {blockContent} from './blockContent'
+
+const [toolbar] = (blockContent as any)?.of || []
 
 export const blockContentBare = F.array({
   title: 'Block Content Bare',
@@ -16,30 +18,8 @@ export const blockContentBare = F.array({
       ],
       lists: [],
       marks: {
-        decorators: [...defaultDecorators],
-        annotations: [
-          F.link({
-            name: 'link',
-            args: {
-              label: false,
-              linkStyle: false,
-              linkSize: false,
-            },
-            fields: [
-              F.dropdown(['inline'], {
-                name: 'linkStyle',
-                initialValue: 'inline',
-                group:'options',
-                hidden: true
-              }),
-              F.string({
-                name: 'href',
-                hidden: ({parent}) => !parent.href,
-                group: 'content',
-              }),
-            ],
-          }),
-        ],
+        decorators: toolbar.marks.decorators,
+        annotations: toolbar.marks.annotations,
       },
     },
   ],

@@ -13,7 +13,8 @@ export const box = {
       base: '1.5rem',
       xs: '1.5rem',
       sm: '1.5rem',
-      md: '5rem',
+      md: '3rem',
+      lg: '5rem',
     },
     y: {
       base: '2rem',

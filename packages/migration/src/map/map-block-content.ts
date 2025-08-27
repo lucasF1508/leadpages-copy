@@ -1,4 +1,5 @@
 const defaultMap = {
+  dropShadowBox: (item: any) => item.content,
   headlineSubtitle: (item: any) => ({
     ...item,
     style: 'h4',
@@ -12,7 +13,7 @@ const defaultMap = {
     style: 'h2',
   }),
   normal: (item: any) => {
-    const {listItem} = item
+    const { listItem } = item
     if (listItem === 'checkmarks') {
       return {
         ...item,
@@ -33,6 +34,7 @@ const mapBlockContent = (_content: any, _map = {}) => {
 
   const content = data.flatMap((item) => {
     const mapper = map[item.style] || map[item._type]
+
     return typeof mapper === 'function' ? mapper(item) : item
   })
 

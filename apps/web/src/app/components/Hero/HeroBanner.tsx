@@ -7,9 +7,10 @@ import Pinion from '@/components/Pinion'
 export interface HeroBannerProps {
   heading: string
   label: string
+  subheading?: string
 }
 
-const Hero = ({ heading, label }: HeroBannerProps) => (
+const Hero = ({ heading, label, subheading }: HeroBannerProps) => (
   <div className="relative overflow-hidden bg-gradient-to-r from-purple-300 to-purple-600 flex flex-row items-center justify-center min-h-[18.625rem] md:min-h-[30rem]">
     <Pinion
       classNames={{
@@ -31,6 +32,13 @@ const Hero = ({ heading, label }: HeroBannerProps) => (
             'type-title-t7 sm:type-title-t6 md:type-title-t3 max-w-cols6 md:max-w-cols8 mx-auto'
           )}
           heading={heading}
+        />
+      )}
+      {subheading && (
+        <Heading
+          as="h2"
+          className={clsx('type-body-lg max-w-cols6 md:max-w-cols8 mx-auto')}
+          heading={subheading}
         />
       )}
     </Pinion>

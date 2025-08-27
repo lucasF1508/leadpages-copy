@@ -20,7 +20,7 @@ const Section = ({
   <Rack
     as="div"
     className={clsx(
-      'theme-light py-px !-my-px bg-surface text-body relative rounded-2xl',
+      'theme-light pt-px !-mt-px bg-surface text-body relative rounded-2xl last:box-pb last:!box-[mb*-2]',
       className
     )}
     classNames={classNames}

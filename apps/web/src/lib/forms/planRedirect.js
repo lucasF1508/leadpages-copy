@@ -1,11 +1,11 @@
 import kebabCase from 'lodash/kebabCase'
-import {getFreeTrialCheckoutUrl} from '@/lib/utils/getFreeTrialCheckoutUrl'
+import { getFreeTrialCheckoutUrl } from '@/lib/utils/getFreeTrialCheckoutUrl'
 import { submitToHubSpot } from '@lib/forms/hubspotHelpers'
 
 const planRedirect = async ({ type, formData }) => {
   if (!formData.email || formData.email === '') {
     const defaultUrl = getFreeTrialCheckoutUrl(type)
-    window.location.href = `${defaultUrl}?emailsubmission=${kebabCase(type)}`
+    window.location.href = defaultUrl
     return true
   }
 
@@ -15,7 +15,7 @@ const planRedirect = async ({ type, formData }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...formData, type }),
+      body: JSON.stringify({ email: formData.email, type }),
       redirect: 'follow',
     }
 

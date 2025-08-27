@@ -8,7 +8,6 @@ export const companyInfo = {
   type: 'document',
   fields: [
     F.string({name: 'companyTitle'}),
-    F.field('address', {name: 'address'}),
     F.field('email'),
     F.string({name: 'phone'}),
     F.field('social'),

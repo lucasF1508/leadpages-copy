@@ -20,7 +20,6 @@ const HeroMedia = ({
   overflow,
 }: HeroMediaProps) => {
   if (!hasMedia(media)) return null
-  
   return (
     <div
       className={clsx(
@@ -38,6 +37,7 @@ const HeroMedia = ({
         )}
         media={media}
         priority
+        sizes="(max-width: 900px) 100vw, 50vw"
       />
     </div>
   )

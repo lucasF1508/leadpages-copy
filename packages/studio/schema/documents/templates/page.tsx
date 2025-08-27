@@ -11,14 +11,20 @@ export const page = F.document({
   fieldsets: [FS.seo(), FS.define('meta', {collapsed: false})],
   fields: [
     orderRankField({type: 'page'}),
-    ...G.group('content', [F.title(), F.field('hero'), F.field('components', {}), F.datetime({name: 'modified', hidden: true})]),
-    ...G.group('meta', [F.slug(), F.field('path')]),
+    ...G.group('content', [
+      F.title(),
+      F.field('hero'),
+      F.field('components', {}),
+      F.datetime({name: 'modified', hidden: true}),
+    ]),
+    ...G.group('meta', [F.slug(), F.field('path'), F.reference('page', {name: 'parent'})]),
     ...G.group('seo', [F.seo()]),
   ],
   preview: {
     select: {
       title: 'title',
+      subtitle: 'parent.title',
     },
-    prepare: ({title}) => ({title, media: icon}),
+    prepare: ({title, subtitle}) => ({title, subtitle, media: icon}),
   },
 })
