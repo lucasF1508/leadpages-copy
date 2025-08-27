@@ -1,4 +1,4 @@
-import { TfiLayoutAccordionMerged as icon } from "react-icons/tfi";
+import {TfiLayoutAccordionMerged as icon} from 'react-icons/tfi'
 import {F, G, P} from '@/schema/tool'
 
 export const mediaWithItems = F.field('object', {
@@ -9,7 +9,7 @@ export const mediaWithItems = F.field('object', {
   fields: [
     ...G.group('content', [
       F.string({name: 'title'}),
-      F.field('blockContentSimple', { name: 'content' }),
+      F.field('blockContentSimple', {name: 'content'}),
       F.array({
         name: 'mediaItems',
         title: 'Media',
@@ -32,16 +32,9 @@ export const mediaWithItems = F.field('object', {
               F.title({required: true}),
               F.text({name: 'content'}),
               F.link({
-                args: {
-                  linkStyle: false,
+                initialValue: {
+                  linkStyle: 'inline',
                 },
-                fields: [
-                  F.dropdown(['button-solid', 'button-outline', 'button-secondary', 'text', 'text-secondary'], {
-                    name: 'linkStyle',
-                    initialValue: 'inline',
-                    group:'options'
-                  }),
-                ]      
               }),
             ],
             name: 'accordionItems',

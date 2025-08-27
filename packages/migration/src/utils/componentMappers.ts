@@ -11,6 +11,7 @@ import shapeServicePoints from "@src/shape/servicePoints"
 import shapeStatsAlternate from "@src/shape/statsAlternate"
 import shapeTabs from "@src/shape/tabs"
 import shapeTestimonials from "@src/shape/testimonials"
+import shapeTextBlock from "@src/shape/textBlock"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const componentMappers: Record<string, (component: any) => any> = {
@@ -27,6 +28,7 @@ const componentMappers: Record<string, (component: any) => any> = {
   statsAlternate: shapeStatsAlternate,
   tabs: shapeTabs,
   testimonials: shapeTestimonials,
+  textBlock: shapeTextBlock,
 }
 
 export default componentMappers

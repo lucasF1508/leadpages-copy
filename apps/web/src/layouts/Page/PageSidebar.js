@@ -1,12 +1,12 @@
 import React from 'react'
 import { styled } from '@design'
-import Hero from '@components/Hero'
 import CTA from '@components/Cta'
-import Rack from '@components/Rack'
+import Hero from '@components/Hero'
 import Pinion from '@components/Pinion'
-import Text from '@components/Text'
+import Rack from '@components/Rack'
 import SidebarPage from '@components/Sidebar/SidebarPage'
 import { withSidebar } from '@components/Sidebar/SidebarProvider'
+import Text from '@components/Text'
 
 const $SidebarPageContainer = styled('div', {
   mw: '$extended',
@@ -36,15 +36,16 @@ const PageSidebar = ({
   title,
 }) => {
   const { compareLogo } = excerpt || {}
+
   return (
     <>
       {hero && <Hero hero={hero} />}
       <$SidebarPageContainer>
         {sidebarLinks?.length ? (
           <SidebarPage
-            pageTitle={title}
-            links={sidebarLinks}
             compareLogo={compareLogo}
+            links={sidebarLinks}
+            pageTitle={title}
             // useScrollLink
           />
         ) : (
@@ -53,7 +54,7 @@ const PageSidebar = ({
         <Rack>
           <$SidebarPinion maxWidth="content">
             {children || (
-              <Text content={content} usePostTokens={true} displayIds />
+              <Text content={content} displayIds usePostTokens={true} />
             )}
           </$SidebarPinion>
         </Rack>

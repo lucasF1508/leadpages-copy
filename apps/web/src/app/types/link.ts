@@ -5,12 +5,19 @@ import type { IconType } from '@react-icons/all-files'
 import type { Reference } from '@sanity/types'
 import type { ClassValue } from 'clsx'
 
-export type LinkStyleType = 'button-outline' | 'button-secondary' | 'button-solid' | 'ghost' | 'none' | 'text'
+export type LinkStyleType =
+  | 'button-outline'
+  | 'button-secondary'
+  | 'button-solid'
+  | 'ghost'
+  | 'none'
+  | 'text'
 export type LinkSizeType = 'small'
 
 export interface CommonLinkType {
   _key?: string
   Icon?: IconType
+  ariaLabel?: string
   children?: React.ReactNode
   className?: ClassValue
   classNames?: {
@@ -18,6 +25,7 @@ export interface CommonLinkType {
     root?: ClassValue
     span?: ClassValue
   }
+  dataGtm?: string
   hasIcon?: boolean
   href?: string
   label?: string
@@ -30,6 +38,14 @@ export interface LinkInternalType extends CommonLinkType {
   hasHash?: boolean
   hash?: string
   page?: Reference
+  url?: string
+}
+
+export interface LinkLeadpagesTriggerType extends CommonLinkType {
+  condition: 'leadpagesTrigger'
+  leadpagesDomain?: string
+  popUpId?: string
+  rel?: string
   url?: string
 }
 
@@ -64,6 +80,7 @@ export type LinkComponentProps =
   | LinkExternalType
   | LinkInternalType
   // | LinkModalType
+  | LinkLeadpagesTriggerType
   | LinkNullType
 
 export type LinkProps = {
@@ -78,7 +95,6 @@ export type LinkProps = {
   url?: string
 }
 
-export type LinkType = { _type?: 'link' | 'signUp' } &
-  LinkComponentProps &
-  LinkProps & 
+export type LinkType = { _type?: 'link' | 'signUp' } & LinkComponentProps &
+  LinkProps &
   Omit<React.ComponentProps<'a'>, 'className' | 'target'>

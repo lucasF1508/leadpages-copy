@@ -17,12 +17,12 @@ const query = (
   query: string,
   { params, preview = false }: QueryParams = {}
 ): QueryType => {
-  const client = getClient({ 
-    // @ts-ignore
+  const client = getClient({
+    // @ts-expect-error Better typing for client required
     config: {
       dataset: process.env.SANITY_STUDIO_API_DATASET,
-    }, 
-    preview 
+    },
+    preview
   })
 
   return {

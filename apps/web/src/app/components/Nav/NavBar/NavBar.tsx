@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useEffect, useRef} from 'react'
+import React, { useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import {
   Item as NavBarPrimitiveItem,
@@ -41,10 +41,17 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
   const asPath = usePathname()
   const navRef = useRef<HTMLDivElement>(null)
 
-  const { buttons } = navigation || {}  
+  const { buttons } = navigation || {}
 
-  const { dropdownSlug, hideNav, isNavActive, setDropdownSlug, setNavActive, isSticky = false } = navStore(
-    useShallow((state) => ({ 
+  const {
+    dropdownSlug,
+    hideNav,
+    isNavActive,
+    setDropdownSlug,
+    setNavActive,
+    isSticky = false,
+  } = navStore(
+    useShallow((state) => ({
       dropdownSlug: state.dropdownSlug,
       hideNav: state.hideNav,
       isNavActive: state.isNavActive,
@@ -52,7 +59,7 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
       setNavActive: state.setNavActive,
       setIsSticky: state.setIsSticky,
       isSticky: state.isSticky,
-    })),
+    }))
   )
 
   const { showHeader, stickyMotionProps } = useStickyHeader({
@@ -97,11 +104,10 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
             ? 'calc((var(--header-height) + 1.25rem) * -1)'
             : 0,
       }}
-      className={
-        clsx(
-          'z-nav sticky top-0 p-[0.625rem] group/nav',
-          !isEmpty(dropdownSlug) && 'scroll-lock'
-        )}
+      className={clsx(
+        'z-nav sticky top-0 p-[0.625rem] group/nav',
+        !isEmpty(dropdownSlug) && 'scroll-lock'
+      )}
       transition={stickyMotionProps.transition}
     >
       <div
@@ -110,7 +116,8 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
           isTransparent
             ? 'bg-transparent shadow-none border-transparent'
             : 'bg-surface-neutral-dark nav-break:bg-surface-neutral-dark/90 shadow-md border-border-muted backdrop-blur-xl',
-          isNavActive && 'max-nav-break:rounded-b-none max-nav-break:bg-surface-neutral-dark',
+          isNavActive &&
+            'max-nav-break:rounded-b-none max-nav-break:bg-surface-neutral-dark',
           squareCorners && 'rounded-b-none'
         )}
         ref={navRef}
@@ -122,41 +129,50 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
           onPointerLeave={handlePointerLeave}
           value={dropdownSlug}
         >
-          <NavBarPrimitiveList 
-            className="min-h-header-height md:min-h-header-height.md flex justify-between list-none items-center py-1.5 pr-1.5 pl-[1.875rem] gap-3" 
+          <NavBarPrimitiveList
+            className="min-h-header-height md:min-h-header-height.md flex justify-between list-none items-center py-1.5 pr-1.5 pl-[1.875rem] gap-3"
             onBlur={handlePointerLeave}
             onFocus={handlePointerEnter}
           >
             <NavBarPrimitiveItem>
-              <Link 
-                url="/" 
-                condition='internal' 
-                linkStyle="none" 
-              >
+              <Link url="/" condition="internal" linkStyle="none">
                 <NavLogo />
               </Link>
             </NavBarPrimitiveItem>
-            <div className='max-nav-break:hidden flex items-center gap-3 self-stretch'>{children}</div>
-            <div className="ml-auto hidden items-center justify-center gap-3 sm:flex self-stretch mr-1.5">
-              {buttons?.map(({ _key, url, ...rest }: LinkProps & {_key: string}, i: number) => {
-                const isPricing =
-                  asPath?.includes('pricing') && url === '/pricing'
-                const buttonStyle = isTransparent ? 'button-outline' : 'button-solid'
-
-                return isPricing ? (
-                  null
-                ) : (
-                  <div className="gap-1.5 whitespace-nowrap group/trigger h-full flex justify-center flex-col relative" key={_key}>
-                    <Link url={url} {...rest} linkStyle={i === 0 ? 'text' : buttonStyle}/>
-                    {i !== buttons.length - 1 && <NavItemUnderline />}
-                  </div>
-                )
-              })}
+            <div className="max-nav-break:hidden flex items-center gap-3 self-stretch">
+              {children}
             </div>
-            <div className='cursor-pointer nav-break:hidden'>
+            <div className="ml-auto hidden items-center justify-center gap-3 sm:flex self-stretch mr-1.5">
+              {buttons?.map(
+                (
+                  { _key, url, ...rest }: LinkProps & { _key: string },
+                  i: number
+                ) => {
+                  const isPricing =
+                    asPath?.includes('pricing') && url === '/pricing'
+                  const buttonStyle = isTransparent
+                    ? 'button-outline'
+                    : 'button-solid'
+
+                  return isPricing ? null : (
+                    <div
+                      className="gap-1.5 whitespace-nowrap group/trigger h-full flex justify-center flex-col relative"
+                      key={_key}
+                    >
+                      <Link
+                        url={url}
+                        {...rest}
+                        linkStyle={i === 0 ? 'text' : buttonStyle}
+                      />
+                      {i !== buttons.length - 1 && <NavItemUnderline />}
+                    </div>
+                  )
+                }
+              )}
+            </div>
+            <div className="cursor-pointer nav-break:hidden">
               <NavDrawerTrigger />
             </div>
-            {/* TODO: Add simplified header feature, not relevant for homepage [initial implimentation] */}
           </NavBarPrimitiveList>
           <NavDrawer navigation={navigation} />
           <NavBarViewport />

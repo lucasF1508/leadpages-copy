@@ -37,7 +37,7 @@ const map = {
       "markDefs": [],
       "style": "normal"
     }]})
-    
+
     return mappedItems
   },
   h2: (item: any) => ({

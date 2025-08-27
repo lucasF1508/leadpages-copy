@@ -1,3 +1,5 @@
+export * from './categoryIntegration'
+export * from './categoryIntegrationStatus'
 export * from './categoryPost'
 export * from './categoryTestimonial'
 export * from './templateCategory'

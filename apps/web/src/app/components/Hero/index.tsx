@@ -1,6 +1,8 @@
 import type { HeroHomeProps } from './HeroHome'
 import type { HeroPricingProps } from './HeroPricing/HeroPricing'
 import type { HeroWithMediaProps } from './HeroWithMedia'
+import HeroBanner from './HeroBanner'
+import HeroBase from './HeroBase'
 import HeroHome from './HeroHome'
 import HeroPricing from './HeroPricing'
 import HeroSimple from './HeroSimple'
@@ -9,7 +11,7 @@ import HeroTextWithMarquee from './HeroTextWithMarquee'
 import HeroWithMedia from './HeroWithMedia'
 
 interface HeroProps {
-  hero: (HeroHomeProps | HeroPricingProps |HeroWithMediaProps) & any[]
+  hero: (HeroHomeProps | HeroPricingProps | HeroWithMediaProps) & any[]
 }
 
 // TODO Expand as more Hero types are added.
@@ -18,12 +20,16 @@ const Hero = ({ hero }: HeroProps) => {
   const [heroProps] = Array.isArray(hero) ? hero : [hero]
 
   switch (heroProps?._type) {
+    case 'heroBase':
+      return <HeroBase {...heroProps} />
     case 'heroHome':
       return <HeroHome {...heroProps} />
     case 'heroPricing':
       return <HeroPricing {...heroProps} />
     case 'heroSimple':
       return <HeroSimple {...heroProps} />
+    case 'heroBanner':
+      return <HeroBanner {...heroProps} />
     case 'heroTemplate':
       return <HeroTemplate {...heroProps} />
     case 'heroTextWithMarquee':

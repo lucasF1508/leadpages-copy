@@ -16,16 +16,12 @@ export interface HeroSimpleProps {
 }
 
 const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
-  <div className='relative overflow-hidden'>
+  <div className="relative overflow-hidden">
     <Pinion className={clsx(hasMedia(media) && '!mb-0')} component="hero">
       {(label || pill) && (
         <div className="flex flex-col sm:flex-row gap-2 mb-2 items-start sm:items-center">
           {label && (
-            <Label
-              className={clsx('type-overline-xxs')}
-              content={label}
-
-            />
+            <Label className={clsx('type-overline-xxs')} content={label} />
           )}
           {pill && (
             <div className="inline-flex py-0.5 rounded-lg bg-gradient-purple-invert px-1.5">
@@ -38,26 +34,25 @@ const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
         </div>
       )}
       {content && (
-        <div className='mb-4 max-w-cols10'>
-          <Text
-            as="div"
-            className='[&>p]:mt-2 [&>h1]:mb-2'
-            content={content}
-          />
+        <div className="mb-4 max-w-cols10">
+          <Text as="div" className="[&>p]:mt-2 [&>h1]:mb-2" content={content} />
         </div>
       )}
       {hasLinks(links) && (
         <Links
-          className={clsx('mt-2 gap-2 sm:gap-3 flex flex-col sm:flex-row max-w-cols6')}
+          className={clsx(
+            'mt-2 gap-2 sm:gap-3 flex flex-col sm:flex-row max-w-cols6'
+          )}
           links={links}
         />
       )}
       {hasMedia(media) && (
-        <div className='mt-6 relative w-full'>
+        <div className="mt-6 relative w-full">
           <Media
             className={clsx('w-full object-cover')}
             media={media}
             priority
+            sizes="(max-width: 1024px) 1216px, 100vw"
           />
         </div>
       )}
@@ -66,4 +61,3 @@ const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
 )
 
 export default Hero
-

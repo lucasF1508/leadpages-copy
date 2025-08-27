@@ -1,7 +1,6 @@
 import type { GenerateMetadataProps } from '@/lib/utils/generateMetadata/generateMetadata'
 import type { ResolvingMetadata } from 'next'
-import Hero from '@/components/Hero'
-import Rack from '@/components/Rack'
+import Layout from '@/components/Layout'
 import { getStaticPathsParams } from '@/lib/queries'
 import { fetchTemplateData } from '@/lib/queries/fetchTemplateData'
 import { generateMetadataStatic } from '@/lib/utils/generateMetadata/generateMetadataStatic'
@@ -51,10 +50,5 @@ export default async function Page({
     slug,
   })
 
-  return (
-    <>
-      <Hero hero={hero} />
-      <Rack components={components} />
-    </>
-  )
+  return <Layout data={{ components, hero }} />
 }

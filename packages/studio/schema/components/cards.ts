@@ -1,5 +1,5 @@
 import {BsCardText as icon} from 'react-icons/bs'
-import {F} from '@/schema/tool'
+import {F, P} from '@/schema/tool'
 
 export const cards = F.object({
   name: 'cardsBlock',
@@ -16,16 +16,6 @@ export const cards = F.object({
       name: 'condition',
       title: 'Type',
       initialValue: 'mostRecent',
-    }),
-    F.radio(['post'], {
-      name: 'contentType',
-      initialValue: 'post',
-      hidden: () => true,
-    }),
-    F.multiReference('post', {
-      name: 'posts',
-      title: 'Cards',
-      hidden: ({parent}) => parent?.condition !== 'selection',
     }),
     F.array({
       name: 'cards',
@@ -45,6 +35,20 @@ export const cards = F.object({
               },
             }),
           ],
+          preview: {
+            select: {
+              content: 'content',
+              media: 'media',
+            },
+            prepare: ({content, media}) => {
+              const [title, subtitle] = content ? P.richHeading(content, 'all') : []
+              return {
+                title: title || 'Card',
+                subtitle,
+                media: P.mediaIcon(media),
+              }
+            },
+          },
         }),
       ],
     }),
@@ -52,12 +56,6 @@ export const cards = F.object({
   preview: {
     select: {
       heading: 'heading',
-      condition: 'condition',
-      contentType: 'contentType',
-      post1: 'posts.0.title',
-      post2: 'posts.1.title',
-      post3: 'posts.2.title',
-      limit: 'limit',
       cards: 'cards',
     },
     prepare: ({heading, condition, contentType, limit = 3, post1, post2, post3, cards}) => {

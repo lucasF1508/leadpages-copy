@@ -3,16 +3,21 @@
 import type { LinkInternalType } from '@types'
 import React, { forwardRef } from 'react'
 import clsx from 'clsx'
-import { motion } from "motion/react"
+import { motion } from 'motion/react'
 import NextLink from 'next/link'
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation'
 import { scrollToHash } from '@/hooks/useScrollToHash'
-import {isChildrenText} from '@/lib/utils/isChildrenText'
+import { isChildrenText } from '@/lib/utils/isChildrenText'
 import LinkIcon from './LinkIcon'
 
 const LinkAnchor = forwardRef<HTMLAnchorElement, Partial<LinkInternalType>>(
   ({ children, className, href, onClick }, ref) => (
-    <motion.a className={clsx(className)} href={href} onClick={onClick} ref={ref}>
+    <motion.a
+      className={clsx(className)}
+      href={href}
+      onClick={onClick}
+      ref={ref}
+    >
       {children}
     </motion.a>
   )
@@ -22,9 +27,11 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
   (
     {
       Icon = LinkIcon,
+      ariaLabel,
       children,
       className,
       classNames,
+      dataGtm,
       hasHash,
       hasIcon,
       hash,
@@ -52,7 +59,7 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
     const handleScroll = (e: React.UIEvent) => {
       e.preventDefault()
       if (hasHash && hash) {
-        scrollToHash({hash})
+        scrollToHash({ hash })
       }
     }
 
@@ -69,17 +76,25 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
         shallow={isSamePage}
       >
         <LinkAnchor
+          aria-label={ariaLabel}
           className={clsx(className, classNames?.root)}
+          data-gtm={dataGtm}
           onClick={isSamePage ? handleScroll : undefined}
           ref={ref}
         >
-          {hasLabel ? <span className={clsx("link-label", classNames?.span)}>{children || label}</span> : children}
-          {hasLabel && hasIcon &&
+          {hasLabel ? (
+            <span className={clsx('link-label', classNames?.span)}>
+              {children || label}
+            </span>
+          ) : (
+            children
+          )}
+          {hasLabel && hasIcon && (
             <span className="link-icon">
               <span className="link-icon-background" />
-              <Icon className={clsx(classNames?.icon)}/>
+              <Icon className={clsx(classNames?.icon)} />
             </span>
-          }
+          )}
         </LinkAnchor>
       </NextLink>
     )

@@ -1,16 +1,21 @@
 import {F} from '@/schema/tool'
-import { BiUserCheck as icon} from "react-icons/bi";
+import {BiUserCheck as icon} from 'react-icons/bi'
 
-export const testimonialBlock =  F.object({
+export const testimonialBlock = F.object({
   name: 'testimonialBlock',
   title: 'Testimonials Block',
   icon,
   fields: [
     F.string({name: 'heading'}),
     F.string({name: 'subheading'}),
-    F.multiReference(['testimonial'], {name: 'testimonials', description: 'If more than 1 testimonial is selected slider will be used to display testimonials'}),
+    F.array({
+      name: 'testimonials',
+      description:
+        'If more than 1 testimonial is selected slider will be used to display testimonials',
+      of: [F.reference('testimonial')],
+    }),
   ],
-  preview: {  
+  preview: {
     select: {
       title: 'heading',
       subtitle: 'subheading',
@@ -24,5 +29,5 @@ export const testimonialBlock =  F.object({
         media: image || icon,
       }
     },
-  }
+  },
 })

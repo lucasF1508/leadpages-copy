@@ -18,7 +18,6 @@
 /public/story
 /public/sitemap.xml
 /public/sitemap*.xml
-/public/robots.txt
 /public/export.csv
 /public/indices/*.json
 !/public/indices/legacyBlogRedirects.json

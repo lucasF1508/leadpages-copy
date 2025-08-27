@@ -1,21 +1,36 @@
-// import config from 'config'
-import type {LinkField, ArrayField} from '@gearbox-built/sanity-schema-tool'
-import {F, G, withConfig} from '@gearbox-built/sanity-schema-tool'
+/* eslint-disable @typescript-eslint/no-namespace */
+import type {
+  RadioField,
+  ArrayField,
+  LinkField,
+  PortableTextBlock,
+} from '@gearbox-built/sanity-schema-tool'
+import {type Image as ImageType} from 'sanity'
 import ImageInput from '@/components/Input/ImageInput'
 import LinkInput from '@/components/Input/LinkInput'
 import {lottieArgs} from './lottie'
+import {F, G, P, withConfig} from '@gearbox-built/sanity-schema-tool'
+import partition from 'lodash/partition'
+import {BiImageAdd as imageIcon} from 'react-icons/bi'
+import {BsCameraVideo as videoIcon} from 'react-icons/bs'
 
 declare module '@gearbox-built/sanity-schema-tool' {
   export namespace F {
     const rawLink: typeof customTypes.F.rawLink
     const links: typeof customTypes.F.links
+    const columnsWidth: typeof customTypes.F.columnsWidth
+  }
+  export namespace P {
+    const richHeading: typeof customTypes.P.richHeading
+    const richMedia: typeof customTypes.P.richMedia
+    const mediaIcon: typeof customTypes.P.mediaIcon
   }
 }
 
 export const customTypes = {
   F: {
     links: (
-      props?: Partial<ArrayField> & {signUpOption?: boolean, linkStyle?: boolean},
+      props?: Partial<ArrayField> & {signUpOption?: boolean; linkStyle?: boolean},
       linkProps?: Partial<LinkField>,
       additionalFields = []
     ) => {
@@ -27,31 +42,45 @@ export const customTypes = {
             F.link({
               ...linkProps,
               fields: [
-                ...( 
-                linkStyle ? [F.dropdown(['button-solid', 'button-outline', 'button-secondary', 'text', 'text-secondary'], {
-                  name: 'linkStyle',
-                  initialValue: 'inline',
-                  group:'options'
-                })] : []),
-              ],   
+                ...(linkStyle
+                  ? [
+                      F.dropdown(
+                        [
+                          'button-solid',
+                          'button-outline',
+                          'button-secondary',
+                          'text',
+                          'text-secondary',
+                        ],
+                        {
+                          name: 'linkStyle',
+                          initialValue: 'inline',
+                          group: 'options',
+                        }
+                      ),
+                    ]
+                  : []),
+              ],
               args: {
                 ...linkProps?.args,
                 linkStyle: false,
                 linkSize: false,
-              },   
+              },
             }),
             ...(signUpOption ? [F.field('signUp')] : []),
             ...(additionalFields || []),
           ],
           validation: (Rule) => [
-            ...(signUpOption ? [
-              Rule.max(1),
-              Rule.custom((field) =>
-                 field?.some((link: any) => link._type === 'signUp') && field.length > 1
-                   ? 'When signup link is present, the CTA cannot contain other links'
-                   : true
-                ),
-              ] : [])
+            ...(signUpOption
+              ? [
+                  Rule.max(1),
+                  Rule.custom((field) =>
+                    field?.some((link: any) => link._type === 'signUp') && field.length > 1
+                      ? 'When signup link is present, the CTA cannot contain other links'
+                      : true
+                  ),
+                ]
+              : []),
           ],
         },
         {
@@ -85,6 +114,53 @@ export const customTypes = {
         },
         props
       ),
+    columnsWidth: (props?: RadioField) => {
+      const list = [
+        {value: 'cols6', title: '6 Columns'},
+        {value: 'cols7', title: '7 Columns'},
+        {value: 'cols8', title: '8 Columns'},
+        {value: 'cols9', title: '9 Columns'},
+        {value: 'cols10', title: '10 Columns'},
+        {value: 'cols11', title: '11 Columns'},
+        {value: 'cols12', title: '12 Columns'},
+      ]
+      return F.dropdown(list, {
+        name: 'columnsWidth',
+        title: 'Column Width',
+        ...props,
+      })
+    },
+  },
+  P: {
+    richHeading: (content?: PortableTextBlock[], headingStyle: string = 'h2'): [string, string] => {
+      if (!content) return ['', '']
+
+      const headingFilterRegex = /^h\d/
+      const [heading, body] = content
+        ? partition(content, (block) =>
+            headingStyle !== 'all'
+              ? block.style === headingStyle
+              : headingFilterRegex.test(block.style as string)
+          )
+        : []
+      const title = heading ? P.richText(heading) : ''
+      const subtitle = body ? P.richText(body) : ''
+      return [title, subtitle]
+    },
+    richMedia: (content?: PortableTextBlock[]): any => {
+      if (!content || !Array.isArray(content) || !content?.length) return undefined
+      const media: any = content.find((block) => block._type === 'media')
+
+      if (!media) return undefined
+
+      return media?.condition && ['illustration', 'image'].includes(media?.condition)
+        ? media?.image || imageIcon
+        : videoIcon
+    },
+    mediaIcon: (media: {condition?: string; image?: ImageType} | undefined): any =>
+      media?.condition && ['illustration', 'image'].includes(media?.condition)
+        ? media?.image || imageIcon
+        : videoIcon,
   },
   G: {
     postDefaults: () => [G.content(), G.define('media'), G.meta()],
@@ -114,8 +190,17 @@ export default withConfig(
     media: {
       conditions: {
         lottie: [],
+        wistia: [],
       },
-      fields: G.group('content', lottieArgs),
+      fields: [
+        ...G.group('content', [...lottieArgs]),
+        F.string({
+          group: 'content',
+          name: 'wistiaId',
+          description: 'ID of the Wistia video you wish to load (eg. ago55021i9).',
+          hidden: ({parent}) => parent?.condition !== 'wistia',
+        }),
+      ],
     },
     link: {
       conditions: {
@@ -125,6 +210,7 @@ export default withConfig(
         condition: {
           required: false,
         },
+        linkStyle: false,
         url: {
           hidden: ({parent}) => !['external', 'internal'].includes(parent?.condition),
           //TODO: Is there a way to provide a dynamic desctiption depending on the condition?
@@ -135,6 +221,27 @@ export default withConfig(
         },
       },
       fields: [
+        F.dropdown(
+          [
+            'button-solid',
+            'button-outline',
+            'button-secondary',
+            'text',
+            'text-secondary',
+            'inline',
+          ],
+          {
+            name: 'linkStyle',
+            initialValue: 'inline',
+            group: 'options',
+          }
+        ),
+        F.boolean({
+          name: 'hasIcon',
+          title: 'Has Icon',
+          initialValue: false,
+          group: 'options',
+        }),
         F.string({name: 'dataGtm', title: 'data-gtm', group: 'options'}),
         F.string({
           name: 'ariaLabel',
@@ -150,12 +257,6 @@ export default withConfig(
           name: 'leadpagesDomain',
           group: 'content',
           hidden: ({parent}) => parent?.condition !== 'leadpagesTrigger',
-        }),
-        F.boolean({
-          name: 'hasIcon',
-          title: 'Has Icon',
-          initialValue: false,
-          group: 'options',
         }),
       ],
       types: pageTemplates,

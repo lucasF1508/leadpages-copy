@@ -1,5 +1,5 @@
-import {F} from '@/schema/tool'
-import { TbCards as icon } from "react-icons/tb";
+import {F, P} from '@/schema/tool'
+import {TbCards as icon} from 'react-icons/tb'
 
 export const cardsBlock = F.object({
   name: 'cardsBlock',
@@ -11,17 +11,32 @@ export const cardsBlock = F.object({
         F.object({
           name: 'card',
           fields: [
-            F.image({name: 'icon'}), 
-            F.field('blockContent', {name: 'content'}), 
-            F.image({name: 'backgroundImage'})
+            F.image({name: 'icon'}),
+            F.field('blockContent', {name: 'content'}),
+            F.image({name: 'backgroundImage'}),
           ],
+          preview: {
+            select: {
+              content: 'content',
+              image: 'image',
+              icon: 'icon',
+            },
+            prepare: ({content, image, icon}) => {
+              const [title, subtitle] = content ? P.richHeading(content, 'all') : []
+              return {
+                title: title || 'Card',
+                subtitle,
+                media: P.mediaIcon({condition: 'image', image: icon || image}),
+              }
+            },
+          },
         }),
       ],
     }),
   ],
   preview: {
     prepare: () => ({
-        title: "Feature Cards"
-    })
+      title: 'Feature Cards',
+    }),
   },
 })

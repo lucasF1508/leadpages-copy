@@ -1,0 +1,40 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /studio
+
+# *
+User-agent: *
+Disallow: /story
+
+# *
+User-agent: *
+Disallow: /_legacy
+
+# *
+User-agent: *
+Allow: /blog/search
+Disallow: /blog/search?s=
+
+# Host
+Host: https://www.leadpages.com
+
+# Sitemaps
+Sitemap: https://www.leadpages.com/sitemap.xml
+Sitemap: https://www.leadpages.com/sitemap/blog/index.xml
+Sitemap: https://www.leadpages.com/sitemap/templates/index.xml
+Sitemap: https://www.leadpages.com/sitemap/comparisons.xml
+Sitemap: https://www.leadpages.com/sitemap/integrations.xml
+Sitemap: https://www.leadpages.com/sitemap/customers.xml
+Sitemap: https://www.leadpages.com/sitemap/pages.xml
+Sitemap: https://www.leadpages.com/sitemap/landing-pages-guide.xml
+Sitemap: https://www.leadpages.com/sitemap/landing-page-examples.xml
+Sitemap: https://www.leadpages.com/sitemap/conversion-optimization-guide.xml
+Sitemap: https://www.leadpages.com/sitemap/contact.xml
+Sitemap: https://www.leadpages.com/sitemap/lead-generation-guide.xml
+Sitemap: https://www.leadpages.com/sitemap/platform.xml
+Sitemap: https://www.leadpages.com/sitemap/use-cases.xml
+Sitemap: https://www.leadpages.com/sitemap/product.xml

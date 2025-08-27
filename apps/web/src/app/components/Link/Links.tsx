@@ -1,4 +1,4 @@
-import type { InlineSignUpProps } from '../InlineSignUp';
+import type { InlineSignUpProps } from '../InlineSignUp'
 import type { LinkProps, LinkType } from '@types'
 import type { ClassValue } from 'clsx'
 import clsx from 'clsx'
@@ -23,29 +23,24 @@ const Links = ({ className, classNames, links, ...props }: LinksProps) => {
   if (hasSignUpLink) {
     return (
       <div className={clsx(className, classNames?.root)}>
-        {
-          links
-            .filter((link) => link._type === 'signUp')
-            .map((link) =>
-              (
-                <InlineSignUp
-                  className={clsx(classNames?.link)}
-                  key={link._key}
-                  {...(link as InlineSignUpProps)}
-                />
-              )
-          )
-        }
+        {links
+          .filter((link) => link._type === 'signUp')
+          .map((link) => (
+            <InlineSignUp
+              className={clsx(classNames?.link)}
+              key={link._key}
+              {...(link as InlineSignUpProps)}
+            />
+          ))}
       </div>
     )
   }
 
   return (
     <div className={clsx(className, classNames?.root)}>
-      {
-        links?.map((link) =>
-          hasLink(link) &&
-          (
+      {links?.map(
+        (link) =>
+          hasLink(link) && (
             <Link
               className={clsx(classNames?.link)}
               {...link}
@@ -53,8 +48,7 @@ const Links = ({ className, classNames, links, ...props }: LinksProps) => {
               key={link._key}
             />
           )
-        )
-      }
+      )}
     </div>
   )
 }

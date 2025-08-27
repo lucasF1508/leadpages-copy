@@ -7,9 +7,11 @@ const { filterRoutesFromSanity } = require('directoryToRoutes')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
+
 require('dotenv').config({
   path: findUp.sync([`.env.${process.env.NODE_ENV}`, '.env.local', '.env']),
 })
+
 const { init: buildJSON } = require('indices/buildJSON')
 
 const {
@@ -86,7 +88,7 @@ module.exports = withBundleAnalyzer({
   experimental: {
     scrollRestoration: true,
   },
-    images: {
+  images: {
     deviceSizes: [320, 640, 750, 828, 1080, 1200, 1600, 1920, 2048, 3840],
     remotePatterns: [
       {
@@ -105,80 +107,19 @@ module.exports = withBundleAnalyzer({
         hostname: 'customer-4yowinxxlegi56v8.cloudflarestream.com',
         protocol: 'https',
       },
-    ]
+    ],
   },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   poweredByHeader: false,
   reactStrictMode: false,
   redirects: async () => {
+    // TODO Added redirects to Middleware with Next.js like pate
     const redirects = await adminRedirects({
-      dataset: SANITY_STUDIO_API_DATASET_LEGACY,
+      dataset: SANITY_STUDIO_API_DATASET,
       projectId: SANITY_STUDIO_API_PROJECT_ID,
     })
 
-    return [
-      {
-        destination: 'https://lp.leadpages.com/podcast/',
-        permanent: true,
-        source: '/podcast',
-      },
-      {
-        destination: 'https://lp.leadpages.com/affiliates/',
-        permanent: true,
-        source: '/affiliates',
-      },
-      {
-        destination: 'https://lp.leadpages.com/why-leadpages/',
-        permanent: true,
-        source: '/why-leadpages',
-      },
-      {
-        destination: 'https://lp.leadpages.com/free-trial/',
-        permanent: true,
-        source: '/free-trial',
-      },
-      {
-        destination: 'https://lp.leadpages.com/webinars/',
-        permanent: true,
-        source: '/webinars',
-      },
-      {
-        destination: 'https://lp.leadpages.com/demo/',
-        permanent: true,
-        source: '/demo',
-      },
-      {
-        destination: 'https://lp.leadpages.com/:slug',
-        permanent: true,
-        source: '/webinars/:slug',
-      },
-      {
-        destination: '/blog',
-        permanent: true,
-        source: '/blog/page/:page*',
-      },
-      {
-        destination: '/blog',
-        permanent: true,
-        source: '/blog/category/:category/page/:page*',
-      },
-      {
-        destination: '/blog',
-        permanent: true,
-        source: '/blog/(\\d{4})',
-      },
-      {
-        destination: '/blog',
-        permanent: true,
-        source: '/blog/(\\d{4})/(.*)',
-      },
-      {
-        destination: '/blog',
-        permanent: true,
-        source: '/blog/(.*)/feed',
-      },
-      ...redirects,
-    ]
+    return redirects
   },
   rewrites: async () => {
     // Incremental path rewrites
@@ -202,7 +143,6 @@ module.exports = withBundleAnalyzer({
         `Built index of ${incrementalPaths?.length} incremental paths.`
       )
     }
-
 
     return {
       afterFiles: [
@@ -228,7 +168,7 @@ module.exports = withBundleAnalyzer({
     config.resolve.fallback = {
       ...(config.resolve.fallback || {}),
       vertx: false,
-    };
-    return config;
+    }
+    return config
   },
 })

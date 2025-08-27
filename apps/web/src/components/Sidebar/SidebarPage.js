@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { styled } from '@design'
-import Link from '@components/Link'
-import PropTypes from 'prop-types'
 import { Link as ScrollLink } from 'react-scroll'
-import SidebarCompareImage from '@components/Sidebar/SidebarCompareImage'
+import { styled } from '@design'
 import { useRouter } from 'next/router'
+import PropTypes from 'prop-types'
+import Link from '@components/Link'
+import SidebarCompareImage from '@components/Sidebar/SidebarCompareImage'
 import SidebarPageMobile from './SidebarPageMobile'
-import { getSidebarSlug, SidebarContext } from './SidebarProvider'
+import { SidebarContext, getSidebarSlug } from './SidebarProvider'
 
 const SidebarContainer = styled('div', {
   display: 'none',
@@ -107,7 +107,7 @@ const SidebarPage = (props) => {
 
   return (
     <>
-      <SidebarContainer id="silo-sidebar" className={className}>
+      <SidebarContainer className={className} id="silo-sidebar">
         <$SidebarInner>
           {compareLogo && <SidebarCompareImage compareLogo={compareLogo} />}
           {links.map(({ title: sectionTitle, links: sectionLinks }, i) => (
@@ -122,14 +122,14 @@ const SidebarPage = (props) => {
 
                 return !isPageLink ? (
                   <StyledScrollLink
-                    className={isActive && 'active'}
-                    key={sectionSlug}
-                    to={sectionSlug}
                     alt={sectionHeading}
-                    spy
-                    smooth
+                    className={isActive && 'active'}
                     duration={300}
+                    key={sectionSlug}
                     offset={-100}
+                    smooth
+                    spy
+                    to={sectionSlug}
                   >
                     <SidebarSubHeading>
                       {title || sectionHeading}

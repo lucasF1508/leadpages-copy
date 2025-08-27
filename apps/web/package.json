@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "yarn build:web",
-    "build:web": "next build && yarn build:sitemap",
-    "build:sitemap": "next-sitemap --config next-sitemap.js",
+    "build:web": "next build",
     "start": "yarn blast:next && yarn dev",
     "serve": "next start",
     "lint": "next lint",
@@ -78,7 +77,7 @@
     "framer-motion": "10.18.0",
     "google-maps-react": "2.0.6",
     "hamburger-react": "2.5.0",
-    "html-react-parser": "^3.0.1",
+    "html-react-parser": "^5.2.6",
     "icons": "*",
     "indices": "*",
     "js-cookie": "^3.0.5",

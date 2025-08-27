@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
-import incrementalPaths from '@public/indices/incrementalPaths'
 import experiments from '@public/indices/experiments'
+import incrementalPaths from '@public/indices/incrementalPaths'
+import { NextResponse } from 'next/server'
 
 const findExperimentForControl = (pathname, _experiments) =>
   _experiments.find((e) => e.control === pathname)
@@ -12,7 +12,7 @@ const getSelectedVariantPath = (choice, variants) => {
 
   for (const [index, variant] of variants.entries()) {
     cumulativeWeight += variant.weight
-    if (choice < cumulativeWeight) return { path: variant.path, index }
+    if (choice < cumulativeWeight) return { index, path: variant.path }
   }
   return { index: 'basePath' }
 }
@@ -62,8 +62,8 @@ const getVariant = (url, request) => {
   }
 
   const {
-    path: selectedVariantPath = experimentForControl.control,
     index: selectedIndex,
+    path: selectedVariantPath = experimentForControl.control,
   } = getSelectedVariantPath(Math.random(), experimentForControl.variants)
 
   const newCookieData = {
@@ -72,14 +72,14 @@ const getVariant = (url, request) => {
   }
 
   return {
-    rewrite: selectedVariantPath,
     cookie: JSON.stringify(newCookieData),
+    rewrite: selectedVariantPath,
   }
 }
 
-const patterns = incrementalPaths?.map(
-  (pathname) => new URLPattern({ pathname })
-)
+const patterns = incrementalPaths
+  ?.filter((url) => !url.startsWith('/lead-generation-guide'))
+  ?.map((pathname) => new URLPattern({ pathname }))
 
 export async function middleware(request) {
   const response = NextResponse.next()

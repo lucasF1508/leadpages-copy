@@ -75,15 +75,7 @@ const usePreview = ({
 
     const { shapeData = (data) => data } =
       {
-        '/website-templates/website-template/[slug]': await import(
-          '@utils/shapeTemplateData'
-        ),
-        '/templates/landing-page-template/[slug]': await import(
-          '@utils/shapeTemplateData'
-        ),
-        '/[...slug]': await import('@pages/[...slug].js'),
         '/404': await import('@pages/404'),
-        '/integrations': await import('@pages/integrations'),
         '/blog': await import('@pages/blog'),
         '/blog/category/[category]': await import(
           '@pages/blog/category/[category]'
@@ -94,9 +86,8 @@ const usePreview = ({
     const client = getClient({ preview: true })
 
     const globalQueries = await getGlobalQueries(true)
-    const [navigation, leadboxes, siteMeta, footer] = await Promise.all(
-      globalQueries
-    )
+    const [navigation, leadboxes, siteMeta, footer] =
+      await Promise.all(globalQueries)
 
     const allData = queries?.length
       ? await Promise.all(

@@ -1,10 +1,9 @@
 export const dynamic = 'force-static'
 
 import { draftMode } from 'next/headers'
-import { componentsQuery } from '@/(pages)/_page'
 import HeroHome from '@/components/Hero/HeroHome'
 import Rack from '@/components/Rack'
-import { query } from '@/lib/queries'
+import { componentsQuery, query } from '@/lib/queries'
 
 export default async function Page() {
   const { components, hero } =
@@ -18,7 +17,7 @@ export default async function Page() {
       {
         preview: draftMode().isEnabled,
       }
-    ).data) || {}
+    )?.data) || {}
 
   return (
     <>

@@ -1,10 +1,8 @@
 import type {WorkspaceOptions} from 'sanity'
 import adminMessagePlugin from '@gearbox-built/sanity-admin-message'
-import autoCompleteAddressPlugin from '@gearbox-built/sanity-autocomplete-address'
 import multiReferencesPlugin from '@gearbox-built/sanity-multi-reference'
 import {structuredData} from '@gearbox-built/sanity-structured-data'
 import structuredDataConfig from './structuredDataConfig'
-import vimeoPlugin from '@gearbox-built/sanity-vimeo'
 import {table} from '@sanity/table'
 import {visionTool} from '@sanity/vision'
 import capitalize from 'lodash/capitalize'
@@ -26,6 +24,7 @@ import {getPreviewPaneUrl} from './utils/getPreviewUrl'
 import {tags} from 'sanity-plugin-tags'
 import {defaultDocumentNode, structure} from './components/DeskStructure'
 import {Logo} from './components/Studio'
+import {docCreationControl} from './plugins/doc-creation-control'
 
 const sanityDatasets = [
   import.meta.env.SANITY_STUDIO_API_DATASET,
@@ -59,20 +58,26 @@ const config = defineConfig(
         media(),
         multiReferencesPlugin({apiVersion: import.meta.env.SANITY_STUDIO_API_VERSION}),
         adminMessagePlugin(),
-        autoCompleteAddressPlugin({
-          apiKey: import.meta.env.SANITY_STUDIO_GOOGLE_API_KEY,
-          options: {types: ['address']},
-        }),
-        vimeoPlugin({
-          apiKey: import.meta.env.SANITY_STUDIO_VIMEO_TOKEN,
-        }),
         tags({}),
         PathInputPlugin({
           generatePath,
           apiVersion: import.meta.env.SANITY_STUDIO_API_VERSION,
         }),
         structuredData(structuredDataConfig),
-      ],
+        dataset !== 'production_v3' &&
+          docCreationControl({
+            exclude: [
+              'page',
+              'experiments',
+              'comparison',
+              'footer',
+              'navigation',
+              'integration',
+              'pageHome',
+              'template',
+            ],
+          }),
+      ].filter(Boolean),
       document: {
         actions: DocumentActions,
         productionUrl: getPreviewPaneUrl,
