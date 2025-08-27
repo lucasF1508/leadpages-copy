@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "yarn build:web",
-    "build:web": "next build && yarn build:sitemap",
-    "build:sitemap": "next-sitemap --config next-sitemap.js",
+    "build:web": "next build",
     "start": "yarn blast:next && yarn dev",
     "serve": "next start",
     "lint": "next lint",
