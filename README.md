@@ -171,6 +171,7 @@ git clone [...]
 ```
 vercel link
 ```
+NOTE: To properly work, you must link to the `leadpages-rack-pinion` project.
 
 #### 4. Pull the env vars from production from Vercel
 

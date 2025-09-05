@@ -4,22 +4,30 @@ export type FreeTrialKeyType =
   | 'standardAnnual'
   | 'standardMonthly'
 
-export const freeTrialEndpoints = {
-  proAnnual: 'PRO-TR-A-14D',
-  proMonthly: 'PRO-TR-M-14D',
-  standardAnnual: 'STD-TR-A-14D',
-  standardMonthly: 'STD-TR-M-14D',
-}
+  const planKeyToPlanId: Record<FreeTrialKeyType, string> = {
+    standardMonthly: 'fvnp9stiiu14',
+    proMonthly: 'rv7qq6f68t14',
+    standardAnnual: 'lamghdv4qr14',
+    proAnnual: 'jh4rs6oedh14',
+  }
+
+const TRIAL_ID_14D = 'd3yy2ARDnfEVTPU7'
 
 export const getFreeTrialCheckoutUrl = (
   planKey: FreeTrialKeyType,
   isFormSignup = false
 ) => {
-  const baseUrl = isFormSignup
-    ? 'https://my.leadpages.com/api/v1/signup'
-    : 'https://my.leadpages.com/signup'
+  const planId = planKeyToPlanId[planKey]
 
-  const endpoint = freeTrialEndpoints[planKey]
+  if (!planId) {
+    console.warn('[getFreeTrialCheckoutUrl] Missing mapping for planKey:', planKey)
+    return ''
+  }
 
-  return [baseUrl, endpoint].join('/')
+  // NOTE: previously, depending on isFormSignup 
+  // baseUrl was either "https://my.leadpages.com/api/v1/signup"
+  // or "https://my.leadpages.com/signup"
+  const baseUrl = 'https://my.leadpages.com/order-leadpages'
+
+return [baseUrl, planId, 't', TRIAL_ID_14D].join('/')
 }
