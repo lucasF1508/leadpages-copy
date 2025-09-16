@@ -26,7 +26,7 @@ const MediaWithText = ({
 }: MediaWithTextType) => (
   <div
     className={clsx(
-      'flex flex-col md:flex-nowrap gap-y-7 gap-x-4 items-center justify-center xs:px-3 md:px-0 max-w-[30rem] md:max-w-none mx-auto h-full w-full',
+      'mb-6 flex flex-col md:flex-nowrap gap-y-7 gap-x-4 items-center justify-center xs:px-3 md:px-0 max-w-[30rem] md:max-w-none mx-auto h-full w-full',
       alignContent === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'
     )}
   >
