@@ -1,10 +1,14 @@
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import { draftMode } from 'next/headers'
 import Script from 'next/script'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import TrackingScripts, { RedbrickStructuredDataScript } from '@/components/TrackingScripts'
+import TrackingScripts, {
+  RedbrickStructuredDataScript,
+} from '@/components/TrackingScripts'
 import generateMetadata from '@/lib/utils/generateMetadata'
 import './globals.css'
 import PreviewPane from './components/PreviewPane'
@@ -45,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className='has-[.scroll-lock]:[overflow:hidden]' lang="en">
+    <html className="has-[.scroll-lock]:[overflow:hidden]" lang="en">
       <head>
         <script>window.dataLayer = window.dataLayer || []</script>
         <link
@@ -62,7 +66,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `dataLayer.push({ 'event': 'start_pw' });`,
           }}
-          id='#profit-well-retain'
+          id="#profit-well-retain"
         />
       </head>
       <body
@@ -71,11 +75,11 @@ export default function RootLayout({
         {/* @ts-expect-error Server Component https://github.com/vercel/next.js/issues/42292 */}
         <Header />
         <main>{children}</main>
+        <Analytics />
+        <SpeedInsights />
         {/* @ts-expect-error Server Component https://github.com/vercel/next.js/issues/42292 */}
         <Footer />
-        {draftMode().isEnabled && (
-          <PreviewPane />
-        )}
+        {draftMode().isEnabled && <PreviewPane />}
       </body>
     </html>
   )
