@@ -9,10 +9,7 @@ import Loader from '@/components/Loader'
 import useForm, { FormProvider } from '@/hooks/useForm'
 import externalRedirect from '@/lib/forms/externalRedirect'
 import planRedirect from '@/lib/forms/planRedirect'
-import {
-  getFreeTrialCheckoutUrl,
-  getOrderUrlForEmail,
-} from '@/lib/utils/getFreeTrialCheckoutUrl'
+import { getFreeTrialCheckoutUrl, getOrderUrlForEmail } from '@/lib/utils/getFreeTrialCheckoutUrl'
 
 export interface InlineSignUpProps {
   className?: ClassValue
@@ -23,6 +20,53 @@ export interface InlineSignUpProps {
   placeholder?: string
   signUpType?: string
   type: FreeTrialKeyType
+}
+
+const HS_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_DEFAULT_PORTAL_ID || ''
+const HS_FORM_ID = process.env.NEXT_PUBLIC_HUBSPOT_DEFAULT_FORM_ID || ''
+const HS_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`
+
+function getHubspotUtk(): string | undefined {
+  try {
+    return document.cookie.split('; ').find((c) => c.startsWith('hubspotutk='))?.split('=')[1]
+  } catch {
+    return undefined
+  }
+}
+
+function buildHsPayload(email: string) {
+  const hutk = getHubspotUtk()
+  return JSON.stringify({
+    context: {
+      hutk,
+      pageName: typeof document !== 'undefined' ? document.title : '',
+      pageUri: typeof window !== 'undefined' ? window.location.href : '',
+    },
+    fields: [{ name: 'email', value: email }],
+  })
+}
+
+function submitHubSpotEmail(email: string) {
+  if (!email || !HS_PORTAL_ID || !HS_FORM_ID) return
+  const payload = buildHsPayload(email)
+  try {
+    if ('sendBeacon' in navigator) {
+      const blob = new Blob([payload], { type: 'application/json' })
+      const ok = navigator.sendBeacon(HS_ENDPOINT, blob)
+      if (ok) return
+    }
+  } catch {}
+  try {
+    const controller = new AbortController()
+    const t = setTimeout(() => controller.abort(), 1500)
+    fetch(HS_ENDPOINT, {
+      body: payload,
+      headers: { 'Content-Type': 'application/json' },
+      keepalive: true,
+      method: 'POST',
+      signal: controller.signal,
+    }).finally(() => clearTimeout(t))
+  } catch {}
 }
 
 const InlineSignUp = ({
@@ -49,27 +93,24 @@ const InlineSignUp = ({
 
     try {
       if (isExternalRedirect) {
-        if (!external?.url) {
-          console.warn('[InlineSignUp] Missing external redirect URL')
-          return
-        }
-        const result = await externalRedirect({ formData, ...external })
-        if (typeof result === 'object' && result.error) {
-          console.warn('[InlineSignUp] externalRedirect error:', result.error)
-        }
+        if (!external?.url) return
+        await externalRedirect({ formData, ...external })
         return
       }
 
-      const shouldTokenize = !!email && process.env.NEXT_PUBLIC_ENV === 'production'
+      if (email) submitHubSpotEmail(email)
+
+      const isProd =
+        process.env.NEXT_PUBLIC_ENV === 'production' || process.env.NODE_ENV === 'production'
+      const shouldTokenize = !!email && isProd
+
       if (shouldTokenize) {
         try {
           const orderUrl = await getOrderUrlForEmail(plan, email, extraParams)
           window.location.href = orderUrl
           redirected = true
           return
-        } catch (err: any) {
-          console.warn('[StartTrial] tokenizer failed; falling back to direct GET:', err?.message || err)
-        }
+        } catch {}
       }
 
       const href = getFreeTrialCheckoutUrl(plan, false, extraParams)
@@ -79,15 +120,7 @@ const InlineSignUp = ({
         return
       }
 
-      const result = await planRedirect({
-        formData: { ...formData, trial_type: plan },
-        type: plan,
-      })
-      if (typeof result === 'object' && result.error) {
-        console.warn('[StartTrial] planRedirect error:', result.error)
-      }
-    } catch (e: any) {
-      console.error('[StartTrial] redirect failed (outer catch):', e?.message || e)
+      await planRedirect({ formData: { ...formData, trial_type: plan }, type: plan })
     } finally {
       if (!redirected) setIsLoading(false)
     }
