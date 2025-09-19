@@ -6,7 +6,6 @@ import clsx from 'clsx'
 import * as Primitives from '@radix-ui/react-accordion'
 import Icon from 'icons/Icon'
 import { arrowDown } from 'icons/all/arrow-down'
-import { usePathname } from 'next/navigation'
 import Link from '@/components/Link'
 import Text from '@/components/Text'
 
@@ -26,9 +25,7 @@ const TextWithSidebar = ({
   className,
   content,
   sidebar,
-}: TextWithSidebarProps) => {
-  const pathname = usePathname() || ''
-  return (
+}: TextWithSidebarProps) => (
     <div
       className={clsx(
         'flex flex-col md:flex-row items-start gap-4 lg:gap-8',
@@ -82,13 +79,6 @@ const TextWithSidebar = ({
                               hasIcon={false}
                               linkStyle="none"
                             />
-                            {pathname === link?.url && (
-                              <div
-                                className={clsx(
-                                  'w-[0.375rem] h-3 bg-brand absolute top-0 left-0 z-content bg-gradient-to-b from-purple-600 to-purple-400 top-1/2 -mt-1.5'
-                                )}
-                              />
-                            )}
                           </div>
                         ))}
                     </div>
@@ -99,7 +89,7 @@ const TextWithSidebar = ({
           </Primitives.Item>
         </Primitives.Root>
       </aside>
-      <aside className="flex-[0_0_auto] w-[15.5rem] lg:w-[20rem] sticky top-2 gap-3 hidden md:flex flex-col rounded-md bg-surface-muted border border-surface-neutral-medium py-4 lg:py-6 z-dropdown max-h-[calc(100dvh-2rem)] overflow-scroll scrollbar-hide">
+      <aside className="flex-[0_0_auto] w-[15.6rem] lg:w-[20rem] sticky top-2 gap-3 hidden md:flex flex-col rounded-md bg-surface-muted border border-surface-neutral-medium py-4 lg:py-6 z-dropdown max-h-[calc(100dvh-2rem)] overflow-scroll scrollbar-hide">
         {sidebar?.sections.map(({ heading, links }) => (
           <div className="flex flex-col gap-3" key={heading}>
             <h4 className="type-h4 lg:type-h3 px-3 lg:px-4">{heading}</h4>
@@ -109,19 +99,11 @@ const TextWithSidebar = ({
                   <Link
                     {...link}
                     className={clsx(
-                      'type-body-sm lg:type-body relative hover:text-button-text-inline transition-colors',
-                      pathname === link?.url && 'text-button-text-inline'
+                      'type-body-sm lg:type-body relative hover:text-button-text-inline transition-colors'
                     )}
                     hasIcon={false}
                     linkStyle="none"
                   />
-                  {pathname === link?.url && (
-                    <div
-                      className={clsx(
-                        'w-[0.375rem] h-3 bg-brand absolute top-0 left-0 z-content bg-gradient-to-b from-purple-600 to-purple-400 top-1/2 -mt-1.5'
-                      )}
-                    />
-                  )}
                 </div>
               ))}
           </div>
@@ -130,6 +112,5 @@ const TextWithSidebar = ({
       <Text content={content} />
     </div>
   )
-}
 
 export default TextWithSidebar

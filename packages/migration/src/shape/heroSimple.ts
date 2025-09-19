@@ -17,7 +17,9 @@ const shapeHeroSimple = (hero: Record<string, any>): Record<string, any> => {
     ...filteredFields,
     _type: 'heroSimple',
     content,
-    links: parseLinks(hero.links)
+    labelMobileOnly: hero.labelMobileOnly || false,
+    links: parseLinks(hero.links),
+    mediaDesktopOnly: hero.mediaDesktopOnly || false,
   }
 }
 

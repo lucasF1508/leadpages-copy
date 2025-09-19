@@ -33,6 +33,7 @@ const Text = ({
   renderers = RendererList,
   styleMap = {},
   tagStyle,
+  labelMobileOnly = false,
   ...props
 }) => {
   if (!children && !content) return null
@@ -56,7 +57,7 @@ const Text = ({
     >
       {children || (
         <PortableText
-          blocks={content.map((item) => ({ ...item, displayIds, styleMap }))}
+          blocks={content.map((item) => ({ ...item, displayIds, styleMap, labelMobileOnly }))}
           serializers={{
             list,
             listItem,

@@ -44,6 +44,17 @@ const CardTitle = styled('div', {
   marginBottom: '1.8rem',
 })
 
+const CardHeading = styled('div', {
+  lineHeight: '24px',
+  fontWeight: 500,
+  color: '$textAlt',
+  marginBottom: '2.3rem',
+  display: '-webkit-box',
+  WebkitLineClamp: 4,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+})
+
 const CardDescription = styled('div', {
   lineHeight: '24px',
   fontWeight: 500,
@@ -146,6 +157,7 @@ const ComparisonCards = ({
   description,
   link,
   linkAlt,
+  heading,
 }) => (
   <CardContainer>
     <Link href={link} passHref legacyBehavior>
@@ -159,6 +171,7 @@ const ComparisonCards = ({
         </CardImageItem>
         <TextContentItem>
           <CardTitle>{title}</CardTitle>
+          <CardHeading>{heading}</CardHeading>
           <CardDescription>{description}</CardDescription>
           <CardLinkItem>
             <StyledBottomText>Read Comparison</StyledBottomText>
@@ -175,6 +188,7 @@ ComparisonCards.propTypes = {
   imageAlt: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  heading: PropTypes.string,
   link: PropTypes.string.isRequired,
   linkAlt: PropTypes.string.isRequired,
 }

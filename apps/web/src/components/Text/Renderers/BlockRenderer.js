@@ -22,7 +22,7 @@ const BlockRenderer = (props) => {
   const { node } = props
 
   // Renderer settings
-  const { styleMap = {}, style = 'normal', displayIds = false } = node
+  const { styleMap = {}, style = 'normal', displayIds = false, labelMobileOnly = false } = node
   const isCustomSidebarLink = node.markDefs?.find(
     ({ _type }) => _type === 'sidebarLink'
   )
@@ -72,7 +72,15 @@ const BlockRenderer = (props) => {
     <$StyledText
       id={id}
       as={as || asDefault}
-      css={{ type: type || style, color }}
+      css={{ 
+        type: type || style, 
+        color,
+        ...(style === 'overline' && labelMobileOnly && {
+          '@md': {
+            display: 'none'
+          }
+        })
+      }}
     >
       {props.children}
     </$StyledText>

@@ -1,11 +1,11 @@
 import React from 'react'
-import Text from '@components/Text'
-import { styled, darkTheme } from '@design'
-import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
+import { darkTheme, styled } from '@design'
 import { features } from 'config'
+import useEvalBreakpoint from '@hooks/useEvalBreakpoint'
 import Link from '@components/Link'
+import Text from '@components/Text'
+import { $BackgroundImage, $Hero, heroColors } from './HeroDefault'
 import { LinksContainer } from './HeroHome'
-import { $Hero, $BackgroundImage, heroColors } from './HeroDefault'
 
 const $Text = styled(Text, {
   variants: {
@@ -71,27 +71,27 @@ const HeroSimple = ({
 
   return (
     <$HeroSimple
+      backgroundColor={backgroundColor}
       className={darkBackground && darkTheme}
       size={size}
-      backgroundColor={backgroundColor}
     >
       <$HeroSimpleInner>
         {backgroundImage && (
           <$BackgroundImage
+            css={{
+              '&::after': { backgroundColor: bc || `$${backgroundColor}` },
+            }}
+            image={backgroundImage}
             objectFit={isMobile ? 'cover' : 'contain'}
             objectPosition={
               isMobile && backgroundOffset ? `${backgroundOffset}%` : 'right'
             }
-            image={backgroundImage}
             priority
-            css={{
-              '&::after': { backgroundColor: bc || `$${backgroundColor}` },
-            }}
           />
         )}
         <$Text
-          content={content}
           align={align}
+          content={content}
           links={links}
           maxWidth={maxWidth}
         />

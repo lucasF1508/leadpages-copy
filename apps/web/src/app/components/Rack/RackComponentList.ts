@@ -15,12 +15,16 @@ import dynamic from 'next/dynamic'
  *  component: [dynamic(() => import('@/components/client/Component')), { className: 'mt-2' }],
  *  component: [dynamic(() => import('@/components/client/Component')), { classNames: { root: 'mt-2', inner: 'ml-1' }],
  */
-
 const RackComponentList = {
   addOnCards: dynamic(() => import('@/components/AddOnCards')),
   cardClickable: dynamic(() => import('@/components/CardClickable')),
   cardsBlock: dynamic(() => import('@/components/Cards')),
   comparePlans: dynamic(() => import('@/components/ComparePlans')),
+  comparisonCard:
+    dynamic(() => import('@/components/ComparisonCard')),
+  comparisonCards: [
+    dynamic(() => import('@/components/ComparisonCards')), { pinion: false },
+  ],
   cta: dynamic(() => import('@/components/CTA')),
   faqs: dynamic(() => import('@/components/FAQs')),
   featureCards: dynamic(() => import('@/components/FeatureCards')),
@@ -43,10 +47,13 @@ const RackComponentList = {
     dynamic(() => import('@/components/PageAnchor')),
     { pinion: false },
   ],
+  prevNextCard: dynamic(() => import('@/components/PrevNextCard/PrevNextCard')),
   resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
   spacer: dynamic(() => import('@/components/Spacer')),
+  subFooter: [dynamic(() => import('@/components/SubFooter')), { pinion: false }],
+
   templateDetails: dynamic(() => import('@/components/TemplateTabs')),
   templateGallery: [
     dynamic(() => import('@/components/TemplateGallery')),

@@ -76,9 +76,12 @@ const getVariant = (url, request) => {
     rewrite: selectedVariantPath,
   }
 }
-
 const patterns = incrementalPaths
-  ?.filter((url) => !url.startsWith('/lead-generation-guide'))
+  ?.filter(
+    (url) =>
+      !url.startsWith('/lead-generation-guide') &&
+      !url.startsWith('/comparisons')
+  )
   ?.map((pathname) => new URLPattern({ pathname }))
 
 export async function middleware(request) {
@@ -86,7 +89,7 @@ export async function middleware(request) {
   const url = request.nextUrl.clone()
 
   if (request.cookies.get('__next_preview_data')) {
-    if (url.pathName !== '/home' && url.pathname.includes('/home-')) {
+    if (url.pathname !== '/home' && url.pathname.includes('/home-')) {
       const path = url.pathname
       url.pathname = `/home${path}`
       return NextResponse.rewrite(url)
@@ -98,7 +101,7 @@ export async function middleware(request) {
   // Enable caching for 31 days
   response.headers.set('Cache-Control', 'public, s-maxage=2678400')
 
-  if (!incrementalPaths.length) return response
+  if (!incrementalPaths || !incrementalPaths.length) return response
 
   const match = patterns.find((p) => p.test(url))
 

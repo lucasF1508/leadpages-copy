@@ -10,21 +10,37 @@ import Media, { hasMedia } from '../Media'
 export interface HeroSimpleProps {
   content: string
   label: string
+  labelMobileOnly?: boolean
   links: LinkType[]
   media: MediaType
+  mediaDesktopOnly?: boolean
   pill: string
 }
 
-const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
+const Hero = ({
+  content,
+  label,
+  labelMobileOnly = false,
+  links,
+  media,
+  mediaDesktopOnly = false,
+  pill,
+}: HeroSimpleProps) => (
   <div className="relative overflow-hidden">
     <Pinion className={clsx(hasMedia(media) && '!mb-0')} component="hero">
       {(label || pill) && (
         <div className="flex flex-col sm:flex-row gap-2 mb-2 items-start sm:items-center">
           {label && (
-            <Label className={clsx('type-overline-xxs')} content={label} />
+            <Label
+              className={clsx(
+                'type-overline-xxs',
+                labelMobileOnly && 'block md:hidden'
+              )}
+              content={label}
+            />
           )}
           {pill && (
-            <div className="inline-flex py-0.5 rounded-lg bg-gradient-purple-invert px-1.5">
+            <div className="inline-flex py-0.6 rounded-lg bg-gradient-purple-invert px-1.5">
               <Label
                 className={clsx('type-overline-xxs text-light pt-[0.125rem]')}
                 content={pill}
@@ -47,7 +63,12 @@ const Hero = ({ content, label, links, media, pill }: HeroSimpleProps) => (
         />
       )}
       {hasMedia(media) && (
-        <div className="mt-6 relative w-full">
+        <div
+          className={clsx(
+            'mt-6 relative w-full',
+            mediaDesktopOnly && 'hidden md:block'
+          )}
+        >
           <Media
             className={clsx('w-full object-cover')}
             media={media}
