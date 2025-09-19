@@ -22,8 +22,8 @@ export interface InlineSignUpProps {
   type: FreeTrialKeyType
 }
 
-const HS_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_DEFAULT_PORTAL_ID || ''
-const HS_FORM_ID = process.env.NEXT_PUBLIC_HUBSPOT_DEFAULT_FORM_ID || ''
+const HS_PORTAL_ID = '21794907'
+const HS_FORM_ID = 'b9cf01c6-afce-4838-a074-d7bf202da044'
 const HS_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`
 
 function getHubspotUtk(): string | undefined {
