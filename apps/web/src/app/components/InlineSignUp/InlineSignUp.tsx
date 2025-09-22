@@ -12,7 +12,7 @@ import { submitToHubSpot } from '@/lib/forms/hubspotHelpers'
 import planRedirect from '@/lib/forms/planRedirect'
 import {
   getFreeTrialCheckoutUrl,
-  getOrderUrlForEmailViaProxy,
+  getOrderUrlForEmail,
 } from '@/lib/utils/getFreeTrialCheckoutUrl'
 
 export interface InlineSignUpProps {
@@ -69,7 +69,7 @@ const InlineSignUp = ({
 
       if (shouldTokenize) {
         try {
-          const orderUrl = await getOrderUrlForEmailViaProxy(plan, email, extraParams)
+          const orderUrl = await getOrderUrlForEmail(plan, email, extraParams)
           window.location.href = orderUrl
           redirected = true
           return

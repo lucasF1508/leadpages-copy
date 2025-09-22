@@ -50,20 +50,3 @@ export async function getOrderUrlForEmail(
   if (!data?.['order-url']) throw new Error('Respuesta sin order-url')
   return data['order-url']
 }
-
-export async function getOrderUrlForEmailViaProxy(
-  planKey: FreeTrialKeyType,
-  email: string,
-  extraParams?: Record<string, string>
-): Promise<string> {
-  const res = await fetch('/api/new-signup', {
-    body: JSON.stringify({ email, extraParams, planKey }),
-    headers: { 'Content-Type': 'application/json' },
-    method: 'POST',
-  })
-  const data = await res.json()
-  if (!res.ok || !data?.['order-url']) {
-    throw new Error(`tokenizer failed: ${res.status}`)
-  }
-  return data['order-url'] as string
-}
