@@ -8,6 +8,7 @@ import LinkIcon from '@/components/Link/LinkIcon'
 import Loader from '@/components/Loader'
 import useForm, { FormProvider } from '@/hooks/useForm'
 import externalRedirect from '@/lib/forms/externalRedirect'
+import { submitToHubSpot } from '@/lib/forms/hubspotHelpers'
 import planRedirect from '@/lib/forms/planRedirect'
 import { getFreeTrialCheckoutUrl, getOrderUrlForEmail } from '@/lib/utils/getFreeTrialCheckoutUrl'
 
@@ -20,53 +21,6 @@ export interface InlineSignUpProps {
   placeholder?: string
   signUpType?: string
   type: FreeTrialKeyType
-}
-
-const HS_PORTAL_ID = '21794907'
-const HS_FORM_ID = 'b9cf01c6-afce-4838-a074-d7bf202da044'
-const HS_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL_ID}/${HS_FORM_ID}`
-
-function getHubspotUtk(): string | undefined {
-  try {
-    return document.cookie.split('; ').find((c) => c.startsWith('hubspotutk='))?.split('=')[1]
-  } catch {
-    return undefined
-  }
-}
-
-function buildHsPayload(email: string) {
-  const hutk = getHubspotUtk()
-  return JSON.stringify({
-    context: {
-      hutk,
-      pageName: typeof document !== 'undefined' ? document.title : '',
-      pageUri: typeof window !== 'undefined' ? window.location.href : '',
-    },
-    fields: [{ name: 'email', value: email }],
-  })
-}
-
-function submitHubSpotEmail(email: string) {
-  if (!email || !HS_PORTAL_ID || !HS_FORM_ID) return
-  const payload = buildHsPayload(email)
-  try {
-    if ('sendBeacon' in navigator) {
-      const blob = new Blob([payload], { type: 'application/json' })
-      const ok = navigator.sendBeacon(HS_ENDPOINT, blob)
-      if (ok) return
-    }
-  } catch {}
-  try {
-    const controller = new AbortController()
-    const t = setTimeout(() => controller.abort(), 1500)
-    fetch(HS_ENDPOINT, {
-      body: payload,
-      headers: { 'Content-Type': 'application/json' },
-      keepalive: true,
-      method: 'POST',
-      signal: controller.signal,
-    }).finally(() => clearTimeout(t))
-  } catch {}
 }
 
 const InlineSignUp = ({
@@ -98,7 +52,13 @@ const InlineSignUp = ({
         return
       }
 
-      if (email) submitHubSpotEmail(email)
+      if (email) {
+        submitToHubSpot({
+          email,
+          page_name: typeof document !== 'undefined' ? document.title : '',
+          page_url: typeof window !== 'undefined' ? window.location.href : '',
+        }).catch(() => {})
+      }
 
       const isProd =
         process.env.NEXT_PUBLIC_ENV === 'production' || process.env.NODE_ENV === 'production'
