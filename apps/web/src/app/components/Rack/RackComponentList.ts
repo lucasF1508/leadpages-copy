@@ -17,6 +17,11 @@ import dynamic from 'next/dynamic'
  */
 const RackComponentList = {
   addOnCards: dynamic(() => import('@/components/AddOnCards')),
+  // bestOfBlog: dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
+  bestOfBlog: [
+    dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
+    { pinion: false },
+  ],
   cardClickable: dynamic(() => import('@/components/CardClickable')),
   cardsBlock: dynamic(() => import('@/components/Cards')),
   comparePlans: dynamic(() => import('@/components/ComparePlans')),
