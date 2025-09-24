@@ -20,10 +20,10 @@ const RackComponentList = {
   cardClickable: dynamic(() => import('@/components/CardClickable')),
   cardsBlock: dynamic(() => import('@/components/Cards')),
   comparePlans: dynamic(() => import('@/components/ComparePlans')),
-  comparisonCard:
-    dynamic(() => import('@/components/ComparisonCard')),
+  comparisonCard: dynamic(() => import('@/components/ComparisonCard')),
   comparisonCards: [
-    dynamic(() => import('@/components/ComparisonCards')), { pinion: false },
+    dynamic(() => import('@/components/ComparisonCards')),
+    { pinion: false },
   ],
   cta: dynamic(() => import('@/components/CTA')),
   faqs: dynamic(() => import('@/components/FAQs')),
@@ -50,9 +50,16 @@ const RackComponentList = {
   prevNextCard: dynamic(() => import('@/components/PrevNextCard/PrevNextCard')),
   resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
+  resourcesGrid: [
+    dynamic(() => import('@/components/ResourcesGrid')),
+    { pinion: false },
+  ],
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
   spacer: dynamic(() => import('@/components/Spacer')),
-  subFooter: [dynamic(() => import('@/components/SubFooter')), { pinion: false }],
+  subFooter: [
+    dynamic(() => import('@/components/SubFooter')),
+    { pinion: false },
+  ],
 
   templateDetails: dynamic(() => import('@/components/TemplateTabs')),
   templateGallery: [
