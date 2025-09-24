@@ -114,7 +114,7 @@ export default function BestOfBlog({
     <section
       aria-labelledby="best-of-blog-heading"
       className={clsx(
-        'relative w-full bg-[#0E0F13] px-4 py-8 md:py-12',
+        'relative w-full bg-black px-4 py-8 md:py-12',
         className
       )}
       onKeyDown={onKeyDown}
