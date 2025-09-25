@@ -80,7 +80,8 @@ const patterns = incrementalPaths
   ?.filter(
     (url) =>
       !url.startsWith('/lead-generation-guide') &&
-      !url.startsWith('/comparisons')
+      !url.startsWith('/comparisons') &&
+      !url.startsWith('/marketing-resources')
   )
   ?.map((pathname) => new URLPattern({ pathname }))
 
