@@ -1,4 +1,5 @@
 import shapeBanner from "@src/shape/banner"
+import shapeCarruselWithArrows from "@src/shape/carruselWithArrows"
 import shapeCtaInline from "@src/shape/ctaInline"
 import shapeFeatureGrid from "@src/shape/featureGrid"
 import shapeFeaturedTemplates from "@src/shape/featuredTemplates"
@@ -16,6 +17,7 @@ import shapeTextBlock from "@src/shape/textBlock"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const componentMappers: Record<string, (component: any) => any> = {
   banner: shapeBanner,
+  carruselWithArrows: shapeCarruselWithArrows,
   cta: shapeGlobalCta,
   ctaInline: shapeCtaInline,
   featureGrid: shapeFeatureGrid,

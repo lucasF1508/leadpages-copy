@@ -24,6 +24,9 @@ const RackComponentList = {
   ],
   cardClickable: dynamic(() => import('@/components/CardClickable')),
   cardsBlock: dynamic(() => import('@/components/Cards')),
+  carruselWithArrows: [
+    dynamic(() => import('@/components/CarruselWithArrows/CarruselWithArrows')), { pinion: false },
+  ],
   comparePlans: dynamic(() => import('@/components/ComparePlans')),
   comparisonCard: dynamic(() => import('@/components/ComparisonCard')),
   comparisonCards: [
