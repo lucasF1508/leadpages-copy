@@ -109,7 +109,8 @@ export default function BestOfBlog({
 
   const site = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '')
   const ctaHref = cta?.href || ''
-  const isCtaExternal = /^https?:\/\//.test(ctaHref) && (site ? !ctaHref.startsWith(site) : true)
+  const isCtaExternal =
+    /^https?:\/\//.test(ctaHref) && (site ? !ctaHref.startsWith(site) : true)
 
   return (
     <section
@@ -179,7 +180,10 @@ export default function BestOfBlog({
                   key={`peek-${nextIndex}`}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <BlogNextPeek className="w-full h-full" nextItem={items[nextIndex]!} />
+                  <BlogNextPeek
+                    className="w-full h-full"
+                    nextItem={items[nextIndex]!}
+                  />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -190,9 +194,9 @@ export default function BestOfBlog({
               <button
                 aria-label="Previous"
                 className={clsx(
-                  'absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 z-20',
-                  'inline-flex h-10 w-10 items-center justify-center rounded-md',
-                  'text-2xl md:text-3xl',
+                  'absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-20',
+                  'inline-flex h-5 w-5 items-center justify-center rounded-md',
+                  'text-base md:text-2xl',
                   'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20',
                   'text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70',
                   'md:h-11 md:w-11'
@@ -206,9 +210,9 @@ export default function BestOfBlog({
               <button
                 aria-label="Next"
                 className={clsx(
-                  'absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 z-20',
-                  'inline-flex h-10 w-10 items-center justify-center rounded-md',
-                  'text-2xl md:text-3xl',
+                  'absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-20',
+                  'inline-flex h-5 w-5 items-center justify-center rounded-md',
+                  'text-base md:text-2xl',
                   'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20',
                   'text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70',
                   'md:h-11 md:w-11'

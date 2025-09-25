@@ -51,7 +51,7 @@ const CarruselWithArrows = ({
   }
 
   const [visibleCards, setVisibleCards] = useState(getVisibleCards())
-  
+
   // Calculate max index based on whether arrows should be hidden
   const shouldHideArrows = !isMobile && cards.length <= 4
   const maxIndex = shouldHideArrows ? 0 : Math.max(0, cards.length - 1)
@@ -277,8 +277,9 @@ const CarruselWithArrows = ({
             <button
               aria-label="Previous"
               className={clsx(
-                'absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1',
-                'inline-flex h-10 w-10 items-center justify-center rounded-md',
+                'absolute left-2 md:left-0 top-1/2 -translate-y-1/2 z-20',
+                'inline-flex h-5 w-5 items-center justify-center rounded-md',
+                'text-base md:text-2xl',
                 'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20',
                 'text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70',
                 'md:h-11 md:w-11'
@@ -292,8 +293,9 @@ const CarruselWithArrows = ({
             <button
               aria-label="Next"
               className={clsx(
-                'absolute right-0 top-1/2 -translate-y-1/2 translate-x-1',
-                'inline-flex h-10 w-10 items-center justify-center rounded-md',
+                'absolute right-2 md:right-0 top-1/2 -translate-y-1/2 z-20',
+                'inline-flex h-5 w-5 items-center justify-center rounded-md',
+                'text-base md:text-2xl',
                 'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20',
                 'text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70',
                 'md:h-11 md:w-11'

@@ -34,24 +34,32 @@ export default function ResourcesGrid({
                 {heading}
               </div>
             )}
-            {subheading && (
-              <div className="mt-2 text-white/70">{subheading}</div>
-            )}
+            {subheading && <div className="mt-2 text-white/70">{subheading}</div>}
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-stretch">
           {items.map((it) => (
             <article
               className={clsx(
-                'rounded-2xl bg-[#1A1B21] ring-1 ring-white/10 shadow-lg',
+                'rounded-2xl bg-[#1A1B21] ring-1 ring-white/10 shadow-lg overflow-hidden',
                 'p-4 md:p-3'
               )}
               key={it._key}
             >
-              <div className="[&_p]:line-clamp-4">
-                <MediaWithText {...it} className="!mb-0"/>
-              </div>
+              <MediaWithText
+                {...it}
+                className={clsx(
+                  '!mb-0 !w-full !max-w-none !mx-0 !px-0',
+                  '!flex !flex-col md:!flex-row !items-stretch !justify-start !gap-4 md:!gap-6',
+                  'max-md:[&>div:first-child]:!m-0',
+                  '![&_figure]:mx-auto ![&_figure]:w-full',
+                  '![&_figure]:justify-center ![&_figure]:items-center',
+                  '![&_figure>*]:w-full ![&_figure>*]:max-w-full',
+                  '![&_img]:max-w-full ![&_img]:w-full ![&_img]:h-auto',
+                  'max-md:![&_img]:object-contain md:![&_img]:object-cover'
+                )}
+              />
             </article>
           ))}
         </div>
