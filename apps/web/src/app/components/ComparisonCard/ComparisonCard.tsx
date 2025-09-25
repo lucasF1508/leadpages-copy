@@ -9,7 +9,7 @@ export interface ComparisonCardProps {
   ctaHref: string
   ctaLabel: string
   description: string
-  heading?: string // 🔹 Nuevo heading opcional
+  heading?: string
   logo: ImageType
   logoAlt: string
   showTitle?: boolean
@@ -22,7 +22,7 @@ const ComparisonCard = ({
   ctaHref,
   ctaLabel,
   description,
-  heading, // 🔹 Nuevo prop
+  heading,
   logo,
   logoAlt,
   showTitle = false,
@@ -38,7 +38,7 @@ const ComparisonCard = ({
         'group relative rounded-3xl bg-white/5 border border-white/10',
         'p-5 sm:p-6 md:p-6 text-white/90 shadow-[0_0_0_1px_rgba(255,255,255,0.02)_inset]',
         'hover:border-white/20 transition-colors',
-        'flex flex-col items-center text-center',
+        'flex flex-col h-full items-center text-center',
         className
       )}
     >
@@ -74,7 +74,7 @@ const ComparisonCard = ({
         <h4 className="type-h6 sm:type-h5 text-white/90 mb-2">{heading}</h4>
       )}
 
-      <p className="type-body-sm text-white/80 mb-5 max-w-prose">
+      <p className="type-body-sm text-white/80 mb-5 max-w-prose line-clamp-3 md:line-clamp-4">
         {description}
       </p>
 
@@ -83,7 +83,8 @@ const ComparisonCard = ({
         className={clsx(
           'inline-flex items-center gap-3 font-medium',
           'text-white/80 hover:text-white transition-colors',
-          'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/30'
+          'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/30',
+          'mt-auto pt-2'
         )}
         href={ctaHref}
         rel={target === '_blank' ? 'noopener noreferrer' : undefined}
