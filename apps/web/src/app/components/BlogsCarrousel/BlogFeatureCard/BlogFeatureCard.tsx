@@ -39,8 +39,7 @@ export default function BlogFeatureCard({ className, item }: BlogFeatureCardProp
         )}
       >
         <div className="w-full">
-          <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden ring-1 ring-white/10 bg-white/5
-                          md:min-h-[18rem] lg:min-h-[20rem]">
+          <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden ring-1 ring-white/10 bg-white/5 md:min-h-[18rem] lg:min-h-[20rem]">
             {image ? (
               <Media
                 classNames={{ media: 'object-cover', root: 'absolute inset-0' }}
@@ -55,7 +54,7 @@ export default function BlogFeatureCard({ className, item }: BlogFeatureCardProp
           </div>
         </div>
 
-        <div className="w-full min-w-0">
+        <div className="w-full min-w-0 relative z-10">
           {tag && (
             <div className="inline-flex items-center max-w-fit rounded-lg theme-light:bg-gradient-purple theme-dark:bg-gradient-purple-invert px-1.5 py-[3px] leading-none mb-2">
               <Label className="type-overline-xxs text-light" content={String(tag)} />
@@ -77,9 +76,9 @@ export default function BlogFeatureCard({ className, item }: BlogFeatureCardProp
           <div className="mt-3">
             <Link
               aria-label={`Read more: ${title}`}
-              className="rounded-md"
+              className="rounded-md cursor-pointer"
+              condition={isExternal ? 'external' : 'internal'}
               linkStyle="button-secondary"
-              target={isExternal ? true : undefined}
               url={href}
             >
               Read More

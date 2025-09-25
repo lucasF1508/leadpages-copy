@@ -42,14 +42,12 @@ export default function BestOfBlog({
   const goNext = useCallback(() => goTo(current + 1), [current, goTo])
   const goPrev = useCallback(() => goTo(current - 1), [current, goTo])
 
-  // AUTOPLAY
   useEffect(() => {
     if (!autoPlay || paused || count <= 1) return
     const id = setInterval(() => setCurrent((c) => (c + 1) % count), intervalMs)
     return () => clearInterval(id)
   }, [autoPlay, paused, count, intervalMs])
 
-  // Teclado (← →) cuando la sección tiene foco
   const onKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === 'ArrowRight') {
       e.preventDefault()
@@ -88,7 +86,6 @@ export default function BestOfBlog({
     </div>
   )
 
-  // Header (mismo look que veníamos usando)
   const headerBlocks = useMemo(() => {
     const blocks: any[] = []
     if (heading) {
@@ -109,6 +106,10 @@ export default function BestOfBlog({
     }
     return blocks
   }, [heading, subheading])
+
+  const site = (process.env.NEXT_PUBLIC_SITE_URL || '').replace(/\/$/, '')
+  const ctaHref = cta?.href || ''
+  const isCtaExternal = /^https?:\/\//.test(ctaHref) && (site ? !ctaHref.startsWith(site) : true)
 
   return (
     <section
@@ -139,11 +140,11 @@ export default function BestOfBlog({
             </div>
 
             {cta?.href && cta?.label && (
-              <div className="md:pt-1.5">
+              <div className="md:pt-1.5 relative z-20">
                 <Link
-                  className="rounded-md"
+                  className="rounded-md cursor-pointer"
+                  condition={isCtaExternal ? 'external' : 'internal'}
                   linkStyle="button-solid"
-                  target={cta.target === '_blank' ? true : undefined}
                   url={cta.href}
                 >
                   {cta.label}
@@ -158,7 +159,7 @@ export default function BestOfBlog({
             <AnimatePresence initial={false} mode="wait">
               <motion.div
                 animate={{ opacity: 1, y: 0 }}
-                className="h-full"
+                className="h-full relative z-10"
                 exit={{ opacity: 0, y: -8 }}
                 initial={{ opacity: 0, y: 8 }}
                 key={current}
@@ -178,10 +179,7 @@ export default function BestOfBlog({
                   key={`peek-${nextIndex}`}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <BlogNextPeek
-                    className="w-full h-full"
-                    nextItem={items[nextIndex]!}
-                  />
+                  <BlogNextPeek className="w-full h-full" nextItem={items[nextIndex]!} />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -192,7 +190,7 @@ export default function BestOfBlog({
               <button
                 aria-label="Previous"
                 className={clsx(
-                  'absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1',
+                  'absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 z-20',
                   'inline-flex h-10 w-10 items-center justify-center rounded-md',
                   'text-2xl md:text-3xl',
                   'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20',
@@ -208,7 +206,7 @@ export default function BestOfBlog({
               <button
                 aria-label="Next"
                 className={clsx(
-                  'absolute right-0 top-1/2 -translate-y-1/2 translate-x-1',
+                  'absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 z-20',
                   'inline-flex h-10 w-10 items-center justify-center rounded-md',
                   'text-2xl md:text-3xl',
                   'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20',
