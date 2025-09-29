@@ -34,7 +34,7 @@ const RackComponentList = {
     { pinion: false },
   ],
   cta: dynamic(() => import('@/components/CTA')),
-  faqs: dynamic(() => import('@/components/FAQs')),
+  faqAccordion: [dynamic(() => import('@/components/FAQAccordion/FAQAccordion')), { pinion: false }],
   featureCards: dynamic(() => import('@/components/FeatureCards')),
   integrationDirectory: [
     dynamic(() => import('@/components/IntegrationDirectory')),

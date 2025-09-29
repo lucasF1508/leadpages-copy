@@ -1,5 +1,5 @@
 import React from 'react'
-import FAQ from '@layouts/FAQ'
+import FAQ from '../../legacy/layouts/FAQ'
 import { query, runQueries } from '@lib/queries'
 
 const FAQPage = (props) => <FAQ {...props} />

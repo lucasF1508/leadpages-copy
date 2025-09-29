@@ -27,8 +27,8 @@ const RackComponentList = {
   statsAlternate: dynamic(() => import('@components/StatsAlternate')),
   headlineSection: dynamic(() => import('@components/Text/TextHeadline')),
   textBlock: dynamic(() => import('@components/Text/TextStandard')),
-  testimonials: dynamic(() =>
-    import('@components/Testimonial/TestimonialRotator')
+  testimonials: dynamic(
+    () => import('@components/Testimonial/TestimonialRotator')
   ),
   tableBlock: dynamic(() => import('@components/Table')),
   video: dynamic(() => import('@components/Video/VideoEmbed')),
@@ -42,7 +42,6 @@ const RackComponentList = {
   ctaInline: dynamic(() => import('@components/Cta/CtaInline')),
   socialProof: dynamic(() => import('@components/SocialProof')),
   quote: dynamic(() => import('@components/Quote')),
-  faqs: dynamic(() => import('@components/Faq')),
   pricing: dynamic(() => import('@components/Pricing')),
   marquee: dynamic(() => import('@components/Marquee')),
   servicePoints: dynamic(() => import('@components/ServicePoints')),

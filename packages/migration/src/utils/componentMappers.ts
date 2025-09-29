@@ -1,6 +1,7 @@
 import shapeBanner from "@src/shape/banner"
 import shapeCarruselWithArrows from "@src/shape/carruselWithArrows"
 import shapeCtaInline from "@src/shape/ctaInline"
+import shapeFAQAccordion from "@src/shape/faqAccordion"
 import shapeFeatureGrid from "@src/shape/featureGrid"
 import shapeFeaturedTemplates from "@src/shape/featuredTemplates"
 import shapeGlobalCta from "@src/shape/globalCta"
@@ -20,6 +21,7 @@ const componentMappers: Record<string, (component: any) => any> = {
   carruselWithArrows: shapeCarruselWithArrows,
   cta: shapeGlobalCta,
   ctaInline: shapeCtaInline,
+  faqAccordion: shapeFAQAccordion,
   featureGrid: shapeFeatureGrid,
   featuredTemplates: shapeFeaturedTemplates,
   headlineSection: shapeHeadlineSection,
