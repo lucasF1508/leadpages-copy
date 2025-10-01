@@ -17,7 +17,6 @@ import dynamic from 'next/dynamic'
  */
 const RackComponentList = {
   addOnCards: dynamic(() => import('@/components/AddOnCards')),
-  // bestOfBlog: dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
   bestOfBlog: [
     dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
     { pinion: false },
@@ -55,6 +54,9 @@ const RackComponentList = {
     dynamic(() => import('@/components/PageAnchor')),
     { pinion: false },
   ],
+  pressArticlesSection: [ dynamic(() => import('@/components/PressArticlesSection')),
+    { pinion: false },
+  ],
   prevNextCard: dynamic(() => import('@/components/PrevNextCard/PrevNextCard')),
   resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
@@ -63,6 +65,7 @@ const RackComponentList = {
     { pinion: false },
   ],
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
+  sectionCTA: dynamic(() => import('@/components/SectionCTA')),
   spacer: dynamic(() => import('@/components/Spacer')),
   subFooter: [
     dynamic(() => import('@/components/SubFooter')),
