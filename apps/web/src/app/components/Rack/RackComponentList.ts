@@ -16,6 +16,7 @@ import dynamic from 'next/dynamic'
  *  component: [dynamic(() => import('@/components/client/Component')), { classNames: { root: 'mt-2', inner: 'ml-1' }],
  */
 const RackComponentList = {
+  accordionWithSidebar: [dynamic(() => import('@/components/AccordionWithSidebar/AccordionWithSidebar')), { pinion: false }],
   addOnCards: dynamic(() => import('@/components/AddOnCards')),
   bestOfBlog: [
     dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),

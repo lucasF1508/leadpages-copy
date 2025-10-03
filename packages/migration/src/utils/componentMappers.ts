@@ -1,3 +1,4 @@
+import shapeAccordionWithSidebar from "@src/shape/accordionWithSidebar"
 import shapeBanner from "@src/shape/banner"
 import shapeCarruselWithArrows from "@src/shape/carruselWithArrows"
 import shapeCtaInline from "@src/shape/ctaInline"
@@ -17,6 +18,7 @@ import shapeTextBlock from "@src/shape/textBlock"
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const componentMappers: Record<string, (component: any) => any> = {
+  accordionWithSidebar: shapeAccordionWithSidebar,
   banner: shapeBanner,
   carruselWithArrows: shapeCarruselWithArrows,
   cta: shapeGlobalCta,
