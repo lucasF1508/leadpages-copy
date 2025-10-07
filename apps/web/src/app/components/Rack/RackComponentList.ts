@@ -22,10 +22,12 @@ const RackComponentList = {
     dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
     { pinion: false },
   ],
+  brand: [dynamic(() => import('@/components/Brand')), { pinion: false }],
   cardClickable: dynamic(() => import('@/components/CardClickable')),
   cardsBlock: dynamic(() => import('@/components/Cards')),
   carruselWithArrows: [
-    dynamic(() => import('@/components/CarruselWithArrows/CarruselWithArrows')), { pinion: false },
+    dynamic(() => import('@/components/CarruselWithArrows/CarruselWithArrows')),
+    { pinion: false },
   ],
   comparePlans: dynamic(() => import('@/components/ComparePlans')),
   comparisonCard: dynamic(() => import('@/components/ComparisonCard')),
@@ -34,7 +36,10 @@ const RackComponentList = {
     { pinion: false },
   ],
   cta: dynamic(() => import('@/components/CTA')),
-  faqAccordion: [dynamic(() => import('@/components/FAQAccordion/FAQAccordion')), { pinion: false }],
+  faqAccordion: [
+    dynamic(() => import('@/components/FAQAccordion/FAQAccordion')),
+    { pinion: false },
+  ],
   featureCards: dynamic(() => import('@/components/FeatureCards')),
   integrationDirectory: [
     dynamic(() => import('@/components/IntegrationDirectory')),
@@ -55,7 +60,8 @@ const RackComponentList = {
     dynamic(() => import('@/components/PageAnchor')),
     { pinion: false },
   ],
-  pressArticlesSection: [ dynamic(() => import('@/components/PressArticlesSection')),
+  pressArticlesSection: [
+    dynamic(() => import('@/components/PressArticlesSection')),
     { pinion: false },
   ],
   prevNextCard: dynamic(() => import('@/components/PrevNextCard/PrevNextCard')),
