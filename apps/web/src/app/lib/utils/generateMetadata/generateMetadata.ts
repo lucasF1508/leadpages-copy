@@ -4,7 +4,7 @@ import { runQuery } from '@/lib/queries'
 import { parseImageRef } from '@/lib/utils/parseImageRef'
 
 const VERCEL_ENV = process.env.VERCEL_ENV
-const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_URL
+const NEXT_PUBLIC_URL = process.env.NEXT_PUBLIC_URL || 'https://www.leadpages.com'
 
 const seoQuery = `*[_type == 'seoSite'] | order(_updatedAt desc) [0]`
 
@@ -25,17 +25,16 @@ export async function generateMetadata(): Promise<Metadata> {
     siteName,
   } = data || {}
 
+  const { url } = parseImageRef(image) || {}
   const robots = VERCEL_ENV !== 'production' ? 'noindex, nofollow' : ''
   const template = _template || `%s | ${siteName}`
-  const {
-    url = null,
-  } = parseImageRef(image) || {}
 
   return {
+    alternates: { canonical: '/' },
     description,
     openGraph: {
       description,
-      images: [(url && {height: 630, url, width: 1200})],
+      images: url ? [{ height: 630, url, width: 1200 }] : undefined,
       locale: 'en_CA',
       siteName,
       title,
@@ -50,8 +49,8 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       description,
-      images: [url && url],
+      images: url ? [url] : undefined,
       title,
-    } as Metadata['twitter']
+    } as Metadata['twitter'],
   }
 }

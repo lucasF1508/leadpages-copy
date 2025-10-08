@@ -1,9 +1,14 @@
 export const dynamic = 'force-static'
 
+import type { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import HeroHome from '@/components/Hero/HeroHome'
 import Rack from '@/components/Rack'
 import { componentsQuery, query } from '@/lib/queries'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 export default async function Page() {
   const { components, hero } =

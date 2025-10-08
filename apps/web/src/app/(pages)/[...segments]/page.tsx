@@ -14,7 +14,6 @@ export async function generateStaticParams() {
   const paths = params.map(({ params: { slug } }: any) => ({
     segments: slug,
   }))
-
   return paths
 }
 
@@ -24,7 +23,6 @@ export async function generateMetadata(
 ) {
   const { segments } = await params
   const path = joinPath(segments)
-
   return await generateMetadataStatic({ parent, path, types: ['page'] })
 }
 
@@ -38,19 +36,15 @@ export default async function Page({
 
   const { components, hero } =
     (await query(
-      `*[_type == 'page' && path == $path] | order(_updatedAt desc) [0]
-    {
-      ...,
-      ${componentsQuery}
-    }
-  `,
+      `*[_type == 'page' && path == $path] | order(_updatedAt desc) [0]{
+        ...,
+        ${componentsQuery}
+      }`,
       {
         preview: draftMode().isEnabled,
-        params: {
-          path,
-        },
+        params: { path },
       }
-    ).data) || {}
+    )?.data) || {}
 
   return <Layout data={{ hero, components }} />
 }
