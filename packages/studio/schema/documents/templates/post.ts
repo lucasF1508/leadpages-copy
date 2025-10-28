@@ -1,57 +1,72 @@
 import {BsNewspaper as icon} from 'react-icons/bs'
-import {F, FS, G, P} from '@/schema/tool'
+import {F, FS, P, G} from '@/legacy/schema/tool'
+import CustomSidebarLinksReference from '../../../components/CustomSideBarLinksReference'
 
 export const post = {
   icon,
   name: 'post',
   title: 'Posts',
   type: 'document',
-  groups: [...G.fieldGroupDefaults(), G.define('seo', {title: 'SEO'})],
   orderings: [
-    {
-      title: 'Published Date ↓',
-      name: 'publishedDateDesc',
-      by: [{field: 'publishedDate', direction: 'desc'}],
-    },
-    {
-      title: 'Published Date ↑',
-      name: 'publishedDateAsc',
-      by: [{field: 'publishedDate', direction: 'asc'}],
-    },
+    {title: 'Published', name: 'publishedDesc', by: [{field: 'publishedDate', direction: 'desc'}]},
   ],
-  fieldsets: [FS.seo(), FS.define('meta', {collapsed: false})],
+  groups: [
+    ...G.fieldGroupDefaults(),
+    G.define('excerpt'),
+    G.define('seo', {title: 'SEO'}),
+    G.define('options'),
+  ],
   fields: [
+    ...F.fieldDefaultsCustom({parent: {hidden: true}}),
+
+    // CONTENT
     ...G.group('content', [
-      F.title(),
       F.image(),
       F.blockContent(),
-      F.excerpt(),
-      F.category('categoryPost'),
-      F.checkbox({
-        name: 'isExternal',
-        title: 'Is External Article',
+      F.boolean({name: 'useCustomSidebarLinks', initialValue: false}),
+      {
+        name: 'customSidebarItems',
+        title: 'Custom Sidebar Links',
+        description: 'Listing sidebar links, added using inline marks in the content section.',
+        type: 'boolean',
+        // 👇 en v3 se usa `components.input`
+        components: {input: CustomSidebarLinksReference as any},
+        hidden: ({parent}: any) => !parent?.useCustomSidebarLinks,
+      },
+    ]),
+
+    // EXCERPT
+    ...G.group('excerpt', [F.excerpt()]),
+
+    // META (idéntico al legacy)
+    ...G.group('meta', [
+      F.field('structuredData'),
+      F.datetime({
+        name: 'modified',
+        readOnly: true,
+        hidden: ({parent}: any) => !parent?.modified,
+        description: 'Temporary field for Studio V3 Migration, value removed in publish hook.',
+      }),
+      F.publishedDate(),
+      F.category('publisher', {name: 'publisher', required: true}),
+      F.category('categoryPost', {name: 'primaryCategory', required: true}),
+      F.multiReference('post', {name: 'relatedArticles', validation: (Rule: any) => Rule.max(4)}),
+      F.multiReference('categoryPost', {name: 'secondaryCategories'}),
+      F.field('tags', {name: 'tags', options: {includeFromRelated: 'tags'}}),
+    ]),
+
+    // SEO
+    ...G.group('seo', [F.seo()]),
+
+    // OPTIONS
+    ...G.group('options', [
+      F.boolean({
+        name: 'redirectToLegacy',
+        title: 'Proxy to legacy post',
+        description: 'Enable to proxy to the legacy Leadpages post, if it exists.',
         initialValue: false,
       }),
-      F.field('components', {hidden: ({parent}) => parent.isExternal}),
-      F.checkbox({
-        name: 'target',
-        title: 'Open in a new tab',
-        initialValue: true,
-        hidden: ({parent}) => !parent.isExternal,
-      }),
-      F.url({
-        name: 'articleUrl',
-        title: 'Article Url',
-        hidden: ({parent}) => !parent.isExternal,
-      }),
-      F.string({
-        name: 'label',
-        title: 'Link Label',
-        hidden: ({parent}) => !parent.isExternal,
-      }),
     ]),
-    ...G.group('meta', [F.slug(), F.field('path'), F.publishedDate({fieldset: 'meta'})]),
-    ...G.group('seo', [F.seo()]),
   ],
   preview: P.titleImage(),
 }

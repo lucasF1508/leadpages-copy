@@ -1,11 +1,13 @@
+// studio/structure.ts (or studio/plugins/desk/structure.ts)
+// Complete, cleaned up, with Posts and Authors added
+
 import {MdBusiness, MdOutlineSmartButton, MdSettings} from 'react-icons/md'
-import {BsGraphUp} from 'react-icons/bs'
+import {BsGraphUp, BsPlug, BsNewspaper, BsPencil} from 'react-icons/bs' // ✅ added BsNewspaper, BsPencil
 import config from 'config'
-import {AiOutlineHome} from 'react-icons/ai'
+import {AiOutlineHome, AiOutlineFileText, AiOutlineSetting} from 'react-icons/ai'
 import IframePreview from './CustomViews/IframePreview'
 import SeoPane from './CustomViews/SeoPane'
 import {StructureBuilder} from 'sanity/structure'
-import {BsPlug} from 'react-icons/bs'
 import {ConfigContext} from 'sanity'
 import {BiCategory} from 'react-icons/bi'
 import SingletonListItem from './SingletonListItem'
@@ -14,17 +16,20 @@ import {GrStatusInfo} from 'react-icons/gr'
 import {PiSidebar} from 'react-icons/pi'
 import CategoriesListItem from './CategoriesListItem'
 import syncTemplateData from '@/utils/syncTemplateData'
-import {AiOutlineFileText, AiOutlineSetting} from 'react-icons/ai'
 import {orderableDocumentListDeskItem} from '@sanity/orderable-document-list'
 
 const pageTemplates = config?.studio?.docTypes
 
 export const structure = (S: StructureBuilder, context: ConfigContext) => {
+  // Make sure template config is synced before building the menu
   syncTemplateData(context)
 
   return S.list()
     .title('Menu')
     .items([
+      // ===========================
+      // HOME (singleton)
+      // ===========================
       S.listItem()
         .title('Home')
         .icon(AiOutlineHome)
@@ -34,11 +39,49 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
             .documentId('pageHome')
             .views([S.view.form(), IframePreview(S), SeoPane(S)])
         ),
+
       S.divider(),
+
+      // ===========================
+      // PAGES
+      // ===========================
       S.documentTypeListItem('page').title('Pages'),
+
       S.divider(),
+
+      // ===========================
+      // BLOG BLOCK (NEW)
+      // ===========================
+      // Posts list
+      S.listItem()
+        .title('Posts')
+        .icon(BsNewspaper)
+        .child(S.documentTypeList('post').title('Posts')),
+
+      // Authors (backed by `publisher` documents)
+      S.listItem()
+        .title('Authors')
+        .icon(BsPencil)
+        .child(S.documentTypeList('publisher').title('Authors')),
+
+      // Optional: Post Categories (if you want the whole blog block together)
+      // Comment out if you don't want it visible yet.
+      S.listItem()
+        .title('Post Categories')
+        .icon(BiCategory)
+        .child(S.documentTypeList('categoryPost').title('Post Categories')),
+
+      S.divider(),
+
+      // ===========================
+      // OTHER CONTENT TYPES
+      // ===========================
       S.documentTypeListItem('testimonial'),
       S.documentTypeListItem('faq'),
+
+      // ===========================
+      // TEMPLATES
+      // ===========================
       S.listItem()
         .title('Templates')
         .child(
@@ -63,6 +106,7 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
                 ),
               S.documentTypeListItem('templateCategory').title('Template Categories'),
               S.divider(),
+              // Template singletons
               SingletonListItem({
                 type: 'pageTemplates',
                 title: 'Leadpage Template Gallery',
@@ -91,6 +135,10 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
             ])
         )
         .icon(AiOutlineFileText),
+
+      // ===========================
+      // INTEGRATIONS
+      // ===========================
       S.listItem()
         .title('Integrations')
         .child(
@@ -123,10 +171,23 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
             ])
         )
         .icon(BsPlug),
+
       S.divider(),
+
+      // ===========================
+      // NAV & FOOTER
+      // ===========================
       SingletonListItem({type: 'navigation', title: 'Navigation', icon: MdOutlineSmartButton, S}),
       SingletonListItem({type: 'footer', title: 'Footer', icon: RiLayoutBottom2Line, S}),
+
+      // ===========================
+      // LEGACY CATEGORIES (site-wide)
+      // ===========================
       CategoriesListItem({type: 'category', title: 'Categories', S, context}),
+
+      // ===========================
+      // SITE SETTINGS
+      // ===========================
       S.listItem()
         .title('Site Settings')
         .child(
@@ -141,10 +202,13 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
     ])
 }
 
+// Default document views
 export const defaultDocumentNode = (S: StructureBuilder, {schemaType}: {schemaType: string}) => {
+  // Keep iframe + SEO panes for template docs
   if (pageTemplates.includes(schemaType)) {
     return S.document().views([S.view.form(), IframePreview(S, {schemaType}), SeoPane(S)])
   }
 
+  // Default view for other docs
   return S.document().views([S.view.form()])
 }
