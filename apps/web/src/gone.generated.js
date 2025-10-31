@@ -76,7 +76,6 @@ const goneList = [
   "/legal",
   "/library/sales-funnel-course",
   "/lp.",
-  "/marketing-resources",
   "/marketing-resources/#guides",
   "/product/website-builder",
   "/ruth-soukup",
