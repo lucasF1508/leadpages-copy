@@ -49,10 +49,9 @@ export const generateMetadataStatic = async ({
 
   const imgUrl = image ? (parseImageRef(image)?.url ?? null) : null
 
-  // canonical: prioridad al explicitado; sino por path/slug; siempre limpio
-  const canonicalPath = cleanPath(
-    canonical || path || (slug ? `/${slug}` : '/')
-  )
+ const canonicalPath = cleanPath(
+  canonical ?? (path?.startsWith('/') ? path : `/${path}`) ?? (slug ? `/${slug}` : '/')
+)
 
   return {
     ...(title ? { title } : {}),
