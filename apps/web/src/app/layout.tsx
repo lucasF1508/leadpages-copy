@@ -50,6 +50,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: `dataLayer.push({ 'event': 'start_pw' });` }}
           id="profit-well-retain" 
         />
+        <Script
+          id="hs-script-loader"
+          src="https://js.hs-scripts.com/21794907.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body className={`${inter.variable} ${uxumVF.variable} ${rocGrotesk.variable} theme-dark font-sans text-body`}>
         {/* @ts-expect-error Server Component https://github.com/vercel/next.js/issues/42292 */}
@@ -60,11 +65,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* @ts-expect-error Server Component https://github.com/vercel/next.js/issues/42292 */}
         <Footer />
         {draftMode().isEnabled && <PreviewPane />}
-        <Script
-          id="hs-script-loader"
-          src="https://js.hs-scripts.com/21794907.js"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   )
