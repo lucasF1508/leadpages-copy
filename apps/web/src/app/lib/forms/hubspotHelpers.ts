@@ -245,8 +245,25 @@ export const formApiSubmission = async (data: any) => {
 }
 
 export const submitToHubSpot = async (formData : any) => {
+  const payload = {
+    ...formData,
+    // Valores por defecto de HubSpot
+    formId: formData?.formId || 'b9cf01c6-afce-4838-a074-d7bf202da044',
+    // Fallback del hutk desde el browser
+    hutk:
+      typeof document !== 'undefined'
+        ? document.cookie.match(/(?:^|; )hubspotutk=([^;]+)/)?.[1] ?? null
+        : formData?.hutk ?? null,
+    page_name:
+      typeof document !== 'undefined' ? document.title : formData?.page_name,
+    page_url:
+      typeof window !== 'undefined' ? window.location.href : formData?.page_url,
+    portalId: formData?.portalId || '21794907',
+  }
+
   const response = await fetch('/api/send-hubspot', {
-    body: JSON.stringify(formData),
+    body: JSON.stringify(payload),
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -254,8 +271,12 @@ export const submitToHubSpot = async (formData : any) => {
   })
 
   if (!response.ok) {
-    const { error } = await response.json()
-    console.error(error.message)
+    try {
+      const { error } = await response.json()
+      console.error(error?.message || error)
+    } catch {
+      // ignore
+    }
     throw new Error('Failed to submit form. Please contact support.')
   }
 
