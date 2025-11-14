@@ -2,7 +2,7 @@
 // Complete, cleaned up, with Posts and Authors added
 
 import {MdBusiness, MdOutlineSmartButton, MdSettings} from 'react-icons/md'
-import {BsGraphUp, BsPlug, BsNewspaper, BsPencil} from 'react-icons/bs' // ✅ added BsNewspaper, BsPencil
+import {BsGraphUp, BsPlug, BsNewspaper, BsPencil, BsArchive} from 'react-icons/bs'
 import config from 'config'
 import {AiOutlineHome, AiOutlineFileText, AiOutlineSetting} from 'react-icons/ai'
 import IframePreview from './CustomViews/IframePreview'
@@ -64,12 +64,25 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
         .icon(BsPencil)
         .child(S.documentTypeList('publisher').title('Authors')),
 
-      // Optional: Post Categories (if you want the whole blog block together)
-      // Comment out if you don't want it visible yet.
+      // Optional: Post Categories
       S.listItem()
         .title('Post Categories')
         .icon(BiCategory)
         .child(S.documentTypeList('categoryPost').title('Post Categories')),
+
+      S.divider(),
+
+      // ===========================
+      // ARCHIVES
+      // ===========================
+      S.listItem()
+        .title('Archives')
+        .icon(BsArchive)
+        .child(
+          S.documentList()
+            .title('Archives')
+            .filter('_type == "pageArchive" && slug.current != "integrations"')
+        ),
 
       S.divider(),
 
@@ -204,11 +217,8 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
 
 // Default document views
 export const defaultDocumentNode = (S: StructureBuilder, {schemaType}: {schemaType: string}) => {
-  // Keep iframe + SEO panes for template docs
   if (pageTemplates.includes(schemaType)) {
     return S.document().views([S.view.form(), IframePreview(S, {schemaType}), SeoPane(S)])
   }
-
-  // Default view for other docs
   return S.document().views([S.view.form()])
 }

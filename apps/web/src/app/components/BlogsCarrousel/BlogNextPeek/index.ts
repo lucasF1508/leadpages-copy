@@ -1,3 +1,4 @@
-import BlogNextPeek from "./BlogNextPeek";
+import BlogNextPeek from './BlogNextPeek'
 
-export default BlogNextPeek;
+export default BlogNextPeek
+

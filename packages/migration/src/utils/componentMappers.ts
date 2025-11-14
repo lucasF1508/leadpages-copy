@@ -1,5 +1,7 @@
 import shapeAccordionWithSidebar from "@src/shape/accordionWithSidebar"
 import shapeBanner from "@src/shape/banner"
+import shapeBlogCard from "@src/shape/blogCard"
+import shapeBlogSection from "@src/shape/blogSection"
 import shapeCarruselWithArrows from "@src/shape/carruselWithArrows"
 import shapeCtaInline from "@src/shape/ctaInline"
 import shapeFAQAccordion from "@src/shape/faqAccordion"
@@ -20,6 +22,8 @@ import shapeTextBlock from "@src/shape/textBlock"
 const componentMappers: Record<string, (component: any) => any> = {
   accordionWithSidebar: shapeAccordionWithSidebar,
   banner: shapeBanner,
+  blogCard: shapeBlogCard,
+  blogSection: shapeBlogSection,
   carruselWithArrows: shapeCarruselWithArrows,
   cta: shapeGlobalCta,
   ctaInline: shapeCtaInline,

@@ -41,7 +41,7 @@ export async function getStaticProps(context) {
             "url": path,
           })
         }
-      }`, 
+      }`,
       {preview}
     ),
     query(`*[_type == 'pageArchive' && archiveOf == "${docType}"][0] {..., ${seoQuery}}`, {preview}),
@@ -58,3 +58,4 @@ export async function getStaticProps(context) {
 }
 
 export default UserSitemapPage
+

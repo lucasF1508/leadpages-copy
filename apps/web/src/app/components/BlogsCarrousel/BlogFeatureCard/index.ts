@@ -1,3 +1,4 @@
-import BlogFeatureCard from "./BlogFeatureCard";
+import BlogFeatureCard from './BlogFeatureCard'
 
-export default BlogFeatureCard;
+export default BlogFeatureCard
+

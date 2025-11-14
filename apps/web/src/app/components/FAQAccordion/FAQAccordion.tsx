@@ -88,8 +88,6 @@ const FAQAccordionItem = ({
             components={{
               marks: {
                 link: ({ children, value }) => {
-                  console.log('Link value:', value) // Debug
-
                   // Determine link type and URL
                   const url = value?.url || value?.href || '#'
                   const isExternal = url.startsWith('http')

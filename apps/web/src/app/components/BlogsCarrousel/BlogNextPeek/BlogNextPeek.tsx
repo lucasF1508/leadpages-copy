@@ -39,3 +39,4 @@ export default function BlogNextPeek({ className, nextItem }: BlogNextPeekProps)
     </div>
   )
 }
+

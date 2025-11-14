@@ -98,7 +98,7 @@ export async function getStaticProps(context) {
         {
           preview,
         }
-      ),  
+      ),
       query(
         `*[_type == "pageArchive" && archiveOf == "${docType}"][0] {
           ...,
@@ -119,3 +119,4 @@ export async function getStaticProps(context) {
 }
 
 export default ArchivePage
+

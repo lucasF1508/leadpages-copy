@@ -18,6 +18,10 @@ import dynamic from 'next/dynamic'
 const RackComponentList = {
   accordionWithSidebar: [dynamic(() => import('@/components/AccordionWithSidebar/AccordionWithSidebar')), { pinion: false }],
   addOnCards: dynamic(() => import('@/components/AddOnCards')),
+  blogSection: [
+    dynamic(() => import('@/components/BlogSection/BlogSection')),
+    { pinion: false },
+  ],
   bestOfBlog: [
     dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
     { pinion: false },
@@ -60,13 +64,20 @@ const RackComponentList = {
     dynamic(() => import('@/components/PageAnchor')),
     { pinion: false },
   ],
-  pressArticlesSection: [
-    dynamic(() => import('@/components/PressArticlesSection')),
-    { pinion: false },
+  pressArticlesSection: [dynamic(() => import('@/components/PressArticlesSection')),
+  { pinion: false },
   ],
   prevNextCard: dynamic(() => import('@/components/PrevNextCard/PrevNextCard')),
+  relatedContent: [
+    dynamic(() => import('@/components/RelatedContent')),
+    { pinion: false },
+  ],
   resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
+  socialMedia: [
+    dynamic(() => import('@/components/SocialMedia')),
+    { pinion: false },
+  ],
   resourcesGrid: [
     dynamic(() => import('@/components/ResourcesGrid')),
     { pinion: false },

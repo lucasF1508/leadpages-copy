@@ -47,7 +47,10 @@ async function respond410(request) {
 
   // 3) Minimal plain-text fallback
   return new NextResponse('Gone', {
-    headers: { 'cache-control': 'no-store', 'x-from-middleware': '410-fallback' },
+    headers: {
+      'cache-control': 'no-store',
+      'x-from-middleware': '410-fallback',
+    },
     status: 410,
   })
 }
@@ -131,7 +134,8 @@ const patterns =
         !url.startsWith('/faq') &&
         !url.startsWith('/press') &&
         !url.startsWith('/product/feature-index') &&
-        !url.startsWith('/brand')
+        !url.startsWith('/brand') &&
+        !url.startsWith('/blog')
     )
     ?.map((pathname) => new URLPattern({ pathname })) ?? []
 
@@ -180,8 +184,7 @@ export async function middleware(request) {
       return redirect
     }
     url.pathname = splitTest.rewrite
-    if (url.pathname.includes('/home-'))
-      url.pathname = `/home${url.pathname}`
+    if (url.pathname.includes('/home-')) url.pathname = `/home${url.pathname}`
     const rewritten = NextResponse.rewrite(url)
     if (splitTest.cookie) rewritten.cookies.set('__lpst', splitTest.cookie)
     rewritten.headers.set('x-from-middleware', 'ab-rewrite')

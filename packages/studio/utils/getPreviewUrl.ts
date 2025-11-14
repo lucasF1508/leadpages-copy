@@ -1,4 +1,4 @@
-import type {ResolveProductionUrlContext, SanityDocumentLike} from 'sanity'
+import type { ResolveProductionUrlContext, SanityDocumentLike } from 'sanity'
 import sanityConfig from 'config'
 
 const datasetEndpoints: Record<string, string> = {
@@ -10,7 +10,11 @@ export const getPreviewUrl = (doc: SanityDocumentLike, dataset: string) => {
   const params = new URLSearchParams()
   params.set('preview', 'true')
   params.set('dataset', dataset)
-  params.set('secret', import.meta.env.SANITY_STUDIO_PREVIEW_SECRET)
+
+  const secret = import.meta.env.SANITY_STUDIO_PREVIEW_SECRET
+  if (secret) {
+    params.set('secret', secret)
+  }
 
   if (doc?.slug?.current) {
     params.set('slug', doc.slug.current)
@@ -40,12 +44,18 @@ export const getPreviewPaneUrl = async (
 ) => {
   if (!context?.document) return undefined
 
-  const {document, dataset} = context
-  const {_type} = document
-  const pageTemplates = sanityConfig?.studio?.docTypes
+  const { document, dataset } = context
+  const { _type } = document
 
-  if (pageTemplates.includes(_type)) {
-    const url = getPreviewUrl(document, dataset)
-    return url
+  try {
+    const pageTemplates = sanityConfig?.studio?.docTypes || []
+
+    if (pageTemplates.includes(_type)) {
+      const url = getPreviewUrl(document, dataset)
+      return url
+    }
+  } catch (error) {
+    console.warn('Error getting preview URL:', error)
+    return undefined
   }
 }

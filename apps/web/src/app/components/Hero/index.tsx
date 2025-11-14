@@ -3,6 +3,7 @@ import type { HeroPricingProps } from './HeroPricing/HeroPricing'
 import type { HeroWithMediaProps } from './HeroWithMedia'
 import HeroBanner from './HeroBanner'
 import HeroBase from './HeroBase'
+import HeroBlog from './HeroBlog'
 import HeroComparisons from './HeroComparisons'
 import HeroHome from './HeroHome'
 import HeroPricing from './HeroPricing'
@@ -23,12 +24,14 @@ const Hero = ({ hero }: HeroProps) => {
   switch (heroProps?._type) {
     case 'heroBase':
       return <HeroBase {...heroProps} />
+    case 'heroBlog':
+      return <HeroBlog {...heroProps} />
+    case 'heroComparisons':
+      return <HeroComparisons {...heroProps} />
     case 'heroHome':
       return <HeroHome {...heroProps} />
     case 'heroPricing':
       return <HeroPricing {...heroProps} />
-    case 'heroComparisons':
-      return <HeroComparisons {...heroProps} />
     case 'heroSimple':
       return <HeroSimple {...heroProps} />
     case 'heroBanner':

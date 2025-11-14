@@ -103,3 +103,4 @@ export async function getStaticPaths() {
 }
 
 export default CategoryPage
+

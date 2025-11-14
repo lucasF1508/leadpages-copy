@@ -1,30 +1,30 @@
-import type {WorkspaceOptions} from 'sanity'
+import type { WorkspaceOptions } from 'sanity'
 import adminMessagePlugin from '@gearbox-built/sanity-admin-message'
 import multiReferencesPlugin from '@gearbox-built/sanity-multi-reference'
-import {structuredData} from '@gearbox-built/sanity-structured-data'
+import { structuredData } from '@gearbox-built/sanity-structured-data'
 import structuredDataConfig from './structuredDataConfig'
-import {table} from '@sanity/table'
-import {visionTool} from '@sanity/vision'
+import { table } from '@sanity/table'
+import { visionTool } from '@sanity/vision'
 import capitalize from 'lodash/capitalize'
 import PathInputPlugin from '@gearbox-built/sanity-path-input'
 import generatePath from '@/utils/paths/generatePath'
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {media} from 'sanity-plugin-media'
+import { defineConfig } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { media } from 'sanity-plugin-media'
 import './styles/styles.css'
 import DocumentActions from './actions/DocumentActions'
 import {
   defaultDocumentNode as legacyDefaultDocumentNode,
   structure as legacyStructure,
 } from './legacy/components/DeskStructure'
-import {Layout as LegacyLayout, ToolMenu as LegacyToolMenu} from './legacy/components/Studio'
+import { Layout as LegacyLayout, ToolMenu as LegacyToolMenu } from './legacy/components/Studio'
 import legacySchemaTypes from './legacy/schema'
 import schemaTypes from './schema'
-import {getPreviewPaneUrl} from './utils/getPreviewUrl'
-import {tags} from 'sanity-plugin-tags'
-import {defaultDocumentNode, structure} from './components/DeskStructure'
-import {Logo} from './components/Studio'
-import {docCreationControl} from './plugins/doc-creation-control'
+import { getPreviewPaneUrl } from './utils/getPreviewUrl'
+import { tags } from 'sanity-plugin-tags'
+import { defaultDocumentNode, structure } from './components/DeskStructure'
+import { Logo } from './components/Studio'
+import { docCreationControl } from './plugins/doc-creation-control'
 
 const sanityDatasets = [
   import.meta.env.SANITY_STUDIO_API_DATASET,
@@ -44,7 +44,7 @@ const config = defineConfig(
       releases: {
         enabled: false,
       },
-      scheduledPublishing: {enabled: false},
+      scheduledPublishing: { enabled: false },
       plugins: [
         structureTool({
           name: 'desk',
@@ -53,10 +53,10 @@ const config = defineConfig(
           defaultDocumentNode:
             dataset === 'production_v3' ? defaultDocumentNode : legacyDefaultDocumentNode,
         }),
-        visionTool({defaultApiVersion: import.meta.env.SANITY_STUDIO_API_VERSION}),
+        visionTool({ defaultApiVersion: import.meta.env.SANITY_STUDIO_API_VERSION }),
         table(),
         media(),
-        multiReferencesPlugin({apiVersion: import.meta.env.SANITY_STUDIO_API_VERSION}),
+        multiReferencesPlugin({ apiVersion: import.meta.env.SANITY_STUDIO_API_VERSION }),
         adminMessagePlugin(),
         tags({}),
         PathInputPlugin({
@@ -65,18 +65,18 @@ const config = defineConfig(
         }),
         structuredData(structuredDataConfig),
         dataset !== 'production_v3' &&
-          docCreationControl({
-            exclude: [
-              'page',
-              'experiments',
-              'comparison',
-              'footer',
-              'navigation',
-              'integration',
-              'pageHome',
-              'template',
-            ],
-          }),
+        docCreationControl({
+          exclude: [
+            'page',
+            'experiments',
+            'comparison',
+            'footer',
+            'navigation',
+            'integration',
+            'pageHome',
+            'template',
+          ],
+        }),
       ].filter(Boolean),
       document: {
         actions: DocumentActions,

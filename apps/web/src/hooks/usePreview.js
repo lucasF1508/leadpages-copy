@@ -76,10 +76,6 @@ const usePreview = ({
     const { shapeData = (data) => data } =
       {
         '/404': await import('@pages/404'),
-        '/blog': await import('@pages/blog'),
-        '/blog/category/[category]': await import(
-          '@pages/blog/category/[category]'
-        ),
       }[pathname] || {}
 
     const getClient = (await import('client')).default

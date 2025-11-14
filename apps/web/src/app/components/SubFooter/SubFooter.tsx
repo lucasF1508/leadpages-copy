@@ -4,7 +4,6 @@ import Heading from '@/components/Heading'
 import Label from '@/components/Label'
 import Pinion from '@/components/Pinion'
 import SubFooterGradient from '@/components/SubFooter/SubFooterGradient'
-import Link from '../Link'
 
 export interface SubFooterProps {
   className?: string
@@ -62,15 +61,16 @@ const SubFooter = ({
             />
           )}
 
-          <Link
+          <a
+            href={ctaHref}
             aria-label={ctaLabel}
-            className="mt-4 mb-2 rounded-md"
-            linkStyle="button-solid" 
-            target={target === '_blank' ? true : undefined} 
-            url={ctaHref}
+            target={target}
+            rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+            className="link-button-solid mt-4 mb-2"
+            style={{ position: 'relative', zIndex: 20 }}
           >
             {ctaLabel}
-          </Link>
+          </a>
         </Pinion>
       </div>
     </div>

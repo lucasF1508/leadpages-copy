@@ -76,7 +76,6 @@ const useForm = ({ config = {}, form }: UseFormProps) => {
 
     if (status === 'subscribed') {
       // eslint-disable-next-line no-console
-      console.log('Subscribed was successful')
       setFormHasSubmitted(true)
     } else if (status === 'error' || message) {
       setIsLoading(false)

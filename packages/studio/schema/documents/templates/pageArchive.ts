@@ -13,11 +13,14 @@ export const pageArchive = {
   fields: [
     ...G.group('content', [
       F.title(),
-      F.field('hero'),
-      F.number({
-        name: 'docsPerPage',
-        initialValue: 12,
-        validation: (Rule) => Rule.greaterThan(1).integer(),
+      F.array({
+        name: 'tags',
+        title: 'Tags',
+        description:
+          'Articles using these tags will be excluded from the main roll. They will still appear in search results and categories.',
+        of: [{type: 'string'}],
+        options: {layout: 'tags'},
+        initialValue: [],
       }),
       F.message('This page is automatically populated with the selected document type', {
         hidden: ({parent}) => !parent?.archiveOf,

@@ -33,22 +33,33 @@ export default async function Page({
   params: Promise<{ segments: string[] }>
 }) {
   const { segments = [] } = await params
-  const path = joinPath(segments)
+  const rawPath = joinPath(segments)
+  const withLeadingSlash =
+    rawPath && rawPath.startsWith('/') ? rawPath : `/${rawPath || ''}`
+  const withoutTrailingSlash =
+    withLeadingSlash === '/' ? '/' : withLeadingSlash.replace(/\/+$/g, '') || '/'
+  const normalizedPath = withoutTrailingSlash
+  const alternatePath = normalizedPath.replace(/^\/+/g, '')
+  const legacyPath = alternatePath.replace(/\/+$/g, '')
 
   const normalized = (s: string) => s.replace(/^\/|\/$/g, '')
   const isVwo =
-    normalized(path) === 'pricing' ||
+    normalized(normalizedPath) === 'pricing' ||
     normalized(segments.join('/')) === 'pricing'
 
   const { components, hero } =
     (await query(
-      `*[_type == 'page' && path == $path] | order(_updatedAt desc) [0]{
+      `*[_type == 'page' && (path == $path || path == $alternatePath || path == $legacyPath)] | order(_updatedAt desc) [0]{
         ...,
         ${componentsQuery}
       }`,
       {
         preview: draftMode().isEnabled,
-        params: { path },
+        params: {
+          alternatePath,
+          legacyPath,
+          path: normalizedPath,
+        },
       }
     )?.data) || {}
 

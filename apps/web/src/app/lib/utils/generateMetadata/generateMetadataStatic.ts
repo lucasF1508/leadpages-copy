@@ -28,13 +28,25 @@ export const generateMetadataStatic = async ({
   slug = '',
   types = configTypes,
 }: GenerateMetadataStaticProps): Promise<Metadata> => {
+  const withLeadingSlash = path?.startsWith('/') ? path : path ? `/${path}` : ''
+  const withoutTrailingSlash =
+    withLeadingSlash === '/' ? '/' : withLeadingSlash.replace(/\/+$/g, '') || '/'
+  const normalizedPath = withoutTrailingSlash
+  const alternatePath = normalizedPath.replace(/^\/+/g, '')
+  const legacyPath = alternatePath.replace(/\/+$/g, '')
   const [data] = await runQuery(
-    `*[(path == $path || slug.current == $slug) && _type in $types]{
+    `*[((path == $path || path == $alternatePath || path == $legacyPath) || slug.current == $slug) && _type in $types]{
       ...(seo),
       "seoTitle": coalesce(seo.seoTitle, title)
     }`,
     {
-      params: { path, slug, types },
+      params: {
+        alternatePath,
+        legacyPath,
+        path: normalizedPath,
+        slug,
+        types,
+      },
       preview: draftMode().isEnabled,
     }
   )
@@ -49,9 +61,9 @@ export const generateMetadataStatic = async ({
 
   const imgUrl = image ? (parseImageRef(image)?.url ?? null) : null
 
- const canonicalPath = cleanPath(
-  canonical ?? (path?.startsWith('/') ? path : `/${path}`) ?? (slug ? `/${slug}` : '/')
-)
+  const canonicalPath = cleanPath(
+    canonical ?? (normalizedPath || (slug ? `/${slug}` : '/'))
+  )
 
   return {
     ...(title ? { title } : {}),
