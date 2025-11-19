@@ -33,7 +33,7 @@ const Title = styled('div', {
   fontFamily: 'Space Mono',
   fontSize: '12px',
   letterSpacing: '2px',
-  lineHeight: '18px',
+  lineHeight: '19px',
   textTransform: 'uppercase',
   opacity: 0.5,
   color: '$black',

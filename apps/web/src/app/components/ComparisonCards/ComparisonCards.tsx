@@ -3,6 +3,7 @@ import type { ImageType } from '@types'
 import React from 'react'
 import ComparisonCard from '@/components/ComparisonCard'
 import Pinion from '@/components/Pinion'
+import { normalizeUrl } from '@/lib/utils/normalizeUrl'
 
 export type ComparisonCardItem = {
   _type: 'comparisonCard'
@@ -29,9 +30,14 @@ export interface ComparisonCardsProps {
 }
 
 function normalizePath(p: string): string {
-  if (/^(https?:)?\/\//.test(p)) return p
+  if (/^(https?:)?\/\//.test(p)) {
+    // Para URLs externas, usar normalizeUrl
+    return normalizeUrl(p)
+  }
   const withSlash = p.startsWith('/') ? p : `/${p}`
-  return withSlash.replace(/\/{2,}/g, '/')
+  // Normalizar para eliminar trailing slashes y dobles slashes
+  const normalized = withSlash.replace(/\/{2,}/g, '/')
+  return normalizeUrl(normalized)
 }
 
 function resolveHref(link: any): string | undefined {

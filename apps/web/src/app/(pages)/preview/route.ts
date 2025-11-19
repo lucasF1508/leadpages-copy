@@ -1,4 +1,4 @@
-import type { NextRequest} from 'next/server';
+import type { NextRequest } from 'next/server';
 import { draftMode } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { query } from '@/lib/queries'
@@ -34,7 +34,8 @@ export async function GET(request: NextRequest) {
     )
   }
 
-  const doc = await query(`*[_type == $type && path == $path] | order(_updatedAt desc) [0] {
+  // Buscar primero con el path original
+  let doc = await query(`*[_type == $type && path == $path] | order(_updatedAt desc) [0] {
       "url": path,
       "slug": slug.current,
       kind
@@ -45,11 +46,48 @@ export async function GET(request: NextRequest) {
     },
     preview: true,
   })
-  .data || {}
+    .data || {}
+
+  // Si no encuentra, intentar con path normalizado (sin trailing slash)
+  if (!doc && path !== '/') {
+    const normalizedPath = path.replace(/\/+$/, '')
+    doc = await query(`*[_type == $type && path == $path] | order(_updatedAt desc) [0] {
+        "url": path,
+        "slug": slug.current,
+        kind
+      }`, {
+      params: {
+        path: normalizedPath,
+        type,
+      },
+      preview: true,
+    })
+      .data || {}
+  }
+
+  // Si aún no encuentra, intentar con path con trailing slash
+  if (!doc && path !== '/' && !path.endsWith('/')) {
+    const pathWithSlash = path + '/'
+    doc = await query(`*[_type == $type && path == $path] | order(_updatedAt desc) [0] {
+        "url": path,
+        "slug": slug.current,
+        kind
+      }`, {
+      params: {
+        path: pathWithSlash,
+        type,
+      },
+      preview: true,
+    })
+      .data || {}
+  }
 
   const { url } = doc as DocumentFields
   const origin = request.nextUrl.origin
-  const absoluteUrl = new URL(url, origin).toString()
+
+  // Si no hay url, usar el path original
+  const targetUrl = url || path
+  const absoluteUrl = new URL(targetUrl, origin).toString()
 
   draftMode().enable()
 

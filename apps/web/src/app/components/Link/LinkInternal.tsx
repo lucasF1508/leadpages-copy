@@ -8,6 +8,7 @@ import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
 import { scrollToHash } from '@/hooks/useScrollToHash'
 import { isChildrenText } from '@/lib/utils/isChildrenText'
+import { normalizeUrl } from '@/lib/utils/normalizeUrl'
 import LinkIcon from './LinkIcon'
 
 const LinkAnchor = forwardRef<HTMLAnchorElement, Partial<LinkInternalType>>(
@@ -54,8 +55,11 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
       return null
     }
 
+    // Normalizar la URL para eliminar trailing slashes
+    const normalizedUrl = normalizeUrl(url)
     const [base] = pathname?.split(/[?#]/)
-    const isSamePage = hasHash && base === url
+    const normalizedBase = normalizeUrl(base)
+    const isSamePage = hasHash && normalizedBase === normalizedUrl
     const handleScroll = (e: React.UIEvent) => {
       e.preventDefault()
       if (hasHash && hash) {
@@ -69,7 +73,7 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
       <NextLink
         href={{
           hash: hasHash ? hash : undefined,
-          pathname: url,
+          pathname: normalizedUrl,
         }}
         legacyBehavior
         passHref

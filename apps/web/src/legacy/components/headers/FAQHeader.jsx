@@ -12,7 +12,7 @@ const OuterContainer = styled('div', {
 })
 
 const HeaderContainer = styled('div', {
-  maxWidth: '1140px',
+  maxWidth: '1141px',
   marginLeft: 'auto',
   marginRight: 'auto',
   paddingTop: '6rem',

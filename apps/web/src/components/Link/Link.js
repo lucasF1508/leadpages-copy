@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { scrollToHash } from '@hooks/useScrollToHash'
+import { normalizeUrl } from '@lib/utils/normalizeUrl'
 import Modal, { ModalLink, ModalProvider } from '@components/Modal'
 import SignUpWithEmailFieldLink from './SignUpWithEmailFieldLink'
 
@@ -103,7 +104,10 @@ const Link = (
   const hasIcon = hasIconOrg && Icon && props?.linkStyle !== 'none'
   const { asPath } = useRouter()
   const [path] = asPath.split(/[?#]/)
-  const _condition = path === url && hasHash ? 'hash' : condition
+  // Normalizar URLs para comparación y uso (solo si existen)
+  const normalizedPath = path ? normalizeUrl(path) : path
+  const normalizedUrl = url ? normalizeUrl(url) : url
+  const _condition = normalizedPath && normalizedUrl && normalizedPath === normalizedUrl && hasHash ? 'hash' : condition
   const Element = props?.linkStyle === 'none' ? 'a' : $Link
 
   if (disabled) {
@@ -134,7 +138,7 @@ const Link = (
 
       return (
         <NextLink
-          href={`${url}${hasHash && hash ? `#${hash}` : ''}`}
+          href={`${normalizedUrl}${hasHash && hash ? `#${hash}` : ''}`}
           legacyBehavior
           passHref
         >
