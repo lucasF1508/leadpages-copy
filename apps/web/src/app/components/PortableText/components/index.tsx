@@ -7,6 +7,7 @@ import clsx from 'clsx'
 import PageAnchor from './Anchor'
 import Embed from './Embed'
 import Media from './Media'
+import StartATrial from './StartATrial'
 import Table from './Table'
 
 interface ComponentTypesProps {
@@ -32,6 +33,7 @@ export const types = ({
   pageAnchor: ({ value }) => (
     <PageAnchor className={clsx(classNames?.pageAnchor)} value={value} />
   ),
+  startATrial: ({ value }) => <StartATrial value={value} />,
   table: ({ value }) => (
     <Table className={clsx(classNames?.table)} value={value} />
   ),

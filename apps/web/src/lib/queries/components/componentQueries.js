@@ -75,6 +75,28 @@ const customerRotator = `
 
 // Content
 const schemaInlineCTAGlobalBlock = `_type == "schemaInlineCTAGlobalBlock" => {..., cta->}`
+const startATrial = `_type == "startATrial" => {
+  ...,
+  link {
+    ...,
+    internal-> {
+      _id,
+      _type,
+      "slug": slug.current,
+      "path": path
+    }
+  },
+  backgroundImage {
+    asset->{
+      _id,
+      url,
+      metadata {
+        dimensions { width, height },
+        lqip,
+      },
+    },
+  },
+}`
 
 const components = [
   ctaInline, 
@@ -85,7 +107,7 @@ const components = [
   listingBlock,
   cardsComparison
 ].join(',')
-const content = [schemaInlineCTAGlobalBlock].join(',')
+const content = [schemaInlineCTAGlobalBlock, startATrial].join(',')
 const pages = [cta, parent, seoQuery].join(',')
 
 

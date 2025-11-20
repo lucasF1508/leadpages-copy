@@ -128,7 +128,29 @@ export const getPageType = (path?: string[]) => {
 // Content query for blog posts
 export const contentQuery = `content[] {
   ...,
-  _type == "schemaInlineCTAGlobalBlock" => {..., cta->}
+  _type == "schemaInlineCTAGlobalBlock" => {..., cta->},
+  _type == "startATrial" => {
+    ...,
+    link {
+      ...,
+      internal-> {
+        _id,
+        _type,
+        "slug": slug.current,
+        "path": path
+      }
+    },
+    backgroundImage {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions { width, height },
+          lqip,
+        },
+      },
+    },
+  },
 }`
 
 // Query for getting a single post by slug

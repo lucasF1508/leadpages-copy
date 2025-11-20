@@ -8,6 +8,8 @@ import Rack from '@/components/Rack'
 import SocialMedia from '@/components/SocialMedia'
 import RelatedContent from '@/components/RelatedContent'
 import SubFooter from '@/components/SubFooter'
+import StartATrial from '@/components/StartATrial'
+import StartATrialType from '@/components/PortableText/components/StartATrial'
 
 interface BlogPostLayoutProps {
   post: {
@@ -458,6 +460,9 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
                         </div>
                       )
                     },
+                    startATrial: ({ value }: any) => (
+                      <StartATrialType value={value} />
+                    ),
                   },
                   list: {
                     bullet: ({ children }: any) => (
@@ -531,8 +536,10 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
                 </p>
               </div>
             )}
+
           </div>
         </div>
+
       </div>
 
       {/* Getting Started Section (before Social Media) */}
@@ -665,3 +672,4 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
 }
 
 export default BlogPostLayout
+

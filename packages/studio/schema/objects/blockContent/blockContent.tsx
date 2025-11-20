@@ -153,5 +153,8 @@ export const blockContent = F.array({
     {
       type: 'pageAnchor',
     },
+    {
+      type: 'startATrial',
+    },
   ],
 })

@@ -85,6 +85,7 @@ const RackComponentList = {
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
   sectionCTA: dynamic(() => import('@/components/SectionCTA')),
   spacer: dynamic(() => import('@/components/Spacer')),
+  startATrial: dynamic(() => import('@/components/StartATrial')),
   subFooter: [
     dynamic(() => import('@/components/SubFooter')),
     { pinion: false },

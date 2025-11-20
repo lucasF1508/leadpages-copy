@@ -118,7 +118,29 @@ const runBlogQueries = async ({
             image,
             content[] {
               ...,
-              image
+              image,
+              _type == "startATrial" => {
+                ...,
+                link {
+                  ...,
+                  internal-> {
+                    _id,
+                    _type,
+                    "slug": slug.current,
+                    "path": path
+                  }
+                },
+                backgroundImage {
+                  asset->{
+                    _id,
+                    url,
+                    metadata {
+                      dimensions { width, height },
+                      lqip,
+                    },
+                  },
+                },
+              },
             },
             // === Aliases so legacy components keep working ===
             "author": publisher->,
