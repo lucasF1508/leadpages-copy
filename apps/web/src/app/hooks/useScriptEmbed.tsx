@@ -80,11 +80,19 @@ const useScriptEmbed = ({
         if (key.includes('data-')) {
           const [, dataValue] = key.split('-')
           script.dataset[camelCase(dataValue)] = attrs[key]
-        } else {
-          script.setAttribute(key, attrs[key] || '')
+        } else if (key === 'async' || key === 'defer') {
+          // Handle boolean attributes - attrs[key] is string | undefined
+          const attrValue = attrs[key]
+          if (attrValue && attrValue !== 'false') {
+            script[key] = true
+          }
+        } else if (key === 'src' && attrs[key]) {
+          script.src = attrs[key]
+        } else if (attrs[key]) {
+          script.setAttribute(key, attrs[key])
         }
       })
-      script.id = `embedSrc-${kebabCase(attrs?.src)}`
+      script.id = `embedSrc-${kebabCase(attrs?.src || 'script')}`
 
       const existingScript = document.getElementById(script.id)
 

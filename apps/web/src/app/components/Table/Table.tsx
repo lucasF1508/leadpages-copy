@@ -16,24 +16,23 @@ const Table = ({ className, rows }: TableProps) => {
   if (!rows) return null
 
   return (
-    <div className="relative overflow-x-auto max-sm:box-[mx*-1] max-sm:w-auto max-sm:box-px">
+    <div className="relative overflow-x-auto max-sm:box-[mx*-1] max-sm:w-auto max-sm:box-px my-6">
       <div className="max-sm:min-w-[35rem] rounded-sm border border-border">
         <table
           className={clsx(
-            'mx-auto block w-full sm:table sm:table-fixed rounded-sm overflow-hidden',
+            'mx-auto w-full sm:table rounded-sm overflow-hidden',
             className
           )}
         >
-          <tbody className="block w-full sm:table-row-group">
+          <tbody className="sm:table-row-group">
             {rows &&
               rows.map(({ _key, cells }, rowIndex) => {
                 const isHeaderRow = rowIndex === 0
                 return (
                   <tr
                     className={clsx(
-                      'odd:bg-surface-muted/50 table-row',
-                      isHeaderRow &&
-                        '[&_td]:!border-0 table-row [&_td]:!font-bold'
+                      'block sm:table-row odd:bg-surface-muted/50',
+                      isHeaderRow && '[&_td]:!border-0 [&_td]:!font-bold'
                     )}
                     key={_key}
                   >
@@ -44,14 +43,23 @@ const Table = ({ className, rows }: TableProps) => {
                         return (
                           <td
                             className={clsx(
-                              '[&_span]:flex-auto type-body-sm align-left border-border box-border flex w-full flex-row flex-nowrap items-center justify-between border-t px-2 py-1 text-left table-cell',
+                              'type-body-sm border-border box-border border-t px-2 py-1 text-left',
+                              'block sm:table-cell',
+                              'sm:align-left',
+                              // Mobile: flex layout with heading
+                              'flex flex-row flex-nowrap items-center justify-between sm:flex-none',
+                              'w-full sm:w-auto',
                               isEmpty && 'hidden sm:table-cell',
-                              'first:w-1/3'
+                              // Remove first:w-1/3 to prevent overlap
                             )}
                             data-heading={rows[0]?.cells[cellIndex]}
                             key={`${_key}-${cell}-${cellIndex}`}
                           >
-                            {cell && <span>{cell}</span>}
+                            {/* Mobile: show heading before content */}
+                            <span className="flex-0 flex-shrink-0 font-bold mr-3 sm:hidden">
+                              {rows[0]?.cells[cellIndex]}:{' '}
+                            </span>
+                            {cell && <span className="flex-1 sm:flex-none">{cell}</span>}
                           </td>
                         )
                       })}

@@ -10,6 +10,9 @@ import RelatedContent from '@/components/RelatedContent'
 import SubFooter from '@/components/SubFooter'
 import StartATrial from '@/components/StartATrial'
 import StartATrialType from '@/components/PortableText/components/StartATrial'
+import TableType from '@/components/PortableText/components/Table'
+import InlineCTAType from '@/components/PortableText/components/InlineCTA'
+import EmbedType from '@/components/PortableText/components/Embed'
 
 interface BlogPostLayoutProps {
   post: {
@@ -462,6 +465,15 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
                     },
                     startATrial: ({ value }: any) => (
                       <StartATrialType value={value} />
+                    ),
+                    table: ({ value }: any) => (
+                      <TableType value={value} />
+                    ),
+                    schemaInlineCTAGlobalBlock: ({ value }: any) => (
+                      <InlineCTAType value={value} />
+                    ),
+                    embed: ({ value }: any) => (
+                      <EmbedType value={value} />
                     ),
                   },
                   list: {

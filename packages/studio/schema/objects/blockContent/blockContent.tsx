@@ -7,6 +7,8 @@ import {MdFormatListNumbered} from 'react-icons/md'
 import styled from 'styled-components'
 import {findChildProp} from '@/utils/findChildProp'
 import {colorDecorators, styles} from './util'
+import {schemaInlineCTAGlobalBlock} from '../inlineCTAGlobalBlock'
+import {logoGrid} from '../../components/logoGrid'
 
 export const blockContent = F.array({
   title: 'Block Content',
@@ -156,5 +158,7 @@ export const blockContent = F.array({
     {
       type: 'startATrial',
     },
+    schemaInlineCTAGlobalBlock,
+    logoGrid,
   ],
 })

@@ -6,6 +6,8 @@ import type { ClassValue } from 'clsx'
 import clsx from 'clsx'
 import PageAnchor from './Anchor'
 import Embed from './Embed'
+import InlineCTA from './InlineCTA'
+import LogoGrid from './LogoGrid'
 import Media from './Media'
 import StartATrial from './StartATrial'
 import Table from './Table'
@@ -36,6 +38,12 @@ export const types = ({
   startATrial: ({ value }) => <StartATrial value={value} />,
   table: ({ value }) => (
     <Table className={clsx(classNames?.table)} value={value} />
+  ),
+  schemaInlineCTAGlobalBlock: ({ value }) => (
+    <InlineCTA value={value} />
+  ),
+  logoGrid: ({ value }) => (
+    <LogoGrid value={value} />
   ),
 })
 
