@@ -65,7 +65,7 @@ const Image = ({
   if (!url) return null
 
   const css = {
-    ...(type === 'static'
+    ...(type === 'static' && width && height && width > 0 && height > 0
       ? {
           '&::before': {
             pb: `${(height / width) * 100}%`,
@@ -93,7 +93,10 @@ const Image = ({
     if (!entry) return
 
     if (!hasLoaded.get()) {
-      hasLoaded.set(entry.target.querySelector('img').complete)
+      const img = entry.target.querySelector('img')
+      if (img) {
+        hasLoaded.set(img.complete)
+      }
     }
 
     if (inView && !hasBeenInView.get()) {

@@ -2,7 +2,12 @@ import getClient from 'client'
 import isEmpty from 'lodash/isEmpty'
 import { useNextSanityImage } from 'next-sanity-image'
 
-const client = getClient()
+// Use the correct dataset (production_v3) for image parsing
+const client = getClient({
+  config: {
+    dataset: process.env.SANITY_STUDIO_API_DATASET,
+  },
+})
 
 const isStaticImageData = (image) =>
   image?.src?.includes('_next/static') || image?.src?.includes('data:image')
@@ -27,15 +32,26 @@ const useImageParser = (image, _options) => {
         }
         // eslint-disable-next-line no-else-return
       } else {
+        const imageData = useNextSanityImage(client, image, {
+          imageBuilder: (imageUrlBuilder) => imageUrlBuilder.auto('format'),
+          ..._options,
+        })
+        
+        if (!imageData || !imageData.src) {
+          return {}
+        }
+
         const {
           height: assetHeight,
           src: _src,
           width: assetWidth,
-        } = useNextSanityImage(client, image, {
-          imageBuilder: (imageUrlBuilder) => imageUrlBuilder.auto('format'),
-          ..._options,
-        }) || {}
-        const extension = _src?.split('.').pop().split('?')[0]
+        } = imageData
+        
+        if (!_src) {
+          return {}
+        }
+
+        const extension = _src.split('.').pop().split('?')[0]
         const isSvg = extension?.includes('svg')
         const [src] = _src && isSvg ? _src.split('?') : [_src]
 
@@ -45,7 +61,7 @@ const useImageParser = (image, _options) => {
         const height = !image?.crop
           ? assetHeight
           : (1 - image.crop.top - image.crop.bottom) * assetHeight
-        const aspectRatio = width / height
+        const aspectRatio = width && height ? width / height : undefined
 
         return {
           alt: image?.altText,

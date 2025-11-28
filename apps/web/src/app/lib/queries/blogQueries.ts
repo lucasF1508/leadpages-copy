@@ -128,7 +128,31 @@ export const getPageType = (path?: string[]) => {
 // Content query for blog posts
 export const contentQuery = `content[] {
   ...,
-  _type == "schemaInlineCTAGlobalBlock" => {..., cta->},
+  _type == "schemaInlineCTAGlobalBlock" => {
+    ...,
+    cta-> {
+      ...,
+      image {
+        asset-> {
+          _id,
+          _type,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            },
+            lqip
+          }
+        },
+        altText,
+        hotspot,
+        crop,
+        lqip
+      }
+    }
+  },
   _type == "startATrial" => {
     ...,
     link {

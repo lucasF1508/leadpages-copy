@@ -13,6 +13,9 @@ import StartATrialType from '@/components/PortableText/components/StartATrial'
 import TableType from '@/components/PortableText/components/Table'
 import InlineCTAType from '@/components/PortableText/components/InlineCTA'
 import EmbedType from '@/components/PortableText/components/Embed'
+import AudioType from '@/components/PortableText/components/Audio'
+import CardsPreviousNextType from '@/components/PortableText/components/CardsPreviousNext'
+import DropShadowBoxType from '@/components/PortableText/components/DropShadowBox'
 
 interface BlogPostLayoutProps {
   post: {
@@ -445,6 +448,21 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
                     ),
                   },
                   types: {
+                    audio: ({ value }: any) => (
+                      <AudioType value={value} />
+                    ),
+                    cardsPreviousNext: ({ value }: any) => (
+                      <CardsPreviousNextType value={value} />
+                    ),
+                    dropShadowBox: ({ value }: any) => (
+                      <DropShadowBoxType value={value} />
+                    ),
+                    embed: ({ value }: any) => (
+                      <EmbedType value={value} />
+                    ),
+                    inlineCTA: ({ value }: any) => (
+                      <InlineCTAType value={value} />
+                    ),
                     media: ({ value }: any) => {
                       if (!value?.image) return null
                       return (
@@ -463,17 +481,14 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
                         </div>
                       )
                     },
+                    schemaInlineCTAGlobalBlock: ({ value }: any) => (
+                      <InlineCTAType value={value} />
+                    ),
                     startATrial: ({ value }: any) => (
                       <StartATrialType value={value} />
                     ),
                     table: ({ value }: any) => (
                       <TableType value={value} />
-                    ),
-                    schemaInlineCTAGlobalBlock: ({ value }: any) => (
-                      <InlineCTAType value={value} />
-                    ),
-                    embed: ({ value }: any) => (
-                      <EmbedType value={value} />
                     ),
                   },
                   list: {

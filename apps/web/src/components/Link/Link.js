@@ -9,8 +9,8 @@ import { MdPlayArrow as VideoIcon } from '@react-icons/all-files/md/MdPlayArrow'
 import { m as motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import NextLink from 'next/link'
-import { useRouter } from 'next/router'
 import { scrollToHash } from '@hooks/useScrollToHash'
+import { useCurrentPath } from '@hooks/useCurrentPath'
 import { normalizeUrl } from '@lib/utils/normalizeUrl'
 import Modal, { ModalLink, ModalProvider } from '@components/Modal'
 import SignUpWithEmailFieldLink from './SignUpWithEmailFieldLink'
@@ -102,8 +102,10 @@ const Link = (
   const { Modal: ModalComponent = () => null, modalKey, modalCss } = props
   const Icon = Icons[icon || condition]
   const hasIcon = hasIconOrg && Icon && props?.linkStyle !== 'none'
-  const { asPath } = useRouter()
-  const [path] = asPath.split(/[?#]/)
+  
+  // Safely get current path (works with both Pages Router and App Router)
+  const path = useCurrentPath()
+  
   // Normalizar URLs para comparación y uso (solo si existen)
   const normalizedPath = path ? normalizeUrl(path) : path
   const normalizedUrl = url ? normalizeUrl(url) : url

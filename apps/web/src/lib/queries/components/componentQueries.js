@@ -74,7 +74,31 @@ const customerRotator = `
   }`
 
 // Content
-const schemaInlineCTAGlobalBlock = `_type == "schemaInlineCTAGlobalBlock" => {..., cta->}`
+const schemaInlineCTAGlobalBlock = `_type == "schemaInlineCTAGlobalBlock" => {
+  ...,
+  cta-> {
+    ...,
+    image {
+      asset-> {
+        _id,
+        _type,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          },
+          lqip
+        }
+      },
+      altText,
+      hotspot,
+      crop,
+      lqip
+    }
+  }
+}`
 const startATrial = `_type == "startATrial" => {
   ...,
   link {

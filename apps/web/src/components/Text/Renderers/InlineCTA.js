@@ -54,17 +54,33 @@ const $CTAContent = styled('div', {
 const $CTAImage = styled('div', {
   position: 'relative',
   width: '100%',
-  mr: '$5',
+  minHeight: '200px',
   pt: '$3',
   d: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
-  maxWidth: '92.5%',
+  alignItems: 'center',
+  maxWidth: '100%',
+  overflow: 'hidden',
+
+  '& > figure': {
+    width: '100%',
+    height: '100%',
+    minHeight: '150px',
+  },
 
   '@>s': {
+    minHeight: 'auto',
     py: '$3',
+    mr: '$5',
     mx: 0,
     flex: '0 0 auto',
+    maxWidth: '92.5%',
+    alignItems: 'flex-start',
+
+    '& > figure': {
+      minHeight: 'auto',
+    },
   },
 
   variants: {
@@ -91,24 +107,40 @@ const $CTAImage = styled('div', {
 const $InlineCta = styled('div', {
   bc: '$grayAlt',
   mb: '$3',
+  d: 'flex',
+  flexDirection: 'column',
 
   '@>s': {
-    d: 'flex',
+    flexDirection: 'row',
     justifyContent: 'space-between',
   },
 
   variants: {
     contentRight: {
-      true: {},
+      true: {
+        '@>s': {
+          flexDirection: 'row',
+        },
+      },
       false: {
-        flexDirection: 'row-reverse',
+        '@>s': {
+          flexDirection: 'row-reverse',
+        },
       },
     },
     imageBottom: {
       true: {
+        flexDirection: 'column-reverse',
+        '@>s': {
+          flexDirection: 'row',
+        },
         [`${$CTAImage}`]: {
           pb: 0,
+          pt: 0,
           justifyContent: 'flex-end',
+          '@>s': {
+            pt: '$3',
+          },
         },
       },
       false: {},
@@ -127,14 +159,94 @@ const $InlineCta = styled('div', {
           },
         },
       },
-      secondary: { bc: '$ctaPurple' },
-      grayAlt: { bc: '$grayAlt' },
-      tan: { bc: '$tan' },
-      lavenderLight: { bc: '$lavenderLight' },
-      textHighlight: { bc: '$textHighlight' },
-      champagne: { bc: '$champagne' },
-      magnolia: { bc: '$magnolia' },
-      lavenderBlush: { bc: '$lavenderBlush' },
+      secondary: { 
+        bc: '$ctaPurple',
+        [`${$CTAContent}`]: {
+          '& p': {
+            c: '$white',
+          },
+          [`h2, h3, h4`]: {
+            c: '$white',
+          },
+        },
+      },
+      grayAlt: { 
+        bc: '$grayAlt',
+        [`${$CTAContent}`]: {
+          '& p': {
+            c: '$text',
+          },
+          [`h2, h3, h4`]: {
+            c: '$text',
+          },
+        },
+      },
+      tan: { 
+        bc: '$tan',
+        [`${$CTAContent}`]: {
+          '& p': {
+            c: '$text',
+          },
+          [`h2, h3, h4`]: {
+            c: '$text',
+          },
+        },
+      },
+      lavenderLight: { 
+        bc: '$lavenderLight',
+        [`${$CTAContent}`]: {
+          '& p': {
+            c: '$text',
+          },
+          [`h2, h3, h4`]: {
+            c: '$text',
+          },
+        },
+      },
+      textHighlight: { 
+        bc: '$textHighlight',
+        [`${$CTAContent}`]: {
+          '& p': {
+            c: '$text',
+          },
+          [`h2, h3, h4`]: {
+            c: '$text',
+          },
+        },
+      },
+      champagne: { 
+        bc: '$champagne',
+        [`${$CTAContent}`]: {
+          '& p': {
+            c: '$text',
+          },
+          [`h2, h3, h4`]: {
+            c: '$text',
+          },
+        },
+      },
+      magnolia: { 
+        bc: '$magnolia',
+        [`${$CTAContent}`]: {
+          '& p': {
+            c: '$text',
+          },
+          [`h2, h3, h4`]: {
+            c: '$text',
+          },
+        },
+      },
+      lavenderBlush: { 
+        bc: '$lavenderBlush',
+        [`${$CTAContent}`]: {
+          '& p': {
+            c: '$text',
+          },
+          [`h2, h3, h4`]: {
+            c: '$text',
+          },
+        },
+      },
       transparent: {
         bc: 'transparent',
         [`${$CTAContent}`]: {
@@ -180,6 +292,74 @@ const InlineCta = ({ node = {}, ...props }) => {
     bgColor !== 'transparent' &&
     [...darkBackgrounds, 'primary'].includes(bgColor)
 
+  // Determine order of elements based on contentRight
+  // contentRight: true (default) = image left, content right → mobile: image top, content bottom
+  // contentRight: false = content left, image right → mobile: content top, image bottom
+  // Normalize image structure - create a simple reference for useImageParserLegacy
+  const normalizedImage = image?.asset 
+    ? { 
+        _type: 'image', 
+        asset: {
+          _ref: image.asset._id || image.asset._ref,
+          _type: 'reference',
+        },
+        ...(image.altText ? { altText: image.altText } : {}),
+        ...(image.alt ? { altText: image.alt } : {}),
+        ...(image.lqip ? { lqip: image.lqip } : {}),
+        ...(image.hotspot ? { hotspot: image.hotspot } : {}),
+        ...(image.crop ? { crop: image.crop } : {}),
+      }
+    : image?._type === 'image' 
+      ? image 
+      : null
+
+  const imageElement = normalizedImage ? (
+    <$CTAImage imageWidth={imageWidth}>
+      <Image 
+        objectFit="contain" 
+        image={normalizedImage}
+        type="static"
+      />
+    </$CTAImage>
+  ) : null
+  
+  const contentElement = (
+    <$CTAContent>
+      {content && <$Text content={content} usePostTokens={true} />}
+      {legacyLink && ctaLink && (
+        <$CTAButton isFlex={true}>
+          <Link
+            {...ctaLink}
+            linkStyle={bgColor === 'primary' ? 'buttonInverse' : 'button'}
+            label={`${ctaLink.label} →`}
+          />
+        </$CTAButton>
+      )}
+      <$Links>
+        {!legacyLink &&
+          !!links?.length &&
+          links?.map(({ _key, _type, linkStyle, ...link }) => (
+            <>
+              <Link
+                key={_key}
+                className={
+                  (_type === 'signUp' || linkStyle === 'button') &&
+                  useDarkMode
+                    ? darkTheme
+                    : theme
+                }
+                bgColor={bgColor}
+                align={'start'}
+                _type={_type}
+                linkStyle={linkStyle}
+                {...link}
+              />
+            </>
+          ))}
+      </$Links>
+    </$CTAContent>
+  )
+
   return (
     <$InlineCta
       {...props}
@@ -187,43 +367,8 @@ const InlineCta = ({ node = {}, ...props }) => {
       imageBottom={imageBottom}
       bgColor={bgColor}
     >
-      <$CTAImage imageWidth={imageWidth}>
-        <Image objectFit="contain" image={image || ImageFallback} />
-      </$CTAImage>
-      <$CTAContent>
-        {content && <$Text content={content} usePostTokens={true} />}
-        {legacyLink && ctaLink && (
-          <$CTAButton isFlex={true}>
-            <Link
-              {...ctaLink}
-              linkStyle={bgColor === 'primary' ? 'buttonInverse' : 'button'}
-              label={`${ctaLink.label} →`}
-            />
-          </$CTAButton>
-        )}
-        <$Links>
-          {!legacyLink &&
-            !!links?.length &&
-            links?.map(({ _key, _type, linkStyle, ...link }) => (
-              <>
-                <Link
-                  key={_key}
-                  className={
-                    (_type === 'signUp' || linkStyle === 'button') &&
-                    useDarkMode
-                      ? darkTheme
-                      : theme
-                  }
-                  bgColor={bgColor}
-                  align={'start'}
-                  _type={_type}
-                  linkStyle={linkStyle}
-                  {...link}
-                />
-              </>
-            ))}
-        </$Links>
-      </$CTAContent>
+      {contentRight === false ? contentElement : imageElement}
+      {contentRight === false ? imageElement : contentElement}
     </$InlineCta>
   )
 }
