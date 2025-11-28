@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import {findChildProp} from '@/utils/findChildProp'
 import {colorDecorators, styles} from './util'
 import {schemaInlineCTAGlobalBlock} from '../inlineCTAGlobalBlock'
+import {inlineCTA} from '../inlineCTA'
 import {logoGrid} from '../../components/logoGrid'
 
 export const blockContent = F.array({
@@ -159,6 +160,8 @@ export const blockContent = F.array({
       type: 'startATrial',
     },
     schemaInlineCTAGlobalBlock,
+    inlineCTA,
     logoGrid,
   ],
 })
+
