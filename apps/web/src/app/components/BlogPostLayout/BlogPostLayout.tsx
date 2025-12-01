@@ -13,6 +13,7 @@ import StartATrialType from '@/components/PortableText/components/StartATrial'
 import TableType from '@/components/PortableText/components/Table'
 import InlineCTAType from '@/components/PortableText/components/InlineCTA'
 import EmbedType from '@/components/PortableText/components/Embed'
+import JavaScriptEmbedType from '@/components/PortableText/components/JavaScriptEmbed'
 import AudioType from '@/components/PortableText/components/Audio'
 import CardsPreviousNextType from '@/components/PortableText/components/CardsPreviousNext'
 import DropShadowBoxType from '@/components/PortableText/components/DropShadowBox'
@@ -462,6 +463,9 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
                     ),
                     inlineCTA: ({ value }: any) => (
                       <InlineCTAType value={value} />
+                    ),
+                    javascriptEmbed: ({ value }: any) => (
+                      <JavaScriptEmbedType value={value} />
                     ),
                     media: ({ value }: any) => {
                       if (!value?.image) return null

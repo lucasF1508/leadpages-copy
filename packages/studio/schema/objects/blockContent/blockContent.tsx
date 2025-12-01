@@ -154,6 +154,9 @@ export const blockContent = F.array({
       type: 'embed',
     },
     {
+      type: 'javascriptEmbed',
+    },
+    {
       type: 'table',
     },
     {

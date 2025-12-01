@@ -1,6 +1,7 @@
 export * from './cardsBlock'
 export * from './cardClickable'
 export * from './embed'
+export * from './javascriptEmbed'
 export * from './marquee'
 export * from './media'
 export * from './pageAnchor'

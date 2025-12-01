@@ -6,6 +6,7 @@ import type { ClassValue } from 'clsx'
 import clsx from 'clsx'
 import PageAnchor from './Anchor'
 import Embed from './Embed'
+import JavaScriptEmbed from './JavaScriptEmbed'
 import Audio from './Audio'
 import CardsPreviousNext from './CardsPreviousNext'
 import DropShadowBox from './DropShadowBox'
@@ -38,6 +39,7 @@ export const types = ({
     <CardsPreviousNext value={value} />
   ),
   embed: ({ value }) => <Embed className={classNames?.embed} value={value} />,
+  javascriptEmbed: ({ value }) => <JavaScriptEmbed value={value} />,
   media: ({ value }) => <Media classNames={classNames?.media} value={value} />,
   pageAnchor: ({ value }) => (
     <PageAnchor className={clsx(classNames?.pageAnchor)} value={value} />
