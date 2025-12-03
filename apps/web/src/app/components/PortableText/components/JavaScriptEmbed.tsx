@@ -3,7 +3,7 @@
 import type { ClassValue } from 'clsx'
 import React from 'react'
 import clsx from 'clsx'
-import JavaScriptEmbed from '@components/JavaScriptEmbed/JavaScriptEmbed'
+import JavaScriptEmbed from '@/components/JavaScriptEmbed/JavaScriptEmbed'
 
 const JavaScriptEmbedType = ({
   className,
