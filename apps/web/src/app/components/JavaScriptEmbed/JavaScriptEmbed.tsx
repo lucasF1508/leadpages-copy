@@ -14,15 +14,10 @@ const JavaScriptEmbed = ({ code, ...props }: JavaScriptEmbedProps) => {
   const formTargetId = useRef(`hubspot-form-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`)
 
   useEffect(() => {
-    console.log('🔵 JavaScriptEmbed mounted with code:', code)
-    if (!code) {
-      console.log('⚠️ No code provided')
-      return
-    }
+    if (!code) return
 
     // Parse and execute JavaScript code
     const parseAndExecuteScripts = async () => {
-      console.log('🔵 Starting to parse and execute scripts...')
       const { default: parse } = await import('html-react-parser')
       
       // Parse the HTML to extract script tags
@@ -87,19 +82,13 @@ const JavaScriptEmbed = ({ code, ...props }: JavaScriptEmbedProps) => {
           
           // Special handling for HubSpot forms - inject target if missing
           if (scriptContent.includes('hbspt.forms.create')) {
-            console.log('🔵 Detected HubSpot form script, checking for target...')
-            
             // Check if target is already specified
             if (!scriptContent.includes('target:') && !scriptContent.includes('"target"')) {
-              console.log('⚠️ No target found, injecting target:', `#${formTargetId.current}`)
-              
               // Inject target parameter before the closing brace
               scriptContent = scriptContent.replace(
                 /(\{[^}]*)(region:\s*["'][^"']*["']\s*)/,
                 `$1$2,\n    target: "#${formTargetId.current}"\n  `
               )
-              
-              console.log('✅ Modified script:', scriptContent)
             }
           }
           
@@ -116,12 +105,9 @@ const JavaScriptEmbed = ({ code, ...props }: JavaScriptEmbedProps) => {
           // For scripts with src, wait for load before continuing
           if (script.src) {
             await new Promise<void>((resolve, reject) => {
-              script.onload = () => {
-                console.log(`✅ Script loaded successfully: ${script.src}`)
-                resolve()
-              }
+              script.onload = () => resolve()
               script.onerror = () => {
-                console.error(`❌ Failed to load script: ${script.src}`)
+                console.error(`Failed to load script: ${script.src}`)
                 reject(new Error(`Failed to load script: ${script.src}`))
               }
               document.body.appendChild(script)
@@ -130,10 +116,39 @@ const JavaScriptEmbed = ({ code, ...props }: JavaScriptEmbedProps) => {
               // Continue even if script fails to load
             })
           } else {
-            // Inline scripts execute immediately when appended
-            document.body.appendChild(script)
-            scriptsRef.current.push(scriptId)
-            console.log('✅ Inline script executed')
+            // Inline scripts - check for dependencies before executing
+            const scriptContent = scriptData.content
+            
+            // Check if script depends on HubSpot
+            if (scriptContent.includes('hbspt.forms') || scriptContent.includes('hbspt.')) {
+              // Wait for HubSpot to be available
+              await new Promise<void>((resolve) => {
+                const checkHubSpot = () => {
+                  if (typeof (window as any).hbspt !== 'undefined') {
+                    document.body.appendChild(script)
+                    scriptsRef.current.push(scriptId)
+                    resolve()
+                  } else {
+                    setTimeout(checkHubSpot, 100)
+                  }
+                }
+                
+                // Start checking
+                checkHubSpot()
+                
+                // Timeout after 10 seconds
+                setTimeout(() => {
+                  if (typeof (window as any).hbspt === 'undefined') {
+                    console.warn('HubSpot library not loaded after 10 seconds')
+                  }
+                  resolve()
+                }, 10000)
+              })
+            } else {
+              // Other inline scripts execute immediately when appended
+              document.body.appendChild(script)
+              scriptsRef.current.push(scriptId)
+            }
           }
         }
       }

@@ -49,51 +49,66 @@ const JavaScriptEmbed = ({ code, ...props }) => {
         },
       })
 
-      // Execute scripts
-      scripts.forEach((scriptData, index) => {
-        const script = document.createElement('script')
-        
-        // Set attributes
-        Object.keys(scriptData.attrs).forEach((key) => {
-          if (key === 'src') {
-            script.src = scriptData.attrs[key]
-          } else if (key === 'type') {
-            script.type = scriptData.attrs[key]
-          } else if (key === 'charset') {
-            script.charset = scriptData.attrs[key]
-          } else if (key.startsWith('data-')) {
-            script.setAttribute(key, scriptData.attrs[key])
-          } else {
-            script.setAttribute(key, scriptData.attrs[key])
-          }
-        })
-
-        // Set inline script content
-        if (scriptData.content) {
-          script.textContent = scriptData.content
-        }
-
-        // Generate unique ID to avoid duplicates
-        const scriptId = `js-embed-${index}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-        script.id = scriptId
-
-        // Check if script already exists
-        const existingScript = document.getElementById(scriptId)
-        if (!existingScript) {
-          // For scripts with src, wait for load before executing inline scripts
-          if (script.src) {
-            script.onload = () => {
-              // Script loaded successfully
-            }
-            script.onerror = () => {
-              console.error(`Failed to load script: ${script.src}`)
-            }
-          }
+      // Execute scripts in order, waiting for external scripts to load
+      const executeScriptsInOrder = async () => {
+        for (let index = 0; index < scripts.length; index++) {
+          const scriptData = scripts[index]
           
-          document.body.appendChild(script)
-          scriptsRef.current.push(scriptId)
+          await new Promise((resolve, reject) => {
+            const script = document.createElement('script')
+            
+            // Set attributes
+            Object.keys(scriptData.attrs).forEach((key) => {
+              if (key === 'src') {
+                script.src = scriptData.attrs[key]
+              } else if (key === 'type') {
+                script.type = scriptData.attrs[key]
+              } else if (key === 'charset') {
+                script.charset = scriptData.attrs[key]
+              } else if (key.startsWith('data-')) {
+                script.setAttribute(key, scriptData.attrs[key])
+              } else {
+                script.setAttribute(key, scriptData.attrs[key])
+              }
+            })
+
+            // Set inline script content
+            if (scriptData.content) {
+              script.textContent = scriptData.content
+            }
+
+            // Generate unique ID to avoid duplicates
+            const scriptId = `js-embed-${index}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+            script.id = scriptId
+
+            // Check if script already exists
+            const existingScript = document.getElementById(scriptId)
+            if (existingScript) {
+              resolve()
+              return
+            }
+
+            // For scripts with src, wait for load before continuing
+            if (script.src) {
+              script.onload = () => {
+                resolve()
+              }
+              script.onerror = () => {
+                console.error(`Failed to load script: ${script.src}`)
+                reject(new Error(`Failed to load script: ${script.src}`))
+              }
+            } else {
+              // For inline scripts, resolve immediately after appending
+              setTimeout(() => resolve(), 0)
+            }
+            
+            document.body.appendChild(script)
+            scriptsRef.current.push(scriptId)
+          })
         }
-      })
+      }
+
+      executeScriptsInOrder()
     }
 
     parseAndExecuteScripts()
