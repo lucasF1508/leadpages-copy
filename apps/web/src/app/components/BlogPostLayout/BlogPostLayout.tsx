@@ -534,17 +534,22 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
                     em: ({ children }: any) => (
                       <em style={{ color: '#DBD8E4' }}>{children}</em>
                     ),
-                    link: ({ children, value }: any) => (
-                      <a
-                        href={value.href}
-                        className="transition-colors hover:underline"
-                        style={{ color: '#C47FF3' }}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {children}
-                      </a>
-                    ),
+                    link: ({ children, value }: any) => {
+                      const url = value?.url || value?.href || '#'
+                      const isExternal = url.startsWith('http') || (!url.startsWith('/') && !url.startsWith('#'))
+                      
+                      return (
+                        <a
+                          href={url}
+                          className="transition-colors hover:underline"
+                          style={{ color: '#C47FF3' }}
+                          target={isExternal ? '_blank' : undefined}
+                          rel={isExternal ? 'noopener noreferrer' : undefined}
+                        >
+                          {children}
+                        </a>
+                      )
+                    },
                     sidebarLink: ({ children, value }: any) => {
                       const href = value?.href || value?.url || '#'
                       return (
