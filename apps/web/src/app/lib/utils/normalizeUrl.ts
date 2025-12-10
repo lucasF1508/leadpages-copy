@@ -9,8 +9,9 @@
  * normalizeUrl('/blog/post') // '/blog/post'
  * normalizeUrl('/') // '/'
  * normalizeUrl('https://example.com/page/') // 'https://example.com/page'
+ * normalizeUrl('http://www.leadpages.com/blog') // '/blog' (enlace interno convertido a relativo)
  */
-export function normalizeUrl(url: string | undefined | null): string {
+export function normalizeUrl(url: null | string | undefined): string {
     if (!url || typeof url !== 'string') {
         return ''
     }
@@ -26,14 +27,35 @@ export function normalizeUrl(url: string | undefined | null): string {
         return url
     }
 
-    // Si es una URL externa (http/https), normalizar el pathname
+    // Si es una URL con protocolo (http/https), verificar si es interna o externa
     if (/^(https?:)?\/\//.test(url)) {
         try {
             const urlObj = new URL(url.startsWith('//') ? `https:${url}` : url)
+            const siteUrl = process.env.NEXT_PUBLIC_URL || 'https://www.leadpages.com'
+            const siteUrlObj = new URL(siteUrl)
+            
+            // Si es un enlace interno (mismo dominio), convertir a ruta relativa
+            if (urlObj.origin === siteUrlObj.origin) {
+                const pathname = urlObj.pathname
+                const normalizedPathname = pathname === '/' ? '/' : pathname.replace(/\/+$/, '')
+                return normalizedPathname
+            }
+            
+            // Si es externa, normalizar pero forzar https://
             const pathname = urlObj.pathname
             const normalizedPathname = pathname === '/' ? '/' : pathname.replace(/\/+$/, '')
-            return `${urlObj.origin}${normalizedPathname}${urlObj.search}${urlObj.hash}`
-        } catch (e) {
+            return `https://${urlObj.host}${normalizedPathname}${urlObj.search}${urlObj.hash}`
+        } catch {
+            // Si falla el parsing, intentar extraer la ruta si parece ser interna
+            const siteUrl = process.env.NEXT_PUBLIC_URL || 'https://www.leadpages.com'
+            if (url.includes(siteUrl.replace(/^https?:\/\//, ''))) {
+                // Intentar extraer la ruta después del dominio
+                const match = url.match(/https?:\/\/[^\/]+(\/.*)/)
+                if (match && match[1]) {
+                    const path = match[1]
+                    return path === '/' ? '/' : path.replace(/\/+$/, '')
+                }
+            }
             // Si falla el parsing, simplemente eliminamos trailing slash
             return url.replace(/\/+$/, '')
         }

@@ -16,6 +16,43 @@ interface GenerateMetadataStaticProps {
 const configTypes = config?.studio?.docTypes
 
 const cleanPath = (p?: string) => {
+  if (!p) return '/'
+  
+  // Si es una URL completa (con protocolo), extraer solo la ruta
+  if (/^(https?:)?\/\//.test(p)) {
+    try {
+      const urlObj = new URL(p.startsWith('//') ? `https:${p}` : p)
+      const siteUrl = process.env.NEXT_PUBLIC_URL || 'https://www.leadpages.com'
+      const siteUrlObj = new URL(siteUrl)
+      
+      // Si es un enlace interno (mismo dominio), retornar solo la ruta
+      if (urlObj.origin === siteUrlObj.origin) {
+        const pathname = urlObj.pathname
+        return pathname === '/' ? '/' : pathname.replace(/\/+$/, '')
+      }
+      
+      // Si es externa, retornar la URL completa normalizada
+      const pathname = urlObj.pathname
+      const normalizedPathname = pathname === '/' ? '/' : pathname.replace(/\/+$/, '')
+      return `https://${urlObj.host}${normalizedPathname}${urlObj.search}${urlObj.hash}`
+    } catch {
+      // Si falla el parsing, intentar extraer la ruta si parece ser interna
+      const siteUrl = process.env.NEXT_PUBLIC_URL || 'https://www.leadpages.com'
+      const siteDomain = siteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
+      if (p.includes(siteDomain)) {
+        const match = p.match(/https?:\/\/[^\/]+(\/.*)/)
+        if (match && match[1]) {
+          const pathParts = match[1].split(/[?#]/, 1)
+          const path = pathParts[0]
+          if (path) {
+            return path === '/' ? '/' : path.replace(/\/+$/, '')
+          }
+        }
+      }
+    }
+  }
+  
+  // Para rutas relativas, normalizar
   const raw = p || '/'
   const withSlash = raw.startsWith('/') ? raw : `/${raw}`
   return withSlash.split(/[?#]/, 1)[0] || '/'

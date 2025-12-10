@@ -29,12 +29,7 @@ export async function generateMetadata(
   const slug = slugFromId || _slug
 
   return await generateMetadataStatic({
-    canonical: [
-      process.env.NEXT_PUBLIC_URL,
-      'templates',
-      'landing-page-template',
-      slug,
-    ].join('/'),
+    canonical: `/templates/landing-page-template/${slug}`,
     parent,
     slug,
     types: ['template'],
