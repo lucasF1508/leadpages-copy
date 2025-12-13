@@ -2,7 +2,7 @@
 // Complete, cleaned up, with Posts and Authors added
 
 import {MdBusiness, MdOutlineSmartButton, MdSettings} from 'react-icons/md'
-import {BsGraphUp, BsPlug, BsNewspaper, BsPencil, BsArchive} from 'react-icons/bs'
+import {BsGraphUp, BsPlug, BsNewspaper, BsPencil, BsArchive, BsFlag} from 'react-icons/bs'
 import config from 'config'
 import {AiOutlineHome, AiOutlineFileText, AiOutlineSetting} from 'react-icons/ai'
 import IframePreview from './CustomViews/IframePreview'
@@ -191,6 +191,7 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
       // NAV & FOOTER
       // ===========================
       SingletonListItem({type: 'navigation', title: 'Navigation', icon: MdOutlineSmartButton, S}),
+      SingletonListItem({type: 'websiteBanner', title: 'Website Banner', icon: BsFlag, S}),
       SingletonListItem({type: 'footer', title: 'Footer', icon: RiLayoutBottom2Line, S}),
 
       // ===========================
