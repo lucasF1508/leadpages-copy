@@ -32,6 +32,7 @@ export interface Plan {
     compareAtString?: string
     compareAtOverride?: string
     override?: boolean
+    links?: LinkType[]
   }[]
   title: string
   pillContent?: string
