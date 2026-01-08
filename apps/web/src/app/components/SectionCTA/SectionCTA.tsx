@@ -1,9 +1,16 @@
-import React from 'react'
+'use client'
+
+import React, { useMemo } from 'react'
 import clsx from 'clsx'
 import Heading from '@/components/Heading'
 import Label from '@/components/Label'
 import Pinion from '@/components/Pinion'
 import SubFooterGradient from '@/components/SubFooter/SubFooterGradient'
+import { useVerifoneCheckoutUrl } from '@/hooks/useVerifoneCheckoutUrl'
+import {
+  extractPlanFromUrl,
+  shouldReplaceWithVerifone,
+} from '@/lib/utils/getVerifoneCheckoutUrl'
 
 type CTA = {
   label: string
@@ -41,6 +48,44 @@ export default function SectionCTA({
   variant = 'gradient',
 }: SectionCTAProps) {
   const isCenter = align === 'center'
+
+  // Find the first CTA that needs replacement to determine default plan
+  const ctaToReplace = useMemo(() => {
+    return ctas.find((cta) => shouldReplaceWithVerifone(cta.url))
+  }, [ctas])
+
+  // Extract plan info from the first CTA that needs replacement
+  const planInfo = useMemo(() => {
+    if (!ctaToReplace) return null
+    return extractPlanFromUrl(ctaToReplace.url)
+  }, [ctaToReplace])
+
+  // Get Verifone URL for the default plan
+  const { url: verifoneUrl, loading } = useVerifoneCheckoutUrl({
+    enabled: !!ctaToReplace,
+    level: planInfo?.level,
+    billingCycle: planInfo?.billingCycle,
+    defaultLevel: 'standard',
+    defaultBillingCycle: 'month',
+  })
+
+  // Process CTAs: replace Recurly/checkout URLs with Verifone URLs
+  const processedCTAs = useMemo(() => {
+    if (!ctas.length) return []
+    if (loading || !verifoneUrl) return ctas // Return original if still loading or no Verifone URL
+
+    return ctas.map((cta) => {
+      if (!shouldReplaceWithVerifone(cta.url)) {
+        return cta
+      }
+
+      // Replace with Verifone URL
+      return {
+        ...cta,
+        url: verifoneUrl,
+      }
+    })
+  }, [ctas, verifoneUrl, loading])
 
   return (
     <section className={clsx('relative isolate mt-6 md:mt-10', className)}>
@@ -123,7 +168,7 @@ export default function SectionCTA({
               </div>
             )}
 
-    {!!ctas?.length && (
+    {!!processedCTAs?.length && (
   <div
     className={clsx(
       'mt-2 flex flex-wrap items-center gap-3 pb-6 md:pb-0',
@@ -131,7 +176,7 @@ export default function SectionCTA({
       'relative z-20'
     )}
   >
-    {ctas.map((c, i) => {
+    {processedCTAs.map((c, i) => {
       const isBlank = c.target === '_blank'
       return (
         <a
@@ -140,7 +185,7 @@ export default function SectionCTA({
             '!bg-[#CB79F0]/22 hover:!bg-[#CB79F0]/30 !text-white !border !border-white/60',
             'transition-colors inline-flex items-center justify-center'
           )}
-          href={c.url}
+          href={loading ? '#' : c.url}
           key={`${c.label}-${i}`}
           rel={isBlank ? 'noopener noreferrer' : undefined}
           target={isBlank ? '_blank' : undefined}

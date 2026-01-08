@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { pricingStore } from '@/stores/pricingStore'
 import Link, { hasLink } from '../Link'
 import { PriceType } from '../Price'
@@ -50,22 +50,29 @@ const PricingCardLink = ({ isFeatured, prices }: PricingCardLinkProps) => {
 
   if (!link) return null
 
-  const baseHref: string =
-    (link as any).href ?? (link as any).url ?? (link as any).to ?? '#'
+  // Calculate baseHref from link - this will update when link changes (e.g., when API data loads)
+  const baseHref = useMemo(() => {
+    const href = (link as any).href ?? (link as any).url ?? (link as any).to ?? '#'
+    return href
+  }, [link])
 
-  const [finalHref, setFinalHref] = useState<string>(baseHref)
-
-  useEffect(() => {
+  // Update finalHref whenever baseHref changes (including when API data loads and replaces CMS URLs with Verifone URLs)
+  const finalHref = useMemo(() => {
     const code = getCouponFromLocation()
-    const decorated = code ? appendCouponToUrl(baseHref, code) : baseHref
-    setFinalHref(decorated)
+    return code ? appendCouponToUrl(baseHref, code) : baseHref
   }, [baseHref])
+
+  // Build a clean link object preserving all original properties but updating URLs
+  const cleanLink = {
+    ...link,
+    href: finalHref,
+    url: finalHref,
+    to: finalHref,
+  }
 
   return (
     <Link
-      {...link}
-      href={finalHref}
-      url={finalHref}
+      {...cleanLink}
       className="w-full"
       linkStyle={isFeatured ? 'button-solid' : 'button-secondary'}
       data-final-href={finalHref}

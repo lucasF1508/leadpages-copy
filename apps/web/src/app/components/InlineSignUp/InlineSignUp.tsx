@@ -1,6 +1,7 @@
 'use client'
 
 import type { FreeTrialKeyType } from '@/lib/utils/getFreeTrialCheckoutUrl'
+import type { BillingCycle, PlanLevel } from '@/lib/utils/getVerifoneCheckoutUrl'
 import type { ClassValue } from 'clsx'
 import React from 'react'
 import clsx from 'clsx'
@@ -14,6 +15,7 @@ import {
   getFreeTrialCheckoutUrl,
   getOrderUrlForEmail,
 } from '@/lib/utils/getFreeTrialCheckoutUrl'
+import { getVerifoneCheckoutUrl } from '@/lib/utils/getVerifoneCheckoutUrl'
 
 export interface InlineSignUpProps {
   className?: ClassValue
@@ -24,6 +26,23 @@ export interface InlineSignUpProps {
   placeholder?: string
   signUpType?: string
   type: FreeTrialKeyType
+}
+
+// Map FreeTrialKeyType to Verifone plan level and billing cycle
+function mapPlanToVerifone(plan: FreeTrialKeyType): { level: PlanLevel; billingCycle: BillingCycle } {
+  if (plan.includes('standard')) {
+    return {
+      level: 'standard',
+      billingCycle: plan.includes('Annual') ? 'year' : 'month',
+    }
+  } else if (plan.includes('pro')) {
+    return {
+      level: 'pro',
+      billingCycle: plan.includes('Annual') ? 'year' : 'month',
+    }
+  }
+  // Default to standard monthly
+  return { level: 'standard', billingCycle: 'month' }
 }
 
 const InlineSignUp = ({
@@ -63,6 +82,26 @@ const InlineSignUp = ({
         }).catch(() => {})
       }
 
+      // Try to get Verifone checkout URL first
+      try {
+        const { level, billingCycle } = mapPlanToVerifone(plan)
+        const verifoneUrl = await getVerifoneCheckoutUrl({ level, billingCycle })
+        
+        if (verifoneUrl) {
+          // Append extra params to Verifone URL
+          const url = new URL(verifoneUrl)
+          Object.entries(extraParams).forEach(([key, value]) => {
+            if (value) url.searchParams.set(key, value)
+          })
+          window.location.href = url.toString()
+          redirected = true
+          return
+        }
+      } catch (error) {
+        console.error('[InlineSignUp] Error getting Verifone URL, falling back to Recurly:', error)
+      }
+
+      // Fallback to Recurly if Verifone fails
       const isProd =
         process.env.NEXT_PUBLIC_ENV === 'production' || process.env.NODE_ENV === 'production'
       const shouldTokenize = !!email && isProd

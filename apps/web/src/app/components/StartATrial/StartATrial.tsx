@@ -1,11 +1,18 @@
+'use client'
+
 import type { ContentType, ImageType, LinkType } from '@types'
 import type { ClassValue } from 'clsx'
-import React from 'react'
+import React, { useMemo } from 'react'
 import clsx from 'clsx'
 import Heading from '@/components/Heading'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import Text from '@/components/Text'
+import { useVerifoneCheckoutUrl } from '@/hooks/useVerifoneCheckoutUrl'
+import {
+  extractPlanFromUrl,
+  shouldReplaceWithVerifone,
+} from '@/lib/utils/getVerifoneCheckoutUrl'
 
 export interface StartATrialProps {
   backgroundImage?: ImageType
@@ -147,6 +154,36 @@ const StartATrial = ({
     return null
   }
 
+  // Check if link should be replaced with Verifone URL
+  const linkUrl = normalizedLink.url
+  const shouldReplace = shouldReplaceWithVerifone(linkUrl)
+  const planInfo = useMemo(() => {
+    if (!shouldReplace) return null
+    return extractPlanFromUrl(linkUrl)
+  }, [linkUrl, shouldReplace])
+
+  const { url: verifoneUrl, loading } = useVerifoneCheckoutUrl({
+    enabled: shouldReplace,
+    level: planInfo?.level,
+    billingCycle: planInfo?.billingCycle,
+    defaultLevel: 'standard',
+    defaultBillingCycle: 'month',
+  })
+
+  // Use Verifone URL if available, otherwise use original
+  const finalLink = useMemo(() => {
+    if (!shouldReplace || loading || !verifoneUrl) {
+      return normalizedLink
+    }
+    return {
+      ...normalizedLink,
+      url: verifoneUrl,
+      href: verifoneUrl,
+      to: verifoneUrl,
+      condition: 'external' as const,
+    }
+  }, [normalizedLink, shouldReplace, verifoneUrl, loading])
+
   const StartATrialComponent =
     desktopOrientation === 'horizontal'
       ? StartATrialHorizontal
@@ -164,7 +201,7 @@ const StartATrial = ({
           content={content}
           heading={heading}
           image={backgroundImage}
-          link={normalizedLink}
+          link={finalLink}
           mobileAlignment={mobileAlignment}
         />
       </div>

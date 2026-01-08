@@ -10,6 +10,9 @@ import Script from 'next/script'
 // Prevent unspecified paths from being statically rendered at runtime
 export const dynamicParams = false
 
+// Revalidate every hour to pick up CMS changes (including pricing link updates)
+export const revalidate = 3600
+
 export async function generateStaticParams() {
   const params = await getStaticPathsParams({ catchAll: '/', types: ['page'] })
   const paths = params.map(({ params: { slug } }: any) => ({
@@ -46,23 +49,32 @@ export default async function Page({
   const isVwo =
     normalized(normalizedPath) === 'pricing' ||
     normalized(segments.join('/')) === 'pricing'
+  const isPricing = isVwo
 
-  const { components, hero } =
-    (await query(
-      `*[_type == 'page' && (path == $path || path == $alternatePath || path == $legacyPath)] | order(_updatedAt desc) [0]{
-        ...,
-        ${componentsQuery}
-      }`,
-      {
-        preview: draftMode().isEnabled,
-        params: {
-          alternatePath,
-          legacyPath,
-          path: normalizedPath,
-        },
-      }
-    )?.data) || {}
-
+  // For pricing page, bypass CDN to get fresh data (important for updated Verifone links)
+  const pageQueryResult = query(
+    `*[_type == 'page' && (path == $path || path == $alternatePath || path == $legacyPath)] | order(_updatedAt desc) [0]{
+      _id,
+      _updatedAt,
+      path,
+      ...,
+      ${componentsQuery}
+    }`,
+    {
+      preview: draftMode().isEnabled,
+      // @ts-ignore - useCdn is supported in query.js but not in query.ts types yet
+      useCdn: !isPricing, // Disable CDN for pricing page to bypass cache
+      params: {
+        alternatePath,
+        legacyPath,
+        path: normalizedPath,
+      },
+    }
+  )
+  
+  const pageData = await pageQueryResult?.data
+  const { components, hero, _id: pageId, _updatedAt: pageUpdatedAt } = pageData || {}
+  
   return (
     <>
       {isVwo && (
@@ -82,6 +94,16 @@ export default async function Page({
     'jh4rs6oedh14': { cls: 'pro_annual',       vwo: 'pro_yr' },
   };
 
+  // Map Verifone product codes to VWO IDs
+  var VERIFONE_MAP = {
+    'STD-TR-M-14D': { cls: 'standard_monthly', vwo: 'std_mo' },
+    'STD-TR-A-14D': { cls: 'standard_annual',  vwo: 'std_yr' },
+    'PRO-TR-M-14D': { cls: 'pro_monthly',      vwo: 'pro_mo' },
+    'PRO-TR-A-14D': { cls: 'pro_annual',       vwo: 'pro_yr' },
+    'ADV-TR-M-14D': { cls: 'advanced_monthly', vwo: 'adv_mo' },
+    'ADV-TR-A-14D': { cls: 'advanced_annual',  vwo: 'adv_yr' },
+  };
+
   function extractPlanId(href){
     try {
       var m = href.match(/order-leadpages\\/([^/]+)/);
@@ -89,16 +111,42 @@ export default async function Page({
     } catch(e){ return null; }
   }
 
+  function extractVerifoneProductCode(href){
+    try {
+      // Match patterns like /signup/STD-TR-M-14D/ or /signup/STD-TR-M-14D
+      var m = href.match(/signup\\/([A-Z0-9-]+)/);
+      return m && m[1] ? m[1] : null;
+    } catch(e){ return null; }
+  }
+
   function tagAndPatchAnchor(a){
     try {
-      var planId = extractPlanId(a.href);
+      var href = a.href || a.getAttribute('href') || '';
+      if (!href) return;
+
+      // Check if it's a Verifone URL
+      var verifoneCode = extractVerifoneProductCode(href);
+      if (verifoneCode && VERIFONE_MAP[verifoneCode]) {
+        var meta = VERIFONE_MAP[verifoneCode];
+        a.classList.remove('standard_monthly','standard_annual','pro_monthly','pro_annual','advanced_monthly','advanced_annual');
+        a.classList.add(meta.cls);
+
+        var u = new URL(href);
+        if (!u.searchParams.get('vwo_id')) u.searchParams.set('vwo_id', meta.vwo);
+        if (!u.searchParams.get('_fsRef')) u.searchParams.set('_fsRef','https://www.leadpages.com/pricing');
+        a.href = u.toString();
+        return;
+      }
+
+      // Check if it's a Recurly URL (legacy)
+      var planId = extractPlanId(href);
       var meta = planId && MAP[planId] ? MAP[planId] : null;
       if (!meta) return;
 
       a.classList.remove('standard_monthly','standard_annual','pro_monthly','pro_annual');
       a.classList.add(meta.cls);
 
-      var u = new URL(a.href);
+      var u = new URL(href);
       if (!u.searchParams.get('vwo_id')) u.searchParams.set('vwo_id', meta.vwo);
       if (!u.searchParams.get('_fsRef')) u.searchParams.set('_fsRef','https://www.leadpages.com/pricing');
       a.href = u.toString();
@@ -106,8 +154,9 @@ export default async function Page({
   }
 
   function run(){
+    // Process both Recurly and Verifone URLs
     document
-      .querySelectorAll('a[href*="my.leadpages.com/order-leadpages/"]')
+      .querySelectorAll('a[href*="my.leadpages.com/order-leadpages/"], a[href*="my.leadpages.com/signup/"], a[href*="my.leadpagestest.com/signup/"]')
       .forEach(tagAndPatchAnchor);
   }
 
@@ -117,8 +166,10 @@ export default async function Page({
   obs.observe(document.body, { childList: true, subtree: true });
 
   document.addEventListener('click', function(e){
-    var a = e.target && e.target.closest && e.target.closest('a[href*="my.leadpages.com/order-leadpages/"]');
-    if (a) tagAndPatchAnchor(a);
+    var a = e.target && e.target.closest && e.target.closest('a');
+    if (a && (a.href && (a.href.includes('order-leadpages') || a.href.includes('/signup/')))) {
+      tagAndPatchAnchor(a);
+    }
   }, true);
 })();
 `}

@@ -10,6 +10,7 @@ import {Links} from '@/components/Link'
 import Lottie from '@/components/Lottie'
 import Video from '@/components/Video'
 import HeroGradient from '../HeroGradient/HeroGradientHome'
+import { useProcessLinksWithVerifone } from '@/hooks/useProcessLinksWithVerifone'
 
 export interface HeroHomeProps {
   className?: string
@@ -81,6 +82,9 @@ const HeroHome = ({
 }: HeroHomeProps) => {
   const [playing, setPlaying] = useState(false)
   const [scope, animate] = useAnimate()
+  
+  // Process links to replace Recurly/checkout URLs with Verifone URLs
+  const processedLinks = useProcessLinksWithVerifone(links)
 
   const handleOnReady = () => {
     setTimeout(() => {
@@ -125,9 +129,9 @@ const HeroHome = ({
         <p className="type-body-md sm:type-body-lg max-w-cols8 mx-auto w-full opacity-0">
           {content}
         </p>
-        {links &&
+        {processedLinks && processedLinks.length > 0 &&
           <div className='flex w-full justify-center opacity-0' id="links">
-            <Links links={links} />
+            <Links links={processedLinks} />
           </div>
         }
       </div>

@@ -16,11 +16,16 @@ const sanityConfig = {
 }
 
 module.exports = ({ config, preview = false } = {}) => {
+  // Allow config to override useCdn, otherwise use default (CDN in production unless preview)
+  const useCdn = config?.useCdn !== undefined 
+    ? config.useCdn 
+    : (process.env.NODE_ENV === 'production' && !preview)
+  
   const client = sanityClient({
     ...sanityConfig,
     ...config,
     token: preview ? sanityConfig.token : undefined,
-    useCdn: process.env.NODE_ENV === 'production' && !preview,
+    useCdn,
   })
 
   return client
