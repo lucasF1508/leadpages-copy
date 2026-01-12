@@ -27,10 +27,12 @@ const Section = ({
     components={components}
   >
     <div className="z-base bg-gradient-section pointer-events-none absolute left-0 top-0 h-[41.5rem] w-full rounded-t-2xl" />
-    {children
-      ? children
-      : !!components?.length &&
-        components.map((component) => RackInner(component, classNames))}
+    <div className="box-pt box-pb [&>.pinion:first-child]:!mt-0">
+      {children
+        ? children
+        : !!components?.length &&
+          components.map((component) => RackInner(component, classNames))}
+    </div>
   </Rack>
 )
 
