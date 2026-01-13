@@ -7,7 +7,7 @@ const fonts = {
 }
 
 const fontFamily = {
-  base: fonts['roc-grotesk-variable'],
+  base: fonts.inter,
   heading: fonts['roc-grotesk-variable'],
   title: fonts.uxumvf,
 }
