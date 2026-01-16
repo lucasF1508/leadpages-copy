@@ -29,7 +29,7 @@ const Footer = async () => {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="theme-light bg-surface text-body box-px box-py mb-0 w-full rounded-t-2xl relative z-above-content">
+    <footer className="theme-light bg-surface text-body box-px box-py mb-0 w-full relative z-above-content">
       <div className="max-w-base box-mb mx-auto flex flex-col md:flex-row flex-wrap items-start justify-between gap-6 lg:gap-1.5">
         <div className="mx-auto lg:mx-0 text-center lg:text-left">
           <Image className="mb-3 w-[9.375rem]" image={Logo} />
