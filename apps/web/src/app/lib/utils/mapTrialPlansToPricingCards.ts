@@ -41,9 +41,9 @@ export function mapTrialPlansToPricingCards(
   // Build the merged plans array
   const mergedPlans: Plan[] = []
 
-  // Process each level (standard, pro, advanced)
+  // Process each level (standard, pro only - exclude advanced/custom)
   // Use Array.from to avoid downlevelIteration requirement
-  const levels = Array.from(plansByLevel.keys())
+  const levels = Array.from(plansByLevel.keys()).filter(level => level !== 'advanced')
   for (const level of levels) {
     const trialPlansForLevel = plansByLevel.get(level)!
     const cmsPlan = cmsPlansByLevel.get(level)
@@ -56,12 +56,20 @@ export function mapTrialPlansToPricingCards(
     const prices = trialPlansForLevel.map((trialPlan) => {
       const period = trialPlan.billingCycle === 'month' ? 'monthly' : 'yearly'
       
+      // For yearly plans, use monthlyCost (monthly equivalent) since Price component shows "/month"
+      // For monthly plans, use price (which is already the monthly price)
+      const displayPrice = trialPlan.billingCycle === 'year' 
+        ? trialPlan.monthlyCost 
+        : trialPlan.price
+      
       // Extract currency symbol from formatted currency
       // formatCurrency returns something like "$123.00" or "€123,00"
-      const formatted = formatCurrency(trialPlan.currency, trialPlan.price)
+      const formatted = formatCurrency(trialPlan.currency, displayPrice)
       const symbol = formatted.match(/^[^\d.,\s]+/)?.[0] || '$'
       
-      // Build checkout link - use checkout_url from API if available
+      // Build checkout link - use checkout_url from API if available, but preserve label from CMS
+      const cmsLinksForPeriod = cmsPlan.prices.find((p) => p.period === period)?.links || []
+      const cmsLink = cmsLinksForPeriod[0]
       const links = trialPlan.checkout_url
         ? [
             {
@@ -69,18 +77,19 @@ export function mapTrialPlansToPricingCards(
               condition: 'external' as const,
               href: trialPlan.checkout_url,
               url: trialPlan.checkout_url,
+              label: cmsLink?.label, // Preserve label from CMS
             },
           ]
-        : cmsPlan.prices.find((p) => p.period === period)?.links || []
+        : cmsLinksForPeriod
 
       // Use annualSavings from API if available (more accurate than calculating)
       let compareAtString: string | undefined
       if (trialPlan.billingCycle === 'year' && trialPlan.annualSavings !== null && trialPlan.annualSavings > 0) {
-        compareAtString = `Save ${formatCurrency(trialPlan.currency, trialPlan.annualSavings)}`
+        compareAtString = `Save ${formatCurrency(trialPlan.currency, trialPlan.annualSavings)}/year`
       }
 
       return {
-        price: trialPlan.price,
+        price: displayPrice,
         symbol,
         period,
         currency: trialPlan.currency,
@@ -96,6 +105,18 @@ export function mapTrialPlansToPricingCards(
     };
     mergedPlans.push(mergedPlan);
   }
+
+  // Add CMS plans that weren't processed (e.g., Custom/Advanced) to maintain CMS data
+  cmsPlans.forEach((cmsPlan) => {
+    const level = cmsPlan.title.toLowerCase()
+    const shouldSkip = 
+      (level.includes('standard') && levels.includes('standard')) ||
+      (level.includes('pro') && levels.includes('pro'))
+    
+    if (!shouldSkip && !mergedPlans.find(p => p.title === cmsPlan.title)) {
+      mergedPlans.push(cmsPlan)
+    }
+  })
 
   return mergedPlans
 }

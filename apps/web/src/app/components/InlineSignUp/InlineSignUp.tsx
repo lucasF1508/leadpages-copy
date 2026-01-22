@@ -66,6 +66,11 @@ const InlineSignUp = ({
     const extraParams = Object.fromEntries(
       new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
     ) as Record<string, string>
+    
+    // DEBUG: Log para verificar que se capturan los parámetros de la URL (incluyendo XID u otros de afiliados)
+    if (Object.keys(extraParams).length > 0) {
+      console.log('[InlineSignUp] Parámetros capturados de la URL:', extraParams)
+    }
 
     try {
       if (isExternalRedirect) {
@@ -122,7 +127,7 @@ const InlineSignUp = ({
         return
       }
 
-      await planRedirect({ formData: { ...formData, trial_type: plan }, type: plan })
+      await planRedirect({ formData: { ...formData, trial_type: plan }, type: plan, extraParams })
     } finally {
       if (!redirected) setIsLoading(false)
     }

@@ -28,10 +28,15 @@ const PricingCardsToggle = ({plans}: {plans: Plan[]}) => {
   const [currentSelection, setCurrentSelection] = pricingStore(useShallow((state) => [state.currentSelection, state.setCurrentSelection]))
 
   const { prices = [] } = plans?.find(plan => plan?.isFeatured) || {};
-  const monthly = prices.find(p => p.period === 'monthly')?.price ?? 0;
-  const yearly = prices.find(p => p.period === 'yearly')?.price ?? 0;
+  const monthlyPrice = prices.find(p => p.period === 'monthly')?.price ?? 0;
+  const yearlyMonthlyPrice = prices.find(p => p.period === 'yearly')?.price ?? 0;
+  // For yearly plans, price is monthlyCost, so multiply by 12 to get total annual price
+  const yearlyTotalPrice = yearlyMonthlyPrice * 12;
 
-  const compareAtPercentage = yearly && monthly && Math.round(((Number(yearly)/Number(monthly)-1) * -100))
+  // Calculate savings percentage: (monthly * 12 - yearlyTotal) / (monthly * 12) * 100
+  const compareAtPercentage = yearlyTotalPrice && monthlyPrice 
+    ? Math.round(((Number(monthlyPrice) * 12 - Number(yearlyTotalPrice)) / (Number(monthlyPrice) * 12)) * 100)
+    : null
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined;

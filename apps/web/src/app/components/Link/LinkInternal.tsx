@@ -69,12 +69,22 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
 
     const hasLabel = isChildrenText(children) || label
 
+    // Preserve URL parameters (like XID, affiliate, etc.) when navigating
+    const preserveParams = () => {
+      if (typeof window === 'undefined') return ''
+      const currentParams = new URLSearchParams(window.location.search)
+      if (currentParams.toString()) {
+        return `?${currentParams.toString()}`
+      }
+      return ''
+    }
+
+    const urlParams = preserveParams()
+    const finalUrl = `${normalizedUrl}${urlParams}${hasHash && hash ? `#${hash}` : ''}`
+
     return (
       <NextLink
-        href={{
-          hash: hasHash ? hash : undefined,
-          pathname: normalizedUrl,
-        }}
+        href={finalUrl}
         legacyBehavior
         passHref
         shallow={isSamePage}

@@ -165,6 +165,21 @@ export async function middleware(request) {
   // Optional debug header
   response.headers.set('x-gone-count', String(GONE.size))
 
+  // Set ps_xid cookie if XID parameter is present in URL and cookie doesn't exist
+  // This cookie is used by my.leadpages.com to add ADDITIONAL_xid to Verifone checkout URLs
+  // Note: GTM may also set this cookie, so we only set it as a fallback if it doesn't exist
+  const xidParam = url.searchParams.get('XID')
+  const existingPsXid = request.cookies?.get?.('ps_xid')?.value
+  if (xidParam && !existingPsXid) {
+    // Set cookie with 30 days expiration (same as typical affiliate tracking)
+    response.cookies.set('ps_xid', xidParam, {
+      maxAge: 30 * 24 * 60 * 60, // 30 days in seconds
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    })
+  }
+
   if (!incrementalPaths?.length) return response
 
   // Legacy rewrites

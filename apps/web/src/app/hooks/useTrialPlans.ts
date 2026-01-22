@@ -35,8 +35,32 @@ export function useTrialPlans(): UseTrialPlansResult {
         }
         
         if (result) {
+          // Debug logging (in development, preview, and test - but not production)
+          if (typeof window !== 'undefined') {
+            const hostname = window.location.hostname;
+            const isDevelopment = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('localhost:');
+            const isPreview = hostname.includes('vercel.app') || hostname.includes('.vercel.app');
+            const isTest = hostname.includes('leadpagestest.com');
+            
+            if (isDevelopment || isPreview || isTest) {
+              console.log('[useTrialPlans] Successfully fetched trial plans:', {
+                itemCount: result.items?.length || 0,
+                currencies: result.items?.map(item => item.currency) || [],
+              });
+            }
+          }
           setData(result)
         } else {
+          if (typeof window !== 'undefined') {
+            const hostname = window.location.hostname;
+            const isDevelopment = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('localhost:');
+            const isPreview = hostname.includes('vercel.app') || hostname.includes('.vercel.app');
+            const isTest = hostname.includes('leadpagestest.com');
+            
+            if (isDevelopment || isPreview || isTest) {
+              console.warn('[useTrialPlans] fetchTrialPlans returned null - will use CMS fallback');
+            }
+          }
           setError(new Error('Failed to fetch trial plans'))
         }
       } catch (err) {

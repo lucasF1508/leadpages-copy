@@ -11,21 +11,23 @@ interface FormData {
 interface PlanRedirectParams {
   formData: FormData
   type: FreeTrialKeyType
+  extraParams?: Record<string, string>
 }
 
 const planRedirect = async ({
   formData,
   type,
+  extraParams,
 }: PlanRedirectParams): Promise<{ error: string } | boolean> => {
   if (!formData.email || formData.email === '') {
-    const defaultUrl = getFreeTrialCheckoutUrl(type)
+    const defaultUrl = getFreeTrialCheckoutUrl(type, false, extraParams)
     window.location.href = defaultUrl
     return true
   }
 
   try {
     const requestOptions: RequestInit = {
-      body: JSON.stringify({ email: formData.email, type }),
+      body: JSON.stringify({ email: formData.email, type, extraParams }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -45,17 +47,16 @@ const planRedirect = async ({
 
     if (url && isSubmitted?.ok) {
       window.location.href = url
+      return true
     }
     return true
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.error('Failed :: Error:', e.message)
+    console.error('[planRedirect] Error:', e.message)
     return {
       error: `Something went wrong with your submission, please reach out to our support team.`,
     }
   }
-
-  return false
 }
 
 export default planRedirect

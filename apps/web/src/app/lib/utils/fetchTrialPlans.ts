@@ -20,16 +20,32 @@ export interface TrialPlansResponse {
 // Determine endpoint based on environment
 // Use VERCEL_ENV to properly detect production vs test/preview environments
 // In Vercel: 'production' = real production, 'preview' = preview/test deployments
+// NOTE: This must be called at runtime (not module load time) to access window
 const getTrialsEndpoint = (): string => {
-  // Check if we're on the test domain
+  // Check if we're on the test domain (client-side only)
   if (typeof window !== 'undefined') {
     const hostname = window.location.hostname;
+    
+    // Local development - always use test endpoint
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('localhost:')) {
+      return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
+    }
+    
+    // Test domain
     if (hostname.includes('leadpagestest.com')) {
       return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
     }
+    
+    // Production domain
+    if (hostname.includes('leadpages.com') && !hostname.includes('leadpagestest.com')) {
+      return 'https://my.leadpages.com/api/v1/plans/trials';
+    }
+    
+    // For any other hostname (preview deployments, etc.), default to test
+    return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
   }
   
-  // Use VERCEL_ENV if available (more reliable than NODE_ENV in Vercel)
+  // Server-side: Use VERCEL_ENV if available (more reliable than NODE_ENV in Vercel)
   const vercelEnv = process.env.VERCEL_ENV;
   if (vercelEnv === 'production') {
     return 'https://my.leadpages.com/api/v1/plans/trials';
@@ -38,8 +54,6 @@ const getTrialsEndpoint = (): string => {
   // Default to test endpoint for development, preview, and test environments
   return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
 };
-
-const TRIALS_ENDPOINT = getTrialsEndpoint();
 
 /**
  * Helper function to simulate different currency prices for testing
@@ -66,7 +80,23 @@ function getTestPrice(usdPrice: number, currency: string): number {
  */
 export async function fetchTrialPlans(): Promise<TrialPlansResponse | null> {
   try {
-    const response = await fetch(TRIALS_ENDPOINT, {
+    // Calculate endpoint at runtime to ensure correct domain detection
+    const endpoint = getTrialsEndpoint();
+    
+    // Debug logging (in development, preview, and test - but not production)
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      const isDevelopment = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('localhost:');
+      const isPreview = hostname.includes('vercel.app') || hostname.includes('.vercel.app');
+      const isTest = hostname.includes('leadpagestest.com');
+      
+      if (isDevelopment || isPreview || isTest) {
+        console.log('[fetchTrialPlans] Fetching from endpoint:', endpoint);
+        console.log('[fetchTrialPlans] Current hostname:', hostname);
+      }
+    }
+    
+    const response = await fetch(endpoint, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -95,6 +125,27 @@ export async function fetchTrialPlans(): Promise<TrialPlansResponse | null> {
     }
 
     const data: TrialPlansResponse = await response.json();
+    
+    // Debug logging (in development, preview, and test - but not production)
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      const isDevelopment = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('localhost:');
+      const isPreview = hostname.includes('vercel.app') || hostname.includes('.vercel.app');
+      const isTest = hostname.includes('leadpagestest.com');
+      
+      if (isDevelopment || isPreview || isTest) {
+        console.log('[fetchTrialPlans] Received data:', {
+          itemCount: data.items?.length || 0,
+          currencies: data.items?.map(item => item.currency) || [],
+          sampleItem: data.items?.[0] ? {
+            level: data.items[0].level,
+            billingCycle: data.items[0].billingCycle,
+            currency: data.items[0].currency,
+            price: data.items[0].price,
+          } : null,
+        });
+      }
+    }
     
     // Check for override parameter for testing (only in development)
     const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;

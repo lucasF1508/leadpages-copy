@@ -37,17 +37,17 @@ const HeroPricing = ({ content, plans }: HeroPricingProps) => {
   }, [trialPlansData, plans])
 
   return (
-    <div className="relative overflow-clip box-mt box-[pb*2] box-[mb*-2]">
-      <HeroGradient className="absolute top-0 left-0 -translate-x-[45%] z-under" />
-      <div className="flex flex-col gap-7">
-        <div className="max-w-base mx-auto box-px">
-          {content && <Text as="div" content={content} />}
-          <CouponBanner className="mt-4" />
-        </div>
-        <PricingCards plans={mergedPlans} />
+  <div className="relative overflow-clip box-mt box-[pb*2] box-[mb*-2]">
+    <HeroGradient className="absolute top-0 left-0 -translate-x-[45%] z-under" />
+    <div className="flex flex-col gap-7">
+      <div className="max-w-base mx-auto box-px">
+        {content && <Text as="div" content={content} />}
+        <CouponBanner className="mt-4" />
       </div>
+        <PricingCards plans={mergedPlans} />
     </div>
-  )
+  </div>
+)
 }
 
 export default HeroPricing

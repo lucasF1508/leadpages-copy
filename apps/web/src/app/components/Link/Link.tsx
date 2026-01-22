@@ -21,6 +21,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkType>(
     },
     ref
   ) => {
+    const finalUrl = url || href
+    
     const props: LinkType = {
       className: clsx(
         linkStyle && `link-${linkStyle}`,
@@ -35,7 +37,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkType>(
       condition,
       hasIcon,
       ref,
-      url: url || href,
+      url: finalUrl,
       ..._props,
     }
 

@@ -138,9 +138,22 @@ const Link = (
         return null
       }
 
+      // Preserve URL parameters (like XID) when navigating
+      const preserveParams = (url) => {
+        if (typeof window === 'undefined') return url
+        const currentParams = new URLSearchParams(window.location.search)
+        if (currentParams.toString()) {
+          const separator = url.includes('?') ? '&' : '?'
+          return `${url}${separator}${currentParams.toString()}`
+        }
+        return url
+      }
+
+      const finalUrl = preserveParams(`${normalizedUrl}${hasHash && hash ? `#${hash}` : ''}`)
+
       return (
         <NextLink
-          href={`${normalizedUrl}${hasHash && hash ? `#${hash}` : ''}`}
+          href={finalUrl}
           legacyBehavior
           passHref
         >
