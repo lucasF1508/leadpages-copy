@@ -18,11 +18,11 @@ export interface TrialPlansResponse {
 }
 
 // Determine endpoint based on environment
-// Always use the test endpoint for trials API
+// Always use the production endpoint for trials API
 // NOTE: This must be called at runtime (not module load time) to access window
 const getTrialsEndpoint = (): string => {
-  // Always use test endpoint for all environments
-  return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
+  // Always use production endpoint for all environments
+  return 'https://my.leadpages.com/api/v1/billing/plans/trials';
 };
 
 /**

@@ -80,7 +80,46 @@ export const getGroupedPlanData = (plans) => {
   }
 }
 
+// Fetch trial plans from the trials endpoint
+const getTrialPlansData = async () => {
+  const endpoint = 'https://my.leadpages.com/api/v1/billing/plans/trials'
+  // Log for debugging - can be removed in production
+  console.log('[getTrialPlansData] Fetching from trials endpoint:', endpoint);
+  const result = await fetch(endpoint, {
+    headers: { 'Accept': 'application/json' },
+  })
+
+  if (!result.ok) {
+    console.error(`[getTrialPlansData] Failed to fetch trial plans: ${result.status} ${result.statusText}`)
+    return null
+  }
+
+  const data = await result.json()
+  console.log('[getTrialPlansData] Received trial plans:', { itemCount: data.items?.length || 0, currencies: data.items?.map(item => item.currency) || [] });
+
+  // Transform trial plans data to match the expected format
+  if (data.items && Array.isArray(data.items)) {
+    return data.items.map((item) => ({
+      isTrial: item.isTrial,
+      price: item.price,
+      period: item.billingCycle, // Map billingCycle to period
+      planLevel: item.level.charAt(0).toUpperCase() + item.level.slice(1), // Map level to planLevel (capitalize)
+      monthlyCost: item.monthlyCost,
+      annualSavings: item.annualSavings,
+      currency: item.currency,
+      checkout_url: item.checkout_url,
+      productCode: item.productCode,
+    }))
+  }
+
+  return null
+}
+
 export const getPlanData = async (variant) => {
+  // Use trials endpoint for trial plans
+  const trialPlans = await getTrialPlansData()
+
+  // Still fetch general plans from the original endpoint
   const result = await fetch(
     `${process.env.LEADPAGES_API_HOST}/billing/plans${
       variant ? '?variants=1' : ''
@@ -90,5 +129,9 @@ export const getPlanData = async (variant) => {
     }
   )
   const resultData = await result.json()
-  return resultData._items
+  const generalPlans = resultData._items || []
+  console.log('[getPlanData] Combined plans:', { trialPlansCount: trialPlans?.length || 0, generalPlansCount: generalPlans.length });
+
+  // Combine trial plans with general plans
+  return [...(trialPlans || []), ...generalPlans]
 }
