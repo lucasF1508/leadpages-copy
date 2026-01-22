@@ -18,40 +18,10 @@ export interface TrialPlansResponse {
 }
 
 // Determine endpoint based on environment
-// Use VERCEL_ENV to properly detect production vs test/preview environments
-// In Vercel: 'production' = real production, 'preview' = preview/test deployments
+// Always use the test endpoint for trials API
 // NOTE: This must be called at runtime (not module load time) to access window
 const getTrialsEndpoint = (): string => {
-  // Check if we're on the test domain (client-side only)
-  if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    
-    // Local development - always use test endpoint
-    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('localhost:')) {
-      return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
-    }
-    
-    // Test domain
-    if (hostname.includes('leadpagestest.com')) {
-      return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
-    }
-    
-    // Production domain
-    if (hostname.includes('leadpages.com') && !hostname.includes('leadpagestest.com')) {
-      return 'https://my.leadpages.com/api/v1/plans/trials';
-    }
-    
-    // For any other hostname (preview deployments, etc.), default to test
-    return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
-  }
-  
-  // Server-side: Use VERCEL_ENV if available (more reliable than NODE_ENV in Vercel)
-  const vercelEnv = process.env.VERCEL_ENV;
-  if (vercelEnv === 'production') {
-    return 'https://my.leadpages.com/api/v1/plans/trials';
-  }
-  
-  // Default to test endpoint for development, preview, and test environments
+  // Always use test endpoint for all environments
   return 'https://my.leadpagestest.com/api/v1/billing/plans/trials';
 };
 
