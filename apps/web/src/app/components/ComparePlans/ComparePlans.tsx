@@ -1,7 +1,7 @@
 'use client'
 
 import * as Accordion from '@radix-ui/react-accordion'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Text from '@/components/Text'
 import { ContentType, LinkType } from '@/types'
 import CaratIcon from '@/components/Icons/CaratIcon'
@@ -12,6 +12,8 @@ import clsx from 'clsx'
 import { PriceType } from '../Price'
 import PlusIcon from '../Icons/PlusIcon'
 import ComparePlansMobile from './ComparePlansMobile'
+import { useTrialPlans } from '@/hooks/useTrialPlans'
+import { mapTrialPlansToComparePlansColumns } from '@/lib/utils/mapTrialPlansToComparePlansColumns'
 
 interface ComparePlansProps {
   content: ContentType
@@ -68,6 +70,27 @@ const ComparePlans = ({
   defaultState,
 }: ComparePlansProps) => {
   const [visible, setVisible] = useState(defaultState === 'open')
+  
+  // Fetch trial plans from API
+  const { data: trialPlansData, loading, error } = useTrialPlans()
+
+  // Merge API data with CMS columns, with fallback to CMS columns
+  const mergedColumns = useMemo(() => {
+    // If API data is available and we have trial plans, merge them
+    if (trialPlansData?.items && trialPlansData.items.length > 0) {
+      try {
+        const mapped = mapTrialPlansToComparePlansColumns(trialPlansData.items, columns)
+        return mapped
+      } catch (err) {
+        // Fallback to CMS columns if mapping fails
+        console.error('[ComparePlans] Error mapping trial plans:', err)
+        return columns
+      }
+    }
+    
+    // Fallback to CMS columns if API data is not available or still loading
+    return columns
+  }, [trialPlansData, columns])
 
   return (
     <>
@@ -103,7 +126,7 @@ const ComparePlans = ({
                 <div
                   className="min-w-full grid gap-x-4 relative"
                   style={{
-                    gridTemplateColumns: `repeat(${columns.length + 1}, minmax(12.5rem, 1fr))`,
+                    gridTemplateColumns: `repeat(${mergedColumns.length + 1}, minmax(12.5rem, 1fr))`,
                   }}
                 >
                   <div
@@ -112,11 +135,11 @@ const ComparePlans = ({
                       'bg-gradient-to-b from-surface via-surface via-90% to-surface/0'
                     )}
                     style={{
-                      gridTemplateColumns: `repeat(${columns.length + 1}, minmax(12.5rem, 1fr))`,
+                      gridTemplateColumns: `repeat(${mergedColumns.length + 1}, minmax(12.5rem, 1fr))`,
                     }}
                   >
                     <div className="w-full h-full" />
-                    {columns.map(({ title, prices, links, _key }, i) => (
+                    {mergedColumns.map(({ title, prices, links, _key }, i) => (
                       <ComparePlansHeading
                         key={_key}
                         title={title}
@@ -184,7 +207,7 @@ const ComparePlans = ({
         </AnimatePresence>
       </div>
       <ComparePlansMobile
-        columns={columns}
+        columns={mergedColumns}
         sections={sections}
         content={content}
         defaultState={defaultState}

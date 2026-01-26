@@ -15,6 +15,8 @@ export interface PriceType {
   priceOverride?: string
   symbol: string
   links?: LinkType[]
+  compareAtString?: string
+  compareAtOverride?: string
 }
 
 interface PriceProps {

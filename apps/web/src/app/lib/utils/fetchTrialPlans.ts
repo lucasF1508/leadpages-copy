@@ -17,7 +17,6 @@ export interface TrialPlansResponse {
   items: TrialPlanItem[];
 }
 
-// Determine endpoint based on environment
 // Always use the production endpoint for trials API
 // NOTE: This must be called at runtime (not module load time) to access window
 const getTrialsEndpoint = (): string => {
