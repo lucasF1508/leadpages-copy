@@ -222,7 +222,6 @@ const PricingCardLink = ({ isFeatured, prices }: PricingCardLinkProps) => {
       <span className="link-label">{linkLabel}</span>
       {linkProps.hasIcon !== false && (
         <span className="link-icon">
-          <span className="link-icon-background" />
           <span className="link-icon-content">→</span>
         </span>
       )}
