@@ -9,7 +9,19 @@ export const addOnCards = F.object({
   fields: [
     ...G.group('content', [
       F.string({name: 'pillContent'}),
-      F.field('blockContent', {name: 'content'})
+      F.field('blockContent', {name: 'content'}),
+      F.string({
+        name: 'variant',
+        title: 'Variant',
+        options: {
+          list: [
+            {title: 'Default', value: 'default'},
+            {title: 'Dark', value: 'dark'},
+            {title: 'Light', value: 'light'},
+          ],
+        },
+        initialValue: 'default',
+      }),
     ]),
     ...G.group('cards', [
       F.array({

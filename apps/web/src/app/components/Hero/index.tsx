@@ -11,9 +11,11 @@ import HeroSimple from './HeroSimple'
 import HeroTemplate from './HeroTemplate'
 import HeroTextWithMarquee from './HeroTextWithMarquee'
 import HeroWithMedia from './HeroWithMedia'
+import { HeroHomeNewProps } from './HeroHome'
+import HeroHomeNew from './HeroHome/HeroHomeNew'
 
 interface HeroProps {
-  hero: (HeroHomeProps | HeroPricingProps | HeroWithMediaProps) & any[]
+  hero: (HeroHomeProps | HeroPricingProps | HeroWithMediaProps | HeroHomeNewProps) & any[]
 }
 
 // TODO Expand as more Hero types are added.
@@ -40,6 +42,8 @@ const Hero = ({ hero }: HeroProps) => {
       return <HeroTemplate {...heroProps} />
     case 'heroTextWithMarquee':
       return <HeroTextWithMarquee {...heroProps} />
+    case 'heroHomeNew':
+      return <HeroHomeNew {...heroProps} />
     default:
       return <HeroWithMedia {...heroProps} />
   }

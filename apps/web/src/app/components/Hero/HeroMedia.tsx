@@ -9,6 +9,7 @@ export interface HeroMediaProps {
     media?: string
     root?: string
   }
+  limitlessImage?: boolean
   media: MediaType
   overflow?: boolean
 }
@@ -16,14 +17,16 @@ export interface HeroMediaProps {
 const HeroMedia = ({
   className,
   classNames,
+  limitlessImage,
   media,
-  overflow,
+  overflow
 }: HeroMediaProps) => {
   if (!hasMedia(media)) return null
   return (
     <div
       className={clsx(
-        'relative w-full max-w-cols6',
+        'relative w-full',
+        !limitlessImage && 'max-w-cols6',
         overflow && 'aspect-1',
         className,
         classNames?.root

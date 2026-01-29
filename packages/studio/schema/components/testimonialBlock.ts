@@ -14,6 +14,18 @@ export const testimonialBlock = F.object({
         'If more than 1 testimonial is selected slider will be used to display testimonials',
       of: [F.reference('testimonial')],
     }),
+    F.string({
+      name: 'variant',
+      title: 'Variant',
+      options: {
+        list: [
+          {title: 'Default', value: 'default'},
+          {title: 'Dark', value: 'dark'},
+          {title: 'Light', value: 'light'},
+        ],
+      },
+      initialValue: 'default',
+    }),
   ],
   preview: {
     select: {

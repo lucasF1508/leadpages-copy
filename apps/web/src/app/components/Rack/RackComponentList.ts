@@ -17,7 +17,10 @@ import dynamic from 'next/dynamic'
  */
 const RackComponentList = {
   accordionWithSidebar: [dynamic(() => import('@/components/AccordionWithSidebar/AccordionWithSidebar')), { pinion: false }],
-  addOnCards: dynamic(() => import('@/components/AddOnCards')),
+  addOnCards: [
+    dynamic(() => import('@/components/AddOnCards')),
+    { pinion: false },
+  ],
   blogSection: [
     dynamic(() => import('@/components/BlogSection/BlogSection')),
     { pinion: false },
@@ -45,6 +48,10 @@ const RackComponentList = {
     { pinion: false },
   ],
   featureCards: dynamic(() => import('@/components/FeatureCards')),
+  featureScroll: [
+    dynamic(() => import('@/components/FeatureScroll')),
+    { pinion: false },
+  ],
   integrationDirectory: [
     dynamic(() => import('@/components/IntegrationDirectory')),
     { pinion: false },
@@ -96,7 +103,10 @@ const RackComponentList = {
     dynamic(() => import('@/components/TemplateGallery')),
     { pinion: false },
   ],
-  testimonialBlock: dynamic(() => import('@/components/Testimonial')),
+  testimonialBlock: [
+    dynamic(() => import('@/components/Testimonial')),
+    { pinion: false },
+  ],
   textBlock: dynamic(() => import('@/components/Text/TextBlock')),
   textBlockWithSidebar: dynamic(() => import('@/components/TextWithSidebar')),
   textColumns: dynamic(() => import('@/components/TextColumns')),

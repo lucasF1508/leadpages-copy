@@ -9,6 +9,68 @@ export const faqAccordion = F.object({
             description: 'Main heading for the FAQ section',
             validation: (Rule) => Rule.required(),
         }),
+        F.string({
+            name: 'description',
+            title: 'Description',
+            description: 'Description text for the FAQ section',
+        }),
+        F.string({
+            name: 'ctaUrl',
+            title: 'CTA URL',
+            description: 'URL for the call-to-action button',
+        }),
+        F.string({
+            name: 'ctaText',
+            title: 'CTA Text',
+            description: 'Text for the call-to-action button',
+        }),
+        F.string({
+            name: 'variant',
+            title: 'Variant',
+            options: {
+                list: [
+                    { title: 'Default', value: 'default' },
+                    { title: 'Dark', value: 'dark' },
+                    { title: 'Light', value: 'light' },
+                ],
+            },
+            initialValue: 'default',
+        }),
+        F.array({
+            name: 'questions',
+            title: 'Questions',
+            description: 'FAQ questions (for dark/light variants)',
+            of: [
+                F.object({
+                    name: 'question',
+                    title: 'Question',
+                    fields: [
+                        F.string({
+                            name: 'title',
+                            title: 'Question Title',
+                            description: 'The question text',
+                            validation: (Rule) => Rule.required(),
+                        }),
+                        F.field('blockContent', {
+                            name: 'content',
+                            title: 'Answer',
+                            description: 'The answer content with rich text formatting',
+                            validation: (Rule) => Rule.required(),
+                        }),
+                    ],
+                    preview: {
+                        select: {
+                            title: 'title',
+                        },
+                        prepare({ title }) {
+                            return {
+                                title: title || 'Untitled Question',
+                            }
+                        },
+                    },
+                }),
+            ],
+        }),
         F.array({
             name: 'categories',
             title: 'Categories',

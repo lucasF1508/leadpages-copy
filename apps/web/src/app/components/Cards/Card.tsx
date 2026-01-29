@@ -24,6 +24,7 @@ export interface CardProps {
   contentSize?: 'large' | 'small'
   icon?: ImageType
   spacer?: boolean
+  variant?: 'default' | 'dark' | 'light'
 }
 
 const Card = ({
@@ -34,14 +35,22 @@ const Card = ({
   contentSize = 'large',
   icon,
   spacer = true,
-}: CardProps) => (
-  <div
-    className={clsx(
-      'relative rounded-xl overflow-hidden border border-border-muted',
-      className,
-      classNames?.root
-    )}
-  >
+  variant = 'default',
+}: CardProps) => {
+  const isDark = variant === 'dark'
+  const isLight = variant === 'light'
+
+  return (
+    <div
+      className={clsx(
+        'relative rounded-xl overflow-hidden border',
+        isDark && 'border-white/10 bg-[#1A1A1A]',
+        isLight && 'border-border-muted bg-white',
+        !isDark && !isLight && 'border-border-muted',
+        className,
+        classNames?.root
+      )}
+    >
     {backgroundImage && (
       <Image className="absolute inset-0 z-base" fill image={backgroundImage} />
     )}
@@ -55,25 +64,38 @@ const Card = ({
       <div
         className={clsx(
           'flex',
-          contentSize === 'large' ? 'flex-col' : 'flex-row gap-3'
+          contentSize === 'large' ? 'flex-col items-center text-center' : 'flex-row gap-3'
         )}
       >
         {hasImage(icon) && (
           <div
             className={clsx(
-              'shrink-0 flex items-center justify-center mb-2',
-              contentSize === 'large' && 'w-8 h-8',
+              'shrink-0 flex items-center justify-center mb-4',
+              contentSize === 'large' && 'w-10 h-10',
               classNames?.iconContainer
             )}
           >
-            <Image className={clsx('w-5 h-5', classNames?.icon)} image={icon} />
+            <Image className={clsx('w-6 h-6', classNames?.icon)} image={icon} />
           </div>
         )}
         {!!content?.length && (
           <Text
-            blockStyles={defaultLargeBlockStyles}
+            blockStyles={{
+              h3: {
+                className: 'type-h3 md:type-h2 font-bold mb-3',
+                tag: 'h3',
+              },
+              normal: {
+                className: 'type-body-sm md:type-body-md leading-relaxed',
+                tag: 'p',
+              },
+            }}
             className={clsx(
-              '*:!my-0 flex-col flex gap-2 [&_p]:text-body-muted',
+              '*:!my-0 flex-col flex gap-2 w-full',
+              contentSize === 'large' && 'items-center text-center',
+              isDark && '[&_p]:text-white/80 [&_h3]:text-white [&_h4]:text-white [&_h5]:text-white [&_h6]:text-white',
+              isLight && '[&_p]:text-dark/80 [&_h3]:text-dark [&_h4]:text-dark [&_h5]:text-dark [&_h6]:text-dark',
+              !isDark && !isLight && '[&_p]:text-body-muted',
               classNames?.content
             )}
             content={content}
@@ -85,6 +107,7 @@ const Card = ({
       )}
     </div>
   </div>
-)
+  )
+}
 
 export default Card

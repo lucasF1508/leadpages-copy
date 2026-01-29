@@ -28,10 +28,17 @@ export const getPreviewUrl = (doc: SanityDocumentLike, dataset: string) => {
     params.set('type', doc._type)
   }
 
-  const host =
-    window.location.origin == 'http://localhost:3333'
-      ? 'http://localhost:3000'
-      : window.location.origin
+  // Determinar el host para el preview
+  // Prioridad:
+  // 1. Variable de entorno SANITY_STUDIO_PREVIEW_URL (para branches/preview deployments)
+  // 2. Localhost mapping (si estamos en localhost:3333, usar localhost:3000)
+  // 3. window.location.origin (fallback por defecto)
+  const previewUrl = import.meta.env.SANITY_STUDIO_PREVIEW_URL
+  const host = previewUrl 
+    ? previewUrl.replace(/\/$/, '') // Remover trailing slash si existe
+    : window.location.origin == 'http://localhost:3333'
+    ? 'http://localhost:3000'
+    : window.location.origin
 
   const endpoint = datasetEndpoints[dataset] || datasetEndpoints.production_v3
 

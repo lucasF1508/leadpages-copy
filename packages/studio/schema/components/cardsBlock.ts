@@ -33,6 +33,18 @@ export const cardsBlock = F.object({
         }),
       ],
     }),
+    F.radio(['default', 'dark', 'light'], {
+      name: 'variant',
+      title: 'Variant',
+      initialValue: 'default',
+      description: 'Choose the color theme for the cards',
+    }),
+    F.radio(['2', '3'], {
+      name: 'columns',
+      title: 'Columns',
+      initialValue: '2',
+      description: 'Number of columns for the cards grid',
+    }),
   ],
   preview: {
     prepare: () => ({

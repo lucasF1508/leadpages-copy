@@ -7,6 +7,7 @@ import Media from '@/components/Media'
 import { PortableTextBlock } from '@/types'
 import { PortableText } from '@portabletext/react'
 import Link from '@/components/Link'
+import { LinkIcon } from '@/components/Link'
 
 export interface FAQQuestion {
   _key: string
@@ -29,7 +30,12 @@ export interface FAQCategory {
 
 export interface FAQAccordionProps {
   heading: string
-  categories: FAQCategory[]
+  categories?: FAQCategory[]
+  description?: string
+  ctaUrl?: string
+  ctaText?: string
+  questions?: FAQQuestion[]
+  variant?: 'default' | 'dark' | 'light'
 }
 
 const FAQAccordionItem = ({
@@ -131,7 +137,15 @@ const FAQAccordionItem = ({
   </Primitives.Item>
 )
 
-const FAQAccordion = ({ heading, categories }: FAQAccordionProps) => {
+const FAQAccordion = ({ 
+  heading, 
+  categories, 
+  description,
+  ctaUrl,
+  ctaText = 'Visit the FAQ Page →',
+  questions,
+  variant = 'default'
+}: FAQAccordionProps) => {
   const [activeQuestions, setActiveQuestions] = useState<Set<string>>(new Set())
 
   const handleQuestionToggle = (questionKey: string) => {
@@ -153,6 +167,175 @@ const FAQAccordion = ({ heading, categories }: FAQAccordionProps) => {
     }
   }
 
+  // Si es variante dark o light, usar el nuevo diseño
+  if ((variant === 'dark' || variant === 'light') && questions?.length) {
+    const isDark = variant === 'dark'
+    const faqQuestions = questions
+    const [activeValue, setActiveValue] = useState<string | undefined>(undefined)
+
+    return (
+      <div 
+        className={clsx(
+          'py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 relative',
+          isDark ? 'bg-[#1A1A1A]' : 'bg-white'
+        )} 
+        style={isDark ? { 
+          backgroundColor: '#1A1A1A !important',
+          backgroundImage: 'none !important',
+          background: '#1A1A1A !important',
+        } : undefined}
+      >
+        {/* Overlay para eliminar cualquier gradiente */}
+        {isDark && (
+          <div 
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundColor: '#1A1A1A',
+              backgroundImage: 'none',
+              background: '#1A1A1A',
+              zIndex: 0,
+            }}
+          />
+        )}
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12">
+            {/* Columna izquierda: Título, descripción y botón */}
+            <div className="flex-1 lg:max-w-md">
+              <h2 className={clsx(
+                'font-display font-extrabold type-title-t5 sm:type-title-t4 md:type-title-t3 mb-4 sm:mb-6',
+                isDark ? 'text-white' : 'text-dark'
+              )}>
+                {heading}
+              </h2>
+              {description && (
+                <p className={clsx(
+                  'type-body-sm sm:type-body-md md:type-body-lg mb-6 sm:mb-8',
+                  isDark ? 'text-white/80' : 'text-dark/80'
+                )}>
+                  {description}
+                </p>
+              )}
+              {ctaUrl && (
+                <Link
+                  url={ctaUrl}
+                  condition="internal"
+                  hasIcon={false}
+                  className={clsx(
+                    'inline-flex items-center gap-2 px-6 py-3 rounded-lg border transition-colors font-medium',
+                    isDark 
+                      ? 'bg-white border-yellow-200/50 text-black hover:bg-white/90'
+                      : 'bg-black border-black text-white hover:bg-black/90'
+                  )}
+                  style={isDark ? {
+                    backgroundColor: '#FFFFFF',
+                    color: '#000000',
+                    borderColor: '#FEF3C7',
+                  } : {
+                    backgroundColor: '#000000',
+                    color: '#FFFFFF',
+                    borderColor: '#000000',
+                  }}
+                >
+                  {ctaText.replace(/→/g, '').trim()}
+                  <span className={clsx('inline-flex items-center gap-1', isDark ? 'text-black' : 'text-white')}>
+                    <LinkIcon className="w-4 h-4" />
+                  </span>
+                </Link>
+              )}
+            </div>
+
+            {/* Columna derecha: Lista de preguntas */}
+            <div className="flex-1">
+              <Primitives.Root 
+                type="single" 
+                collapsible 
+                className="w-full"
+                value={activeValue}
+                onValueChange={setActiveValue}
+              >
+                {faqQuestions.map((question) => {
+                  const isActive = activeValue === question._key
+                  return (
+                    <Primitives.Item key={question._key} value={question._key}>
+                      <Primitives.Header>
+                        <Primitives.Trigger className={clsx(
+                          'flex w-full items-center justify-between py-4 text-left transition-colors',
+                          'border-b',
+                          isDark 
+                            ? 'border-white/20 hover:text-white/80' 
+                            : 'border-dark/20 hover:text-dark/80'
+                        )}>
+                          <span className={clsx(
+                            'type-body-sm sm:type-body-md font-medium pr-4 flex-1',
+                            isDark ? 'text-white' : 'text-dark'
+                          )}>
+                            {question.title}
+                          </span>
+                          <span className={clsx(
+                            'h-5 w-5 flex items-center justify-center transition-transform duration-200 flex-shrink-0',
+                            isActive && 'rotate-180',
+                            isDark ? 'text-white' : 'text-dark'
+                          )}>
+                            ▼
+                          </span>
+                        </Primitives.Trigger>
+                      </Primitives.Header>
+                      <Primitives.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                        <div className={clsx(
+                          'pb-4 pt-2',
+                          isDark ? 'text-white/80' : 'text-dark/80'
+                        )}>
+                          <PortableText
+                            value={question.content}
+                            components={{
+                              marks: {
+                                link: ({ children, value }) => {
+                                  const url = value?.url || value?.href || '#'
+                                  const isExternal = url.startsWith('http')
+                                  const isInternal = !isExternal && !url.startsWith('#')
+                                  let condition: 'internal' | 'external' = 'external'
+                                  if (isInternal) condition = 'internal'
+
+                                  return (
+                                    <Link
+                                      condition={condition}
+                                      url={url}
+                                      hasIcon={false}
+                                      className={clsx(
+                                        'underline cursor-pointer',
+                                        isDark 
+                                          ? 'text-white hover:text-white/80' 
+                                          : 'text-blue-600 hover:text-blue-800'
+                                      )}
+                                    >
+                                      {children}
+                                    </Link>
+                                  )
+                                },
+                              },
+                              block: {
+                                normal: ({ children }) => (
+                                  <p className="type-body-sm mb-4 last:mb-0">
+                                    {children}
+                                  </p>
+                                ),
+                              },
+                            }}
+                          />
+                        </div>
+                      </Primitives.Content>
+                    </Primitives.Item>
+                  )
+                })}
+              </Primitives.Root>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // Variante default (comportamiento original)
   if (!categories?.length) return null
 
   return (

@@ -9,7 +9,10 @@
   "scripts": {
     "map": "tsx -r tsconfig-paths/register src/map/index.ts",
     "import": "tsx -r tsconfig-paths/register src/import/index.ts",
-    "delete": "tsx -r tsconfig-paths/register src/tools/delete.ts"
+    "delete": "tsx -r tsconfig-paths/register src/tools/delete.ts",
+    "create-component-testing": "tsx -r tsconfig-paths/register src/tools/create-component-testing-page.ts",
+    "fix-cards-block": "tsx -r tsconfig-paths/register src/tools/fix-cards-block-component.ts",
+    "regenerate-cards-block": "tsx -r tsconfig-paths/register src/tools/regenerate-cards-block.ts"
   },
   "keywords": [],
   "author": "",
