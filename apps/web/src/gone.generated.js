@@ -67,7 +67,7 @@ const goneList = [
   // "/customers/kate",
   // "/customers/shohawk",
   "/demo",
-  "/free-trial",
+  // "/free-trial",
   "/hc/en-us/articles/227330167-install-the-wordpress-plugin",
   // "/landing-pages-guide/lead-magnets-101",
   // "/lead-generation-guide/lead-gen-tools",
