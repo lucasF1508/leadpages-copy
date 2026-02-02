@@ -102,36 +102,40 @@ const PricingCards = ({ plans }: PricingCardsProps) => {
         <div className='mt-2 nav-break:hidden'>
           <div className='flex items-center justify-center gap-4 -mb-[calc(0.625rem+1px)]'>
             {
-              !!plans?.length && plans.map(({_key, title}: Plan, i) => 
-                <div 
-                  key={_key}
-                  className={clsx(
-                    'type-h6 cursor-pointer relative',                  
-                  )} 
-                  onClick={() => handleChange(i)}
-                >
-                  {title}
-                  {i === indices?.active && (
-                    <m.div
-                      className={
-                        clsx('bg-surface-brand-lime-primary absolute -bottom-[2px] left-0 right-0 h-[3px] z-under')
-                      }
-                      id="plan-highlight"
-                      layout
-                      layoutId="plan-highlight"
-                    />
-                  )}
-                </div>
-              )
+              !!plans?.length && plans
+                .filter((plan) => plan.title && (plan.description || plan.features?.length || plan.prices?.length))
+                .map(({_key, title}: Plan, i) => 
+                  <div 
+                    key={_key}
+                    className={clsx(
+                      'type-h6 cursor-pointer relative',                  
+                    )} 
+                    onClick={() => handleChange(i)}
+                  >
+                    {title}
+                    {i === indices?.active && (
+                      <m.div
+                        className={
+                          clsx('bg-surface-brand-lime-primary absolute -bottom-[2px] left-0 right-0 h-[3px] z-under')
+                        }
+                        id="plan-highlight"
+                        layout
+                        layoutId="plan-highlight"
+                      />
+                    )}
+                  </div>
+                )
             }
           </div>
         </div>
       </div>
       <div ref={ref} className='max-w-base mx-auto'>
         <div className='flex nav-break:justify-center gap-4 mt-3'>
-          {!!plans?.length && plans.map(({_key, ...card}: Plan) => 
-            <PricingCard card={card} key={_key} />
-          )}
+          {!!plans?.length && plans
+            .filter((plan) => plan.title && (plan.description || plan.features?.length || plan.prices?.length))
+            .map(({_key, ...card}: Plan) => 
+              <PricingCard card={card} key={_key} />
+            )}
         </div>
       </div>
     </div>

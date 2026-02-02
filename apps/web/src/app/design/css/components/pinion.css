@@ -59,6 +59,10 @@
   @apply overflow-hidden;
 }
 
+.pinion-mediaWithItems:has(.media-with-items-light) {
+  @apply !mb-0;
+}
+
 .pinion-marquee {
   @apply overflow-hidden;
 

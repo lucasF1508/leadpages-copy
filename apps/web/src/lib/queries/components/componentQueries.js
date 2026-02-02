@@ -17,6 +17,77 @@ _type == "testimonials" => {
   testimonials[]-> 
 }`
 
+// New testimonials block used in App Router pages (e.g. platform-new)
+// Needs testimonials[] dereferenced so the React Testimonial component
+// receives full testimonial documents instead of just references.
+const testimonialBlock = `
+_type == "testimonialBlock" => {
+  ...,
+  testimonials[]-> 
+}`
+
+const testimonialFeaturedBlock = `
+_type == "testimonialFeaturedBlock" => {
+  ...,
+  testimonials[]-> 
+}`
+
+const integrationsBlock = `
+_type == "integrationsBlock" => {
+  ...,
+  image {
+    asset-> {
+      _id,
+      _type,
+      url,
+      metadata {
+        dimensions {
+          width,
+          height,
+          aspectRatio
+        },
+        lqip
+      }
+    },
+    altText,
+    hotspot,
+    crop,
+    lqip
+  },
+  cta[] {
+    ...,
+    condition,
+    url,
+    label,
+    internal-> {
+      _id,
+      _type,
+      "slug": slug.current,
+      "path": path
+    }
+  }
+}`
+
+const subFooter = `
+_type == "subFooter" => {
+  ...,
+  links[] {
+    ...,
+    _type == "signUp" => {
+      ...,
+      external {
+        ...
+      }
+    },
+    internal-> {
+      _id,
+      _type,
+      "slug": slug.current,
+      "path": path
+    }
+  }
+}`
+
 const mediaTextQuote = ` 
 _type == "mediaTextQuote" => {
   ...,
@@ -126,6 +197,10 @@ const components = [
   ctaInline, 
   mediaTextQuote, 
   testimonials, 
+  testimonialBlock,
+  testimonialFeaturedBlock,
+  integrationsBlock,
+  subFooter,
   customerRotator,
   faqs,
   listingBlock,

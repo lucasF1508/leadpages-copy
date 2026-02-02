@@ -1,38 +1,56 @@
-import React from 'react'
-import clsx from 'clsx'
+import React, { useId } from 'react'
 
-const Star = () => (
+const Star = ({ gradientId }: { gradientId: string }) => (
   <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 0L13.09 6.26L20 7.27L15 12.14L16.18 19.02L10 15.77L3.82 19.02L5 12.14L0 7.27L6.91 6.26L10 0Z" fill="url(#gradient)"/>
-    <defs>
-      <linearGradient gradientUnits="userSpaceOnUse" id="gradient" x1="0" x2="20" y1="9.51" y2="9.51">
-        <stop stopColor="#9061EE"/>
-        <stop offset="1" stopColor="#C47FF3"/>
-      </linearGradient>
-    </defs>
+    <path d="M10 0L13.09 6.26L20 7.27L15 12.14L16.18 19.02L10 15.77L3.82 19.02L5 12.14L0 7.27L6.91 6.26L10 0Z" fill={`url(#${gradientId})`}/>
   </svg>
 )
 
-const Stars = ({ rating = 5, }) => {
+interface StarsProps { rating?: number; variant?: 'purple' | 'green' }
+
+const Stars = ({ rating = 5, variant = 'purple' }: StarsProps) => {
+  const uid = useId().replace(/:/g, '')
+  const gradientId = `stars-${variant}-${uid}`
+  const maskId = `star-mask-${uid}`
   const partial = rating % 1
+
+  const gradient = variant === 'green' ? (
+    <>
+      <stop stopColor="#84cc16"/>
+      <stop offset="1" stopColor="#a3e635"/>
+    </>
+  ) : (
+    <>
+      <stop stopColor="#9061EE"/>
+      <stop offset="1" stopColor="#C47FF3"/>
+    </>
+  )
 
   return (
     <div className='flex flex-row gap-0.5'>
-      {[...Array(Math.floor(rating))].map((_, i) => (
-        <Star key={`${i}-${Math.random()}`} />
-      ))}
-      <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+      <svg width={0} height={0} aria-hidden>
         <defs>
-          <mask id="star-mask">
+          <linearGradient gradientUnits="userSpaceOnUse" id={gradientId} x1="0" x2="20" y1="9.51" y2="9.51">
+            {gradient}
+          </linearGradient>
+          <linearGradient gradientUnits="userSpaceOnUse" id={`${gradientId}-partial`} x1="0" x2="20" y1="9.51" y2="9.51">
+            {gradient}
+          </linearGradient>
+          <mask id={maskId}>
             <svg viewBox="0 0 20 20" xmlSpace="preserve">
               <path d="M10 0L13.09 6.26L20 7.27L15 12.14L16.18 19.02L10 15.77L3.82 19.02L5 12.14L0 7.27L6.91 6.26L10 0Z" fill="#fff"/>
             </svg>
           </mask>
         </defs>
+      </svg>
+      {[...Array(Math.floor(rating))].map((_, i) => (
+        <Star key={`${i}-${uid}`} gradientId={gradientId} />
+      ))}
+      <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
         <rect
-          className={clsx('h-full')}
-          fill="url(#gradient)"
-          mask={`url(#star-mask)`}
+          height="20"
+          fill={`url(#${gradientId}-partial)`}
+          mask={`url(#${maskId})`}
           width={`${100*partial}%`}
         />
       </svg>

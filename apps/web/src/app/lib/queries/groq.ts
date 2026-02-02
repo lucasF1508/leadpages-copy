@@ -1,5 +1,9 @@
 export const componentQueries = `
   testimonials[]->,
+  _type == 'testimonialBlock' => {
+    ...,
+    testimonials[]->
+  },
   faqs[]->,
   _type == 'blogSection' => {
     ...,

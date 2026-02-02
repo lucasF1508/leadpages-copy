@@ -52,6 +52,12 @@ export const marquee = F.object({
       }),
     ]),
     ...G.group('options', [
+      F.dropdown(['default', 'primary', 'secondary'], {
+        name: 'backgroundColor',
+        title: 'Background Color',
+        description: 'Background color for the marquee section',
+        initialValue: 'default',
+      }),
       F.number({
         name: 'duration',
         title: 'Duration (seconds) for a full loop.',

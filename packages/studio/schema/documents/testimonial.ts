@@ -15,6 +15,11 @@ export const schemaTestimonial = F.document({
     F.text({name: 'testimonial'}),
     F.field('rating'),
     F.image(),
+    F.image({
+      name: 'badgeImage',
+      title: 'Badge Image',
+      description: 'Optional image that appears in the bottom left corner of the main image',
+    }),
     F.links({
       name: 'source',
       validation: (Rule) => Rule.max(1),

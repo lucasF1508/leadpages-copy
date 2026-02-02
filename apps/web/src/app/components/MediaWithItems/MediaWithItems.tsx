@@ -39,6 +39,7 @@ export interface MediaWithItemsProps
   items?: MediaWithItemsType[]
   links?: LinkType[]
   mediaItems?: MediaType[]
+  variant?: 'dark' | 'light'
 }
 
 export interface MediaWithItemsType {
@@ -56,6 +57,7 @@ export interface MediaWithItemsContainer {
   className?: ClassValue
   duration?: number
   items: MediaWithItemsType[]
+  variant?: 'dark' | 'light'
 }
 
 interface MediaWithItemsStore {
@@ -75,7 +77,8 @@ const MediaWithItems = ({
   duration = 10,
   items,
   mediaItems,
-  title
+  title,
+  variant = 'dark'
 }: MediaWithItemsProps) => {
   const isDesktop = useMediaQuery('(min-width: 900px)')
   const { activeIndex, setActiveIndex } = useMediaWithItemsStore(
@@ -109,15 +112,28 @@ const MediaWithItems = ({
     setActiveIndex(0)
   }
 
+  const isLight = variant === 'light'
+
   return (
-    <div className='flex flex-col gap-5 sm:gap-7 md:gap-8 md:gap max-md:max-w-[33.5rem] align-center'>
+    <div className={clsx(
+      isLight && 'bg-white w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-12 md:py-16',
+      isLight && 'media-with-items-light'
+    )}>
+      <div className={clsx(
+        'flex flex-col gap-5 sm:gap-7 md:gap-8 md:gap max-md:max-w-[33.5rem] align-center',
+        isLight && 'mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'
+      )}>
         <div className='flex justify-between md:items-end gap-4 max-md:flex-col'>
           <div className={clsx('max-w-cols8')}>
             {title && 
               <div>
                 <Text
                   as="div"
-                  className={clsx('type-title-t7 sm:type-title-t5 md:type-title-t3', classNames?.title)}
+                  className={clsx(
+                    'type-title-t7 sm:type-title-t6 md:type-title-t5 !font-normal',
+                    isLight && 'text-[#1a1a1a]',
+                    classNames?.title
+                  )}
                   content={title}
                 />
               </div>
@@ -126,17 +142,26 @@ const MediaWithItems = ({
               <div className='mt-2'>
                 <Text
                   as="div"
-                  className={clsx(classNames?.content)}
+                  className={clsx(
+                    isLight && 'text-[#1a1a1a]',
+                    classNames?.content
+                  )}
                   content={content}
                 />
               </div>
             }
           </div>
           <div className='flex gap-2 sm:gap-3 md:gap-4'>
-            <div className='link-button-secondary border-none w-6 h-6 rotate-180' onClick={() => handleSetActiveIndex(activeIndex - 1)}>
+            <div className={clsx(
+              'link-button-secondary border-none w-6 h-6 rotate-180',
+              isLight && 'bg-[#9061EE] hover:bg-[#a67ff3] [&_svg]:text-white'
+            )} onClick={() => handleSetActiveIndex(activeIndex - 1)}>
               <LinkIcon/>
             </div>
-            <div className='link-button-secondary border-none w-6 h-6' onClick={() => handleSetActiveIndex(activeIndex + 1)}>
+            <div className={clsx(
+              'link-button-secondary border-none w-6 h-6',
+              isLight && 'bg-[#9061EE] hover:bg-[#a67ff3] [&_svg]:text-white'
+            )} onClick={() => handleSetActiveIndex(activeIndex + 1)}>
               <LinkIcon/>
             </div>
           </div>
@@ -159,20 +184,23 @@ const MediaWithItems = ({
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
             <AnimatePresence initial={false} mode="popLayout">
-              <m.div
-                animate={{ opacity: 1 }}
-                className="max-w-tablet-cols7 md:max-w-none mx-auto w-full relative aspect-1 rounded-lg md:rounded-xl overflow-hidden"
-                exit={{ opacity: 0 }}
-                initial={{ opacity: 0 }}
-                key={hasSingleMedia ? 'media' : activeIndex}
-              >
-                <Media
-                  fill
-                  media={{
-                    ...media,
-                  }}
-                />
-              </m.div>
+              {media && (
+                <m.div
+                  animate={{ opacity: 1 }}
+                  className={clsx(
+                    "max-w-tablet-cols7 md:max-w-none mx-auto w-full relative aspect-1 rounded-lg md:rounded-xl overflow-hidden",
+                    isLight && 'bg-white'
+                  )}
+                  exit={{ opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  key={hasSingleMedia ? 'media' : activeIndex}
+                >
+                  <Media
+                    fill
+                    media={media}
+                  />
+                </m.div>
+              )}
             </AnimatePresence>
           </AnimateChangeInHeight>
         </div>
@@ -187,16 +215,19 @@ const MediaWithItems = ({
             <Accordion
               duration={duration}
               items={items}
+              variant={variant}
             />
           ) : (
             <Slider
               className="max-w-tablet-cols7 mx-auto"
               duration={duration}
               items={items}
+              variant={variant}
             />
           )}
         </div>}
       </div>
+    </div>
     </div>
   )
 }

@@ -16,9 +16,15 @@ export const subFooter = F.object({
       F.string({ name: 'subheading' }),
     ]),
     ...G.group('actions', [
-      F.string({ name: 'ctaLabel', required: true, initialValue: 'Start Free Trial' }),
-      F.url({ name: 'ctaHref', required: true }),
-      F.dropdown(['_self','_blank'], { name: 'target', initialValue: '_self' }),
+      F.links({
+        name: 'links',
+        signUpOption: true,
+        validation: (Rule) => Rule.max(1),
+        description: 'Use sign up option for email form with 4 redirection options (Standard Annual, Standard Monthly, Pro Annual, Pro Monthly). Otherwise use CTA fields below.',
+      }),
+      F.string({ name: 'ctaLabel', initialValue: 'Start Free Trial', hidden: ({parent}) => parent?.links?.length > 0 }),
+      F.url({ name: 'ctaHref', hidden: ({parent}) => parent?.links?.length > 0 }),
+      F.dropdown(['_self','_blank'], { name: 'target', initialValue: '_self', hidden: ({parent}) => parent?.links?.length > 0 }),
     ]),
   ],
   preview: {

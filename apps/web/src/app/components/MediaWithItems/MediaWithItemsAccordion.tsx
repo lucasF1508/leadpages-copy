@@ -18,60 +18,83 @@ const MediaWithItemsAccordionItem = ({
   link,
   title,
   value,
-}: MediaWithItemsType) => (
-  <Primitives.Item
-    className={clsx(
-      'py-xl relative flex w-full flex-row items-start gap-x-3 transition-colors'
-    )}
-    value={value}
-  >
-    <Primitives.Trigger
-      aria-label="open-button"
-      className={clsx('z-base absolute inset-0')}
-    />
-    <span
+  variant = 'dark',
+}: MediaWithItemsType & { variant?: 'dark' | 'light' }) => {
+  const isLight = variant === 'light'
+  
+  return (
+    <Primitives.Item
       className={clsx(
-        'z-content pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity [[data-state=open]_&]:opacity-100'
+        'py-xl relative flex w-full flex-row items-start gap-x-3 transition-colors',
+        isLight && 'text-[#1a1a1a]'
       )}
-    />
-    <div className={clsx('my-auto flex-[1_1_auto]')}>
-      <Primitives.Header
+      value={value}
+    >
+      <Primitives.Trigger
+        aria-label="open-button"
+        className={clsx('z-base absolute inset-0')}
+      />
+      <span
         className={clsx(
-          'type-h2 group flex w-full flex-row items-center justify-between gap-2'
+          'z-content pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity [[data-state=open]_&]:opacity-100',
+          isLight && 'bg-transparent'
         )}
-      >
-        <span className={clsx('text-left')}>{title}</span>
-      </Primitives.Header>
-      <Primitives.Content
-        className={clsx(
-          'overflow-hidden data-[state=closed]:animate-[close_300ms_ease-out] data-[state=open]:animate-[open_300ms_ease-out]'
-        )}
-      >
-        {content &&        
-          <Text
-            as="div"
-            className={clsx(
-              'flex flex-col gap-1.5 [&_*]:!my-0',
-              title && 'pt-4'
-            )}
-            content={content}
-          />
-        }
-        {hasLink(link) &&        
-          <Link
-            className="mt-2"
-            {...link}
-          />
-        }
-      </Primitives.Content>
-    </div>
-  </Primitives.Item>
-)
+      />
+      <div className={clsx('my-auto flex-[1_1_auto]')}>
+        <Primitives.Header
+          className={clsx(
+            'type-h2 group flex w-full flex-row items-center justify-between gap-2',
+            isLight && 'text-[#1a1a1a]'
+          )}
+        >
+          <span className={clsx('text-left')}>{title}</span>
+        </Primitives.Header>
+        <Primitives.Content
+          className={clsx(
+            'overflow-hidden data-[state=closed]:animate-[close_300ms_ease-out] data-[state=open]:animate-[open_300ms_ease-out]'
+          )}
+        >
+          {content &&        
+            <Text
+              as="div"
+              className={clsx(
+                'flex flex-col gap-1.5 [&_*]:!my-0',
+                isLight && 'text-[#1a1a1a]',
+                title && 'pt-4'
+              )}
+              content={content}
+            />
+          }
+          {hasLink(link) &&        
+            <Link
+              className={clsx(
+                "mt-2",
+                isLight && link?.linkStyle === "button-solid" && [
+                  "!bg-[#C47FF3]",
+                  "!text-white",
+                  "[&_.link-label]:!text-white",
+                  "[&_.link-icon]:!text-white",
+                  "[&_.link-icon_svg]:!stroke-white",
+                  "hover:!bg-[#B06FE8]",
+                  "[&:hover_.link-label]:!text-white",
+                  "[&:hover_.link-icon]:!text-white",
+                  "[&:hover_.link-icon_svg]:!stroke-white"
+                ]
+              )}
+              {...link}
+            />
+          }
+        </Primitives.Content>
+      </div>
+    </Primitives.Item>
+  )
+}
 
 const MediaWithItemsAccordion = ({
   className,
   duration = 10,
-  items = []
+  items = [],
+  variant = 'dark'
 }: MediaWithItemsContainer) => {
   const { activeIndex, setActiveIndex } = useMediaWithItemsStore(
     useShallow((state) => ({ 
@@ -96,9 +119,17 @@ const MediaWithItemsAccordion = ({
     setActiveIndex(parseInt(index, 10))
   }, interval)
 
+  const isLight = variant === 'light'
+
   return (
     <Primitives.Root
-      className={clsx('flex w-full flex-col border-t border-b border-border-primary divide-y divide-border-primary', className)}
+      className={clsx(
+        'flex w-full flex-col border-t border-b divide-y',
+        isLight 
+          ? 'border-[#e5e5e5] divide-[#e5e5e5]' 
+          : 'border-border-primary divide-border-primary',
+        className
+      )}
       collapsible
       defaultValue="0"
       onValueChange={onValueChange}
@@ -115,6 +146,7 @@ const MediaWithItemsAccordion = ({
               link={link}
               title={title}
               value={itemValue}
+              variant={variant}
             />
           )
         })}

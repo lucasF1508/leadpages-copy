@@ -4,7 +4,8 @@ import Marquee from './Marquee'
 
 const MarqueeBlock = ({ type = 'logo', ...props }: {  logos?: LogoWithLink[] } & MarqueeProps) => {
   const images = type === 'logo' ? props?.logos : props?.images;
-  const maxHeight = type === 'logo' ? undefined : props?.maxHeight || 577;
+  // Use 64px for logos (same as home page) or use provided maxHeight for images
+  const maxHeight = type === 'logo' ? (props?.maxHeight || 64) : (props?.maxHeight || 577);
 
   if(!images?.length) return null;
 

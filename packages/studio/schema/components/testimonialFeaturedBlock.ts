@@ -1,9 +1,9 @@
 import {F, P} from '@/schema/tool'
 import {BiUserCheck as icon} from 'react-icons/bi'
 
-export const testimonialBlock = F.object({
-  name: 'testimonialBlock',
-  title: 'Testimonials Block',
+export const testimonialFeaturedBlock = F.object({
+  name: 'testimonialFeaturedBlock',
+  title: 'Testimonials Featured Block',
   icon,
   fields: [
     F.field('blockContentHero', {name: 'heading'}),
@@ -11,20 +11,8 @@ export const testimonialBlock = F.object({
     F.array({
       name: 'testimonials',
       description:
-        'If more than 1 testimonial is selected slider will be used to display testimonials',
+        'Shows 3 testimonials with one featured (wider) card. Auto-rotates every 5 seconds.',
       of: [F.reference('testimonial')],
-    }),
-    F.string({
-      name: 'variant',
-      title: 'Variant',
-      options: {
-        list: [
-          {title: 'Default', value: 'default'},
-          {title: 'Dark', value: 'dark'},
-          {title: 'Light', value: 'light'},
-        ],
-      },
-      initialValue: 'default',
     }),
   ],
   preview: {
@@ -35,10 +23,10 @@ export const testimonialBlock = F.object({
       subtitleAlt: 'testimonials.0.title',
     },
     prepare({heading, subheading, image, subtitleAlt}) {
-      const title = heading ? P.richText(heading) : 'Testimonial'
+      const title = heading ? P.richText(heading) : 'Testimonial Featured'
       const subtitle = subheading ? P.richText(subheading) : subtitleAlt
       return {
-        title: title || 'Testimonial',
+        title: title || 'Testimonial Featured',
         subtitle: subtitle || '',
         media: image || icon,
       }

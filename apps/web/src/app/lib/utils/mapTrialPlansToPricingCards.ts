@@ -113,7 +113,11 @@ export function mapTrialPlansToPricingCards(
       (level.includes('standard') && levels.includes('standard')) ||
       (level.includes('pro') && levels.includes('pro'))
     
-    if (!shouldSkip && !mergedPlans.find(p => p.title === cmsPlan.title)) {
+    // Only add plans that have valid content (title and at least description, features, or prices)
+    const hasValidContent = cmsPlan.title && 
+      (cmsPlan.description || cmsPlan.features?.length || cmsPlan.prices?.length)
+    
+    if (!shouldSkip && hasValidContent && !mergedPlans.find(p => p.title === cmsPlan.title)) {
       mergedPlans.push(cmsPlan)
     }
   })

@@ -14,7 +14,7 @@ interface TestimonialProps {
   heading?: string
   subheading?: string
   testimonials: TestimonialCardProps[]
-  variant?: 'default' | 'dark' | 'light'
+  variant?: 'dark' | 'default' | 'light'
 }
  
 const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }: TestimonialProps) => {
@@ -51,9 +51,9 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
           isDark ? 'bg-[#1A1A1A]' : 'bg-white'
         )}
         style={isDark ? { 
+          background: '#1A1A1A !important',
           backgroundColor: '#1A1A1A !important',
           backgroundImage: 'none !important',
-          background: '#1A1A1A !important',
         } : undefined}
       >
         {/* Overlay para eliminar cualquier gradiente */}
@@ -61,9 +61,9 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
           <div 
             className="absolute inset-0 pointer-events-none"
             style={{
+              background: '#1A1A1A',
               backgroundColor: '#1A1A1A',
               backgroundImage: 'none',
-              background: '#1A1A1A',
               zIndex: 0,
             }}
           />
@@ -71,28 +71,28 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
         {heading && (
           <div className='text-center relative z-10 px-4 sm:px-6 md:px-8 mb-2 sm:mb-3'>
             <Heading 
-              heading={heading} 
               className={clsx(
                 'type-title-t5 sm:type-title-t4 md:type-title-t3',
                 isDark ? 'text-white' : 'text-dark'
-              )}
+              )} 
+              heading={heading}
             />
           </div>
         )}
         
         {/* Mobile: 1 por slide */}
-        <div ref={mobileCarousel.ref} className='overflow-hidden relative z-10 w-full md:hidden'>
+        <div className='overflow-hidden relative z-10 w-full md:hidden' ref={mobileCarousel.ref}>
           <div className='flex'>
             {mobileSlides.map((slide, slideIndex) => (
               <div
-                key={slideIndex}
                 className={clsx(
                   'flex-[0_0_100%] flex justify-center px-4 min-w-0 w-full',
                   'transition-opacity duration-300'
                 )}
+                key={slideIndex}
               >
                 {slide.map((testimonial, i) => (
-                  <div key={testimonial?._id || i} className='w-full max-w-md'>
+                  <div className='w-full max-w-md' key={testimonial?._id || i}>
                     <CardComponent {...testimonial} />
                   </div>
                 ))}
@@ -102,18 +102,18 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
         </div>
         
         {/* Desktop: 2 por slide */}
-        <div ref={desktopCarousel.ref} className='overflow-hidden relative z-10 w-full hidden md:block'>
+        <div className='overflow-hidden relative z-10 w-full hidden md:block' ref={desktopCarousel.ref}>
           <div className='flex'>
             {testimonialPairs.map((pair, slideIndex) => (
               <div
-                key={slideIndex}
                 className={clsx(
                   'flex-[0_0_100%] flex gap-4 md:gap-6 px-6 md:px-8 lg:px-12 xl:px-16 min-w-0 w-full',
                   'transition-opacity duration-300'
                 )}
+                key={slideIndex}
               >
                 {pair.map((testimonial, i) => (
-                  <div key={testimonial?._id || i} className='flex-1 min-w-0'>
+                  <div className='flex-1 min-w-0' key={testimonial?._id || i}>
                     <CardComponent {...testimonial} />
                   </div>
                 ))}
@@ -129,8 +129,7 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
           <div className='flex justify-center gap-1.5 mt-3 relative z-10 md:hidden'>
             {Array.from({ length: mobileSlidesCount }).map((_, index) => (
               <button
-                key={index}
-                onClick={() => mobileCarousel.api?.scrollTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
                 className={clsx(
                   'w-1.5 h-1.5 rounded-full transition-all duration-300',
                   index === mobileActive 
@@ -139,7 +138,8 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
                       ? 'bg-white/30 hover:bg-white/50'
                       : 'bg-dark/30 hover:bg-dark/50'
                 )}
-                aria-label={`Go to slide ${index + 1}`}
+                key={index}
+                onClick={() => mobileCarousel.api?.scrollTo(index)}
               />
             ))}
           </div>
@@ -150,8 +150,7 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
           <div className='hidden md:flex justify-center gap-2 mt-3 relative z-10'>
             {Array.from({ length: slidesCount }).map((_, index) => (
               <button
-                key={index}
-                onClick={() => desktopCarousel.api?.scrollTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
                 className={clsx(
                   'w-2 h-2 rounded-full transition-all duration-300',
                   index === desktopActive 
@@ -160,7 +159,8 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
                       ? 'bg-white/30 hover:bg-white/50'
                       : 'bg-dark/30 hover:bg-dark/50'
                 )}
-                aria-label={`Go to slide ${index + 1}`}
+                key={index}
+                onClick={() => desktopCarousel.api?.scrollTo(index)}
               />
             ))}
           </div>

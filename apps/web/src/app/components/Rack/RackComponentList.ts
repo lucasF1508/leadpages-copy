@@ -17,16 +17,17 @@ import dynamic from 'next/dynamic'
  */
 const RackComponentList = {
   accordionWithSidebar: [dynamic(() => import('@/components/AccordionWithSidebar/AccordionWithSidebar')), { pinion: false }],
-  addOnCards: [
-    dynamic(() => import('@/components/AddOnCards')),
-    { pinion: false },
-  ],
-  blogSection: [
-    dynamic(() => import('@/components/BlogSection/BlogSection')),
+  addOnCards: dynamic(() => import('@/components/AddOnCards')),
+  addOnsSection: [
+    dynamic(() => import('@/components/PlatformNew/AddOnSection')),
     { pinion: false },
   ],
   bestOfBlog: [
     dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
+    { pinion: false },
+  ],
+  blogSection: [
+    dynamic(() => import('@/components/BlogSection/BlogSection')),
     { pinion: false },
   ],
   brand: [dynamic(() => import('@/components/Brand')), { pinion: false }],
@@ -81,16 +82,16 @@ const RackComponentList = {
   ],
   resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
-  socialMedia: [
-    dynamic(() => import('@/components/SocialMedia')),
-    { pinion: false },
-  ],
   resourcesGrid: [
     dynamic(() => import('@/components/ResourcesGrid')),
     { pinion: false },
   ],
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
   sectionCTA: dynamic(() => import('@/components/SectionCTA')),
+  socialMedia: [
+    dynamic(() => import('@/components/SocialMedia')),
+    { pinion: false },
+  ],
   spacer: dynamic(() => import('@/components/Spacer')),
   startATrial: dynamic(() => import('@/components/StartATrial')),
   subFooter: [
@@ -103,9 +104,20 @@ const RackComponentList = {
     dynamic(() => import('@/components/TemplateGallery')),
     { pinion: false },
   ],
-  testimonialBlock: [
-    dynamic(() => import('@/components/Testimonial')),
+  integrationsBlock: [
+    dynamic(() => import('../Integrations')),
     { pinion: false },
+  ],
+  // Use the new App Router Testimonial block implementation
+  // which lives under app/components/Testimonial and renders
+  // the 3-card layout with ratings used on platform-new.
+  testimonialBlock: [
+    dynamic(() => import('../Testimonial')),
+    { pinion: false },
+  ],
+  testimonialFeaturedBlock: [
+    dynamic(() => import('../Testimonial/TestimonialFeatured')),
+    { pinion: true, inner: false },
   ],
   textBlock: dynamic(() => import('@/components/Text/TextBlock')),
   textBlockWithSidebar: dynamic(() => import('@/components/TextWithSidebar')),

@@ -21,4 +21,4 @@ export * from './contentBlockReference'
 export * from './signUp'
 export * from './rating'
 export * from './templateSettingsMessage'
-
+export * from './addonCard'

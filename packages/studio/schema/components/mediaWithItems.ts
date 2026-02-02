@@ -10,6 +10,12 @@ export const mediaWithItems = F.field('object', {
     ...G.group('content', [
       F.string({name: 'title'}),
       F.field('blockContentSimple', {name: 'content'}),
+      F.radio(['dark', 'light'], {
+        name: 'variant',
+        title: 'Variant',
+        description: 'Choose between dark (default) or light theme',
+        initialValue: 'dark',
+      }),
       F.array({
         name: 'mediaItems',
         title: 'Media',

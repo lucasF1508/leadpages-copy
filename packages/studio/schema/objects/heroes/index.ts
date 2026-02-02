@@ -1,6 +1,7 @@
 export * from './heroBanner'
 export * from './heroWithMedia'
 export * from './heroHome'
+export * from './heroHomeNew'
 export * from './heroPricing'
 export * from './heroSimple'
 export * from './heroTextWithMarquee'
