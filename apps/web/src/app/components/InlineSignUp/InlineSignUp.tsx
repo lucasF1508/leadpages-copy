@@ -16,6 +16,7 @@ import {
   getOrderUrlForEmail,
 } from '@/lib/utils/getFreeTrialCheckoutUrl'
 import { getVerifoneCheckoutUrl } from '@/lib/utils/getVerifoneCheckoutUrl'
+import { getPersistedTrackingParamsAsObject } from '@/lib/utils/trackingParams'
 
 export interface InlineSignUpProps {
   className?: ClassValue
@@ -63,14 +64,8 @@ const InlineSignUp = ({
     let redirected = false
 
     const email = String(formData?.email || '').trim()
-    const extraParams = Object.fromEntries(
-      new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
-    ) as Record<string, string>
-    
-    // DEBUG: Log para verificar que se capturan los parámetros de la URL (incluyendo XID u otros de afiliados)
-    if (Object.keys(extraParams).length > 0) {
-      console.log('[InlineSignUp] Parámetros capturados de la URL:', extraParams)
-    }
+    // Use persisted params (URL + cookie __lptp) so XID/affiliate survive navigation
+    const extraParams = getPersistedTrackingParamsAsObject()
 
     try {
       if (isExternalRedirect) {

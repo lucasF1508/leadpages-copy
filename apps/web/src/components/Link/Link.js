@@ -9,8 +9,9 @@ import { MdPlayArrow as VideoIcon } from '@react-icons/all-files/md/MdPlayArrow'
 import { m as motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import NextLink from 'next/link'
-import { scrollToHash } from '@hooks/useScrollToHash'
+import { getPersistedTrackingParams } from '@/lib/utils/trackingParams'
 import { useCurrentPath } from '@hooks/useCurrentPath'
+import { scrollToHash } from '@hooks/useScrollToHash'
 import { normalizeUrl } from '@lib/utils/normalizeUrl'
 import Modal, { ModalLink, ModalProvider } from '@components/Modal'
 import SignUpWithEmailFieldLink from './SignUpWithEmailFieldLink'
@@ -138,10 +139,10 @@ const Link = (
         return null
       }
 
-      // Preserve URL parameters (like XID) when navigating
+      // Preserve tracking params (URL + cookie __lptp) so XID/affiliate persist
       const preserveParams = (url) => {
         if (typeof window === 'undefined') return url
-        const currentParams = new URLSearchParams(window.location.search)
+        const currentParams = getPersistedTrackingParams()
         if (currentParams.toString()) {
           const separator = url.includes('?') ? '&' : '?'
           return `${url}${separator}${currentParams.toString()}`

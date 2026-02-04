@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { pricingStore } from '@/stores/pricingStore'
 import Link, { hasLink } from '../Link'
 import { PriceType } from '../Price'
+import { getPersistedTrackingParams } from '@/lib/utils/trackingParams'
 import clsx from 'clsx'
 
 interface PricingCardLinkProps {
@@ -36,28 +37,21 @@ function appendCouponToUrl(rawHref: string, code: string): string {
 
 function preserveAllParams(rawHref: string): string {
   if (typeof window === 'undefined') return rawHref
-  
+
   try {
-    // Handle both absolute URLs (https://...) and relative URLs
     const isAbsolute = /^https?:\/\//.test(rawHref)
-    const u = isAbsolute 
-      ? new URL(rawHref) 
+    const u = isAbsolute
+      ? new URL(rawHref)
       : new URL(rawHref, window.location.origin)
-    
-    const currentParams = new URLSearchParams(window.location.search)
-    
-    // Preserve all current URL parameters (affiliate, ps_xid, etc.)
+
+    // Use persisted params (URL + cookie __lptp) so XID/affiliate survive navigation
+    const currentParams = getPersistedTrackingParams()
     currentParams.forEach((value, key) => {
-      // Don't override existing params in the href, but add missing ones
-      if (!u.searchParams.has(key)) {
-        u.searchParams.set(key, value)
-      }
+      if (!u.searchParams.has(key)) u.searchParams.set(key, value)
     })
-    
     return u.toString()
   } catch {
-    // Fallback: append params manually
-    const currentParams = new URLSearchParams(window.location.search)
+    const currentParams = getPersistedTrackingParams()
     if (currentParams.toString()) {
       const separator = rawHref.includes('?') ? '&' : '?'
       return `${rawHref}${separator}${currentParams.toString()}`

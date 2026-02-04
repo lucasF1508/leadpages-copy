@@ -165,19 +165,44 @@ export async function middleware(request) {
   // Optional debug header
   response.headers.set('x-gone-count', String(GONE.size))
 
-  // Set ps_xid cookie if XID parameter is present in URL and cookie doesn't exist
-  // This cookie is used by my.leadpages.com to add ADDITIONAL_xid to Verifone checkout URLs
-  // Note: GTM may also set this cookie, so we only set it as a fallback if it doesn't exist
-  const xidParam = url.searchParams.get('XID')
-  const existingPsXid = request.cookies?.get?.('ps_xid')?.value
-  if (xidParam && !existingPsXid) {
-    // Set cookie with 30 days expiration (same as typical affiliate tracking)
-    response.cookies.set('ps_xid', xidParam, {
-      maxAge: 30 * 24 * 60 * 60, // 30 days in seconds
+  // Persist ALL URL params to __lptp cookie so tracking (XID, affiliate, etc.) survives
+  // navigation and return visits. URL params always win over existing cookie values.
+  const TRACKING_COOKIE = '__lptp'
+  const TRACKING_MAX_AGE = 30 * 24 * 60 * 60 // 30 days
+  let lptp = {}
+  try {
+    const raw = request.cookies?.get?.(TRACKING_COOKIE)?.value ?? null
+    if (raw) lptp = JSON.parse(decodeURIComponent(raw))
+  } catch {}
+  if (typeof lptp !== 'object' || lptp === null) lptp = {}
+  url.searchParams.forEach((value, key) => {
+    if (key && value != null && value !== '') lptp[key] = value
+  })
+  const lptpStr = JSON.stringify(lptp)
+  if (lptpStr.length > 1 && lptpStr.length < 3500) {
+    const cookieOpts = {
+      maxAge: TRACKING_MAX_AGE,
       path: '/',
       sameSite: 'lax',
       secure: process.env.NODE_ENV === 'production',
-    })
+    }
+    const hostname = url.hostname || ''
+    if (hostname.endsWith('leadpages.com')) cookieOpts.domain = '.leadpages.com'
+    response.cookies.set(TRACKING_COOKIE, encodeURIComponent(lptpStr), cookieOpts)
+  }
+
+  // Set ps_xid from URL or from __lptp so my.leadpages.com can add ADDITIONAL_xid to checkout
+  const xidValue = url.searchParams.get('XID') || url.searchParams.get('xid') || lptp.XID || lptp.xid
+  if (xidValue) {
+    const cookieOpts = {
+      maxAge: TRACKING_MAX_AGE,
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    }
+    const hostname = url.hostname || ''
+    if (hostname.endsWith('leadpages.com')) cookieOpts.domain = '.leadpages.com'
+    response.cookies.set('ps_xid', xidValue, cookieOpts)
   }
 
   if (!incrementalPaths?.length) return response

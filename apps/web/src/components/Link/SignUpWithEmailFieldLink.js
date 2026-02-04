@@ -8,6 +8,7 @@ import SubmitLoadSpinner from '@legacy/assets/svgs/SubmitLoadSpinner'
 import { checkOverflow } from '@lib/forms/checkOverflow'
 import planRedirect from '@lib/forms/planRedirect'
 import externalRedirect from '@lib/forms/externalRedirect'
+import { getPersistedTrackingParamsAsObject } from '@/lib/utils/trackingParams'
 
 const overflowColors = {
   primary: '#4938C2',
@@ -221,15 +222,8 @@ const SignUpWithEmailFieldLink = ({
     setIsLoading(true)
     setFormError(false)
 
-    // Capture URL parameters (like XID) to preserve them
-    const extraParams = Object.fromEntries(
-      new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
-    )
-
-    // DEBUG: Log para verificar que se capturan los parámetros
-    if (Object.keys(extraParams).length > 0) {
-      console.log('[SignUpWithEmailFieldLink] Parámetros capturados de la URL:', extraParams)
-    }
+    // Use persisted params (URL + cookie __lptp) so XID/affiliate survive navigation
+    const extraParams = getPersistedTrackingParamsAsObject()
 
     if (isExternalRedirect) {
       const { error } = await externalRedirect({

@@ -5,6 +5,7 @@ import React, { forwardRef, useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { m as motion } from 'motion/react'
 import { isChildrenText } from '@/lib/utils/isChildrenText'
+import { getPersistedTrackingParams } from '@/lib/utils/trackingParams'
 import LinkIcon from './LinkIcon'
 
 const Icons = {
@@ -36,30 +37,21 @@ export const LinkExternal = forwardRef<HTMLAnchorElement, LinkExternalType>(
     const hasLabel = isChildrenText(children) || label
     const internalRef = useRef<HTMLAnchorElement | null>(null)
     
-    // Function to preserve all URL parameters from current page
+    // Preserve tracking params (URL + cookie __lptp) so XID/affiliate persist
     const preserveAllParams = (baseUrl: string): string => {
       if (typeof window === 'undefined') return baseUrl
-      
       try {
         const isAbsolute = /^https?:\/\//.test(baseUrl)
-        const u = isAbsolute 
-          ? new URL(baseUrl) 
+        const u = isAbsolute
+          ? new URL(baseUrl)
           : new URL(baseUrl, window.location.origin)
-        
-        const currentParams = new URLSearchParams(window.location.search)
-        
-        // Preserve all current URL parameters (affiliate, ps_xid, etc.)
+        const currentParams = getPersistedTrackingParams()
         currentParams.forEach((value, key) => {
-          // Don't override existing params in the href, but add missing ones
-          if (!u.searchParams.has(key)) {
-            u.searchParams.set(key, value)
-          }
+          if (!u.searchParams.has(key)) u.searchParams.set(key, value)
         })
-        
         return u.toString()
       } catch {
-        // Fallback: append params manually
-        const currentParams = new URLSearchParams(window.location.search)
+        const currentParams = getPersistedTrackingParams()
         if (currentParams.toString()) {
           const separator = baseUrl.includes('?') ? '&' : '?'
           return `${baseUrl}${separator}${currentParams.toString()}`

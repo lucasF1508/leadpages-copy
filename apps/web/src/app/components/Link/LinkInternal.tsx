@@ -9,6 +9,7 @@ import { usePathname } from 'next/navigation'
 import { scrollToHash } from '@/hooks/useScrollToHash'
 import { isChildrenText } from '@/lib/utils/isChildrenText'
 import { normalizeUrl } from '@/lib/utils/normalizeUrl'
+import { getPersistedTrackingParams } from '@/lib/utils/trackingParams'
 import LinkIcon from './LinkIcon'
 
 const LinkAnchor = forwardRef<HTMLAnchorElement, Partial<LinkInternalType>>(
@@ -69,13 +70,11 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
 
     const hasLabel = isChildrenText(children) || label
 
-    // Preserve URL parameters (like XID, affiliate, etc.) when navigating
+    // Preserve tracking params (URL + cookie __lptp) so XID/affiliate persist across navigation
     const preserveParams = () => {
       if (typeof window === 'undefined') return ''
-      const currentParams = new URLSearchParams(window.location.search)
-      if (currentParams.toString()) {
-        return `?${currentParams.toString()}`
-      }
+      const currentParams = getPersistedTrackingParams()
+      if (currentParams.toString()) return `?${currentParams.toString()}`
       return ''
     }
 

@@ -6,6 +6,7 @@ import Label from '@/components/Label'
 import Pinion from '@/components/Pinion'
 import Links from '@/components/Link/Links'
 import SubFooterGradient from '@/components/SubFooter/SubFooterGradient'
+import { appendPersistedTrackingParams } from '@/lib/utils/trackingParams'
 
 export interface SubFooterProps {
   className?: string
@@ -75,24 +76,7 @@ const SubFooter = ({
               </div>
             ) : hasLegacyCta ? (
               <a
-                href={(() => {
-                  // Preserve URL parameters (like XID) when navigating
-                  if (typeof window === 'undefined' || target === '_blank') return ctaHref
-                  const currentParams = new URLSearchParams(window.location.search)
-                  if (currentParams.toString()) {
-                    try {
-                      const url = new URL(ctaHref!, window.location.origin)
-                      currentParams.forEach((value, key) => {
-                        url.searchParams.set(key, value)
-                      })
-                      return url.toString()
-                    } catch {
-                      const separator = ctaHref!.includes('?') ? '&' : '?'
-                      return `${ctaHref}${separator}${currentParams.toString()}`
-                    }
-                  }
-                  return ctaHref
-                })()}
+                href={typeof window === 'undefined' || target === '_blank' ? ctaHref : appendPersistedTrackingParams(ctaHref ?? '')}
                 aria-label={ctaLabel}
                 target={target}
                 rel={target === '_blank' ? 'noopener noreferrer' : undefined}
