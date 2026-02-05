@@ -158,69 +158,99 @@ export async function middleware(request) {
     return NextResponse.next()
   }
 
+  // If URL has no params but __lptp cookie exists, redirect to same path with params
+  // (so the address bar is repopulated without client scripts)
+  const TRACKING_COOKIE = '__lptp'
+  if (!url.search || url.search === '?') {
+    try {
+      const raw = request.cookies?.get?.(TRACKING_COOKIE)?.value ?? null
+      if (raw) {
+        const lptp = JSON.parse(decodeURIComponent(raw))
+        if (typeof lptp === 'object' && lptp !== null) {
+          const q = Object.keys(lptp)
+            .filter((k) => k && lptp[k] != null && lptp[k] !== '')
+            .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(lptp[k]))
+            .join('&')
+          if (q) {
+            const redirectUrl = new URL(request.url)
+            redirectUrl.search = q
+            return NextResponse.redirect(redirectUrl)
+          }
+        }
+      }
+    } catch {}
+  }
+
+  // Helper: set tracking cookies (__lptp + ps_xid) on ANY response we return.
+  // When we return rewrite/redirect we were not setting cookies — so they were lost.
+  const TRACKING_MAX_AGE = 30 * 24 * 60 * 60 // 30 days
+  const setTrackingCookies = (res) => {
+    let lptp = {}
+    try {
+      const raw = request.cookies?.get?.(TRACKING_COOKIE)?.value ?? null
+      if (raw) lptp = JSON.parse(decodeURIComponent(raw))
+    } catch {}
+    if (typeof lptp !== 'object' || lptp === null) lptp = {}
+    url.searchParams.forEach((value, key) => {
+      if (key && value != null && value !== '') lptp[key] = value
+    })
+    const lptpStr = JSON.stringify(lptp)
+    if (lptpStr.length > 1 && lptpStr.length < 3500) {
+      const opts = {
+        maxAge: TRACKING_MAX_AGE,
+        path: '/',
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+      }
+      const hostname = url.hostname || ''
+      if (hostname.endsWith('leadpages.com')) opts.domain = '.leadpages.com'
+      res.cookies.set(TRACKING_COOKIE, encodeURIComponent(lptpStr), opts)
+    }
+    const xidValue =
+      url.searchParams.get('XID') ||
+      url.searchParams.get('xid') ||
+      url.searchParams.get('ps_xid') ||
+      lptp.XID ||
+      lptp.xid ||
+      lptp.ps_xid
+    if (xidValue) {
+      const opts = {
+        maxAge: TRACKING_MAX_AGE,
+        path: '/',
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+      }
+      const hostname = url.hostname || ''
+      if (hostname.endsWith('leadpages.com')) opts.domain = '.leadpages.com'
+      res.cookies.set('ps_xid', xidValue, opts)
+    }
+  }
+
   // Default cache (≈ 31 days)
   const response = NextResponse.next()
   response.headers.set('Cache-Control', 'public, s-maxage=2678400')
-
-  // Optional debug header
   response.headers.set('x-gone-count', String(GONE.size))
-
-  // Persist ALL URL params to __lptp cookie so tracking (XID, affiliate, etc.) survives
-  // navigation and return visits. URL params always win over existing cookie values.
-  const TRACKING_COOKIE = '__lptp'
-  const TRACKING_MAX_AGE = 30 * 24 * 60 * 60 // 30 days
-  let lptp = {}
-  try {
-    const raw = request.cookies?.get?.(TRACKING_COOKIE)?.value ?? null
-    if (raw) lptp = JSON.parse(decodeURIComponent(raw))
-  } catch {}
-  if (typeof lptp !== 'object' || lptp === null) lptp = {}
-  url.searchParams.forEach((value, key) => {
-    if (key && value != null && value !== '') lptp[key] = value
-  })
-  const lptpStr = JSON.stringify(lptp)
-  if (lptpStr.length > 1 && lptpStr.length < 3500) {
-    const cookieOpts = {
-      maxAge: TRACKING_MAX_AGE,
-      path: '/',
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
-    }
-    const hostname = url.hostname || ''
-    if (hostname.endsWith('leadpages.com')) cookieOpts.domain = '.leadpages.com'
-    response.cookies.set(TRACKING_COOKIE, encodeURIComponent(lptpStr), cookieOpts)
-  }
-
-  // Set ps_xid from URL or from __lptp so my.leadpages.com can add ADDITIONAL_xid to checkout
-  const xidValue = url.searchParams.get('XID') || url.searchParams.get('xid') || lptp.XID || lptp.xid
-  if (xidValue) {
-    const cookieOpts = {
-      maxAge: TRACKING_MAX_AGE,
-      path: '/',
-      sameSite: 'lax',
-      secure: process.env.NODE_ENV === 'production',
-    }
-    const hostname = url.hostname || ''
-    if (hostname.endsWith('leadpages.com')) cookieOpts.domain = '.leadpages.com'
-    response.cookies.set('ps_xid', xidValue, cookieOpts)
-  }
+  setTrackingCookies(response)
 
   if (!incrementalPaths?.length) return response
 
-  // Legacy rewrites
+  // Legacy rewrites — set tracking cookies on the response we actually return
   const match = patterns.find((p) => p.test(url))
   if (match) {
     url.pathname = `/_legacy${url.pathname}`
-    return NextResponse.rewrite(url)
+    const rewritten = NextResponse.rewrite(url)
+    setTrackingCookies(rewritten)
+    return rewritten
   }
 
-  // A/B testing
+  // A/B testing — set tracking cookies on redirect/rewrite we return
   const splitTest = getVariant(url, request)
   if (splitTest) {
     if (splitTest.redirect) {
       url.pathname = splitTest.redirect
       const redirect = NextResponse.redirect(url)
       redirect.headers.set('x-from-middleware', 'ab-redirect')
+      setTrackingCookies(redirect)
       return redirect
     }
     url.pathname = splitTest.rewrite
@@ -228,6 +258,7 @@ export async function middleware(request) {
     const rewritten = NextResponse.rewrite(url)
     if (splitTest.cookie) rewritten.cookies.set('__lpst', splitTest.cookie)
     rewritten.headers.set('x-from-middleware', 'ab-rewrite')
+    setTrackingCookies(rewritten)
     return rewritten
   }
 

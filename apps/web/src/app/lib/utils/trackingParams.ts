@@ -1,21 +1,20 @@
 /**
- * Utilidad central para parámetros de tracking (XID, affiliate, etc.) que deben
- * persistir en toda la sesión. Combina params de la URL actual con los guardados
- * en cookie __lptp (la URL tiene prioridad).
+ * Central util for tracking params (XID, affiliate, etc.) that must persist
+ * across the session. Merges current URL params with those stored in __lptp
+ * cookie (URL takes precedence).
  *
- * Referencia: cualquier param que llegue por URL debe persistir en toda la página
- * para no perder atribución al navegar o al ir a "elegir plan" / trial.
+ * Reference: any param coming from the URL must persist across the page so
+ * attribution is not lost when navigating or going to "pick plan" / trial.
  */
 
 const COOKIE_NAME = '__lptp'
 const COOKIE_MAX_AGE_DAYS = 30
 
 /**
- * Lee el objeto de params persistidos desde la cookie __lptp.
- * Solo funciona en cliente (usa document.cookie).
+ * Reads the persisted params object from the __lptp cookie.
  */
 function getTrackingParamsFromCookie(): Record<string, string> {
-  if (typeof document === 'undefined') return {}
+  if (typeof window === 'undefined') return {}
   try {
     const match = document.cookie.match(
       new RegExp('(?:^|; )' + COOKIE_NAME.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)')
@@ -35,21 +34,21 @@ function getTrackingParamsFromCookie(): Record<string, string> {
 }
 
 /**
- * Devuelve los parámetros de tracking a usar en links y formularios:
- * URL actual + params de la cookie (la URL gana si existe la misma key).
- * Usar siempre esta función en lugar de solo window.location.search para que
- * XID/affiliate no se pierdan al navegar o al volver sin el link de afiliado.
+ * Returns the tracking params to use in links and forms:
+ * current URL + cookie params (URL wins when the same key exists).
+ * Always use this instead of window.location.search so XID/affiliate
+ * are not lost when navigating or returning without the affiliate link.
  */
 export function getPersistedTrackingParams(): URLSearchParams {
   const params = new URLSearchParams()
 
-  // 1) Primero los de la cookie (base persistida)
+  // 1) Cookie params first (persisted base)
   const fromCookie = getTrackingParamsFromCookie()
   Object.entries(fromCookie).forEach(([key, value]) => {
     if (value != null && value !== '') params.set(key, value)
   })
 
-  // 2) Luego los de la URL (sobrescriben para mismo key)
+  // 2) URL params next (override for same key)
   if (typeof window !== 'undefined' && window.location?.search) {
     const fromUrl = new URLSearchParams(window.location.search)
     fromUrl.forEach((value, key) => {
@@ -61,7 +60,7 @@ export function getPersistedTrackingParams(): URLSearchParams {
 }
 
 /**
- * Convierte los params persistidos a un objeto para APIs (ej. extraParams en fetch-trial-url).
+ * Converts persisted params to an object for APIs (e.g. extraParams in fetch-trial-url).
  */
 export function getPersistedTrackingParamsAsObject(): Record<string, string> {
   const p = getPersistedTrackingParams()
@@ -73,8 +72,8 @@ export function getPersistedTrackingParamsAsObject(): Record<string, string> {
 }
 
 /**
- * Añade los params persistidos a una URL (baseUrl puede ser relativa o absoluta).
- * No sobrescribe params que ya tenga la URL.
+ * Appends persisted params to a URL (baseUrl may be relative or absolute).
+ * Does not override params already present on the URL.
  */
 export function appendPersistedTrackingParams(baseUrl: string): string {
   const params = getPersistedTrackingParams()
