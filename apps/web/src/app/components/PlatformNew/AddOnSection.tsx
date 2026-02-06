@@ -3,18 +3,21 @@
 import type { AddOnCardItem } from '@/components/PlatformNew/AddOnCardsGrid'
 import type { ContentType } from '@types'
 import type { ClassValue } from 'clsx'
-import React from 'react'
+import React, { useMemo } from 'react'
 import clsx from 'clsx'
 import AddOnCardsGrid from '@/components/PlatformNew/AddOnCardsGrid'
-import Pill from '@/components/Pill'
 import Text from '@/components/Text'
+import { useBillingPricings } from '@/hooks/useBillingPricings'
+import { mapBillingPricingToAddOnCardsPlatformPage } from '@/lib/utils/mapBillingPricingToAddOnCards'
+
+
 
 export interface AddOnsSectionProps {
   cards?: AddOnCardItem[]
   className?: ClassValue
   description?: ContentType
   eyebrow?: string
-  heading?: any // (si heading viene como PortableText desde Sanity)
+  heading?: any
 }
 
 const AddOnsSection = ({
@@ -25,6 +28,22 @@ const AddOnsSection = ({
   heading,
 }: AddOnsSectionProps) => {
   if (!heading && !cards.length) return null
+
+  const { data: billingPricingsData } = useBillingPricings()
+
+  const finalCards = useMemo(() => {
+    if (billingPricingsData?.items && billingPricingsData.items.length > 0) {
+      try {
+        const mapped = mapBillingPricingToAddOnCardsPlatformPage(billingPricingsData.items, cards)
+        return mapped
+      } catch (err) {
+        console.error('[ComparePlans] Error mapping trial plans:', err)
+        return cards
+      }
+    }
+    
+    return cards
+  }, [billingPricingsData, cards])
 
   return (
     <section className={clsx('w-full bg-white py-10 md:py-8 lg:py-8', className)}>
@@ -92,7 +111,7 @@ const AddOnsSection = ({
 
         {/* CARDS (CENTERED BELOW) */}
         <div className="mt-12 md:mt-7 lg:mt-8">
-          <AddOnCardsGrid className="w-full" items={cards} />
+          <AddOnCardsGrid className="w-full" items={finalCards} />
         </div>
       </div>
     </section>

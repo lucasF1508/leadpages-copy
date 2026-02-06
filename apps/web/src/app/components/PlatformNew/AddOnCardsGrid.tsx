@@ -10,6 +10,7 @@ import Text from '@/components/Text'
 
 export type AddOnCardItem = {
   _key?: string
+  code?: string
   ctaLabel?: string
   ctaLink?: LinkType
   description?: ContentType
@@ -37,7 +38,6 @@ const AddOnCardsGrid = ({ className, items = [] }: AddOnCardsGridProps) => {
   return (
     <div
       className={clsx(
-        // Contenedor negro con altura adaptable
         'w-full rounded-[2.5rem] bg-[#2b2b2b] p-4 md:p-6',
         'min-h-auto md:min-h-[600px] lg:min-h-[575px]',
         className
@@ -45,11 +45,8 @@ const AddOnCardsGrid = ({ className, items = [] }: AddOnCardsGridProps) => {
     >
       <div
         className={clsx(
-          // Mobile: 1 columna
           'grid grid-cols-1 gap-4 md:gap-5',
-          // Tablet: 2 columnas
           'md:grid-cols-2',
-          // Desktop: 4 columnas
           'lg:grid-cols-4'
         )}
       >
@@ -62,7 +59,6 @@ const AddOnCardsGrid = ({ className, items = [] }: AddOnCardsGridProps) => {
                 'min-w-0 flex h-full flex-col rounded-[1.6rem] bg-white',
                 'border border-black/10',
                 'px-4 py-5 md:px-5 md:py-6 lg:px-4 lg:py-5',
-                // Asegurarse de que las cards se estiren correctamente
                 'gap-3 md:gap-2'
               )}
               key={card._key ?? card.title ?? idx}

@@ -1,19 +1,23 @@
-import type { PriceType } from '@/components/Price'
-import type { ContentType, LinkType, SanityImageProps } from '@/types'
-import React from 'react'
-import clsx from 'clsx'
-import Heading from '@/components//Heading'
-import Link, { hasLink, LinkIcon } from '@/components//Link'
-import Image from '@/components/Image'
-import { defaultLargeBlockStyles } from '@/components/PortableText'
-import Price from '@/components/Price'
-import Text from '@/components/Text'
-import Pill from '../Pill'
-import AddOnCardsPriceLabel from './AddOnCardsPriceLabel'
-import AddOnCardsText from './AddOnCardsText'
+'use client'
 
-interface AddOnProps {
+import type { ContentType, LinkType, SanityImageProps } from "@/types"
+import React, { useMemo } from "react"
+import clsx from "clsx"
+import Heading from "@/components//Heading"
+import Link, { LinkIcon, hasLink } from "@/components//Link"
+import Image from "@/components/Image"
+import { defaultLargeBlockStyles } from "@/components/PortableText"
+import Price, { type PriceType } from "@/components/Price"
+import Text from "@/components/Text"
+import { useBillingPricings } from "@/hooks/useBillingPricings"
+import { mapBillingPricingToAddOnCardsPricingPage } from "@/lib/utils/mapBillingPricingToAddOnCards"
+import Pill from "../Pill"
+import AddOnCardsPriceLabel from "./AddOnCardsPriceLabel"
+import AddOnCardsText from "./AddOnCardsText"
+
+export interface AddOnProps {
   _key: string
+  code?: string
   content: ContentType
   icon: SanityImageProps
   image: SanityImageProps
@@ -33,7 +37,7 @@ interface AddOnCardsProps {
   columnCount?: '2' | '3' | '4'
   content: ContentType
   pillContent: string
-  variant?: 'default' | 'dark' | 'light'
+  variant?: 'dark' | 'default' | 'light'
 }
 
 const AddOnCards = ({
@@ -47,6 +51,22 @@ const AddOnCards = ({
   const columnCount =
     (cards?.length >= 4 && '4') || (cards?.length === 3 && '3') || '2'
 
+    const { data: billingPricingsData } = useBillingPricings()
+
+    const finalCards = useMemo(() => {
+      if (billingPricingsData?.items && billingPricingsData.items.length > 0) {
+        try {
+          const mapped = mapBillingPricingToAddOnCardsPricingPage(billingPricingsData.items, cards)
+          return mapped
+        } catch (err) {
+          console.error('[AddOnCards] Error mapping billing pricings:', err)
+          return cards
+        }
+      }
+      
+      return cards
+    }, [billingPricingsData, cards])
+
   // Si es variante dark o light, usar el nuevo diseño
   if (variant === 'dark' || variant === 'light') {
     const isDark = variant === 'dark'
@@ -58,9 +78,9 @@ const AddOnCards = ({
           isDark ? 'bg-[#1A1A1A]' : 'bg-white'
         )}
         style={isDark ? { 
+          background: '#1A1A1A !important',
           backgroundColor: '#1A1A1A !important',
           backgroundImage: 'none !important',
-          background: '#1A1A1A !important',
         } : undefined}
       >
         {/* Overlay para eliminar cualquier gradiente */}
@@ -68,9 +88,9 @@ const AddOnCards = ({
           <div 
             className="absolute inset-0 pointer-events-none"
             style={{
+              background: '#1A1A1A',
               backgroundColor: '#1A1A1A',
               backgroundImage: 'none',
-              background: '#1A1A1A',
               zIndex: 0,
             }}
           />
@@ -115,20 +135,20 @@ const AddOnCards = ({
             {/* Columna derecha: Cards */}
             <div className="flex-1 lg:flex-[1.725] lg:min-w-0">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                {cards.map(
-                  ({ _key, content: cardContent, icon, links, prices, pricesLabel, title }, i) => {
+                {finalCards.map(
+                  ({ _key, content: cardContent, icon, links, prices, pricesLabel, title }) => {
                     const [link] = links || []
 
                     return (
                       <div
-                        key={_key}
                         className={clsx(
                           'flex flex-col justify-between p-6 rounded-lg',
                           'border border-white/10'
                         )}
+                        key={_key}
                         style={{
-                          backgroundColor: '#2A2A2A !important',
                           background: '#2A2A2A !important',
+                          backgroundColor: '#2A2A2A !important',
                         }}
                       >
                         <div className="w-full mb-4">
@@ -196,13 +216,13 @@ const AddOnCards = ({
                           )}
                           {hasLink(link) && (
                             <Link
-                              url={link.url || link.href}
-                              condition={link.condition || 'internal'}
-                              hasIcon={false}
                               className={clsx(
                                 'inline-flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors font-medium w-full justify-center',
                                 'bg-[#1A1A1A] border-white/20 text-white hover:bg-[#2A2A2A]'
                               )}
+                              condition={link.condition || 'internal'}
+                              hasIcon={false}
+                              url={link.url || link.href}
                             >
                               <span>{link.label || (typeof link.children === 'string' ? link.children : 'View')}</span>
                               <LinkIcon className="w-4 h-4" />
@@ -253,10 +273,10 @@ const AddOnCards = ({
           columnCount === '4' && 'nav-break:grid-cols-4'
         )}
       >
-        {cards.map(
+        {finalCards.map(
           ({ _key, content: cardContent, icon, links, prices, pricesLabel, title }, i) => {
             const [link] = links || []
-            const isLast = i === cards.length - 1
+            const isLast = i === finalCards.length - 1
 
             return (
               <div

@@ -17,9 +17,9 @@ import dynamic from 'next/dynamic'
  */
 const RackComponentList = {
   accordionWithSidebar: [dynamic(() => import('@/components/AccordionWithSidebar/AccordionWithSidebar')), { pinion: false }],
-  addOnCards: dynamic(() => import('@/components/AddOnCards')),
+  addOnCards: dynamic(() => import('@/components/AddOnCards'), { ssr: false }),
   addOnsSection: [
-    dynamic(() => import('@/components/PlatformNew/AddOnSection')),
+    dynamic(() => import('@/components/PlatformNew/AddOnSection'), { ssr: false }),
     { pinion: false },
   ],
   bestOfBlog: [
@@ -37,7 +37,7 @@ const RackComponentList = {
     dynamic(() => import('@/components/CarruselWithArrows/CarruselWithArrows')),
     { pinion: false },
   ],
-  comparePlans: dynamic(() => import('@/components/ComparePlans')),
+  comparePlans: dynamic(() => import('@/components/ComparePlans'), { ssr: false }),
   comparisonCard: dynamic(() => import('@/components/ComparisonCard')),
   comparisonCards: [
     dynamic(() => import('@/components/ComparisonCards')),
@@ -55,6 +55,10 @@ const RackComponentList = {
   ],
   integrationDirectory: [
     dynamic(() => import('@/components/IntegrationDirectory')),
+    { pinion: false },
+  ],
+  integrationsBlock: [
+    dynamic(() => import('../Integrations')),
     { pinion: false },
   ],
   jobPostings: [
@@ -94,18 +98,14 @@ const RackComponentList = {
   ],
   spacer: dynamic(() => import('@/components/Spacer')),
   startATrial: dynamic(() => import('@/components/StartATrial')),
+
   subFooter: [
     dynamic(() => import('@/components/SubFooter')),
     { pinion: false },
   ],
-
   templateDetails: dynamic(() => import('@/components/TemplateTabs')),
   templateGallery: [
     dynamic(() => import('@/components/TemplateGallery')),
-    { pinion: false },
-  ],
-  integrationsBlock: [
-    dynamic(() => import('../Integrations')),
     { pinion: false },
   ],
   // Use the new App Router Testimonial block implementation
@@ -117,7 +117,7 @@ const RackComponentList = {
   ],
   testimonialFeaturedBlock: [
     dynamic(() => import('../Testimonial/TestimonialFeatured')),
-    { pinion: true, inner: false },
+    { inner: false, pinion: true },
   ],
   textBlock: dynamic(() => import('@/components/Text/TextBlock')),
   textBlockWithSidebar: dynamic(() => import('@/components/TextWithSidebar')),

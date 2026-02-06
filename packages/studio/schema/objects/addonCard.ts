@@ -8,6 +8,7 @@ export const addonCard = F.object({
   fields: [
     F.image({ name: 'icon', title: 'Icon' }),
     F.string({ name: 'title', title: 'Title', validation: (Rule) => Rule.required() }),
+    F.string({ name: 'code', title: 'Code', description: 'Code to match with API billing pricings (e.g. USR-1-100)' }),
     F.field('blockContentSimple', { name: 'description', title: 'Description' }),
 
     F.string({ name: 'pricePrefix', title: 'Price prefix (e.g. From)' }),

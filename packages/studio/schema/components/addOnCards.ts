@@ -32,6 +32,7 @@ export const addOnCards = F.object({
             fields: [
               F.image({name: 'icon'}),
               F.string({name: 'title'}),
+              F.string({name: 'code', title: 'Code', description: 'Code to match with API billing pricings (e.g. USR-1-100)'}),
               F.text({name: 'content'}),
               F.string({name: 'pricesLabel', placeholder: 'From'}),
               F.array({
