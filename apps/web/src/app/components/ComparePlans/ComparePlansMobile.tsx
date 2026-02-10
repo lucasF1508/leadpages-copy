@@ -1,7 +1,7 @@
 // ComparePlansMobile.tsx
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import clsx from 'clsx'
 import { AnimatePresence, motion as m } from 'motion/react'
 import Text from '@/components/Text'
@@ -11,6 +11,8 @@ import XIcon from '@/components/Icons/XIcon'
 import ComparePlansHeading from './ComparePlansHeading'
 import { PriceType } from '../Price'
 import { comparePlansAnimationVariants } from './ComparePlans'
+import { useBillingPricings } from '@/hooks/useBillingPricings'
+import { formatCurrency } from '@/lib/utils/formatPrice'
 
 type Column = {
   _key: string
@@ -24,6 +26,7 @@ type FeatureCell = {
   text: string
   textSecondary?: string
   isAvailable?: boolean
+  code?: string
 }
 
 type Section = {
@@ -46,6 +49,24 @@ interface Props {
 
 const ComparePlansMobile: React.FC<Props> = ({ columns, sections, content, defaultState }) => {
   const [visible, setVisible] = useState(defaultState === 'open')
+  const { data: billingPricingsData } = useBillingPricings()
+  const billingMap = useMemo(() => {
+    const map = new Map<string, { currency: string; monthlyCost: string }>()
+    billingPricingsData?.items?.forEach((item) => {
+      map.set(item.code, { currency: item.currency, monthlyCost: item.monthlyCost })
+    })
+    return map
+  }, [billingPricingsData?.items])
+
+  const getCellDisplayText = (cell: FeatureCell | undefined): string => {
+    if (!cell) return ''
+    if (typeof cell.code === 'string' && billingMap.has(cell.code)) {
+      const api = billingMap.get(cell.code)!
+      const num = parseFloat(api.monthlyCost)
+      return `${formatCurrency(api.currency, num)} ${api.currency}/mo`
+    }
+    return cell.text ?? ''
+  }
 
   return (
     <div className="block lg:hidden">
@@ -93,8 +114,9 @@ const ComparePlansMobile: React.FC<Props> = ({ columns, sections, content, defau
                         <h4 className="type-caption-xs mb-2 text-body-neutral/80">{section.title}</h4>
                         <ul className="space-y-2">
                           {section.features.map((feat) => {
-                            const cell = feat.columns?.[planIndex] // <- dato puntual de este plan
+                            const cell = feat.columns?.[planIndex]
                             const available = !!cell?.isAvailable
+                            const displayText = getCellDisplayText(cell)
                             return (
                               <li
                                 key={feat._key}
@@ -102,16 +124,16 @@ const ComparePlansMobile: React.FC<Props> = ({ columns, sections, content, defau
                               >
                                 <div className="flex-1 min-w-0">
                                   <div className="type-body-sm">{feat.title}</div>
-                                  {(cell?.text || cell?.textSecondary) && (
+                                  {(displayText || cell?.textSecondary) && (
                                     <div className="type-caption-xxs text-body-neutral-disabled">
-                                      {cell?.text}
+                                      {displayText}
                                       {cell?.textSecondary && (
                                         <span className="ml-1">{cell.textSecondary}</span>
                                       )}
                                     </div>
-                                  )}                      
+                                  )}
                                 </div>
-                                                                <div className={clsx(available ? 'text-body' : 'text-body-neutral-disabled', 'pt-0.5')}>
+                                <div className={clsx(available ? 'text-body' : 'text-body-neutral-disabled', 'pt-0.5')}>
                                   {available ? <CheckIcon /> : <XIcon />}
                                 </div>
                               </li>

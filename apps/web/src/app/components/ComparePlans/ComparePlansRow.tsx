@@ -6,12 +6,15 @@ import CheckIcon from '@/components/Icons/CheckIcon'
 import XIcon from '@/components/Icons/XIcon'
 import Text from '@/components/Text'
 import { comparePlansAnimationVariants } from './ComparePlans'
+import { useBillingPricings } from '@/hooks/useBillingPricings'
+import { formatCurrency } from '@/lib/utils/formatPrice'
 
 interface Column {
   _key: string
   isAvailable?: boolean
   text: string
   textSecondary?: string
+  code?: string
 }
 
 interface ComparePlansRowProps {
@@ -27,6 +30,14 @@ const ComparePlansRow: React.FC<ComparePlansRowProps> = ({
   title,
 }) => {
   const [active, setActive] = useState(false)
+  const { data: billingPricingsData } = useBillingPricings()
+  const billingMap = React.useMemo(() => {
+    const map = new Map<string, { currency: string; monthlyCost: string }>()
+    billingPricingsData?.items?.forEach((item) => {
+      map.set(item.code, { currency: item.currency, monthlyCost: item.monthlyCost })
+    })
+    return map
+  }, [billingPricingsData?.items])
 
   return (
     <div 
@@ -77,17 +88,27 @@ const ComparePlansRow: React.FC<ComparePlansRowProps> = ({
           )}
         </AnimatePresence>
       </div>
-      {columns.map(({ _key, isAvailable, text, textSecondary }) => (
-        <div className={clsx("flex items-start gap-x-1 relative", `group/column`)} key={_key}>
-          <div className={clsx(isAvailable ? 'text-body' : 'text-body-neutral-disabled')}>
-            {isAvailable ? <CheckIcon /> : <XIcon />}
+      {columns.map(({ _key, isAvailable, text, textSecondary, code }) => {
+        const displayText =
+          typeof code === 'string' && billingMap.has(code)
+            ? (() => {
+                const api = billingMap.get(code)!
+                const num = parseFloat(api.monthlyCost)
+                return `${formatCurrency(api.currency, num)} ${api.currency}/mo`
+              })()
+            : text
+        return (
+          <div className={clsx("flex items-start gap-x-1 relative", `group/column`)} key={_key}>
+            <div className={clsx(isAvailable ? 'text-body' : 'text-body-neutral-disabled')}>
+              {isAvailable ? <CheckIcon /> : <XIcon />}
+            </div>
+            <div>
+              {displayText && <div>{displayText}</div>}
+              {textSecondary && <div className="type-caption-xxs text-body-neutral-disabled">{textSecondary}</div>}
+            </div>
           </div>
-          <div>
-            {text && <div>{text}</div>}
-            {textSecondary && <div className="type-caption-xxs text-body-neutral-disabled">{textSecondary}</div>}
-          </div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }

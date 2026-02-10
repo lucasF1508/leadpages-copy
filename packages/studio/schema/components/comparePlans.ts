@@ -136,6 +136,11 @@ export const comparePlans = F.object({
                           fields: [
                             F.boolean({name: 'isAvailable', required: true, initialValue: true}),
                             F.title({name: 'text'}),
+                            F.string({
+                              name: 'code',
+                              title: 'Code',
+                              description: 'Code to match with API billing pricings (e.g. USR-1-100)',
+                            }),
                             F.text({name: 'textSecondary'}),
                           ],
                           preview: {

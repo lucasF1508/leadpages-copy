@@ -36,6 +36,7 @@ interface ComparePlansProps {
         text: string
         textSecondary?: string
         isAvailable?: boolean
+        code?: string
       }[]
     }[]
   }[]
