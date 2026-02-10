@@ -13,6 +13,7 @@ import HeroSimple from './HeroSimple'
 import HeroTemplate from './HeroTemplate'
 import HeroTextWithMarquee from './HeroTextWithMarquee'
 import HeroWithMedia from './HeroWithMedia'
+import HeroPageAnalyzer from './HeroPageAnalyzer'
 
 interface HeroProps {
   hero: (HeroHomeProps | HeroPricingProps | HeroWithMediaProps | HeroHomeNewProps) & any[]
@@ -44,6 +45,8 @@ const Hero = ({ hero }: HeroProps) => {
       return <HeroTemplate {...heroProps} />
     case 'heroTextWithMarquee':
       return <HeroTextWithMarquee {...heroProps} />
+    case 'heroPageAnalyzer':
+      return <HeroPageAnalyzer {...heroProps} />
     default:
       return <HeroWithMedia {...heroProps} />
   }

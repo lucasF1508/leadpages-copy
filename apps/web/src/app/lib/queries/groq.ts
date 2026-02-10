@@ -5,6 +5,49 @@ export const componentQueries = `
     testimonials[]->
   },
   faqs[]->,
+  _type == 'heroSimple' => {
+    ...,
+    links[] {
+      _key,
+      _type,
+      label,
+      url,
+      condition,
+      hasHash,
+      hash,
+      linkStyle,
+      hasIcon,
+      ariaLabel,
+      dataGtm,
+      internal-> {
+        _id,
+        _type,
+        "slug": slug.current,
+        "path": path
+      }
+    }
+  },
+  _type == 'faqSimple' => {
+    ...,
+    faqs[] {
+      _key,
+      question,
+      answer[] {
+        ...,
+        _type == 'block' => {
+          ...,
+          children[] {
+            ...,
+            _type == 'span' => {
+              ...,
+              marks[],
+              text
+            }
+          }
+        }
+      }
+    }
+  },
   _type == 'blogSection' => {
     ...,
     "excludedTags": *[_type=="pageArchive" && slug.current=="blog"][0].tags,
@@ -101,6 +144,84 @@ export const componentQueries = `
       },
       []
     )
+  },
+  _type == 'sectionCTA' => {
+    ...,
+    ctas[] {
+      _key,
+      _type,
+      label,
+      url,
+      condition,
+      hasHash,
+      hash,
+      linkStyle,
+      hasIcon,
+      ariaLabel,
+      dataGtm,
+      internal-> {
+        _id,
+        _type,
+        "slug": slug.current,
+        "path": path
+      }
+    }
+  },
+  _type == 'featureCards' => {
+    ...,
+    cards[] {
+      _key,
+      _type,
+      content[] {
+        ...
+      },
+      icon {
+        ...,
+        asset-> {
+          _id,
+          _type,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            },
+            lqip
+          }
+        },
+        altText,
+        hotspot,
+        crop
+      }
+    }
+  },
+  _type == 'howItWorks' => {
+    ...,
+    steps[] {
+      _key,
+      title,
+      description,
+      icon {
+        ...,
+        asset-> {
+          _id,
+          _type,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            },
+            lqip
+          }
+        },
+        altText,
+        hotspot,
+        crop
+      }
+    }
   },
 `
 

@@ -59,13 +59,17 @@ export const sectionCTA = defineType({
       name: 'ctas',
       title: 'CTAs',
       type: 'array',
-      validation: (r) => r.min(1),
       of: [
         {
+          type: 'link',
+        },
+        {
           type: 'object',
+          name: 'ctaSimple',
+          title: 'Simple CTA',
           fields: [
             { name: 'label', title: 'Label', type: 'string', validation: (r) => r.required() },
-            { name: 'url', title: 'URL', type: 'url', validation: (r) => r.required() },
+            { name: 'url', title: 'URL', type: 'string', validation: (r) => r.required() },
             {
               name: 'target',
               title: 'Target',

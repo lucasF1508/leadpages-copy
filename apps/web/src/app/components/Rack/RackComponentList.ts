@@ -48,6 +48,10 @@ const RackComponentList = {
     dynamic(() => import('@/components/FAQAccordion/FAQAccordion')),
     { pinion: false },
   ],
+  faqSimple: [
+    dynamic(() => import('@/components/FAQSimple')),
+    { pinion: false },
+  ],
   featureCards: dynamic(() => import('@/components/FeatureCards')),
   featureScroll: [
     dynamic(() => import('@/components/FeatureScroll')),
@@ -124,6 +128,35 @@ const RackComponentList = {
   textColumns: dynamic(() => import('@/components/TextColumns')),
   textWithStats: dynamic(() => import('@/components/TextWithStats')),
   upsell: dynamic(() => import('@/components/Upsell')),
+  pageAnalyzer: [
+    dynamic(() => import('@/components/PageAnalyzer/PageAnalyzer')),
+    { pinion: false },
+  ],
+  emailSignature: [
+    dynamic(() => import('@/components/EmailSignature/EmailSignature')),
+    { pinion: false },
+  ],
+  hubspotForm: dynamic(() => import('@/components/HubspotForm')),
+  howItWorks: [
+    dynamic(() => import('@/components/HowItWorks')),
+    { pinion: false },
+  ],
+  privacySecurity: [
+    dynamic(() => import('@/components/PrivacySecurity')),
+    { pinion: false },
+  ],
+  analyzerInput: [
+    dynamic(() => import('@/components/AnalyzerInput')),
+    { pinion: false },
+  ],
+  pageAnalyzerComplete: [
+    dynamic(() => import('@/components/PageAnalyzerComplete')),
+    { pinion: false },
+  ],
+  emailSignatureComplete: [
+    dynamic(() => import('@/components/EmailSignatureComplete')),
+    { pinion: false },
+  ],
 }
 
 export default RackComponentList

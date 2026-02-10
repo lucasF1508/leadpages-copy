@@ -6,6 +6,8 @@ import Heading from '@/components/Heading'
 import Label from '@/components/Label'
 import Pinion from '@/components/Pinion'
 import SubFooterGradient from '@/components/SubFooter/SubFooterGradient'
+import Link from '@/components/Link'
+import type { LinkType, LinkStyleType } from '@types'
 import { useVerifoneCheckoutUrl } from '@/hooks/useVerifoneCheckoutUrl'
 import {
   extractPlanFromUrl,
@@ -15,8 +17,15 @@ import {
 type CTA = {
   label: string
   style?: 'button-ghost' | 'button-outline' | 'button-solid'
+  linkStyle?: 'button-ghost' | 'button-outline' | 'button-solid'
   target?: '_blank' | '_self'
-  url: string
+  url?: string
+  condition?: 'internal' | 'external'
+  hasHash?: boolean
+  hash?: string
+  hasIcon?: boolean
+  _key?: string
+  _type?: string
 }
 
 type Stat = {
@@ -48,15 +57,16 @@ export default function SectionCTA({
   variant = 'gradient',
 }: SectionCTAProps) {
   const isCenter = align === 'center'
+  const safeCtas = ctas ?? []
 
   // Find the first CTA that needs replacement to determine default plan
   const ctaToReplace = useMemo(() => {
-    return ctas.find((cta) => shouldReplaceWithVerifone(cta.url))
-  }, [ctas])
+    return safeCtas.find((cta) => cta.url != null && shouldReplaceWithVerifone(cta.url))
+  }, [safeCtas])
 
   // Extract plan info from the first CTA that needs replacement
   const planInfo = useMemo(() => {
-    if (!ctaToReplace) return null
+    if (!ctaToReplace?.url) return null
     return extractPlanFromUrl(ctaToReplace.url)
   }, [ctaToReplace])
 
@@ -71,13 +81,12 @@ export default function SectionCTA({
 
   // Process CTAs: replace Recurly/checkout URLs with Verifone URLs
   const processedCTAs = useMemo(() => {
-    if (!ctas.length) return []
-    if (loading || !verifoneUrl) return ctas // Return original if still loading or no Verifone URL
+    if (!safeCtas.length) return []
+    if (loading || !verifoneUrl) return safeCtas // Return original if still loading or no Verifone URL
 
-    return ctas.map((cta) => {
-      if (!shouldReplaceWithVerifone(cta.url)) {
-        return cta
-      }
+    return safeCtas.map((cta) => {
+      if (!cta.url) return cta
+      if (!shouldReplaceWithVerifone(cta.url)) return cta
 
       // Replace with Verifone URL
       return {
@@ -85,10 +94,10 @@ export default function SectionCTA({
         url: verifoneUrl,
       }
     })
-  }, [ctas, verifoneUrl, loading])
+  }, [safeCtas, verifoneUrl, loading])
 
   return (
-    <section className={clsx('relative isolate mt-6 md:mt-10', className)}>
+    <section className={clsx('relative isolate mt-12 md:mt-16', className)}>
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden">
         <div
           className={clsx(
@@ -96,18 +105,12 @@ export default function SectionCTA({
             'min-h-[18.625rem] md:min-h-[30rem]'
           )}
         >
-          {variant === 'gradient' && (
-            <SubFooterGradient className="absolute bottom-0 inset-x-0 h-[120%] w-full opacity-95 translate-y-6 md:translate-y-0" />
+          {variant === 'dark' && (
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[#0F0E16]"
+            />
           )}
-          <div
-            aria-hidden="true"
-            className={clsx(
-              'pointer-events-none absolute inset-0',
-              variant === 'gradient' &&
-                'bg-gradient-to-r from-[#CB79F0] to-[#874afc]',
-              variant === 'dark' && 'bg-[#0F0E16]'
-            )}
-          />
           <Pinion
             classNames={{
               inner:
@@ -177,21 +180,57 @@ export default function SectionCTA({
     )}
   >
     {processedCTAs.map((c, i) => {
-      const isBlank = c.target === '_blank'
+      if (!c.url) return null
+
+      const url = c.url
+
+      const mapStyleToLinkStyle = (style?: string): LinkStyleType | undefined => {
+        if (!style) return undefined
+        if (style === 'button-ghost') return 'ghost'
+        if (style === 'button-outline') return 'button-outline'
+        if (style === 'button-solid') return 'button-solid'
+        return style as LinkStyleType
+      }
+
+      const linkProps: Partial<LinkType> = {
+        _key: c._key || `cta-${i}`,
+        _type: (c._type === 'link' || c._type === 'signUp' ? c._type : 'link') as 'link' | 'signUp',
+        label: c.label,
+        url: url,
+        condition: c.condition || (url.startsWith('http') ? 'external' : 'internal'),
+        linkStyle: c.linkStyle ? mapStyleToLinkStyle(c.linkStyle) : mapStyleToLinkStyle(c.style) || 'button-solid',
+        hasIcon: c.hasIcon ?? true,
+        hasHash: c.hasHash,
+        hash: c.hash,
+      }
+
+      if (!c.condition && !c.linkStyle && !c.hasHash) {
+        const isBlank = c.target === '_blank'
+        const isSolid = c.style === 'button-solid'
+        return (
+          <a
+            className={clsx(
+              'cursor-pointer rounded-lg px-4 py-2.5 md:px-5 md:py-2.5 text-sm md:text-base font-medium',
+              'transition-colors inline-flex items-center justify-center',
+              isSolid
+                ? '!bg-[#CB79F0] hover:!bg-[#B869E0] !text-white !border-0'
+                : '!bg-[#CB79F0]/22 hover:!bg-[#CB79F0]/30 !text-white !border !border-white/60'
+            )}
+            href={loading ? '#' : url}
+            key={`${c.label}-${i}`}
+            rel={isBlank ? 'noopener noreferrer' : undefined}
+            target={isBlank ? '_blank' : undefined}
+          >
+            {c.label}
+          </a>
+        )
+      }
+
       return (
-        <a
-          className={clsx(
-            'cursor-pointer rounded-lg px-4 py-2.5 md:px-5 md:py-2.5 text-sm md:text-base font-medium',
-            '!bg-[#CB79F0]/22 hover:!bg-[#CB79F0]/30 !text-white !border !border-white/60',
-            'transition-colors inline-flex items-center justify-center'
-          )}
-          href={loading ? '#' : c.url}
-          key={`${c.label}-${i}`}
-          rel={isBlank ? 'noopener noreferrer' : undefined}
-          target={isBlank ? '_blank' : undefined}
-        >
-          {c.label}
-        </a>
+        <Link
+          key={linkProps._key}
+          {...linkProps}
+        />
       )
     })}
   </div>

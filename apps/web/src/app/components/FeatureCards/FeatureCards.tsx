@@ -14,11 +14,11 @@ export interface FeatureCardsProps {
 const FeatureCards = ({ cards: _cards, cta }: FeatureCardsProps) => {
   const cards = _cards.map((card: CardProps) => ({
     spacer: false,
-    contentSize: 'small',
+    contentSize: 'large',
     classNames: {
-      content: '[&>h3]:type-h3',
-      root: 'bg-opacity-light-100/10',
-      iconContainer: '!items-start'
+      content: '[&>h3]:type-h3 text-center',
+      root: 'bg-gray-100 border-gray-200',
+      iconContainer: '!items-center !justify-center'
     },
     ...card
     } as CardProps

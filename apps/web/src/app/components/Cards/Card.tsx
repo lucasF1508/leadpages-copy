@@ -67,8 +67,8 @@ const Card = ({
           contentSize === 'large' ? 'flex-col items-center text-center' : 'flex-row gap-3'
         )}
       >
-        {hasImage(icon) && (
-          <div
+        {(hasImage(icon) || contentSize === 'large') && (
+            <div
             className={clsx(
               'shrink-0 flex items-center justify-center mb-4',
               contentSize === 'large' && 'w-10 h-10',

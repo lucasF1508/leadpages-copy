@@ -93,3 +93,27 @@
 .pinion-mediaWithText {
   @apply overflow-hidden;
 }
+
+.pinion-howItWorks {
+  .pinion-inner {
+    @apply max-w-base;
+  }
+
+  @media (max-width: 768px) {
+    .how-it-works-steps {
+      @apply flex-col items-center;
+    }
+
+    .how-it-works-step {
+      @apply items-center text-center;
+    }
+
+    .how-it-works-icon-wrapper {
+      @apply justify-center;
+    }
+
+    .how-it-works-text {
+      @apply text-center;
+    }
+  }
+}

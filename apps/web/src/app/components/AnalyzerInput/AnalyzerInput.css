@@ -1,0 +1,173 @@
+.analyzer-input {
+  padding: 3rem 2rem;
+  background: linear-gradient(to bottom, rgba(139, 92, 246, 0.05), rgba(255, 255, 255, 1));
+  color: #1a1a1a;
+}
+
+.analyzer-input-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.analyzer-toggle-section {
+  margin-bottom: 2rem;
+}
+
+.analyzer-toggle-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.analyzer-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 1rem;
+}
+
+.analyzer-toggle-icon {
+  width: 20px;
+  height: 20px;
+  color: #8b5cf6;
+}
+
+.analyzer-toggle {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.analyzer-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.analyzer-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #cbd5e1;
+  transition: 0.3s;
+  border-radius: 28px;
+}
+
+.analyzer-toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.analyzer-toggle input:checked + .analyzer-toggle-slider {
+  background-color: #8b5cf6;
+}
+
+.analyzer-toggle input:checked + .analyzer-toggle-slider:before {
+  transform: translateX(24px);
+}
+
+.analyzer-toggle-description {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.analyzer-input-section {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.analyzer-url-input {
+  flex: 1;
+  padding: 0.875rem 1.25rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.analyzer-url-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.analyzer-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.analyzer-button:hover:not(:disabled) {
+  background: #7c3aed;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.analyzer-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.analyzer-button-icon {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 768px) {
+  .analyzer-input {
+    padding: 2rem 1rem;
+  }
+
+  .analyzer-input-container {
+    padding: 1.5rem;
+  }
+
+  .analyzer-input-section {
+    flex-direction: column;
+  }
+
+  .analyzer-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Estilos para el formulario de Hubspot */
+.analyzer-hubspot-form {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+

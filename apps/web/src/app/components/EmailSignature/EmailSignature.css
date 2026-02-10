@@ -1,0 +1,408 @@
+.emailsignature-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fa;
+}
+
+.emailsignature-container.emailsignature-form-only {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: white;
+  overflow-y: auto;
+}
+
+/* Hide other page content when form is in fullscreen mode */
+body:has(.emailsignature-form-only) > *:not(.emailsignature-form-only),
+body:has(.emailsignature-form-only) header,
+body:has(.emailsignature-form-only) footer {
+  display: none !important;
+}
+
+.emailsignature-back-btn {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 10000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.emailsignature-back-btn:hover {
+  background: #f9fafb;
+  border-color: #9061EE;
+  color: #9061EE;
+  transform: scale(1.05);
+}
+
+.emailsignature-form-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 5rem 2rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .emailsignature-form-wrapper {
+    grid-template-columns: 1fr;
+    padding: 5rem 1.5rem 2rem;
+  }
+}
+
+.emailsignature-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.emailsignature-header.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.emailsignature-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.emailsignature-header.sticky h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+.emailsignature-header .subtitle {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+.emailsignature-header.sticky .subtitle {
+  display: none;
+}
+
+.emailsignature-main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.emailsignature-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 2rem;
+}
+
+.form-section {
+  min-width: 0;
+}
+
+.form-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-card h2 {
+  font-size: 1.75rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.image-upload-container {
+  margin-top: 0.5rem;
+}
+
+.image-input {
+  display: none;
+}
+
+.image-upload-label {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.image-upload-label:hover {
+  background: #5568d3;
+}
+
+.image-preview-container {
+  margin-top: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.image-preview {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #e0e0e0;
+}
+
+.remove-image-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.3s ease;
+}
+
+.remove-image-btn:hover {
+  background: #dc2626;
+}
+
+.image-help-text {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.cta-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+.cta-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.preview-section {
+  min-width: 0;
+}
+
+.preview-section.sticky {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
+.preview-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.preview-header h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+}
+
+.copy-btn {
+  padding: 0.5rem 1rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.copy-btn:hover {
+  background: #5568d3;
+}
+
+.signature-preview {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  min-height: 150px;
+  align-items: flex-start;
+}
+
+.signature-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.signature-content {
+  flex: 1;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.signature-name {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.signature-title {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.signature-company {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.signature-email,
+.signature-phone,
+.signature-website,
+.signature-address {
+  margin-bottom: 0.25rem;
+  color: #666;
+}
+
+.signature-email a,
+.signature-website a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.signature-email a:hover,
+.signature-website a:hover {
+  text-decoration: underline;
+}
+
+.emailsignature-footer {
+  padding: 2rem;
+  text-align: center;
+  background: white;
+  border-top: 1px solid #e0e0e0;
+}
+
+.social-share-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-share-section p {
+  margin: 0;
+  color: #333;
+}
+
+@media (max-width: 1024px) {
+  .emailsignature-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-section.sticky {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .emailsignature-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .emailsignature-main {
+    padding: 1rem;
+  }
+
+  .form-card,
+  .preview-card {
+    padding: 1.5rem;
+  }
+
+  .signature-preview {
+    flex-direction: column;
+  }
+
+  .signature-image {
+    align-self: center;
+  }
+}
+

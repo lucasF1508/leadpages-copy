@@ -64,7 +64,13 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
     const handleScroll = (e: React.UIEvent) => {
       e.preventDefault()
       if (hasHash && hash) {
-        scrollToHash({ hash })
+        // Special handling for signature-form to redirect to form page
+        if (hash === 'signature-form') {
+          window.location.href = '/emailsignature/form'
+          return
+        } else {
+          scrollToHash({ hash })
+        }
       }
     }
 
@@ -79,7 +85,11 @@ export const LinkInternal = forwardRef<HTMLAnchorElement, LinkInternalType>(
     }
 
     const urlParams = preserveParams()
-    const finalUrl = `${normalizedUrl}${urlParams}${hasHash && hash ? `#${hash}` : ''}`
+    // Redirect to form page if hash is signature-form
+    const finalUrl =
+      hasHash && hash === 'signature-form'
+        ? `/emailsignature/form${urlParams}`
+        : `${normalizedUrl}${urlParams}${hasHash && hash ? `#${hash}` : ''}`
 
     return (
       <NextLink

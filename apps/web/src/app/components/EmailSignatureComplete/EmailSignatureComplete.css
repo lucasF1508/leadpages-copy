@@ -1,0 +1,21 @@
+.email-signature-complete {
+  background: white;
+  color: #1a1a1a;
+}
+
+.emailsig-form-section {
+  padding: 3rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#hubspot-form-emailsig-main {
+  background: white;
+}
+
+@media (max-width: 768px) {
+  .emailsig-form-section {
+    padding: 2rem 1rem;
+  }
+}
+

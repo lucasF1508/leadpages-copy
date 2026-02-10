@@ -72,9 +72,10 @@ export default async function Page({
     }
   )
   
-  const pageData = await pageQueryResult?.data
-  const { components, hero, _id: pageId, _updatedAt: pageUpdatedAt } = pageData || {}
-  
+  const pageData = await pageQueryResult?.data ?? null
+  const components = pageData?.components ?? []
+  const hero = pageData?.hero ?? []
+
   return (
     <>
       {isVwo && (

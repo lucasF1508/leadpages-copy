@@ -35,9 +35,11 @@ export const LinkExternal = forwardRef<HTMLAnchorElement, LinkExternalType>(
 
 
     const hasLabel = isChildrenText(children) || label
+
     const internalRef = useRef<HTMLAnchorElement | null>(null)
-    
-    // Preserve tracking params (URL + cookie __lptp) so XID/affiliate persist
+    const isSignatureFormHash =
+      url === '#signature-form' || url?.includes('#signature-form')
+
     const preserveAllParams = (baseUrl: string): string => {
       if (typeof window === 'undefined') return baseUrl
       try {
@@ -59,89 +61,76 @@ export const LinkExternal = forwardRef<HTMLAnchorElement, LinkExternalType>(
         return baseUrl
       }
     }
-    
-    // Use both refs: the forwarded ref and our internal ref
+
     const combinedRef = (node: HTMLAnchorElement | null) => {
-      // Assign to internal ref
       ;(internalRef as React.MutableRefObject<HTMLAnchorElement | null>).current = node
-      
-      // Handle forwarded ref
       if (typeof ref === 'function') {
         ref(node)
       } else if (ref) {
-        // Type assertion needed because ref.current might be readonly in some cases
         const mutableRef = ref as React.MutableRefObject<HTMLAnchorElement | null>
         mutableRef.current = node
       }
     }
-    
-    // Force navigation with full URL including params to prevent tracking scripts from stripping them
-    // Use capture phase to intercept before other listeners
+
     useEffect(() => {
       const anchor = internalRef.current
       if (!anchor || condition === 'download' || !url) {
         return
       }
-      
-      // Calculate URL with preserved params dynamically at click time
+
       const getFinalUrl = (): string => {
+        if (isSignatureFormHash) return '/emailsignature/form'
         return preserveAllParams(url)
       }
-      
+
       const handleClickCapture = (e: MouseEvent) => {
-        // Calculate final URL with params dynamically at click time
         const finalUrl = getFinalUrl()
         e.preventDefault()
         e.stopPropagation()
         e.stopImmediatePropagation()
         window.location.href = finalUrl
       }
-      
-      // Add listener in capture phase (runs before other listeners)
+
       anchor.addEventListener('click', handleClickCapture, true)
-      
-      // Also monitor if the href is being changed and restore it immediately
+
       const observer = new MutationObserver(() => {
         const correctUrl = getFinalUrl()
         if (anchor.href !== correctUrl && anchor.href.includes('my.leadpages.com')) {
-          // Force restore the correct URL with params
           anchor.setAttribute('href', correctUrl)
           anchor.href = correctUrl
         }
       })
-      
+
       observer.observe(anchor, { attributes: true, attributeFilter: ['href'] })
-      
-      // Set initial href with params
+
       const initialUrl = getFinalUrl()
       anchor.setAttribute('href', initialUrl)
       anchor.href = initialUrl
-      
+
       return () => {
         anchor.removeEventListener('click', handleClickCapture, true)
         observer.disconnect()
       }
-    }, [url, condition])
-    
+    }, [url, condition, isSignatureFormHash])
+
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-      // Fallback handler for React events
-      // Note: stopImmediatePropagation is not available on React synthetic events
-      // The native event listener in capture phase handles this
       if (url && condition !== 'download') {
         e.preventDefault()
         e.stopPropagation()
-        const finalUrl = preserveAllParams(url)
+        const finalUrl = isSignatureFormHash ? '/emailsignature/form' : preserveAllParams(url)
         window.location.href = finalUrl
       }
     }
-    
+
+    const href = isSignatureFormHash ? '/emailsignature/form' : url
+
     return (
       <motion.a
         aria-label={ariaLabel}
         className={clsx(className, classNames?.root)}
         data-gtm={dataGtm}
         download={condition === 'download'}
-        href={url}
+        href={href}
         onClick={handleClick}
         ref={combinedRef}
         rel={rel}
