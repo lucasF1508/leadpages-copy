@@ -1,13 +1,13 @@
+'use client'
+
 import type {
   PlayerDirection,
   PlayerEvent,
   Player as PlayerType,
 } from '@lottiefiles/react-lottie-player'
 import type { AnimationItem } from 'lottie-web'
-import React, { useId, useRef, useState } from 'react'
+import React, { useEffect, useId, useRef, useState, type ComponentType } from 'react'
 import clsx from 'clsx'
-import { create } from '@lottiefiles/lottie-interactivity'
-import { Controls, Player } from '@lottiefiles/react-lottie-player'
 import Loader from '@/components/Loader'
 import isJSON from '@utils/isJSON'
 
@@ -75,6 +75,24 @@ const Lottie = ({
   if (!file?.file && !file?.asset) return null
   const id = useId()
   const [isLoading, setIsLoading] = useState(true)
+  const [PlayerModule, setPlayerModule] = useState<{
+    Player: ComponentType<any>
+    Controls: ComponentType<any>
+  } | null>(null)
+  const createRef = useRef<Function | null>(null)
+
+  useEffect(() => {
+    Promise.all([
+      import('@lottiefiles/react-lottie-player'),
+      import('@lottiefiles/lottie-interactivity'),
+    ]).then(([playerMod, interactivityMod]) => {
+      createRef.current = interactivityMod.create
+      setPlayerModule({
+        Player: playerMod.Player,
+        Controls: playerMod.Controls,
+      })
+    })
+  }, [])
 
   let direction: PlayerDirection = 1
   const { end = 1, start = 0 } = offset || {}
@@ -92,11 +110,11 @@ const Lottie = ({
   }
 
   const hasPlayOnScroll = () => {
-    if (!lottie?.current) {
+    if (!lottie?.current || !createRef.current) {
       console.error('Lottie not initialized. Lottie:', lottie?.current)
       return false
     }
-    return create({
+    return createRef.current({
       actions: [
         {
           frames: [0, frames],
@@ -110,12 +128,12 @@ const Lottie = ({
   }
 
   const hasStartInView = () => {
-    if (!lottie?.current) {
+    if (!lottie?.current || !createRef.current) {
       console.error('Lottie not initialized. Lottie:', lottie?.current)
       return false
     }
 
-    return create({
+    return createRef.current({
       actions: [
         {
           type: 'playOnce',
@@ -128,12 +146,12 @@ const Lottie = ({
   }
 
   const hasConfig = () => {
-    if (!lottie?.current) {
+    if (!lottie?.current || !createRef.current) {
       console.error('Lottie not initialized. Lottie:', lottie?.current)
       return false
     }
 
-    return create({
+    return createRef.current({
       player: lottie?.current,
       ...(config ? JSON.parse(config) : {}),
     })
@@ -165,6 +183,21 @@ const Lottie = ({
     }
   }
 
+  if (!PlayerModule) {
+    return loader ? (
+      <Loader
+        className={clsx(
+          'absolute left-1/2 top-1/2 -ml-4 -mt-4',
+          classNames?.loader
+        )}
+        height="2rem"
+        width="2rem"
+      />
+    ) : null
+  }
+
+  const { Player, Controls } = PlayerModule
+
   return (
     <>
       {loader && isLoading && (
@@ -192,7 +225,7 @@ const Lottie = ({
           id={`${animationName}-${id}`}
           keepLastFrame
           loop={loop}
-          lottieRef={(instance) => getInstance(instance)}
+          lottieRef={(instance: AnimationItem) => getInstance(instance)}
           onEvent={handleEvent}
           ref={ref}
           speed={speed}

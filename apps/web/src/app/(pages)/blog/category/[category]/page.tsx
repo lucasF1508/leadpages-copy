@@ -3,6 +3,7 @@ import { getStaticPathsParams } from '@/lib/queries'
 import { query, categoryPostsQuery, categoryQuery, categoriesQuery } from '@/lib/queries'
 import { draftMode } from 'next/headers'
 import BlogCategoryLayout from '@/components/BlogCategoryLayout'
+import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd'
 import { notFound } from 'next/navigation'
 
 // Dynamic rendering to avoid build timeouts
@@ -63,12 +64,21 @@ export default async function BlogCategoryPage({
     params: {},
   })?.data
 
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: categoryData.title, path: `/blog/category/${categorySlug}` },
+  ]
+
   return (
-    <BlogCategoryLayout
-      category={categoryData}
-      posts={posts || []}
-      categories={categories || []}
-    />
+    <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <BlogCategoryLayout
+        category={categoryData}
+        posts={posts || []}
+        categories={categories || []}
+      />
+    </>
   )
 }
 

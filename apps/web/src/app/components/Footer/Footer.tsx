@@ -4,12 +4,10 @@ import type { SocialShareItemType } from '@/components/Social'
 import type { LinkType } from '@types'
 import React from 'react'
 import Logo from '@public/images/logo.svg'
-import { draftMode } from 'next/headers'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import Social from '@/components/Social'
 import RedbrickFooter from './RedbrickFooter'
-import { getFooter } from './getFooter'
 
 export interface FooterProps {
   address: string
@@ -22,10 +20,8 @@ export interface FooterProps {
   social: SocialShareItemType[]
 }
 
-const Footer = async () => {
-  const footer = await getFooter(draftMode().isEnabled)
-
-  const { address, copyright, legal, menu, social }: FooterProps = footer || {}
+const Footer = ({ footerData }: { footerData?: FooterProps | null }) => {
+  const { address, copyright, legal, menu, social } = footerData || {}
   const year = new Date().getFullYear()
 
   return (

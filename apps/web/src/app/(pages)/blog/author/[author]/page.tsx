@@ -3,6 +3,7 @@ import { getStaticPathsParams } from '@/lib/queries'
 import { query, authorPostsQuery, authorQuery } from '@/lib/queries'
 import { draftMode } from 'next/headers'
 import BlogAuthorLayout from '@/components/BlogAuthorLayout'
+import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd'
 import { notFound } from 'next/navigation'
 
 // Dynamic rendering to avoid build timeouts
@@ -57,11 +58,20 @@ export default async function BlogAuthorPage({
     params: {},
   })?.data
 
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: authorData.title || authorData.name || 'Author', path: `/blog/author/${authorSlug}` },
+  ]
+
   return (
-    <BlogAuthorLayout
-      author={authorData}
-      posts={posts || []}
-    />
+    <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <BlogAuthorLayout
+        author={authorData}
+        posts={posts || []}
+      />
+    </>
   )
 }
 

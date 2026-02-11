@@ -9,7 +9,7 @@ interface BlogFeatureCardProps {
 }
 
 export default function BlogFeatureCard({ className, item }: BlogFeatureCardProps) {
-  const { author, excerpt, href = '#', image, publishedDate, tag } = item
+  const { author, excerpt, href = '#', image, publishedDate, tag, title } = item
 
   // Decide if the link is internal or external and normalize it
   const isRelative = href.startsWith('/')
@@ -113,6 +113,18 @@ export default function BlogFeatureCard({ className, item }: BlogFeatureCardProp
                 {tag.toUpperCase()}
               </span>
             </div>
+          )}
+
+          {/* Title */}
+          {title && (
+            <h4 className="type-body text-white !font-bold mb-2 leading-tight">
+              <a
+                href={normalizedHref}
+                className="hover:text-purple-400 transition-colors"
+              >
+                {title}
+              </a>
+            </h4>
           )}
 
           {/* Excerpt */}

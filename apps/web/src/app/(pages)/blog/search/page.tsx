@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { query, categoryPostsQuery, categoriesQuery } from '@/lib/queries'
 import { draftMode } from 'next/headers'
 import BlogSearchLayout from '@/components/BlogSearchLayout'
+import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd'
 
 // Dynamic rendering (search needs to be dynamic anyway)
 export const dynamic = 'force-dynamic'
@@ -31,12 +32,21 @@ export default async function BlogSearchPage({
     params: {},
   })?.data
 
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Search', path: '/blog/search' },
+  ]
+
   return (
-    <BlogSearchLayout 
-      posts={posts || []} 
-      categories={categories || []}
-      initialSearchTerm={searchQuery || ''}
-    />
+    <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <BlogSearchLayout
+        posts={posts || []}
+        categories={categories || []}
+        initialSearchTerm={searchQuery || ''}
+      />
+    </>
   )
 }
 

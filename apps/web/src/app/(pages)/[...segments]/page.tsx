@@ -5,6 +5,8 @@ import { getStaticPathsParams } from '@/lib/queries'
 import { query, componentsQuery, joinPath } from '@/lib/queries'
 import { draftMode } from 'next/headers'
 import Layout from '@/components/Layout'
+import PricingStructuredData from '@/components/PricingStructuredData'
+import BreadcrumbJsonLd from '@/components/BreadcrumbJsonLd'
 import Script from 'next/script'
 
 // Prevent unspecified paths from being statically rendered at runtime
@@ -46,10 +48,10 @@ export default async function Page({
   const legacyPath = alternatePath.replace(/\/+$/g, '')
 
   const normalized = (s: string) => s.replace(/^\/|\/$/g, '')
-  const isVwo =
+  const isPricingPage =
     normalized(normalizedPath) === 'pricing' ||
     normalized(segments.join('/')) === 'pricing'
-  const isPricing = isVwo
+  const isPricing = isPricingPage
 
   // For pricing page, bypass CDN to get fresh data (important for updated Verifone links)
   const pageQueryResult = query(
@@ -76,9 +78,27 @@ export default async function Page({
   const components = pageData?.components ?? []
   const hero = pageData?.hero ?? []
 
+  const heroData = Array.isArray(hero) ? hero[0] : hero
+  const pricingPlans = heroData?._type === 'heroPricing' ? heroData.plans : null
+
+  const breadcrumbs = [
+    { name: 'Home', path: '/' },
+    ...segments.map((segment: string, i: number) => ({
+      name: segment
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (c: string) => c.toUpperCase()),
+      path: `/${segments.slice(0, i + 1).join('/')}`,
+    })),
+  ]
+
   return (
     <>
-      {isVwo && (
+      {segments.length > 0 && <BreadcrumbJsonLd items={breadcrumbs} />}
+      {isPricingPage && pricingPlans && (
+        <PricingStructuredData plans={pricingPlans} />
+      )}
+
+      {isPricingPage && (
         <>
           <link rel="preconnect" href="https://dev.visualwebsiteoptimizer.com" />
           <Script id="vwoCode" strategy="beforeInteractive">

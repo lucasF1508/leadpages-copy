@@ -121,20 +121,18 @@ export const generateMetadataStatic = async ({
       ...parentProps?.openGraph,
       ...(title ? { title } : {}),
       description: description || parentProps?.description,
-      images: [
-        ...(imgUrl ? [{ height: 630, url: imgUrl, width: 1200 }] : []),
-        ...((parentProps?.openGraph?.images as any[]) || []),
-      ].filter(Boolean),
+      images: imgUrl
+        ? [{ height: 630, url: imgUrl, width: 1200 }]
+        : ((parentProps?.openGraph?.images as any[]) || []),
       url: canonicalPath,
     } as Metadata['openGraph'],
     twitter: {
       ...parentProps?.twitter,
       ...(title ? { title } : {}),
       description: description || parentProps?.description,
-      images: [
-        ...(imgUrl ? [imgUrl] : []),
-        ...((parentProps?.twitter?.images as unknown as string[]) || []),
-      ].filter(Boolean) as string[],
+      images: (imgUrl
+        ? [imgUrl]
+        : ((parentProps?.twitter?.images as unknown as string[]) || [])) as string[],
     } as Metadata['twitter'],
   }
 }

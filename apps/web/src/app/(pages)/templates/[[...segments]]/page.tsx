@@ -65,6 +65,8 @@ export default async function Page({
       ...mergeTemplateWithDefaults(categoryHero || {}, _hero),
       _id: 'heroTextWithMarquee',
       _type: 'heroTextWithMarquee',
+      content:
+        'Leadpages offers high-converting landing page templates designed to help marketers and businesses generate more leads quickly and easily.',
       marquee,
     },
   ]

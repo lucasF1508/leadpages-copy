@@ -7,11 +7,10 @@ const GTM_CONTAINER_ID = process.env.GTM_CONTAINER_ID
 const FB_PIXEL_ID = process.env.FB_PIXEL_ID
 const NEXT_PUBLIC_HOTJAR_ID = process.env.NEXT_PUBLIC_HOTJAR_ID
 const GA4_TRACKING_ID = process.env.GA4_TRACKING_ID
-// HubSpot Portal ID - hardcoded para asegurar que siempre se cargue
 const HUBSPOT_PORTAL_ID = '21794907'
- 
+
 const TrackingScripts = () => (
-  <>        
+  <>
     {GA4_TRACKING_ID && <GoogleAnalytics gaId={GA4_TRACKING_ID} />}
     {GTM_CONTAINER_ID && <GoogleTagManager gtmId={GTM_CONTAINER_ID} />}
     {NEXT_PUBLIC_HOTJAR_ID && (
@@ -22,7 +21,7 @@ const TrackingScripts = () => (
       `,
         }}
         id="hotjar"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
     )}
     {FB_PIXEL_ID && (
@@ -41,6 +40,7 @@ const TrackingScripts = () => (
         `,
         }}
         id="fb-pixel"
+        strategy="lazyOnload"
       />
     )}
     {FB_PIXEL_ID && (
@@ -61,15 +61,16 @@ const TrackingScripts = () => (
     <Script
       id="LP-embed"
       src="https://static.leadpages.com/leadboxes/current/embed.js"
+      strategy="lazyOnload"
     />
     {HUBSPOT_PORTAL_ID && (
       <Script
         id="hs-script-loader"
         src={`https://js.hs-scripts.com/${HUBSPOT_PORTAL_ID}.js`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
     )}
   </>
 )
- 
+
 export default TrackingScripts

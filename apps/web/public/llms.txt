@@ -1,0 +1,29 @@
+# Leadpages — llms.txt
+# https://www.leadpages.com/llms.txt
+
+> Leadpages is a lead generation platform that helps small businesses
+> build websites, landing pages, pop-ups, and alert bars to collect
+> leads and close sales.
+
+## Docs
+
+- [Leadpages Homepage](https://www.leadpages.com/)
+- [Pricing](https://www.leadpages.com/pricing)
+- [Features](https://www.leadpages.com/product/features)
+- [Templates](https://www.leadpages.com/templates)
+- [Landing Page Builder](https://www.leadpages.com/product/landing-page-builder)
+- [Website Builder](https://www.leadpages.com/product/website-builder)
+- [Pop-Ups](https://www.leadpages.com/product/pop-ups)
+- [Alert Bars](https://www.leadpages.com/product/alert-bars)
+- [AI Engine](https://www.leadpages.com/product/ai-engine)
+- [Integrations](https://www.leadpages.com/integrations)
+- [Blog](https://www.leadpages.com/blog)
+- [Help Center](https://support.leadpages.com/)
+
+## Optional
+
+- [About](https://www.leadpages.com/about)
+- [Contact](https://www.leadpages.com/contact)
+- [Customers](https://www.leadpages.com/customers)
+- [Affiliates](https://www.leadpages.com/affiliates)
+- [Partners](https://www.leadpages.com/partners)

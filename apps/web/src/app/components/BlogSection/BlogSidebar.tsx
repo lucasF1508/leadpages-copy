@@ -88,7 +88,7 @@ const BlogSidebar = ({
           </h4>
 
           {/* 2-column grid. Rows auto-height so long labels don’t get cramped */}
-          <div className="grid grid-cols-2 gap-x-4">
+          <div className="grid grid-cols-1">
             {/* All Categories (left column, first row) */}
             <div className="flex flex-col divide-y divide-white/10">
               <div className="px-3 lg:px-4 py-2">

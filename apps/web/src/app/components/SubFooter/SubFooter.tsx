@@ -56,7 +56,7 @@ const SubFooter = ({
 
             {heading && (
               <Heading
-                as="h1"
+                as="h2"
                 className="text-center type-title-t7 sm:type-title-t6 md:type-title-t3 max-w-cols12 mx-auto"
                 heading={heading}
               />
@@ -64,7 +64,7 @@ const SubFooter = ({
 
             {subheading && (
               <Heading
-                as="h2"
+                as="h3"
                 className="text-center type-body-lg max-w-cols12 mx-auto opacity-90"
                 heading={subheading}
               />

@@ -1,90 +1,6 @@
 import React from 'react'
-import Script from 'next/script'
 
-const RedbrickStructuredDataScript = ({ includeSoftwareApplication = true }) => {
-  const softwareApplications = includeSoftwareApplication
-    ? [
-        {
-          "@id": "https://www.leadpages.com/#SoftwareApplicationStandard",
-          "@type": "SoftwareApplication",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": 4.3,
-            "reviewCount": 206
-          },
-          "applicationCategory": "BusinessApplication",
-          "description": "Leadpages Standard is a complete lead generation platform that includes a website and landing page builder, templates, conversion tools, AI copywriting, and a pop-up and alert bar builder.",
-          "name": "Leadpages Standard",
-          "offers": {
-            "@type": "Offer",
-            "price": 444,
-            "priceCurrency": "USD"
-          },
-          "review": {
-            "@type": "Review",
-            "author": { "@type": "Person", "name": "John H." },
-            "datePublished": "2023-02-01",
-            "name": "The Rebirth of my Business",
-            "reviewBody": "Leadpages is easy to use. On top of that, the free weekly coaching sessions are second to none. It provides the greatest value of any coaching program I've seen.",
-            "reviewRating": { "@type": "Rating", "ratingValue": 5 }
-          },
-          "url": "https://www.leadpages.com/"
-        },
-        {
-          "@id": "https://www.leadpages.com/#SoftwareApplicationPro",
-          "@type": "SoftwareApplication",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": 4.3,
-            "reviewCount": 206
-          },
-          "applicationCategory": "BusinessApplication",
-          "description": "Leadpages Pro is a complete lead generation platform that includes a website and landing page builder, templates, conversion tools, AI copywriting, A/B testing, and a pop-up and alert bar builder.",
-          "name": "Leadpages Pro",
-          "offers": {
-            "@type": "Offer",
-            "price": 888,
-            "priceCurrency": "USD"
-          },
-          "review": {
-            "@type": "Review",
-            "author": { "@type": "Person", "name": "Katie H." },
-            "datePublished": "2023-02-23",
-            "name": "Perfect for Online Entrepreneurs",
-            "reviewBody": "Leadpages is easy to use. Perfect for any online entrepreneur who wants to make marketing your products/services easy. I use it for hosting my free webinar/masterclass and connect it with ConvertKit to build my email list and convert sales to my online course! Their customer support is extremely helpful, and they have tons of beautiful templates to choose from, so you don't have to start from scratch. On top of that, the free weekly coaching sessions are second to none. It provides the greatest value of any coaching program I've seen.",
-            "reviewRating": { "@type": "Rating", "ratingValue": 5 }
-          },
-          "url": "https://www.leadpages.com/"
-        },
-        {
-          "@id": "https://www.leadpages.com/#SoftwareApplicationAdvanced",
-          "@type": "SoftwareApplication",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": 4.3,
-            "reviewCount": 206
-          },
-          "applicationCategory": "BusinessApplication",
-          "description": "Leadpages Advanced is a complete lead generation platform that includes a website and landing page builder, templates, conversion tools, AI copywriting, A/B testing, and a pop-up and alert bar builder.",
-          "name": "Leadpages Advanced",
-          "offers": {
-            "@type": "Offer",
-            "price": 3588,
-            "priceCurrency": "USD"
-          },
-          "review": {
-            "@type": "Review",
-            "author": { "@type": "Person", "name": "Fola O." },
-            "datePublished": "2023-01-21",
-            "name": "Easy to use and intuitive",
-            "reviewBody": "We initially got help from a freelancer with creating landing pages on Leadpages. However after a while we were able to start creating landing pages on leadpages ourselves. The design is intuitive to use for a non-techy person. It has all the bells and whistles we need as a small business. Best of all we can be up and running with a new ad campaign in very little time. Pricing is also competitive compared to other providers we explored. For what we want it does the job!",
-            "reviewRating": { "@type": "Rating", "ratingValue": 5 }
-          },
-          "url": "https://www.leadpages.com/"
-        }
-      ]
-    : [];
-
+const RedbrickStructuredDataScript = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -142,8 +58,7 @@ const RedbrickStructuredDataScript = ({ includeSoftwareApplication = true }) => 
           "https://www.tiktok.com/@leadpages_",
           "https://www.youtube.com/@LeadpagesSoftware"
         ],
-        "url": "https://www.leadpages.com",
-        ...(includeSoftwareApplication && { "owns": softwareApplications })
+        "url": "https://www.leadpages.com"
       },
       {
         "@id": "https://www.leadpages.com/#website",
@@ -166,6 +81,7 @@ const RedbrickStructuredDataScript = ({ includeSoftwareApplication = true }) => 
       {
         "@id": "https://www.leadpages.com",
         "@type": "WebPage",
+        "breadcrumb": { "@id": "https://www.leadpages.com/#breadcrumb" },
         "description": "A powerful landing page builder that helps create high-converting landing pages and drive sales for businesses. Lead generation and opt-in tools integrated.",
         "inLanguage": "en-US",
         "isPartOf": {
@@ -175,14 +91,30 @@ const RedbrickStructuredDataScript = ({ includeSoftwareApplication = true }) => 
         },
         "name": "Leadpages | Website & Landing Page Software Small Businesses",
         "url": "https://www.leadpages.com"
+      },
+      {
+        "@id": "https://www.leadpages.com/#breadcrumb",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.leadpages.com/"
+          }
+        ]
       }
     ]
   };
 
   return (
-    <Script id="redbrick-structured-data-script" type="application/ld+json">
-      {JSON.stringify(structuredData)}
-    </Script>
+    <script
+      id="redbrick-structured-data-script"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(structuredData).replace(/</g, '\\u003c'),
+      }}
+    />
   );
 };
 

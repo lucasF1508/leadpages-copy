@@ -4,10 +4,6 @@ import type { ControlProps, Props as SelectProps } from 'react-select';
 import React from 'react'
 import Select, { components } from 'react-select'
 
-type ExtendedSelectProps = {
-  prefixTitle?: string;
-} & SelectProps<OptionType, false>;
-
 interface UpsellDropdownProps {
   options: OptionType[]
   title: string
@@ -19,10 +15,8 @@ export interface OptionType {
 }
 
 const Control = (props: ControlProps<OptionType, false>) => {
-  const {
-    children,
-    selectProps: { prefixTitle }
-  } = props as ExtendedSelectProps
+  const { children, selectProps } = props
+  const { prefixTitle } = selectProps as SelectProps<OptionType, false> & { prefixTitle?: string }
 
   return (
     <components.Control {...props}>
@@ -48,7 +42,7 @@ const UpsellDropdown = ({ options, title }: UpsellDropdownProps) =>
         defaultValue={options[0]}
         isSearchable={false}
         options={options}
-        prefixTitle={title}
+        {...{ prefixTitle: title } as Record<string, unknown>}
         unstyled
       />
     </div>
