@@ -175,7 +175,7 @@ export default function Brand({
             <aside className="hidden lg:block lg:w-64 flex-shrink-0">
               <div className="rounded-2xl p-4 bg-[#F3EEF9]">
                 {heading && (
-                  <h2 className="type-h2 font-bold text-black mb-4">
+                  <h2 className="type-h2 text-black mb-4">
                     {heading}
                   </h2>
                 )}
@@ -206,7 +206,7 @@ export default function Brand({
                 >
                   <header className="px-4 md:px-6">
                     <h1
-                      className="type-h1 font-medium"
+                      className="type-h1"
                       style={{ color: PURPLE }}
                     >
                       {category.title}

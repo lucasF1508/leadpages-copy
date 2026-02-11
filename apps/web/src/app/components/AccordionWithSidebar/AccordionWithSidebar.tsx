@@ -122,7 +122,7 @@ const AccordionWithSidebar = ({
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="hidden lg:block lg:w-64 flex-shrink-0">
             {heading && (
-              <h2 className="type-h2 font-bold text-black mb-6">{heading}</h2>
+              <h2 className="type-h2 text-black mb-6">{heading}</h2>
             )}
             <nav className="space-y-2">
               {categories.map((category) => (
@@ -163,7 +163,7 @@ const AccordionWithSidebar = ({
                           />
                         </div>
                       )}
-                      <h1 className="type-h1 font-medium text-purple-700 flex-1">
+                      <h1 className="type-h1 text-purple-700 flex-1">
                         {category.title}
                       </h1>
                       <button

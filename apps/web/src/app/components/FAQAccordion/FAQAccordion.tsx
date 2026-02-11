@@ -202,7 +202,7 @@ const FAQAccordion = ({
             {/* Columna izquierda: Título, descripción y botón */}
             <div className="flex-1 lg:max-w-md">
               <h2 className={clsx(
-                'font-display font-extrabold type-title-t5 sm:type-title-t4 md:type-title-t3 mb-4 sm:mb-6',
+                'font-display type-title-t5 sm:type-title-t4 md:type-title-t3 mb-4 sm:mb-6',
                 isDark ? 'text-white' : 'text-dark'
               )}>
                 {heading}
@@ -347,7 +347,7 @@ const FAQAccordion = ({
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar - Hidden on mobile */}
           <div className="hidden lg:block lg:w-64 flex-shrink-0">
-            <h2 className="type-h2 font-bold text-black mb-6">{heading}</h2>
+            <h2 className="type-h2 text-black mb-6">{heading}</h2>
             <nav className="space-y-2">
               {categories.map((category) => (
                 <a

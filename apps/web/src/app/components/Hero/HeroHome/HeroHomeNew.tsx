@@ -45,7 +45,7 @@ export default function HeroHomeNew({
               {/* LEFT */}
               <div className="relative z-10 flex flex-col order-2 lg:order-1">
                 {heading ? (
-                  <h1 className="font-semibold tracking-tight leading-[1.1] text-[28px] sm:text-[36px] md:text-[44px] lg:text-[56px]">
+                  <h1 className="tracking-tight leading-[1.1] text-[28px] sm:text-[36px] md:text-[44px] lg:text-[56px]">
                     {heading}
                   </h1>
                 ) : null}

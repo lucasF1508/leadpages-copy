@@ -22,6 +22,11 @@
     @apply bg-surface-neutral-dark text-body text-[16px] antialiased;
   }
 
+  h1,
+  h2 {
+    font-weight: 400 !important;
+  }
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }

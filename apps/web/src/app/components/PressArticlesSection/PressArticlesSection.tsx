@@ -35,7 +35,7 @@ export default function PressArticlesSection({
           </div>
         )}
         {heading && (
-          <h2 className="text-2xl md:text-3xl font-semibold text-neutral-900 m-0">
+          <h2 className="text-2xl md:text-3xl text-neutral-900 m-0">
             {heading}
           </h2>
         )}

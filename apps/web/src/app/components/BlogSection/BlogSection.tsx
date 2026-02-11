@@ -305,7 +305,7 @@ export default function BlogSection(props: Props) {
               <div className="text-left">
                 {mainTitle && (
                   <h1
-                    className="font-bold mb-4"
+                    className="mb-4"
                     style={{
                       fontSize: 'clamp(2.5rem, 5vw, 4rem)',
                       lineHeight: '1.1',
@@ -336,7 +336,7 @@ export default function BlogSection(props: Props) {
                   </span>
                 </div>
               )}
-              {heading && <h2 className="type-h2 md:type-h1 font-bold text-gray-900 mb-2">{heading}</h2>}
+              {heading && <h2 className="type-h2 md:type-h1 text-gray-900 mb-2">{heading}</h2>}
               {subheading && <Text className="type-body-sm text-gray-600" content={subheading} />}
             </div>
 

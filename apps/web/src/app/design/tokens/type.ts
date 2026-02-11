@@ -254,7 +254,7 @@ const [headingSizes, headingStyles] = generateTypography({
   styles: {
     default: {
       fontFamily: fontFamily.heading,
-      fontWeight: fontWeight.medium,
+      fontWeight: fontWeight.normal,
     },
   },
 })
