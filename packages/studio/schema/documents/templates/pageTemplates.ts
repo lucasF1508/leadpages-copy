@@ -4,7 +4,7 @@ import {F, FS, G, P} from '@/schema/tool'
 export const pageTemplates = {
   icon,
   name: 'pageTemplates',
-  title: 'Leadpage Templates Gallery',
+  title: 'Template Gallery Settings',
   type: 'document',
   groups: [...G.fieldGroupDefaults(), G.define('seo', {title: 'SEO'})],
   fieldsets: [FS.seo(), FS.define('meta', {collapsed: false})],
@@ -19,7 +19,7 @@ export const pageTemplates = {
           F.text({name: 'content'}),
         ],
       }),
-      F.field('marquee'),
+      F.field('components'),
     ]),
     ...G.group('meta', [F.slug(), F.field('path')]),
     ...G.group('seo', [F.seo()]),

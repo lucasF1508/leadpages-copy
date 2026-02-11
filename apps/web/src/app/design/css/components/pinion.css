@@ -117,3 +117,11 @@
     }
   }
 }
+/* Componentes de inspiration - mismo comportamiento que otros Pinions */
+.pinion-inspirationPreview,
+.pinion-inspirationDescription,
+.pinion-inspirationDetails {
+  .pinion-inner {
+    @apply max-w-base;
+  }
+}

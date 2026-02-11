@@ -18,6 +18,7 @@ export interface MarqueeProps {
   logos?: LogoWithLink[]
   maxHeight?: number
   type: 'image' | 'logo'
+  visibility?: 'visible' | 'invisible'
 }
 
 const MarqueeRow = React.forwardRef<HTMLDivElement, MarqueeProps>(
@@ -89,7 +90,9 @@ const Marquee = ({
   logos,
   maxHeight,
   type,
+  visibility = 'visible',
 }: MarqueeProps) => {
+  if (visibility === 'invisible') return null
   const images = _images || logos
   if (!images?.length) return null
 

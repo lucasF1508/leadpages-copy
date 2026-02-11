@@ -1,4 +1,4 @@
-import { UiTemplate } from '@/types'
+import { Taxon, UiTemplate } from '@/types'
 import React from 'react'
 import clsx from 'clsx'
 import { useShallow } from 'zustand/react/shallow'
@@ -9,17 +9,117 @@ import templateGalleryStore from '@/stores/templateGalleryStore'
 export interface TemplateGalleryCardsProps {
   className?: string
   infiniteRef?: React.RefObject<HTMLDivElement>
+  marketingLayout?: boolean
+  taxons?: Taxon[]
   templates: UiTemplate[]
 }
 
 const TemplateGalleryCards = ({
   className,
   infiniteRef,
+  marketingLayout = false,
+  taxons = [],
   templates,
 }: TemplateGalleryCardsProps) => {
   const getTemplateUrl = templateGalleryStore(
     useShallow((state) => state.getTemplateUrl)
   )
+
+  if (marketingLayout) {
+    return (
+      <div
+        className={clsx(
+          'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-1.5 gap-y-6 relative z-content w-full',
+          className
+        )}
+        ref={infiniteRef}
+      >
+        {templates.map(({ kind, template, _meta, ui }) => {
+          const url = getTemplateUrl({ kind, template, _meta })
+          if (!template || !url) return null
+
+          // Get category label from taxons by matching the value
+          const firstCategory = template?.categories?.[0] as { value?: string } | string | undefined
+          const categoryValue = typeof firstCategory === 'string' 
+            ? firstCategory 
+            : firstCategory?.value
+          const categoryTaxon = categoryValue 
+            ? taxons.find((taxon) => taxon.value === categoryValue)
+            : null
+          const categoryLabel = categoryTaxon?.label || null
+
+          return (
+            <div
+              className="flex flex-col gap-2.5"
+              key={ui?.guid}
+            >
+              <Link
+                className={clsx(
+                  "relative w-full rounded-[0.625rem] bg-[#111018] overflow-hidden group transition-[box-shadow,transform] after:content-[''] after:absolute after:inset-0 after:rounded-[0.625rem] after:border-2 after:border-white after:pointer-events-none",
+                  'hover:-translate-y-0.5 hover:shadow-[0_18px_60px_rgba(0,0,0,0.45)] focus:-translate-y-0.5 focus:shadow-[0_18px_60px_rgba(0,0,0,0.45)]',
+                  // Wider aspect ratio for page templates
+                  kind === 'LeadpageTemplate' && 'aspect-[4/5]',
+                  kind === 'SiteTemplate' && 'aspect-[3/4]'
+                )}
+                condition="internal"
+                linkStyle="none"
+                url={url}
+              >
+                {template?.tags?.includes('new') && (
+                  <div className="absolute top-0 right-0 bg-[#7E4AFF] text-white text-xs font-semibold px-3 py-1.5 rounded-bl-[0.625rem] z-above-content">
+                    New
+                  </div>
+                )}
+
+                <div className="relative w-full h-full rounded-[0.625rem] overflow-hidden bg-[#111018]">
+                  {template?.thumbnailUrlWebp ? (
+                    <Image
+                      alt={template?.name || 'Template thumbnail'}
+                      fill
+                      image={typeof template.thumbnailUrlWebp === 'string' 
+                        ? template.thumbnailUrlWebp 
+                        : template.thumbnailUrlWebp}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      unoptimized={template.thumbnailUrlWebp?.includes('/api/screenshot-proxy') || template.thumbnailUrlWebp?.startsWith('data:')}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white/30">
+                      <span className="text-sm">No thumbnail</span>
+                    </div>
+                  )}
+                </div>
+              </Link>
+              <div className="flex flex-col gap-1">
+                {template?.name && (
+                  <p className="type-h5 sm:type-h4 md:type-h2 text-white">
+                    {template.name}
+                  </p>
+                )}
+                {(() => {
+                  const templateHeading = (template as any)?.heading as
+                    | string
+                    | undefined
+                  const templateDescription = (template as any)?.description as
+                    | string
+                    | undefined
+                  const summary = templateHeading || templateDescription
+
+                  if (!summary) return null
+
+                  return (
+                  <p className="type-body-xs sm:type-body-sm text-body-disabled">
+                    {summary}
+                    {categoryLabel ? ` | ${categoryLabel}` : ''}
+                  </p>
+                  )
+                })()}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    )
+  }
 
   return (
     <div
@@ -30,7 +130,7 @@ const TemplateGalleryCards = ({
       ref={infiniteRef}
     >
       {templates.map(({ kind, template, _meta, ui }) => {
-        const url = getTemplateUrl({ kind, template })
+        const url = getTemplateUrl({ kind, template, _meta })
         if (!template || !url) return null
 
         return (

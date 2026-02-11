@@ -50,7 +50,9 @@ export const RackInner = (
   if (!Component) {
     console.error(
       'Provided component was not found in RackComponentList',
-      component
+      component,
+      'Available components:',
+      Object.keys(RackComponentList)
     )
     return null
   }
@@ -86,8 +88,8 @@ const Rack = ({
   className,
   classNames,
   components = [],
-}: RackProps) =>
-  createElement(
+}: RackProps) => {
+  return createElement(
     as,
     {
       className: clsx(className, classNames?.root),
@@ -97,5 +99,6 @@ const Rack = ({
       : !!components?.length &&
           components.map((component) => RackInner(component, classNames))
   )
+}
 
 export default memo(Rack)

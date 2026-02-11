@@ -59,7 +59,27 @@ const TemplateGallery = ({
   })
 
   // Filter out legacy templates
-  const templates = legacyTemplateFilter(state.templates)
+  const rawTemplates = legacyTemplateFilter(state.templates)
+  
+  // Filter to only show templates WITH valid Mandrel IDs (opposite of TemplateGalleryStudio)
+  const templates = rawTemplates.filter((template) => {
+    const templateId = template?._meta?.id || template?.template?.id || ''
+    if (!templateId || templateId.trim() === '') {
+      return false // Exclude if no ID
+    }
+    if (
+      templateId.includes('example') ||
+      templateId.includes('test') ||
+      templateId.includes('ejemplo') ||
+      templateId.includes('prueba')
+    ) {
+      return false // Exclude if temporary/test ID
+    }
+    if (templateId.length < 10) {
+      return false // Exclude if short/invalid ID
+    }
+    return true // Include if valid Mandrel ID
+  })
 
   const hasLoaded = state?.ui?.hasLoaded
   const hasTemplates = !!templates?.length

@@ -5,7 +5,7 @@ const getKindSlug = (kind) =>
   kind === 'SiteTemplate' ? 'website-templates' : 'templates'
 
 const getKindSlugSecondary = (kind) =>
-  kind === 'SiteTemplate' ? 'website-template' : 'landing-page-template'
+  kind === 'SiteTemplate' ? 'website-template' : 'landing-page-template-new'
 
 const getKindQueryParam = (kind) => (kind === 'SiteTemplate' ? 'site' : 'page')
 

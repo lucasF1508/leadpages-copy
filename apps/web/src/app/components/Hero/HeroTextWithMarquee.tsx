@@ -16,8 +16,14 @@ const HeroTextWithMarquee = ({
   marquee,
 }: HeroTextWithMarqueeProps) => (
   <>
-    <HeroBase content={content} heading={heading} label={label} links={links} />
-    {marquee && (
+    <HeroBase
+      className="box-[mb*0] box-[mt*1.5]"
+      content={content}
+      heading={heading}
+      label={label}
+      links={links}
+    />
+    {marquee && marquee.visibility !== 'invisible' && (
       <div className="overflow-hidden">
         <Marquee {...marquee} maxHeight={64} />
       </div>

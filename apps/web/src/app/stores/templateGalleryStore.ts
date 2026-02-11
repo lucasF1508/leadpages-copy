@@ -23,10 +23,12 @@ export interface TemplateGalleryStore {
     kind,
     slug,
     template,
+    _meta,
   }: {
     kind: TemplateKind
     slug?: string
     template: any
+    _meta?: any
   }) => string
   joinQueryParams: (params: Record<string, string | undefined>) => string
   legacyCustomTemplateIds: string[]
@@ -69,7 +71,7 @@ export const templateGalleryStore = create<TemplateGalleryStore>(
     getKindSlug: (kind) =>
       kind === 'SiteTemplate' ? 'website-templates' : 'templates',
     getKindSlugSecondary: (kind) =>
-      kind === 'SiteTemplate' ? 'website-template' : 'landing-page-template',
+      kind === 'SiteTemplate' ? 'website-template' : 'landing-page-template-new',
     getKindTitle: (kind) =>
       kind === 'SiteTemplate' ? 'Website' : 'Landing Page',
     getQueryParams: (queryString) => {
@@ -88,14 +90,36 @@ export const templateGalleryStore = create<TemplateGalleryStore>(
     },
     getTemplatePreviewUrl: (kind: TemplateKind, slug: string, _id: string) =>
       `/${get().getKindSlug(kind)}/preview/${slug || _id}`,
-    getTemplateUrl: ({ kind, slug: _slug, template }) => {
+    getTemplateUrl: ({ kind, slug: _slug, template, _meta }) => {
       const slug = _slug || kebabCase(template?.name)
 
       if (!slug) {
         return ''
       }
 
-      return `/${get().getKindSlug(kind)}/${get().getKindSlugSecondary(kind)}/${slug}`
+      // Check if template doesn't have a valid Mandrel ID
+      // If so, use page-studio-templates route
+      const templateId = _meta?.id || template?.id || ''
+      const hasValidMandrelId = templateId && 
+        templateId.trim() !== '' &&
+        !templateId.includes('example') &&
+        !templateId.includes('test') &&
+        !templateId.includes('ejemplo') &&
+        !templateId.includes('prueba') &&
+        templateId.length >= 10
+
+      // For templates without Mandrel ID, use page-studio-templates route
+      if (!hasValidMandrelId) {
+        const templateType = kind === 'SiteTemplate' 
+          ? 'website-template' 
+          : 'landing-page-template'
+        const url = `/page-studio-templates/${templateType}/${slug}`
+        return url
+      }
+
+      // For templates with valid Mandrel ID, use normal route
+      const url = `/${get().getKindSlug(kind)}/${get().getKindSlugSecondary(kind)}/${slug}`
+      return url
     },
     joinQueryParams: (params) =>
       Object.entries(params).reduce((acc, [key, value]) => {

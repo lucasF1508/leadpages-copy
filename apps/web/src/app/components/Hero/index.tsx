@@ -8,6 +8,7 @@ import HeroComparisons from './HeroComparisons'
 import HeroHome from './HeroHome'
 import HeroHomeNew from './HeroHome/HeroHomeNew'
 import { HeroHomeNewProps } from './HeroHome'
+import HeroInspiration from './HeroInspiration'
 import HeroPricing from './HeroPricing'
 import HeroSimple from './HeroSimple'
 import HeroTemplate from './HeroTemplate'
@@ -35,6 +36,8 @@ const Hero = ({ hero }: HeroProps) => {
       return <HeroHome {...heroProps} />
     case 'heroHomeNew':
       return <HeroHomeNew {...heroProps} />
+    case 'heroInspiration':
+      return <HeroInspiration {...heroProps} />
     case 'heroPricing':
       return <HeroPricing {...heroProps} />
     case 'heroSimple':

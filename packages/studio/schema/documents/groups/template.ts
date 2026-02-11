@@ -16,7 +16,21 @@ const content = G.group('content', [
   F.title({
     title: 'Template Name',
     validation: (Rule) => Rule.required(),
-    readOnly: true,
+    // Make editable if no Mandrel ID (new template)
+    readOnly: ({document}) => {
+      // If is templateSettings, always readOnly
+      if (document?._type === 'templateSettings') return true
+      // If has a Mandrel ID (doesn't contain "example", "test", "ejemplo" or "prueba"), make readOnly
+      if (document?.id && 
+          !document.id.includes('example') && 
+          !document.id.includes('test') &&
+          !document.id.includes('ejemplo') && 
+          !document.id.includes('prueba')) {
+        return true
+      }
+      // If no ID or is a new template, make editable
+      return false
+    },
     hidden: ({document}) => !document || document?._type === 'templateSettings',
   }),
   F.string({
@@ -40,13 +54,54 @@ const content = G.group('content', [
       }),
     ],
   }),
-  F.field('string', {
+  F.string({
     name: 'id',
-    readOnly: true,
-    title: ` `,
-    description: 'This ID is used to match the template with its Mandrel counterpart.',
-    components: {input: IdField},
+    // Make editable if no valid Mandrel ID
+    readOnly: ({document}) => {
+      // If is templateSettings, always readOnly
+      if (document?._type === 'templateSettings') return true
+      
+      const templateId = document?.id
+      
+      // If no ID, make editable
+      if (!templateId || templateId.trim() === '') {
+        return false
+      }
+      
+      // If ID contains "example", "test", "ejemplo" or "prueba", make editable (is temporary)
+      if (templateId.includes('example') || 
+          templateId.includes('test') ||
+          templateId.includes('ejemplo') || 
+          templateId.includes('prueba')) {
+        return false
+      }
+      
+      // If ID is too short, make editable (probably not valid)
+      if (templateId.length < 10) {
+        return false
+      }
+      
+      // If has a valid Mandrel ID, make readOnly
+      return true
+    },
+    title: `Template ID`,
+    description: 'Template ID in Leadpages API (e.g., pPRzWeL2HZem5weUF3ixdL). Leave empty for new templates without preview. You can edit it if you need to add an ID later.',
     hidden: ({document}) => !document || document?._type === 'templateSettings',
+  }),
+  F.image({
+    name: 'customThumbnail',
+    title: 'Custom Thumbnail Image',
+    description: 'Upload a custom thumbnail image for templates without Mandrel ID. This will be used as the preview image in the template gallery.',
+    hidden: ({document}) => {
+      // Only show if template has a valid Mandrel ID (opposite logic)
+      if (!document || document?._type === 'templateSettings') return true
+      const templateId = document?.id
+      if (!templateId || templateId.trim() === '') return false // Show if no ID
+      if (templateId.includes('example') || templateId.includes('test') || 
+          templateId.includes('ejemplo') || templateId.includes('prueba')) return false // Show if test ID
+      if (templateId.length < 10) return false // Show if short ID
+      return true // Hide if valid Mandrel ID
+    },
   }),
 ])
 
@@ -151,6 +206,25 @@ const included = G.group('included', [
           }),
           F.image({
             name: 'image',
+            description: 'Upload a custom icon/image. If not provided, the selected icon below will be used.',
+          }),
+          F.string({
+            name: 'icon',
+            title: 'Icon',
+            description: 'Select an icon to display if no custom image is uploaded.',
+            options: {
+              list: [
+                {title: 'Check', value: 'check'},
+                {title: 'Star', value: 'star'},
+                {title: 'Gear', value: 'gear'},
+                {title: 'Mobile', value: 'mobile'},
+                {title: 'Form', value: 'form'},
+                {title: 'SEO', value: 'seo'},
+                {title: 'Custom', value: 'custom'},
+                {title: 'Scroll', value: 'scroll'},
+              ],
+            },
+            initialValue: 'check',
           }),
         ],
         preview: {
@@ -158,10 +232,12 @@ const included = G.group('included', [
             content: 'content',
             shownIn: 'shownIn',
             image: 'image',
+            icon: 'icon',
           },
-          prepare: ({content = [], image}) => ({
+          prepare: ({content = [], image, icon: iconValue}) => ({
             title: P.richText(content),
             media: image || icon,
+            subtitle: iconValue ? `Icon: ${iconValue}` : 'No icon',
           }),
         },
       }),
@@ -202,9 +278,43 @@ const meta = G.group('meta', [
   ...G.group('meta', [
     F.slug({
       validation: (Rule) => Rule.required(),
-      readOnly: true,
+      // Make editable if no Mandrel ID (new template)
+      readOnly: ({document}) => {
+        // If has a Mandrel ID (doesn't contain "example", "test", "ejemplo" or "prueba"), make readOnly
+        if (document?.id && 
+            !document.id.includes('example') && 
+            !document.id.includes('test') &&
+            !document.id.includes('ejemplo') && 
+            !document.id.includes('prueba')) {
+          return true
+        }
+        // If no ID or is a new template, make editable
+        return false
+      },
     }),
-    F.string({name: 'kind', readOnly: true}),
+    F.string({
+      name: 'kind',
+      // Make editable if no Mandrel ID (new template)
+      readOnly: ({document}) => {
+        // If has a Mandrel ID (doesn't contain "example", "test", "ejemplo" or "prueba"), make readOnly
+        if (document?.id && 
+            !document.id.includes('example') && 
+            !document.id.includes('test') &&
+            !document.id.includes('ejemplo') && 
+            !document.id.includes('prueba')) {
+          return true
+        }
+        // If no ID or is a new template, make editable
+        return false
+      },
+      options: {
+        list: [
+          {title: 'Leadpage Template', value: 'LeadpageTemplate'},
+          {title: 'Site Template', value: 'SiteTemplate'},
+        ],
+      },
+      initialValue: 'LeadpageTemplate',
+    }),
     F.datetime({name: 'lastMandrelUpdate', readOnly: true}),
     F.datetime({name: 'originalCreatedAt', readOnly: true}),
     F.datetime({name: 'releaseDate', readOnly: true}),
@@ -212,7 +322,26 @@ const meta = G.group('meta', [
     F.number({name: 'thumbnailAspect', readOnly: true}),
     F.string({name: 'thumbnailUrlWebp', readOnly: true}),
     F.string({name: 'thumbnailUrl', readOnly: true}),
-    F.string({name: 'previewUrl', readOnly: true}),
+    F.string({
+      name: 'previewUrl',
+      title: 'Preview URL',
+      description: 'Direct URL to the template preview page. Examples:\n• Full URL: https://hassanmehmood.lpagestest.co/lead-magnet-2\n• Relative URL: /templates/preview/lead-magnet-2\n\nThis URL is used to generate thumbnails automatically. If empty, it will be generated from the slug.',
+      placeholder: 'https://example.com/template-preview or /templates/preview/slug',
+      validation: (Rule) => Rule.custom((value, context) => {
+        // Allow empty - will be auto-generated from slug
+        if (!value) return true
+        
+        // Must be a valid URL (absolute or relative)
+        const isAbsolute = value.startsWith('http://') || value.startsWith('https://')
+        const isRelative = value.startsWith('/')
+        
+        if (!isAbsolute && !isRelative) {
+          return 'Preview URL must be a full URL (https://...) or a relative path (/)'
+        }
+        
+        return true
+      }),
+    }),
     F.string({
       name: 'fullPageScreenshotUrlWebp',
       readOnly: true,

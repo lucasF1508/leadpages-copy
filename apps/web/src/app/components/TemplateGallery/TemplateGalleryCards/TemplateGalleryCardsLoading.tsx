@@ -15,7 +15,7 @@ const TemplateGalleryCardsLoading = ({
   const { Placeholder, className: placeholderClassName } = {
     [TemplateKind.Leadpage]: {
       Placeholder: LandingPageLoading,
-      className: 'aspect-[3/2]',
+      className: 'aspect-[4/5]',
     },
     [TemplateKind.Site]: {
       Placeholder: SiteLoading,
@@ -26,23 +26,21 @@ const TemplateGalleryCardsLoading = ({
   return (
     <div
       className={clsx(
-        'flex flex-wrap gap-y-4 gap-x-2 relative z-content w-full',
+        'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-1.5 gap-y-6 relative z-content w-full',
         className
       )}
     >
-      {Array.from({ length: 12 }).map((_, num) => {
-        const animationDelay = `${(num % 3) * 0.25}s`
+      {Array.from({ length: 8 }).map((_, num) => {
+        const animationDelay = `${(num % 4) * 0.15}s`
         return (
           <div
-            className="flex-[0_1_calc((100%-2rem)/3)] flex flex-col gap-2"
+            className="flex flex-col gap-2.5"
             key={num}
           >
             <div
               className={clsx(
-                'relative w-full rounded-[0.5rem] border border-border/10 overflow-hidden group transition-[box-shadow]',
-                placeholderClassName,
-                kind === TemplateKind.Leadpage && 'aspect-[3/2]',
-                kind === TemplateKind.Site && 'aspect-[3/4]'
+                'relative w-full rounded-[0.625rem] bg-[#111018] overflow-hidden border-2 border-white',
+                placeholderClassName
               )}
             >
               <Placeholder

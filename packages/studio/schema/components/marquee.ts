@@ -58,6 +58,13 @@ export const marquee = F.object({
         description: 'Background color for the marquee section',
         initialValue: 'default',
       }),
+      F.radio(['visible', 'invisible'], {
+        name: 'visibility',
+        title: 'Visibility',
+        description: 'When set to invisible, the marquee will not render and will not take up space.',
+        initialValue: 'visible',
+        options: {layout: 'radio'},
+      }),
       F.number({
         name: 'duration',
         title: 'Duration (seconds) for a full loop.',

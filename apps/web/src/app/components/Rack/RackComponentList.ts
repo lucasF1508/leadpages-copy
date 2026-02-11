@@ -22,12 +22,12 @@ const RackComponentList = {
     dynamic(() => import('@/components/PlatformNew/AddOnSection'), { ssr: false }),
     { pinion: false },
   ],
-  bestOfBlog: [
-    dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
+  analyzerInput: [
+    dynamic(() => import('@/components/AnalyzerInput')),
     { pinion: false },
   ],
-  blogSection: [
-    dynamic(() => import('@/components/BlogSection/BlogSection')),
+  bestOfBlog: [
+    dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
     { pinion: false },
   ],
   brand: [dynamic(() => import('@/components/Brand')), { pinion: false }],
@@ -44,6 +44,14 @@ const RackComponentList = {
     { pinion: false },
   ],
   cta: dynamic(() => import('@/components/CTA')),
+  emailSignature: [
+    dynamic(() => import('@/components/EmailSignature/EmailSignature')),
+    { pinion: false },
+  ],
+  emailSignatureComplete: [
+    dynamic(() => import('@/components/EmailSignatureComplete')),
+    { pinion: false },
+  ],
   faqAccordion: [
     dynamic(() => import('@/components/FAQAccordion/FAQAccordion')),
     { pinion: false },
@@ -57,6 +65,16 @@ const RackComponentList = {
     dynamic(() => import('@/components/FeatureScroll')),
     { pinion: false },
   ],
+  howItWorks: [
+    dynamic(() => import('@/components/HowItWorks')),
+    { pinion: false },
+  ],
+  hubspotForm: dynamic(() => import('@/components/HubspotForm')),
+  inspirationCTA: dynamic(() => import('@/components/InspirationCTA')),
+  inspirationDescription: dynamic(() => import('@/components/InspirationDescription')),
+  inspirationDetails: dynamic(() => import('@/components/InspirationDetails')),
+  inspirationPreview: dynamic(() => import('@/components/InspirationPreview')),
+  inspirationRelated: dynamic(() => import('@/components/InspirationRelated')),
   integrationDirectory: [
     dynamic(() => import('@/components/IntegrationDirectory')),
     { pinion: false },
@@ -76,6 +94,14 @@ const RackComponentList = {
   mediaWithTextSticky: dynamic(
     () => import('@/components/MediaWithText/MediaWithTextSticky')
   ),
+  pageAnalyzer: [
+    dynamic(() => import('@/components/PageAnalyzer/PageAnalyzer')),
+    { pinion: false },
+  ],
+  pageAnalyzerComplete: [
+    dynamic(() => import('@/components/PageAnalyzerComplete')),
+    { pinion: false },
+  ],
   pageAnchor: [
     dynamic(() => import('@/components/PageAnchor')),
     { pinion: false },
@@ -84,10 +110,15 @@ const RackComponentList = {
   { pinion: false },
   ],
   prevNextCard: dynamic(() => import('@/components/PrevNextCard/PrevNextCard')),
+  privacySecurity: [
+    dynamic(() => import('@/components/PrivacySecurity')),
+    { pinion: false },
+  ],
   relatedContent: [
     dynamic(() => import('@/components/RelatedContent')),
     { pinion: false },
   ],
+
   resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
   resourcesGrid: [
@@ -96,13 +127,14 @@ const RackComponentList = {
   ],
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
   sectionCTA: dynamic(() => import('@/components/SectionCTA')),
+  // Use the new App Router Testimonial block implementation
+  // which lives under app/components/Testimonial and renders
   socialMedia: [
     dynamic(() => import('@/components/SocialMedia')),
     { pinion: false },
   ],
   spacer: dynamic(() => import('@/components/Spacer')),
   startATrial: dynamic(() => import('@/components/StartATrial')),
-
   subFooter: [
     dynamic(() => import('@/components/SubFooter')),
     { pinion: false },
@@ -112,8 +144,13 @@ const RackComponentList = {
     dynamic(() => import('@/components/TemplateGallery')),
     { pinion: false },
   ],
-  // Use the new App Router Testimonial block implementation
-  // which lives under app/components/Testimonial and renders
+  templateGalleryStudio: [
+    dynamic(() => import('@/components/TemplateGallery/TemplateGalleryStudio')),
+    { pinion: false },
+  ],
+  templateMarketplaceFooterCTA: [
+    dynamic(() => import('@/components/TemplateMarketplaceFooterCTA')),{ pinion: false },
+  ],
   // the 3-card layout with ratings used on platform-new.
   testimonialBlock: [
     dynamic(() => import('../Testimonial')),
@@ -128,35 +165,6 @@ const RackComponentList = {
   textColumns: dynamic(() => import('@/components/TextColumns')),
   textWithStats: dynamic(() => import('@/components/TextWithStats')),
   upsell: dynamic(() => import('@/components/Upsell')),
-  pageAnalyzer: [
-    dynamic(() => import('@/components/PageAnalyzer/PageAnalyzer')),
-    { pinion: false },
-  ],
-  emailSignature: [
-    dynamic(() => import('@/components/EmailSignature/EmailSignature')),
-    { pinion: false },
-  ],
-  hubspotForm: dynamic(() => import('@/components/HubspotForm')),
-  howItWorks: [
-    dynamic(() => import('@/components/HowItWorks')),
-    { pinion: false },
-  ],
-  privacySecurity: [
-    dynamic(() => import('@/components/PrivacySecurity')),
-    { pinion: false },
-  ],
-  analyzerInput: [
-    dynamic(() => import('@/components/AnalyzerInput')),
-    { pinion: false },
-  ],
-  pageAnalyzerComplete: [
-    dynamic(() => import('@/components/PageAnalyzerComplete')),
-    { pinion: false },
-  ],
-  emailSignatureComplete: [
-    dynamic(() => import('@/components/EmailSignatureComplete')),
-    { pinion: false },
-  ],
 }
 
 export default RackComponentList

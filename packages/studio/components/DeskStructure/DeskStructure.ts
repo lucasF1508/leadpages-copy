@@ -4,7 +4,7 @@
 import {MdBusiness, MdOutlineSmartButton, MdSettings} from 'react-icons/md'
 import {BsGraphUp, BsPlug, BsNewspaper, BsPencil, BsArchive, BsFlag} from 'react-icons/bs'
 import config from 'config'
-import {AiOutlineHome, AiOutlineFileText, AiOutlineSetting} from 'react-icons/ai'
+import {AiOutlineHome, AiOutlineFileText} from 'react-icons/ai'
 import IframePreview from './CustomViews/IframePreview'
 import SeoPane from './CustomViews/SeoPane'
 import {StructureBuilder} from 'sanity/structure'
@@ -102,49 +102,30 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
             .title('Templates')
             .items([
               S.listItem()
-                .title('Leadpage Templates')
+                .title('Page Templates')
                 .icon(AiOutlineFileText)
                 .child(
                   S.documentList()
-                    .title('Leadpage Templates Gallery')
+                    .title('Page Templates')
                     .filter('_type == "template" && kind == "LeadpageTemplate"')
                 ),
               S.listItem()
-                .title('Website Templates')
+                .title('Section Templates')
                 .icon(AiOutlineFileText)
                 .child(
                   S.documentList()
-                    .title('Website Templates')
+                    .title('Section Templates')
                     .filter('_type == "template" && kind == "SiteTemplate"')
                 ),
               S.documentTypeListItem('templateCategory').title('Template Categories'),
               S.divider(),
-              // Template singletons
+              // Template Gallery Settings singleton
               SingletonListItem({
                 type: 'pageTemplates',
-                title: 'Leadpage Template Gallery',
+                title: 'Template Gallery Settings',
                 documentId: 'pageTemplates',
                 S,
               }).icon(PiSidebar),
-              SingletonListItem({
-                type: 'pageTemplates',
-                title: 'Website Template Gallery',
-                documentId: 'pageWebsiteTemplates',
-                S,
-              }).icon(PiSidebar),
-              S.divider(),
-              SingletonListItem({
-                type: 'templateSettings',
-                title: 'Template Settings',
-                documentId: 'templateSettings',
-                S,
-              }).icon(AiOutlineSetting),
-              SingletonListItem({
-                type: 'templateSettings',
-                title: 'Website Template Settings',
-                documentId: 'websiteTemplateSettings',
-                S,
-              }).icon(AiOutlineSetting),
             ])
         )
         .icon(AiOutlineFileText),

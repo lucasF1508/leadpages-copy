@@ -88,6 +88,7 @@ export default function App({
   // Option
   const isTemplate = [
     "/templates/landing-page-template/[slug]",
+    "/templates/landing-page-template-new/[slug]",
     "/website-templates/website-template/[slug]"
   ].includes(pathname)
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verificación de Fuente</title>
+</head>
+<body>
+    <h1>Script de Verificación de Fuente</h1>
+    <p>Ejecuta esto en la consola del navegador (F12 → Console):</p>
+    <pre>
+// Verifica la fuente del párrafo específico
+const p = document.querySelector('p.text-body-muted.type-body-sm');
+if (p) {
+    const styles = window.getComputedStyle(p);
+    console.log('📝 Fuente aplicada:', styles.fontFamily);
+    console.log('✅ Debe contener "Inter" o "var(--font-inter)"');
+    
+    if (styles.fontFamily.includes('Inter') || styles.fontFamily.includes('--font-inter')) {
+        console.log('✅ ¡CORRECTO! El body está usando Inter');
+    } else if (styles.fontFamily.includes('roc') || styles.fontFamily.includes('Roc')) {
+        console.warn('⚠️ PROBLEMA: Aún se está usando Roc Grotesque');
+    }
+} else {
+    console.log('No se encontró el párrafo');
+}
+    </pre>
+</body>
+</html>
+
+
+
+

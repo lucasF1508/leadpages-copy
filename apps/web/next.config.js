@@ -107,6 +107,22 @@ module.exports = withBundleAnalyzer({
         hostname: 'customer-4yowinxxlegi56v8.cloudflarestream.com',
         protocol: 'https',
       },
+      {
+        hostname: 'hassanmehmood.lpagestest.co',
+        protocol: 'https',
+      },
+      {
+        hostname: '*.lpagestest.co',
+        protocol: 'https',
+      },
+      {
+        hostname: 'api.screenshotone.com',
+        protocol: 'https',
+      },
+      {
+        hostname: 'free-screenshot-api-code.vercel.app',
+        protocol: 'https',
+      },
     ],
   },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
@@ -119,7 +135,15 @@ module.exports = withBundleAnalyzer({
       projectId: SANITY_STUDIO_API_PROJECT_ID,
     })
 
-    return redirects
+    // Keep legacy template URLs working
+    return [
+      {
+        source: '/templates/landing-page-template/:slug',
+        destination: '/templates/landing-page-template-new/:slug',
+        permanent: false,
+      },
+      ...redirects,
+    ]
   },
   rewrites: async () => {
     // Incremental path rewrites
@@ -137,12 +161,6 @@ module.exports = withBundleAnalyzer({
         },
       ],
     })
-
-    if (builtPaths?.every(({ status }) => status === 'fulfilled')) {
-      console.log(
-        `Built index of ${incrementalPaths?.length} incremental paths.`
-      )
-    }
 
     return {
       afterFiles: [
