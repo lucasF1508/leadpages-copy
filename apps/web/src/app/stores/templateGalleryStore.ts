@@ -36,6 +36,8 @@ export interface TemplateGalleryStore {
   onUpdateQueryString: (urlParams: string) => void
   queryString: string
   setQueryString: (queryString: string) => void
+  setTemplateRouteSegment: (segment: 'landing-page-template' | 'landing-page-template-new') => void
+  templateRouteSegment: 'landing-page-template' | 'landing-page-template-new'
   tracker: Tracker
   trackerEvents: Record<string, string>
 }
@@ -71,7 +73,7 @@ export const templateGalleryStore = create<TemplateGalleryStore>(
     getKindSlug: (kind) =>
       kind === 'SiteTemplate' ? 'website-templates' : 'templates',
     getKindSlugSecondary: (kind) =>
-      kind === 'SiteTemplate' ? 'website-template' : 'landing-page-template-new',
+      kind === 'SiteTemplate' ? 'website-template' : get().templateRouteSegment,
     getKindTitle: (kind) =>
       kind === 'SiteTemplate' ? 'Website' : 'Landing Page',
     getQueryParams: (queryString) => {
@@ -160,6 +162,8 @@ export const templateGalleryStore = create<TemplateGalleryStore>(
     },
     queryString: '',
     setQueryString: (queryString: string) => set({ queryString }),
+    setTemplateRouteSegment: (segment) => set({ templateRouteSegment: segment }),
+    templateRouteSegment: 'landing-page-template',
     tracker: {
       onUpdateFilter: ({ kind, value }) => {
         window.dataLayer = window.dataLayer || []

@@ -135,15 +135,7 @@ module.exports = withBundleAnalyzer({
       projectId: SANITY_STUDIO_API_PROJECT_ID,
     })
 
-    // Keep legacy template URLs working
-    return [
-      {
-        source: '/templates/landing-page-template/:slug',
-        destination: '/templates/landing-page-template-new/:slug',
-        permanent: false,
-      },
-      ...redirects,
-    ]
+    return redirects
   },
   rewrites: async () => {
     // Incremental path rewrites

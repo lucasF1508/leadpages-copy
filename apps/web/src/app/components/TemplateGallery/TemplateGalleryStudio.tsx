@@ -116,6 +116,7 @@ const TemplateGalleryStudio = ({
     generateQueryStringFromPath,
     legacyTemplateFilter,
     onUpdateQueryString,
+    setTemplateRouteSegment,
     tracker,
   } = templateGalleryStore(
     useShallow((state) => ({
@@ -123,6 +124,7 @@ const TemplateGalleryStudio = ({
       generateQueryStringFromPath: state.generateQueryStringFromPath,
       legacyTemplateFilter: state.legacyTemplateFilter,
       onUpdateQueryString: state.onUpdateQueryString,
+      setTemplateRouteSegment: state.setTemplateRouteSegment,
       tracker: state.tracker,
     }))
   )
@@ -131,6 +133,10 @@ const TemplateGalleryStudio = ({
     usePathname()!,
     useSearchParams()!
   )
+
+  useEffect(() => {
+    setTemplateRouteSegment('landing-page-template-new')
+  }, [setTemplateRouteSegment])
 
   const [pageState, pageActions] = useTemplateState({
     baseFilters,

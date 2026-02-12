@@ -16,7 +16,7 @@ export const getServerSideProps = async (context) => {
       const { modified, _updatedAt, slug } = item
 
       return {
-        loc: `${rootUrl}/templates/landing-page-template-new/${slug?.current}`,
+        loc: `${rootUrl}/templates/landing-page-template/${slug?.current}`,
         changefreq: 'yearly',
         priority: 0.7,
         lastmod: new Date(modified || _updatedAt).toISOString(),

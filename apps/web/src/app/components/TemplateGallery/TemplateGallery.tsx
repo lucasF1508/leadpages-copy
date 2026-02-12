@@ -32,6 +32,7 @@ const TemplateGallery = ({
     generateQueryStringFromPath,
     legacyTemplateFilter,
     onUpdateQueryString,
+    setTemplateRouteSegment,
     tracker,
   } = templateGalleryStore(
     useShallow((state) => ({
@@ -39,6 +40,7 @@ const TemplateGallery = ({
       generateQueryStringFromPath: state.generateQueryStringFromPath,
       legacyTemplateFilter: state.legacyTemplateFilter,
       onUpdateQueryString: state.onUpdateQueryString,
+      setTemplateRouteSegment: state.setTemplateRouteSegment,
       tracker: state.tracker,
     }))
   )
@@ -91,6 +93,10 @@ const TemplateGallery = ({
     exit: { opacity: 0 },
     initial: { opacity: 0 },
   }
+
+  useEffect(() => {
+    setTemplateRouteSegment('landing-page-template')
+  }, [setTemplateRouteSegment])
 
   useEffect(() => {
     if (!hasLoaded) {
