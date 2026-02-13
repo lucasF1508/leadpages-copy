@@ -99,6 +99,11 @@
   }
 }
 
+.link-button-solid-copied {
+  @apply link-buttons border border-brand-lime-muted;
+  @apply bg-brand-lime-muted text-brand-lime-strong;
+}
+
 .link-button-outline,
 .link-button-outline[type='button'],
 .link-button-outline[type='submit'] {

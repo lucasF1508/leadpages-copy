@@ -1,7 +1,7 @@
 'use client'
 
 import type { Taxon } from '@/types'
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import clsx from 'clsx'
 import Link from '@/components/Link'
 import Pinion from '@/components/Pinion'
@@ -23,6 +23,7 @@ export interface HeroInspirationProps {
     label: string
     url: string
   }
+  templateCode?: string | null
 }
 
 const toggleNav = [
@@ -35,8 +36,23 @@ const HeroInspiration = ({
   heading,
   deviceIcons = true,
   ctaButton,
+  templateCode,
 }: HeroInspirationProps) => {
   const { isMobile, setIsMobile } = useDeviceView()
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyTemplate = useCallback(async () => {
+    try {
+      const textToCopy = templateCode?.trim()
+        ? templateCode
+        : (typeof window !== 'undefined' ? window.location.href : '')
+      await navigator.clipboard.writeText(textToCopy)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2500)
+    } catch {
+      setCopied(false)
+    }
+  }, [templateCode])
 
   return (
     <Pinion component="hero" className="theme-dark">
@@ -112,17 +128,37 @@ const HeroInspiration = ({
         )}
       </div>
 
-      {/* CTA Button */}
-      {ctaButton && (
-        <Link
-          condition="internal"
-          hasIcon={false}
-          linkStyle="button-solid"
-          url={ctaButton.url}
-        >
-          {ctaButton.label}
-        </Link>
-      )}
+      {/* CTA Buttons */}
+      <div className="flex flex-wrap items-center gap-3">
+        {ctaButton && (
+          <Link
+            condition="internal"
+            hasIcon={false}
+            linkStyle="button-solid"
+            url={ctaButton.url}
+          >
+            {ctaButton.label}
+          </Link>
+        )}
+        {copied ? (
+          <span
+            role="status"
+            aria-live="polite"
+            className="link link-button-solid-copied pointer-events-none inline-flex items-center justify-center"
+          >
+            Template copied
+          </span>
+        ) : (
+          <button
+            type="button"
+            onClick={handleCopyTemplate}
+            className="link link-button-solid"
+            aria-label="Copy template link"
+          >
+            Copy Template
+          </button>
+        )}
+      </div>
     </div>
   </Pinion>
   )

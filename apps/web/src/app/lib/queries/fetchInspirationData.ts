@@ -285,7 +285,12 @@ export const fetchInspirationData = async ({
     ],
   }
 
-  // Hero
+  // Hero - use ctaButton from Sanity if set, else fallback to default
+  const sanityCta = data.ctaButton?.label && data.ctaButton?.url
+  const defaultCtaUrl = data._id
+    ? `${getFreeTrialCheckoutUrl('standardMonthly')}?lp_template_data=${getKindQueryParam((kind === TemplateKind.Leadpage ? 'LeadpageTemplate' : 'SiteTemplate') as any)}-${data._id}`
+    : getFreeTrialCheckoutUrl('standardMonthly')
+
   const hero = [
     {
       _key: 'heroInspiration',
@@ -293,12 +298,12 @@ export const fetchInspirationData = async ({
       breadcrumbs,
       heading: data.title || 'Template',
       deviceIcons: true,
-      ctaButton: {
-        label: 'Use for Free',
-        url: data._id
-          ? `${getFreeTrialCheckoutUrl('standardMonthly')}?lp_template_data=${getKindQueryParam((kind === TemplateKind.Leadpage ? 'LeadpageTemplate' : 'SiteTemplate') as any)}-${data._id}`
-          : getFreeTrialCheckoutUrl('standardMonthly'),
-      },
+      ctaButton: sanityCta
+        ? { label: data.ctaButton.label, url: data.ctaButton.url }
+        : { label: 'Use for Free', url: defaultCtaUrl },
+      templateCode: data.templateCode && Array.isArray(data.templateCode)
+        ? blocksToText(data.templateCode)
+        : null,
     },
   ]
 

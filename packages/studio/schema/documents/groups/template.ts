@@ -103,6 +103,30 @@ const content = G.group('content', [
       return true // Hide if valid Mandrel ID
     },
   }),
+  F.object({
+    name: 'ctaButton',
+    title: 'CTA Button',
+    description: 'Button shown next to the template preview (e.g. "Use for Free"). Overrides the default if set.',
+    hidden: ({document}) => !document || document?._type === 'templateSettings',
+    fields: [
+      F.string({
+        name: 'label',
+        title: 'Label',
+        description: 'Button text (e.g. "Use for Free")',
+      }),
+      F.string({
+        name: 'url',
+        title: 'URL',
+        description: 'Link destination (e.g. checkout URL)',
+      }),
+    ],
+  }),
+  F.field('blockContentBare', {
+    name: 'templateCode',
+    title: 'Template Code',
+    description: 'Code/structure of the template to copy into the builder. Used by the "Copy Template" button. Rich text supports more content than a plain text area.',
+    hidden: ({document}) => !document || document?._type === 'templateSettings',
+  }),
 ])
 
 const details = G.group('details', [
