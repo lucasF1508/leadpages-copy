@@ -93,7 +93,12 @@ export const templateGalleryStore = create<TemplateGalleryStore>(
     getTemplatePreviewUrl: (kind: TemplateKind, slug: string, _id: string) =>
       `/${get().getKindSlug(kind)}/preview/${slug || _id}`,
     getTemplateUrl: ({ kind, slug: _slug, template, _meta }) => {
-      const slug = _slug || kebabCase(template?.name)
+      const slug =
+        _slug ||
+        template?.slug?.current ||
+        (typeof template?.slug === 'string' ? template.slug : null) ||
+        _meta?.slug ||
+        kebabCase(template?.name)
 
       if (!slug) {
         return ''

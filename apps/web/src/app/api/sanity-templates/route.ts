@@ -188,6 +188,7 @@ export async function POST(request: NextRequest) {
           name: template.title || 'Untitled Template',
           heading: template.heading || '',
           description: description || '',
+          slug: template.slug,
           thumbnailUrlWebp,
           thumbnailAspect,
           previewUrl: previewUrl || `/templates/preview/${template.slug?.current || ''}`,

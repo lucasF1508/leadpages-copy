@@ -144,7 +144,7 @@ const HeroInspiration = ({
           <span
             role="status"
             aria-live="polite"
-            className="link link-button-solid-copied pointer-events-none inline-flex items-center justify-center"
+            className="link link-text cursor-default"
           >
             Template copied
           </span>
@@ -152,7 +152,7 @@ const HeroInspiration = ({
           <button
             type="button"
             onClick={handleCopyTemplate}
-            className="link link-button-solid"
+            className="link link-text cursor-pointer bg-transparent border-none p-0 font-inherit"
             aria-label="Copy template link"
           >
             Copy Template

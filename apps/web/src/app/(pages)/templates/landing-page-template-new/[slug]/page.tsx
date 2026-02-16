@@ -71,9 +71,9 @@ export default async function Page({
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Template no encontrado</h1>
-          <p className="text-gray-600 mb-2">No se encontró un template con el slug: <code className="bg-gray-100 px-2 py-1 rounded">{slug}</code></p>
-          <p className="text-sm text-gray-500">Verifica que el template esté publicado en Sanity CMS.</p>
+          <h1 className="text-2xl font-bold mb-4">Template not found</h1>
+          <p className="text-gray-600 mb-2">No template was found with the slug: <code className="bg-gray-100 px-2 py-1 rounded">{slug}</code></p>
+          <p className="text-sm text-gray-500">Verify that the template is published in Sanity CMS.</p>
         </div>
       </div>
     )

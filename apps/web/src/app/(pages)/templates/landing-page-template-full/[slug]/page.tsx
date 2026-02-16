@@ -66,8 +66,8 @@ export default async function Page({
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Template no encontrado</h1>
-          <p className="text-gray-600">No se encontró un previewUrl para este template.</p>
+          <h1 className="text-2xl font-bold mb-4">Template not found</h1>
+          <p className="text-gray-600">No previewUrl was found for this template.</p>
         </div>
       </div>
     )
