@@ -30,6 +30,10 @@ const RackComponentList = {
     dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
     { pinion: false },
   ],
+  blogSection: [
+    dynamic(() => import('@/components/BlogSection/BlogSection')),
+    { pinion: false },
+  ],
   brand: [dynamic(() => import('@/components/Brand')), { pinion: false }],
   cardClickable: dynamic(() => import('@/components/CardClickable')),
   cardsBlock: dynamic(() => import('@/components/Cards')),
