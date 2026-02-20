@@ -43,7 +43,7 @@ const TemplateGalleryLegacyBanner = ({ className }: TemplateGalleryLegacyBannerP
         {/* Desktop: Single line with all content */}
         <div className="hidden md:flex flex-row items-center justify-center gap-4">
           <h3 className="text-white text-[22px] lg:text-[24px] font-normal text-left leading-tight whitespace-nowrap">
-            Need templates for Classic Builder Templates?
+            Need templates for Classic Builder?
           </h3>
           <span>
             <span className="text-white/80 text-[15px] font-medium mr-2">
