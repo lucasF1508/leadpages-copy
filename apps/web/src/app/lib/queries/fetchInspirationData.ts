@@ -315,11 +315,15 @@ export const fetchInspirationData = async ({
       _type: 'inspirationPreview' as const,
       previewUrl: data.previewUrl,
     }] : []),
-    // Description
+    // Description - uses Text from What's Included (landingPage/site), with fallbacks
     {
       _key: 'inspirationDescription',
       _type: 'inspirationDescription' as const,
-      content: data.content?.description || data.details?.content,
+      content:
+        data.included?.landingPage?.text ||
+        data.included?.site?.text ||
+        data.content?.description ||
+        data.details?.content,
     },
     // Details - Use includedItems from Sanity if available, otherwise use defaults
     {

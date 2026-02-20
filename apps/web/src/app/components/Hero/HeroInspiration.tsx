@@ -140,7 +140,8 @@ const HeroInspiration = ({
             {ctaButton.label}
           </Link>
         )}
-        {copied ? (
+        {/* Copy Template - oculto temporalmente, se usará más adelante */}
+        {false && (copied ? (
           <span
             role="status"
             aria-live="polite"
@@ -157,7 +158,7 @@ const HeroInspiration = ({
           >
             Copy Template
           </button>
-        )}
+        ))}
       </div>
     </div>
   </Pinion>
