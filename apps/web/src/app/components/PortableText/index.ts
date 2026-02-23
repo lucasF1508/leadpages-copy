@@ -1,9 +1,14 @@
-import type { PortableTextProps } from './PortableText'
+import type { BlockStylesType, PortableTextProps } from './PortableText'
 import PortableText, {
   defaultBlockStyles,
   defaultLargeBlockStyles,
+  mediaWithItemsSwitchBlockStyles,
 } from './PortableText'
 
-export type { PortableTextProps }
+export type { BlockStylesType, PortableTextProps }
 export default PortableText
-export { defaultBlockStyles, defaultLargeBlockStyles }
+export {
+  defaultBlockStyles,
+  defaultLargeBlockStyles,
+  mediaWithItemsSwitchBlockStyles,
+}

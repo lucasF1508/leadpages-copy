@@ -1,23 +1,28 @@
-import type { HeroHomeProps } from './HeroHome'
 import type { HeroPricingProps } from './HeroPricing/HeroPricing'
 import type { HeroWithMediaProps } from './HeroWithMedia'
 import HeroBanner from './HeroBanner'
 import HeroBase from './HeroBase'
 import HeroBlog from './HeroBlog'
 import HeroComparisons from './HeroComparisons'
-import HeroHome from './HeroHome'
-import HeroHomeNew from './HeroHome/HeroHomeNew'
-import { HeroHomeNewProps } from './HeroHome'
-import HeroInspiration from './HeroInspiration'
+import HeroHome, { HeroHomeNew, type HeroHomeNewProps, type HeroHomeProps } from './HeroHome'
+import HeroInspiration, { type HeroInspirationProps } from './HeroInspiration'
+import HeroPageAnalyzer from './HeroPageAnalyzer'
+import HeroPlatformPage, { type HeroPlatformPageProps } from './HeroPlatformPage'
 import HeroPricing from './HeroPricing'
 import HeroSimple from './HeroSimple'
 import HeroTemplate from './HeroTemplate'
 import HeroTextWithMarquee from './HeroTextWithMarquee'
 import HeroWithMedia from './HeroWithMedia'
-import HeroPageAnalyzer from './HeroPageAnalyzer'
 
 interface HeroProps {
-  hero: (HeroHomeProps | HeroPricingProps | HeroWithMediaProps | HeroHomeNewProps) & any[]
+  hero: (
+    | HeroHomeNewProps
+    | HeroHomeProps
+    | HeroInspirationProps
+    | HeroPlatformPageProps
+    | HeroPricingProps
+    | HeroWithMediaProps
+  ) & any[]
 }
 
 // TODO Expand as more Hero types are added.
@@ -50,6 +55,8 @@ const Hero = ({ hero }: HeroProps) => {
       return <HeroTextWithMarquee {...heroProps} />
     case 'heroPageAnalyzer':
       return <HeroPageAnalyzer {...heroProps} />
+    case 'heroPlatformPage':
+      return <HeroPlatformPage {...heroProps} />
     default:
       return <HeroWithMedia {...heroProps} />
   }

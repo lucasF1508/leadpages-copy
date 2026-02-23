@@ -2,6 +2,7 @@ import type { MediaType } from '@types'
 import React from 'react'
 import clsx from 'clsx'
 import HeroMedia from '@/components/Hero/HeroMedia'
+import Media from '@/components/Media'
 import Text from '@/components/Text'
 
 export interface HeroHomeNewProps {
@@ -22,6 +23,7 @@ export default function HeroHomeNew({
   theme = 'dark',
 }: HeroHomeNewProps) {
   const isDark = theme === 'dark'
+  const isVideo = media?.condition === 'video'
 
   const primaryBtn = isDark
     ? 'bg-white text-black hover:bg-white/90'
@@ -110,25 +112,43 @@ export default function HeroHomeNew({
 
               {/* RIGHT */}
               {media ? (
-                <div className="relative z-0 flex w-full items-center justify-center lg:justify-end order-1 lg:order-2">
-                  {/* fondo falso que extiende el blanco del card */}
-                  {!isDark && (
+                <div
+                  className={clsx(
+                    'relative z-0 flex w-full items-center justify-center order-1 lg:order-2',
+                    !isVideo && 'lg:justify-end'
+                  )}
+                >
+                  {!isDark && !isVideo && (
                     <div className="pointer-events-none absolute inset-x-0 -bottom-20 sm:-bottom-40 h-20 sm:h-40 bg-white" />
                   )}
 
-                  <div className="relative w-full max-w-[1040px] h-[200px] sm:h-[260px] md:h-[320px] lg:h-[560px] translate-y-0 sm:translate-y-[12px] lg:translate-y-[18px] overflow-hidden sm:overflow-visible">
-                    <HeroMedia
-                      classNames={{
-                        media:
-                          'w-full h-full [&_img]:w-full [&_img]:h-full [&_img]:!object-contain [&_img]:!object-center [&_img]:bg-transparent ' +
-                          '[&_img]:scale-[1.0] sm:[&_img]:scale-[1.07] lg:[&_img]:scale-[1.07] [&_img]:filter',
-                        root: 'w-full h-full overflow-visible bg-transparent',
-                      }}
-                      limitlessImage
-                      media={media}
-                      overflow={false}
-                    />
-                  </div>
+                  {isVideo ? (
+                    <div className="relative w-full flex items-center justify-center">
+                      <div className="w-full bg-gradient-to-b from-[#2e3139] to-[#22252b] rounded-[20px] md:rounded-[32px] p-[6px] md:p-[10px] shadow-[0_25px_80px_rgba(0,0,0,0.5)]">
+                        <div className="relative rounded-[16px] md:rounded-[26px] overflow-hidden">
+                          <Media
+                            media={media}
+                            priority
+                            sizes="(max-width: 900px) 100vw, 55vw"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative w-full max-w-[1040px] h-[200px] sm:h-[260px] md:h-[320px] lg:h-[560px] translate-y-0 sm:translate-y-[12px] lg:translate-y-[18px] overflow-hidden sm:overflow-visible">
+                      <HeroMedia
+                        classNames={{
+                          media:
+                            'w-full h-full [&_img]:w-full [&_img]:h-full [&_img]:!object-contain [&_img]:!object-center [&_img]:bg-transparent ' +
+                            '[&_img]:scale-[1.0] sm:[&_img]:scale-[1.07] lg:[&_img]:scale-[1.07] [&_img]:filter',
+                          root: 'w-full h-full overflow-visible bg-transparent',
+                        }}
+                        limitlessImage
+                        media={media}
+                        overflow={false}
+                      />
+                    </div>
+                  )}
                 </div>
               ) : null}
             </div>

@@ -188,6 +188,9 @@ export default withConfig(
       fields: [F.string({name: 'lqip', hidden: true})],
     },
     media: {
+      args: {
+        caption: false,
+      },
       conditions: {
         lottie: [],
         wistia: [],

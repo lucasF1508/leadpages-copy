@@ -9,7 +9,7 @@ import clsx from 'clsx'
 import { motion } from 'motion/react'
 import ReactPlayer from 'react-player/lazy'
 import Image from '@/components/Image'
-import { hasVideo } from './utils'
+import { getFileVideoInfo, hasVideo } from './utils'
 
 export interface VideoProps extends Partial<ReactPlayerProps> {
   callBack?: any
@@ -28,15 +28,19 @@ export interface VideoProps extends Partial<ReactPlayerProps> {
   playing?: boolean
   playsinline?: boolean
   video?: {
-    condition: string // TODO Extend Video to accept all formats in Leadpages.
+    condition?: string
     controls?: boolean
+    file?: {
+      asset?: {
+        _ref?: string
+        _type?: string
+      }
+    }
     height?: number
     thumbnail?: ImageType | undefined
     url?: string
     width?: number
   }
-  // videoRef passed as a regular prop to avoid issues with ReactPlayer
-  // https://github.com/cookpete/react-player/issues/1455
   videoRef?: React.RefObject<ReactPlayer>
   volume?: number
 }
@@ -75,13 +79,50 @@ const Video = ({
   videoRef,
   volume,
 }: VideoProps) => {
-  if (!hasVideo(video)) return null
   const [isReady, setIsReady] = useState(false)
   const [inViewRef, inView] = useInView({
     ...inViewProps,
     triggerOnce: true,
   })
 
+  if (!hasVideo(video)) return null
+
+  const fileInfo = getFileVideoInfo(video)
+
+  if (fileInfo) {
+    return (
+      <div
+        className={clsx(
+          'block w-full',
+          fill ? 'absolute left-0 top-0 h-full' : 'relative',
+          className,
+          classNames?.root
+        )}
+      >
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+        <video
+          autoPlay
+          className={clsx(
+            fill
+              ? 'absolute left-0 top-0 h-full w-full object-cover'
+              : 'w-full h-auto object-cover',
+            classNames?.player
+          )}
+          loop={loop}
+          muted={muted}
+          playsInline={playsinline}
+          preload="auto"
+        >
+          <source
+            src={fileInfo.url}
+            type={fileInfo.mimeType}
+          />
+        </video>
+      </div>
+    )
+  }
+
+  // Legacy URL-based video (ReactPlayer)
   const { height = 9, thumbnail, url, width = 16 } = video || {}
   const controls =
     typeof video?.controls !== 'undefined' ? video?.controls : _controls
@@ -98,8 +139,8 @@ const Video = ({
   return (
     <div
       className={clsx(
-        'bg-surface-shadow relative block w-full',
-        fill && 'absolute left-0 top-0 h-full',
+        'bg-surface-shadow block w-full',
+        fill ? 'absolute left-0 top-0 h-full' : 'relative',
         className,
         classNames?.root
       )}

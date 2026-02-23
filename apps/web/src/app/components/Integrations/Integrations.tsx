@@ -7,12 +7,12 @@ import React from 'react'
 import clsx from 'clsx'
 import Heading from '@/components/Heading'
 import Image from '@/components/Image'
-import Link from '@/components/Link'
 
 export interface IntegrationsProps {
   cta?: LinkType[]
   heading?: PortableTextBlock[] | string
   image?: SanityImageProps
+  label?: string
   overline?: string
   subheading?: PortableTextBlock[] | string
 }
@@ -21,6 +21,7 @@ const Integrations = ({
   cta,
   heading,
   image,
+  label,
   overline,
   subheading,
 }: IntegrationsProps) => {
@@ -32,24 +33,25 @@ const Integrations = ({
     <section className="flex flex-col items-center w-full mb-8 md:mb-12 lg:mb-16">
       {/* Content Container - Full Width */}
       <div className="w-full mt-12">
-        <div 
+        <div
           className={clsx(
-            'rounded-xl p-4 sm:p-5 md:p-6 lg:p-8',
+            'rounded-xl',
             'bg-white/10 backdrop-blur-[20px]',
             'border border-[#524F5F]/20',
             'mx-auto',
-            'max-w-[80vw] md:max-w-[70vw] lg:max-w-[65vw]',
+            'max-w-[calc(100vw-32px)] sm:max-w-[calc(100vw-80px)] lg:max-w-[calc(100vw-160px)]',
             'will-change-auto',
-            'overflow-hidden'
+            'overflow-hidden',
+            'py-8 md:py-10 lg:py-12'
           )}
-          style={{ 
+          style={{
             backfaceVisibility: 'hidden',
             transform: 'translateZ(0)',
             ...({ WebkitBackfaceVisibility: 'hidden' } as React.CSSProperties)
           }}
         >
           {/* Content Section */}
-          <div className="flex flex-col items-center gap-1.5 md:gap-2 text-center">
+          <div className="flex flex-col items-center gap-1.5 md:gap-2 text-center px-4 sm:px-8 md:px-12 lg:px-20">
             {/* Overline - Roc Grotesk 500, xs, letter-spacing 16%, uppercase */}
             {overline && (
               <p 
@@ -132,38 +134,59 @@ const Integrations = ({
               </div>
             )}
 
+            {/* Label */}
+            {label && (
+              <p
+                className="text-base sm:text-lg text-white font-medium text-center mt-4 mb-2"
+                style={{
+                  fontFamily: 'var(--font-inter, sans-serif)',
+                  fontWeight: 500,
+                  letterSpacing: '0px'
+                }}
+              >
+                {label}
+              </p>
+            )}
+
             {/* CTA Button */}
             {cta && cta[0] && (
-              <div className="mt-0.5">
-                <Link
-                  {...cta[0]}
-                  condition={cta[0].condition || 'external'}
-                  hasIcon={true}
-                  linkStyle="button-solid"
-                  url={cta[0].url || ''}
+              <div className="mt-4">
+                <a
+                  className="inline-flex items-center gap-2 group"
+                  href={cta[0].url || '#'}
                 >
-                  {cta[0].label || 'Integrations'}
-                </Link>
+                  <span className="text-white text-[16px] font-medium">
+                    {cta[0].label || 'Integrations'}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="flex items-center justify-center w-6 h-6 rounded-md bg-[#d4ff00] text-[#1a1d24] text-lg transition-colors group-hover:bg-[#c8f000]"
+                  >
+                    →
+                  </span>
+                </a>
               </div>
             )}
           </div>
 
-          {/* Integration Logos Image - Sobrepasa por abajo, izquierda y derecha */}
+          {/* Integration Logos Image - Centered, full width */}
           {image && (
-            <div 
-              className="w-[calc(100%+4rem)] sm:w-[calc(100%+5rem)] md:w-[calc(100%+6rem)] lg:w-[calc(100%+8rem)] mt-4 md:mt-6 -mb-6 sm:-mb-8 md:-mb-10 lg:-mb-12 -ml-4 sm:-ml-5 md:-ml-6 lg:-ml-8 -mr-4 sm:-mr-5 md:-mr-6 lg:-mr-8" 
-              style={{ isolation: 'isolate' }}
+            <div
+              className="hidden md:block relative w-full mt-6 md:mt-8 -mb-8 md:-mb-10 lg:-mb-12"
+              style={{
+                isolation: 'isolate',
+                aspectRatio: '1396 / 316'
+              }}
             >
-              <div className="relative w-full">
-                <Image
-                  className="w-full h-auto !object-contain"
-                  image={image}
-                  sizes="(max-width: 768px) 100vw, 1200px"
-                  style={{ 
-                    imageRendering: 'crisp-edges'
-                  }}
-                />
-              </div>
+              <Image
+                className="!object-contain"
+                fill
+                image={image}
+                sizes="100vw"
+                style={{
+                  imageRendering: 'crisp-edges'
+                }}
+              />
             </div>
           )}
         </div>

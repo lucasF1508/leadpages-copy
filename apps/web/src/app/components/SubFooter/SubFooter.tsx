@@ -33,9 +33,9 @@ const SubFooter = ({
   const hasLegacyCta = ctaHref && ctaLabel
 
   return (
-    <div className={clsx('relative isolate', className)}>
+    <div className={clsx('relative isolate -mt-8 md:-mt-12', className)}>
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden">
-        <div className="relative flex items-center justify-center min-h-[18.625rem] md:min-h-[30rem]">
+        <div className="relative flex items-start justify-center min-h-[18.625rem] md:min-h-[30rem] pt-4 md:pt-6">
           <SubFooterGradient className="absolute bottom-0 inset-x-0 h-[120%] w-full opacity-95 translate-y-6 md:translate-y-0" />
           <div
             aria-hidden="true"

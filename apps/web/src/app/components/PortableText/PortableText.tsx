@@ -83,6 +83,7 @@ export const defaultLargeBlockStyles: BlockStylesType = {
   h6: { className: 'type-h4 md:type-h3', tag: 'h6' },
 }
 
+
 export const defaultBlockStyles: BlockStylesType = {
   'h1-home': { className: 'type-title-t1', tag: 'h1' },
   'h1-hero': {
@@ -126,7 +127,30 @@ export const defaultBlockStyles: BlockStylesType = {
   blockquote: { className: 'type-quote-xs sm:type-quote-sm', tag: 'p' },
 }
 
+/** Figma specs for MediaWithItemsSwitch items: Uxum 40px/48px headings, Inter 20px body */
+const figmaHeadingClass =
+  'text-[40px] leading-[48px] font-normal text-black [font-family:var(--font-uxumvf,sans-serif)]'
+const figmaBodyClass =
+  'text-[20px] leading-[1.5] font-normal text-black mb-3 last:mb-0'
+export const mediaWithItemsSwitchBlockStyles: BlockStylesType = {
+  ...defaultBlockStyles,
+  h1: { className: figmaHeadingClass, tag: 'h2' },
+  h2: { className: figmaHeadingClass, tag: 'h2' },
+  h3: { className: figmaHeadingClass, tag: 'h3' },
+  h4: { className: figmaHeadingClass, tag: 'h4' },
+  h5: { className: figmaHeadingClass, tag: 'h5' },
+  h6: { className: figmaHeadingClass, tag: 'h6' },
+  'h1-hero': { className: figmaHeadingClass, tag: 'h2' },
+  'h2-hero': { className: figmaHeadingClass, tag: 'h2' },
+  'h3-hero': { className: figmaHeadingClass, tag: 'h3' },
+  'h4-hero': { className: figmaHeadingClass, tag: 'h4' },
+  large: { className: figmaBodyClass, tag: 'p' },
+  normal: { className: figmaBodyClass, tag: 'p' },
+  small: { className: figmaBodyClass, tag: 'p' },
+}
+
 export const colorMarks = {
+  black: 'text-gray-900',
   highlight: 'text-theme',
   primary: 'text-brand-primary',
   secondary: 'text-brand-secondary',

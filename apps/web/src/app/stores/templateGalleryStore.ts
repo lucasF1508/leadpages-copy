@@ -20,15 +20,15 @@ export interface TemplateGalleryStore {
     _id: string
   ) => string
   getTemplateUrl: ({
+    _meta,
     kind,
     slug,
     template,
-    _meta,
   }: {
+    _meta?: any
     kind: TemplateKind
     slug?: string
     template: any
-    _meta?: any
   }) => string
   joinQueryParams: (params: Record<string, string | undefined>) => string
   legacyCustomTemplateIds: string[]
@@ -73,7 +73,7 @@ export const templateGalleryStore = create<TemplateGalleryStore>(
     getKindSlug: (kind) =>
       kind === 'SiteTemplate' ? 'website-templates' : 'templates',
     getKindSlugSecondary: (kind) =>
-      kind === 'SiteTemplate' ? 'website-template' : get().templateRouteSegment,
+      kind === 'SiteTemplate' ? 'website-template' : 'landing-page-template-new',
     getKindTitle: (kind) =>
       kind === 'SiteTemplate' ? 'Website' : 'Landing Page',
     getQueryParams: (queryString) => {

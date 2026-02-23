@@ -16,17 +16,29 @@ export const templateMarketplaceFooterCTA = F.object({
       F.text({name: 'subheading'}),
     ]),
     ...G.group('actions', [
-      F.string({name: 'ctaLabel'}),
-      F.url({name: 'ctaHref'}),
-      F.dropdown(['_self', '_blank'], {name: 'target'}),
+      F.string({
+        name: 'inputPlaceholder',
+        title: 'Input Placeholder',
+        description: 'Placeholder text for the email input (e.g., Sample@gmail.com)',
+      }),
+      F.string({
+        name: 'buttonText',
+        title: 'Button Text',
+        description: 'Text for the submit button (e.g., Submit Email)',
+      }),
+      F.string({
+        name: 'buttonHref',
+        title: 'Button URL',
+        description: 'URL or path where the button will redirect when clicked (e.g., /signup or https://example.com)',
+      }),
     ]),
   ],
   preview: {
-    select: {label: 'label', ctaLabel: 'ctaLabel'},
-    prepare({label = '', ctaLabel = ''}) {
+    select: {label: 'label', buttonText: 'buttonText'},
+    prepare({label = '', buttonText = ''}) {
       return {
         title: 'Template Marketplace Footer CTA',
-        subtitle: label || ctaLabel,
+        subtitle: label || buttonText,
         media: icon,
       }
     },

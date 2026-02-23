@@ -14,7 +14,6 @@ import { TemplateKind } from '@/types/template-constants'
 import TemplateGalleryCards, {
   TemplateGalleryCardsLoading,
 } from './TemplateGalleryCards'
-import TemplateGalleryLegacyBanner from './TemplateGalleryLegacyBanner'
 import TemplateGalleryNoResults from './TemplateGalleryNoResults'
 import TemplateGallerySearch from './TemplateGallerySearch'
 import TemplateGallerySidebar, {
@@ -116,7 +115,6 @@ const TemplateGalleryStudio = ({
     generateQueryStringFromPath,
     legacyTemplateFilter,
     onUpdateQueryString,
-    setTemplateRouteSegment,
     tracker,
   } = templateGalleryStore(
     useShallow((state) => ({
@@ -124,7 +122,6 @@ const TemplateGalleryStudio = ({
       generateQueryStringFromPath: state.generateQueryStringFromPath,
       legacyTemplateFilter: state.legacyTemplateFilter,
       onUpdateQueryString: state.onUpdateQueryString,
-      setTemplateRouteSegment: state.setTemplateRouteSegment,
       tracker: state.tracker,
     }))
   )
@@ -133,10 +130,6 @@ const TemplateGalleryStudio = ({
     usePathname()!,
     useSearchParams()!
   )
-
-  useEffect(() => {
-    setTemplateRouteSegment('landing-page-template-new')
-  }, [setTemplateRouteSegment])
 
   const [pageState, pageActions] = useTemplateState({
     baseFilters,
@@ -231,12 +224,12 @@ const TemplateGalleryStudio = ({
   // New marketing layout for landing page templates
   if (kind === TemplateKind.Leadpage) {
     return (
-      <div className="bg-transparent">
+      <div className="bg-transparent pb-16">
         <section
           className="relative z-content"
           id="template-gallery"
         >
-          <div className="px-4 md:px-8 lg:px-10 xl:px-12 pt-8 md:pt-10 pb-6 md:pb-10">
+          <div className="px-4 md:px-8 lg:px-10 xl:px-12 pt-8 md:pt-10 pb-10 md:pb-14">
             <div className="max-w-[110rem] mx-auto w-full">
               {galleryComponentsShowcase?.switch === 1 && <TemplateSwitch
                 activeFilter={activeFilter}
@@ -327,8 +320,6 @@ const TemplateGalleryStudio = ({
               )}
             </div>
           </div>
-
-          <TemplateGalleryLegacyBanner/>
         </section>
       </div>
     )

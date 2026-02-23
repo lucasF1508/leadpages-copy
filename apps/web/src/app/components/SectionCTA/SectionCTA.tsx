@@ -97,7 +97,7 @@ export default function SectionCTA({
   }, [safeCtas, verifoneUrl, loading])
 
   return (
-    <section className={clsx('relative isolate mt-12 md:mt-16', className)}>
+    <section className={clsx('relative isolate mt-6 md:mt-8', className)}>
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden">
         <div
           className={clsx(

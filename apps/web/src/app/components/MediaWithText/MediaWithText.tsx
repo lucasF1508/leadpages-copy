@@ -1,4 +1,5 @@
 import type { ContentType, LinkType, MediaType } from '@types'
+import type { BlockStylesType } from '@/components/PortableText'
 import type { ClassValue } from 'clsx'
 import React from 'react'
 import clsx from 'clsx'
@@ -10,18 +11,29 @@ import { Links, hasLinks } from '../Link'
 export type MediaWithTextType = {
   _key: string
   alignContent?: 'left' | 'right'
+  blockStyles?: BlockStylesType
   className?: ClassValue
   content?: ContentType
   links?: LinkType[]
+  linkButtonVariant?: 'default' | 'green' | null
   media: MediaType
   pillContent?: string
 }
 
+const linkButtonVariantClasses = {
+  default:
+    '[&_.link-button-solid]:!bg-[#7E4AFF] [&_.link-button-solid]:!text-white [&_.link-button-solid]:!border-[#7E4AFF] [&_.link-button-solid_.link-label]:!text-white [&_.link-button-solid_.link-icon]:!text-white [&_.link-button-solid_.link-icon_svg]:!stroke-white [&_.link-button-solid:hover]:!bg-[#9061EE] [&_.link-button-solid:hover_.link-label]:!text-white [&_.link-button-solid:hover_.link-icon]:!text-white [&_.link-button-solid:hover_.link-icon_svg]:!stroke-white',
+  green:
+    '[&_.link-button-solid]:!bg-green-500 [&_.link-button-solid]:!text-black [&_.link-button-solid]:!border-green-500 [&_.link-button-solid_.link-label]:!text-black [&_.link-button-solid_.link-icon]:!stroke-black [&_.link-button-solid:hover]:!bg-green-600 [&_.link-button-solid:hover_.link-label]:!text-black [&_.link-button-solid:hover_.link-icon]:!stroke-black',
+}
+
 const MediaWithText = ({
   alignContent,
+  blockStyles = defaultLargeBlockStyles,
   className,
   content,
   links,
+  linkButtonVariant,
   media,
   pillContent,
 }: MediaWithTextType) => (
@@ -52,7 +64,7 @@ const MediaWithText = ({
         {content && (
           <Text
             as="div"
-            blockStyles={defaultLargeBlockStyles}
+            blockStyles={blockStyles}
             className="[&>*]:max-md:!mb-2"
             classNames={{
               large: 'max-md:!mt-2',
@@ -64,7 +76,10 @@ const MediaWithText = ({
         )}
         {hasLinks(links) && (
           <Links
-            className="mt-2 gap-2 flex flex-row justify-start"
+            className={clsx(
+              'mt-2 gap-2 flex flex-row justify-start',
+              linkButtonVariant && linkButtonVariantClasses[linkButtonVariant]
+            )}
             links={links}
           />
         )}

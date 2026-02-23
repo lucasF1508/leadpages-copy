@@ -16,6 +16,12 @@ export const mediaWithItems = F.field('object', {
         description: 'Choose between dark (default) or light theme',
         initialValue: 'dark',
       }),
+      F.radio([{title: 'Cover Component', value: 'cover'}, {title: 'Do not cover', value: 'noCover'}], {
+        name: 'videoDisplay',
+        title: 'Video Display Mode',
+        description: 'Cover Component: video fills the container. Do Not Cover: video keeps its natural aspect ratio with visible border.',
+        initialValue: 'noCover',
+      }),
       F.array({
         name: 'mediaItems',
         title: 'Media',

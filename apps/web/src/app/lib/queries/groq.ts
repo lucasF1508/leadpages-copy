@@ -223,6 +223,47 @@ export const componentQueries = `
       }
     }
   },
+  _type == 'mediaWithItemsSwitch' => {
+    ...,
+    label,
+    title,
+    linkButtonVariant,
+    content[] {
+      ...
+    },
+    sections[] {
+      ...,
+      tabLabel,
+      items[] {
+        ...,
+        _key,
+        pillContent,
+        alignContent,
+        content[] {
+          ...
+        },
+        media {
+          ...,
+          image {
+            ...,
+            asset-> {
+              _id,
+              _type,
+              url,
+              metadata { dimensions { width, height, aspectRatio }, lqip }
+            },
+            altText,
+            hotspot,
+            crop
+          }
+        },
+        links[] {
+          ...,
+          internal-> { _id, _type, "slug": slug.current, "path": path }
+        }
+      }
+    }
+  },
 `
 
 export const componentsQuery = `

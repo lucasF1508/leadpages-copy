@@ -72,7 +72,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={`${inter.variable} ${uxumVF.variable} ${rocGrotesk.variable} theme-dark font-sans text-body`}>
         <RedbrickStructuredDataScript />
         <Header navigation={navigation} websiteBanner={websiteBanner} />
-        <main>{children}</main>
+        <main className={isDraftMode ? 'pb-24' : ''}>{children}</main>
         <Analytics />
         <SpeedInsights />
         <Footer footerData={footerData} />

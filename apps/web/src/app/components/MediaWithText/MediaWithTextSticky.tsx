@@ -1,20 +1,24 @@
 'use client'
 
-import type { MediaWithTextType } from './MediaWithText';
+import type { BlockStylesType } from '@/components/PortableText'
+import type { MediaWithTextType } from './MediaWithText'
 import type { ClassValue } from 'clsx'
 import React from 'react'
 import clsx from 'clsx'
 import { create } from 'zustand'
 import MediaWithText from './MediaWithText'
+
 interface MediaWithTextStickyProps
   extends Omit<React.ComponentProps<'div'>, 'className' | 'content'> {
   align?: 'left' | 'right'
+  blockStyles?: BlockStylesType
   className?: ClassValue
   classNames?: {
     item?: ClassValue
     root?: ClassValue
   }
-  items:MediaWithTextType[]
+  items: MediaWithTextType[]
+  linkButtonVariant?: 'default' | 'green' | null
 }
 
 interface MediaWithTextStore {
@@ -32,18 +36,22 @@ export const useMediaWithTextStore = create<MediaWithTextStore>((set) => ({
 }))
 
 const MediaWithTextSticky = ({
+  blockStyles,
   className,
   classNames,
   items,
+  linkButtonVariant,
 }: MediaWithTextStickyProps) => (
       <div className={clsx('flex flex-col gap-12 relative', className, classNames?.root)}>
         {
-          items.map(({_key, ...item}) => (
-            <MediaWithText 
+          items.map(({_key, blockStyles: itemBlockStyles, ...item}) => (
+            <MediaWithText
               _key={_key}
               key={_key}
-              {...item} 
-            />  
+              blockStyles={itemBlockStyles ?? blockStyles}
+              linkButtonVariant={linkButtonVariant}
+              {...item}
+            />
           ))
         }
       </div>

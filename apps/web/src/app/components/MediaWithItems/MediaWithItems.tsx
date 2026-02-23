@@ -40,6 +40,7 @@ export interface MediaWithItemsProps
   links?: LinkType[]
   mediaItems?: MediaType[]
   variant?: 'dark' | 'light'
+  videoDisplay?: 'cover' | 'noCover'
 }
 
 export interface MediaWithItemsType {
@@ -78,7 +79,8 @@ const MediaWithItems = ({
   items,
   mediaItems,
   title,
-  variant = 'dark'
+  variant = 'dark',
+  videoDisplay = 'noCover'
 }: MediaWithItemsProps) => {
   const isDesktop = useMediaQuery('(min-width: 900px)')
   const { activeIndex, setActiveIndex } = useMediaWithItemsStore(
@@ -90,6 +92,9 @@ const MediaWithItems = ({
 
   const hasSingleMedia = mediaItems?.length === 1
   const media = hasSingleMedia ? mediaItems[0] : mediaItems?.[activeIndex]
+  const isVideo = media?.condition === 'video'
+  const videoCover = isVideo && videoDisplay === 'cover'
+  const videoNoCover = isVideo && videoDisplay === 'noCover'
 
   useEffect(() => {
     if (activeIndex !== 0) {
@@ -188,17 +193,36 @@ const MediaWithItems = ({
                 <m.div
                   animate={{ opacity: 1 }}
                   className={clsx(
-                    "max-w-tablet-cols7 md:max-w-none mx-auto w-full relative aspect-1 rounded-lg md:rounded-xl overflow-hidden",
-                    isLight && 'bg-white'
+                    "max-w-tablet-cols7 md:max-w-none mx-auto w-full relative",
+                    videoCover
+                      ? 'aspect-1 bg-gradient-to-b from-[#2e3139] to-[#22252b] rounded-[20px] md:rounded-[32px] p-[6px] md:p-[10px] shadow-[0_25px_80px_rgba(0,0,0,0.5)]'
+                      : videoNoCover
+                        ? 'bg-gradient-to-b from-[#2e3139] to-[#22252b] rounded-[20px] md:rounded-[32px] p-[6px] md:p-[10px] shadow-[0_25px_80px_rgba(0,0,0,0.5)]'
+                        : clsx('aspect-1 overflow-hidden rounded-lg md:rounded-xl', isLight && 'bg-white')
                   )}
                   exit={{ opacity: 0 }}
                   initial={{ opacity: 0 }}
                   key={hasSingleMedia ? 'media' : activeIndex}
                 >
+                  {videoCover ? (
+                    <div className="relative w-full h-full rounded-[16px] md:rounded-[26px] overflow-hidden">
+                      <Media
+                        fill
+                        media={media}
+                      />
+                    </div>
+                  ) : videoNoCover ? (
+                    <div className="relative w-full rounded-[16px] md:rounded-[26px] overflow-hidden">
+                      <Media
+                        media={media}
+                      />
+                    </div>
+                  ) : (
                   <Media
                     fill
                     media={media}
                   />
+                  )}
                 </m.div>
               )}
             </AnimatePresence>

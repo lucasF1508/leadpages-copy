@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import clsx from 'clsx'
 import Autoplay from 'embla-carousel-autoplay'
 import { motion as m } from 'motion/react'
-import Heading from '@/components/Heading'
 import Link from '@/components/Link'
 import Text from '@/components/Text'
 import useCarousel from '@/hooks/useCarousel'
@@ -77,7 +76,7 @@ const MediaWithItemsSlider = ({
                   )}
                 >
                   <div>
-                    <Heading className="type-h5" heading={title} />
+                    <span className="type-body-md sm:type-body-lg font-normal block">{title}</span>
                     <Text
                       as="div"
                       className={clsx(

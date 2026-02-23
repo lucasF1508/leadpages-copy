@@ -13,6 +13,11 @@ export const integrationsBlock = F.object({
     }),
     F.field('blockContentHero', {name: 'heading'}),
     F.field('blockContentHero', {name: 'subheading'}),
+    F.string({
+      name: 'label',
+      title: 'Label',
+      description: 'Text between subheading and button (e.g., 90+ integrations. Zero Zapier tax...)',
+    }),
     F.links({
       name: 'cta',
       title: 'Call to Action Button',

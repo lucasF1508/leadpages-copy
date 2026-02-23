@@ -94,6 +94,14 @@
   @apply overflow-hidden;
 }
 
+/* Componentes de inspiration - mismo comportamiento que otros Pinions */
+.pinion-inspirationPreview,
+.pinion-inspirationDescription,
+.pinion-inspirationDetails {
+  .pinion-inner {
+    @apply max-w-base;
+  }
+}
 .pinion-howItWorks {
   .pinion-inner {
     @apply max-w-base;

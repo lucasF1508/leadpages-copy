@@ -36,6 +36,14 @@ export const colorIcon = (color: CSSProperties['backgroundColor']) => (
 )
 
 export const colorDecorators = {
+  black: {
+    title: 'Texto negro',
+    value: 'black',
+    component: ({children}: BlockDecoratorProps) => (
+      <span style={{color: '#111827'}}>{children}</span>
+    ),
+    icon: () => colorIcon('#111827'),
+  },
   primary: {
     title: 'Brand - Primary',
     value: 'primary',

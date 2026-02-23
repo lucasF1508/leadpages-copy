@@ -9,7 +9,6 @@ import type { LoadableComponent } from 'next/dynamic'
 import React, { memo } from 'react'
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
-import Text from '@/components/Text'
 import { removeProps } from '@/lib/utils/removeProps'
 
 export interface MediaProps
@@ -55,7 +54,7 @@ const Media = ({
   sizes,
   ...props
 }: MediaProps) => {
-  const { caption, condition, image, ratio, ...media } = _media || {}
+  const { condition, image, ratio, ...media } = _media || {}
 
   if (!condition || condition === 'none') return null
 
@@ -90,11 +89,6 @@ const Media = ({
         {...elementProps}
         style={ratio ? { aspectRatio: ratio.replace(':', ' / ') } : undefined}
       />
-      {caption && (
-        <figcaption className="left-1/2 top-full flex -translate-x-1/2 flex-col items-center justify-start md:absolute">
-          <Text className={clsx('type-caption')} content={caption} />
-        </figcaption>
-      )}
     </figure>
   )
 }

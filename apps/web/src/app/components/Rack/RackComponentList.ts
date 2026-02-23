@@ -26,6 +26,10 @@ const RackComponentList = {
     dynamic(() => import('@/components/AnalyzerInput')),
     { pinion: false },
   ],
+  bannerCta: [
+    dynamic(() => import('@/components/BannerCta/BannerCta')),
+    { pinion: false },
+  ],
   bestOfBlog: [
     dynamic(() => import('@/components/BlogsCarrousel/BestOfBlog')),
     { pinion: false },
@@ -60,11 +64,23 @@ const RackComponentList = {
     dynamic(() => import('@/components/FAQAccordion/FAQAccordion')),
     { pinion: false },
   ],
+  faqPlatform: [
+    dynamic(() => import('@/components/FAQPlatform/FAQPlatform')),
+    { pinion: false },
+  ],
   faqSimple: [
     dynamic(() => import('@/components/FAQSimple')),
     { pinion: false },
   ],
   featureCards: dynamic(() => import('@/components/FeatureCards')),
+  featureGrid: [
+    dynamic(() => import('@/components/FeatureGrid/FeatureGrid')),
+    { pinion: false },
+  ],
+  featureShowcase: [
+    dynamic(() => import('@/components/FeatureShowcase/FeatureShowcase')),
+    { pinion: false },
+  ],
   featureScroll: [
     dynamic(() => import('@/components/FeatureScroll')),
     { pinion: false },
@@ -84,7 +100,7 @@ const RackComponentList = {
     { pinion: false },
   ],
   integrationsBlock: [
-    dynamic(() => import('../Integrations')),
+    dynamic(() => import('@/components/Integrations')),
     { pinion: false },
   ],
   jobPostings: [
@@ -94,6 +110,10 @@ const RackComponentList = {
   marquee: dynamic(() => import('@/components/Marquee/MarqueeBlock')),
   media: dynamic(() => import('@/components/Media/MediaBlock')),
   mediaWithItems: dynamic(() => import('@/components/MediaWithItems')),
+  mediaWithItemsSwitch: [
+    dynamic(() => import('@/components/MediaWithItemsSwitch/MediaWithItemsSwitch')),
+    { pinion: false },
+  ],
   mediaWithText: dynamic(() => import('@/components/MediaWithText')),
   mediaWithTextSticky: dynamic(
     () => import('@/components/MediaWithText/MediaWithTextSticky')
@@ -114,15 +134,19 @@ const RackComponentList = {
   { pinion: false },
   ],
   prevNextCard: dynamic(() => import('@/components/PrevNextCard/PrevNextCard')),
+  pricingComparison: [
+    dynamic(() => import('@/components/PricingComparison/PricingComparison')),
+    { pinion: false },
+  ],
   privacySecurity: [
     dynamic(() => import('@/components/PrivacySecurity')),
     { pinion: false },
   ],
+
   relatedContent: [
     dynamic(() => import('@/components/RelatedContent')),
     { pinion: false },
   ],
-
   resourceCard: dynamic(() => import('@/components/ResourceCard')),
   resourceCards: dynamic(() => import('@/components/ResourceCards')),
   resourcesGrid: [
@@ -130,8 +154,8 @@ const RackComponentList = {
     { pinion: false },
   ],
   section: [dynamic(() => import('@/components/Section')), { pinion: false }],
-  sectionCTA: dynamic(() => import('@/components/SectionCTA')),
   // Use the new App Router Testimonial block implementation
+  sectionCTA: dynamic(() => import('@/components/SectionCTA')),
   // which lives under app/components/Testimonial and renders
   socialMedia: [
     dynamic(() => import('@/components/SocialMedia')),

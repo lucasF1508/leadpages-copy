@@ -43,7 +43,7 @@ const MediaWithItemsAccordionItem = ({
       <div className={clsx('my-auto flex-[1_1_auto]')}>
         <Primitives.Header
           className={clsx(
-            'type-h2 group flex w-full flex-row items-center justify-between gap-2',
+            'type-body-md sm:type-body-lg font-normal group flex w-full flex-row items-center justify-between gap-2',
             isLight && 'text-[#1a1a1a]'
           )}
         >

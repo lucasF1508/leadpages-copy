@@ -8,10 +8,18 @@ export const video = SANITY_STUDIO_VIMEO_TOKEN
   : F.object({
       icon,
       name: 'video',
-      fields: [F.url()],
+      fields: [
+        {
+          name: 'file',
+          title: 'Video File',
+          type: 'file',
+          description: 'Upload a video file (mp4, webm, mov, etc.)',
+          options: {accept: 'video/*'},
+        },
+      ],
       preview: {
-        select: {title: 'url'},
-        prepare: ({title}) => ({
+        select: {title: 'file.asset.originalFilename'},
+        prepare: ({title}: any) => ({
           title: title || 'Video (empty)',
           media: icon,
         }),

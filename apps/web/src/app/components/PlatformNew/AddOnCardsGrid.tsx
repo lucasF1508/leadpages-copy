@@ -81,24 +81,24 @@ const AddOnCardsGrid = ({ className, items = [] }: AddOnCardsGridProps) => {
 
               {/* title */}
               {card.title && (
-                <h3 className="text-[18px] md:text-[20px] lg:text-[22px] font-semibold leading-[1.2] text-[#2a2a2a]">
+                <h3 className="text-[17px] md:text-[18px] lg:text-[20px] font-semibold leading-[1.15] text-[#2a2a2a]">
                   {card.title}
                 </h3>
               )}
 
               {/* description */}
               {card.description && (
-                <div className="mt-1 md:mt-0">
+                <div className="mt-0.5 md:mt-0">
                   <Text
                     baseStyles={false}
                     blockStyles={{
                       normal: {
                         className:
-                          '!text-[14px] md:!text-[16px] !leading-[1.5] md:!leading-[1.65] !text-[#6b6b6b]',
+                          '!text-[13px] md:!text-[14px] !leading-[1.4] md:!leading-[1.45] !text-[#6b6b6b]',
                         tag: 'p',
                       },
                     }}
-                    className="[&_*]:!text-inherit line-clamp-4"
+                    className="[&_*]:!text-inherit"
                     content={card.description}
                   />
                 </div>
@@ -107,41 +107,41 @@ const AddOnCardsGrid = ({ className, items = [] }: AddOnCardsGridProps) => {
               {/* price block - con flex-grow para mantener al CTA al final */}
               <div className="mt-auto">
                 {card.pricePrefix && (
-                  <div className="text-[13px] md:text-[16px] leading-[1.3] text-[#6b6b6b] mb-2">
+                  <div className="text-[12px] md:text-[14px] leading-[1.3] text-[#6b6b6b] mb-1.5">
                     {card.pricePrefix}
                   </div>
                 )}
 
-                <div className="flex items-end gap-1 min-w-0 mb-2">
+                <div className="flex items-end gap-1 min-w-0 mb-1.5">
                   {price && (
-                    <div className="text-[32px] md:text-[36px] lg:text-[40px] font-thin leading-none tracking-[-0.02em] text-[#2a2a2a]">
+                    <div className="text-[28px] md:text-[32px] lg:text-[36px] font-thin leading-none tracking-[-0.02em] text-[#2a2a2a]">
                       ${price}
                     </div>
                   )}
                   {card.priceUnit && (
-                    <div className="pb-[3px] text-[16px] md:text-[16px] leading-none text-[#6b6b6b] whitespace-nowrap">
+                    <div className="pb-[2px] text-[14px] md:text-[15px] leading-none text-[#6b6b6b] whitespace-nowrap">
                       {card.priceUnit}
                     </div>
                   )}
                 </div>
 
                 {card.priceNote && (
-                  <div className="text-[13px] md:text-[16px] leading-[1.4] md:leading-[1.5] text-[#6b6b6b] line-clamp-2">
+                  <div className="text-[12px] md:text-[14px] leading-[1.35] text-[#6b6b6b]">
                     {card.priceNote}
                   </div>
                 )}
               </div>
 
               {/* CTA */}
-              <div className="mt-4 md:mt-3 pt-2 md:pt-0">
+              <div className="mt-2 md:mt-2">
                 {card.ctaLink ? (
                   <Link
                     {...card.ctaLink}
                     className={clsx(
                       'group inline-flex w-full items-center justify-center gap-2',
                       'rounded-[0.9rem] bg-[#0f1115]',
-                      'px-3 md:px-2 py-2 md:py-1.5',
-                      'text-[13px] md:text-[16px] font-light text-white',
+                      'px-3 py-2 md:py-2',
+                      'text-[13px] md:text-[14px] font-light text-white',
                       'transition-opacity hover:opacity-90'
                     )}
                     hasIcon={false}
@@ -156,8 +156,8 @@ const AddOnCardsGrid = ({ className, items = [] }: AddOnCardsGridProps) => {
                     className={clsx(
                       'inline-flex w-full items-center justify-center gap-2',
                       'rounded-[0.9rem] bg-[#0f1115]',
-                      'px-3 md:px-4 py-2 md:py-2.5',
-                      'text-[13px] md:text-[16px] font-medium text-white',
+                      'px-3 py-2 md:py-2',
+                      'text-[13px] md:text-[14px] font-medium text-white',
                       'opacity-60 cursor-not-allowed'
                     )}
                     type="button"

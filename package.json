@@ -13,7 +13,7 @@
     "lint": "yarn run check-node-version && turbo run lint",
     "start": "turbo run start --parallel",
     "serve": "turbo run serve",
-    "dev": "yarn start",
+    "dev": "turbo run dev --parallel --filter=web --filter=studio",
     "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
     "docs:map": "yarn workspace migration run map",
     "docs:import": "yarn workspace migration run import",

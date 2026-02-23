@@ -176,7 +176,7 @@ const FAQAccordion = ({
     return (
       <div 
         className={clsx(
-          'py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 md:px-8 relative',
+          'pt-8 pb-2 sm:pt-12 sm:pb-3 md:pt-16 md:pb-4 lg:pt-20 lg:pb-6 px-4 sm:px-6 md:px-8 relative',
           isDark ? 'bg-[#1A1A1A]' : 'bg-white'
         )} 
         style={isDark ? { 
