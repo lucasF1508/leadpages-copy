@@ -117,10 +117,6 @@ export default async function Page({
       _type: 'templateGalleryStudio',
     },
     ...(_components || []),
-    {
-      _key: 'templateMarketplaceFooterCTA',
-      _type: 'templateMarketplaceFooterCTA',
-    },
   ]
 
   return <Layout data={{ components, hero }} />

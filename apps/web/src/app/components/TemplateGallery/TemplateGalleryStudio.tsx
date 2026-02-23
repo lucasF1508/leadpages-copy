@@ -14,6 +14,7 @@ import { TemplateKind } from '@/types/template-constants'
 import TemplateGalleryCards, {
   TemplateGalleryCardsLoading,
 } from './TemplateGalleryCards'
+import TemplateGalleryLegacyBanner from './TemplateGalleryLegacyBanner'
 import TemplateGalleryNoResults from './TemplateGalleryNoResults'
 import TemplateGallerySearch from './TemplateGallerySearch'
 import TemplateGallerySidebar, {
@@ -321,6 +322,7 @@ const TemplateGalleryStudio = ({
             </div>
           </div>
         </section>
+        <TemplateGalleryLegacyBanner />
       </div>
     )
   }
