@@ -135,7 +135,26 @@ module.exports = withBundleAnalyzer({
       projectId: SANITY_STUDIO_API_PROJECT_ID,
     })
 
-    return redirects
+    // Keep legacy template URLs working
+    return [
+      {
+        source: '/templates/landing-page-template/:slug',
+        destination: '/templates/landing-page-template-new/:slug',
+        permanent: false,
+      },
+      // Redirect old page-studio-templates URL to template-inspiration
+      {
+        source: '/page-studio-templates',
+        destination: '/template-inspiration',
+        permanent: true,
+      },
+      {
+        source: '/page-studio-templates/:path*',
+        destination: '/template-inspiration/:path*',
+        permanent: true,
+      },
+      ...redirects,
+    ]
   },
   rewrites: async () => {
     // Incremental path rewrites

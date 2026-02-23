@@ -17,7 +17,7 @@ export async function generateMetadata({
   return await generateMetadataStatic(
     !segments?.length
       ? {
-          path: '/page-studio-templates',
+          path: '/template-inspiration',
           types: ['pageTemplates'],
         }
       : {
@@ -55,8 +55,8 @@ export default async function Page({
         preview,
       }
     ).data,
-    // Fallback: reutiliza el hero (heading/subheading) de `/templates` si `pageStudioTemplates`
-    // no lo tiene configurado (o viene vacío).
+    // Fallback: reuse hero (heading/subheading) from `/templates` if `pageStudioTemplates`
+    // doesn't have it configured (or is empty).
     query(
       `*[_type == 'pageTemplates' && _id == 'pageTemplates'] | order(_updatedAt desc) [0] {
         hero
@@ -94,12 +94,12 @@ export default async function Page({
 
   const resolvedHero = {
     ...heroFromStudio,
-    heading: !isEmptyHeading(heroFromStudio?.heading)
-      ? heroFromStudio.heading
-      : heroFromTemplates?.heading,
     content: !isEmptyContent(heroFromStudio?.content)
       ? heroFromStudio.content
       : heroFromTemplates?.content,
+    heading: !isEmptyHeading(heroFromStudio?.heading)
+      ? heroFromStudio.heading
+      : heroFromTemplates?.heading,
   }
 
   const hero = [
@@ -113,10 +113,14 @@ export default async function Page({
 
   const components = [
     {
-      _type: 'templateGalleryStudio',
       _key: 'templateGalleryStudio',
+      _type: 'templateGalleryStudio',
     },
     ...(_components || []),
+    {
+      _key: 'templateMarketplaceFooterCTA',
+      _type: 'templateMarketplaceFooterCTA',
+    },
   ]
 
   return <Layout data={{ components, hero }} />

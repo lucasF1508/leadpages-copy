@@ -105,7 +105,7 @@ export const templateGalleryStore = create<TemplateGalleryStore>(
       }
 
       // Check if template doesn't have a valid Mandrel ID
-      // If so, use page-studio-templates route
+      // If so, use template-inspiration route
       const templateId = _meta?.id || template?.id || ''
       const hasValidMandrelId = templateId && 
         templateId.trim() !== '' &&
@@ -115,12 +115,12 @@ export const templateGalleryStore = create<TemplateGalleryStore>(
         !templateId.includes('prueba') &&
         templateId.length >= 10
 
-      // For templates without Mandrel ID, use page-studio-templates route
+      // For templates without Mandrel ID, use template-inspiration route
       if (!hasValidMandrelId) {
-        const templateType = kind === 'SiteTemplate' 
-          ? 'website-template' 
+        const templateType = kind === 'SiteTemplate'
+          ? 'website-template'
           : 'landing-page-template'
-        const url = `/page-studio-templates/${templateType}/${slug}`
+        const url = `/template-inspiration/${templateType}/${slug}`
         return url
       }
 

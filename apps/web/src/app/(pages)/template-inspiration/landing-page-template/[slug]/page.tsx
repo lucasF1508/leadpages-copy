@@ -9,7 +9,7 @@ import { TemplateKind } from '@/types/template-constants'
 const types = ['template']
 
 export async function generateStaticParams() {
-  // Obtener solo templates de Leadpage sin Mandrel ID válido
+  // Get only Leadpage templates without valid Mandrel ID
   const leadpageTemplates = await getStaticPathsParams({
     filter: `kind == "${TemplateKind.Leadpage}" && (!defined(id) || id == null || id == '' || id match "*example*" || id match "*test*" || id match "*ejemplo*" || id match "*prueba*" || length(id) < 10) && !defined(lastMandrelUpdate) && !defined(originalCreatedAt)`,
     types,
@@ -49,14 +49,14 @@ export default async function Page({
     slug,
   })
 
-  // Si no encuentra resultados, mostrar error
+  // If no results found, show error
   if (!result.components.length && !result.hero.length) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Template not found</h1>
-          <p className="text-gray-600 mb-2">No template was found with the slug: <code className="bg-gray-100 px-2 py-1 rounded">{slug}</code></p>
-          <p className="text-sm text-gray-500">Verify that the template is published in Sanity CMS.</p>
+          <p className="text-gray-600 mb-2">No template found with slug: <code className="bg-gray-100 px-2 py-1 rounded">{slug}</code></p>
+          <p className="text-sm text-gray-500">Verify the template is published in Sanity CMS.</p>
         </div>
       </div>
     )
