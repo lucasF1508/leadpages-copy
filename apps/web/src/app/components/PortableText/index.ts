@@ -3,6 +3,7 @@ import PortableText, {
   defaultBlockStyles,
   defaultLargeBlockStyles,
   mediaWithItemsSwitchBlockStyles,
+  mediaWithItemsSwitchIntroBlockStyles,
 } from './PortableText'
 
 export type { BlockStylesType, PortableTextProps }
@@ -11,4 +12,5 @@ export {
   defaultBlockStyles,
   defaultLargeBlockStyles,
   mediaWithItemsSwitchBlockStyles,
+  mediaWithItemsSwitchIntroBlockStyles,
 }

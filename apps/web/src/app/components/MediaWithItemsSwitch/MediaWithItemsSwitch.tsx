@@ -4,7 +4,10 @@ import type { ContentType } from '@types'
 import type { ClassValue } from 'clsx'
 import React, { useState } from 'react'
 import clsx from 'clsx'
-import { mediaWithItemsSwitchBlockStyles } from '@/components/PortableText'
+import {
+  mediaWithItemsSwitchBlockStyles,
+  mediaWithItemsSwitchIntroBlockStyles,
+} from '@/components/PortableText'
 import MediaWithTextSticky from '@/components/MediaWithText/MediaWithTextSticky'
 import type { MediaWithTextType } from '@/components/MediaWithText/MediaWithText'
 import Text from '@/components/Text'
@@ -59,23 +62,27 @@ const MediaWithItemsSwitch = ({
   if (!list.length) return null
 
   return (
-    <div className={clsx('w-full bg-white pt-12 pb-20', className, classNames?.root)}>
+    <div className={clsx('w-full bg-white pt-12 pb-8', className, classNames?.root)}>
       <div className="max-w-base mx-auto w-full px-4 sm:px-6 lg:px-8">
         {(Boolean(label) || Boolean(title) || Boolean(content)) && (
           <header className={clsx('text-center mb-8', classNames?.header)}>
             {label && (
-              <p className="type-overline-xxs theme-light:bg-gradient-purple theme-dark:bg-gradient-purple-invert text-black inline-block rounded-lg py-[0.25rem] px-1.5 mb-3">
+              <p className="type-overline-xxs theme-light:bg-gradient-purple theme-dark:bg-gradient-purple-invert !text-white inline-block rounded-lg py-[0.25rem] px-1.5 mb-3">
                 {label}
               </p>
             )}
             {title && (
-              <h2 className="type-title-t3 sm:type-title-t2 md:type-title-t1 text-black mb-4">
+              <h2 className="type-title-t5 sm:type-title-t4 md:type-title-t3 text-black mb-4">
                 {title}
               </h2>
             )}
             {content && (
-              <div className="text-black [&_.text-body-muted]:!text-black [&_.portable-text]:text-black max-w-3xl mx-auto">
-                <Text as="div" content={content} />
+              <div className="max-w-3xl mx-auto">
+                <Text
+                  as="div"
+                  blockStyles={mediaWithItemsSwitchIntroBlockStyles}
+                  content={content}
+                />
               </div>
             )}
           </header>
@@ -95,8 +102,8 @@ const MediaWithItemsSwitch = ({
                   className={clsx(
                     'flex-none whitespace-nowrap px-5 py-2 rounded-xl text-sm font-medium transition-colors',
                     isActive
-                      ? 'bg-[#7E4AFF] text-white shadow-[0_10px_30px_rgba(126,74,255,0.5)]'
-                      : 'text-gray-300 hover:text-white hover:bg-[#242131]'
+                      ? 'bg-[#7E4AFF] !text-white shadow-[0_10px_30px_rgba(126,74,255,0.5)]'
+                      : '!text-white hover:bg-[#242131]'
                   )}
                   key={section?._key ?? index}
                   onClick={() => setActiveIndex(index)}

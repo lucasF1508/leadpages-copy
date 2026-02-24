@@ -127,6 +127,21 @@ export const defaultBlockStyles: BlockStylesType = {
   blockquote: { className: 'type-quote-xs sm:type-quote-sm', tag: 'p' },
 }
 
+/** Intro content (subheading) in MediaWithItemsSwitch header - black text for visibility */
+export const mediaWithItemsSwitchIntroBlockStyles: BlockStylesType = {
+  ...defaultBlockStyles,
+  large: {
+    className: '!text-black type-body-md sm:type-body-lg',
+    tag: 'p',
+  },
+  normal: { className: '!text-black type-body-sm md:type-body', tag: 'p' },
+  small: {
+    className: '!text-black type-body-xs md:type-body-sm',
+    tag: 'p',
+  },
+  xsmall: { className: '!text-black type-body-xs', tag: 'p' },
+}
+
 /** Figma specs for MediaWithItemsSwitch items: Uxum 40px/48px headings, Inter 20px body */
 const figmaHeadingClass =
   'text-[40px] leading-[48px] font-normal text-black [font-family:var(--font-uxumvf,sans-serif)]'
