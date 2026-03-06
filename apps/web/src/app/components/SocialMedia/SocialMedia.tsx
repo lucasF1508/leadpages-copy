@@ -52,7 +52,8 @@ const SocialMedia: React.FC<Props> = ({ heading, icons, buttonText, buttonUrl, b
         paddingTop: '24px',
         paddingBottom: '24px',
         maxWidth: '1440px',
-        margin: '0 auto'
+        margin: '0 auto',
+        marginBottom: '32px'
       }}
     >
       <div className="flex flex-col items-center" style={{ gap: '30px' }}>
