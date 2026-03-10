@@ -37,10 +37,9 @@ const SubFooter = ({
       <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden">
         <div className="relative flex items-start justify-center min-h-[18.625rem] md:min-h-[30rem] pt-4 md:pt-6">
           <SubFooterGradient className="absolute bottom-0 inset-x-0 h-[120%] w-full opacity-95 translate-y-6 md:translate-y-0" />
-          {/* top-8 md:top-12 prevents mask from covering "Share this post" due to SubFooter negative margin */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 top-8 md:top-12 bg-[#0F0E16] [mask-image:linear-gradient(to_top,black,transparent_65%)]"
+            className="pointer-events-none absolute inset-0 bg-[#0F0E16] [mask-image:linear-gradient(to_top,black,transparent_65%)]"
           />
           <Pinion
             classNames={{
@@ -66,7 +65,7 @@ const SubFooter = ({
             {subheading && (
               <Heading
                 as="h3"
-                className="text-center type-body-lg max-w-cols12 mx-auto opacity-90 mt-4 md:mt-6"
+                className="text-center type-body-lg max-w-cols12 mx-auto opacity-90"
                 heading={subheading}
               />
             )}
