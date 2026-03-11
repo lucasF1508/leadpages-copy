@@ -5,6 +5,9 @@ import HeroBase from './HeroBase'
 import HeroBlog from './HeroBlog'
 import HeroComparisons from './HeroComparisons'
 import HeroHome, { HeroHomeNew, type HeroHomeNewProps, type HeroHomeProps } from './HeroHome'
+import HeroLandingGenerator, {
+  type HeroLandingGeneratorProps,
+} from './HeroLandingGenerator'
 import HeroInspiration, { type HeroInspirationProps } from './HeroInspiration'
 import HeroPageAnalyzer from './HeroPageAnalyzer'
 import HeroPlatformPage, { type HeroPlatformPageProps } from './HeroPlatformPage'
@@ -19,6 +22,7 @@ interface HeroProps {
     | HeroHomeNewProps
     | HeroHomeProps
     | HeroInspirationProps
+    | HeroLandingGeneratorProps
     | HeroPlatformPageProps
     | HeroPricingProps
     | HeroWithMediaProps
@@ -43,6 +47,8 @@ const Hero = ({ hero }: HeroProps) => {
       return <HeroHomeNew {...heroProps} />
     case 'heroInspiration':
       return <HeroInspiration {...heroProps} />
+    case 'heroLandingGenerator':
+      return <HeroLandingGenerator {...heroProps} />
     case 'heroPricing':
       return <HeroPricing {...heroProps} />
     case 'heroSimple':

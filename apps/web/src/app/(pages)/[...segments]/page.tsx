@@ -16,7 +16,12 @@ export const dynamicParams = false
 export const revalidate = 3600
 
 export async function generateStaticParams() {
-  const params = await getStaticPathsParams({ catchAll: '/', types: ['page'] })
+  // Include 'page' documents and Home copies (pageHome with path other than '/')
+  const params = await getStaticPathsParams({
+    catchAll: '/',
+    types: ['page', 'pageHome'],
+    filter: "!(_type == 'pageHome' && (path == '/' || path == null))",
+  })
   const paths = params.map(({ params: { slug } }: any) => ({
     segments: slug,
   }))
@@ -29,7 +34,7 @@ export async function generateMetadata(
 ) {
   const { segments } = await params
   const path = joinPath(segments)
-  return await generateMetadataStatic({ parent, path, types: ['page'] })
+  return await generateMetadataStatic({ parent, path, types: ['page', 'pageHome'] })
 }
 
 export default async function Page({
@@ -53,9 +58,9 @@ export default async function Page({
     normalized(segments.join('/')) === 'pricing'
   const isPricing = isPricingPage
 
-  // For pricing page, bypass CDN to get fresh data (important for updated Verifone links)
+  // Include 'page' and Home copies (pageHome with path other than '/')
   const pageQueryResult = query(
-    `*[_type == 'page' && (path == $path || path == $alternatePath || path == $legacyPath)] | order(_updatedAt desc) [0]{
+    `*[(_type == 'page' || (_type == 'pageHome' && $path != '/')) && (path == $path || path == $alternatePath || path == $legacyPath)] | order(_updatedAt desc) [0]{
       _id,
       _updatedAt,
       path,

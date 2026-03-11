@@ -65,10 +65,17 @@ export const marquee = F.object({
         initialValue: 'visible',
         options: {layout: 'radio'},
       }),
+      F.boolean({
+        name: 'static',
+        title: 'Static (no animation)',
+        description: 'When on, the marquee is fixed and does not scroll. When off, it scrolls as usual.',
+        initialValue: false,
+      }),
       F.number({
         name: 'duration',
         title: 'Duration (seconds) for a full loop.',
         description: 'A longer duration is needed for more items. A good starting point is 5× the number of items. If left empty, this default will be used.',
+        hidden: ({parent}) => parent?.static === true,
       }),
     ])
   ],

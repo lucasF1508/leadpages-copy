@@ -1,5 +1,8 @@
 import type { GenerateMetadataProps } from '@/lib/utils/generateMetadata/generateMetadata'
 import type { ResolvingMetadata } from 'next'
+import { notFound } from 'next/navigation'
+import type { HeroProps } from '@/components/Hero'
+import type { RackInnerComponent } from '@/types/rack'
 import Layout from '@/components/Layout'
 import { getStaticPathsParams } from '@/lib/queries'
 import { fetchTemplateData } from '@/lib/queries/fetchTemplateData'
@@ -11,16 +14,21 @@ const kind = TemplateKind.Leadpage
 const settingsId = 'templateSettings'
 
 export async function generateStaticParams() {
-  const templates = await getStaticPathsParams({
-    filter: `kind == "${kind}"`,
-    types,
-  })
+  try {
+    const templates = await getStaticPathsParams({
+      filter: `kind == "${kind}"`,
+      types,
+    })
 
-  const paths = templates.map(({ params: { slug } }: any) => ({
-    slug,
-  }))
+    const paths = templates.map(({ params: { slug } }: any) => ({
+      slug,
+    }))
 
-  return paths
+    return paths
+  } catch (e) {
+    console.warn('[landing-page-template] generateStaticParams failed:', e)
+    return []
+  }
 }
 
 export async function generateMetadata(
@@ -44,11 +52,29 @@ export default async function Page({
 }) {
   const { slug } = await params
 
-  const { components, hero }: any = await fetchTemplateData({
-    kind,
-    settingsId,
-    slug,
-  })
+  try {
+    const result = await fetchTemplateData({
+      kind,
+      settingsId,
+      slug,
+    })
 
-  return <Layout data={{ components, hero }} />
+    const { components, hero } = result || {}
+
+    if (!components?.length && !hero?.length) {
+      notFound()
+    }
+
+    return (
+      <Layout
+        data={{
+          components: components as RackInnerComponent[],
+          hero: hero as HeroProps['hero'],
+        }}
+      />
+    )
+  } catch (e) {
+    console.error(`[landing-page-template] Failed for slug "${slug}":`, e)
+    notFound()
+  }
 }

@@ -13,6 +13,14 @@ const Icons = {
   external: LinkIcon,
 }
 
+/** Si la URL no tiene esquema (http:, https:, etc.), el navegador la trata como ruta relativa. Para enlaces externos, anteponer https://. */
+function ensureAbsoluteUrl(url: string | undefined, isExternal: boolean): string | undefined {
+  if (!url || !isExternal) return url
+  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(url)) return url
+  if (url.startsWith('#') || url.startsWith('/')) return url
+  return `https://${url}`
+}
+
 export const LinkExternal = forwardRef<HTMLAnchorElement, LinkExternalType>(
   (
     {
@@ -27,12 +35,13 @@ export const LinkExternal = forwardRef<HTMLAnchorElement, LinkExternalType>(
       label,
       rel = 'noopener noreferrer',
       target,
-      url,
+      url: rawUrl,
     },
     ref
   ) => {
     const Icon = _Icon || Icons[condition as keyof typeof Icons]
-
+    const isExternal = condition === 'external'
+    const url = ensureAbsoluteUrl(rawUrl, isExternal) ?? rawUrl
 
     const hasLabel = isChildrenText(children) || label
 

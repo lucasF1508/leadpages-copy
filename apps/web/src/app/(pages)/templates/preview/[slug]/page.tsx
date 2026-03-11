@@ -1,6 +1,7 @@
 import type { GenerateMetadataProps } from '@/lib/utils/generateMetadata/generateMetadata'
 import type { ResolvingMetadata } from 'next'
 import { draftMode } from 'next/headers'
+import { notFound } from 'next/navigation'
 import TemplatePreview from '@/components/TemplatePreview'
 import { getStaticPathsParams, query, runQuery } from '@/lib/queries'
 import { generateMetadataStatic } from '@/lib/utils/generateMetadata/generateMetadataStatic'
@@ -42,30 +43,43 @@ export default async function Page({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const data = (await queryData(slug).data) || {}
 
-  return <TemplatePreview data={data} />
+  try {
+    const data = (await queryData(slug).data) || {}
+
+    if (!data?._id) {
+      notFound()
+    }
+
+    return <TemplatePreview data={data} />
+  } catch (e) {
+    console.error(`[templates/preview] Failed for slug "${slug}":`, e)
+    notFound()
+  }
 }
 
 // Prevent unspecified paths from being statically rendered at runtime
 export const dynamicParams = false
 
 export async function generateStaticParams() {
-  const params = await getStaticPathsParams({
-    filter: 'kind == "LeadpageTemplate"',
-    type: 'template',
-  })
-  const ids = await runQuery(
-    `*[_type == "template" && kind == "LeadpageTemplate"]._id`
-  )
+  try {
+    const params = await getStaticPathsParams({
+      filter: 'kind == "LeadpageTemplate"',
+      type: 'template',
+    })
+    const ids = await runQuery(
+      `*[_type == "template" && kind == "LeadpageTemplate"]._id`
+    )
 
-  const slugPaths = params.map(({ params: { slug } }: any) => ({
-    slug,
-  }))
+    const slugPaths = params.map(({ params: { slug } }: any) => ({
+      slug,
+    }))
 
-  const idPaths = ids.map((slug: string) => ({ slug }))
+    const idPaths = Array.isArray(ids) ? ids.map((slug: string) => ({ slug })) : []
 
-  const paths = [...slugPaths, ...idPaths]
-
-  return paths
+    return [...slugPaths, ...idPaths]
+  } catch (e) {
+    console.warn('[templates/preview] generateStaticParams failed:', e)
+    return []
+  }
 }
