@@ -212,8 +212,11 @@ export const fetchTemplateData = async ({
   
   if ((!finalCategories || finalCategories.length === 0) && data._id) {
     try {
-      const mandrelTaxons = await mandrelApi.getTaxons()
-      if (mandrelTaxons) {
+      const rawTaxons = await mandrelApi.getTaxons()
+      const mandrelTaxons = Array.isArray(rawTaxons)
+        ? rawTaxons
+        : (rawTaxons?.taxons ?? rawTaxons?.data ?? [])
+      if (Array.isArray(mandrelTaxons) && mandrelTaxons.length > 0) {
         const categoryTaxons = mandrelTaxons.filter((t: any) => t.type === 'category')
         finalCategories = categoryTaxons.map((cat: any) => {
           const sectionValue = cat.section || 'Templates'
@@ -232,8 +235,11 @@ export const fetchTemplateData = async ({
   
   if (!finalTags && data._id) {
     try {
-      const mandrelTaxons = await mandrelApi.getTaxons()
-      if (mandrelTaxons && data.tags?.length) {
+      const rawTaxons = await mandrelApi.getTaxons()
+      const mandrelTaxons = Array.isArray(rawTaxons)
+        ? rawTaxons
+        : (rawTaxons?.taxons ?? rawTaxons?.data ?? [])
+      if (Array.isArray(mandrelTaxons) && mandrelTaxons.length > 0 && data.tags?.length) {
         const tagTaxons = mandrelTaxons.filter((t: any) => t.type === 'tags')
         finalTags = data.tags
           .map((tag: any) => {

@@ -40,6 +40,17 @@ export const structure = (S: StructureBuilder, context: ConfigContext) => {
             .views([S.view.form(), IframePreview(S), SeoPane(S)])
         ),
 
+      // List of Home copies (pageHome with a different URL, e.g. /home-copy)
+      S.listItem()
+        .title('Home (copies with different URL)')
+        .icon(AiOutlineHome)
+        .child(
+          S.documentList()
+            .title('Home copies')
+            .filter('_type == "pageHome" && _id != "pageHome"')
+            .schemaType('pageHome')
+        ),
+
       S.divider(),
 
       // ===========================

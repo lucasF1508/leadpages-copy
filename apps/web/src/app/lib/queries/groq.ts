@@ -5,6 +5,26 @@ export const componentQueries = `
     testimonials[]->
   },
   faqs[]->,
+  _type == 'heroLandingGenerator' => {
+    ...,
+    cardsStatic,
+    carouselImages[] {
+      _key,
+      _type,
+      asset-> {
+        _id,
+        _type,
+        url,
+        metadata {
+          dimensions { width, height, aspectRatio },
+          lqip
+        }
+      },
+      altText,
+      hotspot,
+      crop
+    }
+  },
   _type == 'heroSimple' => {
     ...,
     links[] {

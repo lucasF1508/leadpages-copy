@@ -17,12 +17,13 @@ export interface MarqueeProps {
   images: LogoWithLink[]
   logos?: LogoWithLink[]
   maxHeight?: number
+  static?: boolean
   type: 'image' | 'logo'
   visibility?: 'visible' | 'invisible'
 }
 
 const MarqueeRow = React.forwardRef<HTMLDivElement, MarqueeProps>(
-  ({ duration = 15, images, maxHeight, type }, ref) => {
+  ({ duration = 15, images, maxHeight, static: isStatic, type }, ref) => {
     const selectors: string[] = []
     const styles = images
       .map((image) => {
@@ -44,13 +45,11 @@ const MarqueeRow = React.forwardRef<HTMLDivElement, MarqueeProps>(
     return (
       <div
         className={clsx(
-          'flex flex-row flex-nowrap items-center justify-start',
-          'animate-[scroll-left_300ms_linear_infinite]'
+          'flex flex-row flex-nowrap items-center',
+          isStatic ? 'w-full justify-between' : 'justify-start animate-[scroll-left_300ms_linear_infinite]'
         )}
         ref={ref}
-        style={{
-          animationDuration: `${duration}s`,
-        }}
+        style={!isStatic ? { animationDuration: `${duration}s` } : undefined}
       >
         <style dangerouslySetInnerHTML={{ __html: styles }} />
         {images.map((image, index) => (
@@ -58,7 +57,7 @@ const MarqueeRow = React.forwardRef<HTMLDivElement, MarqueeProps>(
             className={clsx(
               'flex-[0_0_auto]',
               selectors[index],
-              type === 'logo' ? 'ml-6 sm:ml-9' : 'ml-3 sm:ml-2'
+              !isStatic && (type === 'logo' ? 'ml-6 sm:ml-9' : 'ml-3 sm:ml-2')
             )}
             key={image?._key}
           >
@@ -84,17 +83,33 @@ const MarqueeRow = React.forwardRef<HTMLDivElement, MarqueeProps>(
   }
 )
 
+const MOBILE_MAX_WIDTH = 767
+
 const Marquee = ({
   duration: _duration,
   images: _images,
   logos,
   maxHeight,
+  static: isStatic,
   type,
   visibility = 'visible',
 }: MarqueeProps) => {
   if (visibility === 'invisible') return null
   const images = _images || logos
   if (!images?.length) return null
+
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const mq = window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`)
+    const onChange = () => setIsMobile(mq.matches)
+    setIsMobile(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  /** En mobile siempre marquee en movimiento aunque esté seleccionado estático */
+  const effectiveStatic = isStatic && !isMobile
 
   const duration = _duration || images.length * 5
   const ref = useRef<HTMLDivElement>(null)
@@ -108,10 +123,11 @@ const Marquee = ({
   }
 
   useEffect(() => {
-    setNumber(getCloneCount())
-  }, [])
+    if (!effectiveStatic) setNumber(getCloneCount())
+  }, [effectiveStatic])
 
   useEventListener('resize', () => {
+    if (effectiveStatic) return
     const cloneCount = getCloneCount()
 
     if (cloneCount !== number) {
@@ -119,30 +135,32 @@ const Marquee = ({
     }
   })
 
+  const rowProps = {
+    duration,
+    images,
+    maxHeight,
+    static: effectiveStatic,
+    type,
+  }
+
   return (
     <div
       className={clsx(
-        'flex flex-row flex-nowrap items-center justify-start self-start sm:-ml-9',
-        type === 'logo' ? '-ml-6  sm:-ml-9' : '-ml-3  sm:-ml-4'
+        'flex flex-row flex-nowrap items-center self-start',
+        effectiveStatic ? 'w-full' : clsx('justify-start sm:-ml-9', type === 'logo' ? '-ml-6 sm:-ml-9' : '-ml-3 sm:-ml-4')
       )}
-      key={number}
+      key={effectiveStatic ? 'static' : number}
     >
-      <MarqueeRow
-        duration={duration}
-        images={images}
-        maxHeight={maxHeight}
-        ref={ref}
-        type={type}
-      />
-      {[...Array(number)].map((i, index) => (
-        <MarqueeRow
-          duration={duration}
-          images={images}
-          key={`clone-${index + 1}`}
-          maxHeight={maxHeight}
-          type={type}
-        />
-      ))}
+      {effectiveStatic ? (
+        <MarqueeRow {...rowProps} ref={ref} />
+      ) : (
+        <>
+          <MarqueeRow {...rowProps} ref={ref} />
+          {[...Array(number)].map((i, index) => (
+            <MarqueeRow {...rowProps} key={`clone-${index + 1}`} />
+          ))}
+        </>
+      )}
     </div>
   )
 }

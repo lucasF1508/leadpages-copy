@@ -20,7 +20,11 @@ export const pageHome = {
     ]),
     ...G.group('meta', [
       F.slug({
-        readOnly: true,
+        // Only the official Home (singleton) has slug locked to "/". Copies can change the URL.
+        readOnly: ({ document }) => {
+          const id = document?._id ?? ''
+          return id === 'pageHome' || id === 'drafts.pageHome'
+        },
         initialValue: {
           current: '/',
         },

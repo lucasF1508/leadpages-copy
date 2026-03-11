@@ -79,4 +79,12 @@ export const keyframes = {
     from: { transform: 'translateX(0%)' },
     to: { transform: 'translateX(100%)' },
   },
+  'hero-landing-fade': {
+    '0%, 22%': { opacity: '1' },
+    '25%, 100%': { opacity: '0' },
+  },
+  'hero-carousel-scroll': {
+    from: { transform: 'translateX(0)' },
+    to: { transform: 'translateX(-50%)' },
+  },
 }

@@ -60,6 +60,14 @@ export const colorDecorators = {
     ),
     icon: () => colorIcon(colors.secondary),
   },
+  highlight: {
+    title: 'Brand Green (Highlight)',
+    value: 'highlight',
+    component: ({children}: BlockDecoratorProps) => (
+      <span style={{color: '#a7ed2a'}}>{children}</span>
+    ),
+    icon: () => colorIcon('#a7ed2a'),
+  },
   gradient: {
     title: 'Text Gradient',
     value: 'textGradient',

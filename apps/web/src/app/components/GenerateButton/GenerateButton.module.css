@@ -1,0 +1,90 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.button {
+  position: relative;
+  background: linear-gradient(90deg, #7c5cff 0%, #5a3df0 100%);
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 9999px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 25px rgba(90, 61, 240, 0.45);
+  overflow: hidden;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(90, 61, 240, 0.6);
+}
+
+/* Variante compacta para fila con input (ej. hero) */
+.compact .button {
+  padding: 12px 24px;
+  font-size: 15px;
+  min-height: 50px;
+}
+
+.compact .sparkle {
+  font-size: 16px;
+}
+
+/* Shine animation */
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: skewX(-20deg);
+}
+
+.button:hover::before {
+  animation: shine 0.8s ease forwards;
+}
+
+@keyframes shine {
+  100% {
+    left: 130%;
+  }
+}
+
+.sparkle {
+  font-size: 18px;
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  bottom: 10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: floatUp linear forwards;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120px);
+    opacity: 0;
+  }
+}
