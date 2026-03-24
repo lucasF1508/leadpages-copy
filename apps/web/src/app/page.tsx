@@ -11,9 +11,10 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
+  // Only use the main Home singleton (not copies like "Home Page Rebrand")
   const { components, hero } =
     (await query(
-      `*[_type == 'pageHome'] | order(_updatedAt desc) [0]
+      `*[_type == 'pageHome' && _id in ['pageHome', 'drafts.pageHome']] | order(_updatedAt desc) [0]
       {
         ...,
         ${componentsQuery}
