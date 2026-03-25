@@ -66,6 +66,8 @@ export type BlogSectionProps = {
   image?: { alt?: string; asset?: any; height?: number; src?: string; width?: number }
   pill?: string
   heading: string
+  /** Post marked in Sanity (blogSectionMainHero); drives hero when set and not excluded by tags. */
+  mainHeroPost?: SanityPost | null
   items?: BlogCard[] // Legacy support
   posts?: SanityPost[] // New posts from Sanity
   postSelection?: 'manual' | 'category' | 'latest' | 'trending' // Post selection method
