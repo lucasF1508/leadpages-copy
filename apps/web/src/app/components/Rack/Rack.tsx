@@ -67,14 +67,42 @@ export const RackInner = (
     )
   }
 
+  // Keep legacy/default behavior when variant is missing:
+  // - Original dark components: missing variant -> dark
+  // - Original light components: missing variant -> light
+  const isTestimonialLight =
+    component === 'testimonialFeaturedBlock' && componentData?.variant === 'light'
+  const isFaqPlatformLight =
+    component === 'faqPlatform' && componentData?.variant === 'light'
+  const isMediaWithItemsLight =
+    // If variant is missing (legacy content), default to light.
+    component === 'mediaWithItems' && (componentData?.variant === 'light' || componentData?.variant == null)
+  const isFeatureCardsLight =
+    component === 'featureCards' && componentData?.variant === 'light'
+  const isFeatureGridLight =
+    component === 'featureGrid' && (componentData?.variant === 'light' || componentData?.variant == null)
+  const isIntegrationsLight =
+    component === 'integrationsBlock' && (componentData?.variant === 'light' || componentData?.variant == null)
+  const pinionLightNoMargin =
+    (isTestimonialLight || isFaqPlatformLight || isMediaWithItemsLight || isFeatureCardsLight || isFeatureGridLight || isIntegrationsLight) &&
+    '!bg-white !mt-0 !mb-0 !pt-8 md:!pt-12 lg:!pt-20 !pb-8 md:!pb-12 lg:!pb-20'
+
   return (
     <Pinion
       alignment={alignment}
-      backgroundColor={backgroundColor}
+      backgroundColor={
+        isTestimonialLight || isFaqPlatformLight || isMediaWithItemsLight || isFeatureCardsLight || isFeatureGridLight || isIntegrationsLight
+          ? undefined
+          : backgroundColor
+      }
       columnsWidth={columnsWidth}
       key={_key}
       {...pinionParams}
-      className={clsx(classNames?.pinion, pinionParams?.className)}
+      className={clsx(
+        classNames?.pinion,
+        pinionParams?.className,
+        pinionLightNoMargin
+      )}
       component={component}
     >
       <Component className={classNames?.component} {...componentData} />

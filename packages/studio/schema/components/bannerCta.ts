@@ -3,6 +3,12 @@ import { F, P } from '@/schema/tool'
 
 export const bannerCta = F.object({
   fields: [
+    F.radio(['light', 'dark'], {
+      name: 'variant',
+      title: 'Theme',
+      description: 'Light or dark version',
+      initialValue: 'light',
+    }),
     F.string({
       name: 'title',
       title: 'Title',

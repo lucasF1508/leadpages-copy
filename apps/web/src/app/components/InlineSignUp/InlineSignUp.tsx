@@ -132,23 +132,52 @@ const InlineSignUp = ({
     <FormProvider {...methods}>
       <form
         className={clsx(
-          'flex flex-row flex-wrap items-center justify-start md:gap-0 gap-[0.125rem] w-full md:flex-nowrap relative',
+          'flex flex-row flex-wrap items-center justify-start gap-3 w-full md:flex-nowrap relative',
           className,
           classNames?.root
         )}
         onSubmit={handleSubmit(interceptSubmit)}
       >
-        <input
+        {/*
+          Gradient + backdrop-blur en capa detrás recortada (overflow-hidden).
+          Evita el “sliver” blanco de WebKit al mezclar blur + border-radius en el <input>.
+        */}
+        <div
           className={clsx(
-            '[background-color:transparent] focus:bg-light bg-gradient-input backdrop-blur-md transition-all duration-200 ease-in-out md:w-full',
-            '!ring-brand-lime flex-[1_1_auto] type-body-sm block h-6 rounded-md border-none p-2.5 py-0 text-obsidian-900 placeholder:text-dark max-md:flex-[1_1_auto]'
+            'group relative isolate min-w-0 flex-[1_1_auto] h-6 max-md:max-w-full md:max-w-[20rem] md:flex-none',
+            'overflow-hidden rounded-[40px]'
           )}
+        >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-[40px] bg-gradient-input backdrop-blur-md opacity-15"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-[40px] bg-light opacity-100"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute right-0 top-0 bottom-0 w-4 rounded-r-[40px] bg-[linear-gradient(90deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.18)_100%)] opacity-20 group-focus-within:opacity-60"
+          />
+          <input
+            className={clsx(
+              'relative z-[1] type-body-sm block h-full w-full min-w-0 appearance-none rounded-[40px] border-0 bg-transparent',
+              'p-2.5 py-0 text-obsidian-900 placeholder:text-obsidian-900',
+              'shadow-none outline-none ring-0',
+              'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-button-surface-solid-ring'
+            )}
+            disabled={isLoading}
+            placeholder={placeholder}
+            type="email"
+            {...register('email')}
+          />
+        </div>
+        <button
+          className="link-button-solid max-md:w-full shrink-0 !rounded-[40px]"
           disabled={isLoading}
-          placeholder={placeholder}
-          type="email"
-          {...register('email')}
-        />
-        <button className="link-button-solid max-md:w-full" disabled={isLoading} type="submit">
+          type="submit"
+        >
           {label}
           {isLoading ? <Loader /> : <LinkIcon />}
         </button>

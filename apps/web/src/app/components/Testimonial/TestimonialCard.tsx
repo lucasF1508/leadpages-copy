@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import Stars from '@/components/Stars'
 import Image from '@/components/Image'
 import { SanityImageProps } from '@/types'
@@ -11,15 +12,16 @@ export interface TestimonialCardProps {
   badgeImage?: SanityImageProps
   rating: number
   _id: string
-  /** When true, card shows full content (image top cropped, quote, name). When false, only image + stars. */
   isActive?: boolean
+  variant?: 'dark' | 'light'
 }
 
-const TestimonialCard = ({ title, authorTitle, testimonial: body, image, badgeImage, rating, isActive = true }: TestimonialCardProps) => {
+const TestimonialCard = ({ title, authorTitle, testimonial: body, image, badgeImage, rating, isActive = true, variant }: TestimonialCardProps) => {
+  const isLight = (variant ?? 'dark') === 'light'
+
   if (isActive) {
-    // Selected: full image contained (no crop), stars, quote without scroll, name+title
     return (
-      <div className='flex flex-col h-full w-full bg-surface-neutral-opacity rounded-xl overflow-hidden'>
+      <div className={clsx('flex flex-col h-full w-full rounded-xl overflow-hidden', isLight ? 'bg-[#E6FAE6]' : 'bg-surface-neutral-opacity')}>
         {image && (
           <div className='w-full flex-shrink-0 px-3 pt-3 sm:px-4 sm:pt-4'>
             <div
@@ -52,32 +54,36 @@ const TestimonialCard = ({ title, authorTitle, testimonial: body, image, badgeIm
           </div>
         )}
         <div className='flex flex-col gap-3 sm:gap-4 flex-grow min-h-0 px-4 pt-3 pb-5 sm:px-6 sm:pt-5 sm:pb-6'>
-          {rating && <div className='max-w-[8.5rem] flex-shrink-0'><Stars rating={rating} variant='green' /></div>}
-          {/* Quote: Inter 300, 24px, line-height 32px, paragraph spacing 12px, gradient #FFFFFF → #E4D1FF */}
+          {rating && <div className='max-w-[8.5rem] flex-shrink-0'><Stars rating={rating} variant={isLight ? 'brandPurple' : 'green'} /></div>}
           <div className='relative flex-grow min-h-0 overflow-hidden font-light text-[24px] leading-[32px] tracking-normal'>
-            <span className='absolute left-0 top-0 -translate-x-full bg-gradient-to-r from-white to-[#E4D1FF] bg-clip-text text-transparent'>"</span>
-            <article className='line-clamp-8 bg-gradient-to-r from-white to-[#E4D1FF] bg-clip-text text-transparent'>
-              {body}"
-            </article>
+            {isLight ? (
+              <>
+                <span className='absolute left-0 top-0 -translate-x-full text-black'>"</span>
+                <article className='line-clamp-8 text-black'>{body}"</article>
+              </>
+            ) : (
+              <>
+                <span className='absolute left-0 top-0 -translate-x-full bg-gradient-to-r from-white to-[#E4D1FF] bg-clip-text text-transparent'>"</span>
+                <article className='line-clamp-8 bg-gradient-to-r from-white to-[#E4D1FF] bg-clip-text text-transparent'>{body}"</article>
+              </>
+            )}
           </div>
-          {/* Name: OVERLINE/xs — Roc Grotesk 500, xs, letter-spacing 16%, uppercase. Paragraph spacing 24px */}
           <div className='flex flex-col gap-3 flex-shrink-0 pt-6'>
-            {title && <p className='font-heading type-overline-xs font-medium text-light/95 uppercase tracking-[0.16em]'>{title}</p>}
-            {authorTitle && <p className='font-heading type-overline-xxs font-medium text-light/95 uppercase tracking-[0.16em]'>{authorTitle}</p>}
+            {title && <p className={clsx('font-heading type-overline-xs font-medium uppercase tracking-[0.16em]', isLight ? 'text-black' : 'text-light/95')}>{title}</p>}
+            {authorTitle && <p className={clsx('font-heading type-overline-xxs font-medium uppercase tracking-[0.16em]', isLight ? 'text-black' : 'text-light/95')}>{authorTitle}</p>}
           </div>
         </div>
       </div>
     )
   }
 
-  // Unselected: image almost full but inside the card (contained, rounded), stars at bottom
   return (
-    <div className='flex flex-col h-full w-full bg-surface-neutral-opacity rounded-xl p-2 sm:p-3 gap-2'>
+    <div className='flex flex-col h-full w-full rounded-xl p-2 sm:p-3 gap-2'>
       {image && (
         <div className='flex-1 min-h-[8rem] relative rounded-lg overflow-hidden'>
           <Image image={image} fill className='object-contain object-center' sizes='(max-width: 768px) 33vw, 25vw' />
           {badgeImage && (
-            <div className='absolute bottom-2 left-4 z-10 w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden shadow-lg'>
+            <div className={clsx('absolute bottom-2 left-4 z-10 w-12 h-12 sm:w-16 sm:h-16 rounded-lg overflow-hidden shadow-lg', isLight && 'bg-white')}>
               <Image
                 image={badgeImage}
                 fill
@@ -90,7 +96,7 @@ const TestimonialCard = ({ title, authorTitle, testimonial: body, image, badgeIm
       )}
       {rating && (
         <div className='flex-shrink-0 flex justify-start'>
-          <Stars rating={rating} variant='green' />
+          <Stars rating={rating} variant={isLight ? 'brandPurple' : 'green'} />
         </div>
       )}
     </div>

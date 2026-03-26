@@ -152,8 +152,20 @@ const HeroHome = ({
           )}
         </p>
         {processedLinks && processedLinks.length > 0 && (
-          <div className="flex w-full justify-center opacity-0" id="links">
-            <Links links={processedLinks} />
+          <div
+            className={clsx(
+              'w-full opacity-0',
+              '[&_form]:flex [&_form]:w-full [&_form]:max-w-full [&_form]:flex-wrap [&_form]:items-center [&_form]:justify-center [&_form]:gap-3 [&_form]:md:flex-nowrap',
+              '[&_input]:!rounded-[40px] [&_input]:!border-0 [&_input]:!h-6 [&_input]:md:max-w-[20rem]',
+              '[&_button]:!rounded-[40px]',
+              '[&_.link-button-solid]:!rounded-[40px] [&_.link-button-outline]:!rounded-[40px] [&_.link-button-secondary]:!rounded-[40px]'
+            )}
+            id="links"
+          >
+            <Links
+              className="flex w-full flex-wrap items-center justify-center gap-3 md:flex-nowrap"
+              links={processedLinks}
+            />
           </div>
         )}
       </div>

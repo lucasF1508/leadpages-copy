@@ -37,7 +37,7 @@ const TemplateGallerySearch = ({
           className={clsx(
             '[background-color:transparent]',
             'transition-all duration-200 ease-in-out md:w-full',
-            '!ring-brand-lime flex-[0_1_auto] type-body-sm block h-5 lg:h-7 rounded-md border-none p-2.5 py-0 text-obsidian-900 w-full',
+            'flex-[0_1_auto] type-body-sm block h-5 lg:h-7 rounded-md border-none p-2.5 py-0 text-obsidian-900 w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-button-surface-solid-ring',
             'placeholder:!text-body-muted/50',
             'pl-5'
           )}

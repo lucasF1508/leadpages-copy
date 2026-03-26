@@ -24,9 +24,10 @@ const MediaWithItemsAccordionItem = ({
   
   return (
     <Primitives.Item
+      style={isLight ? { color: '#1a1a1a' } : undefined}
       className={clsx(
         'py-xl relative flex w-full flex-row items-start gap-x-3 transition-colors',
-        isLight && 'text-[#1a1a1a]'
+        isLight && '!text-[#1a1a1a]'
       )}
       value={value}
     >
@@ -34,32 +35,35 @@ const MediaWithItemsAccordionItem = ({
         aria-label="open-button"
         className={clsx('z-base absolute inset-0')}
       />
-      <span
-        className={clsx(
-          'z-content pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity [[data-state=open]_&]:opacity-100',
-          isLight && 'bg-transparent'
-        )}
-      />
+      {!isLight && (
+        <span
+          className="z-content pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity [[data-state=open]_&]:opacity-100"
+          aria-hidden
+        />
+      )}
       <div className={clsx('my-auto flex-[1_1_auto]')}>
         <Primitives.Header
+          style={isLight ? { color: '#1a1a1a' } : undefined}
           className={clsx(
             'type-body-md sm:type-body-lg font-normal group flex w-full flex-row items-center justify-between gap-2',
-            isLight && 'text-[#1a1a1a]'
+            isLight && '!text-[#1a1a1a]'
           )}
         >
           <span className={clsx('text-left')}>{title}</span>
         </Primitives.Header>
         <Primitives.Content
           className={clsx(
-            'overflow-hidden data-[state=closed]:animate-[close_300ms_ease-out] data-[state=open]:animate-[open_300ms_ease-out]'
+            'overflow-hidden data-[state=closed]:animate-[close_300ms_ease-out] data-[state=open]:animate-[open_300ms_ease-out]',
+            isLight && '!text-[#1a1a1a]'
           )}
         >
           {content &&        
             <Text
               as="div"
+              style={isLight ? { color: '#1a1a1a' } : undefined}
               className={clsx(
                 'flex flex-col gap-1.5 [&_*]:!my-0',
-                isLight && 'text-[#1a1a1a]',
+                isLight && '[&_*]:!text-[#1a1a1a]',
                 title && 'pt-4'
               )}
               content={content}
@@ -68,17 +72,27 @@ const MediaWithItemsAccordionItem = ({
           {hasLink(link) &&        
             <Link
               className={clsx(
-                "mt-2",
-                isLight && link?.linkStyle === "button-solid" && [
-                  "!bg-[#C47FF3]",
-                  "!text-white",
-                  "[&_.link-label]:!text-white",
-                  "[&_.link-icon]:!text-white",
-                  "[&_.link-icon_svg]:!stroke-white",
-                  "hover:!bg-[#B06FE8]",
-                  "[&:hover_.link-label]:!text-white",
-                  "[&:hover_.link-icon]:!text-white",
-                  "[&:hover_.link-icon_svg]:!stroke-white"
+                'mt-2',
+                isLight && [
+                  '!bg-[#603EFF] !text-white !border-[#603EFF]',
+                  '[&_.link-icon-background]:hidden',
+                  '[&_.link-label]:!text-white',
+                  '[&_.link-icon]:!text-white [&_.link-icon_svg]:!stroke-white',
+                  'hover:!bg-[#7d4fe0] hover:!border-[#7d4fe0]',
+                  '[&:hover_.link-label]:!text-white',
+                  '[&:hover_.link-icon]:!text-white [&:hover_.link-icon_svg]:!stroke-white',
+                  'inline-flex items-center gap-2 rounded-[40px] px-3.5 h-[3rem] font-medium',
+                ],
+                !isLight && [
+                  /* Mismos tokens que navbar (link-button-solid): superficie / texto / hover */
+                  '!rounded-[40px] !min-h-[3rem] inline-flex items-center gap-2 px-3.5 font-medium',
+                  '!bg-button-surface-solid !text-button-text-solid !border-button-surface-solid',
+                  '[&_.link-icon-background]:!hidden',
+                  '[&_.link-label]:!text-button-text-solid',
+                  '[&_.link-icon]:!text-button-text-solid [&_.link-icon_svg]:!stroke-button-text-solid',
+                  'hover:!bg-button-surface-solid-hover',
+                  '[&:hover_.link-label]:!text-button-text-solid',
+                  '[&:hover_.link-icon]:!text-button-text-solid [&:hover_.link-icon_svg]:!stroke-button-text-solid',
                 ]
               )}
               {...link}
@@ -123,10 +137,11 @@ const MediaWithItemsAccordion = ({
 
   return (
     <Primitives.Root
+      style={isLight ? { color: '#1a1a1a' } : undefined}
       className={clsx(
         'flex w-full flex-col border-t border-b divide-y',
         isLight 
-          ? 'border-[#e5e5e5] divide-[#e5e5e5]' 
+          ? 'border-[#e5e5e5] divide-[#e5e5e5]'
           : 'border-border-primary divide-border-primary',
         className
       )}

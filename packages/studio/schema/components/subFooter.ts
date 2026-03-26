@@ -11,6 +11,12 @@ export const subFooter = F.object({
   ],
   fields: [
     ...G.group('content', [
+      F.radio(['dark', 'light'], {
+        name: 'variant',
+        title: 'Theme',
+        description: 'Dark or light version',
+        initialValue: 'dark',
+      }),
       F.string({ name: 'label' }),
       F.string({ name: 'heading', required: true }),
       F.string({ name: 'subheading' }),

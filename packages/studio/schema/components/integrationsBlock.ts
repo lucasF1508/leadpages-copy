@@ -6,6 +6,12 @@ export const integrationsBlock = F.object({
   title: 'Integrations Block',
   icon,
   fields: [
+    F.radio(['dark', 'light'], {
+      name: 'variant',
+      title: 'Theme',
+      description: 'Dark or light version of the block',
+      initialValue: 'light',
+    }),
     F.string({
       name: 'overline',
       title: 'Overline Text',

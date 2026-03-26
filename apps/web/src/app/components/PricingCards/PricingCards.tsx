@@ -116,7 +116,7 @@ const PricingCards = ({ plans }: PricingCardsProps) => {
                     {i === indices?.active && (
                       <m.div
                         className={
-                          clsx('bg-surface-brand-lime-primary absolute -bottom-[2px] left-0 right-0 h-[3px] z-under')
+                          clsx('bg-button-surface-solid absolute -bottom-[2px] left-0 right-0 h-[3px] z-under')
                         }
                         id="plan-highlight"
                         layout

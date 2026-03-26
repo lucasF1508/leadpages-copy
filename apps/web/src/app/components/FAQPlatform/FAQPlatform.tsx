@@ -18,6 +18,7 @@ export interface FAQPlatformProps {
   heading: string
   subheading?: string
   questions: FAQQuestion[]
+  variant?: 'dark' | 'light'
 }
 
 const FAQPlatform = ({
@@ -25,15 +26,17 @@ const FAQPlatform = ({
   heading,
   subheading,
   questions = [],
+  variant = 'dark',
 }: FAQPlatformProps) => {
   const [activeValue, setActiveValue] = useState<string | undefined>(undefined)
+  const isLight = variant === 'light'
 
   if (!questions?.length) return null
 
   return (
     <section
       className="w-full py-10 sm:py-12 md:pt-12 md:pb-48 lg:pt-13 lg:pb-64 px-4 sm:px-6"
-      style={{ backgroundColor: '#111019' }}
+      style={{ backgroundColor: isLight ? '#F8F8F8' : '#111019' }}
     >
       <div className="mx-auto w-full max-w-[1240px]">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
@@ -42,7 +45,10 @@ const FAQPlatform = ({
             {/* Label */}
             {label && (
               <p
-                className="text-xs font-semibold tracking-[0.2em] uppercase text-white/60 mb-3"
+                className={clsx(
+                  'text-xs font-semibold tracking-[0.2em] uppercase mb-3',
+                  isLight ? 'text-[#6F42C1]' : 'text-white/60'
+                )}
                 style={{
                   fontFamily: 'var(--font-roc-grotesk-variable, sans-serif)',
                   fontWeight: 600,
@@ -54,7 +60,10 @@ const FAQPlatform = ({
 
             {/* Heading */}
             <h2
-              className="text-6xl font-normal text-white leading-[0.95] mb-4"
+              className={clsx(
+                'text-6xl font-normal leading-[0.95] mb-4',
+                isLight ? 'text-[#333333]' : 'text-white'
+              )}
               style={{
                 fontFamily: 'var(--font-uxumvf, sans-serif)',
                 fontWeight: 400,
@@ -67,7 +76,10 @@ const FAQPlatform = ({
             {/* Subheading */}
             {subheading && (
               <p
-                className="text-lg font-normal text-white/70 leading-[1.4]"
+                className={clsx(
+                  'text-lg font-normal leading-[1.4]',
+                  isLight ? 'text-[#333333]' : 'text-white/70'
+                )}
                 style={{
                   fontFamily: 'var(--font-inter, sans-serif)',
                   fontWeight: 400,
@@ -93,17 +105,20 @@ const FAQPlatform = ({
                   <Primitives.Item
                     key={question._key}
                     value={question._key}
-                    className="border-b border-white/10"
+                    className={clsx('border-b', isLight ? 'border-[#E0E0E0]' : 'border-white/10')}
                   >
                     <Primitives.Header>
                       <Primitives.Trigger
                         className={clsx(
                           'flex w-full items-center justify-between py-4 text-left transition-colors',
-                          'hover:text-white/80'
+                          isLight ? 'hover:text-[#333333]/80' : 'hover:text-white/80'
                         )}
                       >
                         <span
-                          className="text-lg font-normal text-white pr-6 flex-1"
+                          className={clsx(
+                            'text-lg font-normal pr-6 flex-1',
+                            isLight ? 'text-[#333333]' : 'text-white'
+                          )}
                           style={{
                             fontFamily: 'var(--font-inter, sans-serif)',
                             fontWeight: 400,
@@ -127,7 +142,7 @@ const FAQPlatform = ({
                       </Primitives.Trigger>
                     </Primitives.Header>
                     <Primitives.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                      <div className="pb-4 text-white/70">
+                      <div className={clsx('pb-4', isLight ? 'text-[#333333]' : 'text-white/70')}>
                         <PortableText
                           value={question.content}
                           components={{
@@ -144,7 +159,10 @@ const FAQPlatform = ({
                                     condition={condition}
                                     url={url}
                                     hasIcon={false}
-                                    className="text-white underline cursor-pointer hover:text-white/80"
+                                    className={clsx(
+                                      'underline cursor-pointer',
+                                      isLight ? 'text-[#333333] hover:text-[#6F42C1]' : 'text-white hover:text-white/80'
+                                    )}
                                   >
                                     {children}
                                   </Link>

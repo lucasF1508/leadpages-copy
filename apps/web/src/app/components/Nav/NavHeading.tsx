@@ -34,7 +34,7 @@ const NavHeading = ({ data }: NavHeadingProps) => {
           {link && <Link {...link} className="type-body-xs flex items-center gap-1" classNames={{icon: 'w-2 h-2'}}/>}
           <m.div
             animate={{ scaleX: isHovered ? 1 : 0 }}
-            className="bg-brand-lime-primary absolute left-0 bottom-0 h-[0.125rem] w-full origin-left"
+            className="bg-button-surface-solid absolute left-0 bottom-0 h-[0.125rem] w-full origin-left"
             initial={{ scaleX: 0 }}
             transition={{ duration: 0.2 }}
           />

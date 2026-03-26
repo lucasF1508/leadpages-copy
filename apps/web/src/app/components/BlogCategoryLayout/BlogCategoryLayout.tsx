@@ -62,7 +62,7 @@ const BlogCategoryLayout = ({ category, posts, categories }: BlogCategoryLayoutP
         <nav className="mb-8 text-sm">
           <ol className="flex items-center space-x-2 text-gray-400">
             <li>
-              <Link condition="internal" url="/blog" className="hover:text-white">
+              <Link condition="internal" url="/blog" hasIcon={false} className="hover:text-white">
                 Blog
               </Link>
             </li>
@@ -125,6 +125,7 @@ const BlogCategoryLayout = ({ category, posts, categories }: BlogCategoryLayoutP
                   <Link
                     condition="internal"
                     url="/blog"
+                    hasIcon={false}
                     className="block px-4 py-2 bg-gray-800 text-gray-300 rounded hover:bg-gray-700 transition-colors"
                   >
                     All Articles
@@ -135,18 +136,27 @@ const BlogCategoryLayout = ({ category, posts, categories }: BlogCategoryLayoutP
                     <Link
                       condition="internal"
                       url={`/blog/category/${cat.slug.current}`}
-                      className={`block px-4 py-2 rounded transition-colors ${
+                      hasIcon={false}
+                      className={`group relative flex items-center justify-between gap-3 px-4 py-2 rounded transition-colors ${
                         cat.slug.current === category.slug.current
                           ? 'bg-purple-500 text-white'
                           : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                       }`}
                     >
-                      {cat.title}
+                      <span className="truncate" title={cat.title}>
+                        {cat.title}
+                      </span>
                       {cat.postCount !== undefined && (
-                        <span className="float-right text-sm opacity-75">
+                        <span className="text-sm opacity-75 tabular-nums shrink-0">
                           {cat.postCount}
                         </span>
                       )}
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute left-4 right-4 top-full mt-1 z-20 hidden rounded-md bg-[#1d1a29] px-2.5 py-1.5 text-xs leading-snug text-white shadow-lg ring-1 ring-white/10 group-hover:block group-focus-within:block"
+                      >
+                        {cat.title}
+                      </span>
                     </Link>
                   </li>
                 ))}

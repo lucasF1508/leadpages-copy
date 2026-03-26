@@ -17,8 +17,10 @@ interface MediaWithTextStickyProps
     item?: ClassValue
     root?: ClassValue
   }
+  disableContainer?: boolean
   items: MediaWithTextType[]
   linkButtonVariant?: 'default' | 'green' | null
+  variant?: 'light' | 'dark'
 }
 
 interface MediaWithTextStore {
@@ -39,22 +41,41 @@ const MediaWithTextSticky = ({
   blockStyles,
   className,
   classNames,
+  disableContainer,
   items,
   linkButtonVariant,
-}: MediaWithTextStickyProps) => (
-      <div className={clsx('flex flex-col gap-12 relative', className, classNames?.root)}>
-        {
-          items.map(({_key, blockStyles: itemBlockStyles, ...item}) => (
+  variant,
+}: MediaWithTextStickyProps) => {
+  const parentVariant = variant === 'light' ? 'light' : variant === 'dark' ? 'dark' : undefined
+
+  return (
+    <div className={clsx('flex flex-col gap-12 relative', className, classNames?.root)}>
+      {
+        items.map(({_key, blockStyles: itemBlockStyles, variant: itemVariant, ...item}) => {
+          const resolvedItemVariant =
+            parentVariant === 'light'
+              ? 'light'
+              : itemVariant === 'light'
+                ? 'light'
+                : itemVariant === 'dark'
+                  ? 'dark'
+                  : (parentVariant ?? 'light')
+
+          return (
             <MediaWithText
               _key={_key}
               key={_key}
               blockStyles={itemBlockStyles ?? blockStyles}
+              disableContainer={disableContainer}
               linkButtonVariant={linkButtonVariant}
+              variant={resolvedItemVariant}
               {...item}
             />
-          ))
-        }
-      </div>
-    )
+          )
+        })
+      }
+    </div>
+  )
+}
 
 export default MediaWithTextSticky

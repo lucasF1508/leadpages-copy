@@ -41,6 +41,13 @@ export const mediaWithItemsSwitch = F.field('object', {
   title: 'Media With Items Switch',
   groups: G.fieldGroupComponentOptions(),
   fields: [
+    F.radio(['light', 'dark'], {
+      name: 'variant',
+      title: 'Theme',
+      description: 'Light or dark version',
+      initialValue: 'light',
+      group: 'options',
+    }),
     ...G.group('content', [
       F.string({
         name: 'label',

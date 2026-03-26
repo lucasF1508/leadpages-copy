@@ -69,7 +69,7 @@ const FeatureScroll = ({
   subheading,
   features,
   laptopImage,
-  variant = 'light',
+  variant = 'dark',
 }: FeatureScrollProps) => {
   const isDark = variant === 'dark'
 

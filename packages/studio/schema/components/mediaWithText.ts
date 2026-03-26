@@ -23,6 +23,12 @@ export const mediaWithText = F.field('object', {
         title: 'Content Alignment',
         initialValue: 'right',
       }),
+      F.radio(['light', 'dark'], {
+        name: 'variant',
+        title: 'Theme',
+        description: 'Light or dark version',
+        initialValue: 'light',
+      }),
     ]),
   ],
   preview: {

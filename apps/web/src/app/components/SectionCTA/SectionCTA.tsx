@@ -174,9 +174,13 @@ export default function SectionCTA({
     {!!processedCTAs?.length && (
   <div
     className={clsx(
-      'mt-2 flex flex-wrap items-center gap-3 pb-6 md:pb-0',
-      isCenter ? 'justify-center' : '',
-      'relative z-20'
+      'mt-2 flex flex-wrap items-center gap-3 pb-6 md:pb-0 md:flex-nowrap',
+      isCenter ? 'justify-center' : 'justify-start',
+      'relative z-20',
+      '[&_form]:flex [&_form]:w-full [&_form]:max-w-full [&_form]:flex-wrap [&_form]:items-center [&_form]:justify-center [&_form]:gap-3 [&_form]:md:flex-nowrap',
+      '[&_input]:!rounded-[40px] [&_input]:!border [&_input]:!h-6 [&_input]:md:max-w-[20rem]',
+      '[&_button]:!rounded-[40px]',
+      '[&_.link-button-solid]:!rounded-[40px] [&_.link-button-outline]:!rounded-[40px] [&_.link-button-secondary]:!rounded-[40px]'
     )}
   >
     {processedCTAs.map((c, i) => {
@@ -210,7 +214,7 @@ export default function SectionCTA({
         return (
           <a
             className={clsx(
-              'cursor-pointer rounded-lg px-4 py-2.5 md:px-5 md:py-2.5 text-sm md:text-base font-medium',
+              'cursor-pointer rounded-[40px] px-5 py-3 md:px-6 md:py-3 text-sm md:text-base font-medium shrink-0',
               'transition-colors inline-flex items-center justify-center',
               isSolid
                 ? '!bg-[#CB79F0] hover:!bg-[#B869E0] !text-white !border-0'

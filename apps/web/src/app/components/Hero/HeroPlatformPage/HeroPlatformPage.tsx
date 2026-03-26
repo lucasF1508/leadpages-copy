@@ -1,9 +1,15 @@
 import type { MediaType } from '@types'
 import React from 'react'
 import clsx from 'clsx'
-import HeroMedia from '@/components/Hero/HeroMedia'
 import Media from '@/components/Media'
 import Text from '@/components/Text'
+import { LinkIcon } from '@/components/Link'
+
+/** True si el href es una URL absoluta (http/https); para estos enlaces se usa target="_blank". */
+function isExternalUrl(href: string | undefined): boolean {
+  if (!href || typeof href !== 'string') return false
+  return href.startsWith('http://') || href.startsWith('https://')
+}
 
 export interface HeroPlatformPageProps {
   content?: any
@@ -103,13 +109,19 @@ export default function HeroPlatformPage({
                   <a
                     className={clsx(
                       'inline-flex h-[46px] sm:h-[50px] items-center justify-center px-2',
-                      'text-[14px] sm:text-[15px] font-medium transition rounded-[10px] whitespace-nowrap',
-                      'bg-[#d4ff00] text-[#1a1d24] hover:bg-[#c8f000]'
+                      'text-[14px] sm:text-[15px] font-medium transition rounded-[40px] whitespace-nowrap',
+                      'bg-button-surface-solid text-button-text-solid hover:bg-button-surface-solid-hover'
                     )}
                     href={primaryCta.href ?? '#'}
+                    {...(isExternalUrl(primaryCta.href) && {
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                    })}
                   >
                     {primaryCta.label}
-                    <span aria-hidden="true" className="ml-2 text-[1em]">→</span>
+                    <span aria-hidden="true" className="ml-2 inline-flex">
+                      <LinkIcon />
+                    </span>
                   </a>
                 ) : null}
 
@@ -121,10 +133,16 @@ export default function HeroPlatformPage({
                       'bg-transparent text-white relative group'
                     )}
                     href={secondaryCta.href ?? '#'}
+                    {...(isExternalUrl(secondaryCta.href) && {
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                    })}
                   >
                     <span className="flex items-center gap-2 relative">
                       <span>{secondaryCta.label}</span>
-                      <span aria-hidden="true">→</span>
+                      <span aria-hidden="true" className="inline-flex">
+                        <LinkIcon />
+                      </span>
                       <span
                         className="absolute left-0 right-0 bottom-0 h-[1px] bg-current transition-all duration-200 opacity-0 group-hover:opacity-100"
                       />
@@ -156,7 +174,7 @@ export default function HeroPlatformPage({
               <div className="relative z-0 flex w-full items-center justify-end order-1 lg:order-2 mb-6 lg:mb-0">
                 {isVideo ? (
                   <div className="w-full lg:w-[125%]">
-                    <div className="w-full bg-gradient-to-b from-[#3a3d44] to-[#2a2d33] rounded-[16px] sm:rounded-[22px] md:rounded-[28px] p-[4px] sm:p-[6px] md:p-[8px] shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                    <div className="w-full bg-gradient-to-b from-[#3a3d44] to-[#2a2d33] overflow-hidden rounded-[16px] sm:rounded-[22px] md:rounded-[28px] p-[4px] sm:p-[6px] md:p-[8px] shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
                       <div className="relative rounded-[13px] sm:rounded-[18px] md:rounded-[22px] overflow-hidden aspect-[4/3]">
                         <Media
                           classNames={{ root: 'absolute inset-0 w-full h-full' }}
@@ -169,17 +187,22 @@ export default function HeroPlatformPage({
                     </div>
                   </div>
                 ) : (
-                  <div className="relative w-full lg:w-[125%]">
-                    <HeroMedia
-                      classNames={{
-                        media:
-                          'w-full h-full [&_img]:w-full [&_img]:h-full [&_img]:!object-contain [&_img]:!object-center [&_img]:bg-transparent',
-                        root: 'w-full h-full overflow-visible bg-transparent',
-                      }}
-                      limitlessImage
-                      media={media}
-                      overflow={false}
-                    />
+                  <div className="w-full lg:w-[125%]">
+                    <div className="w-full bg-gradient-to-b from-[#3a3d44] to-[#2a2d33] overflow-hidden rounded-[16px] sm:rounded-[22px] md:rounded-[28px] p-[4px] sm:p-[6px] md:p-[8px] shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+                      <div className="relative overflow-hidden rounded-[13px] sm:rounded-[18px] md:rounded-[22px] bg-[#1a1b21] aspect-[4/3]">
+                        <Media
+                          classNames={{
+                            media:
+                              '!object-contain object-center [&_img]:!rounded-none',
+                            root: 'relative h-full w-full overflow-hidden rounded-[13px] sm:rounded-[18px] md:rounded-[22px]',
+                          }}
+                          fill
+                          media={media}
+                          priority
+                          sizes="(max-width: 1024px) 100vw, 60vw"
+                        />
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>

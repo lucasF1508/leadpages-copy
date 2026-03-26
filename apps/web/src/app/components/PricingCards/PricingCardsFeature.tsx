@@ -21,7 +21,7 @@ const PricingCardsFeature = ({description, icon, tooltipText, visibleOnDesktop}:
       <span className={
         clsx(
           'transition-all duration-200 ease-linear',
-          icon === 'checkmark' && 'group-hover/feature:text-brand-lime-primary'
+          icon === 'checkmark' && 'group-hover/feature:text-button-surface-solid'
         )}
       >
         {icon === 'checkmark' ? <CheckCircleIcon /> : <XCircleIcon />}

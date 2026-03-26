@@ -13,9 +13,10 @@ interface TestimonialFeaturedProps {
   heading?: string | PortableTextBlock[]
   subheading?: string | PortableTextBlock[]
   testimonials: TestimonialCardProps[]
+  variant?: 'dark' | 'light'
 }
  
-const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialFeaturedProps) => {
+const TestimonialFeatured = ({ heading, subheading, testimonials, variant = 'dark' }: TestimonialFeaturedProps) => {
   // Show 3 testimonials with one featured (wider) card that can be clicked to change
   const showFeaturedGrid = testimonials?.length >= 3
   
@@ -97,11 +98,13 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
   // Show arrows on mobile or when using carousel (less than 3 testimonials)
   const showArrows = testimonials?.length > 1 && (isMobile || !showFeaturedGrid)
 
+  const isLight = variant === 'light'
+
   return (
     <div className='flex flex-col gap-5 sm:gap-7 md:gap-8'>
       <div className='flex flex-col gap-4 nav-break:flex-row justify-between'>
         {(heading || subheading) && (
-          <div className='flex flex-col gap-2 max-md:max-w-[33.25rem] text-light'>
+          <div className={clsx('flex flex-col gap-2 max-md:max-w-[33.25rem]', isLight ? 'text-black' : 'text-light')}>
             {heading && (
               typeof heading === 'string' 
                 ? <Heading heading={heading} />
@@ -149,7 +152,7 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
                   'flex-shrink-0 transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)] cursor-pointer self-stretch relative',
                   isActive 
                     ? 'flex-[1_1_54%] md:flex-[1_1_52%] z-10' // Selected
-                    : 'flex-[1_1_23%] md:flex-[1_1_24%] opacity-75 hover:opacity-100 transition-opacity duration-500 z-0' // Unselected: a bit wider
+                    : 'flex-[1_1_23%] md:flex-[1_1_24%] z-0' // Unselected: a bit wider
                 )}
               >
                 <div className={clsx(
@@ -159,6 +162,7 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
                   <TestimonialCard
                     {...testimonial}
                     isActive={isActive}
+                    variant={variant}
                   />
                 </div>
               </div>
@@ -197,7 +201,7 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
                   className={clsx(
                     'min-w-0',
                     !isMobile && 'transition-opacity duration-300',
-                    !isMobile && i !== active && 'opacity-50'
+                    !isMobile && i !== active && 'opacity-100'
                   )}
                   style={isMobile && showFeaturedGrid ? {
                     flex: `0 0 ${100 / testimonialCount}%`,
@@ -209,6 +213,7 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
                 >
                   <TestimonialCard
                     {...testimonial} 
+                    variant={variant}
                   />
                 </div>
               )

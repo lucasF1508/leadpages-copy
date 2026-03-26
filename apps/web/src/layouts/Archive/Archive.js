@@ -3,10 +3,9 @@ import { styled } from '@design'
 import Pinion from '@components/Pinion'
 import Heading from '@components/Heading'
 import ArchiveSidebar from '@components/Archive/ArchiveSidebar'
-import Link, { $Link } from '@components/Link'
+import Link, { $Link, LinkIcon } from '@components/Link'
 import { CardPostArchive } from '@components/Cards'
 import useFetchInfinite from '@hooks/useFetchInfinite'
-import { FiChevronDown as Icon } from '@react-icons/all-files/fi/FiChevronDown'
 import { $ArchiveLayout } from './ArchiveSingle'
 
 const $ArchiveCardGrid = styled('div', {
@@ -105,7 +104,7 @@ export const $LoadMoreContainer = styled('div', {
   },
 })
 
-const $Icon = styled(Icon, {
+const $Icon = styled(LinkIcon, {
   w: '$space$2_5',
   h: '$space$2_5',
   ml: '-$0_5',

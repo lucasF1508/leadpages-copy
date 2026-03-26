@@ -6,6 +6,12 @@ export const testimonialFeaturedBlock = F.object({
   title: 'Testimonials Featured Block',
   icon,
   fields: [
+    F.radio(['dark', 'light'], {
+      name: 'variant',
+      title: 'Theme',
+      description: 'Dark or light version',
+      initialValue: 'dark',
+    }),
     F.field('blockContentHero', {name: 'heading'}),
     F.field('blockContentHero', {name: 'subheading'}),
     F.array({

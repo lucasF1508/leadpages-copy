@@ -76,8 +76,9 @@ export default function BlogFeatureCard({ className, item }: BlogFeatureCardProp
           <div className="mt-3">
             <Link
               aria-label={`Read more: ${title}`}
-              className="rounded-md cursor-pointer"
+              className="cursor-pointer w-fit"
               condition={isExternal ? 'external' : 'internal'}
+              hasIcon
               linkStyle="button-secondary"
               url={href}
             >

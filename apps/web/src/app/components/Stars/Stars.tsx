@@ -6,7 +6,7 @@ const Star = ({ gradientId }: { gradientId: string }) => (
   </svg>
 )
 
-interface StarsProps { rating?: number; variant?: 'purple' | 'green' }
+interface StarsProps { rating?: number; variant?: 'purple' | 'green' | 'blue' | 'brandPurple' }
 
 const Stars = ({ rating = 5, variant = 'purple' }: StarsProps) => {
   const uid = useId().replace(/:/g, '')
@@ -14,10 +14,20 @@ const Stars = ({ rating = 5, variant = 'purple' }: StarsProps) => {
   const maskId = `star-mask-${uid}`
   const partial = rating % 1
 
-  const gradient = variant === 'green' ? (
+  const gradient = variant === 'blue' ? (
+    <>
+      <stop stopColor="#1e40af"/>
+      <stop offset="1" stopColor="#3b82f6"/>
+    </>
+  ) : variant === 'green' ? (
     <>
       <stop stopColor="#84cc16"/>
       <stop offset="1" stopColor="#a3e635"/>
+    </>
+  ) : variant === 'brandPurple' ? (
+    <>
+      <stop stopColor="#603EFF"/>
+      <stop offset="1" stopColor="#603EFF"/>
     </>
   ) : (
     <>

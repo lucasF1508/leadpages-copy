@@ -9,6 +9,7 @@ export interface RackInnerComponent {
   alignment?: Align
   backgroundColor?: BackgroundColor
   columnsWidth?: ColumnsWidth
+  variant?: 'light' | 'dark'
 }
 
 export type ColumnsWidth =

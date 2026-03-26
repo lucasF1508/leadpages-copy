@@ -3,6 +3,12 @@ import { F } from '@/schema/tool'
 
 export const featureShowcase = F.object({
   fields: [
+    F.radio(['light', 'dark'], {
+      name: 'variant',
+      title: 'Theme',
+      description: 'Light or dark version',
+      initialValue: 'light',
+    }),
     F.string({
       name: 'heading',
       title: 'Heading',

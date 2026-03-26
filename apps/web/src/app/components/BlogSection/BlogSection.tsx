@@ -7,6 +7,7 @@ import Text from '@/components/Text'
 import BlogFeatureCard from '../BlogCard/BlogFeatureCard'
 import BlogSidebar from './BlogSidebar'
 import Media from '@/components/Media'
+import { LinkIcon } from '@/components/Link'
 
 type Props = BlogSectionProps & {
   excludedTags?: any[]
@@ -383,11 +384,18 @@ export default function BlogSection(props: Props) {
             {hasMorePosts && (
               <div className="flex justify-center mt-8">
                 <button
+                  type="button"
                   onClick={handleLoadMore}
-                  className="link-button-solid"
+                  className="link-button-solid link-w-icon [&_.link-icon-background]:hidden"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Loading...' : 'Load More Posts →'}
+                  <span className="link-label">{isLoading ? 'Loading...' : 'Load More Posts'}</span>
+                  {!isLoading && (
+                    <span className="link-icon">
+                      <span className="link-icon-background" />
+                      <LinkIcon />
+                    </span>
+                  )}
                 </button>
               </div>
             )}

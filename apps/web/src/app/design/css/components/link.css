@@ -30,6 +30,7 @@
   }
 }
 
+/* Navbar y enlaces inline: sin píldora ni overflow (evita recorte de texto). */
 .link-text {
   @apply link type-button text-button-text-outline relative gap-1.5 rounded-md;
 
@@ -72,8 +73,9 @@
   }
 }
 
+/* Pill shape for all filled / button-style links (solid, secondary, outline, copied) */
 .link-buttons {
-  @apply link rounded-button type-button h-6 gap-0.5 whitespace-nowrap px-2.5 transition-colors;
+  @apply link rounded-[40px] type-button h-6 gap-0.5 whitespace-nowrap px-2.5 transition-colors;
 }
 
 .link-button-solid,
@@ -100,8 +102,8 @@
 }
 
 .link-button-solid-copied {
-  @apply link-buttons border border-brand-lime-muted;
-  @apply bg-brand-lime-muted text-brand-lime-strong;
+  @apply link-buttons border border-button-surface-solid;
+  @apply bg-button-surface-solid text-button-text-solid;
 }
 
 .link-button-outline,
@@ -183,12 +185,12 @@
   .link-text &,
   .link-text-secondary &,
   .link-icon-only & {
-    @apply rounded-button flex h-6 w-6 items-center justify-center;
+    @apply rounded-full flex h-6 w-6 shrink-0 items-center justify-center;
   }
 }
 
 .link-icon-background {
-  @apply rounded-button z-base border-border absolute right-0 h-full w-6 border transition-all;
+  @apply rounded-[40px] z-base border-border absolute right-0 h-full w-6 border transition-all;
 
   .link-text:hover &,
   .link-text-secondary:hover &,
@@ -256,4 +258,29 @@
   .link-icon-only[disabled] & {
     @apply !border-button-border-icon-disabled bg-button-surface-icon-disabled;
   }
+}
+
+/* Píldora solo en copy (portable / media with text), no en navbar */
+.mwt-prose .link-text,
+.mwt-prose .link-text-secondary,
+.portable-text .link-text,
+.portable-text .link-text-secondary {
+  border-radius: 40px !important;
+  overflow: hidden;
+}
+
+.mwt-prose .link-text .link-icon-background,
+.mwt-prose .link-text-secondary .link-icon-background,
+.portable-text .link-text .link-icon-background,
+.portable-text .link-text-secondary .link-icon-background {
+  border-radius: 40px !important;
+}
+
+.mwt-prose .link-button-outline,
+.mwt-prose .link-button-outline[type='button'],
+.mwt-prose .link-button-outline[type='submit'],
+.mwt-prose .link-button-secondary,
+.mwt-prose .link-button-secondary[type='button'],
+.mwt-prose .link-button-secondary[type='submit'] {
+  border-radius: 40px !important;
 }

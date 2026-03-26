@@ -29,6 +29,7 @@ _type == "testimonialBlock" => {
 const testimonialFeaturedBlock = `
 _type == "testimonialFeaturedBlock" => {
   ...,
+  variant,
   testimonials[]-> 
 }`
 

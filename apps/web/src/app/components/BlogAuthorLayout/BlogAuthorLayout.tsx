@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import BlogFeatureCard from '@/components/BlogCard/BlogFeatureCard'
 import Image from '@/components/Image'
-import Link from '@/components/Link'
+import Link, { LinkIcon } from '@/components/Link'
 import PortableText from '@/components/PortableText'
 
 interface Post {
@@ -162,10 +162,15 @@ const BlogAuthorLayout = ({ author, posts }: BlogAuthorLayoutProps) => {
         {hasMorePosts && (
           <div className="flex justify-center mt-12">
             <button
+              type="button"
               onClick={handleLoadMore}
-              className="link-button-solid"
+              className="link-button-solid link-w-icon [&_.link-icon-background]:hidden"
             >
-              Load More Posts →
+              <span className="link-label">Load More Posts</span>
+              <span className="link-icon">
+                <span className="link-icon-background" />
+                <LinkIcon />
+              </span>
             </button>
           </div>
         )}

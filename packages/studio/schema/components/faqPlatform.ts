@@ -3,6 +3,12 @@ import { F } from '@/schema/tool'
 
 export const faqPlatform = F.object({
   fields: [
+    F.radio(['dark', 'light'], {
+      name: 'variant',
+      title: 'Theme',
+      description: 'Dark or light version',
+      initialValue: 'dark',
+    }),
     F.string({
       name: 'label',
       title: 'Label',

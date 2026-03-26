@@ -4,8 +4,15 @@ import { MdOutlineFeaturedVideo as icon } from "react-icons/md";
 export const featureCards = F.object({
   name: 'featureCards',
   icon,
-  groups: [G.define('cta', {title: 'CTA'}), G.define('content', {title: 'Content', default: true})],
+  groups: [G.define('cta', {title: 'CTA'}), G.define('content', {title: 'Content', default: true}), G.define('options', {title: 'Options'})],
   fields: [
+    F.radio(['dark', 'light'], {
+      name: 'variant',
+      title: 'Theme',
+      description: 'Dark or light version',
+      initialValue: 'dark',
+      group: 'options',
+    }),
     ...G.group('content', [
       F.array({
         name: 'cards',

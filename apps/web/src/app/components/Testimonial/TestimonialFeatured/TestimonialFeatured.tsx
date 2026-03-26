@@ -13,9 +13,10 @@ interface TestimonialFeaturedProps {
   heading?: string | PortableTextBlock[]
   subheading?: string | PortableTextBlock[]
   testimonials: TestimonialCardProps[]
+  variant?: 'dark' | 'light'
 }
- 
-const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialFeaturedProps) => {
+
+const TestimonialFeatured = ({ heading, subheading, testimonials, variant }: TestimonialFeaturedProps) => {
   // Show 3 testimonials with one featured (wider) card that can be clicked to change
   const showFeaturedGrid = testimonials?.length >= 3
   
@@ -94,14 +95,27 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
     }
   }
   
-  // Show arrows on mobile or when using carousel (less than 3 testimonials)
   const showArrows = testimonials?.length > 1 && (isMobile || !showFeaturedGrid)
+  const resolvedVariant = variant ?? 'dark'
+  const isLight = resolvedVariant === 'light'
 
   return (
-    <div className='flex flex-col gap-5 sm:gap-7 md:gap-8 max-w-6xl mx-auto'>
+    <div
+      className={clsx(
+        'flex flex-col gap-5 sm:gap-7 md:gap-8',
+        isLight
+          ? '!bg-white w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] pt-12 md:pt-16 pb-12 md:pb-16 px-4 sm:px-6 lg:px-8 rounded-2xl max-w-7xl mx-auto'
+          : 'max-w-6xl mx-auto'
+      )}
+    >
       <div className='flex flex-col gap-4 nav-break:flex-row justify-between items-center'>
         {(heading || subheading) && (
-          <div className='flex flex-col gap-2 max-md:max-w-[33.25rem] text-light text-center mx-auto nav-break:mx-0'>
+          <div
+            className={clsx(
+              'flex flex-col gap-2 max-md:max-w-[33.25rem] text-center mx-auto nav-break:mx-0',
+              isLight ? 'text-gray-900' : 'text-light'
+            )}
+          >
             {heading && (
               typeof heading === 'string' 
                 ? <Heading className='text-center' heading={heading} />
@@ -118,10 +132,16 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
         {showArrows && !isMobile && (        
           <div className='nav-break:self-end'>          
             <div className='flex gap-2 sm:gap-3 md:gap-4'>
-              <div className='link-button-secondary border-none w-6 h-6 rotate-180 cursor-pointer' onClick={scrollPrev}>
+              <div
+                className={clsx('border-none w-6 h-6 rotate-180 cursor-pointer', isLight ? 'bg-[#9061EE] hover:bg-[#a67ff3] [&_svg]:text-white rounded' : 'link-button-secondary')}
+                onClick={scrollPrev}
+              >
                 <LinkIcon/>
               </div>
-              <div className='link-button-secondary border-none w-6 h-6 cursor-pointer' onClick={scrollNext}>
+              <div
+                className={clsx('border-none w-6 h-6 cursor-pointer', isLight ? 'bg-[#9061EE] hover:bg-[#a67ff3] [&_svg]:text-white rounded' : 'link-button-secondary')}
+                onClick={scrollNext}
+              >
                 <LinkIcon/>
               </div>
             </div>
@@ -154,11 +174,12 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
               >
                 <div className={clsx(
                   'h-full w-full transition-all duration-[2000ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]',
-                  isActive && 'ring-2 ring-purple-400/60 rounded-xl shadow-lg transition-all duration-[2000ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]'
+                  isActive && (resolvedVariant === 'light' ? 'ring-2 ring-gray-300 rounded-xl shadow-lg' : 'ring-2 ring-purple-400/60 rounded-xl shadow-lg')
                 )}>
                   <TestimonialCard
                     {...testimonial}
                     isActive={isActive}
+                    variant={resolvedVariant}
                   />
                 </div>
               </div>
@@ -208,7 +229,8 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
                   key={testimonial._id}
                 >
                   <TestimonialCard
-                    {...testimonial} 
+                    {...testimonial}
+                    variant={resolvedVariant}
                   />
                 </div>
               )
@@ -221,11 +243,8 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
               <button
                 aria-label="Previous"
                 className={clsx(
-                  'absolute left-2 top-1/2 -translate-y-1/2 z-20',
-                  'inline-flex h-5 w-5 items-center justify-center rounded-md',
-                  'text-base',
-                  'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20',
-                  'text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70'
+                  'absolute left-2 top-1/2 -translate-y-1/2 z-20 inline-flex h-5 w-5 items-center justify-center rounded-md text-base transition-colors focus-visible:outline-none focus-visible:ring-2',
+                  isLight ? 'bg-[#9061EE] hover:bg-[#a67ff3] text-white focus-visible:ring-purple-400' : 'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20 text-white focus-visible:ring-white/70'
                 )}
                 onClick={goPrev}
                 type="button"
@@ -236,11 +255,8 @@ const TestimonialFeatured = ({ heading, subheading, testimonials }: TestimonialF
               <button
                 aria-label="Next"
                 className={clsx(
-                  'absolute right-2 top-1/2 -translate-y-1/2 z-20',
-                  'inline-flex h-5 w-5 items-center justify-center rounded-md',
-                  'text-base',
-                  'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20',
-                  'text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70'
+                  'absolute right-2 top-1/2 -translate-y-1/2 z-20 inline-flex h-5 w-5 items-center justify-center rounded-md text-base transition-colors focus-visible:outline-none focus-visible:ring-2',
+                  isLight ? 'bg-[#9061EE] hover:bg-[#a67ff3] text-white focus-visible:ring-purple-400' : 'bg-white/10 ring-1 ring-white/10 hover:bg-white/20 hover:ring-white/20 text-white focus-visible:ring-white/70'
                 )}
                 onClick={goNext}
                 type="button"

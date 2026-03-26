@@ -6,6 +6,12 @@ export const textWithStats = F.object({
   title: 'Text With Stats',
   name: 'textWithStats',
   fields: [
+    F.radio(['dark', 'light'], {
+      name: 'variant',
+      title: 'Theme',
+      description: 'Dark or light version',
+      initialValue: 'dark',
+    }),
     F.blockContent(),
     F.array({
       name: 'stats',

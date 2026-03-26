@@ -1,10 +1,8 @@
 /**
- * Script para crear/actualizar la página component-testing con los 6 componentes de ejemplo
- * 
+ * Script para poblar la página existente de testing en Sanity.
+ *
  * Uso:
  *   npm run create-component-testing
- *   o
- *   tsx -r tsconfig-paths/register packages/migration/src/tools/create-component-testing-page.ts
  */
 
 import { loadEnv } from '../loadEnv'
@@ -12,868 +10,498 @@ import { client } from '../client'
 
 loadEnv()
 
-// Datos de los componentes - 6 componentes totales (2 testimonials, 2 FAQ, 2 FeatureScroll)
-const components = [
-  {
-    _type: 'testimonialBlock',
-    _key: 'testimonial-dark-1',
-    heading: 'What Our Customers Say',
-    variant: 'dark',
-    testimonials: [
-      {
-        _key: 'testimonial-1',
-        title: 'John Doe',
-        authorTitle: 'CEO, Company Name',
-        testimonial: 'This is an amazing product that has transformed our business. The features are incredible and the support is outstanding.',
-      },
-      {
-        _key: 'testimonial-2',
-        title: 'Jane Smith',
-        authorTitle: 'Marketing Director, Another Company',
-        testimonial: 'We have seen incredible results since implementing this solution. Highly recommended for any business looking to grow.',
-      },
-      {
-        _key: 'testimonial-3',
-        title: 'Mike Johnson',
-        authorTitle: 'Founder, Startup Inc',
-        testimonial: 'The best investment we have made this year. The ROI has been exceptional and the team loves using it.',
-      },
-      {
-        _key: 'testimonial-4',
-        title: 'Sarah Williams',
-        authorTitle: 'Product Manager, Tech Corp',
-        testimonial: 'Outstanding quality and service. This product has exceeded all our expectations and delivered on every promise.',
-      },
-    ],
-  },
-  {
-    _type: 'testimonialBlock',
-    _key: 'testimonial-light-1',
-    heading: 'Customer Success Stories',
-    variant: 'light',
-    testimonials: [
-      {
-        _key: 'testimonial-5',
-        title: 'David Brown',
-        authorTitle: 'CTO, Innovation Labs',
-        testimonial: 'This platform has revolutionized how we work. The intuitive interface and powerful features make it a must-have tool.',
-      },
-      {
-        _key: 'testimonial-6',
-        title: 'Emily Davis',
-        authorTitle: 'Operations Manager, Growth Co',
-        testimonial: 'We have streamlined our entire workflow thanks to this solution. The time savings alone make it worth every penny.',
-      },
-    ],
-  },
-  {
-    _type: 'faqAccordion',
-    _key: 'faq-dark-1',
-    heading: 'Frequently Asked Questions',
-    description: 'Find answers to common questions about our product and services.',
-    ctaUrl: '/faq',
-    ctaText: 'Visit the FAQ Page',
-    variant: 'dark',
-    questions: [
-      {
-        _key: 'faq-1',
-        title: 'What is the main feature of this product?',
-        content: [
-          {
-            _type: 'block',
-            children: [
-              {
-                _type: 'span',
-                text: 'The main feature is to provide a comprehensive solution that helps businesses streamline their operations and improve efficiency.',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        _key: 'faq-2',
-        title: 'How do I get started?',
-        content: [
-          {
-            _type: 'block',
-            children: [
-              {
-                _type: 'span',
-                text: 'Getting started is easy! Simply sign up for an account, complete the onboarding process, and you will be ready to use all features within minutes.',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        _key: 'faq-3',
-        title: 'What kind of support do you offer?',
-        content: [
-          {
-            _type: 'block',
-            children: [
-              {
-                _type: 'span',
-                text: 'We offer 24/7 customer support via email, chat, and phone. Our team is always ready to help you with any questions or issues you may have.',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        _key: 'faq-4',
-        title: 'Can I customize the product to my needs?',
-        content: [
-          {
-            _type: 'block',
-            children: [
-              {
-                _type: 'span',
-                text: 'Yes! Our product is highly customizable. You can configure settings, integrate with other tools, and adapt it to match your specific workflow requirements.',
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    _type: 'faqAccordion',
-    _key: 'faq-light-1',
-    heading: 'Common Questions',
-    description: 'Everything you need to know about our platform and services.',
-    ctaUrl: '/faq',
-    ctaText: 'View All FAQs',
-    variant: 'light',
-    questions: [
-      {
-        _key: 'faq-5',
-        title: 'What pricing plans are available?',
-        content: [
-          {
-            _type: 'block',
-            children: [
-              {
-                _type: 'span',
-                text: 'We offer several pricing plans to suit different business needs, from starter plans for small teams to enterprise solutions for large organizations.',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        _key: 'faq-6',
-        title: 'Is there a free trial?',
-        content: [
-          {
-            _type: 'block',
-            children: [
-              {
-                _type: 'span',
-                text: 'Yes, we offer a 14-day free trial with full access to all features. No credit card required to start your trial.',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        _key: 'faq-7',
-        title: 'How secure is my data?',
-        content: [
-          {
-            _type: 'block',
-            children: [
-              {
-                _type: 'span',
-                text: 'Security is our top priority. We use industry-standard encryption, regular security audits, and comply with all major data protection regulations.',
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    _type: 'featureScroll',
-    _key: 'feature-scroll-dark-1',
-    heading: 'Our Features',
-    subheading: 'Rebuilt from the ground up, faster, smarter, limitless. A completely new interface built for modern marketers.',
-    variant: 'dark',
-    laptopImage: {},
-    features: [
-      {
-        _key: 'feature-1',
-        icon: {},
-        title: 'Global Brand Styles',
-        description: 'Maintain consistent branding across all your pages and campaigns with our global brand style system.',
-      },
-      {
-        _key: 'feature-2',
-        icon: {},
-        title: 'Powerful AI Tools',
-        description: 'Leverage artificial intelligence to optimize your content, improve conversions, and automate repetitive tasks.',
-      },
-      {
-        _key: 'feature-3',
-        icon: {},
-        title: 'Social Media Automation',
-        description: 'Schedule and publish content across all your social media channels from one centralized dashboard.',
-      },
-    ],
-  },
-  {
-    _type: 'featureScroll',
-    _key: 'feature-scroll-light-1',
-    heading: 'Powerful Features',
-    subheading: 'Everything you need to create, manage, and optimize your marketing campaigns in one place.',
-    variant: 'light',
-    laptopImage: {},
-    features: [
-      {
-        _key: 'feature-4',
-        icon: {},
-        title: 'Advanced Analytics',
-        description: 'Track performance metrics, analyze user behavior, and make data-driven decisions with comprehensive analytics.',
-      },
-      {
-        _key: 'feature-5',
-        icon: {},
-        title: 'Seamless Integrations',
-        description: 'Connect with your favorite tools and services through our extensive integration marketplace.',
-      },
-      {
-        _key: 'feature-6',
-        icon: {},
-        title: 'Mobile Optimization',
-        description: 'Ensure your content looks perfect on all devices with our responsive design tools and mobile preview.',
-      },
-    ],
-  },
-]
-
 async function createComponentTestingPage() {
   try {
-    console.log('🔍 Buscando página component-testing...')
+    console.log('🔍 Buscando página de testing existente en Sanity...')
 
-    // Crear documentos de testimonial primero
-    console.log('📝 Creando documentos de testimonial...')
-    const testimonialDocs = [
+    const now = Date.now()
+    const block = (text: string) => [
       {
-        _type: 'testimonial',
-        title: 'John Doe',
-        authorTitle: 'CEO, Company Name',
-        testimonial: 'This is an amazing product that has transformed our business. The features are incredible and the support is outstanding.',
-      },
-      {
-        _type: 'testimonial',
-        title: 'Jane Smith',
-        authorTitle: 'Marketing Director, Another Company',
-        testimonial: 'We have seen incredible results since implementing this solution. Highly recommended for any business looking to grow.',
-      },
-      {
-        _type: 'testimonial',
-        title: 'Mike Johnson',
-        authorTitle: 'Founder, Startup Inc',
-        testimonial: 'The best investment we have made this year. The ROI has been exceptional and the team loves using it.',
-      },
-      {
-        _type: 'testimonial',
-        title: 'Sarah Williams',
-        authorTitle: 'Product Manager, Tech Corp',
-        testimonial: 'Outstanding quality and service. This product has exceeded all our expectations and delivered on every promise.',
-      },
-      {
-        _type: 'testimonial',
-        title: 'David Brown',
-        authorTitle: 'CTO, Innovation Labs',
-        testimonial: 'This platform has revolutionized how we work. The intuitive interface and powerful features make it a must-have tool.',
-      },
-      {
-        _type: 'testimonial',
-        title: 'Emily Davis',
-        authorTitle: 'Operations Manager, Growth Co',
-        testimonial: 'We have streamlined our entire workflow thanks to this solution. The time savings alone make it worth every penny.',
+        _type: 'block',
+        children: [{ _type: 'span', text }],
       },
     ]
 
-    // Crear o buscar testimonials existentes y obtener sus IDs
-    const testimonialIds = []
-    for (const testimonial of testimonialDocs) {
-      // Buscar si ya existe un testimonial con el mismo título
-      const existing = await client.fetch(
-        `*[_type == 'testimonial' && title == $title] | order(_updatedAt desc) [0]`,
-        { title: testimonial.title }
-      )
-
-      if (existing) {
-        console.log(`   ✓ Testimonial "${testimonial.title}" ya existe`)
-        testimonialIds.push(existing._id)
-      } else {
-        const created = await client.create(testimonial)
-        console.log(`   ✓ Testimonial "${testimonial.title}" creado`)
-        testimonialIds.push(created._id)
-      }
-    }
-
-    // Actualizar componentes con referencias usando el formato correcto
-    const timestamp = Date.now()
-    const componentsWithRefs = components.map((comp, compIndex) => {
-      if (comp._type === 'testimonialBlock') {
-        if (comp._key === 'testimonial-dark-1') {
-          return {
-            ...comp,
-            testimonials: testimonialIds.slice(0, 4).map((id, index) => ({
-              _key: `testimonial-dark-ref-${timestamp}-${compIndex}-${index}`,
-              _type: 'reference',
-              _ref: id,
-              _weak: false,
-            })),
-          }
-        } else if (comp._key === 'testimonial-light-1') {
-          return {
-            ...comp,
-            testimonials: testimonialIds.slice(4, 6).map((id, index) => ({
-              _key: `testimonial-light-ref-${timestamp}-${compIndex}-${index}`,
-              _type: 'reference',
-              _ref: id,
-              _weak: false,
-            })),
-          }
-        }
-      }
-      return comp
+    const link = (label: string, url: string, hasIcon = false, linkStyle?: string) => ({
+      _type: 'link',
+      condition: 'internal',
+      label,
+      url,
+      hasIcon,
+      ...(linkStyle && { linkStyle }),
     })
 
-    // Componente CardsBlock con variante light para agregar
-    const cardsBlockComponent = [
+    const components = [
       {
-        _type: 'cardsBlock',
-        _key: 'cards-block-light-1',
+        _type: 'bannerCta',
+        _key: `banner-cta-light-${now}`,
         variant: 'light',
-        columns: '3',
-        cards: [
-          {
-            _key: 'card-1',
-            content: [
-              {
-                _type: 'block',
-                style: 'h3',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Audience Insights',
-                  },
-                ],
-              },
-              {
-                _type: 'block',
-                style: 'normal',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Listen to our hard-hitting marketing takes and musical insights.',
-                  },
-                ],
-              },
-            ],
-            icon: {},
-          },
-          {
-            _key: 'card-2',
-            content: [
-              {
-                _type: 'block',
-                style: 'h3',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'In App Analytics',
-                  },
-                ],
-              },
-              {
-                _type: 'block',
-                style: 'normal',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Listen to our hard-hitting marketing takes and musical insights.',
-                  },
-                ],
-              },
-            ],
-            icon: {},
-          },
-          {
-            _key: 'card-3',
-            content: [
-              {
-                _type: 'block',
-                style: 'h3',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'AI Integrations',
-                  },
-                ],
-              },
-              {
-                _type: 'block',
-                style: 'normal',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Listen to our hard-hitting marketing takes and musical insights.',
-                  },
-                ],
-              },
-            ],
-            icon: {},
-          },
-          {
-            _key: 'card-4',
-            content: [
-              {
-                _type: 'block',
-                style: 'h3',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Verifone Integration',
-                  },
-                ],
-              },
-              {
-                _type: 'block',
-                style: 'normal',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Listen to our hard-hitting marketing takes and musical insights.',
-                  },
-                ],
-              },
-            ],
-            icon: {},
-          },
-          {
-            _key: 'card-5',
-            content: [
-              {
-                _type: 'block',
-                style: 'h3',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Social Media Automation',
-                  },
-                ],
-              },
-              {
-                _type: 'block',
-                style: 'normal',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Listen to our hard-hitting marketing takes and musical insights.',
-                  },
-                ],
-              },
-            ],
-            icon: {},
-          },
-          {
-            _key: 'card-6',
-            content: [
-              {
-                _type: 'block',
-                style: 'h3',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Global Brand Styles',
-                  },
-                ],
-              },
-              {
-                _type: 'block',
-                style: 'normal',
-                children: [
-                  {
-                    _type: 'span',
-                    text: 'Listen to our hard-hitting marketing takes and musical insights.',
-                  },
-                ],
-              },
-            ],
-            icon: {},
-          },
-        ],
+        title: 'Start your free trial today',
+        subtitle: 'Grow your business with high-converting landing pages.',
+        ctaLabel: 'Get started free',
+        ctaHref: '/pricing',
       },
-    ]
-
-    // Componentes AddOnCards para agregar
-    const addOnCardsComponents = [
       {
-        _type: 'addOnCards',
-        _key: 'addon-cards-dark-1',
+        _type: 'bannerCta',
+        _key: `banner-cta-dark-${now}`,
         variant: 'dark',
-        pillContent: 'ADD ONS',
-        content: [
-          {
-            _type: 'block',
-            style: 'h2',
-            children: [
-              {
-                _type: 'span',
-                text: 'Amplify the power of your plan with add-ons',
-              },
-            ],
-          },
-          {
-            _type: 'block',
-            style: 'normal',
-            children: [
-              {
-                _type: 'span',
-                text: 'Enhance your plan with optional add-ons, available after signup.',
-              },
-            ],
-          },
-        ],
+        title: 'Start your free trial today',
+        subtitle: 'Grow your business with high-converting landing pages.',
+        ctaLabel: 'Get started free',
+        ctaHref: '/pricing',
+      },
+      {
+        _type: 'featureCards',
+        _key: `feature-cards-light-${now}`,
+        variant: 'light',
+        cta: {
+          heading: 'Everything you need to convert more',
+          content: block('Design, publish and optimize pages in minutes.'),
+          links: [link('Try now', '/pricing', true, 'button-solid')],
+        },
         cards: [
           {
-            _key: 'addon-card-1',
-            title: 'Lead Enrichment',
-            content: 'Get richer lead insights and improve lead quality to fuel smarter sales and marketing.',
-            pricesLabel: 'From',
-            prices: [
-              {
-                _key: 'price-1',
-                currency: 'USD',
-                period: 'monthly',
-                price: '15',
-                symbol: '$',
-                priceIncludes: 'Includes 40 enriched leads/mo',
-              },
-            ],
-            links: [
-              {
-                _type: 'link',
-                condition: 'internal',
-                url: '/lead-enrichment',
-                label: 'View Lead Enrichment',
-                hasIcon: false,
-              },
-            ],
-            icon: {},
+            _key: `fc-light-1-${now}`,
+            title: 'Drag & Drop',
+            content: block('Visual editor to create pages without touching code.'),
           },
           {
-            _key: 'addon-card-2',
-            title: 'Add Users',
-            content: 'Invite team members to your Leadpages account to collaborate and optimize efficiently',
-            pricesLabel: '',
-            prices: [
-              {
-                _key: 'price-2',
-                currency: 'USD',
-                period: 'monthly',
-                price: '15',
-                symbol: '$',
-                priceIncludes: 'per user',
-              },
-            ],
-            links: [
-              {
-                _type: 'link',
-                condition: 'internal',
-                url: '/add-users',
-                label: 'View Add Users',
-                hasIcon: false,
-              },
-            ],
-            icon: {},
+            _key: `fc-light-2-${now}`,
+            title: 'A/B Testing',
+            content: block('Compare variants and improve conversions.'),
+          },
+          {
+            _key: `fc-light-3-${now}`,
+            title: 'Integraciones',
+            content: block('Connect with your favorite tools.'),
           },
         ],
       },
       {
-        _type: 'addOnCards',
-        _key: 'addon-cards-light-1',
-        variant: 'light',
-        pillContent: 'ADD ONS',
-        content: [
+        _type: 'featureCards',
+        _key: `feature-cards-dark-${now}`,
+        variant: 'dark',
+        cta: {
+          heading: 'Everything you need to convert more',
+          content: block('Design, publish and optimize pages in minutes.'),
+          links: [link('Try now', '/pricing', true, 'button-solid')],
+        },
+        cards: [
           {
-            _type: 'block',
-            style: 'h2',
-            children: [
+            _key: `fc-dark-1-${now}`,
+            title: 'Drag & Drop',
+            content: block('Visual editor to create pages without touching code.'),
+          },
+          {
+            _key: `fc-dark-2-${now}`,
+            title: 'A/B Testing',
+            content: block('Compare variants and improve conversions.'),
+          },
+          {
+            _key: `fc-dark-3-${now}`,
+            title: 'Integraciones',
+            content: block('Connect with your favorite tools.'),
+          },
+        ],
+      },
+      {
+        _type: 'featureGrid',
+        _key: `feature-grid-light-${now}`,
+        variant: 'light',
+        eyebrow: 'FEATURES',
+        heading: block('Features ready to scale'),
+        items: [
+          { _key: `fg-light-1-${now}`, title: 'Templates', description: block('Get started faster with ready-made designs.') },
+          { _key: `fg-light-2-${now}`, title: 'Forms', description: block('Capture leads with optimized forms.') },
+          { _key: `fg-light-3-${now}`, title: 'Analytics', description: block('Track results in real time.') },
+        ],
+      },
+      {
+        _type: 'featureGrid',
+        _key: `feature-grid-dark-${now}`,
+        variant: 'dark',
+        eyebrow: 'FEATURES',
+        heading: block('Features ready to scale'),
+        items: [
+          { _key: `fg-dark-1-${now}`, title: 'Templates', description: block('Get started faster with ready-made designs.') },
+          { _key: `fg-dark-2-${now}`, title: 'Forms', description: block('Capture leads with optimized forms.') },
+          { _key: `fg-dark-3-${now}`, title: 'Analytics', description: block('Track results in real time.') },
+        ],
+      },
+      {
+        _type: 'integrationsBlock',
+        _key: `integrations-light-${now}`,
+        variant: 'light',
+        overline: 'INTEGRATIONS',
+        heading: block('Connected to your favorite tools'),
+        subheading: block('HubSpot, Mailchimp, Klaviyo, Slack and more.'),
+        label: '90+ integrations available.',
+        cta: [link('View integrations', '/integrations')],
+        image: {},
+      },
+      {
+        _type: 'integrationsBlock',
+        _key: `integrations-dark-${now}`,
+        variant: 'dark',
+        overline: 'INTEGRATIONS',
+        heading: block('Connected to your favorite tools'),
+        subheading: block('HubSpot, Mailchimp, Klaviyo, Slack and more.'),
+        label: '90+ integrations available.',
+        cta: [link('View integrations', '/integrations')],
+        image: {},
+      },
+      {
+        _type: 'mediaWithItems',
+        _key: `media-with-items-light-${now}`,
+        variant: 'light',
+        title: block('Multimedia content that guides the user'),
+        content: block('Switch between messages and formats to tell your value proposition.'),
+        items: [
+          {
+            _key: `mwi-light-1-${now}`,
+            title: 'Step 1',
+            value: 'step-1',
+            content: block('Present the main benefit clearly.'),
+            link: link('View details', '/pricing'),
+          },
+          {
+            _key: `mwi-light-2-${now}`,
+            title: 'Step 2',
+            value: 'step-2',
+            content: block('Reinforce with social proof and results.'),
+            link: link('View details', '/pricing'),
+          },
+        ],
+        mediaItems: [{ condition: 'image', image: {} }, { condition: 'image', image: {} }],
+      },
+      {
+        _type: 'mediaWithItems',
+        _key: `media-with-items-dark-${now}`,
+        variant: 'dark',
+        title: block('Multimedia content that guides the user'),
+        content: block('Switch between messages and formats to tell your value proposition.'),
+        items: [
+          {
+            _key: `mwi-dark-1-${now}`,
+            title: 'Step 1',
+            value: 'step-1',
+            content: block('Present the main benefit clearly.'),
+            link: link('View details', '/pricing'),
+          },
+          {
+            _key: `mwi-dark-2-${now}`,
+            title: 'Step 2',
+            value: 'step-2',
+            content: block('Reinforce with social proof and results.'),
+            link: link('View details', '/pricing'),
+          },
+        ],
+        mediaItems: [{ condition: 'image', image: {} }, { condition: 'image', image: {} }],
+      },
+      {
+        _type: 'mediaWithItemsSwitch',
+        _key: `media-with-items-switch-light-${now}`,
+        variant: 'light',
+        label: 'SWITCH',
+        title: 'Switch between scenarios',
+        content: block('Try different blocks in a single section.'),
+        sections: [
+          {
+            _key: `mws-light-1-${now}`,
+            tabLabel: 'Scenario A',
+            items: [
               {
-                _type: 'span',
-                text: 'Amplify the power of your plan with add-ons',
+                _key: `mws-item-light-1-${now}`,
+                pillContent: 'NEW',
+                content: block('Sample content for scenario A.'),
+                links: [link('Explore', '/pricing', true)],
               },
             ],
           },
           {
-            _type: 'block',
-            style: 'normal',
-            children: [
+            _key: `mws-light-2-${now}`,
+            tabLabel: 'Scenario B',
+            items: [
               {
-                _type: 'span',
-                text: 'Enhance your plan with optional add-ons, available after signup.',
+                _key: `mws-item-light-2-${now}`,
+                pillContent: 'TOP',
+                content: block('Sample content for scenario B.'),
+                links: [link('Explore', '/pricing', true)],
               },
             ],
           },
         ],
-        cards: [
+      },
+      {
+        _type: 'mediaWithItemsSwitch',
+        _key: `media-with-items-switch-dark-${now}`,
+        variant: 'dark',
+        label: 'SWITCH',
+        title: 'Switch between scenarios',
+        content: block('Try different blocks in a single section.'),
+        sections: [
           {
-            _key: 'addon-card-3',
-            title: 'Advanced Analytics',
-            content: 'Get detailed insights and analytics to track performance and optimize your campaigns.',
-            pricesLabel: 'From',
-            prices: [
+            _key: `mws-dark-1-${now}`,
+            tabLabel: 'Scenario A',
+            items: [
               {
-                _key: 'price-3',
-                currency: 'USD',
-                period: 'monthly',
-                price: '25',
-                symbol: '$',
-                priceIncludes: 'Includes advanced reporting',
+                _key: `mws-item-dark-1-${now}`,
+                pillContent: 'NEW',
+                content: block('Sample content for scenario A.'),
+                links: [link('Explore', '/pricing', true)],
               },
             ],
-            links: [
-              {
-                _type: 'link',
-                condition: 'internal',
-                url: '/analytics',
-                label: 'View Analytics',
-                hasIcon: false,
-              },
-            ],
-            icon: {},
           },
           {
-            _key: 'addon-card-4',
-            title: 'Priority Support',
-            content: 'Get priority support with faster response times and dedicated account management.',
-            pricesLabel: '',
-            prices: [
+            _key: `mws-dark-2-${now}`,
+            tabLabel: 'Scenario B',
+            items: [
               {
-                _key: 'price-4',
-                currency: 'USD',
-                period: 'monthly',
-                price: '50',
-                symbol: '$',
-                priceIncludes: '24/7 priority support',
+                _key: `mws-item-dark-2-${now}`,
+                pillContent: 'TOP',
+                content: block('Sample content for scenario B.'),
+                links: [link('Explore', '/pricing', true)],
               },
             ],
-            links: [
-              {
-                _type: 'link',
-                condition: 'internal',
-                url: '/support',
-                label: 'View Support',
-                hasIcon: false,
-              },
-            ],
-            icon: {},
+          },
+        ],
+      },
+      {
+        _type: 'faqPlatform',
+        _key: `faq-platform-light-${now}`,
+        variant: 'light',
+        label: 'FAQ',
+        heading: 'Frequently asked questions',
+        subheading: 'We answer the main questions before you get started.',
+        questions: [
+          {
+            _key: `faq-light-1-${now}`,
+            title: 'Is there a free trial?',
+            content: block('Yes, you can try with no commitment for a limited time.'),
+          },
+          {
+            _key: `faq-light-2-${now}`,
+            title: 'Can I cancel anytime?',
+            content: block('Yes, you can cancel at any time.'),
+          },
+        ],
+      },
+      {
+        _type: 'faqPlatform',
+        _key: `faq-platform-dark-${now}`,
+        variant: 'dark',
+        label: 'FAQ',
+        heading: 'Frequently asked questions',
+        subheading: 'We answer the main questions before you get started.',
+        questions: [
+          {
+            _key: `faq-dark-1-${now}`,
+            title: 'Is there a free trial?',
+            content: block('Yes, you can try with no commitment for a limited time.'),
+          },
+          {
+            _key: `faq-dark-2-${now}`,
+            title: 'Can I cancel anytime?',
+            content: block('Yes, you can cancel at any time.'),
+          },
+        ],
+      },
+      {
+        _type: 'textWithStats',
+        _key: `text-with-stats-light-${now}`,
+        variant: 'light',
+        content: block('Results that back up your strategy.'),
+        stats: [
+          { _key: `tws-light-1-${now}`, stat: '50K+', content: 'Active users' },
+          { _key: `tws-light-2-${now}`, stat: '10M+', content: 'Leads generated' },
+        ],
+      },
+      {
+        _type: 'textWithStats',
+        _key: `text-with-stats-dark-${now}`,
+        variant: 'dark',
+        content: block('Results that back up your strategy.'),
+        stats: [
+          { _key: `tws-dark-1-${now}`, stat: '50K+', content: 'Active users' },
+          { _key: `tws-dark-2-${now}`, stat: '10M+', content: 'Leads generated' },
+        ],
+      },
+      {
+        _type: 'subFooter',
+        _key: `sub-footer-light-${now}`,
+        variant: 'light',
+        label: 'CTA',
+        heading: 'Ready to get started?',
+        subheading: 'Activate your trial and publish today.',
+        ctaLabel: 'Start trial',
+        ctaHref: '/pricing',
+      },
+      {
+        _type: 'subFooter',
+        _key: `sub-footer-dark-${now}`,
+        variant: 'dark',
+        label: 'CTA',
+        heading: 'Ready to get started?',
+        subheading: 'Activate your trial and publish today.',
+        ctaLabel: 'Start trial',
+        ctaHref: '/pricing',
+      },
+      {
+        _type: 'sectionCTA',
+        _key: `section-cta-dark-${now}`,
+        variant: 'dark',
+        label: 'CTA',
+        heading: 'Activate your account now',
+        subheading: 'No commitment, cancel anytime.',
+        ctas: [{ _key: `scta-dark-1-${now}`, label: 'Try for free', url: '/pricing', style: 'button-solid' }],
+      },
+      {
+        _type: 'sectionCTA',
+        _key: `section-cta-gradient-${now}`,
+        variant: 'gradient',
+        label: 'CTA',
+        heading: 'Activate your account now',
+        subheading: 'No commitment, cancel anytime.',
+        ctas: [{ _key: `scta-grad-1-${now}`, label: 'Try for free', url: '/pricing', style: 'button-solid' }],
+      },
+      {
+        _type: 'templateMarketplaceFooterCTA',
+        _key: `template-marketplace-footer-cta-${now}`,
+        label: 'TEMPLATES',
+        heading: block('Find the perfect template for your business'),
+        subheading: 'Explore designs ready to convert.',
+        inputPlaceholder: 'Enter your email',
+        buttonText: 'Explore',
+        buttonHref: '/templates',
+      },
+      {
+        _type: 'testimonialBlock',
+        _key: `testimonial-block-light-${now}`,
+        variant: 'light',
+        heading: 'What our customers say',
+        subheading: 'Real growth stories.',
+        testimonials: [
+          {
+            _id: `tb-light-1-${now}`,
+            title: 'Excellent tool',
+            authorTitle: 'CMO',
+            testimonial: 'We increased conversions in just a few weeks.',
+            image: {},
+            rating: 5,
+          },
+        ],
+      },
+      {
+        _type: 'testimonialBlock',
+        _key: `testimonial-block-dark-${now}`,
+        variant: 'dark',
+        heading: 'What our customers say',
+        subheading: 'Real growth stories.',
+        testimonials: [
+          {
+            _id: `tb-dark-1-${now}`,
+            title: 'Excellent tool',
+            authorTitle: 'CMO',
+            testimonial: 'We increased conversions in just a few weeks.',
+            image: {},
+            rating: 5,
+          },
+        ],
+      },
+      {
+        _type: 'testimonialFeaturedBlock',
+        _key: `testimonial-featured-light-${now}`,
+        variant: 'light',
+        heading: 'Featured testimonials',
+        subheading: 'Results from our customers.',
+        testimonials: [
+          {
+            _id: `tfb-light-1-${now}`,
+            title: 'Highly recommended',
+            authorTitle: 'Founder',
+            testimonial: 'Implementation was fast and simple.',
+            image: {},
+            rating: 5,
+          },
+          {
+            _id: `tfb-light-2-${now}`,
+            title: 'Great impact',
+            authorTitle: 'Marketing Lead',
+            testimonial: 'Helped us organize and scale campaigns.',
+            image: {},
+            rating: 5,
+          },
+          {
+            _id: `tfb-light-3-${now}`,
+            title: 'Clear results',
+            authorTitle: 'Growth Manager',
+            testimonial: 'We got more leads with less friction.',
+            image: {},
+            rating: 5,
+          },
+        ],
+      },
+      {
+        _type: 'testimonialFeaturedBlock',
+        _key: `testimonial-featured-dark-${now}`,
+        variant: 'dark',
+        heading: 'Featured testimonials',
+        subheading: 'Results from our customers.',
+        testimonials: [
+          {
+            _id: `tfb-dark-1-${now}`,
+            title: 'Highly recommended',
+            authorTitle: 'Founder',
+            testimonial: 'Implementation was fast and simple.',
+            image: {},
+            rating: 5,
+          },
+          {
+            _id: `tfb-dark-2-${now}`,
+            title: 'Great impact',
+            authorTitle: 'Marketing Lead',
+            testimonial: 'Helped us organize and scale campaigns.',
+            image: {},
+            rating: 5,
+          },
+          {
+            _id: `tfb-dark-3-${now}`,
+            title: 'Clear results',
+            authorTitle: 'Growth Manager',
+            testimonial: 'We got more leads with less friction.',
+            image: {},
+            rating: 5,
           },
         ],
       },
     ]
 
-    // Buscar la página existente
     const existingPage = await client.fetch(
-      `*[_type == 'page' && (path == '/component-testing' || slug.current == 'component-testing')] | order(_updatedAt desc) [0]`
+      `*[_type == 'page' && (path == '/testing' || slug.current == 'testing')] | order(_updatedAt desc) [0]{ _id, title, path }`
     )
 
-    if (existingPage) {
-      console.log('✅ Página encontrada. Agregando nuevos componentes...')
-      console.log(`   ID: ${existingPage._id}`)
-
-      // Obtener componentes existentes
-      const existingComponents = existingPage.components || []
-      console.log(`   Componentes existentes: ${existingComponents.length}`)
-
-      // Obtener todas las claves existentes para evitar duplicados
-      const existingKeys = new Set(existingComponents.map((c: any) => c._key).filter(Boolean))
-      
-      // Generar claves únicas para los nuevos componentes
-      const timestamp = Date.now()
-      const generateUniqueKey = (baseKey: string, index: number) => {
-        const key = `${baseKey}-${timestamp}-${index}`
-        if (existingKeys.has(key)) {
-          return `${key}-${Math.random().toString(36).substr(2, 9)}`
-        }
-        existingKeys.add(key)
-        return key
-      }
-
-      // Asegurar que todos los componentes tengan claves únicas
-      const newComponentsWithRefs = componentsWithRefs.map((comp, index) => ({
-        ...comp,
-        _key: comp._key ? generateUniqueKey(comp._key, index) : `component-${timestamp}-${index}`,
-      }))
-
-      const newAddOnCards = addOnCardsComponents.map((comp, index) => ({
-        ...comp,
-        _key: comp._key ? generateUniqueKey(comp._key, index) : `addon-${timestamp}-${index}`,
-        cards: comp.cards?.map((card: any, cardIndex: number) => ({
-          ...card,
-          _key: card._key ? generateUniqueKey(card._key, cardIndex) : `card-${timestamp}-${index}-${cardIndex}`,
-        })),
-      }))
-
-      const newCardsBlock = cardsBlockComponent.map((comp, index) => ({
-        ...comp,
-        _key: comp._key ? generateUniqueKey(comp._key, index) : `cards-${timestamp}-${index}`,
-        cards: comp.cards?.map((card: any, cardIndex: number) => ({
-          ...card,
-          _key: card._key ? generateUniqueKey(card._key, cardIndex) : `card-block-${timestamp}-${index}-${cardIndex}`,
-        })),
-      }))
-
-      // Verificar si los componentes ya existen antes de agregarlos
-      const componentsToAdd = []
-      
-      for (const comp of [...newComponentsWithRefs, ...newAddOnCards, ...newCardsBlock]) {
-        const exists = existingComponents.some((existing: any) => 
-          existing._type === comp._type && 
-          existing._key === comp._key
-        )
-        if (!exists) {
-          componentsToAdd.push(comp)
-        }
-      }
-
-      // Combinar componentes existentes con los nuevos
-      const allComponents = [...existingComponents, ...componentsToAdd]
-
-      // Asegurar que todos los componentes tengan _key único
-      const finalComponents = allComponents.map((comp: any, index: number) => {
-        if (!comp._key) {
-          return {
-            ...comp,
-            _key: `component-${Date.now()}-${index}-${Math.random().toString(36).substr(2, 9)}`,
-          }
-        }
-        return comp
-      })
-
-      // Verificar unicidad de claves
-      const keys = new Map()
-      const uniqueComponents = finalComponents.map((comp: any) => {
-        if (keys.has(comp._key)) {
-          const newKey = `${comp._key}-${Math.random().toString(36).substr(2, 9)}`
-          keys.set(newKey, true)
-          return { ...comp, _key: newKey }
-        }
-        keys.set(comp._key, true)
-        return comp
-      })
-
-      // Actualizar los componentes
-      await client
-        .patch(existingPage._id)
-        .set({ components: uniqueComponents })
-        .commit()
-
-      console.log('✅ Componentes agregados exitosamente!')
-      console.log(`   Componentes nuevos agregados: ${componentsToAdd.length}`)
-      console.log(`   Total de componentes: ${uniqueComponents.length}`)
-    } else {
-      console.log('📄 Página no encontrada. Creando nueva página...')
-
-      // Generar claves únicas para todos los componentes
-      const timestamp = Date.now()
-      const generateUniqueKey = (baseKey: string, index: number) => {
-        return `${baseKey}-${timestamp}-${index}`
-      }
-
-      const newComponentsWithRefs = componentsWithRefs.map((comp, index) => ({
-        ...comp,
-        _key: comp._key ? generateUniqueKey(comp._key, index) : `component-${timestamp}-${index}`,
-      }))
-
-      const newAddOnCards = addOnCardsComponents.map((comp, index) => ({
-        ...comp,
-        _key: comp._key ? generateUniqueKey(comp._key, index) : `addon-${timestamp}-${index}`,
-        cards: comp.cards?.map((card: any, cardIndex: number) => ({
-          ...card,
-          _key: card._key ? generateUniqueKey(card._key, cardIndex) : `card-${timestamp}-${index}-${cardIndex}`,
-        })),
-      }))
-
-      const newCardsBlock = cardsBlockComponent.map((comp, index) => ({
-        ...comp,
-        _key: comp._key ? generateUniqueKey(comp._key, index) : `cards-${timestamp}-${index}`,
-        cards: comp.cards?.map((card: any, cardIndex: number) => ({
-          ...card,
-          _key: card._key ? generateUniqueKey(card._key, cardIndex) : `card-block-${timestamp}-${index}-${cardIndex}`,
-        })),
-      }))
-
-      const pageData = {
-        _type: 'page',
-        title: 'Component Testing',
-        slug: {
-          _type: 'slug',
-          current: 'component-testing',
-        },
-        path: '/component-testing',
-        components: [...newComponentsWithRefs, ...newAddOnCards, ...newCardsBlock],
-      }
-
-      // Crear nueva página
-      const newPage = await client.create(pageData)
-
-      console.log('✅ Página creada exitosamente!')
-      console.log(`   ID: ${newPage._id}`)
-      console.log(`   Path: ${newPage.path}`)
-      console.log(`   Total de componentes: ${pageData.components.length}`)
+    if (!existingPage?._id) {
+      console.error('❌ No se encontró la página /testing en Sanity.')
+      console.error('   Crea la página en el CMS y vuelve a correr este script.')
+      process.exit(1)
     }
 
-    // Obtener la página actualizada para mostrar los componentes
-    const updatedPage = await client.fetch(
-      `*[_type == 'page' && _id == $id] [0]`,
-      { id: existingPage?._id || newPage?._id }
-    )
+    console.log('✅ Página encontrada. Actualizando componentes...')
+    console.log(`   ID: ${existingPage._id}`)
 
-    console.log('\n📋 Componentes en la página:')
-    const allComponentsList = updatedPage?.components || []
-    
-    allComponentsList.forEach((comp: any, index: number) => {
-      console.log(`   ${index + 1}. ${comp._type} (${comp.variant || 'default'}) - Key: ${comp._key || 'SIN KEY'}`)
-    })
-    
-    // Verificar claves duplicadas
-    const keyCounts = new Map()
-    allComponentsList.forEach((comp: any) => {
-      if (comp._key) {
-        keyCounts.set(comp._key, (keyCounts.get(comp._key) || 0) + 1)
-      }
-    })
-    
-    const duplicates = Array.from(keyCounts.entries()).filter(([_, count]) => count > 1)
-    if (duplicates.length > 0) {
-      console.log('\n⚠️  Claves duplicadas encontradas:')
-      duplicates.forEach(([key, count]) => {
-        console.log(`   - ${key}: aparece ${count} veces`)
-      })
-    } else {
-      console.log('\n✅ Todas las claves son únicas!')
-    }
+    await client.patch(existingPage._id).set({ components }).commit()
 
+    console.log(`✅ Componentes actualizados (${components.length} bloques).`)
     console.log('\n✨ Proceso completado!')
-    console.log('   Visita la página en: /component-testing')
+    console.log('   Visita: /testing')
   } catch (error) {
     console.error('❌ Error:', error)
     process.exit(1)
   }
 }
 
-// Ejecutar el script
 if (require.main === module) {
   createComponentTestingPage()
 }
 
 export default createComponentTestingPage
-

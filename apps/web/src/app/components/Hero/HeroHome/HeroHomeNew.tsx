@@ -71,12 +71,12 @@ export default function HeroHomeNew({
                   </div>
                 ) : null}
 
-                <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-start sm:justify-start gap-3 md:flex-nowrap">
                   {primaryCta?.label ? (
                     <a
                       className={clsx(
-                        'inline-flex min-h-[48px] sm:min-h-[52px] h-auto py-3 sm:py-0 sm:h-[52px] items-center justify-center px-5 sm:px-6 text-[16px] sm:text-[18px] font-medium transition',
-                        'rounded-[10px] whitespace-nowrap leading-tight',
+                        'inline-flex min-h-[48px] sm:min-h-[52px] h-auto py-3 sm:py-0 sm:h-[52px] items-center justify-center px-6 sm:px-8 text-[16px] sm:text-[18px] font-medium transition',
+                        'rounded-[40px] whitespace-nowrap leading-tight shrink-0',
                         primaryBtn
                       )}
                       href={primaryCta.href ?? '#'}
@@ -88,8 +88,8 @@ export default function HeroHomeNew({
                   {secondaryCta?.label ? (
                     <a
                       className={clsx(
-                        'inline-flex min-h-[48px] sm:min-h-[52px] h-auto py-3 sm:py-0 sm:h-[52px] items-center justify-center px-5 sm:px-6 text-[16px] sm:text-[18px] font-medium transition',
-                        'rounded-[10px] whitespace-nowrap leading-tight',
+                        'inline-flex min-h-[48px] sm:min-h-[52px] h-auto py-3 sm:py-0 sm:h-[52px] items-center justify-center px-6 sm:px-8 text-[16px] sm:text-[18px] font-medium transition',
+                        'rounded-[40px] whitespace-nowrap leading-tight shrink-0',
                         secondaryBtn,
                         'relative group'
                       )}

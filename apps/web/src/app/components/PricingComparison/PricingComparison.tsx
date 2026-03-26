@@ -5,6 +5,7 @@ import React from 'react'
 import clsx from 'clsx'
 import Image from '@/components/Image'
 import Text from '@/components/Text'
+import { LinkIcon } from '@/components/Link'
 
 interface ListItem {
   _key?: string
@@ -230,7 +231,7 @@ const PricingComparison = ({
             <a
               className={clsx(
                 'inline-flex items-center justify-center gap-2',
-                'rounded-button bg-[#9061ee] hover:bg-[#7d4fe0]',
+                'rounded-[40px] bg-[#9061ee] hover:bg-[#7d4fe0]',
                 'h-[2.8rem] sm:h-[2.8rem] px-2 sm:px-2',
                 'text-[18px] sm:text-[17px] font-medium text-white whitespace-nowrap',
                 'transition-colors'
@@ -238,7 +239,9 @@ const PricingComparison = ({
               href={ctaHref ?? '#'}
             >
               <span>{ctaLabel}</span>
-              <span aria-hidden="true">→</span>
+              <span aria-hidden="true" className="inline-flex">
+                <LinkIcon />
+              </span>
             </a>
           </div>
         )}

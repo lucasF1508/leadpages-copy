@@ -79,9 +79,10 @@ const MediaWithItems = ({
   items,
   mediaItems,
   title,
-  variant = 'dark',
+  variant = 'light',
   videoDisplay = 'noCover'
 }: MediaWithItemsProps) => {
+  const resolvedVariant = variant === 'dark' ? 'dark' : 'light'
   const isDesktop = useMediaQuery('(min-width: 900px)')
   const { activeIndex, setActiveIndex } = useMediaWithItemsStore(
     useShallow((state) => ({ 
@@ -117,7 +118,7 @@ const MediaWithItems = ({
     setActiveIndex(0)
   }
 
-  const isLight = variant === 'light'
+  const isLight = resolvedVariant === 'light'
 
   return (
     <div className={clsx(
@@ -239,14 +240,14 @@ const MediaWithItems = ({
             <Accordion
               duration={duration}
               items={items}
-              variant={variant}
+              variant={resolvedVariant}
             />
           ) : (
             <Slider
               className="max-w-tablet-cols7 mx-auto"
               duration={duration}
               items={items}
-              variant={variant}
+              variant={resolvedVariant}
             />
           )}
         </div>}

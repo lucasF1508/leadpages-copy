@@ -141,10 +141,11 @@ export default function BestOfBlog({
             </div>
 
             {cta?.href && cta?.label && (
-              <div className="md:pt-1.5 relative z-20">
+              <div className="md:pt-1.5 relative z-20 shrink-0">
                 <Link
-                  className="rounded-md cursor-pointer"
+                  className="cursor-pointer"
                   condition={isCtaExternal ? 'external' : 'internal'}
+                  hasIcon
                   linkStyle="button-solid"
                   url={cta.href}
                 >

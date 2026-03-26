@@ -181,7 +181,8 @@ export const gradient = {
   'gradient-purple': `linear-gradient(90deg,${palette.purple[500]} 0%, ${palette.purple[300]} 100%)`,
   'gradient-purple-invert': `linear-gradient(90deg,${palette.purple[100]} 0%, ${palette.white} 100%)`,
   'gradient-section': `linear-gradient(0deg, #FFFFFF 30%, #F4EFFF 100%)`,
-  'gradient-input': `linear-gradient(90deg, ${palette.opacity.light[400]} -119.45%, ${palette.opacity.light[800]} -9.73%, ${palette.opacity.light[400]} 100%)`,
+  // Derecha con algo de luz para que no se pierda con el fondo oscuro; evita sliver blanco sin difuminar de más
+  'gradient-input': `linear-gradient(90deg, ${palette.opacity.light[400]} -119.45%, ${palette.opacity.light[800]} -9.73%, ${palette.opacity.light[300]} 65%, ${palette.opacity.light[200]} 88%, ${palette.opacity.light[200]} 100%)`,
   'gradient-border': `linear-gradient(90deg, rgba(82, 79, 95, 0.1) 30%, rgba(82, 79, 95, 0.2) 50%, rgba(82, 79, 95, 0.1) 70%)`,
 }
 

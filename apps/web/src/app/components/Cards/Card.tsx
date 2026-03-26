@@ -3,7 +3,6 @@ import type { ClassValue } from 'clsx'
 import React from 'react'
 import clsx from 'clsx'
 import Image from '@/components/Image'
-import { defaultLargeBlockStyles } from '@/components/PortableText'
 import Text from '@/components/Text'
 import { hasImage } from '../Media'
 
@@ -24,7 +23,7 @@ export interface CardProps {
   contentSize?: 'large' | 'small'
   icon?: ImageType
   spacer?: boolean
-  variant?: 'default' | 'dark' | 'light'
+  variant?: 'dark' | 'default' | 'light'
 }
 
 const Card = ({
@@ -68,14 +67,23 @@ const Card = ({
         )}
       >
         {(hasImage(icon) || contentSize === 'large') && (
-            <div
+          <div
             className={clsx(
               'shrink-0 flex items-center justify-center mb-4',
               contentSize === 'large' && 'w-10 h-10',
               classNames?.iconContainer
             )}
           >
-            <Image className={clsx('w-6 h-6', classNames?.icon)} image={icon} />
+            <Image
+              className={clsx(
+                'w-6 h-6',
+                classNames?.icon,
+                // Fallback: en light algunos íconos no toman el filtro desde FeatureCards.
+                isLight &&
+                  '[filter:brightness(0)_saturate(100%)_invert(31%)_sepia(94%)_saturate(1237%)_hue-rotate(232deg)_brightness(98%)_contrast(101%)]'
+              )}
+              image={icon}
+            />
           </div>
         )}
         {!!content?.length && (

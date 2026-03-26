@@ -36,7 +36,12 @@ export const heroPlatformPage = F.object({
         title: 'Primary Button',
         fields: [
           F.string({name: 'label', title: 'Label', validation: (Rule) => Rule.required()}),
-          F.string({name: 'href', title: 'Link (href)', validation: (Rule) => Rule.required()}),
+          F.string({
+            name: 'href',
+            title: 'Link (href)',
+            description: 'Ruta interna (ej. /pricing) o URL completa (ej. https://lp.leadpages.com/page-studio-beta/). Las URLs externas se abren en nueva pestaña.',
+            validation: (Rule) => Rule.required(),
+          }),
         ],
       }),
 
@@ -45,7 +50,11 @@ export const heroPlatformPage = F.object({
         title: 'Secondary Button',
         fields: [
           F.string({name: 'label', title: 'Label'}),
-          F.string({name: 'href', title: 'Link (href)'}),
+          F.string({
+            name: 'href',
+            title: 'Link (href)',
+            description: 'Ruta interna (ej. /page-studio-beta) o URL completa (ej. https://lp.leadpages.com/page-studio-beta/). Las URLs externas se abren en nueva pestaña.',
+          }),
         ],
       }),
     ]),

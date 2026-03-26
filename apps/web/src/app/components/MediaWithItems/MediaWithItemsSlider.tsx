@@ -11,7 +11,9 @@ const MediaWithItemsSlider = ({
   className,
   duration = 10,
   items,
+  variant = 'dark',
 }: MediaWithItemsContainer) => {
+  const isLight = variant === 'light'
   const setActiveIndex = useMediaWithItemsStore((state) => state.setActiveIndex)
   const activeIndex = useMediaWithItemsStore((state) => state.activeIndex)
 
@@ -76,12 +78,19 @@ const MediaWithItemsSlider = ({
                   )}
                 >
                   <div>
-                    <span className="type-body-md sm:type-body-lg font-normal block">{title}</span>
+                    <span
+                      className="type-body-md sm:type-body-lg font-normal block"
+                      style={isLight ? { color: '#1a1a1a' } : undefined}
+                    >
+                      {title}
+                    </span>
                     <Text
                       as="div"
                       className={clsx(
                         'flex flex-col gap-1.5 pt-1.5 [&_*]:!my-0 [&_.list-check]:flex [&_.list-check]:flex-col [&_.list-check]:gap-1.5 type-body-sm'
+                        , isLight && '[&_*]:!text-[#1a1a1a]'
                       )}
+                      style={isLight ? { color: '#1a1a1a' } : undefined}
                       content={content}
                     />
                     <Link className='mt-2' {...link} />

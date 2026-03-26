@@ -13,8 +13,8 @@ export const mediaWithItems = F.field('object', {
       F.radio(['dark', 'light'], {
         name: 'variant',
         title: 'Variant',
-        description: 'Choose between dark (default) or light theme',
-        initialValue: 'dark',
+        description: 'Choose between dark or light theme (default: light)',
+        initialValue: 'light',
       }),
       F.radio([{title: 'Cover Component', value: 'cover'}, {title: 'Do not cover', value: 'noCover'}], {
         name: 'videoDisplay',

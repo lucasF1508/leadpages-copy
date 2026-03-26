@@ -4,6 +4,43 @@ export const componentQueries = `
     ...,
     testimonials[]->
   },
+  _type == 'integrationsBlock' => {
+    ...,
+    variant
+  },
+  _type == 'testimonialFeaturedBlock' => {
+    ...,
+    variant,
+    testimonials[]->
+  },
+  _type == 'subFooter' => {
+    ...,
+    variant
+  },
+  _type == 'textWithStats' => {
+    ...,
+    variant
+  },
+  _type == 'featureGrid' => {
+    ...,
+    variant
+  },
+  _type == 'bannerCta' => {
+    ...,
+    variant
+  },
+  _type == 'featureShowcase' => {
+    ...,
+    variant
+  },
+  _type == 'faqPlatform' => {
+    ...,
+    variant
+  },
+  _type == 'mediaWithText' => {
+    ...,
+    variant
+  },
   faqs[]->,
   _type == 'heroLandingGenerator' => {
     ...,
@@ -201,6 +238,7 @@ export const componentQueries = `
   },
   _type == 'featureCards' => {
     ...,
+    variant,
     cards[] {
       _key,
       _type,
@@ -257,6 +295,7 @@ export const componentQueries = `
   },
   _type == 'mediaWithItemsSwitch' => {
     ...,
+    variant,
     label,
     title,
     linkButtonVariant,

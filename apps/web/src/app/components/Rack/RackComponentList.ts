@@ -77,12 +77,12 @@ const RackComponentList = {
     dynamic(() => import('@/components/FeatureGrid/FeatureGrid')),
     { pinion: false },
   ],
-  featureShowcase: [
-    dynamic(() => import('@/components/FeatureShowcase/FeatureShowcase')),
-    { pinion: false },
-  ],
   featureScroll: [
     dynamic(() => import('@/components/FeatureScroll')),
+    { pinion: false },
+  ],
+  featureShowcase: [
+    dynamic(() => import('@/components/FeatureShowcase/FeatureShowcase')),
     { pinion: false },
   ],
   howItWorks: [
@@ -180,10 +180,7 @@ const RackComponentList = {
     dynamic(() => import('@/components/TemplateMarketplaceFooterCTA')),{ pinion: false },
   ],
   // the 3-card layout with ratings used on platform-new.
-  testimonialBlock: [
-    dynamic(() => import('../Testimonial')),
-    { pinion: false },
-  ],
+  testimonialBlock: dynamic(() => import('../Testimonial')),
   testimonialFeaturedBlock: [
     dynamic(() => import('../Testimonial/TestimonialFeatured')),
     { inner: false, pinion: true },

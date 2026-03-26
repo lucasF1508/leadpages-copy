@@ -17,23 +17,41 @@ export interface FeatureGridProps {
   eyebrow?: string
   heading?: ContentType
   items?: GridItem[]
+  variant?: 'light' | 'dark'
 }
 
 const FeatureGrid = ({
   eyebrow,
   heading,
   items = [],
+  variant = 'dark',
 }: FeatureGridProps) => {
+  const isDark = variant === 'dark'
   if (!heading && !items.length) return null
 
   return (
-    <section className="relative w-full bg-white rounded-b-[32px] sm:rounded-b-[40px]">
+    <section
+      className={clsx(
+        'relative w-full overflow-hidden rounded-[32px] sm:rounded-[40px]',
+        isDark ? 'bg-[#1a1a1a]' : 'bg-white'
+      )}
+    >
       <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-6 pt-8 sm:pt-10 md:pt-16 pb-10 sm:pb-12 md:pb-14">
 
         {eyebrow && (
           <div className="flex justify-center mb-2 sm:mb-2.5">
-            <div className="inline-flex rounded-lg bg-[#603eff] px-1.5 py-0.5">
-              <span className="text-white text-[9px] sm:text-[10px] font-semibold tracking-[0.2em] uppercase">
+            <div
+              className={clsx(
+                'inline-flex rounded-lg px-1.5 py-0.5',
+                isDark ? 'bg-button-surface-solid' : 'bg-[#603eff]'
+              )}
+            >
+              <span
+                className={clsx(
+                  'text-[9px] sm:text-[10px] font-semibold tracking-[0.2em] uppercase',
+                  isDark ? 'text-button-text-solid' : 'text-white'
+                )}
+              >
                 {eyebrow}
               </span>
             </div>
@@ -50,7 +68,7 @@ const FeatureGrid = ({
                     '!text-[28px] sm:!text-[36px] md:!text-[44px] lg:!text-[50px]',
                     '!leading-[1.12]',
                     '!font-[400] !tracking-[-0.02em]',
-                    '!text-[#1f1f1f]'
+                    isDark ? '!text-white' : '!text-black'
                   ),
                   tag: 'h2',
                 },
@@ -59,7 +77,7 @@ const FeatureGrid = ({
                     '!text-[28px] sm:!text-[36px] md:!text-[44px] lg:!text-[50px]',
                     '!leading-[1.12]',
                     '!font-[400] !tracking-[-0.02em]',
-                    '!text-[#1f1f1f]'
+                    isDark ? '!text-white' : '!text-black'
                   ),
                   tag: 'p',
                 },
@@ -74,9 +92,21 @@ const FeatureGrid = ({
           <div className="mx-auto max-w-[1400px]">
             <div
               className={clsx(
-                'rounded-[16px] sm:rounded-[20px] bg-[#2b2b2b]',
-                'p-3 sm:p-3.5 md:p-4'
+                'rounded-[16px] sm:rounded-[20px] p-3 sm:p-3.5 md:p-4',
+                isDark
+                  ? 'bg-[#24262E] border-2 border-transparent bg-clip-padding'
+                  : 'bg-[#f5f5f5]'
               )}
+              style={
+                isDark
+                  ? {
+                      backgroundImage:
+                        'linear-gradient(#24262E,#24262E), conic-gradient(from 315deg at 50% 50%, #CEFF66 0deg, #9061EE 90deg, #8FEFEF 180deg, #603EFF 270deg, #CEFF66 360deg)',
+                      backgroundOrigin: 'border-box',
+                      backgroundClip: 'padding-box, border-box',
+                    }
+                  : undefined
+              }
             >
               <div
                 className={clsx(
@@ -87,8 +117,8 @@ const FeatureGrid = ({
                 {items.map((item, index) => (
                   <article
                     className={clsx(
-                      'flex flex-col bg-white rounded-[12px]',
-                      'p-2.5 sm:p-3 md:p-3.5'
+                      'flex flex-col rounded-[12px] p-2.5 sm:p-3 md:p-3.5',
+                      isDark ? 'bg-[#2a2a2e]' : 'bg-white'
                     )}
                     key={item._key ?? `item-${index}`}
                   >
@@ -105,7 +135,12 @@ const FeatureGrid = ({
                     )}
 
                     {item.title && (
-                      <h3 className="text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-[1.2] text-[#1f1f1f] mb-1">
+                      <h3
+                        className={clsx(
+                          'text-[20px] sm:text-[22px] md:text-[24px] font-semibold leading-[1.2] mb-1',
+                          isDark ? 'text-white' : 'text-black'
+                        )}
+                      >
                         {item.title}
                       </h3>
                     )}
@@ -116,8 +151,10 @@ const FeatureGrid = ({
                           baseStyles={false}
                           blockStyles={{
                             normal: {
-                              className:
-                                '!text-[12px] sm:!text-[13px] md:!text-[13px] !leading-[1.5] !text-[#5a5a5a]',
+                              className: clsx(
+                                '!text-[12px] sm:!text-[13px] md:!text-[13px] !leading-[1.5]',
+                                isDark ? '!text-gray-300' : '!text-black'
+                              ),
                               tag: 'p',
                             },
                           }}

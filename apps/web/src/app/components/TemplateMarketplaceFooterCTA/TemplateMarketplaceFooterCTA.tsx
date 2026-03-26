@@ -93,7 +93,6 @@ export default function TemplateMarketplaceFooterCTA({
                     'px-4 sm:px-6 py-2',
                     'rounded-[24px]',
                     'bg-white/10 backdrop-blur-sm',
-                    'border',
                     'text-white text-xs placeholder:text-white/40',
                     'focus:outline-none',
                     'transition-all',
@@ -101,7 +100,6 @@ export default function TemplateMarketplaceFooterCTA({
                   )}
                   placeholder={inputPlaceholder || 'Sample@gmail.com'}
                   style={{
-                    borderColor: '#FFFFFF',
                     fontFamily: 'var(--font-inter, sans-serif)',
                     fontWeight: 400,
                   }}

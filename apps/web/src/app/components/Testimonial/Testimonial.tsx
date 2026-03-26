@@ -209,7 +209,7 @@ const Testimonial = ({ heading, subheading, testimonials, variant = 'default' }:
               key={testimonial?._id}
             >
               <TestimonialCard
-                {...(testimonial || {})} 
+                {...(testimonial || {})}
               />
             </div>
           ))}

@@ -2,6 +2,7 @@
 
 import React from 'react'
 import clsx from 'clsx'
+import Link from '@/components/Link'
 
 interface TemplateGalleryLegacyBannerProps {
   className?: string
@@ -20,23 +21,20 @@ const TemplateGalleryLegacyBanner = ({ className }: TemplateGalleryLegacyBannerP
           <h3 className="text-white text-[16px] font-normal text-center leading-tight">
             Need templates for Classic Builder Templates?
           </h3>
-          <div className="flex flex-row items-center gap-2">
-            <span className="text-white/80 text-[13px] font-medium">
+          <div className="flex flex-row items-center justify-center gap-2">
+            <span className="text-white/80 text-[13px] font-medium inline-flex h-6 items-center leading-none">
               View legacy gallery
             </span>
-            <a
-              className={clsx(
-                'inline-flex items-center justify-center w-5 h-5 rounded-[8px]',
-                'bg-[#ceff66] text-black',
-                'hover:bg-[#b8e64a] transition-colors',
-                'flex-shrink-0'
-              )}
-              href="/templates"
-            >
-              <span aria-hidden="true" className="text-[18px]">
-                →
-              </span>
-            </a>
+            <Link
+              ariaLabel="View legacy gallery"
+              className="shrink-0 !min-w-0 !px-2.5"
+              classNames={{ span: 'sr-only' }}
+              condition="internal"
+              hasIcon
+              label="View legacy gallery"
+              linkStyle="button-solid"
+              url="/templates"
+            />
           </div>
         </div>
 
@@ -45,23 +43,20 @@ const TemplateGalleryLegacyBanner = ({ className }: TemplateGalleryLegacyBannerP
           <h3 className="text-white text-[22px] lg:text-[24px] font-normal text-left leading-tight whitespace-nowrap">
             Need templates for Classic Builder?
           </h3>
-          <span>
-            <span className="text-white/80 text-[15px] font-medium mr-2">
+          <span className="inline-flex flex-row items-center gap-2 shrink-0">
+            <span className="text-white/80 text-[15px] font-medium inline-flex h-6 items-center leading-none">
               View legacy gallery
             </span>
-            <a
-              className={clsx(
-                'inline-flex items-center justify-center w-6 h-6 rounded-[10px]',
-                'bg-[#ceff66] text-black',
-                'hover:bg-[#b8e64a] transition-colors',
-                'flex-shrink-0'
-              )}
-              href="/templates"
-            >
-              <span aria-hidden="true" className="text-[22px]">
-                →
-              </span>
-            </a>
+            <Link
+              ariaLabel="View legacy gallery"
+              className="shrink-0 !min-w-0 !px-2.5"
+              classNames={{ span: 'sr-only' }}
+              condition="internal"
+              hasIcon
+              label="View legacy gallery"
+              linkStyle="button-solid"
+              url="/templates"
+            />
           </span>
         </div>
       </div>
