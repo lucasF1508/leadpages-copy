@@ -692,13 +692,8 @@ const BlogPostLayout = ({ post }: BlogPostLayoutProps) => {
         />
       )}
 
-      {/* SubFooter: when no Related Content, mt prevents overlap with "Share this post"; mb separates from footer */}
-      <div
-        className={
-          'max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-16 mb-8 md:mb-12' +
-          (!(post.relatedArticles?.length) ? ' mt-8 md:mt-12' : '')
-        }
-      >
+      {/* SubFooter */}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-16">
         <SubFooter
           label="LET’S GET STARTED"
           heading="Curious About Leadpages ?"

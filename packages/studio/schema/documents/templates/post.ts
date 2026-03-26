@@ -1,5 +1,7 @@
 import { BsNewspaper as icon } from 'react-icons/bs'
+import { defineField } from 'sanity'
 import { F, FS, P, G } from '@/legacy/schema/tool'
+import BlogSectionMainHeroInput from '../../../components/BlogSectionMainHeroInput'
 import CustomSidebarLinksReference from '../../../components/CustomSideBarLinksReference'
 
 export const post = {
@@ -60,6 +62,16 @@ export const post = {
 
     // OPTIONS
     ...G.group('options', [
+      defineField({
+        name: 'blogSectionMainHero',
+        title: 'Blog section main hero',
+        type: 'boolean',
+        group: 'options',
+        description:
+          'If enabled, this post is shown as the main title, image, and intro in the Blog Section component. Only one post should be on; enabling here turns it off on all other posts.',
+        initialValue: false,
+        components: { input: BlogSectionMainHeroInput },
+      }),
       F.boolean({
         name: 'redirectToLegacy',
         title: 'Proxy to legacy post',

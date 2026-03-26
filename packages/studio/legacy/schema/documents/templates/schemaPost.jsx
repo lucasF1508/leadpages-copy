@@ -117,6 +117,13 @@ export const schemaPost = {
     ...G.group('seo', [F.seo()]),
     ...G.group('options', [
       F.boolean({
+        name: 'blogSectionMainHero',
+        title: 'Blog section main hero',
+        description:
+          'If enabled, this post drives the main title, image, and intro in the Blog Section. Prefer editing posts in the v3 studio to auto-clear other posts when enabling.',
+        initialValue: false,
+      }),
+      F.boolean({
         name: 'redirectToLegacy',
         title: 'Proxy to legacy post',
         description: 'Enable to proxy to the legacy Leadpages post, if it exists.',

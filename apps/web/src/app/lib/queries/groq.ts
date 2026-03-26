@@ -71,6 +71,18 @@ export const componentQueries = `
   _type == 'blogSection' => {
     ...,
     "excludedTags": *[_type=="pageArchive" && slug.current=="blog"][0].tags,
+    "mainHeroPost": *[_type == 'post' && !(_id in path('drafts.**')) && blogSectionMainHero == true] | order(publishedDate desc) [0] {
+      _id,
+      _key,
+      title,
+      excerpt,
+      slug,
+      image,
+      publishedDate,
+      "primaryCategory": primaryCategory->{title, slug},
+      "publisher": publisher->{title, name, slug},
+      "seoDescription": seo.seoDescription
+    },
     category->,
     "popularPosts": coalesce(
       *[_type == 'postSettings'][0].trendingArticles[0..3]->{

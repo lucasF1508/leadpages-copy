@@ -112,6 +112,15 @@ function normalizeBlocked(arr: any[] = []): Set<string> {
   return new Set(out);
 }
 
+function formatCardDate(publishedDate?: string): string {
+  if (!publishedDate) return ''
+  return new Date(publishedDate).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
+}
+
 /** Map a Sanity Post into a BlogCard for the grid component */
 function convertPostToBlogCard(post: SanityPost): BlogCard {
   return {
@@ -173,6 +182,7 @@ export default function BlogSection(props: Props) {
     autoCategories,
     popularPostsHeading,
     popularPosts,
+    mainHeroPost,
     excludedTags = [],
   } = props
 
@@ -236,6 +246,22 @@ export default function BlogSection(props: Props) {
       card.excerpt?.toLowerCase().includes(q)
     return matchesCategory && matchesSearch
   })
+
+  const mainHeroSanity =
+    mainHeroPost &&
+    !getTagValues(mainHeroPost).some((t) => EXCLUDED.has(t))
+      ? mainHeroPost
+      : null
+  const selectedMainCard = mainHeroSanity ? convertPostToBlogCard(mainHeroSanity) : null
+
+  const heroMainTitle = selectedMainCard?.title ?? mainTitle
+  const heroImage = selectedMainCard?.image ?? image
+  const displayPill = selectedMainCard?.category ?? pill
+  const displayHeading = selectedMainCard
+    ? [selectedMainCard.author, formatCardDate(selectedMainCard.publishedDate)].filter(Boolean).join(' · ') ||
+      heading
+    : heading
+  const usePostExcerptHero = Boolean(selectedMainCard?.excerpt?.trim())
 
   // Apply display limit for pagination
   const blogCards = filteredCards.slice(0, displayCount)
@@ -301,9 +327,9 @@ export default function BlogSection(props: Props) {
         <div className={clsx('flex flex-col gap-6', enableSidebar ? 'lg:flex-row lg:gap-8' : '')}>
           {/* Main column */}
           <div className="flex-1 flex flex-col" style={{ gap: '35px' }}>
-            {(mainTitle || image) && (
+            {(heroMainTitle || heroImage) && (
               <div className="text-left">
-                {mainTitle && (
+                {heroMainTitle && (
                   <h1
                     className="mb-4"
                     style={{
@@ -312,13 +338,13 @@ export default function BlogSection(props: Props) {
                       color: '#C4B5FD',
                     }}
                   >
-                    {mainTitle}
+                    {heroMainTitle}
                   </h1>
                 )}
-                {image && (
+                {heroImage && (
                   <div className="relative w-full" style={{ maxWidth: '800px' }}>
                     <Media
-                      media={{ condition: 'image', image }}
+                      media={{ condition: 'image', image: heroImage }}
                       sizes="(max-width: 800px) 100vw, 800px"
                       className="rounded-lg"
                     />
@@ -329,15 +355,21 @@ export default function BlogSection(props: Props) {
 
             {/* Section header */}
             <div className="text-left" style={{ maxWidth: enableSidebar ? '100%' : '50%' }}>
-              {pill && (
+              {displayPill && (
                 <div className="inline-flex py-0.5 rounded-lg bg-gradient-purple-invert px-1.5 mb-3">
                   <span className="type-overline-xs text-light pt-[0.125rem] uppercase tracking-wider">
-                    {pill}
+                    {displayPill}
                   </span>
                 </div>
               )}
-              {heading && <h2 className="type-h2 md:type-h1 text-gray-900 mb-2">{heading}</h2>}
-              {subheading && <Text className="type-body-sm text-gray-600" content={subheading} />}
+              {displayHeading && (
+                <h2 className="type-h2 md:type-h1 text-gray-900 mb-2">{displayHeading}</h2>
+              )}
+              {usePostExcerptHero && selectedMainCard?.excerpt ? (
+                <p className="type-body-sm text-gray-600">{selectedMainCard.excerpt}</p>
+              ) : (
+                subheading && <Text className="type-body-sm text-gray-600" content={subheading} />
+              )}
             </div>
 
             {/* Cards grid */}
