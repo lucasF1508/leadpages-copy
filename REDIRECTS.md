@@ -9,7 +9,7 @@ This document lists only redirects and URL behavior defined in `apps/web` code.
 Hardcoded rules:
 
 | Source | Destination | Type |
-|--------|-------------|------|
+| ------ | ----------- | ---- |
 | `/templates/landing-page-template/:slug` | `/templates/landing-page-template-new/:slug` | Temporary (`permanent: false`) |
 | `/page-studio-templates` | `/template-inspiration` | Permanent |
 | `/page-studio-templates/:path*` | `/template-inspiration/:path*` | Permanent |
