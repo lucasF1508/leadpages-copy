@@ -1,61 +1,61 @@
-# Stack Tecnologico - Leadpages Marketing Site
+# Technology Stack - Leadpages Marketing Site
 
-Resumen del stack real del proyecto para referencia rapida en entrevistas.
+Quick reference of the real project stack for interview walkthroughs.
 
-## Runtime y monorepo
+## Runtime and monorepo
 
 - Node.js: `>=20.0.0`
 - Package manager: `yarn@1.19.1`
-- Monorepo/orquestacion: Turborepo (`turbo`)
-- Estructura: workspaces en `apps/*` y `packages/*`
+- Monorepo orchestration: Turborepo (`turbo`)
+- Structure: workspaces in `apps/*` and `packages/*`
 
-## Frontend web
+## Web frontend
 
 - Framework: Next.js (`^14.2.35`)
 - UI: React (`18`) + React DOM (`18`)
-- Lenguaje: TypeScript (en gran parte del codigo)
-- Estilos: Tailwind CSS (`3`), Stitches, utilidades de variantes
-- Animaciones/UI dinamica: Framer Motion, Motion, Lottie, Embla Carousel
+- Language: TypeScript (across most of the codebase)
+- Styling: Tailwind CSS (`3`), Stitches, variant utilities
+- Motion/dynamic UI: Framer Motion, Motion, Lottie, Embla Carousel
 
-## CMS y contenido
+## CMS and content
 
 - CMS: Sanity (`@sanity/client`, `next-sanity`)
-- Rich content y utilidades: `@sanity/block-content-to-react`, `@portabletext/block-tools`
-- Studio en workspace dedicado: `packages/studio`
+- Rich content and utilities: `@sanity/block-content-to-react`, `@portabletext/block-tools`
+- Dedicated Studio workspace: `packages/studio`
 
-## Estado, datos e integraciones
+## State, data, and integrations
 
-- Estado cliente: Zustand
-- Formularios: React Hook Form
+- Client state: Zustand
+- Forms: React Hook Form
 - Data fetching: SWR
 - HTTP client: Axios
-- Integraciones de marketing: HubSpot, Mailchimp, SendGrid
-- Seguridad/bot protection: hCaptcha y reCAPTCHA
+- Marketing integrations: HubSpot, Mailchimp, SendGrid
+- Security/bot protection: hCaptcha and reCAPTCHA
 
-## Tooling y calidad
+## Tooling and quality
 
-- Linting: ESLint (configuracion Next + Airbnb + plugins React/TS)
-- Formato: Prettier (+ plugin Tailwind)
-- Build y analisis: Next build, bundle analyzer
-- Imagenes: Sharp
+- Linting: ESLint (Next + Airbnb + React/TS plugins)
+- Formatting: Prettier (+ Tailwind plugin)
+- Build and analysis: Next build, bundle analyzer
+- Images: Sharp
 
-## Infra y despliegue
+## Infrastructure and deployment
 
 - Hosting/deploy: Vercel
 - Analytics/performance: `@vercel/analytics`, `@vercel/speed-insights`
-- Variables de entorno y linking via Vercel CLI
+- Environment variables and project linking via Vercel CLI
 
-## Paquetes internos relevantes del monorepo
+## Relevant internal monorepo packages
 
-- `apps/web`: aplicacion principal del sitio
-- `packages/studio`: configuracion de Sanity Studio
-- `packages/client`: cliente compartido
-- `packages/icons`, `packages/indices`, `packages/redirects`, entre otros
+- `apps/web`: main website application
+- `packages/studio`: Sanity Studio configuration
+- `packages/client`: shared client utilities
+- `packages/icons`, `packages/indices`, `packages/redirects`, and others
 
-## Comandos utiles para demo tecnica
+## Useful commands for technical demos
 
-- Instalar dependencias: `yarn install`
-- Levantar proyecto: `yarn start`
-- Solo web (workspace): `yarn workspace web start`
+- Install dependencies: `yarn install`
+- Start project: `yarn start`
+- Web only (workspace): `yarn workspace web start`
 - Lint: `yarn lint`
-- Build web: `yarn build:web`
+- Build web app: `yarn build:web`

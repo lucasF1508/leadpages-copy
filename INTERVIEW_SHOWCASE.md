@@ -1,103 +1,118 @@
 # Interview Showcase - Leadpages Marketing Site
 
-Este documento resume el trabajo realizado para compartirlo en entrevistas tecnicas, con foco en el impacto, decisiones y desafios.
+This document summarizes the work completed for technical interviews, with a focus on impact, decisions, and implementation challenges.
 
-## 1) Contexto del proyecto
+## 1) Project context
 
-- Proyecto: sitio de marketing de Leadpages.
-- Arquitectura: monorepo con aplicacion web en Next.js y CMS en Sanity.
-- Objetivo del cambio principal: permitir seleccionar desde CMS el post principal ("main hero post") de una seccion del blog, en lugar de depender solo del orden por fecha.
+- Project: Leadpages marketing website.
+- Architecture: monorepo with a Next.js web app and a Sanity CMS.
+- Main goal: allow content editors to choose the "main hero post" for a blog section from CMS, instead of relying only on publish date ordering.
 
-## 2) Alcance implementado
+## 2) Implemented scope
 
 ### A. CMS (Sanity Studio)
 
-- Se agrego soporte de configuracion para elegir un post destacado por seccion de blog.
-- Se incorporo input personalizado en Studio para mejorar la seleccion editorial.
-- Se actualizaron esquemas de contenido para soportar el nuevo campo sin romper contenido existente.
+- Added configuration support to select a featured post per blog section.
+- Added a custom Studio input to improve editorial selection UX.
+- Updated content schemas to support the new field without breaking existing content.
 
-Archivos relacionados:
+Related files:
+
 - `packages/studio/components/BlogSectionMainHeroInput.tsx`
 - `packages/studio/schema/documents/templates/post.ts`
 - `packages/studio/legacy/schema/documents/templates/schemaPost.jsx`
 
 ### B. Frontend (Next.js)
 
-- Se adapto la capa de consultas (GROQ) para traer el post principal configurado desde CMS.
-- Se actualizo el render de la seccion del blog para priorizar el post seleccionado.
-- Se ajustaron componentes de layout para mantener consistencia visual y comportamiento de fallback.
+- Updated the GROQ query layer to fetch the CMS-selected hero post.
+- Updated blog section rendering to prioritize the selected post.
+- Adjusted layout components to preserve visual consistency and fallback behavior.
 
-Archivos relacionados:
+Related files:
+
 - `apps/web/src/app/lib/queries/groq.ts`
 - `apps/web/src/app/components/BlogSection/BlogSection.tsx`
 - `apps/web/src/app/components/BlogSection/BlogSection.types.ts`
 - `apps/web/src/app/components/BlogPostLayout/BlogPostLayout.tsx`
 
-### C. Ajustes complementarios de UI
+### C. Supporting UI updates
 
-- Ajustes en componentes auxiliares usados dentro del flujo del blog/home.
+- Minor updates in supporting components used by the blog/home flow.
 
-Archivos relacionados:
+Related files:
+
 - `apps/web/src/app/components/SocialMedia/SocialMedia.tsx`
 - `apps/web/src/app/components/SubFooter/SubFooter.tsx`
 
-## 3) Desafios tecnicos y como se resolvieron
+## 3) Technical challenges and solutions
 
-### Desafio 1: Mantener compatibilidad con contenido previo
+### Challenge 1: Preserve backward compatibility with existing content
 
-Problema:
-- Habia contenido historico que no tenia el nuevo campo editorial para "main hero post".
+Problem:
 
-Solucion:
-- Se implemento un comportamiento de fallback: si no hay post seleccionado, el frontend conserva la logica anterior (post principal por orden normal).
+- Historical content did not include the new editorial "main hero post" field.
 
-Resultado:
-- No hubo necesidad de migracion bloqueante para publicar la mejora.
+Solution:
 
-### Desafio 2: Sincronizar contrato CMS <-> Frontend
+- Added fallback behavior: when no post is explicitly selected, the frontend keeps the previous logic (default post ordering).
 
-Problema:
-- Cualquier cambio en schema sin reflejo en consultas/render podia romper el hero del blog.
+Result:
 
-Solucion:
-- Se actualizo en paralelo schema, tipos y query, asegurando consistencia de datos de punta a punta.
+- No blocking migration was required to release the improvement.
 
-Resultado:
-- Menor riesgo de datos nulos y mejor estabilidad en produccion.
+### Challenge 2: Keep the CMS <-> Frontend contract aligned
 
-### Desafio 3: Evitar regresiones visuales
+Problem:
 
-Problema:
-- El bloque de hero y sus componentes satelite podian desalinearse al cambiar la fuente del post principal.
+- Any schema change not reflected in queries/rendering could break the blog hero.
 
-Solucion:
-- Ajustes puntuales en layout/componentes relacionados y validacion visual en flujo real.
+Solution:
 
-Resultado:
-- Se mantuvo la experiencia esperada sin impactar otras paginas.
+- Updated schema, types, and query in parallel to ensure end-to-end data consistency.
 
-## 4) Como se valida este trabajo
+Result:
 
-Checklist funcional:
-- En Sanity, seleccionar un post como main hero en una seccion de blog.
-- Publicar y verificar que el hero muestra ese post en el frontend.
-- Remover la seleccion y verificar fallback correcto.
-- Revisar links, imagen destacada y metadata del post en el bloque principal.
+- Lower risk of null/invalid data and better production stability.
 
-Checklist tecnico:
-- Ejecutar lint del proyecto.
-- Verificar build del workspace web.
-- Probar en entorno conectado a variables de Vercel.
+### Challenge 3: Avoid visual regressions
 
-## 5) Impacto para negocio/editorial
+Problem:
 
-- Da control editorial directo sobre el contenido prioritario del blog.
-- Mejora capacidad de promocionar contenido estrategico sin cambiar fechas.
-- Reduce friccion del equipo de contenido para campañas y lanzamientos.
+- The hero block and connected components could become inconsistent when changing the post source.
 
-## 6) Notas para entrevista
+Solution:
 
-Si necesitas presentar este trabajo en 2-3 minutos:
-- Problema: "El hero del blog no era editorialmente configurable."
-- Solucion: "Agregamos seleccion de post principal en Sanity y lo conectamos al render del frontend con fallback."
-- Valor: "Mas control de contenido, menos operaciones manuales y sin romper contenido legado."
+- Applied targeted layout/component adjustments and validated the full real-world flow.
+
+Result:
+
+- Preserved the expected UX without impacting other pages.
+
+## 4) How this work is validated
+
+Functional checklist:
+
+- In Sanity, select a post as the main hero for a blog section.
+- Publish and verify the hero displays that post in the frontend.
+- Remove selection and verify fallback behavior works correctly.
+- Validate links, featured image, and post metadata in the hero block.
+
+Technical checklist:
+
+- Run project lint checks.
+- Verify `web` workspace build.
+- Test with environment variables linked from Vercel.
+
+## 5) Editorial and business impact
+
+- Gives editorial teams direct control over blog priority content.
+- Improves strategic content promotion without date-based workarounds.
+- Reduces content team friction for campaigns and launches.
+
+## 6) Interview notes
+
+If you need to present this in 2-3 minutes:
+
+- Problem: "The blog hero was not editor-configurable."
+- Solution: "We added main post selection in Sanity and connected it to frontend rendering with safe fallback behavior."
+- Value: "More content control, fewer manual operations, and no breakage of legacy content."
